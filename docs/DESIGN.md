@@ -123,6 +123,56 @@ numero" e la carta girata; qual è adesso la tua carta. La Lettrice osserva e an
 spiega chi sei. Temi: 0 chi sei, 1 valori, 2 paure, 3 sogni, 4 restituisce. Ogni foglia dà punti a una
 carta e lascia una parola (valore, paura, sogno).
 
+## Il ritratto: il gioco ti conosce
+
+Il gioco tiene d'occhio cinque tratti del carattere, dall'inizio alla fine. Ognuno è una linea tra due
+poli, e nessuno dei due è quello giusto: sono due modi di essere, ognuno col suo lato in ombra.
+
+| Tratto | Da una parte | Dall'altra | Da cosa si capisce |
+|---|---|---|---|
+| `esplora` | Curiosa: gira, guarda, si ferma | Dritta al punto: va dove deve andare | Quanti posti ha visto, quante chiacchiere facoltative, quanto devia dalla strada; e le risposte |
+| `parola` | Schietta: lo dice e basta | Accorta: gira intorno, pesa le parole | Le risposte |
+| `tono` | Gentile | Pungente: risponde per le rime | Le risposte |
+| `rischio` | Prudente | Audace | I tre bivi, se evita o sfida i conestabili, gli Esami presi di petto; e le risposte |
+| `guida` | Cuore: sente | Testa: ragiona | Le risposte, soprattutto con la Lettrice |
+
+Come si usa, sempre e solo con del testo:
+
+- **La Lettrice lo nota.** Apre gli incontri con una cosa vera: «Hai girato mezza Salem prima di tornare
+  da me», «Sei venuta dritta, senza guardarti intorno», «Con Malva non hai usato mezze parole».
+- **I personaggi reagiscono al carattere.** A Malva piace chi è schietta, a Ortica chi è curiosa, a Edera
+  chi è gentile, a Ginepra chi è audace. Ognuna ha qualche battuta che esce solo se il tratto è marcato.
+- **La tua carta nasce da qui.** Ogni Arcano Maggiore ha un suo carattere (Il Carro: audace e dritta al
+  punto; L'Eremita: accorta e curiosa; L'Imperatrice: gentile e di cuore...). La tua carta è quella che
+  ti somiglia di più in quel momento, con un piccolo vantaggio iniziale per la carta di nascita. Così la
+  Lettrice può dire perché: «Giri molto e parli poco: per me stanotte sei L'Eremita».
+- **Nel grimorio**, sotto la tua carta, tre parole scritte a mano che cambiano col gioco: «Curiosa,
+  schietta, gentile».
+- **Nel finale** la Lettrice ti restituisce un ritratto: una frase per ogni tratto, la tua carta, il tuo seme.
+
+Regole: i tratti si muovono piano (un punto alla volta, da -6 a +6); una battuta parla di un tratto solo
+quando è marcato (almeno 3); ogni osservazione cita un fatto vero. Il taglio è positivo: il gioco ti
+legge come farebbe una buona cartomante, per farti vedere qualcosa di te, mai per giudicarti.
+
+## Le visite della Lettrice
+
+La Lettrice torna spesso: è lei che ti racconta le carte. Ogni capitolo è fatto di due o tre tratti di
+strada, e ognuno finisce al suo tavolo.
+
+- **Le visite** (brevi, un minuto o poco più): a metà capitolo, quando hai due o tre carte nuove. Lei
+  apre con un'osservazione su come hai giocato, poi gira le carte nuove una alla volta e te le racconta:
+  parte dal dettaglio che avevi scelto tu, arriva a cosa dice la carta, e se avevi scritto le tue tre
+  parole le riprende. Su una delle carte ti fa una domanda a due risposte, che muove un tratto.
+- **Le sedute** (più lunghe, a fine capitolo): le due o tre domande ad albero su valori, paure, sogni;
+  il confronto con un fatto vero; «dimmi un numero»; il giudizio provvisorio sulla tua carta.
+
+Ritmo: prologo, poi per ogni capitolo due visite e una seduta, poi il finale. Un incontro ogni sei-dieci
+minuti, undici in tutto. Una carta raccontata dalla Lettrice guadagna la seconda stella: da lì gli Esami
+possono chiederne il significato. Prima di allora chiedono solo di riconoscerla.
+
+Le visite non si scrivono una per una: si compongono dai pezzi di ogni carta (il racconto, una frase per
+ogni dettaglio, una domanda con due reazioni) e da una riserva di osservazioni legate ai tratti e ai fatti.
+
 ## Sembra fatto su di lei
 
 - **Carta di nascita**: l'Arcano del segno. Fissa. Si può trovare prima del suo capitolo; trovarla è un momento a parte.

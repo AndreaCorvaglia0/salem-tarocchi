@@ -157,6 +157,46 @@ areas (short sight), patrols (constables with a sight cone -> `exam.start`; `sta
 stun power avoid them), the CAST entries (npc talk -> `story.run`). Movement: arrows/WASD, tap to walk,
 an action button on phones. `core/dom.js` `blocked()` true -> the world ignores input.
 
+## Portrait and visits (added after the first playtest)
+
+State: `state.traits = { esplora, parola, tono, rischio, guida }`, integers -6..6. Positive pole first:
+esplora + curiosa / - dritta; parola + schietta / - accorta; tono + gentile / - pungente; rischio + audace /
+- prudente; guida + cuore / - testa. `state.told = { [cardId]: true }` once the Reader has told a card.
+`state.visits = n`.
+
+`core/progress.js`: `addTrait({ parola: 1, tono: -1 })` (clamped, emits `trait`), `traitWord(axis)` (the
+Italian adjective when |value| >= 3, else null), `traitWords()` (up to three, strongest first),
+`yourCard()` now = nearest card signature to the trait vector (signatures in `data/portrait.js`), plus the
+old points and a head start for the birth card. `core/cond.js`: `{ trait: ['tono', '<=', -3] }`,
+fill `{traits}` (e.g. "curiosa, schietta e gentile").
+
+Story nodes: a choice option may carry `trait: { axis: +-1 }` next to (or instead of) `tag`. New nodes:
+`{ do: 'trait', ... }`, `{ do: 'visit' }` (plays a visit composed from the untold found cards; no-op when
+fewer than two are untold unless `force`), and in sessions `{ portrait: true }` (says the final portrait).
+
+`src/data/portrait.js` (story text area): `SIGNATURES = { m07: { rischio: 2, esplora: -2 }, ... }` for the 22
+Majors; `PORTRAIT = { esplora: { plus: '...', mid: '...', minus: '...' }, ... }` one sentence each for the
+finale; `ADJ = { esplora: ['curiosa', 'dritta al punto'], ... }`.
+
+`src/data/story/visits.js`: `TALK = { m02: { tell: 'two or three sentences in the Reader\'s voice: from the
+picture to what the card says', details: { veil: 'one sentence: what that hook suggests', ... }, words:
+'one sentence that picks up her own three words: use {words:m02}', ask: { q: '...', a: [{ t, trait, re }, { t,
+trait, re }] } } }` for the 22 Majors; `OPENERS = [{ when: <cond>, t }]` (the opening observation, most
+specific first, last one always true); `CLOSERS = [{ when, t }]`.
+
+Behaviour feeds traits in `src/glue/` (never in the world): seeing a new place off the main path, an
+optional chat -> esplora +1; reaching a step quickly without detours -> esplora -1; being seen by a patrol
+while it could be avoided, using stun, choosing the bold side of a fork -> rischio +1; using the bottle,
+hiding -> rischio -1. Each feed at most once per few minutes.
+
+Guidance (interface, not fiction): bus `hint { id }` -> a plain interface line near the bottom, once each
+(`move`, `action`, `grimoire`, `exam`, `reading`); texts in `src/data/story/hints.js`. `world.guide(anchor)`
+is on for the whole of chapter 0-1 towards the current step's `at`; from chapter 2 only for a few seconds
+after the player taps the next-step line in the HUD.
+
+Pacing: in sessions, visits and cinema a line stays until tapped, a tap is accepted only after the text is
+fully shown plus a short pause, and one tap never advances two lines.
+
 ## Working rules
 
 - No git commands. No edits outside your folders (plus `harness/<area>.*`, `tests/<area>.*.test.mjs`, `notes/<area>.md`).
