@@ -4,14 +4,15 @@
 import Phaser from 'phaser';
 import { state, save } from '../../core/state.js';
 import { blocked } from '../../core/dom.js';
-import { call } from '../../core/services.js';
+import { call, has } from '../../core/services.js';
 import { stat } from '../../core/progress.js';
-import { on } from '../../core/bus.js';
+import { on, emit } from '../../core/bus.js';
 import { getMap, anchorOf, nearAnchor } from '../maps.js';
 import { makeFx } from '../art/fx.js';
 import { makeCat } from '../art/cat.js';
 import { makePerson, LOOKS } from '../art/people.js';
 import { buildMap } from './build.js';
+import { seasonFor, lightFor } from '../season.js';
 import { Walker } from './walker.js';
 import { Things, toast } from './things.js';
 import { Patrol } from './patrol.js';
@@ -20,9 +21,20 @@ import { Night } from './night.js';
 import { Weather } from './weather.js';
 import { Input } from './input.js';
 import { bark } from './barks.js';
+import { Life } from './life.js';
+import { Guide } from './guide.js';
+
+// sounds (notes/sound.md): the service may be missing (harness), then nothing plays
+const MOOD = { forest: 'forest', depths: 'depths', court: 'depths' };
+export const moodFor = (mapId) => MOOD[mapId] || 'village';
+const sfx = (name) => { if (has('sound.play')) try { Promise.resolve(call('sound.play', name)).catch(() => {}); } catch { /* no sound */ } };
+const mood = (name) => { if (has('sound.mood')) try { Promise.resolve(call('sound.mood', name)).catch(() => {}); } catch { /* no sound */ } };
 
 const T = 16, SPEED = 165;
-export const CALM_MS = 20000, STUN_MS = 12000, STUN_COOLDOWN = 60000;
+import { CALM_MS, SEE } from '../sight.js';
+
+export { CALM_MS };
+export const STUN_MS = 12000, STUN_COOLDOWN = 60000;
 export const zoomFor = (W, H) => Math.max(1, Math.round(Math.min(W, H * 0.75) / (12 * T)));
 
 export class WorldScene extends Phaser.Scene {
@@ -31,10 +43,11 @@ export class WorldScene extends Phaser.Scene {
 
   create() {
     const d = this.start, map = getMap(d.map);
-    Object.assign(this, { map, busy: 0, leaving: false, calmUntil: this.time.now + 2500, stunReadyAt: 0, lastBark: -1e9, lastPatrolBark: -1e9, inDark: false, saveAt: 0 });
+    Object.assign(this, { map, busy: 0, leaving: false, reseason: false, steps: 0, calmUntil: this.time.now + 2500, stunReadyAt: 0, lastBark: -1e9, lastPatrolBark: -1e9, inDark: false, saveAt: 0 });
     this.controls = this.registry.get('controls');
     makeFx(this); makeCat(this); makePerson(this, 'ch-tu', LOOKS.tu);
-    this.built = buildMap(this, map);
+    this.season = seasonFor(map.id, state.chapter); this.light = lightFor(map.id, state.chapter);
+    this.built = buildMap(this, map, this.season);
     const [sx, sy] = this.freeNear(d.x, d.y);
     this.player = new Walker(this, 'ch-tu', sx, sy, d.dir || 'down');
     this.things = new Things(this, map, this.built);
@@ -44,8 +57,12 @@ export class WorldScene extends Phaser.Scene {
     this.patrols = map.patrols.map((p) => new Patrol(this, p));
     const nb = [[-1, 0], [1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [this.player.tx + dx, this.player.ty + dy]).find(([x, y]) => this.canStand(x, y)) || [this.player.tx, this.player.ty];
     this.cat = new Cat(this, ...nb);
-    this.night = new Night(this, map, this.built.lights);
-    this.weather = new Weather(this, map);
+    this.night = new Night(this, map, this.built.lights, this.season, this.light);
+    this.weather = new Weather(this, map, this.season, this.light);
+    this.life = new Life(this, map, this.built, this.season, this.light);
+    this.guide = new Guide(this, map); this.guide.set(this.registry.get('guide'));
+    this.bornAt = this.time.now;
+    mood(moodFor(map.id));
     this.inputs = new Input(this);
     this.hand = this.add.sprite(0, 0, 'fx-flame').setOrigin(0.5, 1).setScale(0.55).setVisible(false).play('flame');
     this.input.keyboard?.on('keydown-Q', () => this.stun());
@@ -76,7 +93,12 @@ export class WorldScene extends Phaser.Scene {
     this.night?.size();
   }
 
-  refresh() { if (!this.sys.isActive()) return; this.things.refresh(); this.patrols.forEach((p) => p.refresh()); }
+  refresh() {
+    if (!this.sys.isActive()) return;
+    this.things.refresh(); this.patrols.forEach((p) => p.refresh());
+    // a new chapter changes the season: the map is drawn again, she stays where she is
+    if (seasonFor(this.map.id, state.chapter) !== this.season || lightFor(this.map.id, state.chapter) !== this.light) this.reseason = true;
+  }
   canAct() { return !blocked() && !this.busy && !this.leaving; }
 
   // ---- the grid ----
@@ -103,13 +125,14 @@ export class WorldScene extends Phaser.Scene {
     return [x, y];
   }
   personNear(wx, wy) { // a tap on a person's body counts as a tap on their tile
-    for (const n of this.things.npcs.values()) { const s = n.w.sprite; if (Math.abs(wx - s.x) < 8 && wy < s.y && wy > s.y - 26) return [n.w.tx, n.w.ty]; }
+    for (const n of this.things.npcs.values()) { const s = n.w.sprite; if (Math.abs(wx - s.x) < 8 && wy < s.y && wy > s.y - 30) return [n.w.tx, n.w.ty]; }
     return null;
   }
 
   // ---- every frame ----
   update(time, dt) {
     const p = this.player, map = this.map;
+    if (this.reseason && this.canAct() && !p.moving) { this.reseason = false; this.leaving = true; this.scene.restart({ map: map.id, x: p.tx, y: p.ty, dir: p.dir }); return; }
     p.unstick();
     const free = this.canAct();
     if (free && !p.moving) {
@@ -133,13 +156,15 @@ export class WorldScene extends Phaser.Scene {
       const m = pt.draw(time, this.sightBlocked);
       if (m) cones.push(m);
     }
-    this.watch(time);
+    this.watch(time, dt);
     this.tartufo(time);
 
     const dark = map.isDark(p.tx, p.ty), short = dark || map.isGrass(p.tx, p.ty);
     const fire = dark && state.powers.fire;
     this.hand.setVisible(fire).setPosition(p.sprite.x + (p.dir === 'left' ? -5 : 5), p.sprite.y - 8).setDepth(p.sprite.y + 1);
     this.night.extra = [...this.patrols.filter((q) => q.active).map((q) => ({ x: q.w.sprite.x, y: q.w.sprite.y - 10, r: 22, a: 0.8 })), ...(fire ? [{ x: this.hand.x, y: this.hand.y - 3, r: 26, a: 0.6 }] : [])];
+    this.night.extra.push(...this.life.update(time, p.sprite.x, p.sprite.y - 10), ...this.guide.update(time));
+    this.firstHints(time);
     this.night.update(time, dt, { px: p.sprite.x, py: p.sprite.y - 10, shortTarget: short ? 1 : 0, cones });
     this.weather.update(time, dt);
     this.prompt();
@@ -158,10 +183,24 @@ export class WorldScene extends Phaser.Scene {
     this.markSeen(x, y);
     state.pos = { map: this.map.id, x, y };
     stat('steps');
+    if (++this.steps % 2 === 0) sfx('step');
     const dark = this.map.isDark(x, y);
-    if (dark && !this.inDark && state.powers.fire) stat('fires');
+    if (dark && !this.inDark && state.powers.fire) { stat('fires'); sfx('fire'); }
     this.inDark = dark;
     this.things.entered(x, y);
+  }
+
+  // first-time hints (another module shows the words): she has never moved; she stands by something usable
+  hintOnce(id) {
+    const once = state.world.once || (state.world.once = {});
+    if (once[`hint.${id}`]) return;
+    once[`hint.${id}`] = true; save();
+    emit('hint', { id });
+  }
+  firstHints(time) {
+    if (!this.canAct()) return;
+    if (!(state.stats.steps > 0) && time - this.bornAt > 3500) this.hintOnce('move');
+    if (!this.player.moving && this.things.current(this.player)) this.hintOnce('action');
   }
 
   prompt() {
@@ -182,7 +221,7 @@ export class WorldScene extends Phaser.Scene {
   async use(u) {
     this.busy++;
     this.inputs.cancel();
-    try { if (u.type === 'door') { if (await this.things.tryDoor(u.d)) this.travel(u.d.to); } else await this.things.use(u); }
+    try { if (u.type === 'door') { if (await this.things.tryDoor(u.d)) { sfx('door'); this.travel(u.d.to); } } else await this.things.use(u); }
     catch (e) { console.error('[world] use', e); }
     finally { this.busy--; }
   }
@@ -216,16 +255,24 @@ export class WorldScene extends Phaser.Scene {
   }
 
   // ---- patrols ----
-  watch(time) {
-    if (!this.canAct() || time < this.calmUntil || (state.world.bottleUntil || 0) > Date.now()) return;
+  // a constable needs a moment to notice her (SEE.notice): a faint "?" grows over him meanwhile
+  watch(time, dt) {
+    const off = !this.canAct() || time < this.calmUntil || (state.world.bottleUntil || 0) > Date.now();
     const p = this.player, px = p.sprite.x, py = p.sprite.y - 6, grass = this.map.isGrass(p.tx, p.ty);
-    const seen = this.patrols.find((q) => q.sees(px, py, grass, this.sightBlocked, time));
-    if (seen) this.spotted(seen);
+    let seen = null;
+    for (const q of this.patrols) {
+      const in_ = !off && q.sees(px, py, grass, this.sightBlocked, time);
+      q.noticed = in_ ? (q.noticed || 0) + dt : Math.max(0, (q.noticed || 0) - 2 * dt);
+      if (off) q.noticed = 0;
+      q.hint(q.noticed / SEE.notice);
+      if (q.noticed >= SEE.notice && !seen) seen = q;
+    }
+    if (seen) { seen.noticed = 0; seen.hint(0); this.spotted(seen); }
   }
   async spotted(q) {
     this.busy++;
     this.inputs.cancel();
-    q.shout(); q.w.faceToward(this.player.tx, this.player.ty); this.player.faceToward(q.w.tx, q.w.ty);
+    q.shout(); sfx('suspicion'); q.w.faceToward(this.player.tx, this.player.ty); this.player.faceToward(q.w.tx, q.w.ty);
     this.cameras.main.shake(140, 0.003);
     let r = null;
     try {
@@ -250,7 +297,7 @@ export class WorldScene extends Phaser.Scene {
     if (!state.powers.stun || now < this.stunReadyAt || !this.canAct()) return;
     const q = this.nearestPatrol();
     if (!q) return;
-    q.stun(now, STUN_MS); this.stunReadyAt = now + STUN_COOLDOWN; stat('stuns');
+    q.stun(now, STUN_MS); this.stunReadyAt = now + STUN_COOLDOWN; stat('stuns'); sfx('stun');
     this.cameras.main.flash(160, 200, 210, 255);
     toast(q.kind === 'afflicted' ? 'Si ferma, smarrita. Hai un momento.' : 'Il conestabile barcolla. Hai un momento.');
   }
@@ -263,8 +310,8 @@ export class WorldScene extends Phaser.Scene {
     if (!state.powers.cat || !this.canAct()) return;
     const p = this.player;
     const card = this.things.activeCards().find((k) => Math.hypot(k.x - p.tx, k.y - p.ty) <= 6);
-    if (card && !this.cat.target) { this.cat.seek(card.x, card.y); if (now - this.lastBark > 12000) { this.lastBark = now; const l = bark('tartufo', 'card'); if (l) toast(l); } }
+    if (card && !this.cat.target) { this.cat.seek(card.x, card.y); sfx('cat'); if (now - this.lastBark > 12000) { this.lastBark = now; const l = bark('tartufo', 'card'); if (l) toast(l); } }
     const q = this.nearestPatrol(6);
-    if (q && now - this.lastPatrolBark > 25000 && now > this.calmUntil) { this.lastPatrolBark = now; const l = bark('tartufo', 'patrol'); if (l) toast(l); }
+    if (q && now - this.lastPatrolBark > 25000 && now > this.calmUntil) { this.lastPatrolBark = now; const l = bark('tartufo', 'patrol'); if (l) { toast(l); sfx('cat'); } }
   }
 }

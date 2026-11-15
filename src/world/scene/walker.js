@@ -26,8 +26,17 @@ export class Walker {
   face(dir) {
     this.dir = dir;
     if (this.gone) return;
-    if (!this.moving) { this.sprite.anims.stop(); this.sprite.setFrame(DIRS[dir].frame); }
+    if (!this.moving) this.rest();
     this.sprite.setFlipX(DIRS[dir].flip);
+  }
+  // standing still: facing down the witches blink and breathe, otherwise a still frame
+  rest() {
+    const idle = `${this.key}-idle`;
+    if (this.dir === 'down' && this.scene.anims.exists(idle)) {
+      if (this.sprite.anims.currentAnim?.key !== idle || !this.sprite.anims.isPlaying) { this.sprite.anims.timeScale = 1; this.sprite.play({ key: idle, startFrame: Math.floor(Math.random() * 8) }); }
+      return;
+    }
+    this.sprite.anims.stop(); this.sprite.setFrame(DIRS[this.dir].frame);
   }
   // canEnter(x, y) -> true to step; anything else is returned (a door, a thing, false)
   step(dir, canEnter, speed = 170, onDone = null) {
@@ -57,7 +66,7 @@ export class Walker {
   }
   // a step that never finished (a stalled tween): snap to the target after two seconds
   unstick() { if (this.moving && this.stepping && this.scene.time.now - this.stepping.at > 2000) { this.stepping.tw?.stop(); this.arrive(); } }
-  stopAnim() { if (!this.moving && !this.gone) { this.sprite.anims.stop(); this.sprite.setFrame(DIRS[this.dir].frame); } }
+  stopAnim() { if (!this.moving && !this.gone) this.rest(); }
   facing() { const d = DIRS[this.dir]; return [this.tx + d.dx, this.ty + d.dy]; }
   faceToward(x, y) { const dx = x - this.tx, dy = y - this.ty; if (!dx && !dy) return; this.face(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : dy > 0 ? 'down' : 'up'); }
   destroy() { this.stepping?.tw?.stop(); this.sprite.destroy(); this.shadow.destroy(); }

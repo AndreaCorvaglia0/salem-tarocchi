@@ -31,7 +31,12 @@ export function makeFx(scene) {
   { const [c, ctx] = makeCanvas(3, 3); px(ctx, 1, 0, '#b5662e'); rect(ctx, 0, 1, 3, 1, '#d99a45'); px(ctx, 1, 2, '#8a4423'); addTex(scene, 'fx-leaf', c); }
   { const [c, ctx] = makeCanvas(2, 2); rect(ctx, 0, 0, 2, 2, '#c9e88a'); addTex(scene, 'fx-firefly', c); }
   { const [c, ctx] = makeCanvas(6, 6); ellipse(ctx, 3, 3, 2, 2, 'rgba(160,160,180,0.55)'); addTex(scene, 'fx-smoke', c); }
+  { // a fog bank: a soft wide blob
+    const [c, ctx] = makeCanvas(96, 40);
+    const g = ctx.createRadialGradient(48, 20, 2, 48, 20, 46); g.addColorStop(0, 'rgba(200,205,220,0.9)'); g.addColorStop(0.6, 'rgba(190,195,215,0.35)'); g.addColorStop(1, 'rgba(180,185,210,0)');
+    ctx.setTransform(1, 0, 0, 0.42, 0, 11.6); ctx.fillStyle = g; ctx.fillRect(0, 0, 96, 96); addTex(scene, 'fx-fog', c, true); }
   { const [c, ctx] = makeCanvas(7, 11); rect(ctx, 0, 0, 7, 11, INK); rect(ctx, 1, 1, 5, 9, '#ffd683'); rect(ctx, 3, 2, 1, 4, INK); px(ctx, 3, 8, INK); addTex(scene, 'fx-alert', c); }
+  { const [c, ctx] = makeCanvas(7, 11); rect(ctx, 0, 0, 7, 11, INK); rect(ctx, 1, 1, 5, 9, '#e9e2c9'); rect(ctx, 2, 2, 3, 1, INK); px(ctx, 4, 3, INK); px(ctx, 3, 4, INK); px(ctx, 3, 5, INK); px(ctx, 3, 8, INK); addTex(scene, 'fx-query', c); }
   { const [c, ctx] = makeCanvas(13, 5); for (const x of [1, 6, 11]) { px(ctx, x, 2, '#fff1a8'); px(ctx, x - 1, 2, '#f2c94c'); px(ctx, x + 1, 2, '#f2c94c'); px(ctx, x, 1, '#f2c94c'); px(ctx, x, 3, '#f2c94c'); } addTex(scene, 'fx-stars', c); }
   // doors that are not part of a building
   { const [c, ctx] = makeCanvas(16, 22); // a wooden gate in a fence

@@ -1,5 +1,5 @@
 // Harness for the world: a prepared state, stub services, the world started.
-// Query: ?map=forest | ?at=village.square, ?chapter=2, ?cat ?fire ?far ?stun ?seals, ?fail (Exams fail),
+// Query: ?guide=village.malva_door (the trail of lights), ?fresh (no steps yet: the hints), ?view=sprites (the sprite sheet; ?big for 4x at game zoom), ?map=forest | ?at=village.square, ?chapter=2, ?cat ?fire ?far ?stun ?seals, ?fail (Exams fail),
 // ?clean (no cards found). window.__world: { go(anchor), anchors(), where(), scene() }.
 import '../src/core/fonts.js';
 import { setState, state } from '../src/core/state.js';
@@ -9,6 +9,7 @@ import { h, root } from '../src/core/dom.js';
 import { CARD } from '../src/data/cards.base.js';
 import { anchorOf } from '../src/world/maps.js';
 import { start, debug } from '../src/world/index.js';
+import { on } from '../src/core/bus.js';
 
 const q = new URLSearchParams(location.search);
 const chapter = Number(q.get('chapter') || 1);
@@ -21,6 +22,7 @@ setState({
   powers: { cat: q.has('cat'), fire: q.has('fire'), stun: q.has('stun'), seals: q.has('seals'), broom: false },
   flags: { 'sight.far': q.has('far'), 'shop.open': q.has('shop') },
   pos: a ? { map: a.map, x: a.x, y: a.y } : null,
+  stats: { steps: q.has('fresh') ? 0 : 5 },
 });
 
 let tt = null;
@@ -35,7 +37,10 @@ provide('card.found', (id) => { findCard(id); toast(`Hai trovato ${CARD[id].name
 provide('exam.start', (o) => { console.log('[stub] exam.start', o); toast(`Esame (${o.kind}, ${o.place})`); return new Promise((r) => setTimeout(() => r({ passed: !q.has('fail'), right: 3, wrong: 0, suspicion: 10 }), 900)); });
 provide('lock.ask', (o) => { console.log('[stub] lock.ask', o); return Promise.resolve(true); });
 
-start().then(() => console.log('[harness] world ready at', debug.where()));
+on('hint', (d) => { console.log('[hint]', d.id); toast(`(hint: ${d.id})`); });
+if (q.get('guide')) debug.guide(q.get('guide'));
+if (q.get('view') === 'sprites') import('./world.sprites.js').then((m) => m.showSprites(q));
+else start().then(() => console.log('[harness] world ready at', debug.where()));
 window.__world = {
   go: (ref) => debug.travel(ref),
   anchors: () => Object.keys(debug.anchors()),

@@ -2,6 +2,14 @@
 // everything is painted for the night: cool, a little desaturated, warm only where there is light.
 export const INK = '#120f1c';
 export const NIGHT = { tint: 0x070a24, outside: 0.6, inside: 0.36, dark: 0.94 };
+// The night by season: spring is softer and bluer, autumn darker; 'dawn' (the village after the
+// ending) is a pale early morning, barely tinted.
+export const SKY = {
+  winter: { tint: 0x070a24, outside: 0.6 },
+  spring: { tint: 0x0b1434, outside: 0.5 },
+  autumn: { tint: 0x0d0a16, outside: 0.6 },
+  dawn: { tint: 0x2a1c3c, outside: 0.16, inside: 0.2 },
+};
 
 export const SEASONS = {
   winter: {
@@ -29,14 +37,14 @@ export const SEASONS = {
     flower: ['#d9a6c4', '#e8d98a', '#b9c8f0'],
   },
   autumn: {
-    ground: ['#2b2024', '#3b2b2a', '#4e3a31', '#66493a'],
+    ground: ['#3a2a28', '#4f3a30', '#68492f', '#86603a'],
     path: ['#2f2a2c', '#403838', '#524744'],
     soil: ['#2a1f1f', '#3a2b28'],
     leaf: ['#2a2a22', '#3b3a2a', '#545033', '#6e6a40'],
     crown: ['#3a1d18', '#5c2a1c', '#8a4423', '#b5662e', '#d99a45'],
     snow: null,
     grass: ['#4a2c1e', '#6b3f24', '#93602f'],
-    water: ['#141e1c', '#1f2d29', '#3c5048'],
+    water: ['#1c2a30', '#2a3e46', '#5a7680'],
     bark: ['#1f191b', '#2f2627', '#433636'],
     flower: ['#b5662e', '#d99a45'],
   },

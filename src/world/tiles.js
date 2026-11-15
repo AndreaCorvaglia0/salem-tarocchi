@@ -43,7 +43,7 @@ export const KINDS = {
   // forest and depths
   campfire: { light: { x: 8, y: 11, r: 80, warm: true, big: true } }, lantern: { light: { x: 12, y: -7, r: 56, lamp: true } },
   stump: {}, log: {}, spring: {}, cross: {}, torch: { light: { x: 8, y: 1, r: 64, warm: true } },
-  chains: {}, pillar: {}, ruin: {}, bones: { solid: false }, mushrooms: { solid: false },
+  chains: {}, pillar: {}, den: {}, ivy: {}, ruin: {}, bones: { solid: false }, mushrooms: { solid: false },
   candles: { solid: false, light: { x: 8, y: 7, r: 44, warm: true, many: [[5, 8], [9, 5], [12, 9]] } }, cauldron: { light: { center: true, bottom: 8, r: 44, green: true } },
   // interiors
   hearth: { light: { center: true, bottom: 4, r: 96, warm: true, big: true } }, table: {}, chair: {}, bed: {}, shelf: {},

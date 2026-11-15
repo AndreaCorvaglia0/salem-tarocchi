@@ -1,17 +1,30 @@
-// People, drawn in code: one sheet of 16x26 frames per look.
+// People, drawn in code: one sheet of 16x32 frames per look.
 // Frames: 0-2 facing down (stand, step, step), 3-5 up, 6-8 side (facing left; flip for right),
-// 9 a pose (the Afflicted points, the others raise a hand).
+// 9 a pose (the Afflicted points, the others raise a hand), 10 blink, 11 breath (idle).
+// The witches (witches.js) are tall, slim and graceful; villagers, constables, the Judge and the
+// Afflicted are plainer and stockier, so the witches stand out.
 import { INK } from './palette.js';
 import { makeCanvas, addSheet, shade } from './px.js';
+import { paintWitch } from './witches.js';
+
+export const FW = 16, FH = 32;
 
 const SK = { light: ['#e9c3a0', '#c99a7a'], warm: ['#d9a37a', '#b07c58'], deep: ['#8d5a3b', '#6d432b'], pale: ['#e6d6cc', '#bfaea6'] };
 
 export const LOOKS = {
-  tu: { skin: 'light', hair: '#4a2a22', hairStyle: 'long', hat: 'witch', coat: ['#141224', '#221d38', '#342c52'], under: '#5c2c48', trim: '#a8823a' },
-  malva: { skin: 'warm', hair: '#8a8478', hairStyle: 'bun', hat: 'coif', coat: ['#2a1d1a', '#4a3127', '#6b4a35'], under: '#7a3d45', trim: '#d3cab6', apron: '#a89e88' },
-  ortica: { skin: 'light', hair: '#6b4a24', hairStyle: 'wild', hat: null, coat: ['#1d2a1c', '#2f4a2a', '#4a6a36'], under: '#8a6a3a', trim: '#c9a55a' },
-  edera: { skin: 'pale', hair: '#e6e2dc', hairStyle: 'long', hat: 'hood', coat: ['#1f1a2c', '#352c48', '#4f4266'], under: '#5c4a6e', trim: '#8a7aa8', cane: true },
-  ginepra: { skin: 'light', hair: '#b5492a', hairStyle: 'braid', hat: 'hood', coat: ['#3a1416', '#5c2024', '#7e3030'], under: '#2a2030', trim: '#d9a54a' },
+  // the witches
+  tu: { witch: true, skin: ['#f0d2b8', '#d2a688'], hair: ['#2a1416', '#4a2622', '#74402f'], hairStyle: 'long', hat: 'witch',
+    hatCol: ['#141126', '#211c3c', '#352e5c'], band: '#8e3a72', buckle: '#e0b85a',
+    cloak: ['#0f0d1d', '#1c1834', '#2e2852'], lining: '#9a3c78', dress: ['#3e1838', '#5c2452', '#80366e'], sash: '#2a1028', jewel: '#e0b85a' },
+  ginepra: { witch: true, skin: ['#f3d6c0', '#d9ab8e'], hair: ['#7a2416', '#c0462a', '#ef8048'], hairStyle: 'curls',
+    cloak: ['#10203a', '#21406c', '#3a68a0'], lining: '#7d9ad8', dress: ['#4c4a5a', '#6c6a7c', '#8e8ca0'], sash: '#21406c', jewel: '#7d9ad8' },
+  malva: { witch: true, strong: true, shawl: true, skin: ['#e0ac84', '#b88262'], hair: ['#2e1a12', '#54321f', '#86553a'], hairStyle: 'crown', streak: '#b8b0a6',
+    cloak: ['#16301e', '#2a5234', '#45784c'], lining: '#6aa070', dress: ['#3a1620', '#58222e', '#76323e'], sash: '#c9a55a', earring: '#e0b85a', trim: '#6aa070' },
+  ortica: { witch: true, lively: true, barefoot: true, skin: ['#ebc6a2', '#c79c7a'], hair: ['#2a1a10', '#4e3218', '#7e5428'], hairStyle: 'wild', leaf: '#7ab84e',
+    cloak: ['#252012', '#3c3620', '#5a5230'], lining: '#7ab84e', dress: ['#1c3416', '#2e5424', '#4a7c36'], sash: '#8a6a3a', jewel: '#7ab84e' },
+  edera: { witch: true, tall: true, gown: true, skin: ['#e6bea6', '#c4977f'], hair: ['#7a7f98', '#b6bccf', '#eef0f8'], hairStyle: 'bun', pin: '#e0b85a',
+    cloak: ['#17122a', '#2a2246', '#43386c'], lining: '#5e9a62', dress: ['#2a2246', '#3a2f5e', '#54487e'], sash: '#5e9a62', jewel: '#d8dcff', trim: '#5e9a62' },
+  // everyone else: plainer
   giudice: { skin: 'pale', hair: '#c9c4bb', hairStyle: 'short', hat: 'tall', coat: ['#0c0c12', '#16161f', '#262633'], under: '#e9e6dc', trim: '#e9e6dc', collar: true, pants: true },
   conestabile: { skin: 'warm', hair: '#2b1d16', hairStyle: 'short', hat: 'brim', coat: ['#141a2a', '#1f2840', '#2e3a58'], under: '#6a5a3a', trim: '#a8823a', pants: true, lantern: true, beard: '#2b1d16' },
   afflitta: { skin: 'pale', hair: '#2a2420', hairStyle: 'loose', hat: null, coat: ['#8a8578', '#b4ad9c', '#d8d1bf'], under: '#d8d1bf', trim: '#d8d1bf' },
@@ -30,8 +43,8 @@ export const lookFor = (who) => LOOKS[who] || VILLAGE[[...String(who)].reduce((a
 
 function paint(ctx, ox, L, view, step, pose) {
   // a child is the same figure, shorter: the head and the top of the coat drop four pixels
-  const sy = (y) => (L.small ? (y < 21 ? Math.min(23, y + 4 - (y > 16 ? Math.floor((y - 16) * 0.8) : 0)) : y) : y);
-  const P = (x, y, col) => { y = sy(y); if (x < 0 || x > 15 || y < 0 || y > 25 || !col) return; ctx.fillStyle = col; ctx.fillRect(ox + x, y, 1, 1); };
+  const sy = (y) => (L.small ? (y < 21 ? Math.min(23, y + 4 - (y > 16 ? Math.floor((y - 16) * 0.8) : 0)) : y) : y) + (FH - 26);
+  const P = (x, y, col) => { y = sy(y); if (x < 0 || x > 15 || y < 0 || y > FH - 1 || !col) return; ctx.fillStyle = col; ctx.fillRect(ox + x, y, 1, 1); };
   const R = (x, y, w, h, col) => { for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) P(x + i, y + j, col); };
   const [skin, skinS] = SK[L.skin] || SK.light;
   const [c0, c1, c2] = L.coat;
@@ -73,7 +86,6 @@ function paint(ctx, ox, L, view, step, pose) {
     R(1, 15 + bob, 5, 1, c1); P(0, 15 + bob, skin); P(1, 14 + bob, INK); R(1, 16 + bob, 5, 1, INK);
   }
   if (L.lantern && view !== 'up') { const lx = view === 'side' ? 3 : 12, ly = 18 + bob; R(lx, ly, 3, 4, INK); P(lx + 1, ly + 1, '#ffd683'); P(lx + 1, ly + 2, '#f2b14a'); }
-  if (L.cane && view !== 'up') { for (let y = 15; y < 26; y++) P(view === 'side' ? 3 : 13, y, '#6e4a35'); }
   // ---- head, y 6..13
   const hy = 6 + bob, hx = view === 'side' ? 5 : 4, hw = view === 'side' ? 7 : 8;
   R(hx, hy, hw, 8, INK);
@@ -114,14 +126,23 @@ function paint(ctx, ox, L, view, step, pose) {
   }
 }
 
+// The whole sheet of one look as a canvas (12 frames in a row). No Phaser: the harness uses it too.
+export function personCanvas(look) {
+  const [c, ctx] = makeCanvas(FW * 12, FH);
+  const order = [['down', 0], ['down', 1], ['down', 2], ['up', 0], ['up', 1], ['up', 2], ['side', 0], ['side', 1], ['side', 2], ['side', 0, true], ['down', 0, false, 'blink'], ['down', 0, false, 'breath']];
+  order.forEach(([v, s, pose, extra], i) => {
+    if (look.witch) paintWitch(ctx, i * FW, look, v, s, !!pose, extra);
+    else paint(ctx, i * FW, look, v, s, !!pose);
+  });
+  return c;
+}
+
 export function makePerson(scene, key, look) {
   if (scene.textures.exists(key)) return;
-  const [c, ctx] = makeCanvas(16 * 10, 26);
-  const order = [['down', 0], ['down', 1], ['down', 2], ['up', 0], ['up', 1], ['up', 2], ['side', 0], ['side', 1], ['side', 2]];
-  order.forEach(([v, s], i) => paint(ctx, i * 16, look, v, s, false));
-  paint(ctx, 9 * 16, look, 'side', 0, true);
-  addSheet(scene, key, c, 16, 26);
+  addSheet(scene, key, personCanvas(look), FW, FH);
   const a = scene.anims;
   const mk = (name, frames, rate) => { if (!a.exists(`${key}-${name}`)) a.create({ key: `${key}-${name}`, frames: frames.map((f) => ({ key, frame: f })), frameRate: rate, repeat: -1 }); };
   mk('walk-down', [1, 0, 2, 0], 8); mk('walk-up', [4, 3, 5, 3], 8); mk('walk-side', [7, 6, 8, 6], 8);
+  // idle, facing down: a blink now and then, and a breath (the witches only; the others stand still)
+  if (look.witch) mk('idle', [0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 11, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 11, 11], 4);
 }

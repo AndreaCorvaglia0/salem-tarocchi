@@ -4,6 +4,7 @@
 //   world.where()        { map, x, y, near }
 //   world.anchors()      { 'village.square': { map, x, y, label }, ... }
 //   world.refresh()      re-reads CAST and the state (the world also listens to step, flag, chapter)
+//   world.guide(anchor)  a trail of lights to an anchor (null: off); bus 'hint' { id: 'move' | 'action' } once each
 import Phaser from 'phaser';
 import { provide } from '../core/services.js';
 import { state } from '../core/state.js';
@@ -11,7 +12,7 @@ import { getMap, allAnchors, anchorOf, nearAnchor, CHAPTER_START } from './maps.
 import { WorldScene } from './scene/World.js';
 import { mountControls } from './controls.js';
 
-let game = null;
+let game = null, guideRef = null;
 const scene = () => game?.scene.getScene('World') || null;
 const live = () => { const s = scene(); return s && s.sys.isActive() ? s : null; };
 
@@ -34,6 +35,7 @@ export function start() {
       fps: { target: 60, min: 5, limit: navigator.webdriver ? 30 : 0 }, // headless screenshots need idle time
     });
     game.registry.set('controls', controls);
+    game.registry.set('guide', guideRef);
     game.events.once('world:ready', () => resolve());
     game.scene.add('World', WorldScene, true, { ...startPoint(), arrived: true });
   });
@@ -69,7 +71,15 @@ export function hint() {
   return best;
 }
 provide('world.hint', () => Promise.resolve(hint()));
+// The guide: a trail of small lights to an anchor (null: off). It stays on across maps.
+export function guide(ref) {
+  guideRef = ref || null;
+  game?.registry.set('guide', guideRef);
+  live()?.guide.set(ref || null);
+  return Promise.resolve();
+}
+provide('world.guide', guide);
 provide('world.refresh', () => { live()?.refresh(); return Promise.resolve(); });
 
 // For harness pages and screenshots only.
-export const debug = { scene: live, game: () => game, travel, where, anchors, hint };
+export const debug = { scene: live, game: () => game, travel, where, anchors, hint, guide };

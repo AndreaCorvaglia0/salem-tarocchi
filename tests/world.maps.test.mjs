@@ -99,3 +99,38 @@ test('every CAST entry stands on an existing anchor', async () => {
   const all = allAnchors();
   for (const e of CAST || []) assert.ok(all[e.at], `${e.id} at ${e.at}`);
 });
+
+test('the arrival is a gentle tutorial: short straight road, the card, Malva\'s door, nothing else', async () => {
+  const { test: cond } = await import('../src/core/cond.js');
+  const { fresh } = await import('../src/core/state.js');
+  const m = maps.village, A = (n) => m.anchors[`village.${n}`];
+  const walkTo = (a, b) => findPath(a.x, a.y, new Set([`${b.x},${b.y}`]), walk(m));
+  const toCard = walkTo(A('arrival'), A('road_card')), toDoor = walkTo(A('road_card'), A('malva_door'));
+  assert.ok(toCard && toCard.length <= 5, 'the card is a few steps ahead');
+  assert.ok(toDoor && toDoor.length <= 6, 'the door is a short walk further on');
+  assert.ok(A('malva_door').y < A('arrival').y, 'she walks on, up the road');
+  // nothing else to use along the way: no other door, chest or gate within 4 tiles of the stretch
+  const stretch = [A('arrival'), A('road_card'), A('malva_door')];
+  const near = (x, y) => stretch.some((a) => Math.abs(a.x - x) + Math.abs(a.y - y) <= 4);
+  for (const d of m.doors) if (d.anchor !== 'village.malva_door') assert.ok(!near(d.x, d.y), `door ${d.id} on the arrival stretch`);
+  for (const c of m.chests) assert.ok(!near(c.x, c.y), `chest ${c.id} on the arrival stretch`);
+  // no patrol walks before the first Exam scene
+  for (const step of ['p.road', 'c1.malva', 'c1.cottage', 'c1.client']) for (const ch of [0, 1]) {
+    const s = { ...fresh(), chapter: ch, step };
+    for (const p of m.patrols) assert.ok(!cond(p.when, s), `${p.id} is out at ${step}`);
+  }
+});
+
+test('the guide leads to the anchor, or to the first door on the way there', async () => {
+  const { guideRoute } = await import('../src/world/guidepath.js');
+  const v = maps.village, a = v.anchors['village.arrival'];
+  const r1 = guideRoute(v, a.x, a.y, 'village.malva_door');
+  assert.deepEqual(r1.dest, [v.anchors['village.malva_door'].x, v.anchors['village.malva_door'].y]);
+  assert.ok(r1.tiles.length > 0);
+  const r2 = guideRoute(v, a.x, a.y, 'malva.hearth');
+  assert.deepEqual(r2.dest, [v.anchors['village.malva_door'].x, v.anchors['village.malva_door'].y]);
+  const r3 = guideRoute(v, a.x, a.y, 'forest.campfire');
+  assert.deepEqual(r3.dest, [v.anchors['village.forest_gate'].x, v.anchors['village.forest_gate'].y]);
+  const c = maps.cottage, d = c.anchors['cottage.door'];
+  assert.ok(guideRoute(c, d.x, d.y, 'depths.coven'), 'from a room to the depths');
+});

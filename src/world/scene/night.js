@@ -2,16 +2,18 @@
 // fires, the constables' lanterns and the player's own glow). In tall grass and dark places the
 // night closes in: only a soft circle around the player stays clear ("vista corta"); the fire
 // power widens it, the far sight (flag sight.far) widens it again.
-import { NIGHT } from '../art/palette.js';
+import { NIGHT, SKY } from '../art/palette.js';
 import { state } from '../../core/state.js';
 
 export const SIGHT = { base: 30, fire: 52, far: 74 };
 export const sightRadius = (s = state) => (s.flags['sight.far'] ? SIGHT.far : s.powers.fire ? SIGHT.fire : SIGHT.base);
 
 export class Night {
-  constructor(scene, map, lights) {
+  constructor(scene, map, lights, season = 'winter', light = 'night') {
     Object.assign(this, { scene, map, lights, short: 0, extra: [] });
-    this.base = map.inside ? NIGHT.inside : NIGHT.outside;
+    const sky = SKY[light === 'dawn' ? 'dawn' : season] || SKY.winter;
+    this.tint = sky.tint;
+    this.base = map.inside ? sky.inside ?? NIGHT.inside : sky.outside;
     this.brush = scene.make.image({ key: 'fx-light', add: false });
     this.sight = scene.make.image({ key: 'fx-sight', add: false });
     this.size();
@@ -30,7 +32,7 @@ export class Night {
     rt.setPosition(ox, oy);
     rt.clear();
     const a = this.base + (NIGHT.dark - this.base) * this.short;
-    rt.fill(NIGHT.tint, a);
+    rt.fill(this.tint, a);
     const cut = (img, x, y, r, alpha = 1) => {
       if (x + r < ox || y + r < oy || x - r > ox + rt.width || y - r > oy + rt.height) return;
       img.setScale((r * 2) / img.width).setAlpha(alpha);

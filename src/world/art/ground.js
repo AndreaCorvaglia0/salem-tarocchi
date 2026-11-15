@@ -10,12 +10,12 @@ const C = (hex) => hexToRgb(hex);
 const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
 const ramp = (cols, t) => { const n = cols.length - 1, i = Math.max(0, Math.min(n - 1e-6, t * n)), k = Math.floor(i); return lerp(cols[k], cols[k + 1], i - k); };
 
-export function paintGround(map) {
-  const S = SEASONS[map.season] || SEASONS.winter;
+export function paintGround(map, season = map.season) {
+  const S = SEASONS[season] || SEASONS.winter;
   const W = map.W * T, H = map.H * T;
   const P = {
     ground: S.ground.map(C), path: S.path.map(C), soil: S.soil.map(C), grass: S.grass.map(C), water: S.water.map(C),
-    cob: M.cobble.map(C), floor: M.inside.floor.map(C), flag: M.inside.flag.map(C), rug: M.inside.rug.map(C),
+    cob: M.cobble.map(C), cellar: ['#211a1a', '#2c2320', '#3a2e28', '#4a3c32'].map(C), floor: M.inside.floor.map(C), flag: M.inside.flag.map(C), rug: M.inside.rug.map(C),
     wallTop: [C('#0e0c14'), C('#1a1622')], snow: S.snow ? C(S.snow) : null,
   };
   const style = map.def.wall || (map.id === 'depths' ? 'cave' : map.inside && map.def.ground === ':' ? 'stone' : 'wood');
@@ -44,9 +44,9 @@ export function paintGround(map) {
       col = ramp(base, Math.min(1, Math.max(0, 0.5 + (n - 0.5) * 0.55 + (k === 'tall' ? -0.25 : 0))));
       if (h > 0.985) col = ramp(base, 0.95);
       else if (h < 0.02) col = ramp(base, 0.05);
-      if (map.season === 'winter' && k !== 'soil' && hash(x >> 1, y >> 1, 7) > 0.995) col = C('#ffffff'); // glitter
-      if (map.season === 'autumn' && hash(x >> 1, y >> 1, 8) > 0.97) col = lerp(col, C(['#8a4423', '#b5662e', '#6e6a40'][Math.floor(hash(x, y, 9) * 3)]), 0.7);
-      if (map.season === 'spring' && k === 'ground' && hash(x >> 2, y >> 2, 91) > 0.993 && (x & 3) === 1 && (y & 3) === 1) col = C(SEASONS.spring.flower[Math.floor(hash(x, y, 5) * 3)]);
+      if (season === 'winter' && k !== 'soil' && hash(x >> 1, y >> 1, 7) > 0.995) col = C('#ffffff'); // glitter
+      if (season === 'autumn' && hash(x >> 1, y >> 1, 8) > 0.97) col = lerp(col, C(['#8a4423', '#b5662e', '#6e6a40'][Math.floor(hash(x, y, 9) * 3)]), 0.7);
+      if (season === 'spring' && k === 'ground' && hash(x >> 2, y >> 2, 91) > 0.993 && (x & 3) === 1 && (y & 3) === 1) col = C(SEASONS.spring.flower[Math.floor(hash(x, y, 5) * 3)]);
       if (k === 'soil' && ly % 4 === 0) col = lerp(col, P.soil[0], 0.6); // furrows
     } else if (k === 'path') {
       col = ramp(P.path, Math.min(1, Math.max(0, 0.45 + (n - 0.5) * 0.8)));
@@ -88,7 +88,8 @@ export function paintGround(map) {
     } else if (k === 'flags') {
       const fx = Math.floor(x / 8), fy = Math.floor(y / 8), off = fy % 2 ? 4 : 0, gx = Math.floor((x + off) / 8);
       const mortar = (x + off) % 8 === 0 || y % 8 === 0;
-      col = mortar ? P.flag[0] : ramp(P.flag, 0.3 + hash(gx, fy, 5) * 0.5 + (n - 0.5) * 0.3 + ((y % 8) === 1 ? 0.12 : 0));
+      const FL = map.id === 'depths' ? P.cellar : P.flag; // the cellars: earthy flags, darker than the walls
+      col = mortar ? FL[0] : ramp(FL, 0.3 + hash(gx, fy, 5) * 0.5 + (n - 0.5) * 0.3 + ((y % 8) === 1 ? 0.12 : 0));
       if (map.id === 'depths' && hash(x >> 2, y >> 2, 12) > 0.9) col = lerp(col, C('#2a3a2c'), 0.5); // moss
       void fx;
     } else if (k === 'water') {

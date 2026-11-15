@@ -90,9 +90,7 @@ export function mill(b, season) {
   for (let y = 0; y < fh; y++) for (let x = 1; x < b.w * T - 1; x++) px(ctx, x, fy + y, x === 1 || x === b.w * T - 2 ? INK : x % 6 === 0 ? M.wood[1] : M.wood[2 + (y % 7 === 0 ? 1 : 0)]);
   rect(ctx, 22, H - 16, 12, 16, INK); rect(ctx, 23, H - 15, 10, 15, M.wood[0]);
   windowAt(ctx, 7, fy + 6, 8, 8, 'dim', {});
-  // the wheel on the stream side
-  const wx = b.w * T + 2, wy = H - 18;
-  ellipse(ctx, wx, wy, 9, 14, INK); ellipse(ctx, wx, wy, 7, 12, M.wood[1]); ellipse(ctx, wx, wy, 4, 8, M.wood[0]);
-  for (let k = 0; k < 8; k++) { const a = (k / 8) * Math.PI * 2; line(ctx, wx, wy, Math.round(wx + Math.cos(a) * 8), Math.round(wy + Math.sin(a) * 13), M.wood[3]); }
-  return { canvas: c, over, windows: [{ x: 11, y: fy + 10, lit: true }], smoke: null };
+  // the wheel on the stream side turns: the scene adds it (art/wild.js) at `wheel`
+  rect(ctx, b.w * T - 3, H - 22, 4, 4, M.metal[1]); // the axle
+  return { canvas: c, over, windows: [{ x: 11, y: fy + 10, lit: true }], smoke: null, wheel: [b.w * T + 2, H - 20] };
 }

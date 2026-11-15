@@ -3,13 +3,13 @@
 // it, the scene starts an Exam. Tall grass hides her except up close.
 import Phaser from 'phaser';
 import { test } from '../../core/cond.js';
-import { findPath, DIRS as STEP } from '../path.js';
+import { findPath } from '../path.js';
 import { Walker } from './walker.js';
 import { makePerson, LOOKS } from '../art/people.js';
 
-const T = 16;
-const ANG = { right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 };
-export const SEE = { range: 4.6, grass: 1.6, half: 0.62 }; // tiles, tiles in tall grass, half angle (rad)
+import { SEE, ANG, T, eyeAt, inSight } from '../sight.js';
+
+export { SEE };
 
 export class Patrol {
   constructor(scene, def) {
@@ -23,7 +23,8 @@ export class Patrol {
     this.cone = scene.add.graphics().setDepth(8990).setBlendMode(Phaser.BlendModes.ADD);
     this.mask = scene.make.graphics({ add: false });
     this.stars = scene.add.image(0, 0, 'fx-stars').setDepth(9003).setVisible(false);
-    if (this.kind === 'afflicted') this.w.sprite.setFrame(9).setFlipX(this.w.dir === 'right');
+    this.query = scene.add.image(0, 0, 'fx-query').setDepth(9004).setOrigin(0.5, 1).setVisible(false);
+    if (this.kind === 'afflicted') this.w.sprite.anims.stop(), this.w.sprite.setFrame(9).setFlipX(this.w.dir === 'right');
     this.refresh();
   }
   get active() { return this.on; }
@@ -66,22 +67,13 @@ export class Patrol {
   }
 
   // the eye: lantern height, a little in front
-  eye() { const s = this.w.sprite, d = STEP[this.w.dir]; return [s.x + d[0] * 4, s.y - 8 + d[1] * 3]; }
+  eye() { const s = this.w.sprite; return eyeAt(s.x, s.y, this.w.dir); }
 
   // Can she see the player at pixel (px, py)? blocked(x, y) says if a tile stops the sight.
   sees(px, py, inGrass, blocked, now) {
     if (!this.on || this.stunned(now)) return false;
     const [ex, ey] = this.eye();
-    const dx = px - ex, dy = py - ey, dist = Math.hypot(dx, dy) / T;
-    if (dist > (inGrass ? SEE.grass : SEE.range)) return false;
-    if (dist > 0.9) {
-      let da = Math.atan2(dy, dx) - ANG[this.w.dir];
-      da = Math.atan2(Math.sin(da), Math.cos(da));
-      if (Math.abs(da) > SEE.half) return false;
-    }
-    const n = Math.ceil(dist * 4);
-    for (let k = 1; k < n; k++) { const x = ex + (dx * k) / n, y = ey + (dy * k) / n; if (blocked(Math.floor(x / T), Math.floor(y / T))) return false; }
-    return true;
+    return inSight(ex, ey, this.w.dir, px, py, inGrass, blocked);
   }
 
   // Draw the cone (visible light) and its shape for the night layer.
@@ -115,5 +107,11 @@ export class Patrol {
     this.scene.tweens.add({ targets: this.alert, y: '-=4', duration: 160, yoyo: true });
   }
   calm() { this.alert?.destroy(); this.alert = null; }
-  destroy() { this.w.destroy(); this.cone.destroy(); this.mask.destroy(); this.stars.destroy(); this.alert?.destroy(); }
+  // f: 0..1, how close he is to noticing her
+  hint(f) {
+    const on = f > 0.05 && this.on && !this.alert;
+    this.query.setVisible(on);
+    if (on) this.query.setPosition(this.w.sprite.x, this.w.sprite.y - 28).setAlpha(0.35 + 0.65 * Math.min(1, f)).setScale(0.7 + 0.3 * Math.min(1, f));
+  }
+  destroy() { this.w.destroy(); this.cone.destroy(); this.mask.destroy(); this.stars.destroy(); this.query.destroy(); this.alert?.destroy(); }
 }
