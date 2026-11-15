@@ -48,7 +48,7 @@ export const MOODS = {
   },
   reading: {
     root: 60, mode: 'majpenta', lp: 2600, hall: 0.9, level: 1, beat: 0.8,
-    pad: { every: [9, 14], dur: 15, attack: 4, oct: -24, chords: [[0, 7, 12], [-3, 4, 9], [0, 4, 9]], vel: 0.55, wave: 'sine' },
+    pad: { every: [9, 14], dur: 15, attack: 4, oct: -12, chords: [[0, 7, 12], [-3, 4, 9], [0, 4, 9]], vel: 0.55, wave: 'sine' },
     mel: { voice: 'bell', gap: [2.8, 6], p: 0.6, span: [0, 7], step: 2, vel: 0.5, rest: 0.15 },
     motif: { every: [35, 55], first: 5, voice: 'bell', vel: 0.7, kind: 'minor', variants: ['full', 'head'], root: 57 },
   },
