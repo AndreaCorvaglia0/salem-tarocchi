@@ -15,6 +15,11 @@ export const reader = (t) => say('lettrice', t);
 
 // one option of a choice: opt('Testo', 'm07', 'w', [nodes], { trust: { ginepra: 1 }, flag: 'x' })
 export const opt = (t, card, suit, then = [], extra = {}) => ({ t, ...(card ? { tag: { card, suit } } : {}), then, ...extra });
+// an option that says something about her character: o('Testo.', { parola: 1 }, [nodes], { trust, flag, tag })
+// trait axes (positive pole first): esplora curiosa/dritta, parola schietta/accorta, tono gentile/pungente,
+// rischio audace/prudente, guida cuore/testa. One point at a time, one or two axes.
+export const o = (t, trait, then = [], extra = {}) => ({ t, ...(trait ? { trait } : {}), then, ...extra });
+export const tg = (card, suit) => ({ card, suit }); // a tag for `extra`: { tag: tg('m07', 'w') }
 export const choice = (...options) => ({ choice: options });
 export const IF = (cond, then, els) => (els ? { if: cond, then, else: els } : { if: cond, then });
 
@@ -42,6 +47,9 @@ export const cinema = (lines, pan, scene) => ({ do: 'cinema', lines, ...(pan ? {
 export const bell = { do: 'call', name: 'sound.play', args: ['bell'] };
 export const mood = (name) => ({ do: 'call', name: 'sound.mood', args: [name] });
 export const wait = (ms = 600) => ({ do: 'wait', ms });
+export const visit = { do: 'visit' }; // a short visit of the Reader (composed by the narrative from the untold cards)
+export const keeper = (t) => say('bottegaio', t);
+export const open = (name, ...args) => ({ do: 'call', name, ...(args.length ? { args } : {}) }); // a service by name
 export const goto = (script) => ({ do: 'goto', script });
 
 // "her card did not move from the birth card": one pair per sign card
