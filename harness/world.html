@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>Harness: il mondo</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #07060c; overflow: hidden; overscroll-behavior: none; touch-action: none; }
+      #game { position: fixed; inset: 0; }
+      #ui { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+      #ui > * { pointer-events: auto; }
+      .h-toast { position: fixed; left: 50%; top: 14px; transform: translateX(-50%); background: rgba(18,15,28,.92); color: #fff3d0; border: 2px solid #e9d8a6;
+        border-radius: 10px; padding: 8px 14px; font: 15px "Pixelify Sans", sans-serif; max-width: 80vw; text-align: center; pointer-events: none !important; transition: opacity .4s; }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="ui"></div>
+    <script type="module" src="./world.js"></script>
+  </body>
+</html>

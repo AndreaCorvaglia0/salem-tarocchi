@@ -1,0 +1,41 @@
+// The court: the Judge's high chair, the dock, the deposit of seized cards, stairs to the cells.
+export default {
+  id: 'court',
+  name: 'Il tribunale',
+  inside: true,
+  ground: ':',
+  start: 'door',
+  rows: [
+    'wwwwwwwwwwwwww',
+    'wwNwwDDDDwwNww',
+    'wL:::DDDD:::Lw',
+    'w::::::::::::w',
+    'w:::::::::::Kw',
+    'w::RR::::::::w',
+    'w::::::::::::w',
+    'w:PPP:::::PPPw',
+    'w::::::::::::w',
+    'w:PPP:::::::+w',
+    'w::::::::::::w',
+    'wwwwww+wwwwwww',
+  ],
+  key: {
+    N: { kind: 'window', tall: true },
+    D: { kind: 'dais' },
+    L: { kind: 'candle' },
+    K: { kind: 'cabinet' },
+    R: { kind: 'dock' },
+    P: { kind: 'pews' },
+  },
+  anchors: {
+    door: [6, 10, 'La porta'],
+    chair: [6, 3, 'Lo scranno del Giudice'],
+    dock: [5, 5, 'Il banco degli accusati'],
+    deposit: [11, 4, 'Il deposito'],
+    stairs: [11, 9, 'Le scale'],
+  },
+  doors: [
+    { at: 'door', to: 'village.court_door', look: 'mat' },
+    { at: 'stairs', to: 'depths.cells', look: 'stairs' },
+  ],
+};
