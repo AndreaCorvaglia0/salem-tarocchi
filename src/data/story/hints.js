@@ -1,0 +1,2 @@
+// STUB by the lead; the Reader-text agent replaces it. Interface lines, outside the fiction, shown once.
+export const HINTS = { move: 'Tocca un punto della strada per camminare.', action: 'Quando sei vicina a qualcosa, tocca il pulsante in basso.', grimoire: 'La carta è nel tuo grimorio: tocca il libro in alto.', exam: 'Rispondi con calma: un errore fa salire il sospetto.', reading: 'Scegli la lettura che ti sembra adatta a chi hai davanti.' };

@@ -1,0 +1,4 @@
+// STUB by the lead; the Reader-text agent replaces it (docs/CONTRACT.md, "Portrait and visits").
+export const TALK = { m01: { tell: 'Il Mago ha tutto sul tavolo e sa di averlo. (provvisorio)', details: {}, words: 'Tu hai scritto: {words:m01}. (provvisorio)', ask: { q: 'Quando hai tutto quello che serve, cominci subito o aspetti? (provvisorio)', a: [{ t: 'Comincio subito.', trait: { esplora: -1 }, re: 'Lo immaginavo. (provvisorio)' }, { t: 'Aspetto il momento giusto.', trait: { rischio: -1 }, re: 'Il momento giusto è furbo: non si presenta mai. (provvisorio)' }] } } };
+export const OPENERS = [{ when: true, t: 'Sei tornata. Siediti, ho visto che hai qualcosa di nuovo da mostrarmi. (provvisorio)' }];
+export const CLOSERS = [{ when: true, t: 'Per stanotte basta così. Torna quando ne avrai trovate altre. (provvisorio)' }];
