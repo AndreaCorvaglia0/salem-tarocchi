@@ -54,12 +54,16 @@ function tick() {
   try { engine.pump(ctx.currentTime + lookahead(TICK)); } catch (e) { console.warn('[sound] pump', e?.message || e); }
 }
 
-// Wait for the first gesture: browsers only start audio inside a tap or a key press.
+// Browsers only start audio inside a gesture, and on a touch screen `pointerdown` does not count:
+// the finger has to come up (touchend / pointerup / click). The first such gesture creates the
+// context; every later one resumes it if the browser has suspended it again (a call, a tab switch).
 function arm() {
   if (armed || typeof window === 'undefined' || !window.addEventListener) return;
   armed = true;
-  const go = () => { window.removeEventListener('pointerdown', go, true); window.removeEventListener('keydown', go, true); start(); };
-  window.addEventListener('pointerdown', go, true); window.addEventListener('keydown', go, true);
+  // iOS 17+: play like a game, also with the ring switch on silent
+  try { if (globalThis.navigator?.audioSession) globalThis.navigator.audioSession.type = 'playback'; } catch { /* ignore */ }
+  const go = () => { if (!ctx) start(); else resume(); };
+  for (const ev of ['touchend', 'pointerup', 'click', 'keydown']) window.addEventListener(ev, go, { capture: true, passive: true });
 }
 
 export function play(name) {

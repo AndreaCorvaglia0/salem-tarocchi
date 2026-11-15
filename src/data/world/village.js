@@ -1,5 +1,5 @@
 // The village of Salem, chapter 1: a winter night. Format: README.md in this folder.
-const EARLY = ['p.session', 'p.road', 'c1.malva', 'c1.cottage', 'c1.client', 'c1.explore'];
+const EARLY = ['p.session', 'p.road', 'c1.malva', 'c1.cottage', 'c1.client', 'c1.explore', 'c1.read', 'c1.shop', 'c1.back', 'c1.deliver', 'c1.grimoire', 'c1.cart'];
 
 export default {
   id: 'village',

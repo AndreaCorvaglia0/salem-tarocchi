@@ -10,7 +10,7 @@ export const SKIPS = {
   c2: { chapter: 2, step: 'c2.ortica', cards: ids(0, 7), xp: 230, at: 'forest.entry',
     spreads: ['single'], lessons: ['deck', 'single'], trust: { malva: 1, ginepra: 2 },
     flags: ['met.ginepra', 'ginepra.snatched', 'ginepra.returned', 'b1.spoke', 'malva.wood', 'client.c1.widow.done', 'seen.road'] },
-  c3: { chapter: 3, step: 'c3.trapdoor', cards: ids(0, 14), xp: 460, at: 'village.trapdoor', near: [-2, 1],
+  c3: { chapter: 3, step: 'c3.trapdoor', cards: ids(0, 14), xp: 470, at: 'village.trapdoor', near: [-2, 1],
     spreads: ['single', 'ppf'], lessons: ['deck', 'single', 'ppf', 'suits'], trust: { malva: 1, ortica: 2, ginepra: 3 },
     flags: ['met.ginepra', 'ginepra.snatched', 'ginepra.returned', 'b1.spoke', 'malva.wood', 'client.c1.widow.done', 'seen.road',
       'client.c2.miller.done', 'fire.promised', 'b2.went', 'ginepra.taken', 'leaf.value.m11'] },
