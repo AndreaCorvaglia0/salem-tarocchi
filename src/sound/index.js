@@ -35,7 +35,7 @@ function start() {
 function resume() { try { if (ctx && ctx.state !== 'running') ctx.resume?.()?.catch?.(() => {}); } catch { /* ignore */ } }
 function onVisible() {
   if (!ctx) return;
-  try { if (document.hidden) ctx.suspend?.(); else { ctx.resume?.(); engine?.resync(); } } catch { /* ignore */ }
+  try { if (document.hidden) { hush?.pause?.(); ctx.suspend?.(); } else { ctx.resume?.(); engine?.resync(); } } catch { /* ignore */ }
 }
 // bring the graph in line with the settings and the wanted mood (called on every change)
 function apply() {
@@ -54,6 +54,22 @@ function tick() {
   try { engine.pump(ctx.currentTime + lookahead(TICK)); } catch (e) { console.warn('[sound] pump', e?.message || e); }
 }
 
+// iPhone: with the ring switch on silent, Web Audio alone stays mute. A media element that is
+// playing (two seconds of silence, looped, a file of this page) makes the phone treat the page as
+// "playing something", and then the generated sound comes out too. Started inside a gesture.
+let hush = null;
+function unmute() {
+  try {
+    if (typeof Audio === 'undefined') return;
+    if (!hush) {
+      hush = new Audio('silence.wav');
+      hush.loop = true; hush.preload = 'auto'; hush.volume = 0.01;
+      hush.setAttribute('playsinline', ''); hush.setAttribute('x-webkit-airplay', 'deny');
+    }
+    if (hush.paused && !document.hidden) hush.play()?.catch?.(() => {});
+  } catch { /* ignore */ }
+}
+
 // Browsers only start audio inside a gesture, and on a touch screen `pointerdown` does not count:
 // the finger has to come up (touchend / pointerup / click). The first such gesture creates the
 // context; every later one resumes it if the browser has suspended it again (a call, a tab switch).
@@ -62,7 +78,7 @@ function arm() {
   armed = true;
   // iOS 17+: play like a game, also with the ring switch on silent
   try { if (globalThis.navigator?.audioSession) globalThis.navigator.audioSession.type = 'playback'; } catch { /* ignore */ }
-  const go = () => { if (!ctx) start(); else resume(); };
+  const go = () => { unmute(); if (!ctx) start(); else resume(); };
   for (const ev of ['touchend', 'pointerup', 'click', 'keydown']) window.addEventListener(ev, go, { capture: true, passive: true });
 }
 
