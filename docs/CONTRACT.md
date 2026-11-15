@@ -213,6 +213,18 @@ Sagittario mobile Giove, Capricorno cardinale Saturno, Acquario fisso Saturno, P
 lunedì Luna, martedì Marte, mercoledì Mercurio, giovedì Giove, venerdì Venere, sabato Saturno, domenica Sole.
 Planet cards: Luna m02, Marte m16, Mercurio m01, Giove m10, Venere m03, Saturno m21, Sole m19.
 
+## After the consolidation of DESIGN.md (15 Nov)
+
+DESIGN.md was rewritten as one document; where this file and DESIGN.md disagree, DESIGN.md wins. Deltas:
+power ids are `cat`, `fire`, `sense`, `move`, `stun`, `broom` (no `seals`, `sense2`, `light2`; no flag
+`sight.far`); levels 2 cat, 3 shop, 4 fire, 5 sense, 6 move, 7 stun (also parts the thick fog), 8 broom;
+levels continue to 12 after the ending (Gran Maestra), each only widening the sixth sense
+(`senseRadius(level)`); tools are `bottle`, `incense`, `pendulum` (the sieve is gone); `yourSuit()` is
+derived from the traits; chapter gates need `{ level: 4 }` and `{ level: 7 }`; the story index may export
+`SIDE` (side missions shown as pencil notes on the grimoire map); Minor Arcana are found in tall grass by
+zone from chapter 1; `review.open` is a short mixed quiz. World obstacles: brambles (fire), roots and warded
+stones (move), thick fog where one loses the way (stun/air), dark (fire).
+
 ## Working rules
 
 - No git commands. No edits outside your folders (plus `harness/<area>.*`, `tests/<area>.*.test.mjs`, `notes/<area>.md`).

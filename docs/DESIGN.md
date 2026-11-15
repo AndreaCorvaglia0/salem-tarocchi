@@ -1,322 +1,264 @@
 # Le carte di Salem: il progetto
 
-Gioco privato, regalo di Andrea alla sua ragazza. Solo italiano. Si gioca soprattutto da telefono.
-Questa pagina dice cosa deve essere il gioco. Come è fatto il codice: `CONTRACT.md`.
-
-## Regole, dai riscontri di Andrea
-
-Valgono sopra tutto il resto di questa pagina.
-
-1. **Il testo è il punto chiave e si pensa prima.** Naturale, scorrevole, comprensibile alla prima, come
-   scritto da una persona. Mai frasi spezzate in fila a caccia di effetto. Regole ed esempi: `WRITING.md`.
-2. **I personaggi non spiegano il gioco.** Nessuno dice ad alta voce una regola, un meccanismo o
-   l'intenzione di chi ha scritto. Se serve un'indicazione pratica, la dà l'interfaccia, a parte.
-3. **Ci si prende il tempo.** Le scene d'atmosfera cominciano piano. Ogni riga resta a schermo finché
-   lei non l'ha letta e tocca: niente righe che scappano, niente tocco che ne salta due.
-4. **L'inizio è una guida, fatta giocando.** Lei ha poca esperienza di giochi. Nei primi minuti si impara
-   una cosa alla volta, usandola: camminare, raccogliere, parlare, aprire il grimorio. Il posto dove
-   andare è sempre visibile (una scia di luci, un punto che pulsa). Più avanti si lascia libera, e la
-   guida arriva solo se la chiede.
-5. **Una domanda non mostra mai la sua risposta.** Se si chiede che carta è, il nome stampato è coperto.
-   Negli Esami si chiede soprattutto cosa dice la carta.
-6. **Le streghe sono belle e positive.** Vedi "I personaggi".
-7. **Il racconto è teatro d'ombre.** Se una cosa non si può mostrare bene, non si mostra. Vedi "Stile".
-8. **La Lettrice sembra leggerti dentro.** Due o tre domande per seduta, la seconda nasce dalla prima.
-   Reagisce, a volte è colpita e a volte no, si fa un'idea e la dice: "Per ora la tua carta è questa.
-   Vedremo se mi farai cambiare idea." Non spiega mai come funziona.
+Gioco privato, regalo di Andrea alla sua ragazza, che sta cominciando a studiare i tarocchi. Solo
+italiano. Si gioca soprattutto da telefono. Questa pagina è il progetto intero, riscritto il 15 novembre
+2026 dopo la prima prova: sostituisce tutte le versioni precedenti. Come si scrive: `WRITING.md`. Come è
+fatto il codice: `CONTRACT.md`.
 
 ## In una riga
 
-Una Salem immaginaria. Sei una strega novizia: giri, esplori, trovi i tarocchi e impari a leggerli.
-Tra un capitolo e l'altro una Lettrice ti fa domande e sembra conoscerti.
+In una Salem immaginaria sei una strega giovane che impara a leggere i tarocchi: giri, trovi le carte,
+le leggi alla gente. Intanto una Lettrice ti racconta le carte che trovi e, incontro dopo incontro, legge te.
 
-## Cosa deve provare chi gioca
+## Le regole
 
-- **Veloce e chiaro.** Si sa sempre cosa fare e si vede che si cresce. I primi tre livelli nei primi 15 minuti.
-- **Utile.** Alla fine sa riconoscere e leggere le 22 carte maggiori, le tre stese, pianeti e segni.
-- **Sembra che ti legga dentro.** Il gioco impara di te (nome, nascita, risposte, modo di giocare) e te lo restituisce. La storia sembra tua e dipendente da te.
-- **Divertente, ironico, a volte pauroso.** Cupo nei momenti giusti, mai pesante. Non si prende gioco di chi impara.
-- **Regola d'onestà.** Poche dipendenze, tutte vere, sfruttate bene. Un personaggio dice "è per quello che hai fatto" solo quando è così.
+Vengono dai riscontri di Andrea e valgono sopra tutto il resto.
 
-## Cosa si impara, e da dove
+1. **Il testo è il punto chiave e si pensa prima.** Naturale, scorrevole, chiaro alla prima, come scritto
+   da una persona. Mai frasi spezzate in fila a caccia di effetto. Vedi `WRITING.md`.
+2. **I personaggi non spiegano il gioco.** Nessuno dice ad alta voce una regola o l'intenzione di chi ha
+   scritto. Un'indicazione pratica la dà l'interfaccia, a parte.
+3. **Ci si prende il tempo.** Le scene d'atmosfera cominciano piano. Ogni riga resta finché lei non tocca.
+4. **L'inizio non si può sbagliare.** Lei ha poca esperienza di giochi: si impara una cosa alla volta,
+   usandola, e il posto dove andare è sempre visibile.
+5. **Una domanda non mostra mai la sua risposta.** Il nome stampato sulla carta è coperto quando serve.
+6. **Le streghe sono belle e positive.** Giovani o mature, mai gobbe, mai caricature.
+7. **Se una cosa non si può mostrare bene, non si mostra.** Il racconto è teatro d'ombre.
+8. **Poche dipendenze, tutte vere.** Il gioco dice "è per quello che hai fatto" solo quando è così.
+9. **Pochi concetti, legati tra loro.** Prima di aggiungere una cosa nuova si guarda se una che c'è già
+   può farla.
 
-Programma: "Tarocchi intuitivi" di Theresa Reed, mazzo Rider-Waite-Smith. I testi si scrivono con parole
-nostre. Una scheda carta, come nel libro: cosa si vede, cosa dice in una lettura, altri modi di vederla
-(parole chiave), capovolta, pianeta o segno (Golden Dawn), come incarnarla, una domanda su cui riflettere.
-Approccio intuitivo: prima si guarda l'immagine e si sceglie cosa colpisce, poi si impara il significato.
-Le stese sono tre: carta singola, passato-presente-futuro, croce celtica (10 posizioni). Ogni lettura
-può essere per una domanda specifica o un quadro generale.
+## Cinque idee, e come si tengono
 
-Croce celtica, posizioni del libro: 1 il presente; 2 ciò che ti attraversa (ostacolo o sostegno), di traverso
-sulla 1; 3 le fondamenta, sotto; 4 il passato recente, a sinistra; 5 le possibilità, sopra; 6 il futuro
-prossimo, a destra; poi la colonna a destra dal basso: 7 tu adesso, 8 l'ambiente, 9 speranze e paure, 10 l'esito.
-
-## Tutto va a tre
-
-| | Capitolo 1 | Capitolo 2 | Capitolo 3 |
+| Idea | In breve | Cosa la alimenta | Cosa alimenta |
 |---|---|---|---|
-| Carte | I-VII | VIII-XIV | XV-XXI |
-| Luogo, stagione | Villaggio, inverno | Bosco, primavera-estate | Cantine e tribunale, autunno |
-| Titolo (3 livelli l'uno) | Novizia | Fattucchiera | Strega |
-| Stesa | Carta singola | Passato-presente-futuro | Croce celtica |
-| Maestra | Comare Malva | Ortica | Nonna Edera |
+| **Le carte** | Si trovano girando, si imparano in tre passi | L'esplorazione, la Lettrice che le racconta | Le letture, gli Esami, l'esperienza |
+| **Le letture** | Quello che si fa con le carte: tre stese | Le carte che hai, le lezioni delle maestre | Esperienza, monete, il finale |
+| **Il rango** | Novizia, Fattucchiera, Strega | L'esperienza, che viene da carte e letture | La magia, la storia, come ti trattano |
+| **La magia** | I quattro elementi dei quattro semi | Il rango | Il mondo che si apre |
+| **Il ritratto** | Il gioco ti conosce | Le tue risposte e il tuo modo di giocare | La tua carta, la Lettrice, le streghe, il finale |
 
-Il Matto (0) è la giocatrice. Le magie per livello sono in "Missioni, crescita, magie".
+Due numeri soli fanno crescere il personaggio: l'**esperienza**, che viene dallo studio, e il **ritratto**,
+che viene da chi sei. Tutto il resto ne discende.
 
-## I personaggi (ognuno incarna una carta)
+## Le carte
 
-Le streghe sono i personaggi positivi della storia e sono tutte belle, ognuna a modo suo: giovani o
-mature, mai gobbe, mai caricature. È una storia di ragazze forti.
+Rider-Waite-Smith. Il programma è "Tarocchi intuitivi" di Theresa Reed, completato con ricerche; i testi
+sono parole nostre. L'approccio è intuitivo: prima si guarda l'immagine, poi si impara cosa dice.
 
-- **Tu**: nome e nascita li dai tu. Una strega giovane e bella, cappello a punta, mantello scuro. Il Matto.
-- **Ginepra** (Il Carro): novizia come te, capelli rossi, mantello blu ginepro. Impulsiva, ride nei momenti sbagliati. Prima ti soffia le carte, poi è la tua amica.
-- **Comare Malva** (L'Imperatrice): levatrice, una bella donna sui quarant'anni, forte, treccia a corona, scialle verde. Brusca, non ringrazia mai ("porta male"), ti vuole bene di nascosto.
-- **Ortica** (Il Mago): vive nel bosco, chioma selvaggia, occhi vivi. Parla senza sosta, sa i fatti di tutti.
-- **Nonna Edera** (La Sacerdotessa): la più grande di tutte: capelli d'argento raccolti alti, elegante, regale. Scorda il tuo nome, ricorda ogni carta.
-- **Tartufo** (La Luna): gatto nero, voce ironica. Fiuta le carte nascoste, rizza il pelo se arriva un conestabile, un suggerimento per Esame.
-- **Il Giudice** (L'Imperatore): educato, paziente, convinto di fare il bene. Fa paura per questo.
-- **Conestabili e Afflitte**: chi ti ferma per strada. Niente inquisitori.
-- **La Lettrice**: la voce delle sedute. Senza volto e senza nome.
+**I 22 Arcani Maggiori** sono la storia. Si dividono in tre file da sette, una per capitolo; Il Matto è
+la giocatrice. Ognuno è nascosto in un posto preciso della zona del suo capitolo, e le sette carte di
+una zona si trovano in qualunque ordine. Qualcuna arriva dalla storia. La carta di nascita si può
+trovare prima del suo capitolo.
 
-## La storia
+**I 56 Arcani Minori** si trovano fin dall'inizio nell'erba alta, a caso, ognuno nella zona del suo
+seme: Denari al mercato, Spade nella parte alta del villaggio, Bastoni nel bosco, Coppe lungo l'acqua.
+Hanno rarità (numeri comuni, Assi meno, figure rare) e doppioni, che si scambiano con Ginepra.
 
-**Prologo.** Seduta zero: la Lettrice chiede nome e data di nascita, gira Il Matto: "Questa sei tu."
-Arrivi a Salem di notte, nella neve. Sulla strada trovi una carta. Nessuno sa da dove arrivino:
-"Arrivano a chi le sa guardare."
+**Tre passi per imparare una carta**, tre stelle:
 
-**Capitolo 1, il villaggio.** Malva ti prende in casa "perché qualcuno deve spaccare la legna" e ti dà
-una capanna al limite del bosco: il cottage. Ti fa pescare due carte e ti insegna la carta singola. Arriva Tartufo.
-Primi clienti, di notte. Incontri Ginepra, che prende la carta che stavi per raccogliere: da lì fate a gara.
-Primi Esami per strada. **Bivio 1, la piazza**: un'Afflitta indica una donna del villaggio; parli o resti nascosta?
-Poi seduta 1: i valori.
+1. *Trovata.* La vedi grande, tocchi il dettaglio che ti colpisce, scrivi tre parole tue.
+2. *Raccontata.* La Lettrice te la racconta, partendo dal tuo dettaglio. Da qui gli Esami e le letture
+   possono chiedertene il significato.
+3. *Conosciuta.* Sai anche il suo pianeta o segno.
 
-**Capitolo 2, il bosco.** Ortica, passato-presente-futuro, il fuoco, le porte sigillate. Ginepra diventa
-un'amica: una notte, al fuoco, ti legge una carta (male) e ti fa lei una domanda. **Bivio 2, il mazzo
-sequestrato**: Ginepra vuole riprendersi le carte chiuse in tribunale; vai con lei o no? Chiusura: i
-conestabili arrivano al cottage per te; Ginepra si fa avanti: "Sono io." Poi seduta 2: le paure.
+Una carta che non rivedi da un po' torna "da ripassare" (dopo 1, 3, 7, 16 giorni).
 
-**Capitolo 3, il buio.** Edera, nelle cantine sotto il villaggio; croce celtica. Le tre maestre si
-riuniscono, litigano, decidono. Stordire, la scopa. **Bivio 3, come salvarla**: di nascosto dalle cantine o a
-viso aperto al processo? Il processo davanti al Giudice è l'Esame finale; le maestre che si fidano di te
-ti aiutano (Malva annulla un errore, Ortica fa saltare una domanda, Edera toglie una risposta sbagliata).
-Alba, volate via. Poi seduta 3: i sogni.
+## Le letture e lo studio
 
-**Finale.** Ultima seduta: la Lettrice ti passa il mazzo. "Adesso leggi tu. Per te." Una croce celtica fatta
-con la tua partita: 1 la tua carta; 2 la carta su cui hai sbagliato di più; 3 la carta di nascita; 4 la carta
-del bivio 3; 5 la carta del tuo sogno; 6 pescata tra coperte; 7 la carta del tuo valore; 8 la carta del
-personaggio che si fida di più di te; 9 la carta della tua paura; 10 dici un numero. Ultima immagine: il
-tavolo dall'altra parte; il grimorio della Lettrice è il tuo. Nessuna spiegazione.
+Tre stese, dal libro, una per maestra: carta singola, passato-presente-futuro, croce celtica. Ogni
+lettura è per una domanda precisa o per un quadro generale.
 
-**Dopo il finale.** I 56 Minori, in giro per zone (Bastoni bosco, Coppe fiume, Spade alture, Denari
-mercato), a caso nell'erba alta, con rarità e doppioni. Con Ginepra scambi i doppioni.
+- **Al cottage** arrivano i clienti. La lettura è guidata: per ogni posizione scegli, tra tre,
+  l'interpretazione adatta alla carta e alla persona. Più carte hai, meglio paga.
+- **Il ripasso** è un breve giro di domande miste, senza posta.
+- **L'Esame** è la stessa conoscenza messa sotto pressione: un conestabile ti ferma, e sapere le carte
+  tiene in piedi l'incantesimo che ti nasconde. Tre-cinque domande, soprattutto sul significato, con la
+  barra del sospetto. Se va male: la cella, e una o due carte sequestrate, che si riprendono al deposito
+  del tribunale rispondendo proprio su quelle. All'inizio è indulgente.
+- **Bauli e porte sigillate** si aprono con una risposta.
+- **Con il mazzo vero**, dal grimorio: indichi le carte che hai estratto sul tavolo di casa e il gioco ti
+  accompagna posizione per posizione.
 
-Ginepra viene sempre presa e sempre salvata. Varia come, con chi, cosa vi dite.
+Croce celtica, posizioni del libro: 1 il presente; 2 ciò che ti attraversa, di traverso sulla 1; 3 le
+fondamenta, sotto; 4 il passato recente, a sinistra; 5 le possibilità, sopra; 6 il futuro prossimo, a
+destra; poi a destra dal basso: 7 tu adesso, 8 l'ambiente, 9 speranze e paure, 10 l'esito.
 
-## Le sedute con la Lettrice
+## Il rango
 
-Non in pixel: **teatro d'ombre** (vedi "Stile"). Luce di candela, sagome di carta ritagliata, fumo, e le
-carte vere. Niente mani, niente manichini, niente personaggi animati: immagini che si trasformano piano.
-La Lettrice è una sagoma ferma o soltanto una voce. Cinque: prologo, dopo ogni capitolo, finale. Brevi. In ognuna: due o tre domande a due risposte, ad albero (la seconda dipende dalla
-prima); un confronto con un fatto vero della partita ("In piazza hai taciuto. Lo rifaresti?"); "dimmi un
-numero" e la carta girata; qual è adesso la tua carta. La Lettrice osserva e annota, non giudica, non
-spiega chi sei. Temi: 0 chi sei, 1 valori, 2 paure, 3 sogni, 4 restituisce. Ogni foglia dà punti a una
-carta e lascia una parola (valore, paura, sogno).
+L'esperienza viene dallo studio: carte trovate, stelle, letture, ripasso, Esami superati, momenti di
+storia. I livelli sono nove, tre per titolo, e i primi tre arrivano nei primi quindici minuti.
 
-## Missioni, crescita, magie
+| Titolo | Livelli | Capitolo | Come ti trattano le streghe |
+|---|---|---|---|
+| Novizia | 1-3 | Il villaggio | Ti danno ordini e commissioni |
+| Fattucchiera | 4-6 | Il bosco | Ti chiedono un parere |
+| Strega | 7-9 | Il buio | Ti ascoltano: alla riunione decidi tu il piano |
+| Gran Maestra | 10-12 | Dopo il finale | |
 
-**La curva.** L'inizio è un tutorial in cui non si può sbagliare. Poi il gioco resta chiarissimo e veloce:
-si guadagnano cose in fretta. Quando lei sa già leggere una carta, fare un ripasso e muoversi, il gioco
-rallenta un poco e la lascia più libera. Dopo il finale è un mondo aperto.
+**I due cancelli.** Per entrare nel capitolo 2 bisogna essere Fattucchiera, per il 3 Strega, oltre ad
+avere almeno cinque delle sette carte del capitolo. Finché non lo è glielo dicono, con parole loro, e
+la mandano a studiare. Un cancello non deve tenerla ferma più di qualche minuto.
 
-**Missioni principali.** Sono la storia: una alla volta, sempre scritta in alto. Si può andare dritte fino
-al finale senza fare altro. Durata da tenere d'occhio: un'ora, un'ora e mezza.
+Le monete vengono dalle letture e si spendono alla bottega, che vende tre strumenti (la bottiglia della
+strega: per un po' nessuno ti ferma; l'incenso: calma un Esame; il pendolo: toglie una risposta
+sbagliata) e, ogni tanto, una carta.
 
-**I due cancelli.** Per passare al capitolo 2 bisogna essere Fattucchiera (livello 4), per il capitolo 3
-Strega (livello 7), oltre alle carte del capitolo. Finché non lo è, la trattano da principiante e glielo
-dicono con parole loro: «Non sei ancora pronta. Torna quando avrai letto qualche carta in più.» È il
-momento in cui si studia: l'esperienza si guadagna leggendo le carte ai clienti, ripassando, giocando ai
-giochi di studio, superando gli Esami, trovando carte. Un cancello non deve tenere ferme più di cinque
-minuti.
+## La magia e il mondo
 
-**Commissioni, solo all'inizio.** Servono da tutorial per la mappa, la bottega e gli strumenti, e per
-legare con le streghe: Malva la manda alla bottega a comprare l'incenso (e le dice a cosa serve, da
-levatrice che lo usa); poi a portare una cosa nella parte alta del villaggio; Ortica, nel capitolo 2, la
-manda una volta al mulino. Tre in tutto. Poi smettono: è il segno che è cresciuta.
+La magia è quella dei quattro elementi, che sono i quattro semi. Ogni magia apre qualcosa nel mondo.
 
-**Come cambiano con lei.** Da Novizia le danno ordini. Da Fattucchiera le chiedono un parere. Da Strega
-la ascoltano: alla riunione delle maestre è lei che decide il piano e dice a ognuna cosa fare.
+| Livello | Magia | Seme | Cosa fa | Cosa apre |
+|---|---|---|---|---|
+| 2 | Tartufo | | Il gatto fiuta le carte vicine e avverte dei conestabili | |
+| 3 | La bottega | | Ti aprono la porta nera | |
+| 4 | Fuoco | Bastoni | Luce nel buio; brucia i rovi | Il bosco fondo, le cantine |
+| 5 | Acqua | Coppe | Il sesto senso: ti tira verso la carta nascosta più vicina | |
+| 6 | Terra | Denari | Radici e pietre segnate si scostano | Passaggi, scorciatoie, bauli |
+| 7 | Aria | Spade | Un soffio che confonde un conestabile e dirada la nebbia | La nebbia fitta, la palude |
+| 8 | La scopa | | Voli tra i luoghi che conosci | |
 
-**Missioni secondarie.** Facoltative. Una persona del villaggio o una strega racconta qualcosa che porta
-nella zona di un Arcano Maggiore («la ruota del mulino gira anche di notte, senz'acqua»). Fanno esplorare
-e insegnano qualcosa di quella carta. Non compaiono in un elenco: sono appunti a matita sulla mappa del
-grimorio, nel posto a cui si riferiscono. Tutte le carte si possono trovare anche senza.
+Il raggio del sesto senso cresce a ogni livello. Da Gran Maestra arriva a tutta la mappa: è il suo
+potere che le fa trovare le ultime carte, non un elenco che compare. Così il cento per cento è a portata.
 
-**Arcani Minori da subito.** Si trovano fin dal capitolo 1 girando nell'erba alta, ognuno nella zona del
-suo seme (Denari al mercato, Spade nella parte alta del villaggio, Bastoni nel bosco, Coppe lungo l'acqua),
-con rarità e doppioni. Danno esperienza e monete. Durante la storia gli Esami chiedono solo i Maggiori.
+Nella nebbia fitta, prima di avere l'Aria, si può entrare: ci si perde e ci si ritrova al bordo. È il
+modo in cui il mondo dice che manca qualcosa.
 
-**Le magie.** Sono la crescita che si vede.
+**I luoghi.** Il villaggio (la strada d'arrivo con la casa di Malva, la piazza e il mercato, la parte
+alta con la casa delle adunanze e il tribunale), il cottage al limite del bosco, il bosco (la capanna di
+Ortica, il mulino, lo stagno, il cimitero, il bosco fondo), le cantine sotto il villaggio (Edera, la
+torre della prigione, il pozzo, la palude). Le stagioni seguono i capitoli: inverno, primavera, autunno,
+e un'alba chiara dopo il finale. Nell'erba alta e al buio si vede solo qualche passo.
 
-| Livello | Magia | Cosa cambia |
-|---|---|---|
-| 2 | Tartufo | Fiuta le carte vicine |
-| 3 | La bottega | Si può comprare |
-| 4 | Fuoco | Luce nei luoghi bui |
-| 5 | Sesto senso | Una bussola verso la carta nascosta più vicina |
-| 6 | Spostare i massi | Si aprono passaggi, scorciatoie, bauli |
-| 7 | Stordire | Un conestabile, ogni tanto |
-| 8 | Scopa | Volo tra i luoghi conosciuti |
-| 9 | Sesto senso pieno | Sulla mappa del grimorio si vedono le carte della zona |
+**Chi ti ferma.** Conestabili con la lanterna, che si possono evitare, e le Afflitte, che ti indicano
+col dito. Niente inquisitori. Camminando distratta, un Esame ogni due o tre minuti; stando attenta, quasi mai.
 
-In più, dalla storia: la **luce grande**, che insegna Edera, per le cantine più buie. Prima di averla ci si
-può entrare, ma non si vede niente e ci si perde: il gioco la riporta all'ingresso e le fa capire che le
-manca una magia. Bauli e porte sigillate si aprono con una risposta, a ogni livello.
+## Il ritratto
 
-**Dopo la storia.** Gran Maestra: la mappa mostra tutte le carte che mancano, in tutte le zone. Si può
-arrivare al cento per cento senza metterci un tempo infinito. Clienti nuovi continuano ad arrivare.
-
-## Il ritratto: il gioco ti conosce
-
-Il gioco tiene d'occhio cinque tratti del carattere, dall'inizio alla fine. Ognuno è una linea tra due
-poli, e nessuno dei due è quello giusto: sono due modi di essere, ognuno col suo lato in ombra.
+Il gioco tiene d'occhio cinque tratti. Ognuno è una linea tra due poli, e nessuno dei due è quello giusto.
 
 | Tratto | Da una parte | Dall'altra | Da cosa si capisce |
 |---|---|---|---|
-| `esplora` | Curiosa: gira, guarda, si ferma | Dritta al punto: va dove deve andare | Quanti posti ha visto, quante chiacchiere facoltative, quanto devia dalla strada; e le risposte |
-| `parola` | Schietta: lo dice e basta | Accorta: gira intorno, pesa le parole | Le risposte |
-| `tono` | Gentile | Pungente: risponde per le rime | Le risposte |
-| `rischio` | Prudente | Audace | I tre bivi, se evita o sfida i conestabili, gli Esami presi di petto; e le risposte |
-| `guida` | Cuore: sente | Testa: ragiona | Le risposte, soprattutto con la Lettrice |
+| Come esplora | Curiosa | Dritta al punto | Posti visti, deviazioni, chiacchiere facoltative |
+| Come parla | Schietta | Accorta | Le risposte |
+| Che tono ha | Gentile | Pungente | Le risposte |
+| Come rischia | Audace | Prudente | I bivi, i conestabili sfidati o evitati |
+| Cosa la guida | Cuore | Testa | Le risposte, soprattutto con la Lettrice |
 
-Come si usa, sempre e solo con del testo:
+Da qui discende tutto quello che fa sembrare il gioco fatto su di lei:
 
-- **La Lettrice lo nota.** Apre gli incontri con una cosa vera: «Hai girato mezza Salem prima di tornare
-  da me», «Sei venuta dritta, senza guardarti intorno», «Con Malva non hai usato mezze parole».
-- **I personaggi reagiscono al carattere.** A Malva piace chi è schietta, a Ortica chi è curiosa, a Edera
-  chi è gentile, a Ginepra chi è audace. Ognuna ha qualche battuta che esce solo se il tratto è marcato.
-- **La tua carta nasce da qui.** Ogni Arcano Maggiore ha un suo carattere (Il Carro: audace e dritta al
-  punto; L'Eremita: accorta e curiosa; L'Imperatrice: gentile e di cuore...). La tua carta è quella che
-  ti somiglia di più in quel momento, con un piccolo vantaggio iniziale per la carta di nascita. Così la
-  Lettrice può dire perché: «Giri molto e parli poco: per me stanotte sei L'Eremita».
-- **Nel grimorio**, sotto la tua carta, tre parole scritte a mano che cambiano col gioco: «Curiosa,
-  schietta, gentile».
-- **Nel finale** la Lettrice ti restituisce un ritratto: una frase per ogni tratto, la tua carta, il tuo seme.
+- **La tua carta** è l'Arcano che le somiglia di più in quel momento. Parte dalla carta di nascita, che è
+  quella del suo segno, e si sposta con lei. Sta nel grimorio, con tre parole sotto: «Curiosa, schietta, gentile».
+- **Il tuo seme** si ricava dagli stessi tratti (Coppe cuore e gentilezza, Spade testa e schiettezza,
+  Bastoni audacia, Denari prudenza) e si scopre nel finale.
+- **Le streghe reagiscono al carattere.** A Malva piace chi è schietta, a Ortica chi è curiosa, a Edera
+  chi è gentile, a Ginepra chi è audace. Poche battute ciascuna, solo su tendenze solide.
+- **La Lettrice** ci costruisce sopra un discorso lungo tutto il gioco.
 
-Regole: i tratti si muovono piano (un punto alla volta, da -6 a +6); una battuta parla di un tratto solo
-quando è marcato (almeno 3); ogni osservazione cita un fatto vero. Il taglio è positivo: il gioco ti
-legge come farebbe una buona cartomante, per farti vedere qualcosa di te, mai per giudicarti.
+Si guardano le tendenze robuste, non ogni scossa. Un cambio si nomina solo se è grosso. Quando su un
+tratto lei tira forte da tutte e due le parti, è una cosa da raccontare: «Il cuore e la testa in te non
+riescono a mettersi d'accordo». Il taglio è quello di una buona cartomante: far vedere qualcosa di sé,
+mai giudicare.
 
-### Un ritratto solo, costruito lungo tutti gli incontri
+Dal nome e dalla data di nascita, chiesti all'inizio e tenuti solo sul telefono, vengono cose vere: il
+segno con la sua carta, l'elemento, la qualità, il pianeta; il giorno della settimana e la luna di
+quella notte, se dà anche l'anno; la stagione; il compleanno.
 
-Gli incontri con la Lettrice sono pensati come un percorso unico, scritto bene dall'inizio alla fine, non
-come tanti commenti slegati.
+## La Lettrice
 
-- **Il filo.** Alla prima seduta lei si fa un'ipotesi. Negli incontri dopo la mette alla prova, la
-  conferma o la corregge, e lo dice: «L'altra volta ti avevo detto che eri L'Eremita. Lo penso ancora» oppure
-  «Ho cambiato idea». Riprende le risposte date prima e le accosta a quello che è successo dopo: «La prima
-  sera mi hai detto che davanti a una porta chiusa bussi. In tribunale, però, sei entrata dalla finestra».
-- **Tendenze robuste, non ogni scossa.** Si commenta un tratto quando è marcato e resta tale da un
-  incontro all'altro. Un cambio si nomina solo se è grosso e vero (il segno si rovescia), e in modo
-  estemporaneo: «Fino a ieri giravi alla larga dai conestabili. Stanotte gli sei passata sotto il naso».
-- **Le combinazioni.** Quando su un tratto tira forte da tutte e due le parti, è una cosa da raccontare:
-  «Il cuore e la testa in te non riescono a mettersi d'accordo, e non è detto che debbano». Così anche gli
-  accostamenti tra tratti: audace ma accorta, gentile ma pungente quando serve.
-- **Cose del momento.** Ogni incontro può avere un'osservazione sull'ultimo tratto di strada (dove è
-  stata, cosa ha evitato, quanto ci ha messo), accanto al discorso lungo.
-- **Gli attrezzi del mestiere.** La Lettrice usa quello che una cartomante e un'astrologa usano davvero:
-  l'elemento e la qualità del segno (cardinale, fisso, mobile), il pianeta che lo governa e la sua carta, il
-  giorno della settimana in cui è nata e il suo pianeta, la luna di quella notte; e con le carte: il taglio
-  del mazzo, «dimmi un numero», la carta in fondo al mazzo, il seme che torna più spesso, le carte a coppie,
-  la carta che rappresenta chi chiede. Tutto calcolato dal vero, mai inventato.
+È la voce fuori dal gioco. Non ha volto né nome. Torna spesso, e ogni tratto di strada finisce al suo tavolo.
 
-## Le visite della Lettrice
+- **Le visite**, brevi, a metà capitolo, quando ci sono due o tre carte nuove. Apre con un'osservazione
+  vera su come lei ha giocato, riprende il discorso dell'altra volta, poi gira le carte nuove e le
+  racconta. Su una fa una domanda a due risposte.
+- **Le sedute**, più lunghe, a fine capitolo: due o tre domande ad albero, in cui la seconda nasce dalla
+  prima (valori, paure, sogni); il confronto con un fatto vero; «dimmi un numero»; e il suo giudizio
+  provvisorio: «Per ora la tua carta è questa. Vedremo se mi farai cambiare idea.»
 
-La Lettrice torna spesso: è lei che ti racconta le carte. Ogni capitolo è fatto di due o tre tratti di
-strada, e ognuno finisce al suo tavolo.
+Prologo, poi due visite e una seduta per capitolo, poi il finale: undici incontri, uno ogni sei-dieci
+minuti. Sono pensati come un percorso solo: alla prima seduta si fa un'ipotesi, negli incontri dopo la
+conferma o la corregge e lo dice, accosta le risposte di prima a quello che è successo dopo. Usa gli
+attrezzi veri del mestiere: il taglio del mazzo, la carta in fondo, il seme che torna, le carte a coppie,
+il segno e la luna. Reagisce, non approva tutto, non spiega mai come funziona.
 
-- **Le visite** (brevi, un minuto o poco più): a metà capitolo, quando hai due o tre carte nuove. Lei
-  apre con un'osservazione su come hai giocato, poi gira le carte nuove una alla volta e te le racconta:
-  parte dal dettaglio che avevi scelto tu, arriva a cosa dice la carta, e se avevi scritto le tue tre
-  parole le riprende. Su una delle carte ti fa una domanda a due risposte, che muove un tratto.
-- **Le sedute** (più lunghe, a fine capitolo): le due o tre domande ad albero su valori, paure, sogni;
-  il confronto con un fatto vero; «dimmi un numero»; il giudizio provvisorio sulla tua carta.
+## Le streghe e la storia
 
-Ritmo: prologo, poi per ogni capitolo due visite e una seduta, poi il finale. Un incontro ogni sei-dieci
-minuti, undici in tutto. Una carta raccontata dalla Lettrice guadagna la seconda stella: da lì gli Esami
-possono chiederne il significato. Prima di allora chiedono solo di riconoscerla.
+Ognuna incarna una carta, e aiuta a ricordarla.
 
-Le visite non si scrivono una per una: si compongono dai pezzi di ogni carta (il racconto, una frase per
-ogni dettaglio, una domanda con due reazioni) e da una riserva di osservazioni legate ai tratti e ai fatti.
+- **Tu**: una strega giovane e bella, cappello a punta. Il Matto.
+- **Ginepra** (Il Carro): novizia come te, ricci rossi, impulsiva, ride nei momenti sbagliati. Rivale, poi amica.
+- **Comare Malva** (L'Imperatrice): levatrice, bella donna sui quaranta, treccia a corona. Brusca, non
+  ringrazia mai. Insegna la carta singola.
+- **Ortica** (Il Mago): vive nel bosco, chioma selvaggia, parla senza sosta. Insegna passato-presente-futuro.
+- **Nonna Edera** (La Sacerdotessa): la più grande, capelli d'argento, regale. Scorda i nomi, ricorda
+  ogni carta. Insegna la croce celtica.
+- **Tartufo** (La Luna): gatto nero, voce ironica.
+- **Il Giudice** (L'Imperatore): cortese, paziente, convinto di fare il bene.
 
-## Sembra fatto su di lei
+**Prologo.** La prima seduta: nome, nascita, Il Matto, le prime domande. Poi la strada d'arrivo, di
+notte, nella neve: pochi passi, una carta che brilla sul bordo, la porta accesa di Malva.
 
-- **Carta di nascita**: l'Arcano del segno. Fissa. Si può trovare prima del suo capitolo; trovarla è un momento a parte.
-- **La tua carta**: parte uguale alla carta di nascita, si sposta con risposte e comportamenti. Può cambiare
-  più volte: "Le carte ti vedono diversa." La Lettrice gioca sullo scarto tra le due.
-- **Il tuo seme**: le stesse risposte pesano su Coppe (cuore), Spade (testa), Bastoni (volontà), Denari
-  (concretezza). Si scopre nel finale.
-- **Le tue tre parole**: quando trovi una carta scrivi tre parole tue. La Lettrice può citartele.
-- **Il diario**: righe in prima persona ricavate dalle scelte ("Ho mentito al conestabile. Lo rifarei.").
-- Nome, stagione di nascita, compleanno: battute dedicate.
+**Capitolo 1, il villaggio (inverno).** Malva la prende in casa, le fa pescare due carte, le insegna la
+carta singola e le dà una capanna al limite del bosco. Le commissioni: comprare l'incenso alla bottega,
+portare una cosa nella parte alta. Arriva Tartufo. Il primo cliente. Ginepra le soffia Il Carro sotto il
+naso, poi glielo rende. Il primo Esame. **Bivio 1, la piazza**: un'Afflitta indica una donna del
+villaggio; parli o resti nascosta?
 
-## Scelte
+**Capitolo 2, il bosco (primavera).** Ortica, la seconda stesa, una commissione al mulino, l'ultima. La
+notte al fuoco con Ginepra, che ora è un'amica. **Bivio 2, il mazzo sequestrato**: vai con lei a
+riprenderlo o no? I conestabili arrivano al cottage per te; Ginepra si fa avanti: «Sono io.»
 
-Ogni battuta della giocatrice ha almeno due risposte. Tre tipi: colore (quasi sempre: cambia la battuta
-dopo e i punti verso la tua carta), fiducia (ogni tanto: il rapporto con un personaggio), bivio (tre in
-tutto). Trucchi a basso costo: qualcuno più tardi ricorda la tua scelta (una riga); ordine libero;
-chi viene con te; ricompensa diversa; bivio a specchio (stessi luoghi, dosati al contrario).
+**Capitolo 3, il buio (autunno).** Edera, sotto il villaggio, e la croce celtica. Le tre maestre si
+riuniscono e questa volta ascoltano te. **Bivio 3, come salvarla**: di nascosto dalle cantine o a viso
+aperto al processo? Il processo davanti al Giudice è l'Esame finale; le maestre che si fidano di te ti
+aiutano. All'alba volate via.
 
-## Il giro del gioco
+**Finale.** La Lettrice le passa il mazzo: «Adesso leggi tu. Per te.» Una croce celtica fatta con la sua
+partita (la sua carta, quella di nascita, quella su cui ha sbagliato di più, quelle del suo valore, della
+sua paura e del suo sogno, quella di chi si fida di più di lei, due pescate a sorte). Poi il ritratto.
 
-Esplori → trovi carte nascoste → i conestabili ti fermano (l'Esame) → leggi le carte ai clienti nel
-cottage → guadagni → sali di livello → si aprono luoghi e poteri.
+**Dopo.** Mondo aperto: i Minori, clienti nuovi, il sesto senso che si allarga.
 
-- **Trovare una carta**: la vedi grande, tocchi il dettaglio che ti colpisce, scrivi tre parole. Entra nel
-  grimorio "velata"; si risveglia fino a 3 stelle (immagine, significato, pianeta o segno).
-- **L'Esame**: 3-5 domande rapide, barra del sospetto. Se finisce alta: prigione e alcune carte
-  confiscate (finiscono nel deposito del tribunale; si riprendono rispondendo proprio su quelle). All'inizio
-  è indulgente. Le Afflitte partono con la barra a metà.
-- **Vista corta**: nell'erba alta e nei luoghi bui vedi solo qualche passo. Il fuoco allarga.
-- **Bauli e porte sigillate**: si aprono con una risposta.
-- **Letture al cottage**: lettura guidata per alternative (per ogni posizione scegli l'interpretazione
-  adatta al cliente). Più carte hai, meglio paga.
-- **Pescare**: carte coperte a ventaglio, dire un numero, girare la prima. Dono della maestra a inizio
-  capitolo; carta del giorno al cottage; i clienti pescano dal tuo mazzo.
-- **Strumenti** (pochi): bottiglia della strega (per un po' nessuno ti ferma), setaccio e cesoie (indica
-  la carta nascosta più vicina), incenso (calma un Esame: toglie sospetto), pendolo (toglie una risposta sbagliata).
-- **Ripasso**: le carte si velano di nuovo dopo 1, 3, 7, 16 giorni; Tartufo te le riporta.
+Ginepra viene sempre presa e sempre salvata. Cambia come, con chi, cosa vi dite.
 
-## Studio, senza giocare
+**Scelte.** Ogni battuta della giocatrice ha almeno due risposte, e la replica cambia con la risposta.
+Quasi tutte muovono un tratto; alcune la fiducia di un personaggio; tre sono i bivi. Il trucco che rende
+di più è far ricordare una scelta a qualcuno, più tardi.
 
-Dal titolo: "Sfoglia il grimorio". Si vedono le carte raccolte con il loro identikit, si rileggono le
-lezioni delle maestre (il mazzo, le tre stese, semi ed elementi, pianeti e segni), si fa ripasso a
-domande senza posta, e si fa una **lettura con il proprio mazzo vero**: indichi le carte che hai estratto
-e il gioco ti accompagna posizione per posizione (verifica).
+**Missioni secondarie.** Circa otto, facoltative: qualcuno racconta una cosa che porta nella zona di un
+Arcano Maggiore e intanto insegna qualcosa di quella carta. Non stanno in un elenco: sono appunti a
+matita sulla mappa del grimorio. Ogni carta si trova anche senza.
 
-## Il grimorio (il menù)
+## Il grimorio
 
-Un oggetto della storia, scritto a mano in prima persona. Tre segnalibri, non di più. Pulito, minimo.
+Il menù è un oggetto della storia, scritto a mano in prima persona. Tre segnalibri, non di più.
 
-1. **Io**: nome, titolo e livello con la barra; la tua carta; il prossimo passo in una riga; le ultime
-   tre righe di diario; in fondo carte trovate su 22, monete, strumenti.
-2. **Carte**: le 22 caselle (quelle vuote: sagoma e una diceria su dove cercare); la pagina di una carta
-   segue la scheda del libro; da qui anche lezioni, ripasso e lettura libera.
-3. **Mappa**: schizzo a inchiostro, prossimo luogo cerchiato; con la scopa, "Vola qui".
+1. **Io**: nome, titolo e livello con la barra; la tua carta con le tre parole; il prossimo passo in una
+   riga; le ultime righe di diario; in fondo carte, monete, strumenti.
+2. **Carte**: le caselle (quelle vuote: sagoma e una diceria); la pagina di una carta segue la scheda del
+   libro; da qui lezioni, ripasso, lettura col mazzo vero.
+3. **Mappa**: schizzo a inchiostro, prossimo luogo cerchiato, appunti a matita; con la scopa, "Vola qui".
 
-Niente statistiche, numeri di fiducia, inventario a griglia, elenco di missioni. A schermo durante il
-gioco: il prossimo passo in una riga e la barra del livello. Nient'altro.
+Dal titolo, "Sfoglia il grimorio" apre le stesse pagine senza giocare. A schermo durante il gioco: il
+prossimo passo e la barra del livello. Nient'altro. Niente statistiche, numeri di fiducia, elenchi di missioni.
+
+## L'inizio guidato
+
+Nei primi minuti una cosa alla volta, usandola: camminare, raccogliere, parlare, pescare, leggere una
+carta, aprire il grimorio, comprare, incontrare Ginepra, affrontare un Esame. Le indicazioni pratiche
+sono righe dell'interfaccia, una sola volta. Una scia di lucine porta sempre al prossimo posto per tutto
+il capitolo 1; dopo, compare toccando la riga del prossimo passo.
 
 ## Stile
 
-Due registri.
-
-- **Il mondo**: pixel art disegnata nel codice, notturna, stagioni per capitolo.
-- **Il racconto** (sedute, filmati, ritratti): teatro d'ombre. Un racconto per immagini, non un filmato:
-  quadri fermi di sagome ritagliate su una luce calda di lanterna, che si trasformano piano (dissolvenze,
-  parallasse lenta, fumo e inchiostro che prendono forma, il tremolio della fiamma). Si mostra il meno
-  possibile. Mai mani in movimento, mai figure che camminano o gesticolano male: se una cosa non si può
-  fare bene, non si mostra. Le carte vere sono le protagoniste. I ritratti dei dialoghi sono cammei di
-  profilo: sagome eleganti con pochi accenti di colore (capelli, un gioiello).
+- **Il mondo**: pixel art disegnata nel codice, notturna.
+- **Il racconto** (sedute, visite, filmati, ritratti): teatro d'ombre. Quadri fermi di sagome ritagliate
+  su una luce calda, che cambiano piano; si muovono solo la fiamma, la neve, il fumo. Le carte vere sono
+  le protagoniste. I ritratti dei dialoghi sono cammei di profilo.
 - Tre voci: pixel per il mondo, mano per il grimorio, serif antico per racconto ed Esame.
-- Il riferimento è Mnemopolis (`/home/claude/mnemopolis`, sola lettura): taccuino, momenti da film,
-  "ricordare", serrature. Si prende l'impianto e quello che funziona.
+- Musica generata, discreta, un tema solo che torna.
+
+## Durata
+
+Andando dritte, un'ora o poco più: è un ordine di grandezza, non un limite. Di certo non dieci. Chi
+vuole restare trova un mondo aperto in cui continuare a crescere.
