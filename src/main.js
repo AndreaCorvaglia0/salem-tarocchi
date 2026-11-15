@@ -5,6 +5,7 @@
 import './core/fonts.js';
 import { state, save, reset } from './core/state.js';
 import { call } from './core/services.js';
+import './sound/index.js'; // music and effects: silent until the first tap
 import './ui/index.js';
 import './story/index.js';
 import './systems/index.js';

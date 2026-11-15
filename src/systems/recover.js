@@ -5,7 +5,7 @@ import { state } from '../core/state.js';
 import { answer, confiscatedIds, recover } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { makeQuestion } from '../data/questions.js';
-import { screen, btn, say } from './theme.js';
+import { screen, btn, say, snd } from './theme.js';
 import { questionView } from './qview.js';
 
 export async function recoverCards({ rng = Math.random } = {}) {
@@ -30,6 +30,7 @@ export async function recoverCards({ rng = Math.random } = {}) {
     const picked = await done;
     const ok = !!q.options[picked]?.ok;
     view.reveal(picked);
+    snd(ok ? 'right' : 'wrong');
     answer(id, ok, q.star);
     if (ok) { recover(id); got.push(id); } else kept.push(id);
     scr.col.append(h('div.sx-say.sx-in', h('b', 'Il custode'), ok ? `Giusto. Prendila: è tua. ${q.explain}` : `No. La carta resta dov'è, ma non scappa. ${q.explain}`));

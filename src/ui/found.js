@@ -3,6 +3,7 @@
 // picks the nearest); its note appears; then three words of her own, and the book's three words;
 // then the card flies into the grimoire. Under twenty seconds, a small ritual.
 // foundCeremony(id) -> Promise resolved when the card is in the grimoire.
+import { snd } from './sfx.js';
 import { h, css, cardUrl, openOverlay, reducedMotion } from '../core/dom.js';
 import { state } from '../core/state.js';
 import { CARD } from '../data/cards.base.js';
@@ -71,6 +72,7 @@ export function foundCeremony(id) {
   const words = h('div.fd-words', h('p', {}, 'Tre parole tue.'), h('div.row', inputs));
   const el = h('div.fd', { role: 'dialog', 'aria-label': `Hai trovato ${c.name}` }, top, stage, birth, note, words);
   const close = openOverlay(el);
+  inputs.forEach((x) => x.addEventListener('input', () => snd('write')));
   let detail = null;
 
   return new Promise((resolve) => {

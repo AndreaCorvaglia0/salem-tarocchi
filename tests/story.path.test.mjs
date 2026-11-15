@@ -20,7 +20,7 @@ function play(pick) {
     if (n.turn) { findCard(n.turn, { silent: true }); return true; }
     if (n.pick === 'number') { api.vars.picked = cardOfNumber(7); return (await api.exec(n.then)) || true; }
     if (n.observe) { assert.ok(n.observe.some((o) => cond(o.when)), 'no observe line holds'); return true; }
-    if (n.empty) return true; // the last image (session.js)
+    if (n.empty || n.symbol || n.tableau) return true; // the last image (session.js)
     return false;
   };
   const call = async (name, arg) => {

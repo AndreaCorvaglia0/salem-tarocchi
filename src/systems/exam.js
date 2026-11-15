@@ -7,7 +7,7 @@ import { answer, ownedIds, confiscate, stat, addXp, trusts } from '../core/progr
 import { CARD, MAJORS } from '../data/cards.base.js';
 import { makeExam, makeQuestion } from '../data/questions.js';
 import { BARKS } from '../data/story/index.js';
-import { screen, btn, say, pickOne, sleep } from './theme.js';
+import { screen, btn, say, pickOne, sleep, snd, mood, moodBack } from './theme.js';
 import { questionView } from './qview.js';
 import { header, DEFAULT_OPEN, CLOSING } from './exam.ui.js';
 import * as R from './exam.rules.js';
@@ -35,6 +35,8 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
   const scr = screen({ cls: 'sxe' });
   scr.el.insertBefore(head.el, scr.body);
   head.setCount(0, s.total); head.setSuspicion(s.suspicion);
+  const tense = () => mood('exam', { tension: Math.min(1, s.suspicion / R.FAIL_AT) });
+  tense();
 
   // ---- the stop ------------------------------------------------------------------------------
   const lines = [say(kind === 'judge' ? 'Il Giudice' : kind === 'afflicted' ? "L'Afflitta" : 'Il conestabile', barkOf(kind, rng))];
@@ -61,7 +63,7 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
     const addHelp = (label, fn) => { const b = btn(label, () => { if (answered) return; fn(b); }, 'ghost'); helps.append(b); return b; };
     if (state.powers.cat) addHelp('Tartufo, aiutami', (b) => { if (used.cat) return; if (removeOne()) { used.cat = true; b.disabled = true; note.textContent = pickOne(HINT_LINES, rng); } });
     if ((state.tools.pendulum || 0) > 0) addHelp(`Pendolo (${state.tools.pendulum})`, (b) => { if (removeOne() && useTool('pendulum')) { note.textContent = 'Il pendolo oscilla, e si ferma lontano da una risposta.'; b.textContent = `Pendolo (${state.tools.pendulum})`; if (!state.tools.pendulum) b.disabled = true; } });
-    if ((state.tools.incense || 0) > 0) addHelp(`Incenso (${state.tools.incense})`, (b) => { if (!useTool('incense')) return; s = R.calm(s, 30); head.setSuspicion(s.suspicion); note.textContent = 'Il fumo dolce riempie la stanza. Tutti respirano più piano.'; b.textContent = `Incenso (${state.tools.incense})`; if (!state.tools.incense) b.disabled = true; });
+    if ((state.tools.incense || 0) > 0) addHelp(`Incenso (${state.tools.incense})`, (b) => { if (!useTool('incense')) return; s = R.calm(s, 30); head.setSuspicion(s.suspicion); tense(); note.textContent = 'Il fumo dolce riempie la stanza. Tutti respirano più piano.'; b.textContent = `Incenso (${state.tools.incense})`; if (!state.tools.incense) b.disabled = true; });
     if (judge && trusts('edera')) addHelp('Nonna Edera', (b) => { if (used.edera) return; if (removeOne()) { used.edera = true; b.disabled = true; note.textContent = 'Nonna Edera, dal fondo, tossisce piano. Una risposta ti pare più lontana.'; } });
     if (judge && trusts('ortica')) addHelp('Ortica: salta', (b) => { if (used.ortica) return; used.ortica = true; b.disabled = true; skipped = true; answered = true; resolveQ(-1); });
     if (judge && trusts('malva') && !used.malva) helps.append(h('p.note', 'Comare Malva è in fondo all\'aula, con le braccia incrociate. Veglia su di te.'));
@@ -83,8 +85,10 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
     s = r.state;
     answer(q.cardId, ok, q.star);
     view.reveal(picked);
+    snd(r.effect === 'right' ? 'right' : 'wrong');
     helps.remove();
     head.setSuspicion(s.suspicion, { flick: r.effect === 'wrong' || r.effect === 'mercy' });
+    tense();
     head.setCount(s.asked + s.skipped, s.total);
     const fb = {
       right: ['ok', 'Giusto.', null], wrong: ['no', 'Sbagliato.', 'La fiamma trema. Il sospetto sale.'],
@@ -106,6 +110,7 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
   if (out.passed) { stat('examsPassed'); addXp(10, 'exam'); }
   else if (!judge) {
     stat('examsFailed'); stat('jailed');
+    snd('caught');
     lost.push(...R.toConfiscate(ownedIds(), rng));
     if (lost.length) confiscate(lost);
   }
@@ -119,6 +124,7 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
     out.passed ? h('p.sx-lab', { style: { textAlign: 'center' } }, 'Hai imparato qualcosa: +10 punti esperienza.') : null));
   await new Promise((res) => scr.setFoot(btn('Continua', res, 'go')));
   scr.close();
+  moodBack();
   await sleep(0);
   return out;
 }

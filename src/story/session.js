@@ -1,4 +1,4 @@
-// A session with the Reader: full screen, the table scene on a canvas (scene.js) and the DOM on top:
+// A session with the Reader: full screen, the shadow-theatre stage (stage/) and the DOM on top:
 // her lines as captions (never a face), choices as two cards of text, a paper to write on, a pad of
 // numbers. The script itself is run by runner.js; this file gives it a UI and the session nodes
 // (ask, turn, pick, observe).
@@ -11,7 +11,7 @@ import { setPlayer, foundIds, findCard } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { SESSIONS, SCRIPTS } from '../data/story/index.js';
 import { createRunner, cardOfNumber } from './runner.js';
-import { createScene } from './scene.js';
+import { createStage } from './stage/index.js';
 
 const CSS = `
 .ss{position:fixed;inset:0;z-index:35;background:#000;font-family:${FONT.serif};color:#efe4cc;opacity:0;transition:opacity .7s;overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation}
@@ -53,6 +53,8 @@ const CSS = `
 .ss-pad button{height:46px;font:600 clamp(20px,2.4vw,24px) ${FONT.serif};color:#f1e6c8;background:rgba(34,22,34,.95);border:1px solid rgba(184,154,82,.6);border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ss-pad button:hover,.ss-pad button:focus-visible{border-color:#ffe08a;outline:none;background:rgba(66,40,56,.98)}
 .ss-pad button.yes{background:#6a2a3a;border-color:#ffe08a}
+.sgc{transition:opacity .5s}
+.ss.asking .sgc{opacity:.22}
 .ss-moment{position:absolute;top:max(18px,env(safe-area-inset-top));left:0;right:0;text-align:center;font:italic 20px ${FONT.serif};color:#d9c9a0;text-shadow:0 2px 8px #000;pointer-events:none;animation:ssu .5s both}
 @media (prefers-reduced-motion:reduce){.ss,.ss-stage,.ss-cap,.ss-cap .w,.ss-opt{transition:none;animation:none}.ss-paper,.ss-pad{animation:none}.ss-dot{animation:none}}
 `;
@@ -70,7 +72,10 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
   const close = openOverlay(root);
   emit('cinema', true);
   requestAnimationFrame(() => root.classList.add('on'));
-  const scene = createScene(stage, { level, found: foundIds() });
+  // the music: a mood of its own, held so that a reading or an Exam inside it comes back to it
+  const sessionMood = id === 's4' ? 'ending' : 'session';
+  call('sound.hold', sessionMood); call('sound.mood', sessionMood);
+  const scene = createStage(stage, { session: level, found: foundIds() });
   stage.append(ui);
   setTimeout(() => root.classList.add('shown'), reduced ? 0 : 750);
 
@@ -116,6 +121,7 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
   function choose(texts) {
     clearTimeout(fadeT);
     const list = h(`div.ss-choices${texts.length === 1 ? '.n1' : ''}`);
+    root.classList.add('asking'); // the cards on the table sit under the choices: let them recede
     return new Promise((resolve) => {
       const btns = texts.slice(0, 4).map((t, i) => h('button.ss-opt', { type: 'button', onclick: () => pick(i) }, t));
       btns.forEach((b) => list.append(b)); ui.append(list);
@@ -123,7 +129,7 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
         release = null;
         btns.forEach((b, j) => b.classList.add(j === i ? 'yes' : 'no'));
         await sleep(reduced ? 0 : 420);
-        list.remove(); dropCap(); resolve(i);
+        list.remove(); dropCap(); root.classList.remove('asking'); resolve(i);
       };
       release = (how) => { const m = /^n(\d)$/.exec(how || ''); if (m && +m[1] <= btns.length) pick(+m[1] - 1); };
     });
@@ -174,8 +180,9 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
   function padNumber() {
     clearTimeout(fadeT);
     const wrap = h('div.ss-pad');
+    root.classList.add('asking');
     return new Promise((resolve) => {
-      for (let n = 1; n <= 22; n++) wrap.append(h('button', { type: 'button', onclick: async (e) => { e.currentTarget.classList.add('yes'); await sleep(reduced ? 0 : 280); wrap.remove(); dropCap(); resolve(n); } }, String(n)));
+      for (let n = 1; n <= 22; n++) wrap.append(h('button', { type: 'button', onclick: async (e) => { e.currentTarget.classList.add('yes'); await sleep(reduced ? 0 : 280); wrap.remove(); dropCap(); root.classList.remove('asking'); resolve(n); } }, String(n)));
       ui.append(wrap);
     });
   }
@@ -189,12 +196,14 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
   const ext = async (node, api) => {
     if (node.ask === 'name') { await askName(); return true; }
     if (node.ask === 'birth') { await askBirth(api); return true; }
-    if (node.turn) { dropCap(); await scene.layCard(node.turn); findCard(node.turn); return true; } // a card turned for her is hers (the Fool)
-    if (node.empty) { dropCap(); scene.setEmpty(true); await sleep(reduced ? 0 : 1200); return true; }
+    if (node.turn) { dropCap(); call('sound.play', 'card'); await scene.layCard(node.turn); findCard(node.turn); return true; } // a card turned for her is hers (the Fool)
+    if (node.symbol) { dropCap(); await scene.symbol(node.symbol); return true; } // a smoke symbol: { symbol: 'moon' }
+    if (node.tableau) { dropCap(); await scene.tableau(node.tableau); return true; } // another picture: { tableau: 'last' }
     if (node.shuffle) { dropCap(); await scene.shuffle(); return true; }
     if (node.pick === 'number') {
       const n = await padNumber(), cid = cardOfNumber(n);
       api.vars.picked = CARD[cid]?.name || cid; api.vars.pickedId = cid; api.vars.pickedNumber = n;
+      call('sound.play', 'card');
       await scene.layCard(cid);
       await api.exec(node.then);
       return true;
@@ -215,5 +224,6 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
     await sleep(reduced ? 0 : 750);
     window.removeEventListener('keydown', onKey, true);
     scene.dispose(); close(); emit('cinema', false);
+    call('sound.hold', null); call('sound.back');
   }
 }

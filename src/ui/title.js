@@ -1,6 +1,7 @@
 // The title screen "Le carte di Salem": night, a candle on a table, a card back. Three ways in:
 // "Continua" (only with a save), "Nuova partita" (asks first when a save exists), "Sfoglia il
 // grimorio" (study, without playing). openTitle() -> 'new' | 'continue' | 'study'.
+import { snd, mood } from './sfx.js';
 import { h, css, openOverlay } from '../core/dom.js';
 import { hasSave } from '../core/state.js';
 import { SERIF, HAND, GOLD, baseCss, rnd } from './paper.js';
@@ -36,6 +37,7 @@ const CSS = `
 
 export function openTitle() {
   baseCss(); css('ui-title', CSS);
+  mood('title');
   return new Promise((resolve) => {
     const sky = h('div.tt-sky');
     const r = rnd(7);
@@ -47,7 +49,7 @@ export function openTitle() {
       h('div.tt-head', h('h1', {}, 'Le carte', h('br'), 'di Salem'), h('p', {}, 'Arrivano a chi le sa guardare.')), scene, acts);
     const close = openOverlay(el);
     const done = (v) => { close(); resolve(v); };
-    const b = (t, fn, main) => h(`button.tt-b${main ? '.main' : ''}`, { type: 'button', onclick: fn }, t);
+    const b = (t, fn, main) => h(`button.tt-b${main ? '.main' : ''}`, { type: 'button', onclick: () => { snd('tap'); fn(); } }, t);
     const menu = () => {
       const saved = hasSave();
       acts.replaceChildren(...[

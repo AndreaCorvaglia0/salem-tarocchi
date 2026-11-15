@@ -1,11 +1,12 @@
-// The dialogue box of the pixel world: a pixel portrait, the name, text typed out quickly, choices as
+// The dialogue box of the pixel world: a profile cameo, the name, text typed out quickly, choices as
 // big buttons stacked above the box. story.say / story.choose / (moment) live here.
 // Tap or Space/Enter completes the typing, then goes on. The layer stays open while a run plays
 // (it blocks the world) and closes on end().
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
+import { call } from '../core/services.js';
 import { PEOPLE } from '../data/cards.base.js';
-import { portrait } from './portraits.js';
+import { cameo } from './stage/cameos.js';
 
 const CSS = `
 .sy-layer{position:fixed;inset:0;pointer-events:none;z-index:30;font-family:${FONT.pixel};color:#f1ead6;-webkit-user-select:none;user-select:none}
@@ -14,7 +15,7 @@ const CSS = `
 .sy-box,.sy-choices,.sy-moment{width:min(100%,720px);box-sizing:border-box}
 .sy-box{position:relative;display:flex;gap:12px;align-items:flex-start;min-height:104px;padding:14px 14px 22px;background:rgba(16,16,34,.96);border:3px solid #d9c9a0;box-shadow:0 0 0 3px #07070f,inset 0 0 0 3px #232345,0 10px 30px rgba(0,0,0,.6);transform:translateY(30px);opacity:0;transition:transform .16s ease-out,opacity .16s;cursor:pointer}
 .sy-box.in{transform:none;opacity:1}
-.sy-port{flex:none;width:72px;height:72px;image-rendering:pixelated;border:3px solid #07070f;outline:2px solid #6a5f48;background:#101020}
+.sy-port{flex:none;display:block}
 .sy-name{position:absolute;left:14px;top:-17px;padding:2px 10px 3px;background:#d9c9a0;color:#1a1424;font-size:16px;font-weight:600;letter-spacing:.04em;box-shadow:0 0 0 2px #07070f}
 .sy-text{flex:1;min-width:0;font-size:18px;line-height:1.38;min-height:75px;padding-top:2px;word-wrap:break-word}
 .sy-text .h{visibility:hidden}
@@ -23,7 +24,7 @@ const CSS = `
 @keyframes sybl{50%{transform:translateY(3px)}}
 .sy-box.thought{background:rgba(24,22,46,.9);border-style:dashed;border-color:#8c88c8}
 .sy-box.thought .sy-text{color:#c9c6ff;font-style:italic}
-.sy-box.thought .sy-port{filter:brightness(.9) saturate(.8);outline-color:#4a4880}
+.sy-box.thought .sy-port{filter:brightness(.9) saturate(.8)}
 .sy-box.thought .sy-name{background:#8c88c8;color:#10102a;font-weight:400}
 .sy-box.narra,.sy-box.plain{background:rgba(10,10,20,.94);border-color:#6a5f48}
 .sy-box.narra .sy-text{font-style:italic;color:#d8d0bc;text-align:left}
@@ -37,7 +38,7 @@ const CSS = `
 .sy-opt:active{transform:translateY(2px)}
 @keyframes syup{from{opacity:0;transform:translateY(10px)}}
 .sy-moment{position:fixed;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:auto;max-width:calc(100% - 24px);padding:10px 18px;background:#d9c9a0;color:#1a1424;font-size:18px;font-weight:600;text-align:center;box-shadow:0 0 0 3px #07070f,0 8px 24px rgba(0,0,0,.6);animation:syup .25s ease-out both;pointer-events:none}
-@media (min-width:720px){.sy-port{width:96px;height:96px}.sy-text{font-size:20px;min-height:96px}.sy-box{min-height:124px}.sy-name{font-size:17px}.sy-opt{font-size:20px}}
+@media (min-width:720px){.sy-text{font-size:20px;min-height:96px}.sy-box{min-height:124px}.sy-name{font-size:17px}.sy-opt{font-size:20px}}
 @media (prefers-reduced-motion:reduce){.sy-box,.sy-opt,.sy-moment{transition:none;animation:none}.sy-more{animation:none}}
 `;
 
@@ -70,12 +71,13 @@ export function say(who, text) {
   ensure();
   active += 1;
   const person = PEOPLE[who];
-  const cv = portrait(who);
+  // the Reader stays faceless in the world; everyone else (and the extra villagers) has a profile cameo
+  const cv = who === 'lettrice' ? null : cameo(who, matchMedia('(min-width:720px)').matches ? 96 : 72);
+  cv?.classList.add('sy-port');
   const kind = who === 'tu' ? 'thought' : who === 'narra' ? 'narra' : cv ? '' : 'plain';
   const t1 = h('span'), t2 = h('span.h'), more = h('div.sy-more', '▼');
   const name = who === 'narra' ? null : person?.short || (typeof who === 'string' ? who : null);
-  const fresh = h(`div.sy-box${kind ? `.${kind}` : ''}`, name && who !== 'tu' ? h('div.sy-name', name) : null, who === 'tu' ? h('div.sy-name', 'pensi') : null, cv ? h('canvas.sy-port', { width: 24, height: 24 }) : null, h('div.sy-text', t1, t2), more);
-  if (cv) fresh.querySelector('canvas').getContext('2d').drawImage(cv, 0, 0);
+  const fresh = h(`div.sy-box${kind ? `.${kind}` : ''}`, name && who !== 'tu' ? h('div.sy-name', name) : null, who === 'tu' ? h('div.sy-name', 'pensi') : null, cv, h('div.sy-text', t1, t2), more);
   if (box) box.remove();
   box = fresh;
   stack.append(box);
@@ -97,7 +99,7 @@ export function say(who, text) {
     release = () => {
       if (!done) { cancelAnimationFrame(raf); finish(); return; }
       if (performance.now() < armed) return;
-      release = null; active -= 1; scheduleHide(); resolve();
+      release = null; active -= 1; call('sound.play', 'tap'); scheduleHide(); resolve();
     };
   });
 }

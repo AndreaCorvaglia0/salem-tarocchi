@@ -1,4 +1,4 @@
-// Harness for the narrative area. ?view=dialogue | cinema | session&id=s0..s4   (&script=name for dialogue)
+// Harness for the narrative area. ?view=dialogue | cinema | tableau&name=arrest | portraits | session&id=s0..s4   (&script=name for dialogue)
 // Stub services log and resolve; card.found calls findCard. Real services come from other areas.
 import '../src/core/fonts.js';
 import { provide } from '../src/core/services.js';
@@ -10,7 +10,10 @@ import { runner } from '../src/story/index.js';
 import { playSession } from '../src/story/session.js';
 import { createRunner } from '../src/story/runner.js';
 import * as dialogue from '../src/story/dialogue.js';
-import { cinema } from '../src/story/cinema.js';
+import { cinema as barsCinema } from '../src/story/cinema.js';
+import { playTableau as tableau } from '../src/story/stage/index.js';
+import { sceneFor } from '../src/story/stage/tableaux.js';
+const cinema = (lines, node = {}) => { const s = sceneFor(node); return s ? tableau(s, lines) : barsCinema(lines); };
 
 const q = new URLSearchParams(location.search);
 const view = q.get('view') || 'dialogue';
@@ -92,10 +95,16 @@ SESSIONS.demo = [
 
 const start = async () => {
   if (view === 'portraits') {
-    const { portrait } = await import('../src/story/portraits.js');
+    const { cameo } = await import('../src/story/stage/cameos.js');
     const wrap = document.createElement('div'); wrap.style.cssText = 'position:fixed;inset:0;display:flex;flex-wrap:wrap;gap:12px;padding:12px;background:#10132a;z-index:5;align-content:flex-start';
-    for (const id of ['malva', 'ortica', 'edera', 'ginepra', 'tartufo', 'giudice', 'conestabile', 'afflitta', 'bottegaio', 'tu']) { const c = portrait(id); c.style.cssText = 'width:144px;height:144px;image-rendering:pixelated;border:3px solid #6a5f48'; wrap.append(c); }
+    for (const id of ['malva', 'ortica', 'edera', 'ginepra', 'tartufo', 'giudice', 'conestabile', 'afflitta', 'bottegaio', 'tu', 'child', 'washer', 'hale', 'gravedigger', 'miller']) { const c = cameo(id, 96); if (c) wrap.append(c); }
     document.body.append(wrap); return;
+  }
+  if (view === 'tableau') {
+    const { playTableau } = await import('../src/story/stage/index.js');
+    await playTableau(q.get('name') || 'arrest', ['Lanterne intorno al cottage.', 'Tre conestabili.']);
+    log('tableau done');
+    return;
   }
   if (view === 'cinema') {
     await cinema(['Salem, di notte. La neve non smette.', 'Qualcuno ha lasciato una candela alla finestra.', 'E tu eri già in cammino.']);

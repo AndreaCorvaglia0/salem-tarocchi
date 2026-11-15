@@ -55,8 +55,8 @@ function probe() {
   }
   const tt = last('.tt');
   if (tt) { const b = all('.tt-b', tt); return { ...base, kind: 'title', buttons: b.map((x) => ({ ...box(x), t: x.textContent })) }; }
-  const cn = last('.cn');
-  if (cn) return { ...base, kind: 'cinema', text: cn.querySelector('.cn-cap')?.textContent || '', at: { x: 195, y: 420 } };
+  const cn = last('.sgm') || last('.cn'); // the shadow-theatre tableau (.sgm); black bars (.cn) only as a fallback
+  if (cn) return { ...base, kind: 'cinema', text: cn.querySelector('.sgm-cap p, .cn-cap')?.textContent || '', at: { x: 195, y: 420 } };
   const ss = last('.ss');
   if (ss) {
     const name = all('.ss-paper input[type=text]:not([inputmode])', ss)[0];

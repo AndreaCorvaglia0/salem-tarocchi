@@ -7,7 +7,7 @@ import { CARD, MAJORS } from '../data/cards.base.js';
 import { SPREADS } from '../data/spreads.js';
 import { sheet } from '../data/cards.js';
 import { CLIENTS } from '../data/story/index.js';
-import { screen, btn, say, fb, sleep } from './theme.js';
+import { screen, btn, say, fb, sleep, snd, mood, moodBack } from './theme.js';
 import { questionView } from './qview.js';
 import { table } from './table.js';
 import { readStyle, posHeader } from './readview.js';
@@ -27,6 +27,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   const self = !cl;
   const N = sp.positions.length;
   const scr = screen({ cls: 'sxread' });
+  mood('reading');
 
   // ---- hello ---------------------------------------------------------------------------------
   const nm = self ? 'La Lettrice' : cl.name;
@@ -52,7 +53,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   const big = table(sp, { big: true });
   scr.setBody(h('p.sxr-q', { style: { textAlign: 'center' } }, N > 1 ? 'Ecco le carte, al loro posto.' : 'Ecco la carta.'), big.el);
   scr.setFoot();
-  for (let i = 0; i < N; i++) { big.place(i, ids[i]); await sleep(i ? 200 : 350); big.turn(i); }
+  for (let i = 0; i < N; i++) { big.place(i, ids[i]); await sleep(i ? 200 : 350); big.turn(i); snd('card'); }
   await sleep(700);
   await wait(scr, 'Leggiamo');
 
@@ -73,6 +74,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
     const k = await done;
     const ok = !!alts[k]?.ok;
     view.reveal(k);
+    snd(ok ? 'right' : 'wrong');
     oks.push(ok); chosen.push(alts[k]?.t || '');
     answer(id, ok, 'meaning');
     scr.col.append(ok ? fb('ok', 'Esatto.', `Qui ${CARD[id]?.name} dice proprio questo.`, coreLine(id)) : fb('no', 'Non proprio.', alts[k]?.card ? `Quella frase appartiene a ${CARD[alts[k].card]?.name}.` : null, `Per ${CARD[id]?.name}, qui, era la frase segnata in verde.`, coreLine(id)));
@@ -96,5 +98,6 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
     coins ? h('div.sxr-coins', `+${coins} monete`) : null);
   await wait(scr, 'Chiudo il libro');
   scr.close();
+  moodBack();
   return { score, coins };
 }

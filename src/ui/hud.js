@@ -2,6 +2,7 @@
 // livello. Nient'altro."): a paper slip with the next step and the level bar, and the grimoire button.
 // It listens to the bus: the step line changes with a stroke of red pencil, the bar fills, a level up
 // is a short full-width moment, "la tua carta" changing, a star, coins. hud.toast(text) for the rest.
+import { snd } from './sfx.js';
 import { h, css, openOverlay, cardUrl, reducedMotion } from '../core/dom.js';
 import { on } from '../core/bus.js';
 import { call } from '../core/services.js';
@@ -99,8 +100,8 @@ export function mountHud() {
   const bk = h('button.hud-book', { type: 'button', 'aria-label': 'Grimorio' }, svgEl(book({ size: 40 })));
   const el = h('div.hud', slip, bk);
   const open = (tab) => call('grimoire.open', { tab });
-  bk.onclick = () => open('io');
-  slip.onclick = () => open('mappa');
+  bk.onclick = () => { snd('tap'); open('io'); };
+  slip.onclick = () => { snd('tap'); open('mappa'); };
   slip.onkeydown = (e) => { if (e.key === 'Enter') open('mappa'); };
   const drawLevel = () => { const lp = levelProgress(); lvT.textContent = `${titleOf(lp.level)} · ${lp.level}`; bar.set(lp.level >= 9 ? 1 : lp.into); };
   stepT.textContent = nextStep().text;

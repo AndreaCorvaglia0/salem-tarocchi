@@ -1,4 +1,4 @@
-// The five sessions with the Reader (illustrated table, candle, two hands).
+// The five sessions with the Reader (shadow theatre: a candle, cut paper, smoke, the real cards).
 // s0 who you are, s1 values, s2 fears, s3 dreams, s4 she hands the deck over.
 // s1-s3: a two-level tree of two-answer questions; each leaf gives a point, a word and a flag
 // `leaf.<kind>.<card>` (read by the final reading). Then a true fact (observe), "dimmi un numero",
@@ -50,6 +50,7 @@ export const SESSIONS = {
     reader('Il Matto. Zero. Un passo sull\'orlo, un fagotto, un cane che abbaia.'),
     reader('Questa sei tu, adesso. Le altre carte verranno.'),
     reader('Una sola domanda, stanotte. Davanti a una porta chiusa: bussi, o cerchi la finestra?'),
+    { symbol: 'key' }, // smoke: the closed door
     choice(
       opt('Busso.', 'm04', 'w', [reader('Bussi. Annoto.')], { flag: 's0.knock' }),
       opt('Cerco la finestra.', 'm02', 's', [reader('La finestra. Annoto.')], { flag: 's0.window' }),
@@ -62,6 +63,7 @@ export const SESSIONS = {
   s1: [
     reader('Sei tornata. Hai le mani fredde e qualche carta in più.'),
     reader('Stanotte parliamo di ciò che conta per te.'),
+    { symbol: 'coin' }, // smoke: what is worth something
     ...ask('Una sera libera. La passi con qualcuno o da sola?',
       ['Con qualcuno.', ask('Qualcuno che ti fa ridere, o qualcuno che ti dice la verità?',
         ['Che mi fa ridere.', leaf('value', 'allegria', 'm03', 'c', 'Ridere. Annoto: allegria.')],
@@ -94,6 +96,7 @@ export const SESSIONS = {
   s2: [
     reader('Hanno preso la tua amica. Lo so. Siediti lo stesso.'),
     reader('Stanotte parliamo di paura. Piano.'),
+    { symbol: 'moon' }, // smoke: the night
     ...ask('Al buio, ti spaventa di più quello che senti, o quello che non senti?',
       ['Quello che sento.', ask('Un passo dietro di te. Ti giri, o corri?',
         ['Mi giro.', leaf('fear', 'non sapere', 'm18', 'c', 'Ti giri. Annoto: non sapere.')],
@@ -125,6 +128,7 @@ export const SESSIONS = {
   s3: [
     reader('L\'hai portata fuori. Lo so. Siediti, prima di cadere.'),
     reader('Stanotte parliamo di sogni. Quelli da sveglia.'),
+    { symbol: 'star' }, // smoke: what you hope for
     ...ask('Quando tutto questo finisce, ti vedi in un posto nuovo o in un posto tuo?',
       ['In un posto nuovo.', ask('Lontano da tutti, o con qualcuno accanto?',
         ['Lontano da tutti.', leaf('dream', 'partire', 'm10', 'w', 'Lontano. Annoto: partire.')],
@@ -159,7 +163,7 @@ export const SESSIONS = {
     IF(SAME_CARD,
       [reader('Sei nata {birthCard} e sei rimasta {birthCard}. Pochi ci riescono.')],
       [reader('Sei nata {birthCard}. Sei diventata {yourCard}. Le carte lo hanno visto prima di te.')]),
-    N('Le due mani spingono il mazzo verso di te, sul tavolo.'),
+    N('Il mazzo scivola sul tavolo, verso di te.'),
     reader('Adesso leggi tu. Per te.'),
     { do: 'reading', spread: 'celtic', client: 'self' },
     reader('Hai letto. Non ti dico se bene. Lo sai.'),
@@ -170,9 +174,9 @@ export const SESSIONS = {
       opt('Chi sei?', null, null, [reader('Guarda il tavolo.')]),
       opt('Grazie.', null, null, [reader('Guarda il tavolo.')]),
     ),
-    N('Il tavolo, la candela. Ma adesso le mani che vedi sono le tue.'),
+    N('Il tavolo, la candela. Ma adesso le carte sono le tue.'),
+    { tableau: 'last' }, // the Reader is gone: only the grimorio, open, and the candle (story/stage)
     N('Il grimorio aperto davanti a te ha la tua scrittura.'),
-    { empty: true }, // the Reader is gone: her seat is empty (story/session.js)
     N('Dall\'altra parte del tavolo, una sedia vuota. Aspetta qualcuno.'),
   ],
 };

@@ -2,6 +2,7 @@
 // pendulum) and two cards for sale: two Majors of this chapter's row that she lacks, expensive.
 // Buying a tool adds to state.tools; buying a card goes through the found ceremony (card.found).
 // openShop() -> Promise resolved when she leaves.
+import { snd } from './sfx.js';
 import { h, css, openOverlay } from '../core/dom.js';
 import { state, save } from '../core/state.js';
 import { call } from '../core/services.js';
@@ -75,6 +76,7 @@ export function openShop() {
     const buyTool = (t) => {
       if (!canBuy(t.price)) return;
       addCoins(-t.price);
+      snd('tap');
       state.tools[t.id] = (state.tools[t.id] || 0) + 1;
       save();
       draw();
@@ -83,6 +85,7 @@ export function openShop() {
     const buyCard = async (id, price) => {
       if (!canBuy(price)) return;
       addCoins(-price);
+      snd('tap');
       el.style.visibility = 'hidden';
       await call('card.found', id);
       el.style.visibility = '';

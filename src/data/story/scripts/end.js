@@ -1,12 +1,13 @@
 // The trial (the final Exam), the dawn flight, the epilogue by the campfire and the last session.
 // Every epilogue line is gated on what really happened (flags, trust, stats).
 import {
-  N, T, malva, ortica, edera, ginepra, cat, judge, opt, choice, IF, xp, flag, diary, step, chapter,
+  bell, N, T, malva, ortica, edera, ginepra, cat, judge, opt, choice, IF, xp, flag, diary, step, chapter,
   travel, give, exam, session, power, cinema, wait, goto,
 } from '../h.js';
 
 export const END = {
   'c3.trial': [
+    bell,
     judge('Signorina {name}. Che bel nome. Mia madre aveva una capra che si chiamava quasi così.'),
     judge('Non abbia paura. Qui cerchiamo solo la verità. La verità non fa male a nessuno. Quasi.'),
     IF({ stat: ['jailed', '>=', 1] }, [judge('Ci conosciamo. Ha dormito nelle mie celle {stat:jailed} volte. Spero che il pane fosse buono.')]),
@@ -51,14 +52,25 @@ export const END = {
   'f.dawn': [
     travel('village.forest_gate'),
     cinema(['Alba.', 'La neve è finita da mesi, ma l\'aria sa ancora di inverno.',
-      'Ginepra ride. Finalmente nel momento giusto.'], 'village.forest_gate'),
+      'Ginepra ride. Finalmente nel momento giusto.'], 'village.forest_gate', 'dawn'),
     give('m19'),
-    power('broom'),
-    ginepra('Una scopa. Una scopa vera. Ah ah. Tu sai guidarla?'),
-    choice(
-      opt('No. Sali lo stesso.', 'm00', 'w', [ginepra('Questa è la cosa più bella che mi hai detto.')]),
-      opt('Tieniti forte.', 'm07', 'w', [ginepra('Mi tengo. Ma se cadiamo, è colpa tua.')]),
-    ),
+    // the broom comes at level 8: a strong player may already fly, so the scene must still land
+    IF({ power: 'broom' },
+      [
+        ginepra('Aspetta. Quella è una scopa. TUA. E tu ci voli già? Da quando? E non mi hai detto niente!'),
+        choice(
+          opt('Volevo farti una sorpresa.', 'm07', 'w', [ginepra('Sorpresa riuscita. Mi tremano le ginocchia. Ah ah. Dai, vado dietro.')]),
+          opt('Da qualche giorno. Sali.', 'm00', 'w', [ginepra('Da giorni! E mi fai salire adesso, sull\'alba. Sei crudele. Mi piaci.')]),
+        ),
+      ],
+      [
+        power('broom'),
+        ginepra('Una scopa. Una scopa vera. Ah ah. Tu sai guidarla?'),
+        choice(
+          opt('No. Sali lo stesso.', 'm00', 'w', [ginepra('Questa è la cosa più bella che mi hai detto.')]),
+          opt('Tieniti forte.', 'm07', 'w', [ginepra('Mi tengo. Ma se cadiamo, è colpa tua.')]),
+        ),
+      ]),
     IF({ flag: 'fire.carriage' }, [ginepra('Te l\'avevo letto, al fuoco. Il viaggio. Solo che non era una carrozza.')]),
     IF({ flag: 'fire.promised' }, [ginepra('Avevi detto «subito». Non è stato subito. Ma sei venuta.')]),
     IF({ flag: 'venus.looked' }, [ginepra('Nel bicchiere c\'era una bara. Si sbagliava. Che albume bugiardo.')]),
@@ -66,7 +78,7 @@ export const END = {
       [ginepra('Dalle cantine. Al buio. Coi topi. Sei romantica, sai?')],
       [ginepra('Sei entrata dalla porta grande. Davanti a tutti. Io non lo dimentico più.')]),
     IF({ power: 'cat' }, [cat('(Io viaggio in braccio. Non si discute.)')]),
-    cinema(['Salem si fa piccola sotto di voi.', 'Il tribunale, la piazza, il comignolo di Malva. Poi solo bosco.']),
+    cinema(['Salem si fa piccola sotto di voi.', 'Il tribunale, la piazza, il comignolo di Malva. Poi solo bosco.'], null, 'dawn'),
     diary('All\'alba abbiamo volato via. Ginepra rideva. Io pure.'),
     xp(15),
     session('s3'),

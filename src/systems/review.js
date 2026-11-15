@@ -1,9 +1,10 @@
 // Calm flashcards, no stakes: the picture, she thinks, taps, sees the name, the core, the keywords and the
 // planet or sign; then "La sapevo" or "Non ancora". Due cards first, then the rest of what she owns. Max 10.
-import { h, css, cardUrl } from '../core/dom.js';
+import { h, css } from '../core/dom.js';
 import { answer, dueIds, ownedIds, dayCard } from '../core/progress.js';
 import { sheet } from '../data/cards.js';
-import { screen, btn, say, shuffle, pickOne } from './theme.js';
+import { screen, btn, say, shuffle, pickOne, mood, moodBack } from './theme.js';
+import { cardFace } from './qview.js';
 
 const CSS = `
 .sxv-card{display:flex;justify-content:center}
@@ -32,20 +33,21 @@ export async function review({ ids } = {}) {
   const today = dayCard(); // the card of the day comes first
   if (!ids?.length && today && owned.has(today)) list = [today, ...list.filter((id) => id !== today)];
   list = list.slice(0, 10);
+  mood('reading');
   const scr = screen({ title: 'Ripasso', cls: 'sxreview', onClose: () => { stop = true; kick?.(); } });
   let stop = false, kick = null;
   const tap = (label, cls = 'go') => new Promise((res) => { kick = () => res(null); scr.setFoot(btn(label, () => res(true), cls)); });
   if (!list.length) {
     scr.setBody(say('Tartufo', 'Non hai ancora carte da ripassare. Trovane qualcuna, poi torno a farti le domande.'));
-    await tap('Va bene'); scr.close(); return;
+    await tap('Va bene'); scr.close(); moodBack(); return;
   }
   let knew = 0, seen = 0;
   for (let i = 0; i < list.length && !stop; i++) {
     const id = list[i], c = sheet(id);
-    scr.setBody(h('div.sxv-prog', `${i + 1} di ${list.length}`), h('div.sxv-card.sx-in', h('div.sx-card', { style: { backgroundImage: `url(${cardUrl(id)})` } })), h('p.sxv-think', 'Che carta è? Cosa dice? Pensaci un momento.'));
+    scr.setBody(h('div.sxv-prog', `${i + 1} di ${list.length}`), h('div.sxv-card.sx-in', cardFace(id, { hideName: true })), h('p.sxv-think', 'Che carta è? Cosa dice? Pensaci un momento.'));
     if (!(await tap('Mostrami'))) break;
     const astro = c.astro ? `${KIND[c.astro.kind] || ''}: ${c.astro.name}` : '';
-    scr.setBody(h('div.sxv-prog', `${i + 1} di ${list.length}`), h('div.sxv-card', h('div.sx-card', { style: { backgroundImage: `url(${cardUrl(id)})` } })),
+    scr.setBody(h('div.sxv-prog', `${i + 1} di ${list.length}`), h('div.sxv-card', cardFace(id)),
       h('h2.sxv-name.sx-in', c.name, c.roman ? h('small', c.roman) : null), c.core ? h('p.sxv-core', c.core) : null,
       c.keywords?.length ? h('div.sxv-kw', c.keywords.slice(0, 6).map((k) => h('span', k))) : null, astro ? h('div.sxv-astro', astro) : null);
     const ok = await new Promise((res) => { kick = () => res(null); scr.setFoot(btn('Non ancora', () => res(false), 'ghost'), btn('La sapevo', () => res(true), 'go')); });
@@ -57,4 +59,5 @@ export async function review({ ids } = {}) {
   scr.setBody(h('h2.sxv-name.sx-in', seen ? `${knew} su ${seen}` : 'A presto'), say('Tartufo', pickOne(END[bucket])));
   await tap('Chiudo il libro');
   scr.close();
+  moodBack();
 }

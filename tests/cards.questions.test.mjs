@@ -28,7 +28,7 @@ const check = (q, level, pool) => {
   if (q.kind === 'meaning') assert.equal(q.options.find((o) => o.ok).t, SHEETS[q.cardId].core);
   if (q.kind === 'detail') {
     const { x, y, r } = q.show.crop; assert.equal(q.show.card, q.cardId);
-    assert.ok(SHEETS[q.cardId].details.some((d) => d.x === x && d.y === y && d.r === r && d.quiz !== false));
+    assert.ok(SHEETS[q.cardId].details.some((d) => d.x === x && d.y >= y && d.r === r && d.quiz !== false));
   }
   if (q.kind === 'astro') assert.equal(CARD[q.cardId].arcana, 'major');
   if (q.kind === 'odd') {
@@ -114,4 +114,39 @@ test('empty or odd pools still give a question', () => {
   assert.ok(CARD[q.cardId]);
   const q2 = makeQuestion({ pool: ['zzz', 'm03'], rng: mulberry(1) });
   assert.equal(q2.cardId, 'm03');
+});
+
+// ---- the printed title (card images carry the English name at the bottom) ----------------------
+import { hasTitle, leaks } from '../src/data/questions.js';
+import { MAJORS as MAJ, MINORS as MIN } from '../src/data/cards.base.js';
+import { SHEETS as SH } from '../src/data/cards.js';
+
+test('name and detail questions hide the printed title; detail crops stay above the title band', () => {
+  const all = [...MAJ, ...MIN].map((c) => c.id);
+  const rng = mulberry(5);
+  for (let i = 0; i < 300; i++) {
+    const q = makeQuestion({ pool: all, kinds: ['name'], rng });
+    assert.equal(q.show.hideName, true);
+    const d = makeQuestion({ pool: all, kinds: ['detail'], rng });
+    if (d.kind !== 'detail') continue;
+    assert.equal(d.show.hideName, true);
+    if (hasTitle(d.cardId)) assert.ok(d.show.crop.y + d.show.crop.r * 350 / 600 <= 88.01, `${d.cardId} crop reaches the title`);
+  }
+  assert.ok(hasTitle('m04') && hasTitle('c13') && !hasTitle('w10'));
+});
+
+test('constable and afflicted ask mostly about meaning', () => {
+  const rng = mulberry(11), ids = MAJ.map((c) => c.id), n = { meaning: 0, which: 0, name: 0, other: 0 };
+  for (const kind of ['constable', 'afflicted']) for (let i = 0; i < 300; i++) for (const q of makeExam({ kind, pool: ids, n: 4, rng })) n[q.kind in n ? q.kind : 'other']++;
+  assert.equal(n.other, 0);
+  assert.ok(n.meaning > n.which * 1.5 && n.meaning > n.name * 1.5, JSON.stringify(n));
+});
+
+test('meaning options never carry a card name or a cognate of its English title', () => {
+  for (const c of MAJ) assert.ok(!leaks(SH[c.id].core, c.id), `${c.id} core leaks its name: ${SH[c.id].core}`);
+  const rng = mulberry(3), ids = MAJ.map((c) => c.id);
+  for (let i = 0; i < 300; i++) {
+    const q = makeQuestion({ pool: ids, kinds: ['meaning'], rng });
+    for (const o of q.options) assert.ok(!MAJ.some((m) => leaks(o.t, m.id) && SH[m.id].core === o.t), `leaking option ${o.t}`);
+  }
 });

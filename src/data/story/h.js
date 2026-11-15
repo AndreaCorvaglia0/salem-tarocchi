@@ -36,7 +36,11 @@ export const exam = (kind, place) => ({ do: 'exam', kind, ...(place ? { place } 
 export const session = (id) => ({ do: 'session', id });
 export const power = (id) => ({ do: 'power', id });
 export const tool = (id, n = 1) => ({ do: 'tool', id, n });
-export const cinema = (lines, pan) => ({ do: 'cinema', lines, ...(pan ? { pan } : {}) });
+// a shadow-theatre tableau: scene is a name from story/stage/tableaux.js (guessed from pan when left out)
+export const cinema = (lines, pan, scene) => ({ do: 'cinema', lines, ...(pan ? { pan } : {}), ...(scene ? { scene } : {}) });
+// sound from a script: a tolling bell at the dark moments, a mood change
+export const bell = { do: 'call', name: 'sound.play', args: ['bell'] };
+export const mood = (name) => ({ do: 'call', name: 'sound.mood', args: [name] });
 export const wait = (ms = 600) => ({ do: 'wait', ms });
 export const goto = (script) => ({ do: 'goto', script });
 

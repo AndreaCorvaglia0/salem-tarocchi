@@ -43,7 +43,7 @@ const run = {
   },
   free: () => call('reading.free', { all: q.get('all') === '1' }),
   review: () => call('review.open', {}),
-  lock: () => call('lock.ask', { label: 'Il baule è sigillato.', rng }),
+  lock: () => call('lock.ask', { label: 'Il baule è sigillato.', kind: q.get('kind') || undefined, cardId: q.get('card') || undefined, rng }),
   recover: () => call('exam.recover'),
 }[view];
 run().then((out) => { window.__result = out; document.getElementById('info').textContent = `${view}: ${JSON.stringify(out)}`; });

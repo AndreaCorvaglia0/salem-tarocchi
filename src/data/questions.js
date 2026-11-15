@@ -63,10 +63,10 @@ const quizzable = (id) => (SHEETS[id]?.details || []).filter((d) => d.quiz !== f
 const qName = (id, level, rng) => {
   const c = CARD[id];
   const wrongs = similar(id, rng).map((x) => ({ t: CARD[x].name }));
-  return { prompt: pick(PROMPTS.name, rng), show: { card: id }, options: assemble({ t: c.name }, wrongs, level, rng, textKey), explain: `${c.name}. ${SHEETS[id].core}` };
+  return { prompt: pick(PROMPTS.name, rng), show: { card: id, hideName: true }, options: assemble({ t: c.name }, wrongs, level, rng, textKey), explain: `${c.name}. ${SHEETS[id].core}` };
 };
 const qMeaning = (id, level, rng) => {
-  const wrongs = similar(id, rng).map((x) => ({ t: SHEETS[x].core }));
+  const wrongs = similar(id, rng).filter((x) => !leaks(SHEETS[x].core, x)).map((x) => ({ t: SHEETS[x].core }));
   return { prompt: pick(PROMPTS.meaning, rng), show: { card: id }, options: assemble({ t: SHEETS[id].core }, wrongs, level, rng, textKey), explain: `${CARD[id].name}. ${SHEETS[id].core}` };
 };
 const qWhich = (id, level, rng) => {
@@ -77,7 +77,7 @@ const qWhich = (id, level, rng) => {
 const qDetail = (id, level, rng) => {
   const d = pick(quizzable(id), rng);
   const wrongs = similar(id, rng).map((x) => ({ t: CARD[x].name }));
-  return { prompt: pick(PROMPTS.detail, rng), show: { card: id, crop: { x: d.x, y: d.y, r: d.r } }, options: assemble({ t: CARD[id].name }, wrongs, level, rng, textKey), explain: `Viene da ${CARD[id].name}: ${d.label}.` };
+  return { prompt: pick(PROMPTS.detail, rng), show: { card: id, crop: clampCrop(id, d), hideName: true }, options: assemble({ t: CARD[id].name }, wrongs, level, rng, textKey), explain: `Viene da ${CARD[id].name}: ${d.label}.` };
 };
 const qOdd = (id, level, rng) => {
   const c = CARD[id];
@@ -133,6 +133,32 @@ const qPosition = (level, rng, spreadId) => {
   return { prompt, options: assemble({ t: pos.hint }, wrongs, level, rng, textKey), explain: `«${pos.label}» (posizione ${pos.n}): ${pos.hint}`, spread: sp.id, position: pos.id };
 };
 
+// ---- the printed title ---------------------------------------------------------------------
+// The card images carry the English title in a band at the bottom (Majors and court cards; pips have none).
+// A question that asks for the card's identity marks `show.hideName`: the screen covers that band.
+export const hasTitle = (id) => CARD[id]?.arcana === 'major' || (CARD[id]?.n ?? 0) >= 11;
+const TITLE_TOP = 88; // % of the image height where the title band begins (about 91%, with a margin)
+// the crop circle (radius r in % of the width) must stay above the band
+const clampCrop = (id, d) => {
+  const ry = d.r * 350 / 600;
+  return { x: d.x, y: hasTitle(id) ? Math.max(ry, Math.min(d.y, TITLE_TOP - ry)) : d.y, r: d.r };
+};
+// word stems that would give a card away in an answer: its Italian name and the English title's cognates
+const STEMS = {
+  m00: ['matt', 'fool', 'foll'], m01: ['mago', 'magi'], m02: ['sacerdot', 'priest', 'sacerd'], m03: ['imperatric', 'empress'], m04: ['imperator', 'emperor'],
+  m05: ['papa', 'pope', 'hierophant', 'ierofant'], m06: ['amant', 'lover'], m07: ['carro', 'chariot'], m08: ['forza', 'strength'], m09: ['eremit', 'hermit'],
+  m10: ['ruota', 'wheel', 'fortuna'], m11: ['giustizi', 'justice'], m12: ['appes', 'hanged'], m13: ['morte', 'death'], m14: ['temperan'], m15: ['diavol', 'devil'],
+  m16: ['torre', 'tower'], m17: ['stella', 'star'], m18: ['luna', 'moon'], m19: ['sole', 'sun'], m20: ['giudizio', 'judgement', 'judgment'], m21: ['mondo', 'world'],
+};
+const SUIT_STEMS = { w: ['bastoni', 'wands'], c: ['coppe', 'cups'], s: ['spade', 'swords'], p: ['denari', 'pentacles'] };
+const words = (t) => String(t).toLowerCase().split(/[^a-zàèéìòù]+/).filter(Boolean);
+export function leaks(text, id) {
+  const c = CARD[id];
+  if (!c) return false;
+  const stems = c.arcana === 'major' ? STEMS[id] || [] : [...SUIT_STEMS[c.suit], c.rank.toLowerCase()].filter((s) => s.length >= 4);
+  return words(text).some((w) => stems.some((s) => w.startsWith(s)));
+}
+
 const ELIGIBLE = {
   name: (id) => !!SHEETS[id], meaning: (id) => !!SHEETS[id], which: (id) => !!SHEETS[id], odd: (id) => !!SHEETS[id],
   detail: (id) => quizzable(id).length > 0,
@@ -164,8 +190,9 @@ export function makeQuestion({ pool, kinds, level = 1, rng = Math.random, spread
 }
 
 const EXAM_WEIGHTS = {
-  constable: { name: 3, meaning: 3, which: 3, detail: 1, odd: 1 },
-  afflicted: { name: 2, detail: 3, which: 2, meaning: 2, odd: 2 },
+  // mostly what a card says: half meaning, a quarter which-picture, a quarter name (the printed title is covered)
+  constable: { meaning: 2, which: 1, name: 1 },
+  afflicted: { meaning: 2, which: 1, name: 1 },
   judge: Object.fromEntries(KINDS.map((k) => [k, 1])),
 };
 export function makeExam({ kind = 'constable', pool, level = 1, n = 3, rng = Math.random, spread } = {}) {

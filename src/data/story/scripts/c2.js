@@ -1,7 +1,7 @@
 // Chapter 2, the forest in spring and summer: Ortica, the campfire night with Ginepra,
 // the seized deck (fork 2), the arrest at the cottage ("Sono io.").
 import {
-  N, T, ortica, ginepra, cat, cop, opt, choice, IF, xp, flag, diary, step, chapter, travel,
+  bell, N, T, ortica, ginepra, cat, cop, opt, choice, IF, xp, flag, diary, step, chapter, travel,
   draw, teach, lesson, session, cinema, wait, trust,
 } from '../h.js';
 
@@ -27,6 +27,11 @@ export const C2 = {
     IF({ power: 'fire' },
       [ortica('Sai fare il fuoco, vedo. Allora puoi andare anche dove è buio. Il bosco è quasi tutto buio.')],
       [ortica('Il fuoco ancora no, eh? Arriva, crescendo. Intanto sta\' nella luce, che nell\'erba alta non si vede niente.')]),
+    ortica('Un segreto: nessuno ascolta Ortica. Nessuno! Da trent\'anni. Le ortiche sì, ma pungono mentre ascoltano.'),
+    choice(
+      opt('Io ti ascolto.', 'm01', 'c', [ortica('Tu sì! Si vede! Hai le orecchie giuste. Due. Ottimo numero.')], { trust: { ortica: 1 } }),
+      opt('Allora parlane alle ortiche.', 'm09', 'p', [ortica('Lo faccio già. Rispondono poco, ma non interrompono. Come te, adesso.')]),
+    ),
     ortica('Ah, Ginepra è passata ieri. Ha chiesto di te. Tre volte. Io conto. Conto tutto.'),
     ortica('Vai al cottage e leggi a qualcuno le tre carte. Poi torna nel bosco, al bivacco.'),
     diary('Ortica mi ha insegnato il tempo in tre carte. E la vita intera del mugnaio.'),
@@ -76,7 +81,7 @@ export const C2 = {
       choice(
         opt('Vengo con te.', 'm07', 'w', [
           cinema(['Il deposito sa di cera e di carta umida.', 'Ginepra trova il suo mazzo. Lo stringe come un gatto.',
-            'In fondo, una lanterna si accende. Qualcuno ha visto due ombre.']),
+            'In fondo, una lanterna si accende. Qualcuno ha visto due ombre.'], null, 'cellar'),
           ginepra('Corri! Ah ah. Corri!'),
           diary('Sono entrata al tribunale con Ginepra. Ci hanno viste.'),
         ], { flag: 'b2.went', trust: { ginepra: 1 } }),
@@ -97,6 +102,7 @@ export const C2 = {
   ],
 
   'c2.arrest': [
+    bell,
     cinema(['Lanterne intorno al cottage.', 'Tre conestabili. Uno ha un foglio con un sigillo rosso.'], 'village.cottage_door'),
     IF({ flag: 'b2.went' },
       [cop('Due ombre al deposito, stanotte. Una era la tua. Abbiamo seguito le impronte.')],

@@ -2,6 +2,7 @@
 // phone. Used by the grimoire (with its ribbons) and by the sheets opened from it (a card's page, the
 // lessons, the Minors), so every page of the game looks like the same object.
 //   const b = bookFrame({ ribbons?, onClose, label }); b.fill(L, R, { single }); b.page(0|1); b.el
+import { snd } from './sfx.js';
 import { h, css, isNarrow } from '../core/dom.js';
 import { PENCIL, HAND, baseCss } from './paper.js';
 
@@ -70,7 +71,8 @@ export function bookFrame({ ribbons = null, onClose, label = 'Grimorio', mid = '
   const body = h('div.bk-body', ribbons, h('div.bk-cover', spread));
   el.append(...[h('div.bk-bar', left, h('span.mid', {}, mid), close), panel, body].filter(Boolean));
   const page = (p) => { spread.dataset.p = String(p); (p ? R : L).scrollTop = 0; };
-  const turn = (to) => h('div.bk-turn', h('button.gx-btn', { type: 'button', onclick: () => page(to) }, to ? 'Pagina dopo →' : '← Pagina prima'));
+  const flip = (p) => { snd('page'); page(p); }; // a page turned by the player (not the first page of a fill)
+  const turn = (to) => h('div.bk-turn', h('button.gx-btn', { type: 'button', onclick: () => flip(to) }, to ? 'Pagina dopo →' : '← Pagina prima'));
   const fill = (lk, rk, { single = false, folio = null } = {}) => {
     const phone = isNarrow();
     if (single && phone) { spread.dataset.single = '1'; L.replaceChildren(...[...lk, ...rk].filter(Boolean)); R.replaceChildren(); }
@@ -87,7 +89,7 @@ export function bookFrame({ ribbons = null, onClose, label = 'Grimorio', mid = '
   spread.addEventListener('touchend', (e) => {
     if (!isNarrow() || spread.dataset.single) return;
     const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
-    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) page(dx < 0 ? 1 : 0);
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) flip(dx < 0 ? 1 : 0);
   }, { passive: true });
   return { el, L, R, spread, fill, page, close };
 }

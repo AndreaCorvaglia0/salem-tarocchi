@@ -2,9 +2,14 @@
 // accent, the old serif voice. Phone first: text >= 16px, targets >= 48px. Used by every screen here.
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
+import { call } from '../core/services.js';
 
 export const sleep = (ms) => new Promise((r) => setTimeout(r, reducedMotion() ? Math.min(ms, 60) : ms));
 export const shuffle = (a, rng = Math.random) => { const r = [...a]; for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; };
+// sound, always through the service locator (the sound area is never imported); all fire and forget
+export const snd = (name) => { call('sound.play', name); };
+export const mood = (name, opts) => { call('sound.mood', name, opts); };
+export const moodBack = () => { call('sound.back'); }; // the music of the map she stands in
 export const pickOne = (a, rng = Math.random) => a[Math.floor(rng() * a.length)];
 
 const CSS = `

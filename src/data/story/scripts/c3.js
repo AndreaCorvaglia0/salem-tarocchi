@@ -1,7 +1,7 @@
 // Chapter 3, the dark in autumn: the trapdoor, Nonna Edera and the Celtic cross, the three
 // mistresses (fork 3: by the cellars or in the open), the jail or the court door.
 import {
-  N, T, malva, ortica, edera, ginepra, cat, judge, opt, choice, IF, xp, flag, diary, step, travel,
+  bell, N, T, malva, ortica, edera, ginepra, cat, judge, opt, choice, IF, xp, flag, diary, step, travel,
   draw, teach, lesson, cinema, goto, wait, trust,
 } from '../h.js';
 
@@ -14,10 +14,11 @@ export const C3 = {
     IF({ flag: 'malva.cheeky' }, [malva('Mani delicate, eh? Tieniti forte alla scala.')]),
     malva('Ginepra è una scema. Una scema coraggiosa. Andiamo a riprendercela.'),
     choice(
-      opt('Grazie, Malva.', 'm03', 'c', [malva('Te l\'ho detto mille volte. Porta male. Scendi.')]),
-      opt('Chi c\'è, là sotto?', 'm02', 's', [malva('Edera. Più vecchia del villaggio. Ti chiamerà con un altro nome. Lasciala fare.')]),
+      opt('Grazie, Malva.', 'm03', 'c', [malva('Te l\'ho detto mille volte. Porta male. Scendi.'), N('Ma l\'angolo della bocca, alla luce della lanterna, le si alza di un dito.')], { trust: { malva: 1 } }),
+      opt('Chi c\'è, là sotto?', 'm02', 's', [malva('Edera. Più antica del villaggio, e il doppio più elegante di noi. Ti chiamerà con un altro nome. Lasciala fare.')]),
     ),
     travel('depths.entry'),
+    bell, // the cellars
     N('Scale umide. Odore di terra, di vino vecchio, di qualcosa che aspetta.'),
     diary('Sono scesa sotto il villaggio. Malva mi teneva la lanterna.'),
     xp(5),
@@ -25,10 +26,11 @@ export const C3 = {
   ],
 
   'c3.edera': [
+    N('Nella nicchia, dritta come una regina, una donna dai capelli d\'argento raccolti in alto. Ti guarda come se ti avesse già letta.'),
     edera('Chi sei? Ah. La ragazza. Rosalba.'),
     choice(
       opt('Mi chiamo {name}.', 'm00', 'w', [edera('{name}. Lo scordo entro sera. Le carte no: quelle non le scordo mai.')]),
-      opt('Rosalba va bene.', 'm02', 'c', [edera('Brava. Non si contraddice una vecchia. Si aspetta che si contraddica da sola.')], { trust: { edera: 1 }, flag: 'edera.rosalba' }),
+      opt('Rosalba va bene.', 'm02', 'c', [edera('Brava. Non si contraddice chi ha i capelli d\'argento. Si aspetta che si contraddica da sola.')], { trust: { edera: 1 }, flag: 'edera.rosalba' }),
     ),
     edera('Il Diavolo sta alle catene. La Torre a nord. La Stella in fondo al pozzo. La Luna nella palude.'),
     edera('Io ricordo tutto. Tranne i nomi. E dove ho messo gli occhiali. E perché sono qui.'),
@@ -39,6 +41,11 @@ export const C3 = {
     edera('La seconda si mette di traverso. Ti attraversa. A volte ti aiuta, a volte ti sbarra.'),
     lesson('astro'),
     edera('La tua carta, adesso, è {yourCard}. Le carte ti guardano, Rosalba. Cioè. Come ti chiami.'),
+    edera('Posso chiederti una cosa, ragazza? Quando mi dimentico un nome, tu lo ripeti. Piano. Senza farmelo notare.'),
+    choice(
+      opt('Lo ripeto volentieri.', 'm02', 'c', [edera('Brava. Un\'altra persona, qui sotto, lo dimentica ad alta voce. Non faccio nomi. Non li ricordo.')], { trust: { edera: 1 } }),
+      opt('Io i nomi li scrivo.', 'm09', 'p', [edera('Scrivi, scrivi. Io ricordo le carte. Faremo un bel libro in due.')]),
+    ),
     edera('Vai al cottage, leggi la croce a qualcuno. Poi torna, quando hai tutte le carte. Ci riuniamo.'),
     diary('Nonna Edera mi chiama Rosalba. Le carte invece se le ricorda tutte.'),
     step('c3.client'),
@@ -50,7 +57,15 @@ export const C3 = {
       ortica('Io dico: entriamo dalle cantine, la prendiamo, usciamo, e intanto...'),
       malva('Intanto niente. Tu parli e ci sentono fino a Boston.'),
       edera('Il Giudice. L\'ho conosciuto bambino. Mangiava le candele.'),
+      choice(
+        opt('Edera, dicci cosa ricordi di lui.', 'm02', 's', [edera('Che sorrideva sempre prima di spegnere. Come adesso. Ricordo bene, vedi. Quando mi serve.')], { trust: { edera: 1 } }),
+        opt('Questo ci aiuta poco, Edera.', 'm07', 'w', [edera('Hai ragione. Mi ricordo meglio i dettagli inutili. Sono i miei preferiti.')]),
+      ),
       ortica('Ecco, vedi? Anche lei divaga. Non sono solo io.'),
+      choice(
+        opt('Ortica, a te lascio il bosco. Parli bene.', 'm01', 'c', [ortica('Parlo bene! Sentito? Qualcuno l\'ha detto! Lo scrivo sul muro.')], { trust: { ortica: 1 } }),
+        opt('Ortica, un po\' meno.', 'm18', 's', [ortica('Un po\' meno. Un po\' meno. Va bene. Un po\'. Meno.')]),
+      ),
       malva('Basta. Decide lei.'),
       N('Tre teste si girano verso di te.'),
       IF({ trust: ['malva', '>=', 2] }, [malva('Spacca la legna e non si lamenta. Di lei mi fido.')]),
@@ -85,6 +100,7 @@ export const C3 = {
   ],
 
   'c3.jail': [
+    bell,
     cinema(['Le cantine finiscono contro un cancello arrugginito.', 'Dietro, una cella. Dentro, qualcuno che canticchia.'], 'depths.jail'),
     ginepra('Sei venuta! Lo sapevo! Cioè, lo speravo. È uguale, te l\'ho detto.'),
     IF({ flag: 'fire.promised' }, [ginepra('L\'avevi promesso, al fuoco. Visto? Me lo ricordo.')]),

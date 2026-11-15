@@ -3,7 +3,7 @@
 import { h, css } from '../core/dom.js';
 import { stat } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
-import { screen, btn, sleep } from './theme.js';
+import { screen, btn, sleep, snd } from './theme.js';
 import { cardBack, flipCard } from './cardback.js';
 import { weightedPick, weightedSample, numberToCard, numberRange } from './draw.rules.js';
 
@@ -44,6 +44,7 @@ export async function pick({ mode = 'fan', pool, weights, title, quick = false, 
 
   const reveal = async (flip, cardId) => {
     flip.flip(cardId);
+    snd('card');
     await sleep(800);
     root.append(h('p.sxd-name.sx-in', CARD[cardId]?.name || cardId, CARD[cardId]?.arcana === 'major' ? h('small', `${CARD[cardId].roman || ''}`) : null));
     scr.scrollDown();

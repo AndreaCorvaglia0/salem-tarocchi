@@ -1,7 +1,7 @@
 // Chapter 1, the village in winter: Malva, the cottage, Tartufo, the first Exam, Ginepra and
 // Il Carro, the Venus glass, the square (fork 1), the gate to the forest.
 import {
-  N, T, malva, ginepra, cat, cop, say, opt, choice, IF, xp, flag, diary, step, chapter, travel, give,
+  bell, N, T, malva, ginepra, cat, cop, say, opt, choice, IF, xp, flag, diary, step, chapter, travel, give,
   draw, teach, lesson, exam, session, power, cinema, wait, trust, point,
 } from '../h.js';
 import { ROAD_POOL } from './c0.js';
@@ -62,7 +62,7 @@ export const C1 = {
     ),
     power('cat'),
     cat('Senti? Bussano. A quest\'ora vengono solo i disperati. Pagano bene.'),
-    cat('Siediti al tavolo. Una domanda, una carta: come ti ha detto la vecchia.'),
+    cat('Siediti al tavolo. Una domanda, una carta: come ti ha detto Malva.'),
     diary('Ho un gatto. O lui ha me. Si chiama Tartufo e ha opinioni.'),
     step('c1.client'),
   ],
@@ -135,6 +135,7 @@ export const C1 = {
   ],
 
   'c1.square': [
+    bell,
     cinema(['La piazza è piena. Nessuno parla forte.', 'Una ragazza trema davanti alla chiesa. È un\'Afflitta.',
       'Ha guardato nel bicchiere di Venere. Ora vede streghe ovunque.'], 'village.square'),
     say('afflitta', 'Lei! La vedo! Mi punge con gli spilli!'),

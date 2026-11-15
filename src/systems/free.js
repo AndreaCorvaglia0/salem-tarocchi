@@ -5,7 +5,7 @@ import { state } from '../core/state.js';
 import { CARD, MAJORS, MINORS, SUITS } from '../data/cards.base.js';
 import { SPREADS } from '../data/spreads.js';
 import { sheet } from '../data/cards.js';
-import { screen, btn } from './theme.js';
+import { screen, btn, mood, moodBack } from './theme.js';
 import { posHeader } from './readview.js';
 import { lineFor } from './reading.rules.js';
 
@@ -46,6 +46,7 @@ const toggle = (label, sub, on, onchange) => {
 export async function free({ all = false } = {}) {
   css('sxg', CSS);
   const scr = screen({ title: 'Lettura con il tuo mazzo', cls: 'sxfree', onClose: () => finish(null) });
+  mood('reading');
   let finish;
   const closed = new Promise((r) => { finish = r; });
   const run = async () => {
@@ -111,4 +112,5 @@ export async function free({ all = false } = {}) {
   run().then(() => finish(null));
   await closed;
   scr.close();
+  moodBack();
 }

@@ -3,7 +3,7 @@ import { h, css } from '../core/dom.js';
 import { state } from '../core/state.js';
 import { answer, ownedIds, stat } from '../core/progress.js';
 import { makeQuestion } from '../data/questions.js';
-import { screen, btn, sleep, fb } from './theme.js';
+import { screen, btn, sleep, fb, snd } from './theme.js';
 import { questionView } from './qview.js';
 
 const CSS = `
@@ -33,11 +33,13 @@ export async function ask({ cardId, kind, label, rng = Math.random } = {}) {
   const picked = await done;
   const ok = !!q.options[picked]?.ok;
   view.reveal(picked);
+  snd(ok ? 'right' : 'wrong');
   if (state.cards[q.cardId]) answer(q.cardId, ok, q.star);
   if (ok) { stat('locks'); lock.classList.remove('sealed'); lock.classList.add('open'); }
   else { lock.classList.add('bad'); }
   scr.col.append(fb(ok ? 'ok' : 'no', ok ? 'Il sigillo cede.' : 'Il sigillo resta chiuso.', q.explain, ok ? null : 'Non perdi niente: puoi riprovare quando vuoi.'));
   scr.show(scr.col.lastChild);
+  if (ok) snd('door');
   await sleep(ok ? 500 : 0);
   await new Promise((res) => scr.setFoot(btn(ok ? 'Apri' : 'Per ora lascio', res, 'go')));
   scr.close();

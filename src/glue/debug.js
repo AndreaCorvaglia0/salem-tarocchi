@@ -11,7 +11,14 @@ import { prepare } from './debug.rules.js';
 import { MAJORS } from '../data/cards.base.js';
 import { debug as worldDebug } from '../world/index.js'; // the live scene, for tests only
 
-const params = () => new URLSearchParams(globalThis.location?.search || '');
+// The hosted page only keeps a plain #name in its address, never a query string: '#debug',
+// '#skip-c2', '#skip-c3', '#skip-trial' mean the same as '?debug' and '?debug&skip=c2' ...
+const params = () => {
+  const p = new URLSearchParams(globalThis.location?.search || '');
+  const hash = (globalThis.location?.hash || '').replace(/^#/, '');
+  if (hash === 'debug' || hash.startsWith('skip-')) { p.set('debug', ''); if (hash.startsWith('skip-')) p.set('skip', hash.slice(5)); }
+  return p;
+};
 export const debugOn = () => params().has('debug');
 
 // main.js calls this before the title: true when a ?debug&skip= state was prepared (boot as "continue")

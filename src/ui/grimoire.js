@@ -3,6 +3,8 @@
 // plain button in the corner. grimoire.open({ tab, study }) resolves when it is closed.
 import { h, openOverlay } from '../core/dom.js';
 import { state, reset, saveNow } from '../core/state.js';
+import { call } from '../core/services.js';
+import { snd } from './sfx.js';
 import { bookFrame, onEscape } from './book.js';
 import { RIB } from './paper.js';
 import { ioPages } from './io.js';
@@ -17,7 +19,8 @@ function settingsPanel(panel, done) {
   const tog = (key, label) => {
     const b = h('button.bk-tog', { type: 'button' });
     const draw = () => { b.setAttribute('aria-pressed', String(!!s[key])); b.replaceChildren(h('span', {}, label), h('span.v', {}, s[key] ? 'sì' : 'no')); };
-    b.onclick = () => { s[key] = !s[key]; saveNow(); draw(); };
+    // through the sound service: it saves, applies and emits `settings`, so music and effects really switch
+    b.onclick = () => { const v = !s[key]; call(key === 'music' ? 'sound.music' : 'sound.sfx', v); s[key] = v; saveNow(); draw(); };
     draw();
     return b;
   };
@@ -39,6 +42,7 @@ export function openGrimoire({ tab = 'io', study = false } = {}) {
   const b = bookFrame({ ribbons: ribs, onClose: finish, label: 'Il grimorio', mid: '', settings: (panel) => settingsPanel(panel, finish) });
   const ctx = { study, close: finish, rerender: () => show(cur), book: b };
   function show(t) {
+    if (cur !== t) snd('page');
     cur = t;
     btns.forEach((x, i) => x.setAttribute('aria-selected', String(TABS[i][0] === t)));
     const { L, R, single, folio } = BUILD[t](ctx);
@@ -55,6 +59,7 @@ export function openGrimoire({ tab = 'io', study = false } = {}) {
   return new Promise((resolve) => {
     resolveP = resolve;
     closeOverlay = openOverlay(b.el);
+    snd('page');
     popEsc = onEscape(() => { if (!b.el.closeSettings?.()) finish(); });
     globalThis.addEventListener('keydown', key, true);
     show(cur);
