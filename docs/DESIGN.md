@@ -3,6 +3,28 @@
 Gioco privato, regalo di Andrea alla sua ragazza. Solo italiano. Si gioca soprattutto da telefono.
 Questa pagina dice cosa deve essere il gioco. Come è fatto il codice: `CONTRACT.md`.
 
+## Regole, dai riscontri di Andrea
+
+Valgono sopra tutto il resto di questa pagina.
+
+1. **Il testo è il punto chiave e si pensa prima.** Naturale, scorrevole, comprensibile alla prima, come
+   scritto da una persona. Mai frasi spezzate in fila a caccia di effetto. Regole ed esempi: `WRITING.md`.
+2. **I personaggi non spiegano il gioco.** Nessuno dice ad alta voce una regola, un meccanismo o
+   l'intenzione di chi ha scritto. Se serve un'indicazione pratica, la dà l'interfaccia, a parte.
+3. **Ci si prende il tempo.** Le scene d'atmosfera cominciano piano. Ogni riga resta a schermo finché
+   lei non l'ha letta e tocca: niente righe che scappano, niente tocco che ne salta due.
+4. **L'inizio è una guida, fatta giocando.** Lei ha poca esperienza di giochi. Nei primi minuti si impara
+   una cosa alla volta, usandola: camminare, raccogliere, parlare, aprire il grimorio. Il posto dove
+   andare è sempre visibile (una scia di luci, un punto che pulsa). Più avanti si lascia libera, e la
+   guida arriva solo se la chiede.
+5. **Una domanda non mostra mai la sua risposta.** Se si chiede che carta è, il nome stampato è coperto.
+   Negli Esami si chiede soprattutto cosa dice la carta.
+6. **Le streghe sono belle e positive.** Vedi "I personaggi".
+7. **Il racconto è teatro d'ombre.** Se una cosa non si può mostrare bene, non si mostra. Vedi "Stile".
+8. **La Lettrice sembra leggerti dentro.** Due o tre domande per seduta, la seconda nasce dalla prima.
+   Reagisce, a volte è colpita e a volte no, si fa un'idea e la dice: "Per ora la tua carta è questa.
+   Vedremo se mi farai cambiare idea." Non spiega mai come funziona.
+
 ## In una riga
 
 Una Salem immaginaria. Sei una strega novizia: giri, esplori, trovi i tarocchi e impari a leggerli.
