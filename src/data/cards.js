@@ -1,18 +1,12 @@
-// STUB written by the lead so that other modules can import while the real sheets are being written.
-// The cards agent replaces this whole file (schema: docs/CONTRACT.md, "Data: cards").
-import { CARD, CARDS } from './cards.base.js';
-const AS = ['present', 'cross', 'root', 'past', 'possible', 'future', 'self', 'environment', 'hopefear', 'outcome'];
-export const SHEETS = Object.fromEntries(CARDS.map((c) => [c.id, {
-  see: `Nell'immagine: ${c.name}. (testo provvisorio)`,
-  details: [{ id: 'a', label: 'la figura', x: 50, y: 45, r: 16, note: 'Cosa sta facendo?' }, { id: 'b', label: 'il cielo', x: 50, y: 12, r: 12, note: 'Che ora è?' }, { id: 'c', label: 'il terreno', x: 50, y: 85, r: 12, note: 'Dove siamo?' }],
-  says: `${c.name} parla di ${(c.words || ['qualcosa']).join(', ')}. (testo provvisorio)`,
-  core: `${(c.words || ['qualcosa'])[0]}.`,
-  keywords: [...(c.words || ['uno', 'due', 'tre']), 'quattro', 'cinque', 'sei'],
-  reversed: 'Capovolta: il contrario, o lo stesso ma bloccato. (testo provvisorio)',
-  embody: 'Fai una cosa piccola che le somigli. (testo provvisorio)',
-  ask: 'Quando ti è successo? (testo provvisorio)',
-  as: Object.fromEntries(AS.map((k) => [k, `${c.name} come ${k}. (testo provvisorio)`])),
-  confusables: [],
-  rumour: 'Si dice che sia da qualche parte. (testo provvisorio)',
-}]));
+// Full card sheets: what you see, hotspots, what it says, keywords, reversed, how it reads in each
+// spread position, confusables and the rumour (Majors); compact versions for the 56 Minors.
+// Schema: docs/CONTRACT.md ("Data: cards"). The base facts (names, astrology, words) are cards.base.js.
+import { CARD } from './cards.base.js';
+import { MAJORS_A } from './cards/majors-a.js';
+import { MAJORS_B } from './cards/majors-b.js';
+import { MAJORS_C } from './cards/majors-c.js';
+import { MINOR_SHEETS } from './cards/minors.js';
+
+export { AS_KEYS, asFromGist } from './cards/minors.js';
+export const SHEETS = { ...MAJORS_A, ...MAJORS_B, ...MAJORS_C, ...MINOR_SHEETS };
 export const sheet = (id) => ({ ...CARD[id], ...SHEETS[id] });
