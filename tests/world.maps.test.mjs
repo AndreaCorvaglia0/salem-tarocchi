@@ -134,3 +134,94 @@ test('the guide leads to the anchor, or to the first door on the way there', asy
   const c = maps.cottage, d = c.anchors['cottage.door'];
   assert.ok(guideRoute(c, d.x, d.y, 'depths.coven'), 'from a room to the depths');
 });
+
+// ---- obstacles, fog, Minors in the grass, and what each chapter's powers reach ----
+const POW = { 1: { cat: true }, 2: { cat: true, fire: true }, 3: { cat: true, fire: true, sense: true, broom: true, stun: true } };
+
+test('every obstacle has a known kind and the magic it needs; every grass suit is valid', async () => {
+  const { NEED } = await import('../src/world/reach.js');
+  for (const m of Object.values(maps)) {
+    for (const o of m.obstacles) {
+      assert.ok(NEED[o.kind], `${o.id}: kind ${o.kind}`);
+      assert.equal(o.need, NEED[o.kind], `${o.id}: need ${o.need}`);
+      if (!o.on) assert.ok(!m.isSolid(o.x, o.y) && m.at(o.x, o.y) !== '+', `${o.id} must sit on a walkable tile`);
+    }
+    for (const z of m.def.suits || []) assert.ok(['p', 's', 'w', 'c'].includes(z.suit), `${m.id} suit ${z.suit}`);
+  }
+  const tagged = (id, suit) => { const m = maps[id]; let n = 0; for (let y = 0; y < m.H; y++) for (let x = 0; x < m.W; x++) if (m.suitAt(x, y) === suit) n++; return n; };
+  for (const [id, suit] of [['village', 'p'], ['village', 's'], ['forest', 'w'], ['forest', 'c'], ['depths', 'c']]) assert.ok(tagged(id, suit) >= 10, `${id} has grass of suit ${suit}`);
+  // never on the arrival road before Malva's door
+  const v = maps.village, a = v.anchors['village.arrival'], d = v.anchors['village.malva_door'];
+  for (let y = d.y; y <= a.y + 1; y++) for (let x = a.x - 6; x <= a.x + 6; x++) assert.equal(v.suitAt(x, y), null, `suit on the arrival road at ${x},${y}`);
+});
+
+test('each chapter\'s Major spots are reachable with the powers of that chapter; the Hermit needs the Air', async () => {
+  const { explore, reached, stateWith } = await import('../src/world/reach.js');
+  const at = (ch, powers) => explore('village.arrival', stateWith({ chapter: ch, powers, flags: { 'shop.open': true } }));
+  for (const ch of [1, 2, 3]) {
+    const prev = at(ch, POW[ch]);
+    for (const c of MAJORS.filter((k) => k.spot && k.row === ch)) {
+      if (c.id === 'm09') continue;
+      assert.ok(reached(prev, c.spot), `chapter ${ch}: ${c.id} at ${c.spot} out of reach`);
+    }
+  }
+  assert.ok(!reached(at(2, POW[2]), 'forest.lantern'), 'the lantern needs the Air');
+  assert.ok(reached(at(2, { ...POW[2], stun: true }), 'forest.lantern'), 'with the Air the lantern is reachable');
+  assert.ok(!reached(at(2, { cat: true }), 'forest.graveyard'), 'the brambles bar the graveyard without Fire');
+  assert.ok(!reached(at(3, { ...POW[3], fire: false }), 'depths.chains'), 'the brambles bar the chains without Fire');
+  assert.ok(!reached(at(3, { ...POW[3], stun: false }), 'depths.swamp'), 'the swamp fog needs the Air');
+  // Earth (move) gates nothing required: every Major reachable with it is reachable without it
+  const all = { ...POW[3] }, withMove = at(3, { ...all, move: true }), without = at(3, all);
+  for (const c of MAJORS.filter((k) => k.spot)) assert.equal(reached(without, c.spot), reached(withMove, c.spot), `${c.id} needs Earth`);
+  // every step of the main path can be walked with its chapter's powers
+  const { STEPS } = await import('../src/data/story/index.js');
+  for (const st of STEPS) if (st.at && st.chapter >= 1 && st.chapter <= 3) assert.ok(reached(at(st.chapter, POW[st.chapter]), st.at), `step ${st.id} at ${st.at}`);
+});
+
+test('the fog is deep enough: without the Air she is turned back before the lantern', async () => {
+  const { FOG } = await import('../src/world/reach.js');
+  const m = maps.forest, a = m.anchors['forest.lantern'];
+  // walking in the fog from any edge tile, the lantern is more than FOG.lost steps in
+  const edge = [];
+  for (let y = 0; y < m.H; y++) for (let x = 0; x < m.W; x++) if (m.fogAt(x, y) && walk(m)(x, y) && [[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => walk(m)(x + dx, y + dy) && !m.fogAt(x + dx, y + dy))) edge.push([x, y]);
+  assert.ok(edge.length, 'the fog has an edge');
+  for (const [x, y] of edge) {
+    const p = findPath(x, y, new Set([`${a.x},${a.y}`]), (tx, ty) => walk(m)(tx, ty) && !!m.fogAt(tx, ty));
+    if (p) assert.ok(p.length + 1 > FOG.lost, `from ${x},${y} the lantern is ${p.length + 1} fog steps in`);
+  }
+});
+
+test('the upper village, and the shop easy to find from Malva\'s door', () => {
+  const v = maps.village, up = v.anchors['village.upper'], md = v.anchors['village.meeting_door'], cd = v.anchors['village.court_door'];
+  assert.ok(up && up.x > md.x && up.x < cd.x + 2 && up.y < cd.y, 'village.upper lies between the meetinghouse and the court');
+  const from = v.anchors['village.malva_door'], shop = v.anchors['village.shop_door'];
+  const p = findPath(from.x, from.y, new Set([`${shop.x},${shop.y}`]), walk(v));
+  assert.ok(p && p.length <= 20, `the shop is ${p?.length} steps from Malva's door`);
+  const near = (b, x, y, r) => Math.abs(b.x - x) <= r && Math.abs(b.y - y) <= r;
+  assert.ok(v.blocks.some((b) => b.kind === 'lamp' && near(b, shop.x, shop.y, 3)), 'a lamp by the shop door');
+  assert.ok(v.blocks.some((b) => b.kind === 'signpost' && near(b, from.x, from.y, 6) && b.opts.arrows.some(([, s]) => s === 'bottle')), 'a signpost to the shop near Malva');
+});
+
+test('the broom: outdoors only, never in fog or from the cell; lands on seen outdoor anchors', async () => {
+  const { flyFrom, canLandOn } = await import('../src/world/fly.js');
+  assert.equal(flyFrom({ map: 'village', x: 18, y: 22 }).ok, true);
+  assert.equal(flyFrom({ map: 'cottage', x: 3, y: 3 }).why, 'inside');
+  assert.equal(flyFrom({ map: 'depths', x: 33, y: 3 }).why, 'under');
+  assert.equal(flyFrom({ map: 'depths', x: 8, y: 29, near: 'depths.jail' }).why, 'cell');
+  assert.equal(flyFrom({ map: 'forest', x: 33, y: 10 }).why, 'fog');
+  assert.ok(canLandOn('village.square', { 'village.square': true }));
+  assert.ok(!canLandOn('village.square', {}), 'not seen');
+  assert.ok(!canLandOn('shop.counter', { 'shop.counter': true }), 'indoors');
+  assert.ok(!canLandOn('forest.lantern', { 'forest.lantern': true }), 'in the fog');
+});
+
+test('the sixth sense feels hidden spots within its radius, every map at the top', async () => {
+  const { sensedFrom } = await import('../src/world/hidden.js');
+  const { stateWith } = await import('../src/world/reach.js');
+  const s = stateWith({ chapter: 2 }), at = { map: 'forest', x: 11, y: 10 };
+  const near = sensedFrom(s, at, 10);
+  assert.ok(near.some((h) => h.anchor === 'forest.graveyard'), 'the graveyard card is near');
+  assert.ok(near.every((h) => h.map === 'forest' && h.dist <= 10));
+  assert.equal(sensedFrom(s, at, 0).length, 0);
+  assert.ok(sensedFrom(s, at, Infinity).some((h) => h.map === 'village'), 'the whole world at the top');
+});

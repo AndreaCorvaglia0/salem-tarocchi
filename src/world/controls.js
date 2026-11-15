@@ -22,6 +22,8 @@ css('world-controls', `
   color: #fff3d0; font-size: 13px; white-space: nowrap; display: none; box-shadow: 0 3px 10px rgba(0,0,0,.5); }
 .w-prompt::after { content: ''; position: absolute; left: 50%; bottom: -7px; margin-left: -5px; border: 5px solid transparent; border-top-color: #e9d8a6; border-bottom: 0; }
 .w-prompt.show { display: block; }
+.w-prompt.dim { opacity: .62; border-color: #8a80a8; color: #cfc8e6; }
+.w-prompt.dim::after { border-top-color: #8a80a8; }
 .w-prompt kbd { font-family: inherit; font-size: 10px; opacity: .7; margin-left: 5px; border: 1px solid #8a80a8; border-radius: 3px; padding: 0 3px; }
 .w-place { left: 50%; top: 22%; transform: translateX(-50%); color: #efe6cc; font-family: ${FONT.serif}; font-size: 26px; letter-spacing: .06em; text-shadow: 0 2px 10px #000, 0 0 18px rgba(0,0,0,.8);
   pointer-events: none !important; opacity: 0; transition: opacity .9s; white-space: nowrap; }
@@ -41,15 +43,18 @@ export function mountControls({ onAct, onStun }) {
   window.addEventListener('pointerdown', (e) => { if (e.pointerType === 'touch' && !act.isConnected) r.append(act); }, { once: true });
   let placeTimer = null, last = '';
   return {
-    prompt(text, x, y) {
+    // dim: something she cannot do yet (an obstacle without its magic)
+    prompt(text, x, y, dim = false) {
       if (!text) { prompt.classList.remove('show'); return; }
+      prompt.classList.toggle('dim', !!dim);
       const t = touch() ? text : `${text}`;
       if (t !== last) { last = t; prompt.replaceChildren(t, touch() ? '' : h('kbd', 'spazio')); }
-      prompt.style.left = `${Math.round(x)}px`; prompt.style.top = `${Math.round(y)}px`;
       prompt.classList.add('show');
+      const half = prompt.offsetWidth / 2 + 6; // keep it on screen near the edges
+      prompt.style.left = `${Math.round(Math.min(innerWidth - half, Math.max(half, x)))}px`; prompt.style.top = `${Math.round(y)}px`;
     },
-    act(label) {
-      act.classList.toggle('idle', !label); act.classList.toggle('on', !!label);
+    act(label, dim = false) {
+      act.classList.toggle('idle', !label || dim); act.classList.toggle('on', !!label && !dim);
       act.textContent = label || '·';
     },
     stun(show, ready) { stun.classList.toggle('show', !!show); stun.classList.toggle('wait', !ready); stun.textContent = ready ? 'Stordisci' : '...'; },

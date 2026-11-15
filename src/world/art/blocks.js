@@ -4,8 +4,9 @@ import { meeting, court, mill } from './civic.js';
 import { PROPS } from './props.js';
 import { INSIDE } from './inside.js';
 import { WILD } from './wild.js';
+import { MARKS } from './marks.js';
 
-const PAINTERS = { house, cottage, shop, hut, meeting, court, mill, ...PROPS, ...INSIDE, ...WILD };
+const PAINTERS = { house, cottage, shop, hut, meeting, court, mill, ...PROPS, ...INSIDE, ...WILD, ...MARKS };
 
 // -> { canvas, over, ox?, windows?, smoke?, wall? }
 export function paintBlock(b, season) {

@@ -90,9 +90,27 @@ export function parseMap(def) {
   const gates = (def.gates || []).map((g, i) => { const p = place(g.at); if (!p) errors.push(`${def.id}: gate ${i} at unknown place`); return p && { id: g.id || `${def.id}.gate.${i}`, ...g, x: p.x, y: p.y }; }).filter(Boolean);
   const patrols = (def.patrols || []).map((p, i) => ({ id: p.id || `${def.id}.patrol.${i}`, kind: 'constable', ...p }));
 
+  // thick fog: zones [{ id, area: [x, y, w, h] }]; a tile holds its zone's index + 1
+  const fog = new Uint8Array(W * H);
+  const fogZones = (def.fog || []).map((z, i) => ({ id: `${def.id}.${z.id || `fog${i}`}`, area: z.area }));
+  fogZones.forEach((z, i) => { const [x, y, w, h] = z.area; for (let yy = y; yy < y + h; yy++) for (let xx = x; xx < x + w; xx++) if (xx >= 0 && yy >= 0 && xx < W && yy < H) fog[yy * W + xx] = i + 1; });
+  // tall grass tagged with a suit (Minor Arcana): [{ suit: 'p' | 's' | 'w' | 'c', area: [x, y, w, h] }]
+  const suitGrid = new Array(W * H).fill(null);
+  for (const { suit, area: [x, y, w, h] } of def.suits || []) for (let yy = y; yy < y + h; yy++) for (let xx = x; xx < x + w; xx++) if (xx >= 0 && yy >= 0 && xx < W && yy < H && grass[yy * W + xx]) suitGrid[yy * W + xx] = suit;
+  // obstacles: brambles (fire), roots and warded stones (move); `on: chestId` sits on a chest
+  const obstacles = (def.obstacles || []).map((o, i) => {
+    const p = o.on ? chests.find((c) => c.id === o.on) : place(o.at);
+    if (!p) { errors.push(`${def.id}: obstacle ${o.id || i} at unknown place`); return null; }
+    return { id: o.id || `${def.id}.${o.kind}.${p.x}.${p.y}`, ...o, x: p.x, y: p.y };
+  }).filter(Boolean);
+
   return {
     id: def.id, name: def.name || def.id, season: def.season || 'winter', inside: !!def.inside, def,
-    W, H, rows, at, groundAt, solid, grass, dark, blocks, anchors, doors, chests, gates, patrols,
+    W, H, rows, at, groundAt, solid, grass, dark, blocks, anchors, doors, chests, gates, patrols, fogZones, obstacles,
+    // outdoors: the sky above (the broom takes off and lands only here)
+    open: !def.inside && !def.under,
+    fogAt: (x, y) => (x >= 0 && y >= 0 && x < W && y < H && fog[y * W + x] ? fogZones[fog[y * W + x] - 1] : null),
+    suitAt: (x, y) => (x >= 0 && y >= 0 && x < W && y < H ? suitGrid[y * W + x] : null),
     start: def.start ? parseRef(def.start, def.id) : Object.keys(anchors)[0],
     errors,
     isSolid: (x, y) => x < 0 || y < 0 || x >= W || y >= H || !!solid[y * W + x],

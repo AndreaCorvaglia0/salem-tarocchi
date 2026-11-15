@@ -5,12 +5,20 @@
 //   world.anchors()      { 'village.square': { map, x, y, label }, ... }
 //   world.refresh()      re-reads CAST and the state (the world also listens to step, flag, chapter)
 //   world.guide(anchor)  a trail of lights to an anchor (null: off); bus 'hint' { id: 'move' | 'action' } once each
+//   world.ahead(n)       screen point of the n-th tile of the trail (the move hint's tap marker)
+//   world.sensed()       what the sixth sense feels: [{ kind: 'card' | 'chest', id, anchor, map, x, y, dist }]
+//   world.canFly()       { ok, why }: why 'inside' | 'under' | 'fog' | 'cell' | 'busy' | 'seen' (world.where() also says fog)
+//   world.fly(anchor)    the broom: true if she flew (only to a seen outdoor anchor, from where she may take off)
+//   world.travel(anchor, { by: 'broom' }) the same check through travel
 import Phaser from 'phaser';
 import { provide } from '../core/services.js';
 import { state } from '../core/state.js';
 import { getMap, allAnchors, anchorOf, nearAnchor, CHAPTER_START } from './maps.js';
 import { WorldScene } from './scene/World.js';
 import { mountControls } from './controls.js';
+import { senseRadius } from '../core/progress.js';
+import { sensedFrom } from './hidden.js';
+import { flyFrom, canLandOn } from './fly.js';
 
 let game = null, guideRef = null;
 const scene = () => game?.scene.getScene('World') || null;
@@ -41,7 +49,8 @@ export function start() {
   });
 }
 
-export function travel(ref) {
+export function travel(ref, opts = {}) {
+  if (opts?.by === 'broom') return fly(ref);
   const s = live();
   if (s) return s.travel(ref, true).then(() => undefined);
   const a = anchorOf(ref);
@@ -52,7 +61,25 @@ export function travel(ref) {
 export function where() {
   const s = live();
   const p = s ? { map: s.map.id, x: s.player.tx, y: s.player.ty } : state.pos || startPoint();
-  return { ...p, near: nearAnchor(p.map, p.x, p.y) };
+  return { ...p, near: nearAnchor(p.map, p.x, p.y), fog: !!getMap(p.map)?.fogAt(p.x, p.y) };
+}
+
+// the sixth sense: hidden Major spots and unopened chests within senseRadius (every map at the top)
+export function sensed() {
+  if (!state.powers.sense) return [];
+  return sensedFrom(state, where(), senseRadius());
+}
+export function canFly() {
+  if (!state.powers.broom) return { ok: false, why: 'broom' };
+  const s = live(), w = where();
+  const busy = !!s && (s.busy > 0 || s.leaving);
+  const seen = !!s && s.patrols.some((q) => (q.noticed || 0) > 0);
+  return flyFrom({ ...w, busy, seen });
+}
+export async function fly(ref) {
+  if (!canFly().ok || !canLandOn(ref, state.stats.seen || {})) return false;
+  await travel(ref);
+  return true;
 }
 
 export const anchors = () => Object.fromEntries(Object.entries(allAnchors()).map(([k, a]) => [k, { map: a.map, x: a.x, y: a.y, label: a.label }]));
@@ -61,6 +88,9 @@ provide('world.start', start);
 provide('world.travel', travel);
 provide('world.where', () => Promise.resolve(where()));
 provide('world.anchors', () => Promise.resolve(anchors()));
+provide('world.sensed', () => Promise.resolve(sensed()));
+provide('world.canFly', () => Promise.resolve(canFly()));
+provide('world.fly', (ref) => fly(ref));
 // The sieve: where the nearest hidden card of this map lies, from where she stands (null: none here).
 export function hint() {
   const s = live();
@@ -79,7 +109,19 @@ export function guide(ref) {
   return Promise.resolve();
 }
 provide('world.guide', guide);
+// Where on screen (CSS px) the tile n steps ahead on the guide's trail is, or on the road ahead when
+// no trail is on; null when the world is not running. For the move hint's tap marker (ui/hint.js).
+export function ahead(n = 4) {
+  const s = live();
+  if (!s) return null;
+  const path = s.guide?.path || [];
+  const t = path.length ? path[Math.min(n, path.length) - 1] : null;
+  if (!t) return null;
+  const cam = s.cameras.main, v = cam.worldView, z = cam.zoom, r = s.game.canvas.getBoundingClientRect();
+  return { x: r.left + (t[0] * 16 + 8 - v.x) * z, y: r.top + (t[1] * 16 + 8 - v.y) * z };
+}
+provide('world.ahead', (n) => Promise.resolve(ahead(n)));
 provide('world.refresh', () => { live()?.refresh(); return Promise.resolve(); });
 
 // For harness pages and screenshots only.
-export const debug = { scene: live, game: () => game, travel, where, anchors, hint, guide };
+export const debug = { scene: live, game: () => game, travel, where, anchors, hint, guide, ahead, sensed, canFly, fly };

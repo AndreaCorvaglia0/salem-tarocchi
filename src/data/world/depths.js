@@ -9,6 +9,7 @@ export default {
   name: 'Le cantine',
   season: 'autumn',
   dark: true,
+  under: true, // underground: no sky, no broom
   start: 'entry',
   rows: [
     'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
@@ -34,7 +35,7 @@ export default {
     'wwwwwwwwwwwwwwwwww::::wwwwwwwrr......rww',
     'ww:X::::::::::XwTTTT::X:U:Z:X...OO....ww',
     'ww:::::::::::+:wTTTT:::::::::...OO....ww',
-    'ww:::::::::::::w::::::::::::..........ww',
+    'ww::::::::::::::::::::::::::..........ww',
     'ww:::::::::::::w::::::::::::..........ww',
     'wwiii:iiii:ii:iw:::::::::::::r......rrww',
     'ww::::i::::i:::w::wwwwwwwwwwwwwww..wwwww',
@@ -89,6 +90,13 @@ export default {
     { kind: 'arch', at: [18, 20], w: 4 }, { kind: 'arch', at: [33, 26], w: 2 },
   ],
   moon: [[32.5, 21.5]],
+  // the swamp: thick fog (only the Air finds the way through), La Luna inside
+  fog: [{ id: 'swampfog', area: [18, 27, 21, 7] }],
+  obstacles: [
+    { kind: 'brambles', need: 'fire', at: [12, 5] }, { kind: 'brambles', need: 'fire', at: [12, 6] }, // the way to the chains
+    { kind: 'stone', need: 'move', at: [15, 23] },                // a shortcut from the cells to the tower (Terra)
+  ],
+  suits: [{ suit: 'c', area: [18, 27, 21, 7] }],
   wisps: [[19, 28, 19, 5]],
   patrols: [
     { id: 'depths.cells', route: [[3, 23], [13, 23]], pause: 2200, when: [{ chapterMin: 3 }, { not: { step: 'c3.jail' } }] },

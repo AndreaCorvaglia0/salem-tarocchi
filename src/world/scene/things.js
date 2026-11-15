@@ -4,6 +4,7 @@
 import { state, save } from '../../core/state.js';
 import { test, fill } from '../../core/cond.js';
 import { call, has } from '../../core/services.js';
+import { emit } from '../../core/bus.js';
 import { addCoins, addXp } from '../../core/progress.js';
 import { MAJORS } from '../../data/cards.base.js';
 import * as STORY from '../../data/story/index.js';
@@ -12,7 +13,7 @@ import { makePerson, lookFor } from '../art/people.js';
 import { anchorOf, getMap } from '../maps.js';
 
 const T = 16, ADD = 1;
-const TOOL_NAMES = { bottle: 'una bottiglia della strega', sieve: 'setaccio e cesoie', incense: "dell'incenso", pendulum: 'un pendolo' };
+const TOOL_NAMES = { bottle: 'una bottiglia della strega', incense: "dell'incenso", pendulum: 'un pendolo' };
 export const toast = (t) => call('hud.toast', fill(t));
 export const say = async (t, who = 'tu') => (has('story.say') ? call('story.say', who, fill(t)) : toast(t));
 
@@ -78,7 +79,7 @@ export class Things {
   solidAt(x, y) {
     for (const n of this.npcs.values()) if (n.w.tx === x && n.w.ty === y) return true;
     for (const g of this.gates) if (g.x === x && g.y === y && !this.gateOpen(g)) return true;
-    return false;
+    return !!this.scene.obstacles?.solidAt(x, y);
   }
   gateAt(x, y) { return this.gates.find((g) => g.x === x && g.y === y && !this.gateOpen(g)) || null; }
   doorAt(x, y) { return this.map.doors.find((d) => d.x === x && d.y === y) || null; }
@@ -88,9 +89,11 @@ export class Things {
   usableAt(x, y) {
     const out = [];
     // label: the words above the thing; verb: the action button
-    for (const c of this.activeCards()) if (c.x === x && c.y === y) out.push({ type: 'card', x, y, label: 'Qualcosa luccica', verb: 'Guarda', c });
+    const lostIn = (cx, cy) => this.map.fogAt(cx, cy) && !state.powers.stun; // in thick fog without the Air nothing shows
+    for (const c of this.activeCards()) if (c.x === x && c.y === y && !lostIn(x, y)) out.push({ type: 'card', x, y, label: 'Qualcosa luccica', verb: 'Guarda', c });
     for (const n of this.npcs.values()) if (n.w.tx === x && n.w.ty === y) out.push({ type: 'npc', x, y, label: n.e.label ? `${n.e.label}` : 'Parla', verb: 'Parla', n });
-    for (const c of this.chests) if (c.x === x && c.y === y && !state.world.opened[c.id]) out.push({ type: 'chest', x, y, label: c.seal ? 'Un baule sigillato' : 'Un baule', verb: 'Apri', c });
+    out.push(...(this.scene.minors?.usableAt(x, y) || []), ...(this.scene.obstacles?.usableAt(x, y) || []));
+    for (const c of this.chests) if (c.x === x && c.y === y && !state.world.opened[c.id] && !this.scene.obstacles?.guards(c.id)) out.push({ type: 'chest', x, y, label: c.seal ? 'Un baule sigillato' : 'Un baule', verb: 'Apri', c });
     for (const e of this.cast) if (e.kind === 'prop' && e.x === x && e.y === y) out.push({ type: 'prop', x, y, label: e.label || 'Guarda', verb: e.verb || 'Usa', e });
     const d = this.doorAt(x, y);
     if (d) { const to = anchorOf(d.to); const name = to && getMap(to.map)?.name; out.push({ type: 'door', x, y, label: this.map.inside ? 'Esci' : name || 'Entra', verb: this.map.inside ? 'Esci' : 'Entra', d }); }
@@ -106,7 +109,7 @@ export class Things {
     const front = this.usableAt(fx, fy);
     if (front.length) return front[0];
     for (const [dx, dy] of [[0, 1], [0, -1], [-1, 0], [1, 0]]) {
-      const u = this.usableAt(p.tx + dx, p.ty + dy).find((v) => v.type === 'npc' || v.type === 'card' || v.type === 'prop');
+      const u = this.usableAt(p.tx + dx, p.ty + dy).find((v) => v.type === 'npc' || v.type === 'card' || v.type === 'prop' || v.type === 'minor');
       if (u) return u;
     }
     return null;
@@ -122,6 +125,7 @@ export class Things {
       state.world.talked[n.e.id] = (state.world.talked[n.e.id] || 0) + 1;
       if (n.e.once) state.world.once[n.e.id] = true;
       save();
+      emit('talk', { id: n.e.id, at: n.e.at }); // glue/traits.js
       if (n.e.script) await call('story.run', n.e.script);
     } else if (u.type === 'prop') {
       state.world.talked[u.e.id] = (state.world.talked[u.e.id] || 0) + 1;
@@ -131,11 +135,12 @@ export class Things {
     } else if (u.type === 'chest') await this.openChest(u.c);
     else if (u.type === 'door') return this.tryDoor(u.d);
     else if (u.type === 'gate') await say(u.g.refuse || 'Chiuso.');
+    else if (u.type === 'obstacle') await sc.obstacles.use(u);
+    else if (u.type === 'minor') await sc.minors.use(u);
     this.refresh();
   }
 
   async openChest(c) {
-    if (c.seal && !state.powers.seals) { await say(c.refuse || 'Un sigillo inciso nel legno. Non sai ancora aprirlo.'); return; }
     const ok = await call('lock.ask', { ...(c.ask || {}), label: c.ask?.label || (c.seal ? 'Un sigillo' : 'Un baule chiuso') });
     if (!ok) return;
     state.world.opened[c.id] = true;
@@ -153,7 +158,6 @@ export class Things {
       return false;
     }
     if (d.seal && !state.world.opened[d.id]) {
-      if (!state.powers.seals) { await say(d.refuse || 'Una porta sigillata. Non sai ancora aprirla.'); return false; }
       const ok = await call('lock.ask', { ...(d.ask || {}), label: d.ask?.label || 'Una porta sigillata' });
       if (!ok) return false;
       state.world.opened[d.id] = true; save();
@@ -179,7 +183,7 @@ export class Things {
   update(time, p) {
     const cat = !!state.powers.cat;
     for (const c of this.cards) {
-      if (!this.cardActive(c)) continue;
+      if (!this.cardActive(c) || (this.map.fogAt(c.x, c.y) && !state.powers.stun)) { c.img.setAlpha(0); c.halo.setAlpha(0); continue; }
       const d = Math.hypot(c.x - p.tx, c.y - p.ty), range = cat ? 7 : 4;
       const pulse = 0.5 + Math.sin(time / (cat ? 260 : 420) + c.x) * 0.5;
       const a = d > range ? 0 : cat ? 0.65 + pulse * 0.35 : (0.18 + pulse * 0.32) * (1 - d / (range + 1)) * 1.6;

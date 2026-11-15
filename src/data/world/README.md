@@ -20,6 +20,10 @@ export default {
   gates: [{ at: [15, 27], when, refuse }],       // tiles shut until `when` holds
   chests: [{ id, at: [x, y] | 'anchor', ask: { kind, cardId, label }, give: { coins, xp, tool, n }, seal }],
   patrols: [{ id, kind: 'constable' | 'afflicted', route: [[x, y], ...], pause, speed, face, look, when }],
+  under: true,              // underground (the depths): no sky, the broom does not fly here
+  obstacles: [{ kind, need, at: [x, y] | 'anchor' | on: chestId }],  // see "Obstacles"
+  fog: [{ id: 'deepfog', area: [x, y, w, h] }],                       // thick fog zones
+  suits: [{ suit: 'p' | 's' | 'w' | 'c', area: [x, y, w, h] }],       // tall grass with Minor Arcana
 };
 ```
 
@@ -75,5 +79,24 @@ Lamps, fires, candles, torches and hearths light the night by themselves.
   question. `look`: 'gate' | 'trapdoor' | 'stairs' | 'mat' (a building's own door needs none).
 - A person (CAST `npc`) standing on a door's anchor steps one tile aside, so the door stays usable.
 - Hidden cards appear by themselves at their `spot` anchors (`MAJORS[].spot`).
+
+## Obstacles, thick fog, Minors in the grass
+
+- `obstacles`: each is solid until opened with its magic, then gone for good (`state.world.opened[id]`).
+  `kind` and `need` go together: `brambles` / `fire` (Fuoco burns them), `roots` / `move` and `stone` /
+  `move` (Terra draws them aside; the stone carries a faintly glowing carved mark). `at` is a walkable
+  tile; `on: 'forest.chest.grove'` puts it over a chest instead (the chest opens once it is gone).
+  Roots and stones only ever guard optional things (shortcuts, chests): the tests check that Earth
+  gates no Major spot.
+- `fog`: thick fog. Without the Air (`stun`) she can walk in, sight closes in, her steps wander, and
+  after a few steps (`FOG.lost` in src/world/reach.js) she is back at the edge. With the Air she walks
+  through. Nothing in it can be seen or used without the Air. A spot that must need the Air should lie
+  more than `FOG.lost` fog steps from every edge (tested for the Hermit's lantern).
+- `suits`: tall grass `,` inside an area holds Minor Arcana of that suit (Denari `p` round the market,
+  Spade `s` in the upper village, Bastoni `w` in the woods, Coppe `c` by the water). Nothing on the
+  arrival road. Odds and cooldown: src/world/minors.js; numbers: `node --test tests/world.minors.test.mjs`.
+- Block `signpost`: `{ kind: 'signpost', arrows: [['left', 'bottle'], ['up', 'bell']] }`, one small board
+  per arrow (`left` `right` `up` `down`), symbols `bottle` (shop) `bell` (meetinghouse) `house` (cottage)
+  `scales` (court) `coin` (market) `hut` `drop` (water) `wheel` (mill) `tree` `fire`.
 
 To check a map: `npm test`, then `harness/world.html?at=<map>.<anchor>` (see harness/world.js).

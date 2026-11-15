@@ -23,6 +23,10 @@ import { Input } from './input.js';
 import { bark } from './barks.js';
 import { Life } from './life.js';
 import { Guide } from './guide.js';
+import { Obstacles } from './obstacles.js';
+import { Fog } from './fog.js';
+import { Minors } from './minors.js';
+import { Sense } from './sense.js';
 
 // sounds (notes/sound.md): the service may be missing (harness), then nothing plays
 const MOOD = { forest: 'forest', depths: 'depths', court: 'depths' };
@@ -50,7 +54,9 @@ export class WorldScene extends Phaser.Scene {
     this.built = buildMap(this, map, this.season);
     const [sx, sy] = this.freeNear(d.x, d.y);
     this.player = new Walker(this, 'ch-tu', sx, sy, d.dir || 'down');
+    this.obstacles = new Obstacles(this, map); // before Things: it asks them what is solid
     this.things = new Things(this, map, this.built);
+    this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.sense = new Sense(this, map);
     if (this.things.solidAt(sx, sy)) { const [fx, fy] = this.freeNear(sx, sy, true); this.player.tx = fx; this.player.ty = fy; this.player.place(); }
     this.things.refresh(true);
     if (d.enter) this.things.zonesIn = new Set(); // sent here by a scene or the broom: zones under her start
@@ -136,7 +142,7 @@ export class WorldScene extends Phaser.Scene {
     p.unstick();
     const free = this.canAct();
     if (free && !p.moving) {
-      const dir = this.inputs.dir();
+      const dir = this.fog.steer(this.inputs.dir());
       if (dir) {
         const from = [p.tx, p.ty];
         const r = p.step(dir, this.canEnter, SPEED, (nx, ny) => this.arrived(nx, ny, from));
@@ -165,7 +171,9 @@ export class WorldScene extends Phaser.Scene {
     this.night.extra = [...this.patrols.filter((q) => q.active).map((q) => ({ x: q.w.sprite.x, y: q.w.sprite.y - 10, r: 22, a: 0.8 })), ...(fire ? [{ x: this.hand.x, y: this.hand.y - 3, r: 26, a: 0.6 }] : [])];
     this.night.extra.push(...this.life.update(time, p.sprite.x, p.sprite.y - 10), ...this.guide.update(time));
     this.firstHints(time);
-    this.night.update(time, dt, { px: p.sprite.x, py: p.sprite.y - 10, shortTarget: short ? 1 : 0, cones });
+    this.obstacles.update(time); this.minors.update(time); this.sense.update(time);
+    const fog = this.fog.update(time, dt);
+    this.night.update(time, dt, { px: p.sprite.x, py: p.sprite.y - 10, shortTarget: short ? 1 : 0, cones, fog, air: !!state.powers.stun });
     this.weather.update(time, dt);
     this.prompt();
   }
@@ -174,7 +182,7 @@ export class WorldScene extends Phaser.Scene {
   markSeen(x, y) {
     const a = nearAnchor(this.map.id, x, y, 3);
     const seen = state.stats.seen || (state.stats.seen = {});
-    if (a && !seen[a]) { seen[a] = true; save(); }
+    if (a && !seen[a]) { seen[a] = true; save(); emit('seen', { anchor: a }); } // glue/traits.js
     if (this.map.inside && !seen[`${this.map.id}.door`]) { seen[`${this.map.id}.door`] = true; save(); }
   }
 
@@ -187,6 +195,7 @@ export class WorldScene extends Phaser.Scene {
     const dark = this.map.isDark(x, y);
     if (dark && !this.inDark && state.powers.fire) { stat('fires'); sfx('fire'); }
     this.inDark = dark;
+    this.fog.arrived(x, y, from); this.minors.arrived(x, y, this.player.dir);
     this.things.entered(x, y);
   }
 
@@ -201,20 +210,21 @@ export class WorldScene extends Phaser.Scene {
     if (!this.canAct()) return;
     if (!(state.stats.steps > 0) && time - this.bornAt > 3500) this.hintOnce('move');
     if (!this.player.moving && this.things.current(this.player)) this.hintOnce('action');
+    if (state.stats.steps > 0 && this.patrols.some((q) => q.active) && this.nearestPatrol(6)) this.hintOnce('patrol'); // a constable on screen, near her
   }
 
   prompt() {
     const c = this.controls;
     if (!c) return;
     const u = this.canAct() && !this.player.moving ? this.things.current(this.player) : null;
-    c.act(u ? u.verb : null);
+    c.act(u ? u.verb : null, !!u?.dim);
     if (!u) return c.prompt(null);
     const cam = this.cameras.main, v = cam.worldView, z = cam.zoom;
     const mine = u.x === this.player.tx && u.y === this.player.ty; // on her own tile: above her hat
     const lift = mine || u.type === 'npc' ? 30 : u.type === 'door' ? 4 : u.type === 'chest' ? 2 : 10;
     const wx = u.x * T + 8, wy = u.y * T + T - lift - (u.type === 'door' ? 0 : 6);
     const rect = this.game.canvas.getBoundingClientRect();
-    c.prompt(u.label, rect.left + (wx - v.x) * z, rect.top + (wy - v.y) * z - 4);
+    c.prompt(u.label, rect.left + (wx - v.x) * z, rect.top + (wy - v.y) * z - 4, !!u.dim);
   }
 
   // ---- using things ----
@@ -272,6 +282,7 @@ export class WorldScene extends Phaser.Scene {
   async spotted(q) {
     this.busy++;
     this.inputs.cancel();
+    emit('patrol:seen', { kind: q.kind }); // glue/traits.js
     q.shout(); sfx('suspicion'); q.w.faceToward(this.player.tx, this.player.ty); this.player.faceToward(q.w.tx, q.w.ty);
     this.cameras.main.shake(140, 0.003);
     let r = null;
@@ -297,7 +308,7 @@ export class WorldScene extends Phaser.Scene {
     if (!state.powers.stun || now < this.stunReadyAt || !this.canAct()) return;
     const q = this.nearestPatrol();
     if (!q) return;
-    q.stun(now, STUN_MS); this.stunReadyAt = now + STUN_COOLDOWN; stat('stuns'); sfx('stun');
+    q.stun(now, STUN_MS); this.stunReadyAt = now + STUN_COOLDOWN; stat('stuns'); sfx('stun'); emit('stun', {});
     this.cameras.main.flash(160, 200, 210, 255);
     toast(q.kind === 'afflicted' ? 'Si ferma, smarrita. Hai un momento.' : 'Il conestabile barcolla. Hai un momento.');
   }

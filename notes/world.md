@@ -7,7 +7,9 @@
   `state.tools[tool]` when a chest gives a tool (progress.js has no helper for tools).
 - Reads `state.world.bottleUntil` (a `Date.now()` timestamp): while it is in the future, nobody
   stops you. **Whoever uses the witch bottle should set it** (e.g. `Date.now() + 90000`).
-- Reads `state.powers` (cat, fire, stun, seals), flag `sight.far`, `state.chapter`, `state.player.birthCard`.
+- Reads `state.powers` (cat, fire, sense, move, stun, broom), `state.chapter`, `state.player.birthCard`, `levelOf()`.
+- Writes `state.dupes[id]` (Minor duplicates; core may want to own this key: please add `dupes: {}` to fresh()),
+  `state.world.opened[obstacleId]` (burnt brambles, moved roots and stones).
 
 ## Services added
 - `world.guide(anchor | null)`: a trail of small lights from her to the anchor (re-computed as she
@@ -47,3 +49,17 @@
 - core/scripts: `scripts/shot.mjs` waits for `networkidle0`; a running Phaser game at 60 fps in
   headless Chrome never reaches it, so the world caps itself at 30 fps only when `navigator.webdriver`
   is true. If other areas mount the world in their harness, the same applies.
+
+## Second pass (obstacles, fog, Minors, sixth sense)
+- Bus out (nobody turns them into words yet): `blocked { kind: 'brambles'|'roots'|'stone', need: 'fire'|'move' }`
+  (she used an obstacle without its magic), `lost { zone: 'forest.deepfog'|'depths.swampfog' }` (fog turned
+  her back, once per entry), `dupe { id }` (a Minor she already had: +2/3/5 coins already given),
+  `opened { id, kind }` (an obstacle cleared).
+- Services: `world.sensed()` -> `[{ kind: 'card'|'chest', id, anchor, map, x, y, dist }]` within
+  `senseRadius()` (every map when Infinity); `world.canFly()` -> `{ ok, why }`, why a code: `broom` (no
+  power) `inside` `under` `fog` `cell` `busy` `seen`; `world.fly(anchor)` -> true if flown (seen outdoor
+  anchor, not in fog). `world.travel(a, { by: 'broom' })` does the same, but glue/diary.js wraps
+  world.travel and drops the second argument: glue/fly.js should call `world.fly`. `world.where()` now
+  has `fog`.
+- New anchor `village.upper` (27,12, the washing trough between the meetinghouse and the court).
+- Minors: `MINORS_WHEN` in src/world/minors.js keeps them off until step c1.malva is past.
