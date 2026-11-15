@@ -154,6 +154,29 @@ Regole: i tratti si muovono piano (un punto alla volta, da -6 a +6); una battuta
 quando è marcato (almeno 3); ogni osservazione cita un fatto vero. Il taglio è positivo: il gioco ti
 legge come farebbe una buona cartomante, per farti vedere qualcosa di te, mai per giudicarti.
 
+### Un ritratto solo, costruito lungo tutti gli incontri
+
+Gli incontri con la Lettrice sono pensati come un percorso unico, scritto bene dall'inizio alla fine, non
+come tanti commenti slegati.
+
+- **Il filo.** Alla prima seduta lei si fa un'ipotesi. Negli incontri dopo la mette alla prova, la
+  conferma o la corregge, e lo dice: «L'altra volta ti avevo detto che eri L'Eremita. Lo penso ancora» oppure
+  «Ho cambiato idea». Riprende le risposte date prima e le accosta a quello che è successo dopo: «La prima
+  sera mi hai detto che davanti a una porta chiusa bussi. In tribunale, però, sei entrata dalla finestra».
+- **Tendenze robuste, non ogni scossa.** Si commenta un tratto quando è marcato e resta tale da un
+  incontro all'altro. Un cambio si nomina solo se è grosso e vero (il segno si rovescia), e in modo
+  estemporaneo: «Fino a ieri giravi alla larga dai conestabili. Stanotte gli sei passata sotto il naso».
+- **Le combinazioni.** Quando su un tratto tira forte da tutte e due le parti, è una cosa da raccontare:
+  «Il cuore e la testa in te non riescono a mettersi d'accordo, e non è detto che debbano». Così anche gli
+  accostamenti tra tratti: audace ma accorta, gentile ma pungente quando serve.
+- **Cose del momento.** Ogni incontro può avere un'osservazione sull'ultimo tratto di strada (dove è
+  stata, cosa ha evitato, quanto ci ha messo), accanto al discorso lungo.
+- **Gli attrezzi del mestiere.** La Lettrice usa quello che una cartomante e un'astrologa usano davvero:
+  l'elemento e la qualità del segno (cardinale, fisso, mobile), il pianeta che lo governa e la sua carta, il
+  giorno della settimana in cui è nata e il suo pianeta, la luna di quella notte; e con le carte: il taglio
+  del mazzo, «dimmi un numero», la carta in fondo al mazzo, il seme che torna più spesso, le carte a coppie,
+  la carta che rappresenta chi chiede. Tutto calcolato dal vero, mai inventato.
+
 ## Le visite della Lettrice
 
 La Lettrice torna spesso: è lei che ti racconta le carte. Ogni capitolo è fatto di due o tre tratti di

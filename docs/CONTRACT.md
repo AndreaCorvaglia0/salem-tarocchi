@@ -197,6 +197,22 @@ after the player taps the next-step line in the HUD.
 Pacing: in sessions, visits and cinema a line stays until tapped, a tap is accepted only after the text is
 fully shown plus a short pause, and one tap never advances two lines.
 
+Portrait over time (added). State: `state.hits = { axis: { plus, minus } }` counts every contribution;
+`state.traitLog = [{ at, traits, card }]` a snapshot at the end of every encounter with the Reader;
+`state.verdicts = [cardId]`. Node `{ do: 'verdict' }` records `yourCard()` after she states it.
+Conditions: `{ trend: [axis, op, n] }` (change since the previous snapshot), `{ steady: axis }` (|value| >= 3
+with the same sign in the last two snapshots), `{ turned: axis }` (sign flipped since the previous snapshot,
+|change| >= 4), `{ torn: axis }` (plus >= 3 and minus >= 3 and |value| <= 1), `{ verdict: 'first' | 'same' |
+'changed' }`, `{ yourCardIsBirth: true }`, `{ hasBirth: true }`, `{ hasYear: true }`, `{ element: 'Fuoco' }`,
+`{ modality: 'cardinale' | 'fisso' | 'mobile' }`, `{ moon: 'nuova' | 'crescente' | 'piena' | 'calante' }`,
+`{ bornOn: 'giovedì' }`. Fill tokens: `{lastVerdict}`, `{element}`, `{modality}`, `{ruler}` (traditional
+ruler of the sign), `{rulerCard}`, `{birthDay}` (weekday), `{dayPlanet}`, `{dayPlanetCard}`, `{moon}`
+("luna crescente"). Signs: Ariete cardinale Marte, Toro fisso Venere, Gemelli mobile Mercurio, Cancro
+cardinale Luna, Leone fisso Sole, Vergine mobile Mercurio, Bilancia cardinale Venere, Scorpione fisso Marte,
+Sagittario mobile Giove, Capricorno cardinale Saturno, Acquario fisso Saturno, Pesci mobile Giove. Weekdays:
+lunedì Luna, martedì Marte, mercoledì Mercurio, giovedì Giove, venerdì Venere, sabato Saturno, domenica Sole.
+Planet cards: Luna m02, Marte m16, Mercurio m01, Giove m10, Venere m03, Saturno m21, Sole m19.
+
 ## Working rules
 
 - No git commands. No edits outside your folders (plus `harness/<area>.*`, `tests/<area>.*.test.mjs`, `notes/<area>.md`).
