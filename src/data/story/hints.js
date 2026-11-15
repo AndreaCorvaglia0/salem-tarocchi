@@ -1,7 +1,7 @@
 // Interface lines, outside the fiction (docs/WRITING.md, rule 7): one plain sentence each, shown once
 // near the bottom of the screen (ui/hint.js), written for someone who has never played a game.
 // HINTS is the touch wording; HINTS_KEYS replaces it where there is a keyboard and no touch screen.
-// move, action, grimoire, exam, reading are emitted today; the others are ready for whoever needs them.
+// Which hint is shown when: notes/story.md, "Hints I need".
 export const HINTS = {
   move: "Per camminare, tocca il punto della strada dove vuoi andare.",
   action: "Quando sei vicina a una persona o a una cosa, tocca il pulsante in basso per parlarle o per prenderla.",
@@ -14,6 +14,14 @@ export const HINTS = {
   number: "Tocca un numero da uno a ventidue.",
   guide: "Se non sai dove andare, tocca il foglietto in alto: una scia di luci ti mostrerà la strada.",
   patrol: "Se un conestabile ti vede ti ferma: per evitarlo, resta fuori dalla sua luce.",
+  draw: "Tocca una delle carte coperte per sceglierla.",
+  shop: "Tocca un oggetto per vedere quanto costa: le monete si guadagnano leggendo le carte a chi bussa alla capanna.",
+  map: "Nel grimorio c'è una mappa: il cerchio rosso segna il posto dove devi andare.",
+  book: "Puoi riaprire il grimorio quando vuoi, toccando il libro in alto.",
+  rank: "Per crescere leggi le carte a chi bussa alla capanna, ripassa quelle che hai e cercane di nuove: la barra in alto mostra quanto ti manca.",
+  side: "Sulla mappa del grimorio è comparso un appunto a matita: è una traccia in più, da seguire se ti va.",
+  fly: "Adesso sai volare: apri la mappa nel grimorio e tocca un posto all'aperto che hai già visto.",
+  trade: "Tocca un tuo doppione e poi la carta di Ginepra che vuoi in cambio.",
 };
 export const HINTS_KEYS = {
   move: "Per camminare usa le frecce della tastiera, oppure fai clic sul punto dove vuoi andare.",
