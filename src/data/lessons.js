@@ -1,57 +1,60 @@
 // The six lessons of the mistresses (deck, single, ppf, celtic, suits, astro), each a few short pages.
-// A page may show a spread (`spread`) or some cards (`cards`). Italian, in the voice of who teaches.
+// A page may show a spread (`spread`) or some cards (`cards`). Italian. These are pages to study from,
+// so the register is the handbook's: plain paragraphs of whole, linked sentences (docs/WRITING.md),
+// with a touch of the voice of who teaches: Malva brisk and practical, Ortica talkative, Edera slow,
+// kind and bad with names.
 
 export const LESSONS = [
   {
     id: 'deck', title: 'Il mazzo', by: 'malva',
     pages: [
-      { h: 'Settantotto carte', body: "Settantotto carte, e non farti venire il mal di testa. Ventidue Maggiori e cinquantasei Minori. Le Maggiori sono le storie grosse della vita: un inizio, un amore, una fine. Le Minori sono i giorni qualunque, quelli in cui si vive davvero.", cards: ['m00', 'm13', 'm19'] },
-      { h: 'Quattro semi', body: "Le Minori hanno quattro semi: Bastoni, Coppe, Spade, Denari. Ognuno ha quattordici carte: l'Asso, poi dal Due al Dieci, poi quattro figure, che sono il Fante, il Cavaliere, la Regina e il Re. Conta, non ti ci vuole molto." },
-      { h: 'Prima guarda', body: "Prima di cercare il significato, guarda. Chi c'è? Dove guarda? Che tempo fa? Cosa ti colpisce per primo? Quello che noti è già una risposta, e di solito è tua. I libri vengono dopo.", cards: ['m02'] },
-      { h: 'Le capovolte', body: "Una carta capovolta non è una disgrazia. Di solito è la stessa carta ma bloccata, troppa o troppo poca. Se ti confonde, ignorale pure: c'è chi lo fa e legge benissimo lo stesso. Per ora, basta il dritto." },
+      { h: 'Settantotto carte', body: "Un mazzo di tarocchi ha settantotto carte, e non c'è bisogno di farsi venire il mal di testa, perché si dividono in due gruppi. Ventidue sono gli Arcani Maggiori, che raccontano i grandi passaggi della vita, come un inizio, un amore o una fine. Le altre cinquantasei sono gli Arcani Minori e parlano dei giorni qualunque, che poi sono quelli in cui si vive davvero.", cards: ['m00', 'm13', 'm19'] },
+      { h: 'Quattro semi', body: "I Minori si dividono in quattro semi: Bastoni, Coppe, Spade e Denari. Ogni seme ha quattordici carte: si comincia dall'Asso, si va avanti dal Due al Dieci, e si finisce con quattro figure, che sono il Fante, il Cavaliere, la Regina e il Re. Contale una volta con calma, e vedrai che non ci vuole molto a ricordarle." },
+      { h: 'Prima guarda', body: "Prima di cercare che cosa significa una carta, guardala. Chiediti chi c'è nel disegno, da che parte guarda, che tempo fa, e soprattutto che cosa ti colpisce per primo. Quello che noti è già una risposta, e di solito è la tua: per questo i libri vengono dopo, quando hai già un'idea con cui confrontarli.", cards: ['m02'] },
+      { h: 'Le capovolte', body: "Quando una carta esce capovolta non è una disgrazia. Di solito vuol dire la stessa cosa della carta dritta, ma bloccata, oppure in dose sbagliata: troppa o troppo poca. Se all'inizio ti confonde puoi anche non tenerne conto, perché c'è chi legge benissimo usando soltanto il dritto. Per adesso fai così anche tu." },
     ],
   },
   {
     id: 'single', title: 'La carta singola', by: 'malva',
     pages: [
-      { h: 'Una carta, una risposta', body: "Una carta sola. Serve per la giornata, per una domanda semplice, per capire da dove cominciare. Non fare la furba: se la domanda è un romanzo, la carta non basta.", spread: 'single' },
-      { h: 'Come si fa', body: "Pensa alla domanda, mescola, pesca. Metti la carta in mezzo al tavolo. Guarda cosa vedi, poi cosa significa. La carta non è un oracolo: è uno specchio, e lo specchio non mente, ma nemmeno ti consola." },
-      { h: 'Cosa dire al cliente', body: "Dì tre cose, in quest'ordine: cosa vedi, cosa vuol dire, cosa può farne lei. Poche frasi. Niente sentenze, niente «ti succederà». Chi esce dal tavolo deve avere una cosa da fare, non una paura.", cards: ['m03'] },
+      { h: 'Una carta, una risposta', body: "La stesa più semplice è fatta di una carta sola. Serve per orientarsi nella giornata, per rispondere a una domanda semplice, o per capire da dove cominciare quando una faccenda è ingarbugliata. Ha un limite, e conviene saperlo subito: se la domanda è lunga come un romanzo una carta non basta, e bisogna passare a una stesa più grande.", spread: 'single' },
+      { h: 'Come si fa', body: "Pensa alla domanda, mescola il mazzo e pesca una carta, poi mettila in mezzo al tavolo. Guarda prima che cosa vedi, e soltanto dopo ricordati che cosa significa. Tieni presente che la carta non decide niente al posto tuo: funziona come uno specchio, cioè ti mostra le cose come stanno, senza mentire e senza consolare." },
+      { h: 'Cosa dire a chi chiede', body: "A chi ti chiede una lettura devi dire tre cose, in quest'ordine: che cosa vedi nella carta, che cosa vuol dire, e che cosa può farne lei. Bastano poche frasi, e non devono mai suonare come una sentenza, quindi niente «ti succederà». Chi si alza dal tuo tavolo deve portarsi via una cosa da fare, e non una paura in più.", cards: ['m03'] },
     ],
   },
   {
     id: 'ppf', title: 'Passato, presente, futuro', by: 'ortica',
     pages: [
-      { h: 'Tre carte, una storia', body: "Ah, finalmente! Ti aspettavo, sai, ho appena sistemato la mia capanna, che era in uno stato, non puoi immaginare. Dunque: tre carte, in fila. Passato, presente, futuro. La prima da dove viene, la seconda dove sei, la terza dove va.", spread: 'ppf' },
-      { h: 'Il filo', body: "La regola d'oro: non leggerle una per una, come i pesci al mercato. Cercale insieme. Si somigliano? C'è lo stesso colore, la stessa persona, lo stesso seme? Guardano nella stessa direzione? Il filo è quello, e chi lo trova ha già mezza lettura fatta. Come lo so? Me l'ha detto la moglie del mugnaio, che lo sa dalla sorella." },
-      { h: 'Il futuro non è una sentenza', body: "E poi, ascoltami bene, che è importante: il futuro non è scritto. È dove vai se non cambi strada. Se la terza carta non ti piace, guarda la prima e la seconda: là c'è quello su cui puoi lavorare. Non spaventare nessuno. Mai." },
+      { h: 'Tre carte, una storia', body: "Finalmente sei arrivata: ti aspettavo, e nel frattempo ho rimesso a posto la capanna, che era in uno stato che non ti dico. Veniamo a noi. Questa stesa ha tre carte, messe in fila da sinistra a destra: la prima è il passato, cioè da dove viene la faccenda; la seconda è il presente, cioè dove ti trovi adesso; la terza è il futuro, cioè dove stai andando.", spread: 'ppf' },
+      { h: 'Il filo', body: "La cosa più importante è non leggerle una per una, come si guardano i pesci sul banco del mercato, ma tutte e tre insieme. Chiediti se si somigliano: se hanno lo stesso colore, la stessa figura, lo stesso seme, o se guardano dalla stessa parte. Quello che le lega è il filo della storia, e chi lo trova ha già fatto mezza lettura. A me l'ha insegnato la moglie del mugnaio, che l'aveva saputo da sua sorella." },
+      { h: 'Il futuro non è una sentenza', body: "Adesso ascoltami bene, perché questa è la parte che conta: il futuro non è già scritto. La terza carta mostra soltanto dove arrivi se continui per la stessa strada. Quando non ti piace, torna a guardare la prima e la seconda, perché è lì che si può ancora cambiare qualcosa. E ricordati di non spaventare mai chi ti sta davanti, per nessun motivo." },
     ],
   },
   {
     id: 'celtic', title: 'La croce celtica', by: 'edera',
     pages: [
-      { h: 'Dieci carte', body: "Oh, sei tu, cara. Come ti chiami? No, non dirmelo, lo dimentico lo stesso. Dieci carte, la croce e poi la colonna. Questa me la ricordo benissimo, che strano. La croce ha il suo ordine: la 1 al centro, e via di seguito.", spread: 'celtic' },
-      { h: 'Il cuore: 1 e 2', body: "La prima carta è dove sei adesso. La seconda ci va di traverso, sopra: è ciò che ti attraversa. A volte è un ostacolo, a volte un aiuto: dipende da come la guardi. Leggile come una coppia, non come due carte separate." },
-      { h: 'Attorno: 3, 4, 5, 6', body: "Sotto, la 3: le fondamenta, da dove viene tutto. A sinistra, la 4: il passato recente, ciò che si allontana. Sopra, la 5: ciò che può nascere. A destra, la 6: il futuro prossimo, ciò che arriva. Una piccola ruota intorno al centro." },
-      { h: 'La colonna: 7, 8, 9, 10', body: "Poi la colonna a destra, dal basso. La 7 sei tu, adesso. L'8 è l'ambiente, chi hai intorno. La 9, le speranze e le paure: spesso sono la stessa cosa. E la 10 è l'esito, dove porta il cammino se non lo cambi. Chiudi sempre con quella." },
+      { h: 'Dieci carte', body: "Oh, sei tu, cara. Dimmi come ti chiami; anzi no, lascia stare, perché tanto lo dimenticherei di nuovo. La croce celtica invece la ricordo benissimo, ed è curioso. È una stesa di dieci carte: sei formano una croce, a sinistra, e quattro una colonna, a destra. Si posano sempre nello stesso ordine, a cominciare dalla prima, che va al centro.", spread: 'celtic' },
+      { h: 'Il cuore: 1 e 2', body: "La prima carta dice dove ti trovi adesso. La seconda si posa di traverso sopra la prima, e mostra che cosa ti attraversa: a volte è un ostacolo e a volte un aiuto, e dipende molto da come la guardi. Queste due vanno lette come una coppia, perché insieme sono il cuore della stesa, e tutte le altre carte girano intorno a loro." },
+      { h: 'Attorno: 3, 4, 5, 6', body: "Intorno al centro si posano quattro carte, come una piccola ruota. La terza va sotto e mostra le fondamenta, cioè il punto da cui viene tutto il resto. La quarta va a sinistra, ed è il passato recente, che si sta allontanando. La quinta va sopra, ed è quello che può nascere. La sesta va a destra, ed è il futuro prossimo, cioè quello che sta arrivando." },
+      { h: 'La colonna: 7, 8, 9, 10', body: "Poi viene la colonna a destra, che si posa dal basso verso l'alto. La settima carta sei tu, come sei in questo momento, e l'ottava è l'ambiente, cioè le persone che hai intorno. La nona raccoglie le speranze e le paure, che molto spesso sono la stessa cosa vista da due lati. La decima è l'esito, cioè dove porta il cammino se non lo cambi, e la lettura si chiude sempre con lei." },
     ],
   },
   {
     id: 'suits', title: 'Semi ed elementi', by: 'malva',
     pages: [
-      { h: 'Quattro semi, quattro elementi', body: "Bastoni: fuoco, volontà. Coppe: acqua, cuore. Spade: aria, testa. Denari: terra, concretezza. Imparali a memoria. Quando una carta ti confonde, chiediti di quale seme è: la metà del lavoro è già fatta." },
-      { h: 'Semi e segni', body: "Ogni seme ha tre segni dello zodiaco, quelli del suo elemento. Bastoni: Ariete, Leone, Sagittario. Coppe: Cancro, Scorpione, Pesci. Spade: Gemelli, Bilancia, Acquario. Denari: Toro, Vergine, Capricorno. Il tuo segno ti dice il tuo seme." },
-      { h: 'I numeri', body: "L'Asso è l'inizio, il seme. Il Due una scelta, il Tre una crescita, il Quattro una base. Il Cinque una crisi, il Sei una tregua, il Sette una prova. L'Otto è movimento, il Nove quasi arrivati, il Dieci la fine del giro. È una traccia, non una regola." },
-      { h: 'Le figure', body: "Il Fante porta un messaggio, o è chi sta imparando. Il Cavaliere si muove, ha una direzione e un po' di fretta. La Regina padroneggia il seme dentro di sé. Il Re lo padroneggia fuori, sugli altri. Possono essere persone, o modi di stare in una situazione." },
+      { h: 'Quattro semi, quattro elementi', body: "Ogni seme corrisponde a un elemento e a una parte della vita. I Bastoni sono il fuoco, cioè la volontà e la voglia di fare. Le Coppe sono l'acqua, cioè il cuore e i sentimenti. Le Spade sono l'aria, cioè la testa e le parole. I Denari sono la terra, cioè le cose concrete, come il lavoro, la casa e i soldi. Imparali a memoria: quando una carta ti confonde basta chiedersi di che seme è, e metà del lavoro è fatta." },
+      { h: 'Semi e segni', body: "Ogni seme ha anche tre segni dello zodiaco, che sono quelli del suo elemento. Ai Bastoni vanno l'Ariete, il Leone e il Sagittario; alle Coppe il Cancro, lo Scorpione e i Pesci; alle Spade i Gemelli, la Bilancia e l'Acquario; ai Denari il Toro, la Vergine e il Capricorno. In questo modo il tuo segno ti dice anche qual è il seme che ti è più vicino." },
+      { h: 'I numeri', body: "Anche i numeri hanno un senso, che è lo stesso in tutti e quattro i semi. L'Asso è l'inizio, il Due è una scelta, il Tre una crescita e il Quattro una base solida. Con il Cinque arriva una crisi, con il Sei una tregua e con il Sette una prova. L'Otto è movimento, il Nove è l'ultimo tratto prima dell'arrivo, e il Dieci chiude il giro. Prendila come una traccia per orientarti, più che come una regola fissa." },
+      { h: 'Le figure', body: "Restano le quattro figure. Il Fante porta un messaggio, oppure è qualcuno che sta ancora imparando. Il Cavaliere si muove, perché ha una direzione e un po' di fretta. La Regina conosce a fondo il suo seme e lo tiene dentro di sé, mentre il Re lo esercita fuori, sugli altri. In una lettura possono essere persone vere, oppure modi diversi di stare in una situazione." },
     ],
   },
   {
     id: 'astro', title: 'Pianeti, segni, elementi', by: 'edera',
     pages: [
-      { h: 'Il cielo nelle carte', body: "Ah, il cielo. Le Maggiori sono legate al cielo da una tradizione antica, quella della Golden Dawn, una società segreta dell'Ottocento: ogni carta ha un pianeta, un segno o un elemento. Come ti chiami? Non importa. Ti serve a ricordare: se sai che il Mago è Mercurio, sai già mezzo Mago." },
-      { h: 'I sette pianeti', body: "Il Mago è Mercurio: mente e parole. La Sacerdotessa è la Luna: intuito. L'Imperatrice è Venere: amore e piacere. La Ruota è Giove: espansione e fortuna. La Torre è Marte: azione e scontro. Il Sole è il Sole: vita. Il Mondo è Saturno: limiti e compimento.", cards: ['m01', 'm02', 'm03', 'm10', 'm16', 'm19', 'm21'] },
-      { h: 'I dodici segni', body: "L'Imperatore è l'Ariete, il Papa il Toro, gli Amanti i Gemelli, il Carro il Cancro, la Forza il Leone, l'Eremita la Vergine. La Giustizia è la Bilancia, la Morte lo Scorpione, la Temperanza il Sagittario, il Diavolo il Capricorno, la Stella l'Acquario, la Luna i Pesci. In ordine: segui il ciclo dell'anno.", cards: ['m04', 'm05', 'm06', 'm07', 'm08', 'm09', 'm11', 'm13', 'm14', 'm15', 'm17', 'm18'] },
-      { h: 'I tre elementi', body: "Restano tre carte, e sono i tre elementi: il Matto è l'Aria, l'Appeso è l'Acqua, il Giudizio è il Fuoco. La Terra, invece, la trovi nei Denari. E la tua carta di nascita è quella del tuo segno: questa, almeno, ricordala tu per me.", cards: ['m00', 'm12', 'm20'] },
+      { h: 'Il cielo nelle carte', body: "Ah, il cielo. Gli Arcani Maggiori sono legati al cielo da una tradizione antica, messa in ordine nell'Ottocento da una società segreta che si chiamava Golden Dawn: a ogni carta corrisponde un pianeta, un segno oppure un elemento. Il tuo nome non lo ricordo più, cara, ma questo sì: serve soprattutto a fissare le carte nella memoria. Se sai che il Mago è Mercurio, per esempio, conosci già mezzo Mago." },
+      { h: 'I sette pianeti', body: "Sette carte hanno un pianeta. Il Mago è Mercurio, che governa la mente e le parole. La Sacerdotessa è la Luna, cioè l'intuito, e l'Imperatrice è Venere, cioè l'amore e il piacere. La Ruota è Giove, che porta espansione e fortuna, mentre la Torre è Marte, che porta azione e scontro. Il Sole è il Sole, naturalmente, e vuol dire vita. Il Mondo è Saturno, che dà i limiti e porta le cose a compimento.", cards: ['m01', 'm02', 'm03', 'm10', 'm16', 'm19', 'm21'] },
+      { h: 'I dodici segni', body: "Dodici carte hanno un segno, e per ricordarle basta seguire l'ordine dell'anno, dalla primavera all'inverno. L'Imperatore è l'Ariete, il Papa il Toro, gli Amanti i Gemelli, il Carro il Cancro, la Forza il Leone e l'Eremita la Vergine. Allo stesso modo la Giustizia è la Bilancia, la Morte lo Scorpione, la Temperanza il Sagittario, il Diavolo il Capricorno, la Stella l'Acquario e la Luna i Pesci.", cards: ['m04', 'm05', 'm06', 'm07', 'm08', 'm09', 'm11', 'm13', 'm14', 'm15', 'm17', 'm18'] },
+      { h: 'I tre elementi', body: "Restano tre carte, e a ciascuna corrisponde un elemento: il Matto è l'Aria, l'Appeso è l'Acqua e il Giudizio è il Fuoco. La Terra non ha una carta sua tra i Maggiori, e la ritrovi nel seme dei Denari. Quanto alla tua carta di nascita, è semplicemente quella del tuo segno: questa, almeno, ricordala tu al posto mio.", cards: ['m00', 'm12', 'm20'] },
     ],
   },
 ];

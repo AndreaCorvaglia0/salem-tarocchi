@@ -1,5 +1,6 @@
 // Compact sheets of the 56 Minor Arcana (Rider-Waite-Smith). Per card: what you see, a noun phrase
 // ("gist") the core and the ten spread sentences are built from, four keywords, the reversed meaning.
+// A gist never names the card's own suit or rank: the core is the right answer of the meaning questions.
 import { MINORS } from '../cards.base.js';
 
 export const AS_KEYS = ['present', 'cross', 'root', 'past', 'possible', 'future', 'self', 'environment', 'hopefear', 'outcome'];
@@ -39,10 +40,10 @@ const W = [
 ];
 const C = [
   ["Una mano esce da una nuvola e regge una coppa. Una colomba vi lascia cadere un'ostia, cinque rivoli d'acqua scendono sul laghetto con i fiori di loto.", "un cuore che si apre a nuova gioia", ["amore", "apertura", "gioia", "intuito"], "Cuore chiuso, emozioni trattenute, un dono che non si riceve."],
-  ["Un uomo e una donna si scambiano due coppe, con una corona di fiori. Tra loro, un bastone con le ali e una testa di leone.", "uno scambio alla pari tra due persone", ["legame", "reciprocità", "attrazione", "intesa"], "Squilibrio nella coppia, rottura, un'intesa che non c'è più."],
+  ["Un uomo e una donna si scambiano due coppe, con una corona di fiori. Tra loro, un bastone con le ali e una testa di leone.", "un'intesa reciproca, alla pari, con un'altra persona", ["legame", "reciprocità", "attrazione", "intesa"], "Squilibrio nella coppia, rottura, un'intesa che non c'è più."],
   ["Tre donne danzano in cerchio con le coppe alzate. Ai loro piedi frutta e fiori.", "una festa tra amiche, gioia condivisa", ["amicizia", "festa", "comunità", "condivisione"], "Eccessi, pettegolezzi, un gruppo che esclude."],
   ["Un giovane siede sotto un albero con le braccia incrociate, davanti a tre coppe. Da una nuvola una mano gliene offre una quarta.", "la noia che non fa vedere l'offerta in arrivo", ["apatia", "noia", "riflessione", "distacco"], "Ti accorgi dell'offerta, o la rifiuti ancora."],
-  ["Una figura in mantello nero guarda tre coppe rovesciate. Dietro di lei, due coppe ancora in piedi; più in là, un ponte e un castello.", "il lutto per tre coppe cadute", ["perdita", "rimpianto", "lutto", "delusione"], "Superare la perdita, voltarsi verso ciò che resta."],
+  ["Una figura in mantello nero guarda tre coppe rovesciate. Dietro di lei, due coppe ancora in piedi; più in là, un ponte e un castello.", "il rimpianto per ciò che è andato perso", ["perdita", "rimpianto", "lutto", "delusione"], "Superare la perdita, voltarsi verso ciò che resta."],
   ["In un cortile, un bambino porge a un altro una coppa piena di fiori. Intorno, altre coppe con fiori.", "un ricordo dolce e un gesto semplice d'infanzia", ["nostalgia", "innocenza", "ricordi", "gentilezza"], "Restare incollati al passato, o ricordi che pungono."],
   ["Una figura vista di spalle guarda sette coppe nelle nuvole, ognuna con dentro qualcosa di strano: un drago, un gioiello, un volto.", "troppe fantasie tra cui scegliere, nessuna concreta", ["sogni", "illusione", "scelte", "fantasia"], "Chiarezza: scegli, oppure ti perdi nelle illusioni."],
   ["Un viandante di spalle si allontana di notte da otto coppe impilate, verso le montagne, sotto una luna.", "la partenza da ciò che non nutre più", ["abbandono", "ricerca", "distacco", "partenza"], "Restare per paura, o scappare senza aver capito perché."],
@@ -71,7 +72,7 @@ const S = [
 ];
 const P = [
   ["Una mano esce da una nuvola e regge un pentacolo. Sotto, un giardino fiorito con un arco di rose che porta alle montagne.", "un'occasione concreta, seme di un guadagno", ["occasione", "prosperità", "seme", "concretezza"], "Occasione sfuggita, un investimento mal pensato."],
-  ["Un giovane danza tenendo due pentacoli legati da un nastro a forma di infinito. Dietro di lui, navi su onde alte.", "due cose tenute in equilibrio con un sorriso", ["equilibrio", "flessibilità", "adattamento", "gestione"], "Troppe palle in aria, un equilibrio che cede."],
+  ["Un giovane danza tenendo due pentacoli legati da un nastro a forma di infinito. Dietro di lui, navi su onde alte.", "più impegni tenuti in equilibrio con un sorriso", ["equilibrio", "flessibilità", "adattamento", "gestione"], "Troppe palle in aria, un equilibrio che cede."],
   ["Un artigiano scolpisce un arco in una cattedrale. Due persone lo guardano con un progetto in mano.", "un mestiere fatto bene, riconosciuto dagli altri", ["squadra", "mestiere", "competenza", "progetto"], "Lavoro svogliato, poca collaborazione, risultato mediocre."],
   ["Un uomo con la corona siede tenendo stretto un pentacolo. Un altro è sulla testa, due sotto i piedi. Dietro, una città.", "l'attaccamento a ciò che hai, forse troppo stretto", ["sicurezza", "risparmio", "controllo", "possesso"], "Lasciar andare, generosità; oppure avarizia che isola."],
   ["Due persone povere, una zoppa, camminano nella neve davanti a una vetrata illuminata di una chiesa.", "il freddo della mancanza, con una porta aperta vicina", ["difficoltà", "povertà", "esclusione", "bisogno"], "Ripresa, chiedere aiuto, oppure restare al buio."],
