@@ -114,12 +114,17 @@ La magia è quella dei quattro elementi, che sono i quattro semi. Ogni magia apr
 | 3 | La bottega | | Ti aprono la porta nera | |
 | 4 | Fuoco | Bastoni | Luce nel buio; brucia i rovi | Il bosco fondo, le cantine |
 | 5 | Acqua | Coppe | Il sesto senso: ti tira verso la carta nascosta più vicina | |
-| 6 | Terra | Denari | Radici e pietre segnate si scostano | Passaggi, scorciatoie, bauli |
+| 6 | La scopa | | Dalla mappa del grimorio voli in un luogo che conosci | Niente più strada tra una zona e l'altra |
 | 7 | Aria | Spade | Un soffio che confonde un conestabile e dirada la nebbia | La nebbia fitta, la palude |
-| 8 | La scopa | | Voli tra i luoghi che conosci | |
+| 8 | Terra | Denari | Radici e pietre segnate si scostano | Passaggi, scorciatoie, bauli |
 
 Il raggio del sesto senso cresce a ogni livello. Da Gran Maestra arriva a tutta la mappa: è il suo
 potere che le fa trovare le ultime carte, non un elenco che compare. Così il cento per cento è a portata.
+
+**La scopa** toglie la noia di rifare la strada: si apre la mappa, si tocca un luogo già visto e ci si
+arriva. Arriva a metà del capitolo 2, quando il villaggio lo si conosce già a piedi. Ha i suoi limiti,
+per la storia e per il gioco: si parte e si atterra solo all'aperto; non si vola dentro gli edifici, sotto
+terra, nella nebbia fitta, dalla cella, durante una scena, né con un conestabile che ti ha già vista.
 
 Nella nebbia fitta, prima di avere l'Aria, si può entrare: ci si perde e ci si ritrova al bordo. È il
 modo in cui il mondo dice che manca qualcosa.

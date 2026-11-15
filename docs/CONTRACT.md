@@ -217,7 +217,9 @@ Planet cards: Luna m02, Marte m16, Mercurio m01, Giove m10, Venere m03, Saturno 
 
 DESIGN.md was rewritten as one document; where this file and DESIGN.md disagree, DESIGN.md wins. Deltas:
 power ids are `cat`, `fire`, `sense`, `move`, `stun`, `broom` (no `seals`, `sense2`, `light2`; no flag
-`sight.far`); levels 2 cat, 3 shop, 4 fire, 5 sense, 6 move, 7 stun (also parts the thick fog), 8 broom;
+`sight.far`); levels 2 cat, 3 shop, 4 fire, 5 sense, 6 broom, 7 stun (also parts the thick fog), 8 move; the broom
+is a teleport from the grimoire map to any seen outdoor anchor, refused indoors, underground, in thick
+fog, from the cell, during a script, or while a patrol has seen her;
 levels continue to 12 after the ending (Gran Maestra), each only widening the sixth sense
 (`senseRadius(level)`); tools are `bottle`, `incense`, `pendulum` (the sieve is gone); `yourSuit()` is
 derived from the traits; chapter gates need `{ level: 4 }` and `{ level: 7 }`; the story index may export
