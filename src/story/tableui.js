@@ -39,6 +39,9 @@ export const TABLE_CSS = `
 @keyframes ssu{from{opacity:0;transform:translateY(14px)}}
 .sgc{transition:opacity .5s}
 .ss.asking .sgc{opacity:.22}
+.ss-back{position:absolute;top:max(14px,env(safe-area-inset-top));left:12px;z-index:5;min-height:40px;padding:6px 14px;border-radius:20px;border:1px solid rgba(217,201,160,.35);background:rgba(0,0,0,.35);color:#d9c9a0;font:italic 17px ${FONT.serif};cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}
+.ss-back.on{opacity:1;pointer-events:auto}
+.ss-back:disabled{opacity:0;pointer-events:none}
 .ss-moment{position:absolute;top:max(18px,env(safe-area-inset-top));left:0;right:0;text-align:center;font:italic 20px ${FONT.serif};color:#d9c9a0;text-shadow:0 2px 8px #000;pointer-events:none;animation:ssu .5s both}
 @media (prefers-reduced-motion:reduce){.ss,.ss-stage,.ss-cap,.ss-cap .w,.ss-opt,.ss-cue{transition:none;animation:none}.ss-dot{animation:none}}
 `;
@@ -57,6 +60,12 @@ export function tableUi({ root, ui, scene, reduced = false }) {
   window.addEventListener('keydown', onKey, true);
 
   let cap = null, cue = null, fadeT = 0;
+  // going back: the lines already said in this encounter can be read again, one tap back at a time
+  const history = [];
+  const backBtn = h('button.ss-back', { type: 'button', 'aria-label': 'Rileggi la frase precedente', onclick: () => t.back?.() }, '‹ indietro');
+  root.append(backBtn);
+  const capClass = (kind) => `ss-cap${kind ? ` ${kind}` : ''}`;
+  const capKids = ({ label, text }) => [label ? h('small', label) : null, ...String(text ?? '').split(/\s+/).filter(Boolean).flatMap((w, i) => (i ? [' ', h('span.w.on', w)] : [h('span.w.on', w)]))].filter(Boolean);
   t.dropCap = () => {
     clearTimeout(fadeT); cue?.remove(); cue = null;
     if (cap) { const c = cap; cap = null; c.classList.add('out'); setTimeout(() => c.remove(), 380); }
@@ -86,9 +95,15 @@ export function tableUi({ root, ui, scene, reduced = false }) {
       finish: () => { clearTimeout(timer); words.forEach((w) => w.classList.add('on')); },
       onReady: () => { myCue.classList.add('on'); hintOnce('tap'); }, // the first line that waits for a tap
     });
-    t.release = () => g.tap();
+    history.push({ kind, text, label: label ? who : null });
+    let view = history.length - 1;
+    const paint = () => { const l = history[view]; el.className = capClass(l.kind); el.replaceChildren(...capKids(l)); backBtn.disabled = view === 0; };
+    t.back = () => { if (view > 0) { view -= 1; paint(); } };
+    t.release = () => { if (view < history.length - 1) { view += 1; paint(); } else g.tap(); };
+    backBtn.disabled = view === 0; backBtn.classList.toggle('on', !ask);
     await g.done;
-    t.release = null; myCue.remove(); if (cue === myCue) cue = null;
+    t.release = null; t.back = null; backBtn.classList.remove('on');
+    myCue.remove(); if (cue === myCue) cue = null;
     if (!ask) lingerCap(); // a question stays above its choices
   };
 

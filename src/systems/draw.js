@@ -107,7 +107,7 @@ export async function pick({ mode = 'fan', pool, weights, title, quick = false, 
     await sleep(quick ? 700 : 400);
   }
   stat('draws');
-  if (!quick) await new Promise((res) => scr.setFoot(btn('Tengo questa', res, 'go')));
+  if (!quick) await new Promise((res) => scr.setFoot(btn('Continua', res, 'go')));
   scr.close();
   return id;
 }

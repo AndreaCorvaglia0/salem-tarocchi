@@ -12,12 +12,14 @@ import { SFX_NAMES } from './sfx.js';
 import { MOOD_NAMES } from './moods.js';
 import { musicOn, sfxOn, makeThrottle, wantsMood } from './gate.js';
 import { lookahead } from './theory.js';
+import { createTracks } from './tracks.js';
 
 const TICK = 0.25; // seconds between scheduler runs
 let ctx = null, engine = null, timer = null, armed = false, broken = false;
 let want = { name: 'title', opts: { tension: 0 } }; // the mood the game asked for (kept until audio can start)
 let ducked = false, running = false;
 const allow = makeThrottle();
+const tracks = createTracks(); // the music is recorded piano (tracks.js); the engine keeps the effects
 
 function start() {
   if (ctx || broken) return;
@@ -26,7 +28,6 @@ function start() {
     if (!AC) { broken = true; return; }
     ctx = new AC();
     engine = createEngine(ctx, { seed: (Date.now() & 0xffff) || 1 });
-    document.addEventListener('visibilitychange', onVisible);
     apply();
     timer = setInterval(tick, TICK * 1000);
     resume();
@@ -34,22 +35,21 @@ function start() {
 }
 function resume() { try { if (ctx && ctx.state !== 'running') ctx.resume?.()?.catch?.(() => {}); } catch { /* ignore */ } }
 function onVisible() {
+  try { tracks.hidden(document.hidden); } catch { /* ignore */ }
   if (!ctx) return;
   try { if (document.hidden) { hush?.pause?.(); ctx.suspend?.(); } else { ctx.resume?.(); engine?.resync(); } } catch { /* ignore */ }
 }
 // bring the graph in line with the settings and the wanted mood (called on every change)
 function apply() {
+  try { tracks.setOn(musicOn(state)); tracks.setDuck(ducked); tracks.setMood(want.name); } catch (e) { console.warn('[sound] tracks', e?.message || e); }
   if (!engine) return;
   try {
-    const m = musicOn(state);
-    engine.setMusicOn(m);
-    if (m && !running) engine.resync();
-    running = m;
-    engine.setDuck(ducked);
-    if (m && want.name) engine.setMood(want.name, want.opts); else if (!m) engine.setMood(null);
+    engine.setMusicOn(false); engine.setMood(null); running = false;
   } catch (e) { console.warn('[sound]', e?.message || e); }
 }
 function tick() {
+  return; // the generated music is off: nothing to schedule
+  // eslint-disable-next-line no-unreachable
   if (!engine || !ctx || ctx.state !== 'running' || !musicOn(state)) return;
   try { engine.pump(ctx.currentTime + lookahead(TICK)); } catch (e) { console.warn('[sound] pump', e?.message || e); }
 }
@@ -78,7 +78,8 @@ function arm() {
   armed = true;
   // iOS 17+: play like a game, also with the ring switch on silent
   try { if (globalThis.navigator?.audioSession) globalThis.navigator.audioSession.type = 'playback'; } catch { /* ignore */ }
-  const go = () => { unmute(); if (!ctx) start(); else resume(); };
+  const go = () => { apply(); tracks.gesture(); if (!musicOn(state)) unmute(); if (!ctx) start(); else resume(); };
+  globalThis.document?.addEventListener?.('visibilitychange', onVisible);
   for (const ev of ['touchend', 'pointerup', 'click', 'keydown']) window.addEventListener(ev, go, { capture: true, passive: true });
 }
 
