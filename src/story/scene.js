@@ -22,7 +22,7 @@ export function createScene(parent, { level = 0, found = [] } = {}) {
   cv.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;background:#050409';
   parent.append(cv);
   const g = cv.getContext('2d'), calm = reducedMotion();
-  let W = 0, H = 0, geo = null, base = null, baseKey = '', raf = 0, alive = true, last = 0, clock = 0, lean = 0, skipFlip = false, cost = 0, found_ = found.slice(), lvl = level;
+  let W = 0, H = 0, geo = null, base = null, baseKey = '', raf = 0, alive = true, last = 0, clock = 0, lean = 0, skipFlip = false, cost = 0, found_ = found.slice(), lvl = level, empty = false;
   const tweens = [], cards = [], hands = { L: new Hand(-1), R: new Hand(1) };
   const deck = { x: 0, y: 0, s: 0.55, to: null, shown: true, riffle: 0 };
   const flying = [];
@@ -151,7 +151,7 @@ export function createScene(parent, { level = 0, found = [] } = {}) {
     const dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016; last = now; clock += dt;
     size();
     const key = `${W}x${H}|${lvl}|${found_.join()}`;
-    if (key !== baseKey) { baseKey = key; const [b, bg] = canvas(W, H); paintBase(bg, geo, found_, imgOf); base = b; }
+    if (key !== baseKey) { baseKey = key; const [b, bg] = canvas(W, H); paintBase(bg, geo, found_, imgOf, { empty }); base = b; }
     runTweens();
     lean *= Math.exp(-dt * 2.2);
     hands.L.update(dt); hands.R.update(dt);
@@ -162,7 +162,7 @@ export function createScene(parent, { level = 0, found = [] } = {}) {
     g.drawImage(base, 0, 0);
     drawDeck(); drawFlying();
     for (const c of cards) drawCard(c);
-    hands.L.draw(g, geo.U, geo.shoulder(-1), clock, calm); hands.R.draw(g, geo.U, geo.shoulder(1), clock, calm);
+    if (!empty) { hands.L.draw(g, geo.U, geo.shoulder(-1), clock, calm); hands.R.draw(g, geo.U, geo.shoulder(1), clock, calm); }
     const { R, fp } = darkness(g, geo, lvl, clock, calm);
     drawDust(fp, R);
     drawCandle(g, geo, lvl, clock, lean, calm);
@@ -177,6 +177,7 @@ export function createScene(parent, { level = 0, found = [] } = {}) {
     speak() { lean = 0.35; }, // the flame leans toward you when she speaks
     setLevel(n) { lvl = clamp(n, 0, 4); invalidate(); },
     setFound(ids) { found_ = ids.slice(); invalidate(); },
+    setEmpty(v = true) { empty = !!v; invalidate(); }, // the last image: the Reader's seat is empty
     get cards() { return cards.map((c) => c.id); },
     dispose() { alive = false; cancelAnimationFrame(raf); cv.remove(); },
   };

@@ -2,7 +2,7 @@
 // the table, then position by position she chooses the right interpretation among three. Rules: reading.rules.js.
 import { h, cardUrl } from '../core/dom.js';
 import { fill } from '../core/cond.js';
-import { answer, addCoins, addXp, stat, ownedMajors, yourCard } from '../core/progress.js';
+import { answer, addCoins, addXp, stat, ownedMajors, yourCard, dayCard } from '../core/progress.js';
 import { CARD, MAJORS } from '../data/cards.base.js';
 import { SPREADS } from '../data/spreads.js';
 import { sheet } from '../data/cards.js';
@@ -83,7 +83,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   // ---- the end -------------------------------------------------------------------------------
   const score = scoreOf(oks);
   const owned = ownedMajors().length;
-  const coins = self ? 0 : payFor({ pay: cl.pay ?? 5, score, owned, yourCardOnTable: ids.includes(yourCard()) });
+  const coins = self ? 0 : payFor({ pay: cl.pay ?? 5, score, owned, yourCardOnTable: ids.includes(yourCard()), dayCardOnTable: !!dayCard() && ids.includes(dayCard()) });
   if (coins) addCoins(coins);
   addXp(xpFor(score), 'reading');
   stat('readings');

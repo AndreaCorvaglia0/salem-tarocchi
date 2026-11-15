@@ -40,6 +40,7 @@ export class WorldScene extends Phaser.Scene {
     this.things = new Things(this, map, this.built);
     if (this.things.solidAt(sx, sy)) { const [fx, fy] = this.freeNear(sx, sy, true); this.player.tx = fx; this.player.ty = fy; this.player.place(); }
     this.things.refresh(true);
+    if (d.enter) this.things.zonesIn = new Set(); // sent here by a scene or the broom: zones under her start
     this.patrols = map.patrols.map((p) => new Patrol(this, p));
     const nb = [[-1, 0], [1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [this.player.tx + dx, this.player.ty + dy]).find(([x, y]) => this.canStand(x, y)) || [this.player.tx, this.player.ty];
     this.cat = new Cat(this, ...nb);
@@ -60,6 +61,7 @@ export class WorldScene extends Phaser.Scene {
     const offs = ['step', 'flag', 'chapter', 'card:found', 'level:up', 'card:recovered'].map((e) => on(e, () => this.refresh()));
     this.events.once('shutdown', () => { offs.forEach((f) => f()); this.scale.off('resize', this.layout, this); this.night.destroy(); this.controls?.prompt(null); });
     state.pos = { map: map.id, x: this.player.tx, y: this.player.ty }; save();
+    this.markSeen(this.player.tx, this.player.ty);
     if (d.arrived) this.controls?.place(map.name);
     this.time.delayedCall(350, () => this.things.entered(this.player.tx, this.player.ty));
     this.game.events.emit('world:ready', map.id);
@@ -91,7 +93,13 @@ export class WorldScene extends Phaser.Scene {
   freeNear(x, y, strict = false) {
     const ok = (a, b) => !this.map.isSolid(a, b) && this.map.at(a, b) !== '+' && (!strict || !this.things.solidAt(a, b));
     if (ok(x, y)) return [x, y];
-    for (let r = 1; r < 6; r++) for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (ok(x + dx, y + dy)) return [x + dx, y + dy];
+    // nearest first, straight neighbours before diagonals (so she ends up facing a person, not beside them)
+    for (let r = 1; r < 6; r++) {
+      const ring = [];
+      for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) if (Math.max(Math.abs(dx), Math.abs(dy)) === r) ring.push([dx, dy]);
+      ring.sort((a, b) => Math.abs(a[0]) + Math.abs(a[1]) - Math.abs(b[0]) - Math.abs(b[1]));
+      for (const [dx, dy] of ring) if (ok(x + dx, y + dy)) return [x + dx, y + dy];
+    }
     return [x, y];
   }
   personNear(wx, wy) { // a tap on a person's body counts as a tap on their tile
@@ -137,8 +145,17 @@ export class WorldScene extends Phaser.Scene {
     this.prompt();
   }
 
+  // the grimoire map reads state.stats.seen[anchor]: a place counts once she has stood near it
+  markSeen(x, y) {
+    const a = nearAnchor(this.map.id, x, y, 3);
+    const seen = state.stats.seen || (state.stats.seen = {});
+    if (a && !seen[a]) { seen[a] = true; save(); }
+    if (this.map.inside && !seen[`${this.map.id}.door`]) { seen[`${this.map.id}.door`] = true; save(); }
+  }
+
   arrived(x, y, from) {
     this.cat.follow(...from);
+    this.markSeen(x, y);
     state.pos = { map: this.map.id, x, y };
     stat('steps');
     const dark = this.map.isDark(x, y);
@@ -171,7 +188,8 @@ export class WorldScene extends Phaser.Scene {
   }
   useDoor(d) { return this.use({ type: 'door', d, x: d.x, y: d.y }); }
 
-  travel(ref) {
+  // enter: true when a scene (world.travel) sends her, false through a door (zones under the door wait)
+  travel(ref, enter = false) {
     const a = anchorOf(ref);
     if (!a) { console.warn(`[world] unknown anchor ${ref}`); return Promise.resolve(false); }
     const m = getMap(a.map);
@@ -184,12 +202,16 @@ export class WorldScene extends Phaser.Scene {
       Object.assign(this.player, { tx: x, ty: y }); this.player.place(); this.player.face(dir);
       this.cameras.main.centerOn(this.player.sprite.x, this.player.sprite.y);
       state.pos = { map: a.map, x, y }; save();
+      this.markSeen(x, y);
+      // a scene sent her onto a zone of this map: it starts like after a walk (zones already under her wait)
+      this.things.refresh();
+      this.time.delayedCall(350, () => { if (this.sys.isActive()) this.things.entered(this.player.tx, this.player.ty); });
       return Promise.resolve(true);
     }
     this.leaving = true;
     return new Promise((res) => {
       this.cameras.main.fadeOut(220, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => { this.scene.restart({ map: a.map, x: a.x, y: a.y, dir, arrived: true }); res(true); });
+      this.cameras.main.once('camerafadeoutcomplete', () => { this.scene.restart({ map: a.map, x: a.x, y: a.y, dir, arrived: true, enter }); res(true); });
     });
   }
 
@@ -215,7 +237,7 @@ export class WorldScene extends Phaser.Scene {
     q.calm();
     this.calmUntil = this.time.now + CALM_MS;
     this.busy--;
-    if (r && r.passed === false) this.travel('depths.jail');
+    if (r && r.passed === false) call('world.travel', 'depths.jail'); // through the service: the glue adds the wake-up
   }
   nearestPatrol(max = 7) {
     const p = this.player;

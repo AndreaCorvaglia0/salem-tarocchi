@@ -122,7 +122,8 @@ export function mountHud() {
     on('yourcard:changed', ({ to } = {}) => { if (CARD[to]) toast('Le carte ti vedono diversa.', { card: to, small: CARD[to].name, ms: 3400 }); }),
     on('card:star', ({ id, stars } = {}) => { if (CARD[id]) toast(`${CARD[id].name}: ${stars === 1 ? 'una stella' : `${stars} stelle`}.`, { icon: starMark(true, 22) }); }),
     on('coins', ({ n } = {}) => { if (n > 0) toast(`+${n} monete`); }),
-    on('card:found', () => { bk.classList.remove('pulse'); void bk.offsetWidth; bk.classList.add('pulse'); }),
+    on('cinema', (v) => { el.style.visibility = v ? 'hidden' : ''; }), // film bars and sessions: nothing of the HUD peeks through
+    on('card:found', () => { if (!step.classList.contains('out')) stepT.textContent = nextStep().text; bk.classList.remove('pulse'); void bk.offsetWidth; bk.classList.add('pulse'); }),
   ];
   mounted = { el, unmount: () => { offs.forEach((f) => f()); el.remove(); mounted = null; } };
   return mounted;

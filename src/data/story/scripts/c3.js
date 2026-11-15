@@ -46,7 +46,7 @@ export const C3 = {
 
   'c3.coven': [
     IF({ majorsMin: 19 }, [
-      cinema(['Tre maestre intorno a un tavolo che zoppica.', 'Nessuna è d\'accordo con le altre due.'], 'depths.coven'),
+      cinema(['Tre maestre intorno a un calderone che fuma.', 'Nessuna è d\'accordo con le altre due.'], 'depths.coven'),
       ortica('Io dico: entriamo dalle cantine, la prendiamo, usciamo, e intanto...'),
       malva('Intanto niente. Tu parli e ci sentono fino a Boston.'),
       edera('Il Giudice. L\'ho conosciuto bambino. Mangiava le candele.'),

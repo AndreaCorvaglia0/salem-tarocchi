@@ -172,6 +172,7 @@ export const SESSIONS = {
     ),
     N('Il tavolo, la candela. Ma adesso le mani che vedi sono le tue.'),
     N('Il grimorio aperto davanti a te ha la tua scrittura.'),
+    { empty: true }, // the Reader is gone: her seat is empty (story/session.js)
     N('Dall\'altra parte del tavolo, una sedia vuota. Aspetta qualcuno.'),
   ],
 };

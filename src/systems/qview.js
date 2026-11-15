@@ -48,6 +48,7 @@ export function questionView(q, { onPick, hidden = [] } = {}) {
     const b = h('button.sxq-o', { type: 'button', onclick: () => onPick?.(i) },
       o.card && !q.textOnly ? [h('div.sx-card', { style: { backgroundImage: `url(${cardUrl(o.card)})` } }), h('span.nm', CARD[o.card]?.name || '')] : o.t);
     if (hidden.includes(i)) { b.classList.add('gone'); b.disabled = true; }
+    if (globalThis.__salem) b.dataset.ok = o.ok ? '1' : '0'; // the ?debug door only: the playthrough bot reads it
     return b;
   });
   const el = h('div.sxq', { style: { display: 'flex', flexDirection: 'column', gap: '12px' } },

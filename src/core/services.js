@@ -9,3 +9,5 @@ export const call = (name, ...args) => {
   if (!fn) { console.warn(`[services] "${name}" is not provided yet`); return Promise.resolve(undefined); }
   return fn(...args);
 };
+// Integration only (src/glue): wrap a provided service. fn(prev, ...args); prev may be undefined.
+export const wrap = (name, fn) => { const prev = table.get(name); table.set(name, (...a) => fn(prev ? (...b) => prev(...b) : null, ...a)); };

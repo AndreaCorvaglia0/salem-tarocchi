@@ -1,4 +1,6 @@
 // The village of Salem, chapter 1: a winter night. Format: README.md in this folder.
+const EARLY = ['p.session', 'p.road', 'c1.malva', 'c1.cottage', 'c1.client', 'c1.explore'];
+
 export default {
   id: 'village',
   name: 'Il villaggio',
@@ -96,6 +98,7 @@ export default {
     well: [20, 21, 'Il pozzo'],
     lane: [19, 32, 'Il vicolo di sotto'],
     reeds: [1, 20, "L'erba alta"],
+    arrest_a: [2, 9, 'Conestabile'], arrest_b: [7, 9, 'Conestabile'], arrest_c: [5, 11, 'Conestabile'], // round the cottage door (c2.arrest)
   },
   doors: [
     { at: 'malva_door', to: 'malva.door' },
@@ -112,8 +115,9 @@ export default {
   ],
   dark: [[3, 33, 7, 6], [35, 10, 5, 9]],
   patrols: [
-    { id: 'village.square', route: [[12, 18], [26, 18], [26, 23], [13, 23]], pause: 1400 },
-    { id: 'village.lane', route: [[4, 32], [36, 32]], pause: 1800 },
-    { id: 'village.upper', route: [[6, 8], [33, 8]], pause: 1600, when: { chapterMin: 1 } },
+    // nobody stops her before the first, scripted Exam (c1.explore); off during the scenes they would break
+    { id: 'village.square', route: [[12, 18], [26, 18], [26, 23], [13, 23]], pause: 1400, when: { not: { stepIn: [...EARLY, 'c1.square', 'c2.plan', 'c3.court'] } } },
+    { id: 'village.lane', route: [[4, 32], [36, 32]], pause: 1800, when: { not: { stepIn: [...EARLY, 'c1.venus'] } } },
+    { id: 'village.upper', route: [[6, 8], [33, 8]], pause: 1600, when: [{ chapterMin: 1 }, { not: { stepIn: [...EARLY, 'c2.home'] } }] },
   ],
 };

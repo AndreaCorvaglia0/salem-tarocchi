@@ -1,7 +1,7 @@
 // Calm flashcards, no stakes: the picture, she thinks, taps, sees the name, the core, the keywords and the
 // planet or sign; then "La sapevo" or "Non ancora". Due cards first, then the rest of what she owns. Max 10.
 import { h, css, cardUrl } from '../core/dom.js';
-import { answer, dueIds, ownedIds } from '../core/progress.js';
+import { answer, dueIds, ownedIds, dayCard } from '../core/progress.js';
 import { sheet } from '../data/cards.js';
 import { screen, btn, say, shuffle, pickOne } from './theme.js';
 
@@ -29,6 +29,8 @@ export async function review({ ids } = {}) {
   let list;
   if (ids?.length) list = ids.filter((id) => owned.has(id) || sheet(id));
   else { const due = dueIds(); list = [...shuffle(due), ...shuffle([...owned].filter((id) => !due.includes(id)))]; }
+  const today = dayCard(); // the card of the day comes first
+  if (!ids?.length && today && owned.has(today)) list = [today, ...list.filter((id) => id !== today)];
   list = list.slice(0, 10);
   const scr = screen({ title: 'Ripasso', cls: 'sxreview', onClose: () => { stop = true; kick?.(); } });
   let stop = false, kick = null;

@@ -40,7 +40,17 @@ export function cardBack() {
 }
 
 // ---- the still part: wall, pinned cards, the Reader, table, cloth
-export function paintBase(g, geo, found, imgOf) {
+function paintReader(g, geo) {
+  const { U, horizon, cx, SW } = geo;
+  const hy = horizon - 0.18 * U, hr = 0.095 * U;
+  g.beginPath();
+  smooth(g, [[cx, hy - hr * 1.2], [cx + hr * 0.95, hy - hr * 0.55], [cx + hr * 1.05, hy + hr * 0.45], [cx + hr * 0.9, hy + hr * 1.25], [cx + SW * 0.48, horizon - 0.07 * U], [cx + SW, horizon + 2], [cx - SW, horizon + 2], [cx - SW * 0.48, horizon - 0.07 * U], [cx - hr * 0.9, hy + hr * 1.25], [cx - hr * 1.05, hy + hr * 0.45], [cx - hr * 0.95, hy - hr * 0.55]], true);
+  g.fillStyle = lin(g, 0, hy - hr, 0, horizon, [[0, '#0d0a12'], [1, '#06050a']]); g.fill();
+  g.save(); g.clip(); g.strokeStyle = lin(g, cx - hr * 2, 0, cx + 0.5 * U, 0, [[0, 'rgba(255,170,90,0)'], [0.5, 'rgba(255,170,90,0.12)'], [1, 'rgba(255,170,90,0.5)']]); g.lineWidth = 5; g.stroke(); g.restore();
+  g.fillStyle = rad(g, cx, hy + hr * 0.1, 0, hr * 0.85, [[0, '#000'], [0.7, '#010003'], [1, 'rgba(1,0,3,0)']]); g.beginPath(); g.ellipse(cx, hy + hr * 0.12, hr * 0.7, hr * 0.85, 0, 0, 7); g.fill();
+}
+
+export function paintBase(g, geo, found, imgOf, { empty = false } = {}) {
   const { W, H, U, horizon, cx, SW } = geo, r = rnd(11);
   // the wall
   g.fillStyle = lin(g, 0, 0, 0, horizon, [[0, '#120e18'], [1, '#2a1c22']]); g.fillRect(0, 0, W, horizon + 2);
@@ -67,13 +77,8 @@ export function paintBase(g, geo, found, imgOf) {
   pins.forEach(([x, y], i) => { if (i === 0) g.moveTo(x, y); else { const [px, py] = pins[i - 1]; g.quadraticCurveTo((x + px) / 2, Math.max(y, py) + ch * 0.18, x, y); } });
   g.stroke();
   g.fillStyle = rad(g, cx, horizon - 0.15 * U, 0, 0.5 * U, [[0, 'rgba(150,84,60,0.3)'], [1, 'rgba(150,84,60,0)']]); g.fillRect(0, 0, W, horizon);
-  // the Reader: a hood and shoulders against the wall; the face is a void
-  const hy = horizon - 0.18 * U, hr = 0.095 * U;
-  g.beginPath();
-  smooth(g, [[cx, hy - hr * 1.2], [cx + hr * 0.95, hy - hr * 0.55], [cx + hr * 1.05, hy + hr * 0.45], [cx + hr * 0.9, hy + hr * 1.25], [cx + SW * 0.48, horizon - 0.07 * U], [cx + SW, horizon + 2], [cx - SW, horizon + 2], [cx - SW * 0.48, horizon - 0.07 * U], [cx - hr * 0.9, hy + hr * 1.25], [cx - hr * 1.05, hy + hr * 0.45], [cx - hr * 0.95, hy - hr * 0.55]], true);
-  g.fillStyle = lin(g, 0, hy - hr, 0, horizon, [[0, '#0d0a12'], [1, '#06050a']]); g.fill();
-  g.save(); g.clip(); g.strokeStyle = lin(g, cx - hr * 2, 0, cx + 0.5 * U, 0, [[0, 'rgba(255,170,90,0)'], [0.5, 'rgba(255,170,90,0.12)'], [1, 'rgba(255,170,90,0.5)']]); g.lineWidth = 5; g.stroke(); g.restore();
-  g.fillStyle = rad(g, cx, hy + hr * 0.1, 0, hr * 0.85, [[0, '#000'], [0.7, '#010003'], [1, 'rgba(1,0,3,0)']]); g.beginPath(); g.ellipse(cx, hy + hr * 0.12, hr * 0.7, hr * 0.85, 0, 0, 7); g.fill();
+  // the Reader: a hood and shoulders against the wall; the face is a void (gone at the very end: the seat is empty)
+  if (!empty) paintReader(g, geo);
   // the table: planks, in perspective
   const th = H - horizon;
   g.fillStyle = lin(g, 0, horizon, 0, H, [[0, '#3a281c'], [1, '#1c120c']]); g.fillRect(0, horizon, W, th);

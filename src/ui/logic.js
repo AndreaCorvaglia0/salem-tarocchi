@@ -30,7 +30,9 @@ export const lessonsShown = (s = live, lessons = LESSONS) => (lessons || []).fil
 export function nextStep(s = live, steps = STEPS) {
   const st = (steps || []).find((x) => x.id === s.step);
   if (!st) return { text: s.flags?.['ending.seen'] ? 'Leggere. Per me.' : 'Guardarmi intorno.', at: null };
-  return { text: fill(st.text || '', s), at: st.at || null, chapter: st.chapter };
+  let text = fill(st.text || '', s);
+  if (st.need) { const have = foundMajors(s); if (have < st.need) text = `Trovare ancora ${st.need - have} ${st.need - have === 1 ? 'carta' : 'carte'}, poi: ${text[0].toLowerCase()}${text.slice(1)}`; }
+  return { text, at: st.at || null, chapter: st.chapter };
 }
 
 // ---- the shop

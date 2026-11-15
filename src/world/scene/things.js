@@ -30,7 +30,8 @@ export class Things {
   }
 
   // ---- what is shown now ----
-  cardActive(c) { const s = state; return !s.cards[c.card.id]?.found && (s.player.birthCard === c.card.id || s.chapter >= c.card.row); }
+  // Il Carro is given by the story (c1.venus), not found on the ground; m19-m21 have no spot at all
+  cardActive(c) { const s = state; return c.card.id !== 'm07' && !s.cards[c.card.id]?.found && (s.player.birthCard === c.card.id || s.chapter >= c.card.row); }
   activeCards() { return this.cards.filter((c) => this.cardActive(c)); }
   gateOpen(g) { return test(g.when); }
   castHere() {
@@ -105,7 +106,7 @@ export class Things {
     const front = this.usableAt(fx, fy);
     if (front.length) return front[0];
     for (const [dx, dy] of [[0, 1], [0, -1], [-1, 0], [1, 0]]) {
-      const u = this.usableAt(p.tx + dx, p.ty + dy).find((v) => v.type === 'npc' || v.type === 'card');
+      const u = this.usableAt(p.tx + dx, p.ty + dy).find((v) => v.type === 'npc' || v.type === 'card' || v.type === 'prop');
       if (u) return u;
     }
     return null;

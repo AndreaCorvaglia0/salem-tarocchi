@@ -16,6 +16,8 @@ export const CAST = [
   { id: 'malva', kind: 'npc', who: 'malva', at: 'malva.hearth', when: [{ chapter: 1 }, notIn('c1.malva')], script: 'malva.chat', label: 'Malva' },
   { id: 'cottage.door', kind: 'zone', at: 'village.cottage_door', when: { step: 'c1.cottage' }, script: 'c1.cottage' },
   { id: 'cottage.door', kind: 'zone', at: 'village.cottage_door', when: { step: 'c2.home' }, script: 'c2.arrest' },
+  // the lanterns round the cottage: they wait for her, and leave with Ginepra
+  ...['a', 'b', 'c'].map((k) => ({ id: `arrest.${k}`, kind: 'npc', who: 'conestabile', at: `village.arrest_${k}`, when: [{ step: 'c2.home' }, { notFlag: 'ginepra.taken' }], script: 'arrest.wait', face: 'up', label: 'Conestabile' })),
   { id: 'cottage.table', kind: 'prop', at: 'cottage.table', when: [{ chapter: 1 }, notIn('c1.malva', 'c1.cottage')], script: 'client.c1', label: 'Il tavolo delle letture' },
   { id: 'cottage.table', kind: 'prop', at: 'cottage.table', when: { chapter: 2 }, script: 'client.c2', label: 'Il tavolo delle letture' },
   { id: 'cottage.table', kind: 'prop', at: 'cottage.table', when: { chapter: 3 }, script: 'client.c3', label: 'Il tavolo delle letture' },
@@ -38,9 +40,17 @@ export const CAST = [
   { id: 'trapdoor', kind: 'zone', at: 'village.trapdoor', when: [{ chapter: 3 }, { not: { step: 'c3.trapdoor' } }], script: 'c3.trapdoor.again', label: 'La botola' },
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: { step: 'c3.edera' }, script: 'c3.edera', label: 'Nonna Edera' },
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: { chapterMin: 3 }, script: 'edera.chat', label: 'Nonna Edera' },
+  // the three mistresses wait round the cauldron when the council can meet (the zone in front of the cauldron plays the scene)
+  ...['malva', 'ortica', 'edera'].map((who) => ({ id: `coven.${who}`, kind: 'npc', who, at: `depths.coven_${who}`, when: [{ step: 'c3.coven' }, { majorsMin: 19 }], script: 'coven.wait', face: 'down', label: who === 'edera' ? 'Nonna Edera' : who === 'malva' ? 'Malva' : 'Ortica' })),
   { id: 'coven', kind: 'zone', at: 'depths.coven', when: { step: 'c3.coven' }, script: 'c3.coven', label: 'Il consiglio' },
   { id: 'jail', kind: 'zone', at: 'depths.jail', when: { step: 'c3.jail' }, script: 'c3.jail' },
   { id: 'court.door', kind: 'zone', at: 'village.court_door', when: { step: 'c3.court' }, script: 'c3.court' },
+
+  // ---- systems in the world: the shop, the deposit, the card of the day
+  { id: 'shop.keeper', kind: 'npc', who: 'bottegaio', at: 'shop.keeper', script: 'prop.shop', label: 'Il bottegaio' }, // behind the counter
+  { id: 'shop.counter', kind: 'prop', at: 'shop.counter', script: 'prop.shop', label: 'Il bancone', verb: 'Compra' },
+  { id: 'court.deposit', kind: 'prop', at: 'court.deposit', script: 'prop.deposit', label: 'Il deposito', verb: 'Cerca' },
+  { id: 'cottage.bed', kind: 'prop', at: 'cottage.bed', when: { chapterMin: 1 }, script: 'prop.bed', label: 'La carta del giorno', verb: 'Pesca' },
 
   // ---- optional encounters (reward wandering: xp 5 and a rumour)
   { id: 'enc.child', kind: 'npc', who: 'child', at: 'village.shop_door', when: { chapterMin: 1, chapterMax: 3 }, script: 'enc.child', once: true, label: 'Un bambino' },

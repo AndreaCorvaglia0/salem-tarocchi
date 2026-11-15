@@ -50,10 +50,10 @@ export function openTitle() {
     const b = (t, fn, main) => h(`button.tt-b${main ? '.main' : ''}`, { type: 'button', onclick: fn }, t);
     const menu = () => {
       const saved = hasSave();
-      acts.replaceChildren(
+      acts.replaceChildren(...[
         saved ? b('Continua', () => done('continue'), true) : null,
         b('Nuova partita', () => (saved ? confirm() : done('new')), !saved),
-        b('Sfoglia il grimorio', () => done('study')));
+        b('Sfoglia il grimorio', () => done('study'))].filter(Boolean));
       acts.querySelector('button')?.focus({ preventScroll: true });
     };
     const confirm = () => {

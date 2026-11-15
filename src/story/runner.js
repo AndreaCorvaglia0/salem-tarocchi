@@ -10,6 +10,7 @@
 import { state, save } from '../core/state.js';
 import { test, fill } from '../core/cond.js';
 import * as P from '../core/progress.js';
+import { emit } from '../core/bus.js';
 import * as SPREAD_DATA from '../data/spreads.js';
 import * as LESSON_DATA from '../data/lessons.js';
 
@@ -21,6 +22,7 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
   const vars = {}; // extra {tokens} for the current run, e.g. {picked}
   let pending = 0;
   let tail = Promise.resolve();
+  let jailAfter = false; // a failed Exam inside a script: the cell comes when the whole run is over
 
   const F = (t) => {
     let s = String(t ?? '');
@@ -82,11 +84,12 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     diary: (n) => P.writeDiary(F(n.t)),
     step: (n) => P.setStep(n.id),
     chapter: (n) => P.setChapter(n.n),
-    power: (n) => { state.powers[n.id] = true; save(); },
+    power: (n) => { const was = state.powers[n.id]; state.powers[n.id] = true; save(); if (!was) emit('power', { id: n.id }); },
     tool: (n) => { state.tools[n.id] = (state.tools[n.id] || 0) + (n.n ?? 1); save(); },
     giveCard: (n) => foundCeremony(n.id),
     draw: async (n) => {
-      const pool = n.pool === 'row' || n.pool == null ? P.majorsMissingOfRow(state.chapter) : n.pool;
+      let pool = n.pool === 'row' || n.pool == null ? P.majorsMissingOfRow(state.chapter) : n.pool.filter((id) => !state.cards[id]?.found);
+      if (!pool.length && n.pool !== 'row') pool = P.majorsMissingOfRow(state.chapter);
       if (!pool.length) { warn('draw: empty pool', n); return; }
       const id = await call('draw.pick', { mode: n.mode || 'fan', pool, weights: n.weights || drawWeights(pool), title: n.title });
       if (n.give && id) await foundCeremony(id);
@@ -104,7 +107,10 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     exam: async (n) => {
       const res = await call('exam.start', { kind: n.kind, place: n.place });
       P.setFlag('exam.passed', !!res?.passed); // the next node can test { flag: 'exam.passed' }
+      if (res && res.passed === false && n.kind !== 'judge' && !n.noJail) jailAfter = true;
     },
+    // a service by name: { do: 'call', name: 'shop.open', args: [...] } (props: the shop, the deposit, the bed)
+    call: (n) => call(n.name, ...(n.args || [])),
     session: (n) => call('story.session', n.id),
     travel: (n) => call('world.travel', n.to),
     cinema: (n) => askSafe(() => ui.cinema((n.lines || []).map(F), n)),
@@ -135,7 +141,12 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     pending += 1;
     const p = tail.then(() => play(what)).catch((e) => warn('run failed:', e?.message || e)).then(() => {
       pending -= 1;
-      if (pending === 0) return askSafe(() => ui.end?.());
+      if (pending === 0) {
+        return askSafe(() => ui.end?.()).then(() => {
+          if (jailAfter) { jailAfter = false; return call('world.travel', 'depths.jail'); }
+          return null;
+        });
+      }
     });
     tail = p;
     return p;

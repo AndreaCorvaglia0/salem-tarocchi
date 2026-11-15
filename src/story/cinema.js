@@ -33,8 +33,9 @@ export async function cinema(lines) {
   const close = openOverlay(root);
   emit('cinema', true);
   requestAnimationFrame(() => root.classList.add('in'));
-  let skipped = false, next = null;
-  const tap = () => { const f = next; next = null; f?.(); };
+  let skipped = false, next = null, armedAt = 0;
+  // a tap right as a line appears (the one that closed the dialogue before) must not swallow it
+  const tap = () => { if (!skipped && performance.now() < armedAt) return; const f = next; next = null; f?.(); };
   root.addEventListener('pointerdown', (e) => { if (e.target === skip) return; e.preventDefault(); tap(); });
   skip.addEventListener('click', (e) => { e.stopPropagation(); skipped = true; tap(); });
   const onKey = (e) => {
@@ -49,6 +50,7 @@ export async function cinema(lines) {
       if (skipped) break;
       cap.textContent = line;
       void cap.offsetWidth; cap.classList.add('on');
+      armedAt = performance.now() + 350;
       const hintT = setTimeout(() => hint.classList.add('on'), 1800);
       await new Promise((r) => { next = r; }); // no auto advance: a tap goes on
       clearTimeout(hintT); hint.classList.remove('on');

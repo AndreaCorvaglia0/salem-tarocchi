@@ -60,6 +60,7 @@ export default {
     entry: [33, 3, 'Sotto la botola'],
     edera_nook: [33, 12, "L'angolo di Edera"],
     coven: [20, 17, 'La congrega'],
+    coven_malva: [17, 15, 'Malva'], coven_ortica: [22, 15, 'Ortica'], coven_edera: [20, 13, 'Edera'], // round the cauldron
     chains: [6, 5, 'Le catene'],
     tower: [20, 6, 'La torre caduta'],
     well: [31, 24, 'Il pozzo vecchio'],
@@ -74,7 +75,8 @@ export default {
   gates: [{ at: [15, 27], when: { chapterMin: 3 }, refuse: 'Una grata, chiusa. Dall\'altra parte gocciola qualcosa.' }],
   chests: [{ id: 'depths.chest.tower', at: [22, 6], ask: { kind: 'name' }, give: { coins: 12, tool: 'incense' }, seal: true }],
   patrols: [
-    { id: 'depths.cells', route: [[3, 23], [13, 23]], pause: 2200, when: { chapterMin: 3 } },
-    { id: 'depths.coven', route: [[15, 12], [24, 12], [24, 18], [15, 18]], pause: 1500, when: { chapterMin: 3 } },
+    { id: 'depths.cells', route: [[3, 23], [13, 23]], pause: 2200, when: [{ chapterMin: 3 }, { not: { step: 'c3.jail' } }] },
+    // off once the council can meet (step c3.coven with every card): nobody walks through that scene
+    { id: 'depths.coven', route: [[15, 12], [24, 12], [24, 18], [15, 18]], pause: 1500, when: [{ chapterMin: 3 }, { not: [{ step: 'c3.coven' }, { majorsMin: 19 }] }] },
   ],
 };

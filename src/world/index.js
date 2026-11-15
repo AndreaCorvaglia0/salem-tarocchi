@@ -41,7 +41,7 @@ export function start() {
 
 export function travel(ref) {
   const s = live();
-  if (s) return s.travel(ref).then(() => undefined);
+  if (s) return s.travel(ref, true).then(() => undefined);
   const a = anchorOf(ref);
   if (a) state.pos = { map: a.map, x: a.x, y: a.y };
   return Promise.resolve();
@@ -59,7 +59,17 @@ provide('world.start', start);
 provide('world.travel', travel);
 provide('world.where', () => Promise.resolve(where()));
 provide('world.anchors', () => Promise.resolve(anchors()));
+// The sieve: where the nearest hidden card of this map lies, from where she stands (null: none here).
+export function hint() {
+  const s = live();
+  if (!s) return null;
+  const p = s.player;
+  let best = null;
+  for (const c of s.things.activeCards()) { const d = Math.hypot(c.x - p.tx, c.y - p.ty); if (!best || d < best.dist) best = { dx: c.x - p.tx, dy: c.y - p.ty, dist: d, id: c.card.id }; }
+  return best;
+}
+provide('world.hint', () => Promise.resolve(hint()));
 provide('world.refresh', () => { live()?.refresh(); return Promise.resolve(); });
 
 // For harness pages and screenshots only.
-export const debug = { scene: live, game: () => game, travel, where, anchors };
+export const debug = { scene: live, game: () => game, travel, where, anchors, hint };

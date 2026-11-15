@@ -1,5 +1,6 @@
 // The main path, in order: one clear next thing at a time (grimoire "Io" page and HUD line).
-// Each step is set by a script with { do: 'step' }; the map circles `at`.
+// Each step is set by a script with { do: 'step' }; the map circles `at`. `need`: the Majors (Il Matto
+// included) the gate of that step asks for; the HUD and the grimoire say how many are still missing.
 // c3.jail and c3.court are the two faces of fork 3: a run sees only one of them.
 
 export const STEPS = [
@@ -14,18 +15,18 @@ export const STEPS = [
   { id: 'c1.cart', chapter: 1, text: 'Guardare cosa luccica sotto il carro.', at: 'village.cart' },
   { id: 'c1.venus', chapter: 1, text: 'Trovare Ginepra al bicchiere di Venere.', at: 'village.venusglass' },
   { id: 'c1.square', chapter: 1, text: 'Andare in piazza: c\'è gente che urla.', at: 'village.square' },
-  { id: 'c1.gate', chapter: 1, text: 'Uscire dal cancello verso il bosco.', at: 'village.forest_gate' },
+  { id: 'c1.gate', chapter: 1, text: 'Uscire dal cancello verso il bosco.', at: 'village.forest_gate', need: 6 },
   // chapter 2, the forest
   { id: 'c2.ortica', chapter: 2, text: 'Trovare la capanna di Ortica.', at: 'forest.ortica_hut' },
   { id: 'c2.client', chapter: 2, text: 'Leggere passato, presente e futuro a qualcuno.', at: 'cottage.table' },
   { id: 'c2.fire', chapter: 2, text: 'Raggiungere il bivacco nel bosco.', at: 'forest.campfire' },
-  { id: 'c2.plan', chapter: 2, text: 'Trovare Ginepra davanti al tribunale.', at: 'village.court_door' },
+  { id: 'c2.plan', chapter: 2, text: 'Trovare Ginepra davanti al tribunale.', at: 'village.court_door', need: 11 },
   { id: 'c2.home', chapter: 2, text: 'Tornare al cottage. Subito.', at: 'village.cottage_door' },
   // chapter 3, the dark
   { id: 'c3.trapdoor', chapter: 3, text: 'Scendere dalla botola sotto il villaggio.', at: 'village.trapdoor' },
   { id: 'c3.edera', chapter: 3, text: 'Trovare Nonna Edera nelle cantine.', at: 'depths.edera_nook' },
   { id: 'c3.client', chapter: 3, text: 'Leggere una croce celtica al cottage.', at: 'cottage.table' },
-  { id: 'c3.coven', chapter: 3, text: 'Andare al consiglio delle tre maestre.', at: 'depths.coven' },
+  { id: 'c3.coven', chapter: 3, text: 'Andare al consiglio delle tre maestre.', at: 'depths.coven', need: 19 },
   { id: 'c3.jail', chapter: 3, text: 'Arrivare alle celle dalle cantine.', at: 'depths.jail' },
   { id: 'c3.court', chapter: 3, text: 'Entrare in tribunale a viso aperto.', at: 'village.court_door' },
   { id: 'c3.trial', chapter: 3, text: 'Rispondere al Giudice.', at: 'court.dock' },

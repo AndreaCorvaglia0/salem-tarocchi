@@ -62,7 +62,7 @@ export default {
   anchors: {
     entry: [19, 37, 'Il limite del bosco'],
     ortica_hut: [10, 28, 'La capanna di Ortica'],
-    campfire: [16, 32, 'Il fuoco'],
+    campfire: [17, 32, 'Il fuoco'], // beside the fire (16,31), not under it: Ginepra stands here
     den: [4, 11, 'La tana'],
     lantern: [30, 8, 'La lanterna'],
     mill: [27, 21, 'Il mulino'],

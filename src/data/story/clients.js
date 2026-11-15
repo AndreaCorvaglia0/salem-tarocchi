@@ -50,7 +50,7 @@ export const CLIENTS = [
 ];
 
 // what Tartufo mutters as each client sits down (one line, colour)
-const MUTTER = {
+export const MUTTER = {
   'c1.widow': '(Vedova. Paga poco ma paga sempre. Gentile, mi raccomando.)',
   'c1.baker': '(Odora di pane. Leggigli bene, magari torna con la crosta.)',
   'c1.mercy': '(Questa è una delle ragazze della piazza. Attenta a cosa dici.)',
@@ -89,13 +89,11 @@ function serve(ch, id, rest) {
   };
 }
 
+// The first reading of a chapter is scripted (it moves the path on); after it, the table serves the
+// returning clients (src/glue/clients.js: a random one not yet read, then old faces come back).
 function chain(ch) {
   const ids = CLIENTS.filter((c) => c.chapter === ch).map((c) => c.id);
-  const empty = [
-    N('Nessuno bussa, stanotte. Solo il vento, e Tartufo che russa.'),
-    IF({ power: 'cat' }, [cat('(Le carte che hai si ripassano. Apri il grimorio, se ti annoi.)')]),
-  ];
-  return [ids.reduceRight((rest, id) => [serve(ch, id, rest)], empty)[0]];
+  return [IF({ step: FIRST[ch][0] }, [ids.reduceRight((rest, id) => [serve(ch, id, rest)], [])[0]], [{ do: 'call', name: 'clients.next' }])];
 }
 
 export const CLIENT_SCRIPTS = {
@@ -105,5 +103,6 @@ export const CLIENT_SCRIPTS = {
   'client.free': [
     N('Il tavolo è tuo. Le carte anche.'),
     IF({ power: 'cat' }, [cat('(Nessuno bussa più per paura. Bussano per curiosità. Meglio.)')]),
+    { do: 'call', name: 'clients.next' },
   ],
 };

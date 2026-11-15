@@ -7,7 +7,7 @@ import { FONT } from '../core/fonts.js';
 import { emit } from '../core/bus.js';
 import { call } from '../core/services.js';
 import { test } from '../core/cond.js';
-import { setPlayer, foundIds } from '../core/progress.js';
+import { setPlayer, foundIds, findCard } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { SESSIONS, SCRIPTS } from '../data/story/index.js';
 import { createRunner, cardOfNumber } from './runner.js';
@@ -189,7 +189,8 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
   const ext = async (node, api) => {
     if (node.ask === 'name') { await askName(); return true; }
     if (node.ask === 'birth') { await askBirth(api); return true; }
-    if (node.turn) { dropCap(); await scene.layCard(node.turn); return true; }
+    if (node.turn) { dropCap(); await scene.layCard(node.turn); findCard(node.turn); return true; } // a card turned for her is hers (the Fool)
+    if (node.empty) { dropCap(); scene.setEmpty(true); await sleep(reduced ? 0 : 1200); return true; }
     if (node.shuffle) { dropCap(); await scene.shuffle(); return true; }
     if (node.pick === 'number') {
       const n = await padNumber(), cid = cardOfNumber(n);

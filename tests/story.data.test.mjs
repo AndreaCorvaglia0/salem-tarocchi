@@ -14,13 +14,14 @@ const ANCHORS = new Set([
   'forest.entry', 'forest.ortica_hut', 'forest.campfire', 'forest.den', 'forest.lantern', 'forest.mill', 'forest.boundary',
   'forest.pond', 'forest.graveyard', 'forest.spring',
   'depths.entry', 'depths.edera_nook', 'depths.coven', 'depths.chains', 'depths.tower', 'depths.well', 'depths.swamp', 'depths.jail',
+  'shop.keeper', 'depths.coven_malva', 'depths.coven_ortica', 'depths.coven_edera', 'village.arrest_a', 'village.arrest_b', 'village.arrest_c', // world extra anchors
 ]);
 // copied from core/cond.js TESTS
 const COND_KEYS = new Set(['flag', 'notFlag', 'chapter', 'chapterMin', 'chapterMax', 'step', 'stepIn', 'has', 'lacks', 'majorsMin',
   'level', 'power', 'spread', 'trust', 'stat', 'yourCard', 'birthCard', 'sign', 'word', 'tool', 'coinsMin', 'not', 'any']);
 const TOKENS = new Set(['name', 'sign', 'birthCard', 'yourCard', 'title', 'level', 'stat', 'word', 'words', 'card', 'trust', 'season', 'coins', 'majors', 'picked']);
 const ACTIONS = new Set(['giveCard', 'draw', 'teach', 'lesson', 'reading', 'exam', 'session', 'xp', 'coins', 'flag', 'trust', 'point',
-  'word', 'diary', 'step', 'chapter', 'travel', 'tool', 'power', 'cinema', 'wait', 'goto']);
+  'word', 'diary', 'step', 'chapter', 'travel', 'tool', 'power', 'cinema', 'wait', 'goto', 'call']);
 const SPEAKERS = new Set([...Object.keys(PEOPLE), 'tu', 'narra']);
 const STEP_IDS = new Set(STEPS.map((s) => s.id));
 const CLIENT_IDS = new Set(CLIENTS.map((c) => c.id));

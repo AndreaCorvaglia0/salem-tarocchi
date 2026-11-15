@@ -114,7 +114,7 @@ export function foundCeremony(id) {
       document.activeElement?.blur?.();
       const bw = (c.words || []).filter(Boolean);
       const own = mine.map((w) => w.trim()).filter(Boolean);
-      words.replaceChildren(own.length ? h('p.fd-book', {}, 'Le tue: ', h('b', {}, own.join(' · '))) : null, h('p.fd-book', {}, 'Quelle del libro: ', h('b', {}, bw.join(' · '))));
+      words.replaceChildren(...[own.length ? h('p.fd-book', {}, 'Le tue: ', h('b', {}, own.join(' · '))) : null, h('p.fd-book', {}, 'Quelle del libro: ', h('b', {}, bw.join(' · ')))].filter(Boolean));
       await wait(1900);
       // into the grimoire: towards the HUD's book if there is one, else the top right corner
       const tgt = document.querySelector('.hud-book')?.getBoundingClientRect();

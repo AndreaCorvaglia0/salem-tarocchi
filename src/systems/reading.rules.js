@@ -40,9 +40,9 @@ export function alternatives({ cardId, positionId, spreadId, table = [], rng = M
 export const scoreOf = (oks) => (oks.length ? oks.filter(Boolean).length / oks.length : 0);
 // The client pays by how well she reads (40% to 100%), +5% per Major she owns, and a bonus (+20%) when
 // "la tua carta" is on the table.
-export function payFor({ pay = 5, score = 0, owned = 0, yourCardOnTable = false }) {
+export function payFor({ pay = 5, score = 0, owned = 0, yourCardOnTable = false, dayCardOnTable = false }) {
   const base = pay * (0.4 + 0.6 * score) * (1 + 0.05 * owned);
-  return Math.max(0, Math.round(base + (yourCardOnTable ? pay * 0.2 : 0)));
+  return Math.max(0, Math.round(base + (yourCardOnTable ? pay * 0.2 : 0) + (dayCardOnTable ? pay * 0.3 : 0)));
 }
 export const xpFor = (score) => 10 + Math.round(20 * score);
 
@@ -61,5 +61,5 @@ export function lookPrompt(cardId, index = 0) {
   const d = sheet(cardId)?.details || [];
   if (!d.length) return 'Lascia che l\'occhio vada dove vuole.';
   const x = d[index % d.length];
-  return x.note ? `Guarda ${x.label ? x.label + ': ' : ''}${x.note}` : `Guarda ${x.label}.`;
+  return x.note ? `Guarda ${x.label ? `${x.label}. ` : ''}${x.note}` : `Guarda ${x.label}.`;
 }

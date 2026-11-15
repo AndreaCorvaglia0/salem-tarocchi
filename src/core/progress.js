@@ -7,7 +7,7 @@ import { CARD, MAJORS, SIGNS, signOf } from '../data/cards.base.js';
 
 // ---- levels ---------------------------------------------------------------------------------
 // Nine levels, three per title. The first three come within the first quarter of an hour.
-export const LEVEL_XP = [0, 30, 70, 130, 210, 310, 430, 570, 730]; // xp needed for level 1..9
+export const LEVEL_XP = [0, 30, 70, 200, 280, 370, 470, 590, 730]; // xp needed for level 1..9: 2-3 in the first minutes, then one title per chapter (playthrough numbers)
 export const TITLES = ['Novizia', 'Fattucchiera', 'Strega'];
 export const levelOf = (xp = state.xp) => { let l = 1; for (let i = 0; i < LEVEL_XP.length; i++) if (xp >= LEVEL_XP[i]) l = i + 1; return l; };
 export const titleOf = (level = levelOf()) => (state.flags['ending.seen'] ? 'Gran Maestra' : TITLES[Math.min(2, Math.floor((level - 1) / 3))]);
@@ -19,7 +19,7 @@ export const levelProgress = (xp = state.xp) => {
 };
 // What each level brings (the world and the HUD read this).
 export const LEVEL_GIFTS = {
-  2: { power: 'cat', text: 'Tartufo ti segue.' },
+  2: { text: 'Al cottage ti aspetta qualcuno. Ha quattro zampe.' }, // the cat itself comes with the story (c1.cottage)
   3: { text: 'La bottega ti apre la porta.', flag: 'shop.open' },
   4: { power: 'fire', text: 'Sai accendere il fuoco: vedi nel buio.' },
   5: { text: 'Vedi più lontano.', flag: 'sight.far' },
@@ -131,3 +131,7 @@ export const setStep = (id) => { if (state.step !== id) { state.step = id; emit(
 export const setChapter = (n) => { if (state.chapter !== n) { state.chapter = n; emit('chapter', { n }); save(); } };
 export const stat = (k, n = 1) => { state.stats[k] = (state.stats[k] || 0) + n; save(); };
 export const majorsMissingOfRow = (row) => MAJORS.filter((c) => c.row === row && !state.cards[c.id]?.found).map((c) => c.id);
+
+// ---- the card of the day (drawn at the cottage bed, once per calendar day) --------------------
+export const todayKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+export const dayCard = () => (state.day?.date === todayKey() && hasCard(state.day.card) ? state.day.card : null);
