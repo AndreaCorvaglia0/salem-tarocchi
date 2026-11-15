@@ -78,6 +78,42 @@ export function ground(seed = 3, span = 2000, { amp = 30, depth = 4000, road = f
   return out;
 }
 
+// ---- a mixed crowd standing: men in coats, women in bonnets, children, an elder with a stick; heights
+// vary, a few turn away, and there are gaps. gaps: [[from, to]] in its units left empty (the accused's place)
+const FOLK = ['villagerMan', 'villagerWoman', 'villagerTall', 'villagerWoman', 'villagerChild', 'villagerMan', 'villagerElder', 'villagerWoman'];
+export function throng(seed = 4, span = 2000, { gaps = [], step = 150, size = 1, rows = 2 } = {}) {
+  const r = rnd(seed), out = [];
+  let i = 0;
+  for (let row = 0; row < rows; row++) {
+    const sz = size * (0.42 + row * 0.16), st = step * sz * 2.2;
+    for (let x = -span / 2 - 40 + r() * st; x < span / 2 + 40; x += st * (0.35 + r() * 0.7)) {
+      if (gaps.some(([a, b]) => x > a - row * 60 && x < b + row * 60)) continue;
+      if (r() < 0.1) { x += st * 0.9; continue; } // a gap in the crowd
+      const kind = FOLK[(i++ * 5 + Math.floor(r() * 3)) % FOLK.length];
+      out.push({ parts: SIL[kind].parts, x, y: row * 70 + r() * 24, s: sz * (0.86 + r() * 0.26), flip: x > 0 ? r() < 0.85 : r() < 0.15 });
+    }
+  }
+  return out;
+}
+// ---- spectators seen from behind, near and big: heads and shoulders, hats and bonnets, uneven
+export function backs(seed = 9, span = 2000, { gap = null } = {}) {
+  const r = rnd(seed), out = [];
+  for (let x = -span / 2 - 60; x < span / 2 + 60; x += 130 + r() * 110) {
+    if (gap && x > gap[0] && x < gap[1]) continue;
+    const k = 0.8 + r() * 0.45, y = r() * 60, kind = Math.floor(r() * 5), parts = [];
+    const sw = 110 + r() * 60, sl = r() * 30;
+    parts.push(toPath([[-sw, 500, 1], [-sw + 6, 150 + sl], [-sw + 40, 60 + sl * 0.5], [-30, 22], [30, 22], [sw - 40, 60 - sl * 0.3], [sw - 6, 150 - sl], [sw, 500, 1]]));
+    parts.push(rect(-22, -20, 44, 50));
+    if (kind === 0) parts.push(ellipse(0, -70, 48, 58), toPath([[-60, -40], [-66, -110], [-30, -140], [30, -140], [66, -110], [60, -40], [40, -10], [-40, -10]])); // bonnet
+    else if (kind === 1) parts.push(ellipse(0, -70, 44, 54), rect(-40, -200, 80, 110), rect(-100, -96, 200, 14)); // tall hat
+    else if (kind === 2) parts.push(ellipse(0, -70, 44, 54), toPath([[-110, -100, 1], [-50, -110], [-44, -150], [44, -150], [50, -110], [110, -100, 1], [110, -90, 1], [-110, -90, 1]])); // brim
+    else if (kind === 3) parts.push(ellipse(0, -70, 44, 54), ellipse(0, -118, 20, 18)); // a knot of hair
+    else parts.push(ellipse(0, -66, 46, 56)); // bare head
+    out.push({ parts, x, y: 60 + y, s: k });
+  }
+  return out;
+}
+
 // ---- a crowd: rows of little busts with hats and bonnets, facing every way
 export function crowd(seed = 4, span = 2000, { rows = 2, size = 1 } = {}) {
   const r = rnd(seed), out = [];
@@ -169,15 +205,26 @@ export function houseFront({ w = 1100, h = 900, door = [220, 470], snow = true }
   return Object.assign(out, { lights: [[0, -dh * 0.45, dh * 0.75], [-330, -560, 120], [330, -560, 120]] });
 }
 
-// ---- the high bench of the court, with arched windows behind (light) and a rail below
-export function bench({ w = 1400, h = 520 } = {}) {
+// ---- the high bench of the court seen from below: a heavy block with a deep cornice that overhangs (its
+// underside a dark band), sunk panels, a step at the foot; it reaches the floor (no legs, no light under it)
+export function bench({ w = 1400, h = 1000 } = {}) {
   const panels = [];
-  for (let i = 0; i < 5; i++) { const x = -w / 2 + 60 + i * ((w - 120) / 5); panels.push(rect(x + 18, -h + 70, (w - 120) / 5 - 36, h - 140)); }
-  // the bench stands on three heavy pillars down to the floor: light passes between them
-  const legs = [-w / 2 + 30, w / 2 - 110].map((x) => rect(x, 40, 80, 760));
-  return [{ parts: [rect(-w / 2, -h, w, h + 40), rect(-w / 2 - 40, -h - 30, w + 80, 34), rect(-w / 2 - 20, 30, w + 40, 24), ...legs, rect(-w * 2, 800, w * 4, 3000)], x: 0, y: 0 },
-    { parts: panels, x: 0, y: 0, tone: 'trodden', ghost: false }];
+  for (let i = 0; i < 4; i++) { const pw = (w - 160) / 4, x = -w / 2 + 80 + i * pw; panels.push(toPath([[x + 30, -90, 1], [x + 30, -h + 260, 1], [x + pw / 2, -h + 200], [x + pw - 30, -h + 260, 1], [x + pw - 30, -90, 1]], true, 0.6)); }
+  const block = [rect(-w / 2, -h, w, h), rect(-w / 2 - 90, -h - 40, w + 180, 60), rect(-w / 2 - 60, -h + 10, w + 120, 40), rect(-w / 2 - 110, -h - 100, w + 220, 70),
+    rect(-w / 2 - 70, -60, w + 140, 60), rect(-w / 2 - 120, -24, w + 240, 24)];
+  return [{ parts: block, x: 0, y: 0 }, { parts: panels, x: 0, y: 0, tone: 'carve', ghost: false }];
 }
+// the rail of the dock: a top bar on turned balusters, across the span
+export function rail(span = 2000, { h = 260 } = {}) {
+  const parts = [rect(-span / 2 - 60, -h, span + 120, 30), rect(-span / 2 - 60, -24, span + 120, 24)];
+  for (let x = -span / 2; x < span / 2 + 60; x += 120) parts.push(toPath([[x - 9, -h + 30, 1], [x - 14, -h + 70], [x - 8, -h * 0.55], [x - 16, -h * 0.3], [x - 10, -24, 1], [x + 10, -24, 1], [x + 16, -h * 0.3], [x + 8, -h * 0.55], [x + 14, -h + 70], [x + 9, -h + 30, 1]], true, 0.8));
+  return [{ parts, x: 0, y: 0 }];
+}
+// a floor seen flat (a tone: field, trodden)
+export const floor = (span = 2000, depth = 3000, tone = 'field') => [{ parts: [rect(-span / 2 - 60, 0, span + 120, depth)], x: 0, y: 0, tone }];
+// a long shadow on the floor from a small figure toward us (w: width at the feet)
+export const castShadow = (w = 60, len = 900, lean = 0) => [{ parts: [toPath([[-w / 2, 0, 1], [w / 2, 0, 1], [w * 1.6 + lean, len * 0.7], [w * 1.2 + lean * 1.3, len, 1], [-w * 1.2 + lean * 1.3, len, 1], [-w * 1.6 + lean, len * 0.7]], true, 0.7)], x: 0, y: 0, tone: 'shade', ghost: false }];
+
 export function tallWindows({ n = 3, w = 220, h = 900, gap = 420 } = {}) {
   const parts = [];
   for (let i = 0; i < n; i++) {
@@ -232,4 +279,70 @@ export function cloth(span = 2000, drop = 200) {
   const tassels = [];
   for (let i = 0; i <= n; i++) { const x = -span / 2 - 60 + i * sc; tassels.push(taper([[x, drop], [x, drop + 34]], 4, 3), ellipse(x, drop + 42, 7, 11)); }
   return [{ parts: [toPath(pts, true, 0.9), ...tassels, rect(-span / 2 - 60, -40, span + 120, 16)], x: 0, y: 0 }];
+}
+
+// ---- foreground frames for tall screens: a bank rising at both sides (low in the middle, where the words
+// go), with tall grass, reeds and dry stems; snow: a pale cap along the top
+export function bank(seed = 11, span = 2000, { rise = 260, low = 40, snow = false, grass = 1, flat = 0.36 } = {}) {
+  const r = rnd(seed), pts = [], n = 22;
+  const top = (x) => { const u = Math.abs(x) / (span / 2), e = Math.max(0, u - flat) / (1 - flat); return -low - rise * e * e * (3 - 2 * e) + Math.sin(x * 0.013 + seed) * 8; };
+  for (let i = 0; i <= n; i++) { const x = -span / 2 - 60 + ((span + 120) * i) / n; pts.push([x, top(x)]); }
+  const parts = [toPath([[-span / 2 - 60, 2000, 1], ...pts, [span / 2 + 60, 2000, 1]], true, 0.8)];
+  const tall = Math.round((span / 26) * grass);
+  for (let i = 0; i < tall; i++) {
+    const x = -span / 2 + r() * span, side = Math.abs(x) / (span / 2), y = top(x) + 6, hh = (30 + r() * 70) * (0.5 + side * 1.6), b = (r() - 0.5) * 0.8 + (x < 0 ? 0.15 : -0.15);
+    parts.push(taper([[x, y], [x + Math.sin(b) * hh * 0.5, y - hh * 0.55], [x + Math.sin(b) * hh * 1.1, y - hh]], 5 + side * 4, 0.4));
+    if (side > 0.55 && r() < 0.18) { const sx = x + Math.sin(b) * hh * 1.1, sy = y - hh; parts.push(ellipse(sx, sy - 10, 5, 13)); } // a seed head
+  }
+  const out = [{ parts, x: 0, y: 0 }];
+  if (snow) out.push({ parts: [taper(pts.map(([x, y]) => [x, y + 3]), 10, 10)], x: 0, y: 0, tone: 'snow', ghost: false });
+  return out;
+}
+// a bough reaching in from a top corner ('l' or 'r'): a tapered branch, twigs, leaves or bare curls
+export function bough(seed = 12, side = 'l', { len = 700, leafy = true, droop = 0.35 } = {}) {
+  const r = rnd(seed), parts = [], sx = side === 'r' ? -1 : 1;
+  const grow = (x, y, a, L, w, depth) => {
+    const pts = [[x, y]];
+    for (let i = 1; i <= 6; i++) { const t = i / 6; pts.push([x + Math.cos(a + droop * t) * L * t * sx, y + Math.sin(a + droop * t) * L * t]); }
+    parts.push(taper(pts, w, w * 0.3));
+    for (let i = 2; i < pts.length; i++) {
+      const [px, py] = pts[i];
+      if (depth > 0 && r() < 0.55) grow(px, py, a + droop * (i / 6) + (r() < 0.5 ? 0.6 : -0.3), L * (0.3 + r() * 0.25), w * 0.45, depth - 1);
+      else if (leafy) for (let k = 0; k < 6; k++) { const b = (r() - 0.2) * 3, Ls = 30 + r() * 44, lx = px + (r() - 0.5) * 20, ly = py + r() * 10; parts.push(toPath([[lx, ly, 1], [lx + Math.cos(b - 0.5) * Ls * 0.6 * sx, ly + Math.sin(b - 0.5) * Ls * 0.6], [lx + Math.cos(b) * Ls * sx, ly + Math.sin(b) * Ls, 1], [lx + Math.cos(b + 0.5) * Ls * 0.6 * sx, ly + Math.sin(b + 0.5) * Ls * 0.6]], true, 1)); }
+      else if (r() < 0.4) parts.push(taper(tendril(px, py, a + 0.6, L * 0.14, 0.25 * sx, 10).map(([X, Y]) => [px + (X - px) * sx, Y]), 5, 0.4));
+    }
+  };
+  grow(0, 0, 0.18, len, 64, 2);
+  return [{ parts, x: 0, y: 0 }];
+}
+// an old fence: leaning posts with two rails, snow on top; from x 0 toward +x
+export function fence(seed = 13, { n = 5, gap = 150, h = 320, snow = true } = {}) {
+  const r = rnd(seed), parts = [], caps = [];
+  const tops = [];
+  for (let i = 0; i < n; i++) { const x = i * gap + (r() - 0.5) * 20, t = (r() - 0.5) * 0.12, hh = h * (0.85 + r() * 0.3); tops.push([x + t * hh, -hh]); parts.push(poly([[x - 12, 30], [x + 12, 30], [x + 12 + t * hh, -hh], [x - 12 + t * hh, -hh - 10]])); caps.push(ellipse(x + t * hh, -hh - 6, 18, 8)); }
+  for (const f of [0.75, 0.38]) parts.push(taper(tops.map(([x, y]) => [x, y * f + (r() - 0.5) * 10]), 16, 14));
+  const out = [{ parts, x: 0, y: 0 }];
+  if (snow) out.push({ parts: caps, x: 0, y: 0, tone: 'snow', ghost: false });
+  return out;
+}
+// a windowsill seen from inside, at the bottom: the sill board, a jar of herbs, a candle stub, a bottle
+export function sill(span = 2000, { h = 70, things = true } = {}) {
+  const parts = [rect(-span / 2 - 60, 0, span + 120, 2000), rect(-span / 2 - 60, -h * 0.4, span + 120, h * 0.4)];
+  if (things) {
+    const L = -span * 0.34, R = span * 0.3;
+    parts.push(toPath([[L - 60, -h * 0.4, 1], [L - 64, -150], [L - 40, -190], [L - 46, -214, 1], [L + 46, -214, 1], [L + 40, -190], [L + 64, -150], [L + 60, -h * 0.4, 1]]));
+    for (let i = 0; i < 7; i++) parts.push(taper([[L + (i - 3) * 10, -210], [L + (i - 3) * 26, -300 - (i % 3) * 30], [L + (i - 3) * 40, -360 - (i % 2) * 50]], 8, 0.5));
+    parts.push(toPath([[R - 40, -h * 0.4, 1], [R - 44, -180], [R - 16, -230], [R - 14, -300, 1], [R + 14, -300, 1], [R + 16, -230], [R + 44, -180], [R + 40, -h * 0.4, 1]]));
+    parts.push(rect(R + 90, -150, 36, 150 - h * 0.4), ellipse(R + 108, -h * 0.4, 50, 10));
+  }
+  return [{ parts, x: 0, y: 0 }];
+}
+// a line of woods seen from above: a ridge of round crowns (a hill of trees), the land below it solid
+export function woods(seed = 14, span = 2000, { amp = 40, crown = 60 } = {}) {
+  const r = rnd(seed), parts = [], pts = [];
+  for (let i = 0; i <= 12; i++) { const x = -span / 2 - 60 + ((span + 120) * i) / 12; pts.push([x, -amp * (0.5 + 0.5 * Math.sin(i * 1.3 + seed))]); }
+  const at = (x) => { const t = ((x + span / 2 + 60) / (span + 120)) * 12, i = Math.min(11, Math.max(0, Math.floor(t))), f = t - i; return pts[i][1] * (1 - f) + pts[i + 1][1] * f; };
+  parts.push(toPath([[-span / 2 - 60, 3000, 1], ...pts, [span / 2 + 60, 3000, 1]], true, 0.8));
+  for (let x = -span / 2 - 40; x < span / 2 + 60; x += crown * (0.7 + r() * 0.6)) { const rr = crown * (0.6 + r() * 0.6); parts.push(ellipse(x, at(x) - rr * 0.3, rr, rr * 0.8)); if (r() < 0.25) parts.push(poly([[x - rr * 0.5, at(x)], [x, at(x) - rr * 2.4], [x + rr * 0.5, at(x)]])); }
+  return [{ parts, x: 0, y: 0 }];
 }

@@ -40,7 +40,7 @@ if (view === 'sils') {
   const names = (q.get('names') || Object.keys(SIL).join(',')).split(',');
   const cols = Math.ceil(Math.sqrt((names.length * W) / H)), rows = Math.ceil(names.length / cols), cw = W / cols, ch = H / rows;
   names.forEach((n, i) => {
-    const s = SIL[n], cx = ((i % cols) + 0.5) * cw, by = (Math.floor(i / cols) + 0.92) * ch, k = Math.min((ch * 0.8) / s.h, (cw * 0.4) / 260);
+    const s = SIL[n], cx = ((i % cols) + 0.5) * cw, by = (Math.floor(i / cols) + 0.92) * ch, k = Math.min((ch * 0.8) / s.h, (cw * 0.4) / Number(q.get('wid') || 260));
     drawSil(g, s, cx, by, k, false, { color: '#140a06', soft: 1.5 });
     g.fillStyle = '#2a1408'; g.font = '11px monospace'; g.fillText(n, cx - cw / 2 + 4, by + 12);
   });

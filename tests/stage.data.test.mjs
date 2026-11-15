@@ -12,7 +12,7 @@ import { PEOPLE } from '../src/data/cards.base.js';
 import { SCRIPTS } from '../src/data/story/index.js';
 
 const d = (p) => (typeof p === 'string' ? p : p.d);
-const FX = new Set(['candle', 'fire', 'snow', 'moon', 'sun', 'glow', 'pool', 'hang', 'clouds']);
+const FX = new Set(['candle', 'fire', 'snow', 'moon', 'sun', 'glow', 'pool', 'hang', 'clouds', 'shafts']);
 const REQUIRED = ['reader', 'cards', 'arrival', 'door', 'square', 'campfire', 'arrest', 'cellar', 'coven', 'trial', 'dawn', 'last'];
 
 test('every required tableau exists and every item resolves', () => {

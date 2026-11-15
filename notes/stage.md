@@ -122,3 +122,23 @@ imports `cinema.js` and `portraits.js`: update or drop those views. (`src/system
   alarm for per-frame cost. That sun is now baked into the field.
 - DESIGN gives Ginepra a juniper-blue cloak; the world sprite (`world/art/people.js`) has a red coat. The
   cameo follows DESIGN.
+
+## Retouch (stage 2)
+
+Public API of `index.js` and `cameos.js` unchanged.
+
+- `dawn`: new broom riders (side-saddle, leaning into the wind, hair, cloak and skirt streaming, bristles
+  trailing, sleeve to the stick, no hands); Tartufo rides at the back of yours. Salem small below, three
+  layers of woods (`woods`) fill the lower screen.
+- `campfire` / seated: you sit on the ground hugging your knees (arms over the shins), Ginepra on a log
+  with forearms on her knees; a light gap under the thighs shows the legs. No hands.
+- `square`: mixed standing crowd (`throng`: men, tall hats, bonnets, a child, an elder with a stick, gaps),
+  the Afflicted apart, the accused (`accused`, head bowed) alone in a pool of light (`glow` with `under`),
+  spectators' backs in front (`backs`).
+- `trial`: heavy bench reaching the floor seen from below, the Judge (tall hat, cut-out bands), rail,
+  fading light shafts (`fx: 'shafts'`, painted once into a sheet), Ginepra from behind (`ginepraBack`)
+  small in a pool with a long shadow (`castShadow`).
+- Phone composition: items take `tall: {...}` overrides and `only: 'tall'|'wide'` (Painter.pick). Banks,
+  fences, vines frame the bottom on phones; bust necks shortened a little (reader untouched).
+- Perf: empty sheets are skipped. Headless Chrome, software raster, 576x1248 canvas: build 10-45 ms,
+  frame 5-13 ms (heaviest: reader ~13, coven ~12, dawn ~11), noisy between runs.

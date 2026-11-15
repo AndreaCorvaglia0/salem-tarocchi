@@ -69,3 +69,26 @@ export function validPath(d) {
   if (toks.join('').length !== d.replace(/[\s,]/g, '').length) return false;
   return toks.every((t) => /[A-Za-z]/.test(t) || Number.isFinite(Number(t)));
 }
+
+// move, scale and turn path data made here (absolute M L C A H V Z only): H and V become L so a turn works.
+// o: { s, dx, dy, rot (radians, around 0,0 before the move) }
+export function xform(d, { s = 1, dx = 0, dy = 0, rot = 0 } = {}) {
+  const cs = Math.cos(rot), sn = Math.sin(rot);
+  const P = (x, y) => [f((x * cs - y * sn) * s + dx), f((x * sn + y * cs) * s + dy)];
+  let cx = 0, cy = 0, out = '';
+  d.replace(/([MLCHVAZ])([^MLCHVAZ]*)/g, (m, cmd, args) => {
+    const n = (args.match(/-?\d*\.?\d+(?:e-?\d+)?/g) || []).map(Number);
+    if (cmd === 'Z') { out += 'Z'; return m; }
+    if (cmd === 'H' || cmd === 'V') { for (const v of n) { if (cmd === 'H') cx = v; else cy = v; out += `L${P(cx, cy).join(' ')}`; } return m; }
+    if (cmd === 'A') {
+      const o = [];
+      for (let i = 0; i < n.length; i += 7) { cx = n[i + 5]; cy = n[i + 6]; o.push(f(n[i] * s), f(n[i + 1] * s), f(n[i + 2] + (rot * 180) / Math.PI), n[i + 3], n[i + 4], ...P(cx, cy)); }
+      out += `A${o.join(' ')}`; return m;
+    }
+    const o = [];
+    for (let i = 0; i < n.length; i += 2) { o.push(...P(n[i], n[i + 1])); cx = n[i]; cy = n[i + 1]; }
+    out += cmd + o.join(' ');
+    return m;
+  });
+  return out;
+}
