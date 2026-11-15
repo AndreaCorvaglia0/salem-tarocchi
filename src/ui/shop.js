@@ -1,4 +1,4 @@
-// The shop: a counter in the dark with four tools on paper tags (bottle, sieve and shears, incense,
+// The shop: a counter in the dark with three tools on paper tags (bottle, incense,
 // pendulum) and two cards for sale: two Majors of this chapter's row that she lacks, expensive.
 // Buying a tool adds to state.tools; buying a card goes through the found ceremony (card.found).
 // openShop() -> Promise resolved when she leaves.
@@ -20,7 +20,7 @@ const CSS = `
 .sp-main{flex:1;min-height:0;display:flex;flex-direction:column;max-width:900px;width:100%;margin:0 auto;padding:4px 14px 0;box-sizing:border-box}
 .sp-hello{font:italic 21px/28px ${SERIF};color:#e3d6bb;text-align:center;margin:6px 8px 14px}
 .sp-hello small{display:block;font:18px ${HAND};color:#b9ab90;font-style:normal;margin-top:2px}
-.sp-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.sp-tools{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .sp-tag{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px 10px 12px;border-radius:4px 10px 4px 10px;background:${paperBg()};color:${INK};font:19px/23px ${HAND};text-align:center;box-shadow:0 6px 16px #000a;transform:rotate(var(--r))}
 .sp-tag::before{content:'';position:absolute;top:-7px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:#2b1c14;box-shadow:inset 0 0 0 2px #a0835a}
 .sp-tag .nm{font-weight:700;font-size:21px;line-height:24px}

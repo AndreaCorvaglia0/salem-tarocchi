@@ -12,12 +12,29 @@
 //   { word: ['fear', 'essere lasciata'] }
 //   { tool: 'bottle' }              { coinsMin: 10 }
 //   { not: <cond> }                 { any: [<cond>, <cond>] }
+//   { wrote: 'm02' }                (she wrote at least one of her three words on that card)
+//   the portrait:  { trait: ['tono', '<=', -3] }  { trend: ['esplora', '>=', 2] } (since the last snapshot)
+//   { steady: 'parola' } (|v| >= 3, same sign as at the last snapshot)  { turned: 'rischio' }  { torn: 'guida' }
+//   { verdict: 'first' | 'same' | 'changed' }  { yourCardIsBirth: true }
+//   birth:  { hasBirth: true } { hasYear: true } { element: 'Fuoco' } { modality: 'fisso' }
+//           { moon: 'piena' } { bornOn: 'giovedì' }   (moon and weekday need the year: false without it)
 //
 // fill('Ciao {name}', state) replaces: {name} {sign} {birthCard} {yourCard} {title} {level}
 //   {stat:exams} {word:fear} {words:m02} {card:m02} {trust:malva} {season} {coins} {majors}
+//   {traits} {trait:esplora} {lastVerdict} {element} {modality} {ruler} {rulerCard} {birthDay} {dayPlanet}
+//   {dayPlanetCard} {moon}   (all safe when the birth data is missing: a neutral phrase)
 import { state as live } from './state.js';
-import { CARD, SIGNS } from '../data/cards.base.js';
-import { levelOf, titleOf, yourCard, hasCard, majorsFound, seasonOfBirth } from './progress.js';
+import { CARD, SIGNS, SIGN_LORE, PLANET_CARD, weekdayOf, moonOf } from '../data/cards.base.js';
+import { levelOf, titleOf, yourCard, hasCard, majorsFound, seasonOfBirth, traitWord, traitWords, lastSnapshot, lastVerdict } from './progress.js';
+
+const signOfState = (s) => SIGNS.find((x) => x.id === s.player?.sign) || null;
+const loreOf = (s) => SIGN_LORE[s.player?.sign] || null;
+const fullBirth = (s) => { const b = s.player?.birth; return b && b.y && b.m && b.d ? b : null; };
+const tv = (s, k) => s.traits?.[k] || 0;
+const prevTv = (s, k) => lastSnapshot(s)?.traits?.[k] || 0;
+const sameBool = (v, x) => (v === false ? !x : !!x);
+// "curiosa, schietta e gentile"
+export const joinIt = (ws) => (ws.length < 2 ? ws[0] || '' : `${ws.slice(0, -1).join(', ')} e ${ws[ws.length - 1]}`);
 
 const cmp = (a, op, b) => (op === '>=' ? a >= b : op === '>' ? a > b : op === '<=' ? a <= b : op === '<' ? a < b : op === '!=' ? a !== b : a === b);
 
@@ -43,6 +60,20 @@ const TESTS = {
   word: ([k, v], s) => s.words[k] === v,
   tool: (v, s) => (s.tools[v] || 0) > 0,
   coinsMin: (v, s) => s.coins >= v,
+  trait: ([k, op, n], s) => cmp(tv(s, k), op, n),
+  trend: ([k, op, n], s) => cmp(tv(s, k) - prevTv(s, k), op, n),
+  steady: (k, s) => { const v = tv(s, k), p = lastSnapshot(s); return !!p && Math.abs(v) >= 3 && Math.abs(prevTv(s, k)) >= 3 && Math.sign(v) === Math.sign(prevTv(s, k)); },
+  turned: (k, s) => { const v = tv(s, k), p = prevTv(s, k); return !!lastSnapshot(s) && v * p < 0 && Math.abs(v - p) >= 4; },
+  torn: (k, s) => { const h = s.hits?.[k] || {}; return (h.plus || 0) >= 3 && (h.minus || 0) >= 3 && Math.abs(tv(s, k)) <= 1; },
+  verdict: (v, s) => { const last = lastVerdict(s); return v === 'first' ? !last : !!last && (v === 'same' ? last === yourCard(s) : v === 'changed' ? last !== yourCard(s) : false); },
+  yourCardIsBirth: (v, s) => sameBool(v, !!s.player?.birthCard && yourCard(s) === s.player.birthCard),
+  hasBirth: (v, s) => sameBool(v, !!s.player?.birth),
+  hasYear: (v, s) => sameBool(v, !!fullBirth(s)),
+  element: (v, s) => signOfState(s)?.element === v,
+  modality: (v, s) => loreOf(s)?.modality === v,
+  moon: (v, s) => moonOf(fullBirth(s)) === v,
+  bornOn: (v, s) => weekdayOf(fullBirth(s) || {})?.name === v,
+  wrote: (v, s) => (s.cards?.[v]?.words || []).some((w) => String(w || '').trim()),
   not: (v, s) => !test(v, s),
   any: (v, s) => v.some((c) => test(c, s)),
 };
@@ -76,6 +107,17 @@ export function fill(text, s = live) {
       case 'words': return (s.cards[arg]?.words || []).filter(Boolean).join(', ') || '...';
       case 'card': return CARD[arg]?.name || arg;
       case 'trust': return String(s.trust[arg] || 0);
+      case 'traits': return joinIt(traitWords(s)) || 'ancora tutta da scoprire';
+      case 'trait': return traitWord(arg, s) || 'nel mezzo';
+      case 'lastVerdict': return CARD[lastVerdict(s)]?.name || CARD[s.player?.birthCard]?.name || 'Il Matto';
+      case 'element': return signOfState(s)?.element || 'un elemento che non conosco';
+      case 'modality': return loreOf(s)?.modality || 'una qualità che non conosco';
+      case 'ruler': return loreOf(s)?.ruler || 'un pianeta che non conosco';
+      case 'rulerCard': return CARD[PLANET_CARD[loreOf(s)?.ruler]]?.name || 'una carta che non conosco';
+      case 'birthDay': return weekdayOf(fullBirth(s) || {})?.name || 'un giorno che non conosco';
+      case 'dayPlanet': return weekdayOf(fullBirth(s) || {})?.planet || 'un pianeta che non conosco';
+      case 'dayPlanetCard': return CARD[PLANET_CARD[weekdayOf(fullBirth(s) || {})?.planet]]?.name || 'una carta che non conosco';
+      case 'moon': { const m = moonOf(fullBirth(s)); return m ? `luna ${m}` : 'una luna che non conosco'; }
       default: return all;
     }
   });

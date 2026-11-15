@@ -34,18 +34,21 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
 
   async function exec(nodes) {
     if (!Array.isArray(nodes)) return null;
-    for (const node of nodes) {
+    for (let i = 0; i < nodes.length; i++) {
+      const node = nodes[i];
       try {
-        const r = await step(node);
+        const r = await step(node, isChoice(nodes[i + 1]));
         if (r && r.goto) return r;
       } catch (e) { warn('node failed:', e?.message || e, node); }
     }
     return null;
   }
 
-  async function step(node) {
+  // a line right before a choice is its question: the UI shows the options once it is fully read
+  const isChoice = (n) => !!n && typeof n === 'object' && 'choice' in n && Array.isArray(n.choice) && n.choice.some((o) => o && test(o.when));
+  async function step(node, ask = false) {
     if (node == null || typeof node !== 'object') { warn('bad node', node); return null; }
-    if ('say' in node) { await askSafe(() => ui.say(node.say, F(node.t))); return null; }
+    if ('say' in node) { await askSafe(() => ui.say(node.say, F(node.t), ask ? { ask: true } : undefined)); return null; }
     if ('choice' in node) return choice(node);
     if ('if' in node) return exec(test(node.if) ? node.then : node.else);
     if ('do' in node) return action(node);
@@ -61,6 +64,7 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     if (!Number.isInteger(i) || i < 0 || i >= opts.length) i = 0;
     const o = opts[i];
     if (o.tag) P.addPoint(o.tag);
+    if (o.trait) P.addTrait(o.trait);
     if (o.trust) for (const [who, n] of Object.entries(o.trust)) P.addTrust(who, n);
     if (o.flag) P.setFlag(o.flag, true); // only options that name a flag are remembered
     return exec(o.then);
@@ -112,6 +116,11 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     // a service by name: { do: 'call', name: 'shop.open', args: [...] } (props: the shop, the deposit, the bed)
     call: (n) => call(n.name, ...(n.args || [])),
     session: (n) => call('story.session', n.id),
+    // { do: 'trait', trait: { tono: 1 } } or { do: 'trait', tono: 1 }
+    trait: (n) => P.addTrait(n.trait && typeof n.trait === 'object' ? n.trait : Object.fromEntries(P.AXES.filter((k) => k in n).map((k) => [k, n[k]]))),
+    visit: (n) => call('story.visit', { force: !!n.force }),
+    verdict: () => P.recordVerdict(), // after the Reader has named her card
+
     travel: (n) => call('world.travel', n.to),
     cinema: (n) => askSafe(() => ui.cinema((n.lines || []).map(F), n)),
     wait: (n) => askSafe(() => ui.sleep(n.ms ?? 600)),

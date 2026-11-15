@@ -1,12 +1,15 @@
 // The dialogue box of the pixel world: a profile cameo, the name, text typed out quickly, choices as
 // big buttons stacked above the box. story.say / story.choose / (moment) live here.
-// Tap or Space/Enter completes the typing, then goes on. The layer stays open while a run plays
-// (it blocks the world) and closes on end().
+// Tap or Space/Enter completes the typing; a second tap after a short pause goes on (pace.js); the
+// ▼ shows only when a tap will be accepted. The layer stays open while a run plays (it blocks the
+// world) and closes on end().
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
 import { call } from '../core/services.js';
 import { PEOPLE } from '../data/cards.base.js';
 import { cameo } from './stage/cameos.js';
+import { gate, isTapKey } from './pace.js';
+import { hintOnce } from '../core/progress.js';
 
 const CSS = `
 .sy-layer{position:fixed;inset:0;pointer-events:none;z-index:30;font-family:${FONT.pixel};color:#f1ead6;-webkit-user-select:none;user-select:none}
@@ -47,8 +50,8 @@ let release = null; // what a tap / Space / Enter does right now
 
 const onKey = (e) => {
   if (!release) return;
-  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); release('key'); }
-  else if (/^[1-4]$/.test(e.key)) release(`n${e.key}`);
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); if (isTapKey(e)) release('key'); }
+  else if (/^[1-4]$/.test(e.key) && !e.repeat) release(`n${e.key}`);
 };
 
 function ensure() {
@@ -66,8 +69,9 @@ const scheduleHide = () => {
   hideT = setTimeout(() => { if (active === 0 && box) { box.remove(); box = null; layer?.classList.remove('on'); } }, 60);
 };
 
-// Shows one line. Resolves when the player taps after the text is complete.
-export function say(who, text) {
+// Shows one line. Resolves when the player taps after the text is complete (and the pause); a
+// question ({ ask: true }, the runner marks the line before a choice) resolves once fully shown.
+export function say(who, text, { ask = false } = {}) {
   ensure();
   active += 1;
   const person = PEOPLE[who];
@@ -84,23 +88,27 @@ export function say(who, text) {
   layer.classList.add('on');
   requestAnimationFrame(() => box === fresh && fresh.classList.add('in'));
   const full = String(text ?? '');
-  return new Promise((resolve) => {
-    const start = performance.now(), per = reducedMotion() ? 0 : 20; // ms per character
-    let n = 0, done = false, raf = 0, armed = 0;
-    const paint = () => { t1.textContent = full.slice(0, n); t2.textContent = full.slice(n); };
-    const finish = () => { n = full.length; paint(); done = true; more.classList.add('on'); armed = performance.now() + 120; };
-    const tick = (now) => {
-      if (done) return;
-      n = per ? Math.min(full.length, Math.floor((now - start) / per)) : full.length;
-      paint();
-      if (n >= full.length) finish(); else raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    release = () => {
-      if (!done) { cancelAnimationFrame(raf); finish(); return; }
-      if (performance.now() < armed) return;
-      release = null; active -= 1; call('sound.play', 'tap'); scheduleHide(); resolve();
-    };
+  let n = 0, raf = 0;
+  const paint = () => { t1.textContent = full.slice(0, n); t2.textContent = full.slice(n); };
+  const g = gate({
+    auto: ask,
+    start: (done) => {
+      const start = performance.now(), per = reducedMotion() ? 0 : 28; // ms per character: readable, not rushed
+      const tick = (now) => {
+        n = per ? Math.min(full.length, Math.floor((now - start) / per)) : full.length;
+        paint();
+        if (n >= full.length) done(); else raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+    },
+    finish: () => { cancelAnimationFrame(raf); n = full.length; paint(); },
+    onReady: () => { more.classList.add('on'); hintOnce('tap'); },
+  });
+  release = () => g.tap();
+  return g.done.then((how) => {
+    release = null; active -= 1;
+    if (how === 'tap') call('sound.play', 'tap');
+    if (!ask) scheduleHide(); // a question stays under its choices
   });
 }
 

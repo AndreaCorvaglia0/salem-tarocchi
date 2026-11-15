@@ -1,10 +1,15 @@
-// Calm flashcards, no stakes: the picture, she thinks, taps, sees the name, the core, the keywords and the
-// planet or sign; then "La sapevo" or "Non ancora". Due cards first, then the rest of what she owns. Max 10.
+// Ripasso: a short calm quiz, no stakes. Five questions of mixed kinds from the question generator
+// (told cards may be asked what they say, untold ones only name or detail: exam.rules.js buildQuestions),
+// due cards first; each answer lifts stars like any answer and a right one gives a little xp; at the end
+// the cards she missed are shown again, with their name and what they say.
 import { h, css } from '../core/dom.js';
-import { answer, dueIds, ownedIds, dayCard } from '../core/progress.js';
+import { state } from '../core/state.js';
+import { answer, dueIds, ownedIds, dayCard, addXp } from '../core/progress.js';
+import { makeExam, makeQuestion } from '../data/questions.js';
+import { buildQuestions } from './exam.rules.js';
 import { sheet } from '../data/cards.js';
 import { screen, btn, say, shuffle, pickOne, mood, moodBack } from './theme.js';
-import { cardFace } from './qview.js';
+import { cardFace, questionView } from './qview.js';
 
 const CSS = `
 .sxv-card{display:flex;justify-content:center}
@@ -16,8 +21,10 @@ const CSS = `
 .sxv-astro{text-align:center;color:var(--sky);font-size:18px}
 .sxv-prog{font-family:Georgia,'Times New Roman',serif;text-align:center;color:var(--dim);font-size:16px}
 .sxv-think{text-align:center;font-size:21px;font-style:italic;color:var(--dim);margin:4px 0}
+.sxv-miss{display:flex;gap:14px;align-items:center;margin:6px 0}
+.sxv-miss .sx-card{flex:none;width:76px;aspect-ratio:350/600;background-size:cover}
+.sxv-miss b{display:block;font-size:21px;font-weight:400}.sxv-miss span{display:block;font-size:18px;font-style:italic;color:#fff7e3}
 `;
-const KIND = { planet: 'Pianeta', sign: 'Segno', element: 'Elemento' };
 const END = {
   all: ['Tartufo si stira. «Tutte. Quasi mi annoio.»', 'Tartufo chiude un occhio, soddisfatto. «Va bene, va bene. Le sai.»'],
   some: ['Tartufo ti guarda dal davanzale. «Quelle che non sapevi tornano. Come me.»', 'Tartufo sbadiglia. «Ripassare è come fare le fusa: più lo fai, meglio ti viene.»'],
@@ -33,6 +40,7 @@ export async function review({ ids } = {}) {
   const today = dayCard(); // the card of the day comes first
   if (!ids?.length && today && owned.has(today)) list = [today, ...list.filter((id) => id !== today)];
   list = list.slice(0, 10);
+  const N = 5, XP_RIGHT = 3;
   mood('reading');
   const scr = screen({ title: 'Ripasso', cls: 'sxreview', onClose: () => { stop = true; kick?.(); } });
   let stop = false, kick = null;
@@ -41,19 +49,32 @@ export async function review({ ids } = {}) {
     scr.setBody(say('Tartufo', 'Non hai ancora carte da ripassare. Trovane qualcuna, poi torno a farti le domande.'));
     await tap('Va bene'); scr.close(); moodBack(); return;
   }
+  // the pool: due cards first (and the card of the day), then the rest; the Fool joins a tiny deck
+  let pool = list.slice(0, 8);
+  if (pool.length < 3 && !pool.includes('m00')) pool = [...pool, 'm00'];
+  const qs = buildQuestions({ kind: 'judge', pool, told: state.told || {}, n: N, level: Math.max(1, state.chapter || 1), makeExam, makeQuestion });
   let knew = 0, seen = 0;
-  for (let i = 0; i < list.length && !stop; i++) {
-    const id = list[i], c = sheet(id);
-    scr.setBody(h('div.sxv-prog', `${i + 1} di ${list.length}`), h('div.sxv-card.sx-in', cardFace(id, { hideName: true })), h('p.sxv-think', 'Che carta è? Cosa dice? Pensaci un momento.'));
-    if (!(await tap('Mostrami'))) break;
-    const astro = c.astro ? `${KIND[c.astro.kind] || ''}: ${c.astro.name}` : '';
-    scr.setBody(h('div.sxv-prog', `${i + 1} di ${list.length}`), h('div.sxv-card', cardFace(id)),
-      h('h2.sxv-name.sx-in', c.name, c.roman ? h('small', c.roman) : null), c.core ? h('p.sxv-core', c.core) : null,
-      c.keywords?.length ? h('div.sxv-kw', c.keywords.slice(0, 6).map((k) => h('span', k))) : null, astro ? h('div.sxv-astro', astro) : null);
-    const ok = await new Promise((res) => { kick = () => res(null); scr.setFoot(btn('Non ancora', () => res(false), 'ghost'), btn('La sapevo', () => res(true), 'go')); });
-    if (ok === null) break;
-    seen++; if (ok) knew++;
-    answer(id, ok, 'image'); // the review lifts only the first star: the others are earned by answering
+  const missed = [];
+  for (let i = 0; i < qs.length && !stop; i++) {
+    const q = qs[i];
+    let pickRes;
+    const picked = new Promise((r) => { pickRes = r; kick = () => r(null); });
+    const view = questionView(q, { onPick: (k) => pickRes(k) });
+    scr.setBody(h('div.sxv-prog', `${i + 1} di ${qs.length}`), view.el);
+    scr.setFoot();
+    const k = await picked;
+    if (k === null) break;
+    const ok = !!q.options[k]?.ok;
+    view.reveal(k);
+    seen++;
+    if (q.cardId) answer(q.cardId, ok, q.star);
+    if (ok) { knew++; addXp(XP_RIGHT, 'review'); } else if (q.cardId && !missed.includes(q.cardId)) missed.push(q.cardId);
+    if (!(await tap(i + 1 < qs.length ? 'Avanti' : 'Fine'))) break;
+  }
+  // the cards she missed, shown again
+  if (missed.length && !stop) {
+    scr.setBody(h('p.sxv-think', 'Queste tornano, guardale ancora un momento.'), ...missed.map((id) => { const c = sheet(id); return h('div.sxv-miss.sx-in', cardFace(id), h('div', h('b', c.name), c.core ? h('span', c.core) : null)); }));
+    await tap('Le ho guardate');
   }
   const bucket = !seen ? 'some' : knew === seen ? 'all' : knew ? 'some' : 'none';
   scr.setBody(h('h2.sxv-name.sx-in', seen ? `${knew} su ${seen}` : 'A presto'), say('Tartufo', pickOne(END[bucket])));

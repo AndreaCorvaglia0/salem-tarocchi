@@ -1,10 +1,9 @@
-// The integration glue (src/glue): the final cross, the returning clients, the sieve's words,
+// The integration glue (src/glue): the final cross, the returning clients, 
 // throttling, the debug skips, and the runner's draw filter and jail-after-run.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { finalCards, FORK3 } from '../src/glue/finale.rules.js';
 import { nextClient } from '../src/glue/clients.rules.js';
-import { direction, sieveLine } from '../src/glue/tools.rules.js';
 import { throttle } from '../src/glue/barks.js';
 import { prepare, SKIPS } from '../src/glue/debug.rules.js';
 import { state, setState } from '../src/core/state.js';
@@ -45,13 +44,6 @@ test('returning clients: new ones first, then old faces with a known spread', ()
   assert.equal(nextClient({ clients: CLIENTS, chapter: 1, done: () => false, spreads: {} }), null);
 });
 
-test('sieve: words for a direction', () => {
-  assert.equal(direction(0, -5), 'a nord');
-  assert.equal(direction(4, 4), 'a sud-est');
-  assert.equal(direction(-6, 1), 'a ovest');
-  assert.match(sieveLine({ dx: 3, dy: 0, dist: 3 }), /est.*vicinissima/);
-  assert.match(sieveLine(null), /non trema/);
-});
 
 test('throttle: once per kind per gap', () => {
   let t = 0;

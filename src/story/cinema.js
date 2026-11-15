@@ -3,6 +3,7 @@
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
 import { emit } from '../core/bus.js';
+import { gate, isTapKey } from './pace.js';
 
 const CSS = `
 .cn{position:fixed;inset:0;z-index:40;font-family:${FONT.serif};color:#f1ecd9;cursor:pointer;-webkit-user-select:none;user-select:none;touch-action:manipulation}
@@ -33,14 +34,14 @@ export async function cinema(lines) {
   const close = openOverlay(root);
   emit('cinema', true);
   requestAnimationFrame(() => root.classList.add('in'));
-  let skipped = false, next = null, armedAt = 0;
-  // a tap right as a line appears (the one that closed the dialogue before) must not swallow it
-  const tap = () => { if (!skipped && performance.now() < armedAt) return; const f = next; next = null; f?.(); };
+  let skipped = false, g = null;
+  // each line goes through the tap gate (pace.js): a tap shows it whole, a later tap goes on
+  const tap = () => { if (skipped) { g?.cancel(); return; } g?.tap(); };
   root.addEventListener('pointerdown', (e) => { if (e.target === skip) return; e.preventDefault(); tap(); });
   skip.addEventListener('click', (e) => { e.stopPropagation(); skipped = true; tap(); });
   const onKey = (e) => {
     if (e.key === 'Escape') { e.preventDefault(); skipped = true; tap(); }
-    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); tap(); }
+    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); if (isTapKey(e)) tap(); }
   };
   window.addEventListener('keydown', onKey, true);
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -49,11 +50,15 @@ export async function cinema(lines) {
     for (const line of list) {
       if (skipped) break;
       cap.textContent = line;
-      void cap.offsetWidth; cap.classList.add('on');
-      armedAt = performance.now() + 350;
-      const hintT = setTimeout(() => hint.classList.add('on'), 1800);
-      await new Promise((r) => { next = r; }); // no auto advance: a tap goes on
-      clearTimeout(hintT); hint.classList.remove('on');
+      void cap.offsetWidth;
+      let t = 0;
+      g = gate({
+        start: (done) => { cap.style.transition = ''; cap.classList.add('on'); t = setTimeout(done, reduced ? 0 : 650); },
+        finish: () => { clearTimeout(t); cap.style.transition = 'none'; },
+        onReady: () => hint.classList.add('on'),
+      });
+      await g.done; // no auto advance: a tap goes on
+      g = null; hint.classList.remove('on'); cap.style.transition = '';
       cap.classList.remove('on');
       await sleep(reduced ? 0 : 320);
     }

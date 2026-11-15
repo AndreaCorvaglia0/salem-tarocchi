@@ -3,6 +3,7 @@ import { h, css } from '../core/dom.js';
 import { state } from '../core/state.js';
 import { answer, ownedIds, stat } from '../core/progress.js';
 import { makeQuestion } from '../data/questions.js';
+import { toldPool, RECOGNIZE } from './exam.rules.js';
 import { screen, btn, sleep, fb, snd } from './theme.js';
 import { questionView } from './qview.js';
 
@@ -23,7 +24,10 @@ export async function ask({ cardId, kind, label, rng = Math.random } = {}) {
   css('sxl', CSS);
   let pool = cardId ? [cardId] : ownedIds();
   if (!cardId && pool.length < 3 && !pool.includes('m00')) pool = [...pool, 'm00'];
-  const q = makeQuestion({ pool, kinds: kind ? [kind] : undefined, level: Math.max(1, state.chapter || 1), rng });
+  // a card the Reader has not told yet can only be recognised (exam.rules.js)
+  const told = toldPool(pool, state.told || {});
+  const kinds = kind ? [kind] : told.length ? undefined : RECOGNIZE;
+  const q = makeQuestion({ pool: kind || !told.length ? pool : told, kinds, level: Math.max(1, state.chapter || 1), rng });
   const lock = h('div.sxl-lock.sealed', h('div.sxl-shackle'), h('div.sxl-body'), h('div.sxl-seal'));
   const scr = screen({ cls: 'sxlock' });
   let resolve;

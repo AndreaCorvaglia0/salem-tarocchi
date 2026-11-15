@@ -5,7 +5,8 @@
 import { snd } from './sfx.js';
 import { h, css, openOverlay, cardUrl, reducedMotion } from '../core/dom.js';
 import { on } from '../core/bus.js';
-import { call } from '../core/services.js';
+import { call, has } from '../core/services.js';
+import { state, save } from '../core/state.js';
 import { CARD } from '../data/cards.base.js';
 import { levelProgress, titleOf } from '../core/progress.js';
 import { INK, RED, HAND, SERIF, GOLD, PENCIL, baseCss, paperBg, inkBar, svgEl } from './paper.js';
@@ -17,9 +18,12 @@ const CSS = `
 .hud>*{pointer-events:auto}
 .hud-slip{position:relative;max-width:min(470px,calc(100vw - 92px));padding:6px 14px 8px 14px;background:${paperBg()};color:${INK};border-radius:2px 6px 3px 7px;box-shadow:0 4px 12px #000a;transform:rotate(-.6deg);font:21px/26px ${HAND};cursor:pointer;-webkit-tap-highlight-color:transparent}
 .hud-slip::before{content:'';position:absolute;top:-6px;left:22px;width:46px;height:14px;background:#e6d9aacc;transform:rotate(-4deg);box-shadow:0 1px 2px #0003}
-.hud-step{position:relative;display:block;min-height:26px}
-.hud-step .ar{color:${RED};margin-right:6px}
-.hud-step .t{display:inline}
+.hud-step{position:relative;display:flex;align-items:flex-start;gap:7px;min-height:26px;padding-bottom:2px;border-bottom:1px dashed ${PENCIL}66}
+.hud-step .ar{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;margin-top:2px}
+.hud-step .ar svg{display:block}
+.hud-step .t{display:block;flex:1;min-width:0;white-space:normal;overflow-wrap:break-word;text-wrap:pretty}
+.hud-slip.asked .hud-step .ar svg{animation:hud-spin 1s ease-out}
+@keyframes hud-spin{from{transform:rotate(-200deg)}}
 .hud-step.out .t{animation:hud-out .5s forwards}
 .hud-step .strike{position:absolute;left:18px;top:50%;height:2px;width:0;background:${RED};transform:rotate(-1.5deg);transition:width .35s}
 .hud-step.in .t{animation:hud-in .7s both}
@@ -31,6 +35,7 @@ const CSS = `
 .hud-book{flex:none;display:grid;place-items:center;width:56px;height:56px;padding:0;border-radius:14px;border:1px solid #6a5a48;background:#1a1420d8;box-shadow:0 4px 12px #000a;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .hud-book:hover,.hud-book:focus-visible{outline:2px solid ${GOLD};outline-offset:2px}
 .hud-book.pulse{animation:hud-pulse .6s 2}
+.hud-book.beckon{animation:hud-pulse 1.4s ease-in-out infinite;border-color:${GOLD}}
 @keyframes hud-pulse{50%{transform:scale(1.12);box-shadow:0 0 18px ${GOLD}aa}}
 .hud-toasts{position:fixed;left:0;right:0;bottom:calc(92px + env(safe-area-inset-bottom));z-index:25;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none!important}
 .hud-toast{display:flex;align-items:center;gap:10px;max-width:calc(100vw - 40px);padding:8px 16px;background:${paperBg()};color:${INK};border-radius:3px 8px 4px 8px;box-shadow:0 6px 18px #000b;font:21px/26px ${HAND};animation:gx-in .3s;transition:opacity .4s,transform .4s}
@@ -50,6 +55,9 @@ const CSS = `
 @keyframes hud-spark{from{transform:translate(-50%,-50%);opacity:1}to{transform:translate(var(--dx),var(--dy));opacity:0}}
 .hud-lvup.bye{opacity:0;transition:opacity .35s}
 `;
+
+// a small compass: the next-step line can be tapped to see the way
+const COMPASS = `<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="none" stroke="${PENCIL}" stroke-width="1.4"/><path d="M11 3.5 L13.4 11 L11 18.5 L8.6 11 Z" fill="${RED}"/><path d="M11 11 L13.4 11 L11 18.5 L8.6 11 Z" fill="${INK}"/><circle cx="11" cy="11" r="1.3" fill="#f3e7c9"/></svg>`;
 
 let mounted = null;
 const queue = [];
@@ -93,17 +101,29 @@ export function mountHud() {
   baseCss(); css('ui-hud', CSS);
   if (mounted) return mounted;
   const stepT = h('span.t');
-  const step = h('span.hud-step', h('span.ar', { 'aria-hidden': 'true' }, '→'), stepT);
+  const step = h('span.hud-step', h('span.ar', { 'aria-hidden': 'true' }, svgEl(COMPASS)), stepT);
   const lvT = h('span');
   const bar = inkBar(0, { w: 110, h: 11 });
-  const slip = h('div.hud-slip', { role: 'button', tabindex: '0', 'aria-label': 'Prossimo passo, apri il grimorio' }, step, h('div.hud-lv', lvT, bar));
+  const slip = h('div.hud-slip', { role: 'button', tabindex: '0', 'aria-label': 'Prossimo passo: mostrami la strada' }, step, h('div.hud-lv', lvT, bar));
   const bk = h('button.hud-book', { type: 'button', 'aria-label': 'Grimorio' }, svgEl(book({ size: 40 })));
   const el = h('div.hud', slip, bk);
   const open = (tab) => call('grimoire.open', { tab });
   bk.onclick = () => { snd('tap'); open('io'); };
-  slip.onclick = () => { snd('tap'); open('mappa'); };
-  slip.onkeydown = (e) => { if (e.key === 'Enter') open('mappa'); };
-  const drawLevel = () => { const lp = levelProgress(); lvT.textContent = `${titleOf(lp.level)} · ${lp.level}`; bar.set(lp.level >= 9 ? 1 : lp.into); };
+  // the next-step line: from chapter 2 it shows the trail for a few seconds (glue/hints.js); while the
+  // trail is always on (chapters 0-1), or with no world, it opens the map
+  const ask = async () => {
+    snd('tap');
+    slip.classList.remove('asked'); void slip.offsetWidth; slip.classList.add('asked');
+    const shown = has('guide.ask') ? await call('guide.ask') : false;
+    if (!shown) open('mappa');
+  };
+  slip.onclick = ask;
+  slip.onkeydown = (e) => { if (e.key === 'Enter') ask(); };
+  // the grimoire beckons after the first card, until she opens it once
+  const once = () => state.world?.once || {};
+  const beckon = () => bk.classList.toggle('beckon', !!once()['hint.grimoire'] && !once()['grimoire.opened']);
+  beckon();
+  const drawLevel = () => { const lp = levelProgress(); lvT.textContent = `${titleOf(lp.level)} · ${lp.level}`; bar.set(lp.top ? 1 : lp.into); };
   stepT.textContent = nextStep().text;
   drawLevel();
   openOverlay(el, { block: false });
@@ -124,6 +144,8 @@ export function mountHud() {
     on('card:star', ({ id, stars } = {}) => { if (CARD[id]) toast(`${CARD[id].name}: ${stars === 1 ? 'una stella' : `${stars} stelle`}.`, { icon: starMark(true, 22) }); }),
     on('coins', ({ n } = {}) => { if (n > 0) toast(`+${n} monete`); }),
     on('cinema', (v) => { el.style.visibility = v ? 'hidden' : ''; }), // film bars and sessions: nothing of the HUD peeks through
+    on('hint', ({ id } = {}) => { if (id === 'grimoire') beckon(); }),
+    on('grimoire:open', () => { const o = state.world.once || (state.world.once = {}); if (!o['grimoire.opened']) { o['grimoire.opened'] = true; save(); } beckon(); }),
     on('card:found', () => { if (!step.classList.contains('out')) stepT.textContent = nextStep().text; bk.classList.remove('pulse'); void bk.offsetWidth; bk.classList.add('pulse'); }),
   ];
   mounted = { el, unmount: () => { offs.forEach((f) => f()); el.remove(); mounted = null; } };

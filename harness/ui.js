@@ -30,7 +30,7 @@ const STATES = {
     xp: 600, coins: 140, points: { m11: 4, m17: 6 }, lastPoint: 'm17',
     cards: Object.fromEntries(['m00', 'm01', 'm02', 'm03', 'm04', 'm05', 'm06', 'm07', 'm08', 'm09', 'm10', 'm11', 'm12', 'm13', 'm14', 'm16', 'm17', 'w01', 'c03', 'p10', 's12'].map((id, i) => [id, card(i % 4, { due: i % 5 ? now + DAY : now - 1, confiscated: id === 'm13' })])),
     diary: [{ t: 'Ginepra ha detto «Sono io». Non l\'ho fermata.' }, { t: 'Edera mi ha chiamata Rosa. Poi Viola. Poi niente.' }, { t: 'In piazza ho parlato. Lo rifarei.' }],
-    tools: { bottle: 2, sieve: 1, incense: 1, pendulum: 3 }, powers: { cat: true, fire: true, seals: true, stun: true, broom: true },
+    tools: { bottle: 2, incense: 1, pendulum: 3 }, powers: { cat: true, fire: true, sense: true, move: true, stun: true, broom: true },
     lessons: { deck: true, single: true, ppf: true, celtic: true }, flags: { 'ending.seen': false },
     stats: { seen: seenAll([...V, 'village.court_door', 'village.meeting_door', 'village.shop_door', 'village.venusglass', 'village.trapdoor', 'forest.entry', 'forest.ortica_hut', 'forest.campfire', 'forest.den', 'forest.lantern', 'forest.mill', 'forest.pond', 'forest.boundary', 'depths.entry', 'depths.edera_nook', 'depths.coven', 'depths.chains']) },
   },

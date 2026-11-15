@@ -1,6 +1,7 @@
 // The grimoire, the game's only menu (docs/DESIGN.md, "Il grimorio"): an object of the story written
 // in her hand, first person. Three ribbon bookmarks: Io, Carte, Mappa. Settings sit behind a small
 // plain button in the corner. grimoire.open({ tab, study }) resolves when it is closed.
+import { emit } from '../core/bus.js';
 import { h, openOverlay } from '../core/dom.js';
 import { state, reset, saveNow } from '../core/state.js';
 import { call } from '../core/services.js';
@@ -59,6 +60,7 @@ export function openGrimoire({ tab = 'io', study = false } = {}) {
   return new Promise((resolve) => {
     resolveP = resolve;
     closeOverlay = openOverlay(b.el);
+    emit('grimoire:open', { tab: cur, study }); // the hint and the beckoning book (ui/hint.js, hud.js)
     snd('page');
     popEsc = onEscape(() => { if (!b.el.closeSettings?.()) finish(); });
     globalThis.addEventListener('keydown', key, true);

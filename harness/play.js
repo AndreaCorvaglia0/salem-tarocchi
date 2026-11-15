@@ -25,7 +25,7 @@ setState({
   started: true, chapter: ch, xp: 60, coins: 10, cards, trust,
   player: { name: 'Ada', birth: { d: 1, m: 10, y: 1995 }, sign: 'bilancia', birthCard: 'm11' },
   stats: { exams: num('exams', 5) },
-  tools: { bottle: 0, sieve: 0, incense: num('incense', 0), pendulum: num('pendulum', 0) },
+  tools: { bottle: 0, incense: num('incense', 0), pendulum: num('pendulum', 0) },
   powers: { cat: q.get('cat') === '1' },
   spreads: { single: true, ppf: ch >= 2, celtic: ch >= 3 },
 });

@@ -2,7 +2,11 @@
 // (first dialogue option on one run, last option on the other, so both sides of every fork play),
 // from the title to `ending.seen`. It moves in the world with the ?debug door (world.travel to the
 // next step's anchor or to a hidden card) and the action key; everything else is taps on the DOM.
-// Fails loudly on a page error, a console error, or when nothing changes for STUCK_MS.
+// Fails loudly on a page error, a console error, or when nothing changes for STUCK_MS; a watchdog
+// outside the loop also fails (screenshot, state, log) when the loop itself hangs for STUCK_MS.
+// Lines are paced (src/story/pace.js): the bot taps only when the cue says a tap will be accepted.
+// It visits the Reader once by itself (story.visit, forced) if the story has not called a visit by
+// the time two cards are untold, to see one; and takes shots of the hints, the trail, the HUD.
 //   node scripts/playthrough.mjs [--url http://127.0.0.1:5181/] [--only first|last]
 // Screenshots: /tmp/play/<run>-<moment>.png
 import puppeteer from 'puppeteer-core';
@@ -11,13 +15,14 @@ import { STEPS } from '../src/data/story/steps.js';
 
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
-const BASE = opt('--url', 'http://127.0.0.1:5181/');
+const BASE = opt('--url', 'http://127.0.0.1:5183/');
 const OUT = '/tmp/play';
-const STUCK_MS = 45000, STEP_MS = 6 * 60000, MAX_MS = 40 * 60000;
+const STUCK_MS = 60000, STEP_MS = 6 * 60000, MAX_MS = 40 * 60000;
 const chrome = process.env.CHROME || ['/usr/bin/google-chrome', '/usr/bin/chromium'].find(existsSync);
 mkdirSync(OUT, { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const AT = Object.fromEntries(STEPS.map((s) => [s.id, s.at]));
+const AT_ROAD_STEP = STEPS.find((s) => s.at === 'village.arrival')?.id || 'p.road'; // the first step in the world (notes/world.md)
 
 // What is on top right now, read from the DOM (highest layer first). Runs in the page.
 function probe() {
@@ -56,17 +61,19 @@ function probe() {
   const tt = last('.tt');
   if (tt) { const b = all('.tt-b', tt); return { ...base, kind: 'title', buttons: b.map((x) => ({ ...box(x), t: x.textContent })) }; }
   const cn = last('.sgm') || last('.cn'); // the shadow-theatre tableau (.sgm); black bars (.cn) only as a fallback
-  if (cn) return { ...base, kind: 'cinema', text: cn.querySelector('.sgm-cap p, .cn-cap')?.textContent || '', at: { x: 195, y: 420 } };
+  if (cn) return { ...base, kind: 'cinema', ready: !!cn.querySelector('.sgm-hint.on, .cn-hint.on'), text: cn.querySelector('.sgm-cap p, .cn-cap')?.textContent || '', at: { x: 195, y: 420 } };
   const ss = last('.ss');
   if (ss) {
+    const where = ss.getAttribute('aria-label') === 'La Lettrice' ? 'visit' : 'session';
+    const turned = !!ss.querySelector('.sgc-card.up.hi');
     const name = all('.ss-paper input[type=text]:not([inputmode])', ss)[0];
     if (name) return { ...base, kind: 'ask-name', at: box(name), ok: box(ss.querySelector('.ss-btn')) };
     if (all('.ss-paper select', ss).length) return { ...base, kind: 'ask-birth', ok: box(ss.querySelector('.ss-btn')), year: box(ss.querySelector('.ss-paper input')) };
     const o = all('.ss-opt', ss);
-    if (o.length) return { ...base, kind: 'choice', where: 'session', opts: o.map((b) => ({ ...box(b), t: b.textContent })), text: ss.querySelector('.ss-cap')?.textContent || '' };
+    if (o.length) return { ...base, kind: 'choice', where, opts: o.map((b) => ({ ...box(b), t: b.textContent })), text: ss.querySelector('.ss-cap')?.textContent || '' };
     const pad = all('.ss-pad button', ss);
     if (pad.length) return { ...base, kind: 'pad', at: box(pad[Math.floor(Math.random() * pad.length)]) };
-    return { ...base, kind: 'tap', where: 'session', text: ss.querySelector('.ss-cap:not(.out)')?.textContent || '', at: { x: 195, y: 300 } };
+    return { ...base, kind: 'tap', where, turned, ready: !!ss.querySelector('.ss-cue.on'), text: ss.querySelector('.ss-cap:not(.out)')?.textContent || '', at: { x: 195, y: 300 } };
   }
   const sy = last('.sy-layer.on');
   if (sy) {
@@ -74,11 +81,12 @@ function probe() {
     const who = sy.querySelector('.sy-name')?.textContent || '';
     const text = sy.querySelector('.sy-text')?.textContent || '';
     if (o.length) return { ...base, kind: 'choice', where: 'dialogue', who, text, opts: o.map((b) => ({ ...box(b), t: b.textContent })) };
-    return { ...base, kind: 'tap', where: 'dialogue', who, text, at: { x: 195, y: 760 } };
+    return { ...base, kind: 'tap', where: 'dialogue', who, text, ready: !!sy.querySelector('.sy-more.on'), at: { x: 195, y: 760 } };
   }
   if (window.__salem?.blocked()) return { ...base, kind: 'wait', what: 'blocked' };
   if (!document.querySelector('#game canvas')) return { ...base, kind: 'wait', what: 'no world' };
-  return { ...base, kind: 'world', act: document.querySelector('.w-act')?.textContent || '' };
+  const hint = document.querySelector('.uh.on');
+  return { ...base, kind: 'world', act: document.querySelector('.w-act')?.textContent || '', hint: hint ? hint.textContent : '' };
 }
 
 async function playRun(side, { stopStep = null } = {}) {
@@ -97,9 +105,24 @@ async function playRun(side, { stopStep = null } = {}) {
   await page.goto(`${BASE}?debug`, { waitUntil: 'domcontentloaded' });
 
   const t0 = Date.now();
+  // the watchdog: if the loop itself does not come round for STUCK_MS (a hung evaluate, a hung tap),
+  // fail loudly with a screenshot and the state instead of freezing silently
+  let beat = Date.now();
+  const withTimeout = (pr, ms, what) => Promise.race([pr, new Promise((_, no) => setTimeout(() => no(new Error(`timeout: ${what}`)), ms))]);
+  const dog = setInterval(async () => {
+    if (Date.now() - beat < STUCK_MS) return;
+    clearInterval(dog);
+    console.error(`[${tag}] WATCHDOG: the bot has not moved for ${STUCK_MS / 1000}s`);
+    await withTimeout(page.screenshot({ path: `${OUT}/${tag}-WATCHDOG.png` }), 10000, 'shot').catch((e) => console.error(e.message));
+    const st = await withTimeout(page.evaluate(() => JSON.stringify(window.__salem?.state || null)), 10000, 'state').catch(() => null);
+    writeFileSync(`${OUT}/${tag}-state.json`, st || 'null');
+    writeFileSync(`${OUT}/${tag}-log.txt`, log.join('\n'));
+    console.error(`state: ${OUT}/${tag}-state.json, shot: ${OUT}/${tag}-WATCHDOG.png\n${errors.join('\n')}`);
+    process.exit(3);
+  }, 5000);
   const shots = new Set();
   const shot = async (name, force = false) => { if (shots.has(name) && !force) return; shots.add(name); await sleep(250); await page.screenshot({ path: `${OUT}/${tag}-${name}.png` }); };
-  const tap = (p) => page.mouse.click(p.x, p.y);
+  const tap = (p) => withTimeout(page.mouse.click(p.x, p.y), 10000, 'tap');
   const S = () => page.evaluate(() => JSON.parse(JSON.stringify(window.__salem.state)));
   const log = [];
   const say = (...a) => { const l = `[${tag} ${((Date.now() - t0) / 1000).toFixed(0)}s] ${a.join(' ')}`; log.push(l); console.log(l); };
@@ -107,6 +130,7 @@ async function playRun(side, { stopStep = null } = {}) {
     await page.screenshot({ path: `${OUT}/${tag}-STUCK.png` }).catch(() => {});
     writeFileSync(`${OUT}/${tag}-state.json`, JSON.stringify(await S().catch(() => null), null, 1));
     writeFileSync(`${OUT}/${tag}-log.txt`, log.join('\n'));
+    clearInterval(dog);
     await browser.close();
     throw new Error(`run ${tag}: ${why}\n${errors.join('\n')}`);
   };
@@ -117,15 +141,16 @@ async function playRun(side, { stopStep = null } = {}) {
     if (errors.length) await fail(`page errors:\n${errors.join('\n')}`);
     if (Date.now() - t0 > MAX_MS) await fail('too long');
     let p;
-    try { p = await page.evaluate(probe); } catch (e) { await sleep(300); continue; }
-    const now = `${p.kind}|${p.step}|${p.xp}|${p.cards}|${p.text || ''}|${p.cls || ''}|${p.map}|${p.label || ''}`;
+    beat = Date.now();
+    try { p = await withTimeout(page.evaluate(probe), 15000, 'probe'); } catch (e) { await sleep(300); continue; }
+    const now = `${p.kind}|${p.step}|${p.xp}|${p.cards}|${p.text || ''}|${p.cls || ''}|${p.map}|${p.label || ''}|${p.ready ? 1 : 0}`;
     if (now !== sig) { sig = now; sigAt = Date.now(); } else if (Date.now() - sigAt > STUCK_MS) await fail(`stuck on ${now}`);
     if (p.ended && p.kind === 'world') break;
-    if (stopStep && p.step === stopStep && p.kind === 'world') return { page, browser, errors, shot };
+    if (stopStep && p.step === stopStep && p.kind === 'world') { clearInterval(dog); return { page, browser, errors, shot }; }
     if (p.step !== stepSeen) { stepSeen = p.step; stepAt = Date.now(); } else if (Date.now() - stepAt > STEP_MS) await fail(`step ${p.step} did not move in ${STEP_MS / 60000} minutes`);
 
     switch (p.kind) {
-      case 'levelup': { const lvl = /Livello (\d)/.exec(p.text)?.[1]; if (lvl && !levels.includes(lvl)) { levels.push(lvl); say('level', lvl, 'xp', p.xp, 'step', p.step); } await shot('levelup'); await tap(p.at); break; }
+      case 'levelup': { const lvl = /Livello (\d)/.exec(p.text)?.[1]; if (lvl && !levels.includes(lvl)) { levels.push(lvl); did.tries = {}; /* a new power may open the way */ say('level', lvl, 'xp', p.xp, 'step', p.step); } await shot('levelup'); await tap(p.at); break; }
       case 'found-detail': await shot('found'); await tap(p.at); break;
       case 'found-words': {
         const words = ['neve', 'luce', 'passo'];
@@ -152,11 +177,18 @@ async function playRun(side, { stopStep = null } = {}) {
         if (/Farmi avanti/.test(p.opts.map((o) => o.t).join())) await shot('square-fork');
         if (/Accenderlo io|Insegnarle/.test(p.opts.map((o) => o.t).join())) await shot('campfire');
         if (p.where === 'session' && p.chapter >= 1) await shot('session-tree');
+        if (p.where === 'visit') { did.visitAsked = true; await shot('visit-3-question'); }
         const o = side === 'first' ? p.opts[0] : p.opts[p.opts.length - 1];
         say('choose', JSON.stringify(o.t.slice(0, 50)));
         await tap(o); break;
       }
       case 'tap':
+        if (!p.ready) { await sleep(120); break; } // the cue is not there: a tap now would only finish the line
+        if (p.where === 'visit') {
+          if (!did.visitOpen) { did.visitOpen = true; await shot('visit-1-opener'); }
+          else if (p.turned && !did.visitCard) { did.visitCard = true; await shot('visit-2-card'); }
+          else if (did.visitAsked && !p.turned && !did.visitClose) { did.visitClose = true; await shot('visit-4-closer'); }
+        }
         if (p.where === 'dialogue') {
           if (/Malva/.test(p.who)) await shot('malva');
           if (/Ortica/.test(p.who)) await shot('ortica');
@@ -166,6 +198,7 @@ async function playRun(side, { stopStep = null } = {}) {
         if (p.where === 'session' && /sedia vuota/.test(p.text)) await shot('last-image');
         await tap(p.at); break;
       case 'cinema':
+        if (!p.ready) { await sleep(120); break; }
         if (p.text && p.text !== did.cin) { did.cin = p.text; say('cinema', JSON.stringify(p.text)); }
         if (/Salem\. Inverno|La neve copre/.test(p.text)) await shot('arrival');
         if (/Lanterne intorno/.test(p.text)) await shot('arrest');
@@ -218,6 +251,33 @@ async function playRun(side, { stopStep = null } = {}) {
       if (b && b.t !== '·') await tap(b); else await page.keyboard.press('Space');
       await sleep(700);
     };
+    if (p.hint && !did[`hint:${p.hint}`]) { did[`hint:${p.hint}`] = true; say('hint', JSON.stringify(p.hint)); }
+    // the first minute: the move hint with the trail, then the action hint by the first card
+    if (st.chapter === 0 && st.step === AT_ROAD_STEP && !did.moveHint) {
+      // stand still until the move hint shows over the world (a scene may come first: the main loop plays it)
+      did.moveWait = did.moveWait || Date.now();
+      const shown = await page.evaluate(() => { const e = document.querySelector('.uh.on'); return !!e && getComputedStyle(e).visibility !== 'hidden' && !document.querySelector('.sgm,.cn,.ss,.sy-layer.on'); });
+      if (shown) { did.moveHint = true; await sleep(700); await shot('hint-move'); if (await page.$('.uh-tap')) say('tap marker shown'); return; }
+      if (Date.now() - did.moveWait < 15000) { await sleep(300); return; }
+      did.moveHint = true; say('no move hint seen');
+    }
+    if (st.chapter === 0 && st.step === AT_ROAD_STEP && !did.actionHint) {
+      did.actionHint = true;
+      await travel('village.road_card'); await sleep(700);
+      await page.waitForSelector('.uh.on', { timeout: 6000 }).catch(() => say('no action hint'));
+      await sleep(300); await shot('hint-action');
+      await act(); return;
+    }
+    if (st.world?.once?.['hint.grimoire'] && !st.world?.once?.['grimoire.opened'] && !did.beckon) { did.beckon = true; await sleep(400); await shot('hint-grimoire'); }
+    // one visit of the Reader, if the story has not played one yet
+    const untold = Object.keys(st.cards).filter((id) => /^m\d\d$/.test(id) && id !== 'm00' && st.cards[id].found && !st.told?.[id]);
+    if (!st.visits && untold.length >= 2 && !did.forcedVisit) { did.forcedVisit = true; say('forced visit', untold.join(',')); page.evaluate(() => window.__salem.call('story.visit', { force: true })); await sleep(500); return; }
+    // the trail on demand (chapter 2+): tap the next-step line, the lights come for a few seconds
+    if (st.chapter >= 2 && !did.trailAsk) { did.trailAsk = true; await page.click('.hud-slip'); await sleep(900); await shot('trail-asked'); await sleep(200); }
+    // the grimoire "Io" with the handwritten words, once some trait is marked
+    if (Object.values(st.traits || {}).some((v) => Math.abs(v) >= 3) && !did.ioWords) {
+      did.ioWords = true; await page.click('.hud-book'); await sleep(900); await shot('grimoire-io-words'); await page.keyboard.press('Escape'); await sleep(500); return;
+    }
     if (st.step === 'c1.square' && !did.grimoire) {
       did.grimoire = true;
       await page.click('.hud-book'); await sleep(900); await shot('grimoire-io');
@@ -249,10 +309,12 @@ async function playRun(side, { stopStep = null } = {}) {
     stepTries++;
     if (at && stepTries <= 2) { await travel(at); await act(); await sleep(400); return; }
     const hidden = await page.evaluate(() => window.__salem.hidden());
-    const ok = hidden.filter((c) => !(c.spot.startsWith('depths.') && st.chapter < 3));
-    if (ok.length) { await travel(ok[0].spot); await act(); stepTries = 1; return; }
+    // a card she cannot reach yet (fog, brambles, roots need a later power) is tried a few times, then left
+    const ok = hidden.filter((c) => !(c.spot.startsWith('depths.') && st.chapter < 3) && (did.tries?.[c.id] || 0) < 3);
+    if (ok.length) { did.tries = did.tries || {}; did.tries[ok[0].id] = (did.tries[ok[0].id] || 0) + 1; await travel(ok[0].spot); await act(); stepTries = 1; return; }
+    if (hidden.length && !did[`unreach${hidden[0].id}`]) { did[`unreach${hidden[0].id}`] = true; say('cannot reach', hidden.map((c) => c.spot).join(','), '- studying for xp instead'); }
     // more xp: a client at the cottage table
-    if (stepTries % 3 === 0 && st.chapter >= 1) { await travel('cottage.table'); await act(); return; }
+    if ((stepTries % 3 === 0 || !ok.length) && st.chapter >= 1) { await travel('cottage.table'); await act(); return; }
     if (at) { await travel(at); await act(); return; }
     await sleep(500);
   }
@@ -262,6 +324,7 @@ async function playRun(side, { stopStep = null } = {}) {
   await sleep(800); await shot('the-end');
   const summary = { run: tag, side, seconds: secs, xp: st.xp, levels, coins: st.coins, cards: Object.keys(st.cards).length, exams: st.stats.exams, passed: st.stats.examsPassed, failed: st.stats.examsFailed, jailed: st.stats.jailed, readings: st.stats.readings,
     forks: ['b1.spoke', 'b1.hid', 'b2.went', 'b2.stayed', 'b3.stealth', 'b3.open', 'trial.won', 'trial.lost'].filter((f) => st.flags[f]), trust: st.trust, errors: errors.length, diary: st.diary.slice(-6).map((d) => d.t) };
+  clearInterval(dog);
   writeFileSync(`${OUT}/${tag}-log.txt`, log.join('\n'));
   writeFileSync(`${OUT}/${tag}-summary.json`, JSON.stringify(summary, null, 1));
   console.log(JSON.stringify(summary));

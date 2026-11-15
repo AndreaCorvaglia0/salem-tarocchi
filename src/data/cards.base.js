@@ -71,6 +71,38 @@ export const SIGNS = [
   { id: 'acquario', name: 'Acquario', card: 'm17', element: 'Aria', suit: 's', from: [1, 20] },
   { id: 'pesci', name: 'Pesci', card: 'm18', element: 'Acqua', suit: 'c', from: [2, 19] },
 ];
+// Quality and traditional ruler of each sign; the planet of each weekday; the Major of each planet.
+export const SIGN_LORE = {
+  ariete: { modality: 'cardinale', ruler: 'Marte' }, toro: { modality: 'fisso', ruler: 'Venere' },
+  gemelli: { modality: 'mobile', ruler: 'Mercurio' }, cancro: { modality: 'cardinale', ruler: 'Luna' },
+  leone: { modality: 'fisso', ruler: 'Sole' }, vergine: { modality: 'mobile', ruler: 'Mercurio' },
+  bilancia: { modality: 'cardinale', ruler: 'Venere' }, scorpione: { modality: 'fisso', ruler: 'Marte' },
+  sagittario: { modality: 'mobile', ruler: 'Giove' }, capricorno: { modality: 'cardinale', ruler: 'Saturno' },
+  acquario: { modality: 'fisso', ruler: 'Saturno' }, pesci: { modality: 'mobile', ruler: 'Giove' },
+};
+// index = Date.getDay() (0 Sunday)
+export const WEEKDAYS = [
+  { name: 'domenica', planet: 'Sole' }, { name: 'lunedì', planet: 'Luna' }, { name: 'martedì', planet: 'Marte' },
+  { name: 'mercoledì', planet: 'Mercurio' }, { name: 'giovedì', planet: 'Giove' }, { name: 'venerdì', planet: 'Venere' },
+  { name: 'sabato', planet: 'Saturno' },
+];
+export const PLANET_CARD = { Luna: 'm02', Marte: 'm16', Mercurio: 'm01', Giove: 'm10', Venere: 'm03', Saturno: 'm21', Sole: 'm19' };
+// The weekday of a full date (null without the year).
+export const weekdayOf = ({ d, m, y } = {}) => (y && m && d ? WEEKDAYS[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] : null);
+// The moon on that day (noon UTC): a mean synodic month from the new moon of 6 January 2000, 18:14 UTC.
+export const SYNODIC = 29.530588853;
+const NEW_MOON_2000 = Date.UTC(2000, 0, 6, 18, 14);
+export const moonAge = ({ d, m, y } = {}) => {
+  if (!(y && m && d)) return null;
+  const days = (Date.UTC(y, m - 1, d, 12) - NEW_MOON_2000) / 86400000;
+  return ((days % SYNODIC) + SYNODIC) % SYNODIC;
+};
+export const moonOf = (birth) => {
+  const a = moonAge(birth || {});
+  if (a == null) return null;
+  const k = a / SYNODIC;
+  return k < 1 / 8 || k >= 7 / 8 ? 'nuova' : k < 3 / 8 ? 'crescente' : k < 5 / 8 ? 'piena' : 'calante';
+};
 export const signOf = (d, m) => {
   // the sign whose start is the latest one not after (m, d); January before the 20th is Capricorn
   const key = m * 100 + d;

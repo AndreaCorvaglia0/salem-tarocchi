@@ -7,6 +7,7 @@ import { openGrimoire } from './grimoire.js';
 import { foundCeremony } from './found.js';
 import { showCard } from './cardpage.js';
 import { openShop } from './shop.js';
+import './hint.js'; // interface hints on bus 'hint'
 
 provide('title.open', () => openTitle());
 provide('hud.mount', () => { mountHud(); return Promise.resolve(); });

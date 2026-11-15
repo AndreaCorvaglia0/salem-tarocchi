@@ -1,42 +1,21 @@
 // A session with the Reader: full screen, the shadow-theatre stage (stage/) and the DOM on top:
 // her lines as captions (never a face), choices as two cards of text, a paper to write on, a pad of
 // numbers. The script itself is run by runner.js; this file gives it a UI and the session nodes
-// (ask, turn, pick, observe).
+// (ask, turn, pick, observe, portrait). Captions and choices: tableui.js (paced by pace.js).
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
 import { emit } from '../core/bus.js';
 import { call } from '../core/services.js';
 import { test } from '../core/cond.js';
-import { setPlayer, foundIds, findCard } from '../core/progress.js';
+import { setPlayer, foundIds, findCard, tellCard, snapshot, hintOnce } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { SESSIONS, SCRIPTS } from '../data/story/index.js';
 import { createRunner, cardOfNumber } from './runner.js';
 import { createStage } from './stage/index.js';
+import { tableUi, TABLE_CSS } from './tableui.js';
+import { portraitLines } from './portrait.js';
 
 const CSS = `
-.ss{position:fixed;inset:0;z-index:35;background:#000;font-family:${FONT.serif};color:#efe4cc;opacity:0;transition:opacity .7s;overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation}
-.ss.on{opacity:1}
-.ss-stage{position:absolute;inset:0;opacity:0;transition:opacity 1s}
-.ss.shown .ss-stage{opacity:1}
-.ss-ui{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;gap:14px;padding:70px 18px max(18px,env(safe-area-inset-bottom));box-sizing:border-box;background:linear-gradient(rgba(3,2,6,0),rgba(3,2,6,.82) 55%);pointer-events:none}
-.ss-ui>*{pointer-events:auto}
-.ss-cap{width:min(100%,640px);min-height:1.4em;margin:0;font-size:clamp(21px,2.5vw,26px);line-height:1.42;text-align:center;text-shadow:0 2px 10px #000,0 0 3px #000;text-wrap:balance;transition:opacity .35s;pointer-events:none}
-.ss-cap.out{opacity:0}
-.ss-cap .w{opacity:0;transition:opacity .7s}
-.ss-cap .w.on{opacity:1}
-.ss-cap.thought{font-style:italic;color:#bcb4d8}
-.ss-cap.narra{font-style:italic;color:#b9ad92;font-size:clamp(19px,2.2vw,23px)}
-.ss-cap small{display:block;margin-bottom:4px;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:#a9976a}
-.ss-dot{width:7px;height:7px;border-radius:50%;background:#ffd58a;box-shadow:0 0 10px #ffb35c;opacity:0;animation:ssd 1.8s ease-in-out infinite}
-.ss-dot.on{opacity:.8}
-@keyframes ssd{50%{transform:scale(.55);opacity:.3}}
-.ss-choices{display:grid;grid-template-columns:1fr;gap:12px;width:min(100%,700px)}
-@media (min-width:720px){.ss-choices{grid-template-columns:1fr 1fr}.ss-choices.n1{grid-template-columns:1fr}}
-.ss-opt{position:relative;min-height:74px;padding:14px 18px;font:inherit;font-size:clamp(19px,2.1vw,22px);line-height:1.34;text-align:left;color:#f1e6c8;background:linear-gradient(160deg,rgba(46,30,40,.96),rgba(22,14,24,.97));border:1px solid rgba(184,154,82,.7);border-radius:7px;box-shadow:inset 0 0 0 4px rgba(10,6,12,.7),inset 0 0 0 5px rgba(184,154,82,.28),0 8px 22px rgba(0,0,0,.6);cursor:pointer;-webkit-tap-highlight-color:transparent;animation:ssu .5s ease-out both;transition:transform .25s,opacity .4s,border-color .2s}
-.ss-opt:nth-child(2){animation-delay:.1s}.ss-opt:nth-child(3){animation-delay:.2s}.ss-opt:nth-child(4){animation-delay:.3s}
-.ss-opt:hover,.ss-opt:focus-visible{border-color:#ffe08a;outline:none;transform:translateY(-3px)}
-.ss-opt.no{opacity:0;transform:scale(.97)}.ss-opt.yes{border-color:#ffe08a;box-shadow:inset 0 0 0 4px rgba(10,6,12,.7),0 0 28px rgba(255,190,90,.5)}
-@keyframes ssu{from{opacity:0;transform:translateY(14px)}}
 .ss-paper{position:relative;width:min(100%,360px);padding:16px 20px 18px;box-sizing:border-box;color:#2a2038;transform:rotate(-1.2deg);animation:ssu .6s ease-out both;background:radial-gradient(120% 100% at 50% 0,#f4ead0,#e2d3ac 70%,#cdb98a);box-shadow:0 12px 30px rgba(0,0,0,.7),inset 0 0 40px rgba(120,80,30,.25)}
 .ss-paper label{display:block;font:22px ${FONT.hand};color:#7a6a58;margin-bottom:2px}
 .ss-paper input,.ss-paper select{font-family:${FONT.hand};font-size:34px;line-height:1.1;color:#1d1830;background:transparent;border:0;border-bottom:2px solid rgba(40,30,60,.55);border-radius:0;padding:2px 4px;width:100%;box-sizing:border-box;outline:none;-webkit-appearance:none;appearance:none}
@@ -53,10 +32,7 @@ const CSS = `
 .ss-pad button{height:46px;font:600 clamp(20px,2.4vw,24px) ${FONT.serif};color:#f1e6c8;background:rgba(34,22,34,.95);border:1px solid rgba(184,154,82,.6);border-radius:6px;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ss-pad button:hover,.ss-pad button:focus-visible{border-color:#ffe08a;outline:none;background:rgba(66,40,56,.98)}
 .ss-pad button.yes{background:#6a2a3a;border-color:#ffe08a}
-.sgc{transition:opacity .5s}
-.ss.asking .sgc{opacity:.22}
-.ss-moment{position:absolute;top:max(18px,env(safe-area-inset-top));left:0;right:0;text-align:center;font:italic 20px ${FONT.serif};color:#d9c9a0;text-shadow:0 2px 8px #000;pointer-events:none;animation:ssu .5s both}
-@media (prefers-reduced-motion:reduce){.ss,.ss-stage,.ss-cap,.ss-cap .w,.ss-opt{transition:none;animation:none}.ss-paper,.ss-pad{animation:none}.ss-dot{animation:none}}
+@media (prefers-reduced-motion:reduce){.ss-paper,.ss-pad{animation:none}}
 `;
 const MONTHS = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -64,7 +40,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function playSession(id, { level: forced, warn = (...a) => console.warn('[session]', ...a) } = {}) {
   const nodes = SESSIONS[id];
   if (!Array.isArray(nodes)) { warn('no such session', id); return; }
-  css('story-session', CSS);
+  css('story-table', TABLE_CSS); css('story-session', CSS);
   const reduced = reducedMotion();
   const level = Math.max(0, Math.min(4, forced ?? (Number(/^s(\d+)$/.exec(id)?.[1]) || 0)));
   const stage = h('div.ss-stage'), ui = h('div.ss-ui');
@@ -79,66 +55,12 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
   stage.append(ui);
   setTimeout(() => root.classList.add('shown'), reduced ? 0 : 750);
 
-  // ---- tap / key plumbing: `release` is what a tap does right now
-  let release = null;
-  root.addEventListener('pointerdown', (e) => { if (e.target.closest('button,input,select,.ss-paper')) return; release?.('tap'); });
-  const onKey = (e) => {
-    if (e.target?.closest?.('input,select')) return;
-    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); release?.('tap'); }
-    else if (/^[1-4]$/.test(e.key)) release?.(`n${e.key}`);
-  };
-  window.addEventListener('keydown', onKey, true);
-
-  // ---- captions
-  let cap = null, fadeT = 0;
-  const dropCap = () => { clearTimeout(fadeT); if (cap) { const c = cap; cap = null; c.classList.add('out'); setTimeout(() => c.remove(), 380); } };
-  const lingerCap = () => { clearTimeout(fadeT); fadeT = setTimeout(dropCap, 180); };
-  async function say(who, text) {
-    dropCap();
-    if (!reduced) await sleep(120);
-    const kind = who === 'tu' ? 'thought' : who === 'narra' ? 'narra' : '';
-    const words = String(text ?? '').split(/\s+/).filter(Boolean).map((w) => h('span.w', w));
-    const label = who && !['lettrice', 'narra', 'tu'].includes(who) ? h('small', who) : null;
-    const dot = h('div.ss-dot');
-    const el = h(`p.ss-cap${kind ? `.${kind}` : ''}`, label, ...words.flatMap((w, i) => (i ? [' ', w] : [w])));
-    cap = el; ui.append(el, dot);
-    if (who === 'lettrice') scene.speak();
-    return new Promise((resolve) => {
-      let i = 0, done = false, timer = 0;
-      const all = () => { clearTimeout(timer); words.forEach((w) => w.classList.add('on')); done = true; dot.classList.add('on'); };
-      const next = () => { if (i < words.length) { words[i++].classList.add('on'); timer = setTimeout(next, 62); } else { done = true; dot.classList.add('on'); } };
-      if (reduced) all(); else next();
-      let armed = 0;
-      release = () => {
-        if (!done) { all(); armed = performance.now() + 150; return; }
-        if (performance.now() < armed) return;
-        release = null; dot.remove(); lingerCap(); resolve();
-      };
-    });
-  }
-
-  // ---- choices: two cards of text (stacked on a phone)
-  function choose(texts) {
-    clearTimeout(fadeT);
-    const list = h(`div.ss-choices${texts.length === 1 ? '.n1' : ''}`);
-    root.classList.add('asking'); // the cards on the table sit under the choices: let them recede
-    return new Promise((resolve) => {
-      const btns = texts.slice(0, 4).map((t, i) => h('button.ss-opt', { type: 'button', onclick: () => pick(i) }, t));
-      btns.forEach((b) => list.append(b)); ui.append(list);
-      const pick = async (i) => {
-        release = null;
-        btns.forEach((b, j) => b.classList.add(j === i ? 'yes' : 'no'));
-        await sleep(reduced ? 0 : 420);
-        list.remove(); dropCap(); root.classList.remove('asking'); resolve(i);
-      };
-      release = (how) => { const m = /^n(\d)$/.exec(how || ''); if (m && +m[1] <= btns.length) pick(+m[1] - 1); };
-    });
-  }
+  const T = tableUi({ root, ui, scene, reduced });
+  const { say, choose } = T, dropCap = T.dropCap;
 
   // ---- a paper to write on
-  const paper = (el) => new Promise((resolve) => { ui.append(el); el.__done = (v) => { el.remove(); resolve(v); }; });
+  const paper = (el) => new Promise((resolve) => { T.hold(); ui.append(el); el.__done = (v) => { el.remove(); resolve(v); }; });
   async function askName() {
-    clearTimeout(fadeT);
     const inp = h('input', { type: 'text', maxLength: 20, autocomplete: 'off', autocapitalize: 'words', spellcheck: false, 'aria-label': 'Il tuo nome' });
     const ok = h('button.ss-btn', { type: 'button', disabled: true }, 'Ecco');
     const el = h('div.ss-paper', h('label', 'il tuo nome'), inp, h('div.ss-btns', h('span'), ok));
@@ -152,7 +74,6 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
     setPlayer({ name });
   }
   async function askBirth(api) {
-    clearTimeout(fadeT);
     const day = h('select', { 'aria-label': 'Giorno' }, h('option', { value: '' }, '—'), ...Array.from({ length: 31 }, (_, i) => h('option', { value: i + 1 }, String(i + 1))));
     const month = h('select', { 'aria-label': 'Mese' }, h('option', { value: '' }, '—'), ...MONTHS.map((m, i) => h('option', { value: i + 1 }, m)));
     const year = h('input', { type: 'text', inputMode: 'numeric', maxLength: 4, placeholder: 'anno', 'aria-label': 'Anno', autocomplete: 'off' });
@@ -161,42 +82,42 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
     const el = h('div.ss-paper', h('label', 'quando sei nata'), h('div.ss-row', h('div', h('label', 'giorno'), day), h('div', h('label', 'mese'), month), h('div', h('label', 'anno'), year)), h('div.ss-btns', skip, ok));
     const valid = () => {
       const d = +day.value, m = +month.value, y = +year.value, max = new Date(2000, m, 0).getDate(); // 2000 is a leap year
-      return d >= 1 && m >= 1 && d <= max && y >= 1900 && y <= new Date().getFullYear();
+      const yearOk = !year.value || (y >= 1900 && y <= new Date().getFullYear()); // the year may stay empty
+      return d >= 1 && m >= 1 && d <= max && yearOk;
     };
     const check = () => { ok.disabled = !valid(); };
     [day, month, year].forEach((e) => e.addEventListener('input', check));
     year.addEventListener('input', () => { year.value = year.value.replace(/\D/g, ''); check(); });
-    ok.addEventListener('click', () => el.__done({ d: +day.value, m: +month.value, y: +year.value }));
+    ok.addEventListener('click', () => el.__done({ d: +day.value, m: +month.value, y: +year.value || null }));
     skip.addEventListener('click', () => el.__done(null));
     const birth = await paper(el);
     dropCap();
-    if (birth) {
-      setPlayer({ birth });
-      await say('lettrice', api.F('{sign}. Per nascita, la tua carta è {birthCard}.'));
-    } else await say('lettrice', 'Va bene. Alcune cose si dicono più tardi.');
+    if (birth) setPlayer({ birth }); // the session's own lines follow (with a hasBirth: false branch)
+    void api;
   }
 
   // ---- "dimmi un numero": a pad of 22
   function padNumber() {
-    clearTimeout(fadeT);
+    T.hold();
     const wrap = h('div.ss-pad');
     root.classList.add('asking');
     return new Promise((resolve) => {
       for (let n = 1; n <= 22; n++) wrap.append(h('button', { type: 'button', onclick: async (e) => { e.currentTarget.classList.add('yes'); await sleep(reduced ? 0 : 280); wrap.remove(); dropCap(); root.classList.remove('asking'); resolve(n); } }, String(n)));
       ui.append(wrap);
+      hintOnce('number');
     });
   }
 
   const sessionUi = {
     say, choose,
     cinema: async (lines) => { for (const l of lines) await say('narra', l); },
-    moment: async (text) => { const el = h('div.ss-moment', text); root.append(el); await sleep(1700); el.remove(); },
+    moment: T.moment,
     sleep,
   };
   const ext = async (node, api) => {
     if (node.ask === 'name') { await askName(); return true; }
     if (node.ask === 'birth') { await askBirth(api); return true; }
-    if (node.turn) { dropCap(); call('sound.play', 'card'); await scene.layCard(node.turn); findCard(node.turn); return true; } // a card turned for her is hers (the Fool)
+    if (node.turn) { dropCap(); call('sound.play', 'card'); await scene.layCard(node.turn); findCard(node.turn); tellCard(node.turn); return true; } // a card the Reader turns for her is hers, and told (the Fool)
     if (node.symbol) { dropCap(); await scene.symbol(node.symbol); return true; } // a smoke symbol: { symbol: 'moon' }
     if (node.tableau) { dropCap(); await scene.tableau(node.tableau); return true; } // another picture: { tableau: 'last' }
     if (node.shuffle) { dropCap(); await scene.shuffle(); return true; }
@@ -205,9 +126,11 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
       api.vars.picked = CARD[cid]?.name || cid; api.vars.pickedId = cid; api.vars.pickedNumber = n;
       call('sound.play', 'card');
       await scene.layCard(cid);
+      if (node.read?.[cid]) await say('lettrice', api.F(node.read[cid])); // what that card says to her now
       await api.exec(node.then);
       return true;
     }
+    if (node.portrait) { await portrait(api); return true; }
     if (node.observe) {
       const hit = node.observe.find((o) => o && test(o.when));
       if (hit) await say('lettrice', api.F(hit.t));
@@ -215,14 +138,19 @@ export async function playSession(id, { level: forced, warn = (...a) => console.
     }
     return false;
   };
+  // the final portrait (portraitLines below)
+  async function portrait(api) {
+    for (const line of portraitLines()) await say('lettrice', api.F(line));
+  }
   const runner = createRunner({ ui: sessionUi, call, ext, getScript: (sid) => SESSIONS[sid] || SCRIPTS[sid], warn });
-  try { await sleep(reduced ? 0 : 1500); await runner.run(nodes); } finally {
-    dropCap();
+  // the room and the candle are seen for a breath before the first line
+  try { await sleep(reduced ? 0 : 3000); await runner.run(nodes); } finally {
+    snapshot(); // every encounter with the Reader leaves a snapshot of the portrait
+    T.dispose();
     root.classList.remove('shown');
     await sleep(reduced ? 0 : 900);
     root.classList.remove('on');
     await sleep(reduced ? 0 : 750);
-    window.removeEventListener('keydown', onKey, true);
     scene.dispose(); close(); emit('cinema', false);
     call('sound.hold', null); call('sound.back');
   }

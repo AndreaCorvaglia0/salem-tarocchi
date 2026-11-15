@@ -26,10 +26,8 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
 
   const pool = R.examPool({ kind, owned: ownedIds(), majors: MAJORS.map((c) => c.id) });
   let s = R.newExam({ kind, chapter, exams: mercyNow });
-  let qs = [];
-  try { qs = makeExam({ kind, pool, level: chapter, n: s.total, rng }) || []; } catch { qs = []; }
-  while (qs.length < s.total) qs.push(makeQuestion({ pool, level: chapter, rng }));
-  qs = qs.slice(0, s.total);
+  // told cards may be asked what they say; the others only recognised (R.buildQuestions)
+  const qs = R.buildQuestions({ kind, pool, told: state.told || {}, n: s.total, level: chapter, rng, makeExam, makeQuestion });
 
   const head = header(kind);
   const scr = screen({ cls: 'sxe' });

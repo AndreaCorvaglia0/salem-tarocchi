@@ -170,3 +170,17 @@ test('ext handles session nodes and shares {picked}', async () => {
 test('cardOfNumber: 22 is the Fool', () => {
   assert.equal(cardOfNumber(1), 'm01'); assert.equal(cardOfNumber(21), 'm21'); assert.equal(cardOfNumber(22), 'm00');
 });
+
+test('portrait nodes: option trait, do trait, verdict, visit; a question line is marked', async () => {
+  setState({ player: { birthCard: 'm11' } });
+  const m = make({ choices: [1] });
+  await m.r.run([
+    { do: 'trait', trait: { tono: 2 } }, { do: 'trait', parola: -1 },
+    { say: 'lettrice', t: 'Domanda?' },
+    { choice: [{ t: 'A', trait: { guida: 1 } }, { t: 'B', trait: { guida: -1 } }] },
+    { do: 'verdict' }, { do: 'visit', force: true },
+  ]);
+  assert.equal(state.traits.tono, 2); assert.equal(state.traits.parola, -1); assert.equal(state.traits.guida, -1);
+  assert.equal(state.verdicts.length, 1);
+  assert.deepEqual(m.calls.find((c) => c[0] === 'story.visit'), ['story.visit', { force: true }]);
+});

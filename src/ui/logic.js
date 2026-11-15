@@ -38,7 +38,6 @@ export function nextStep(s = live, steps = STEPS) {
 // ---- the shop
 export const TOOLS = {
   bottle: { id: 'bottle', short: 'bottiglia', name: 'Bottiglia della strega', line: 'Per un po\' nessuno mi ferma.', price: 12 },
-  sieve: { id: 'sieve', short: 'setaccio', name: 'Setaccio e cesoie', line: 'Indicano la carta nascosta più vicina.', price: 8 },
   incense: { id: 'incense', short: 'incenso', name: 'Incenso', line: 'Calma un Esame: toglie sospetto.', price: 10 },
   pendulum: { id: 'pendulum', short: 'pendolo', name: 'Pendolo', line: 'Toglie una risposta sbagliata.', price: 10 },
 };

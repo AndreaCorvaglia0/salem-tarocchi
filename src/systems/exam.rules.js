@@ -20,6 +20,23 @@ export const examPool = ({ kind, owned = [], majors = [] }) => {
   return pool;
 };
 
+// What she may be asked about a card: only a card the Reader has told (a visit, or turned for her like
+// the Fool) can be asked what it says; the others only to be recognised (name, detail).
+export const RECOGNIZE = ['name', 'detail'];
+export const toldPool = (pool, told = {}) => pool.filter((id) => id === 'm00' || !!told[id]);
+// how many of n questions go to the told cards: their share of the pool, at least one when there are any
+export const toldShare = (n, pool, told) => (told.length ? Math.max(1, Math.min(n, Math.round((n * told.length) / Math.max(1, pool.length)))) : 0);
+// the questions of an Exam: makeExam on the told cards (any kind), makeQuestion(name|detail) on the rest
+export function buildQuestions({ kind, pool, told = {}, n, level, rng = Math.random, makeExam, makeQuestion }) {
+  const tp = toldPool(pool, told), k = toldShare(n, pool, tp);
+  let qs = [];
+  try { qs = k ? (makeExam({ kind, pool: tp, level, n: k, rng }) || []).slice(0, k) : []; } catch { qs = []; }
+  const used = qs.map((q) => q.cardId).filter(Boolean);
+  while (qs.length < n) { const q = makeQuestion({ pool, kinds: RECOGNIZE, level, rng, exclude: used }); if (q?.cardId) used.push(q.cardId); qs.push(q); }
+  for (let i = qs.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [qs[i], qs[j]] = [qs[j], qs[i]]; }
+  return qs;
+}
+
 export const newExam = ({ kind, chapter = 1, exams = 0, total } = {}) => ({
   kind, total: total ?? questionCount(kind, chapter), asked: 0, right: 0, wrong: 0, skipped: 0,
   suspicion: confOf(kind).start, mercy: exams < 2, forgiven: 0, over: false,

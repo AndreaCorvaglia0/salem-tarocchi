@@ -15,6 +15,7 @@ import { Smoke } from './smoke.js';
 import { createCards } from './cards.js';
 import { canvas } from './draw.js';
 import { rnd, clamp, ease } from './kit.js';
+import { gate, isTapKey } from '../pace.js';
 
 const imgs = new Map();
 const loadImg = (id, onload) => {
@@ -143,24 +144,29 @@ export async function playTableau(name, lines, { skip: canSkip = true, via } = {
   const stage = createStage(holder, { tableau: TABLEAUX[name] ? name : 'arrival' });
   void via;
   requestAnimationFrame(() => root.classList.add('in'));
-  let skipped = false, next = null;
-  const tap = () => { const f = next; next = null; f?.(); };
+  let skipped = false, g = null;
+  const tap = () => { if (skipped) { g?.cancel(); return; } g?.tap(); }; // the tap gate (story/pace.js)
   root.addEventListener('pointerdown', (e) => { if (e.target === skipBtn) return; e.preventDefault(); tap(); });
   skipBtn?.addEventListener('click', (e) => { e.stopPropagation(); skipped = true; tap(); });
   const onKey = (e) => {
     if (e.key === 'Escape' && canSkip) { e.preventDefault(); skipped = true; tap(); }
-    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); tap(); }
+    else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); if (isTapKey(e)) tap(); }
   };
   window.addEventListener('keydown', onKey, true);
   const sleep = (ms) => new Promise((r) => setTimeout(r, calm ? Math.min(ms, 200) : ms));
   try {
-    await sleep(1300); // the picture first, then the words
+    await sleep(1800); // the picture first, then the words
     for (const line of list) {
       if (skipped) break;
-      cap.textContent = line; void cap.offsetWidth; cap.classList.add('on');
-      const hintT = setTimeout(() => hint.classList.add('on'), 2400);
-      await new Promise((r) => { next = r; });
-      clearTimeout(hintT); hint.classList.remove('on'); cap.classList.remove('on');
+      cap.textContent = line; void cap.offsetWidth;
+      let t = 0;
+      g = gate({
+        start: (done) => { cap.style.transition = ''; cap.classList.add('on'); t = setTimeout(done, calm ? 0 : 850); },
+        finish: () => { clearTimeout(t); cap.style.transition = 'none'; },
+        onReady: () => hint.classList.add('on'),
+      });
+      await g.done;
+      g = null; hint.classList.remove('on'); cap.style.transition = ''; cap.classList.remove('on');
       await sleep(420);
     }
   } finally {

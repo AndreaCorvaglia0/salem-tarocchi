@@ -8,7 +8,7 @@ import { h, css, cardUrl, openOverlay, reducedMotion } from '../core/dom.js';
 import { state } from '../core/state.js';
 import { CARD } from '../data/cards.base.js';
 import { sheet } from '../data/cards.js';
-import { findCard, setDetail, setWords } from '../core/progress.js';
+import { findCard, setDetail, setWords, hintOnce } from '../core/progress.js';
 import { HAND, SERIF, GOLD, INK, baseCss } from './paper.js';
 import { cardBack } from './art.js';
 import { nearestDetail } from './logic.js';
@@ -83,6 +83,7 @@ export function foundCeremony(id) {
       say.textContent = 'Guarda. Cosa ti colpisce?';
       // the rings come after a moment of just looking
       const ringT = setTimeout(() => el.classList.add('rings'), 1400);
+      if (details.length) hintOnce('detail');
       detail = await new Promise((res) => {
         if (!details.length) { setTimeout(() => res(null), 1200); return; }
         hit.onclick = (e) => {
@@ -103,6 +104,7 @@ export function foundCeremony(id) {
       stage.style.width = `${Math.round(W * k)}px`; stage.style.height = `${Math.round(H * k)}px`;
       say.textContent = '';
       el.classList.add('writing');
+      hintOnce('words');
       const acts = h('div.fd-acts');
       words.append(acts);
       const mine = await new Promise((res) => {

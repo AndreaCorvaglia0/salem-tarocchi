@@ -34,7 +34,7 @@ export function prepare(key, anchors = {}) {
   for (const l of k.lessons) state.lessons[l] = true;
   for (const f of k.flags) state.flags[f] = true;
   for (const [who, n] of Object.entries(k.trust)) addTrust(who, n);
-  state.chapter = k.chapter; state.step = k.step; state.coins = 25; state.tools.bottle = 1; state.tools.sieve = 1;
+  state.chapter = k.chapter; state.step = k.step; state.coins = 25; state.tools.bottle = 1;
   state.world.once.road = true;
   const a = anchors[k.at];
   if (a) state.pos = { map: a.map, x: a.x + (k.near?.[0] || 0), y: a.y + (k.near?.[1] || 0) };

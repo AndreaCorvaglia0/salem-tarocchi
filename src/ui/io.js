@@ -6,7 +6,7 @@ import { call } from '../core/services.js';
 import { state } from '../core/state.js';
 import { CARD, SIGNS } from '../data/cards.base.js';
 import { sheet } from '../data/cards.js';
-import { levelProgress, titleOf, yourCard, lastDiary } from '../core/progress.js';
+import { levelProgress, titleOf, yourCard, lastDiary, traitWords } from '../core/progress.js';
 import { INK, PENCIL, RED, inkBar, svgEl } from './paper.js';
 import { TOOL_ART, purse, fan, silhouette } from './art.js';
 import { nextStep, foundMajors, slotOf, TOOLS } from './logic.js';
@@ -21,6 +21,7 @@ const CSS = `
 .io-card .lb{display:block;color:${PENCIL};font-size:18px;line-height:22px}
 .io-card .nm{display:block;font-weight:700;font-size:25px;line-height:30px}
 .io-card .ln{display:block;line-height:27px;margin-top:2px}
+.io-card .tw{display:block;margin-top:8px;font-size:24px;line-height:28px;color:${INK};transform:rotate(-1.5deg)}
 .io-birth{display:flex;gap:12px;align-items:center;margin:18px 0 0 6px}
 .io-birth .im{flex:none;width:38px;height:65px;border:2px solid #fbf5e6;box-shadow:0 2px 5px #5a452c66;transform:rotate(3deg)}
 .io-birth .im.ghost{border:0;box-shadow:none}
@@ -43,7 +44,7 @@ const CSS = `
 @media (max-width:719px){.io-card{gap:14px}.io-card .im{width:96px;height:164px}}
 `;
 
-const USABLE = { bottle: 'stappa', sieve: 'usa' };
+const USABLE = { bottle: 'stappa' };
 const thumb = (id, cls, { ghostRoman } = {}) => {
   const sl = slotOf(id);
   if (sl.kind === 'missing' || sl.kind === 'taken') { const g = h(`div.im.ghost${cls ? `.${cls}` : ''}`); g.append(svgEl(silhouette(ghostRoman ?? CARD[id]?.roman ?? ''))); return g; }
@@ -57,14 +58,18 @@ export function ioPages(ctx) {
   const lp = levelProgress();
   const L = [];
   L.push(h('div.io-name', h('h2', {}, name || 'Io')));
-  L.push(h('div.io-lv', h('span.t', {}, `${titleOf(lp.level)} · ${lp.level}`), inkBar(lp.level >= 9 ? 1 : lp.into, { w: 150, h: 13 })));
+  L.push(h('div.io-lv', h('span.t', {}, `${titleOf(lp.level)} · ${lp.level}`), inkBar(lp.top ? 1 : lp.into, { w: 150, h: 13 })));
   // my card
   const mine = yourCard(), mineFound = slotOf(mine).kind !== 'missing';
   const S = sheet(mine) || {};
+  // three handwritten words of how I am (the portrait), when there are any: "Curiosa, schietta, gentile."
+  const words = traitWords();
+  const tw = words.length ? `${words.join(', ').replace(/^./, (c) => c.toUpperCase())}.` : null;
   L.push(h('div.io-card', thumb(mine), h('div', {},
     h('span.lb', {}, 'La mia carta'),
     h('span.nm', {}, CARD[mine]?.name || 'Il Matto'),
-    h('span.ln', {}, mineFound ? (S.core || (CARD[mine]?.words || []).join(', ')) : 'Non l\'ho ancora trovata.'))));
+    h('span.ln', {}, mineFound ? (S.core || (CARD[mine]?.words || []).join(', ')) : 'Non l\'ho ancora trovata.'),
+    tw ? h('span.tw', {}, tw) : null)));
   // the card of my sign, smaller
   const bc = state.player?.birthCard, sign = SIGNS.find((x) => x.id === state.player?.sign);
   if (bc && CARD[bc]) L.push(h('div.io-birth', thumb(bc), h('p', {}, `La carta del mio segno, ${sign?.name || ''}: ${CARD[bc].name}.`)));
@@ -83,7 +88,7 @@ export function ioPages(ctx) {
   for (const [id, n] of Object.entries(state.tools || {})) {
     if (!(n > 0) || !TOOL_ART[id]) continue;
     const kids = [svgEl(TOOL_ART[id]({ size: 52 })), h('span', {}, `${TOOLS[id]?.short || ''}${n > 1 ? ` ×${n}` : ''}`)];
-    // the bottle and the sieve are used from here (the grimoire closes, a note says what happened)
+    // the bottle is used from here (the grimoire closes, a note says what happened)
     if (!study && USABLE[id]) things.push(h('button.io-thing.use', { type: 'button', title: TOOLS[id]?.name, onclick: () => { ctx.close?.(); call('tool.use', id); } }, ...kids, h('em', {}, USABLE[id])));
     else things.push(h('div.io-thing', { title: TOOLS[id]?.name }, ...kids));
   }

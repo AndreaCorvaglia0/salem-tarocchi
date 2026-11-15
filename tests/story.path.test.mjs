@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { setState, state } from '../src/core/state.js';
-import { findCard, setPlayer, levelOf } from '../src/core/progress.js';
+import { findCard, setPlayer, levelOf, addXp } from '../src/core/progress.js';
 import { test as cond } from '../src/core/cond.js';
 import { MAJORS } from '../src/data/cards.base.js';
 import { SCRIPTS, SESSIONS, STEPS, CAST } from '../src/data/story/index.js';
@@ -21,6 +21,7 @@ function play(pick) {
     if (n.pick === 'number') { api.vars.picked = cardOfNumber(7); return (await api.exec(n.then)) || true; }
     if (n.observe) { assert.ok(n.observe.some((o) => cond(o.when)), 'no observe line holds'); return true; }
     if (n.empty || n.symbol || n.tableau) return true; // the last image (session.js)
+    if (n.portrait || n.shuffle) return true; // the final portrait, the Reader shuffling (session.js)
     return false;
   };
   const call = async (name, arg) => {
@@ -28,6 +29,7 @@ function play(pick) {
     if (name === 'draw.pick') return arg.pool.find((id) => !state.cards[id]?.found) || arg.pool[0];
     if (name === 'exam.start') return { passed: pick.pass };
     if (name === 'story.session') return runner.exec(SESSIONS[arg]);
+    if (name === 'story.visit') return false; // visits are composed from TALK (tests/story.visit.test.mjs)
     return null;
   };
   let choiceN = 0;
@@ -40,7 +42,8 @@ async function walkPath(pick) {
   const { runner, warnings } = play(pick);
   await runner.run(SESSIONS.s0);
   const seen = [];
-  for (let guard = 0; guard < 80 && state.step !== 'post.minors'; guard++) {
+  let studied = 0;
+  for (let guard = 0; guard < 140 && state.step !== 'post.minors'; guard++) {
     const before = state.step;
     seen.push(before);
     const at = STEPS.find((s) => s.id === before).at;
@@ -49,9 +52,11 @@ async function walkPath(pick) {
     await runner.run(entry.script);
     if (state.step === before) {
       // a gate refused: find the next missing Major with a spot, like a player would
+      // a gate refused: find the next missing Major with a spot, like a player would; with none left,
+      // she studies (a client, a review): xp until the level gate opens
       const next = MAJORS.find((c) => c.spot && !state.cards[c.id]?.found && c.row <= state.chapter && c.id !== 'm07');
-      assert.ok(next, `stuck at ${before}`);
-      findCard(next.id);
+      if (next) findCard(next.id);
+      else { assert.ok(studied < 30, `stuck at ${before}`); studied++; addXp(25, 'study'); }
     }
   }
   return { seen, warnings };

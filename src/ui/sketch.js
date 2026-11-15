@@ -1,7 +1,8 @@
 // The map tab: the three places of the story as ink sketches drawn in code (not the tile map).
 // Each region is a hand-drawn schematic: lanes between places, a small drawing per place, the name
 // in pencil. Places not yet seen stay blank; the next one is circled in red pencil; "× io" where she is.
-// sketch(region, { width, seen, next, here, onPick }) -> element
+// sketch(region, { width, seen, next, here, onPick, notes }) -> element
+// notes: [{ place, text }] side missions, a pencil note written beside their place
 import { h } from '../core/dom.js';
 import { INK, PENCIL, RED, HAND, canvas, rnd } from './paper.js';
 
@@ -102,7 +103,7 @@ function mark(g, kind, k) {
   g.restore(); g.stroke();
 }
 
-export function sketch(regionId, { width = 320, seen = () => false, next = null, here = null, onPick = null } = {}) {
+export function sketch(regionId, { width = 320, seen = () => false, next = null, here = null, onPick = null, notes = [] } = {}) {
   const R = REGIONS[regionId], W = Math.round(width), H = Math.round(width * R.ratio), d = Math.min(2, globalThis.devicePixelRatio || 1);
   const [cv, g] = canvas(W * d, H * d);
   cv.style.width = `${W}px`; cv.style.height = `${H}px`;
@@ -141,6 +142,13 @@ export function sketch(regionId, { width = 320, seen = () => false, next = null,
       if (onPick) wrap.append(h('button.sk-hit', { type: 'button', 'aria-label': p.label, style: { left: `${x}px`, top: `${y}px` }, onclick: (e) => onPick(id, p, e.currentTarget) }));
     }
   }
+  for (const n of notes) {
+    if (!R.places[n.place] || !n.text) continue;
+    const [x, y] = P(n.place);
+    const el = h('span.sk-note', { style: { left: `${x}px`, top: `${y - 20 * k}px` } }, n.text);
+    if (x < W * 0.3) el.classList.add('sk-l'); else if (x > W * 0.7) el.classList.add('sk-r');
+    wrap.append(el);
+  }
   if (here && R.places[here]) {
     const [x, y] = P(here);
     wrap.append(h('span.sk-me', { style: { left: `${x + 13 * k}px`, top: `${y - 14 * k}px` } }, '×', h('i', {}, ' io')));
@@ -153,6 +161,9 @@ export const SKETCH_CSS = `
 .sk canvas{display:block}
 .sk-lab{position:absolute;transform:translate(-50%,0);font:18px/19px ${HAND};color:${PENCIL};white-space:nowrap;pointer-events:none;padding:0 4px;border-radius:6px;background:#ede2c5e0}
 .sk-lab.sk-l{transform:translate(-30%,0)}.sk-lab.sk-r{transform:translate(-75%,0)}
+.sk-note{position:absolute;transform:translate(-50%,-100%) rotate(-3deg);max-width:130px;font:italic 16px/17px ${HAND};color:${PENCIL};text-align:center;pointer-events:none;padding:1px 5px;background:#ede2c5cc;border-bottom:1px dashed ${PENCIL}}
+.sk-note::before{content:'✎ '}
+.sk-note.sk-l{transform:translate(-20%,-100%) rotate(-3deg)}.sk-note.sk-r{transform:translate(-80%,-100%) rotate(-3deg)}
 .sk-hit{position:absolute;width:48px;height:48px;transform:translate(-50%,-50%);border:0;background:none;border-radius:50%;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .sk-hit:focus-visible{outline:2px dashed ${RED}}
 .sk-hit.on{outline:2px dashed ${RED};outline-offset:-4px}

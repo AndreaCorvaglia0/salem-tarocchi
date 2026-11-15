@@ -7,6 +7,7 @@ import { cinema as barsCinema } from './cinema.js';
 import { playTableau } from './stage/index.js';
 import { sceneFor } from './stage/tableaux.js';
 import { playSession } from './session.js';
+import { playVisit } from './visit.js';
 
 // a shadow-theatre tableau when the node has (or implies) a scene, else the black-bars fallback
 const cinema = (lines, node = {}) => { const s = sceneFor(node); return s ? playTableau(s, lines) : barsCinema(lines); };
@@ -20,4 +21,6 @@ provide('story.run', (scriptId) => runner.run(scriptId));
 provide('story.say', (who, text) => dialogue.say(who, text).then(() => dialogue.end()));
 provide('story.choose', (options) => dialogue.choose(options.map((o) => o.t)).then((i) => { dialogue.end(); return i; }));
 provide('story.session', (id) => playSession(id));
+provide('story.visit', (o = {}) => playVisit(o));
+provide('story.busy', () => Promise.resolve(runner.busy)); // a script is running (the broom waits)
 export { runner, dialogue, cinema };
