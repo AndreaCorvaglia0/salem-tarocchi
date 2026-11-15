@@ -12,7 +12,7 @@ import { SFX_NAMES } from './sfx.js';
 import { MOOD_NAMES } from './moods.js';
 import { musicOn, sfxOn, makeThrottle, wantsMood } from './gate.js';
 import { lookahead } from './theory.js';
-import { createTracks } from './tracks.js';
+import { createTracks, cueFor } from './tracks.js';
 
 const TICK = 0.25; // seconds between scheduler runs
 let ctx = null, engine = null, timer = null, armed = false, broken = false;
@@ -28,6 +28,7 @@ function start() {
     if (!AC) { broken = true; return; }
     ctx = new AC();
     engine = createEngine(ctx, { seed: (Date.now() & 0xffff) || 1 });
+    tracks.attach(ctx);
     apply();
     timer = setInterval(tick, TICK * 1000);
     resume();
@@ -41,7 +42,7 @@ function onVisible() {
 }
 // bring the graph in line with the settings and the wanted mood (called on every change)
 function apply() {
-  try { tracks.setOn(musicOn(state)); tracks.setDuck(ducked); tracks.setMood(want.name); } catch (e) { console.warn('[sound] tracks', e?.message || e); }
+  try { tracks.setOn(musicOn(state)); tracks.setDuck(ducked); tracks.setCue(cueFor(want.name, { map: state.pos?.map, chapter: state.chapter, ended: !!state.flags?.['ending.seen'] })); } catch (e) { console.warn('[sound] tracks', e?.message || e); }
   if (!engine) return;
   try {
     engine.setMusicOn(false); engine.setMood(null); running = false;
@@ -78,7 +79,7 @@ function arm() {
   armed = true;
   // iOS 17+: play like a game, also with the ring switch on silent
   try { if (globalThis.navigator?.audioSession) globalThis.navigator.audioSession.type = 'playback'; } catch { /* ignore */ }
-  const go = () => { apply(); tracks.gesture(); if (!musicOn(state)) unmute(); if (!ctx) start(); else resume(); };
+  const go = () => { if (!ctx) start(); else resume(); apply(); tracks.gesture(); unmute(); };
   globalThis.document?.addEventListener?.('visibilitychange', onVisible);
   for (const ev of ['touchend', 'pointerup', 'click', 'keydown']) window.addEventListener(ev, go, { capture: true, passive: true });
 }
@@ -94,6 +95,7 @@ export function mood(name, opts) {
   const w = wantsMood(name, opts, MOOD_NAMES);
   if (!w) { console.warn(`[sound] unknown mood "${name}"`); return; }
   want = w; apply();
+  setTimeout(apply, 350); // the world reports the new map a moment after asking for its mood
 }
 export function stop() { want = { name: null, opts: {} }; apply(); }
 function setSetting(k, v) { state.settings[k] = !!v; save(); apply(); emit('settings', state.settings); }
@@ -110,7 +112,12 @@ on('card:star', () => play('star'));
 on('level:up', () => play('level'));
 on('coins', (e) => { if (!e || !(e.n < 0)) play('coin'); }); // spending (n < 0) stays silent
 on('cinema', (v) => { ducked = !!v; apply(); });
-// 'chapter': nothing, on purpose
+on('chapter', () => apply()); // the village changes its piece with the season
+on('flag', (e) => { if (e?.k === 'ending.seen') apply(); });
+// the music steps back when something else should be heard
+on('card:found', () => tracks.dip(0.4, 3.5));
+on('level:up', () => tracks.dip(0.4, 3));
+on('patrol:seen', () => tracks.dip(0.3, 6));
 
 arm();
 
