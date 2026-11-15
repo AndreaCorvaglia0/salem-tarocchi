@@ -44,11 +44,14 @@ lunga, 6 porte sigillate, 7 stordire, 8 scopa (viaggio rapido), 9 Strega fatta.
 
 ## I personaggi (ognuno incarna una carta)
 
-- **Tu**: nome e nascita li dai tu. Il Matto.
-- **Ginepra** (Il Carro): novizia come te, impulsiva, ride nei momenti sbagliati. Prima ti soffia le carte, poi è la tua amica.
-- **Comare Malva** (L'Imperatrice): levatrice, brusca, non ringrazia mai ("porta male"), ti vuole bene di nascosto.
-- **Ortica** (Il Mago): vive nel bosco, parla senza sosta, sa i fatti di tutti.
-- **Nonna Edera** (La Sacerdotessa): vecchissima, scorda il tuo nome, ricorda ogni carta.
+Le streghe sono i personaggi positivi della storia e sono tutte belle, ognuna a modo suo: giovani o
+mature, mai gobbe, mai caricature. È una storia di ragazze forti.
+
+- **Tu**: nome e nascita li dai tu. Una strega giovane e bella, cappello a punta, mantello scuro. Il Matto.
+- **Ginepra** (Il Carro): novizia come te, capelli rossi, mantello blu ginepro. Impulsiva, ride nei momenti sbagliati. Prima ti soffia le carte, poi è la tua amica.
+- **Comare Malva** (L'Imperatrice): levatrice, una bella donna sui quarant'anni, forte, treccia a corona, scialle verde. Brusca, non ringrazia mai ("porta male"), ti vuole bene di nascosto.
+- **Ortica** (Il Mago): vive nel bosco, chioma selvaggia, occhi vivi. Parla senza sosta, sa i fatti di tutti.
+- **Nonna Edera** (La Sacerdotessa): la più grande di tutte: capelli d'argento raccolti alti, elegante, regale. Scorda il tuo nome, ricorda ogni carta.
 - **Tartufo** (La Luna): gatto nero, voce ironica. Fiuta le carte nascoste, rizza il pelo se arriva un conestabile, un suggerimento per Esame.
 - **Il Giudice** (L'Imperatore): educato, paziente, convinto di fare il bene. Fa paura per questo.
 - **Conestabili e Afflitte**: chi ti ferma per strada. Niente inquisitori.
@@ -90,8 +93,9 @@ Ginepra viene sempre presa e sempre salvata. Varia come, con chi, cosa vi dite.
 
 ## Le sedute con la Lettrice
 
-Illustrate (non pixel): un tavolo, una candela, due mani, le carte vere. Cinque: prologo, dopo ogni
-capitolo, finale. Brevi. In ognuna: due o tre domande a due risposte, ad albero (la seconda dipende dalla
+Non in pixel: **teatro d'ombre** (vedi "Stile"). Luce di candela, sagome di carta ritagliata, fumo, e le
+carte vere. Niente mani, niente manichini, niente personaggi animati: immagini che si trasformano piano.
+La Lettrice è una sagoma ferma o soltanto una voce. Cinque: prologo, dopo ogni capitolo, finale. Brevi. In ognuna: due o tre domande a due risposte, ad albero (la seconda dipende dalla
 prima); un confronto con un fatto vero della partita ("In piazza hai taciuto. Lo rifaresti?"); "dimmi un
 numero" e la carta girata; qual è adesso la tua carta. La Lettrice osserva e annota, non giudica, non
 spiega chi sei. Temi: 0 chi sei, 1 valori, 2 paure, 3 sogni, 4 restituisce. Ogni foglia dà punti a una
@@ -157,7 +161,15 @@ gioco: il prossimo passo in una riga e la barra del livello. Nient'altro.
 
 ## Stile
 
-- Mondo in pixel art disegnata nel codice, notturna, stagioni per capitolo. Sedute e primi piani illustrati.
-- Tre voci: pixel per il mondo, mano per il grimorio, serif antico per sedute ed Esame.
+Due registri.
+
+- **Il mondo**: pixel art disegnata nel codice, notturna, stagioni per capitolo.
+- **Il racconto** (sedute, filmati, ritratti): teatro d'ombre. Un racconto per immagini, non un filmato:
+  quadri fermi di sagome ritagliate su una luce calda di lanterna, che si trasformano piano (dissolvenze,
+  parallasse lenta, fumo e inchiostro che prendono forma, il tremolio della fiamma). Si mostra il meno
+  possibile. Mai mani in movimento, mai figure che camminano o gesticolano male: se una cosa non si può
+  fare bene, non si mostra. Le carte vere sono le protagoniste. I ritratti dei dialoghi sono cammei di
+  profilo: sagome eleganti con pochi accenti di colore (capelli, un gioiello).
+- Tre voci: pixel per il mondo, mano per il grimorio, serif antico per racconto ed Esame.
 - Il riferimento è Mnemopolis (`/home/claude/mnemopolis`, sola lettura): taccuino, momenti da film,
   "ricordare", serrature. Si prende l'impianto e quello che funziona.
