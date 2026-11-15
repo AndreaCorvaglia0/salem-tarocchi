@@ -10,7 +10,10 @@ export class Input {
   constructor(scene) {
     this.scene = scene;
     this.path = []; this.target = null; this.pendingUse = false; this.actQueued = false;
-    this.keys = scene.input.keyboard?.addKeys('W,A,S,D,UP,DOWN,LEFT,RIGHT,SPACE,ENTER,E');
+    // no capture: Phaser would otherwise swallow these letters everywhere, also in the text fields
+    // of the overlays (her three words for a card could not contain a, e, s, d, w or a space)
+    this.keys = scene.input.keyboard?.addKeys('W,A,S,D,UP,DOWN,LEFT,RIGHT,SPACE,ENTER,E', false);
+    scene.input.keyboard?.disableGlobalCapture?.();
     this.marker = scene.add.graphics().setDepth(8999).setVisible(false);
     scene.input.on('pointerup', (p) => this.tap(p));
   }
