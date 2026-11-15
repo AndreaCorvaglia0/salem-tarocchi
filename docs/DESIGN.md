@@ -61,8 +61,7 @@ prossimo, a destra; poi la colonna a destra dal basso: 7 tu adesso, 8 l'ambiente
 | Stesa | Carta singola | Passato-presente-futuro | Croce celtica |
 | Maestra | Comare Malva | Ortica | Nonna Edera |
 
-Il Matto (0) è la giocatrice. Poteri per livello: 2 Tartufo, 3 bottega, 4 fuoco (vedi nel buio), 5 vista
-lunga, 6 porte sigillate, 7 stordire, 8 scopa (viaggio rapido), 9 Strega fatta.
+Il Matto (0) è la giocatrice. Le magie per livello sono in "Missioni, crescita, magie".
 
 ## I personaggi (ognuno incarna una carta)
 
@@ -122,6 +121,59 @@ prima); un confronto con un fatto vero della partita ("In piazza hai taciuto. Lo
 numero" e la carta girata; qual è adesso la tua carta. La Lettrice osserva e annota, non giudica, non
 spiega chi sei. Temi: 0 chi sei, 1 valori, 2 paure, 3 sogni, 4 restituisce. Ogni foglia dà punti a una
 carta e lascia una parola (valore, paura, sogno).
+
+## Missioni, crescita, magie
+
+**La curva.** L'inizio è un tutorial in cui non si può sbagliare. Poi il gioco resta chiarissimo e veloce:
+si guadagnano cose in fretta. Quando lei sa già leggere una carta, fare un ripasso e muoversi, il gioco
+rallenta un poco e la lascia più libera. Dopo il finale è un mondo aperto.
+
+**Missioni principali.** Sono la storia: una alla volta, sempre scritta in alto. Si può andare dritte fino
+al finale senza fare altro. Durata da tenere d'occhio: un'ora, un'ora e mezza.
+
+**I due cancelli.** Per passare al capitolo 2 bisogna essere Fattucchiera (livello 4), per il capitolo 3
+Strega (livello 7), oltre alle carte del capitolo. Finché non lo è, la trattano da principiante e glielo
+dicono con parole loro: «Non sei ancora pronta. Torna quando avrai letto qualche carta in più.» È il
+momento in cui si studia: l'esperienza si guadagna leggendo le carte ai clienti, ripassando, giocando ai
+giochi di studio, superando gli Esami, trovando carte. Un cancello non deve tenere ferme più di cinque
+minuti.
+
+**Commissioni, solo all'inizio.** Servono da tutorial per la mappa, la bottega e gli strumenti, e per
+legare con le streghe: Malva la manda alla bottega a comprare l'incenso (e le dice a cosa serve, da
+levatrice che lo usa); poi a portare una cosa nella parte alta del villaggio; Ortica, nel capitolo 2, la
+manda una volta al mulino. Tre in tutto. Poi smettono: è il segno che è cresciuta.
+
+**Come cambiano con lei.** Da Novizia le danno ordini. Da Fattucchiera le chiedono un parere. Da Strega
+la ascoltano: alla riunione delle maestre è lei che decide il piano e dice a ognuna cosa fare.
+
+**Missioni secondarie.** Facoltative. Una persona del villaggio o una strega racconta qualcosa che porta
+nella zona di un Arcano Maggiore («la ruota del mulino gira anche di notte, senz'acqua»). Fanno esplorare
+e insegnano qualcosa di quella carta. Non compaiono in un elenco: sono appunti a matita sulla mappa del
+grimorio, nel posto a cui si riferiscono. Tutte le carte si possono trovare anche senza.
+
+**Arcani Minori da subito.** Si trovano fin dal capitolo 1 girando nell'erba alta, ognuno nella zona del
+suo seme (Denari al mercato, Spade nella parte alta del villaggio, Bastoni nel bosco, Coppe lungo l'acqua),
+con rarità e doppioni. Danno esperienza e monete. Durante la storia gli Esami chiedono solo i Maggiori.
+
+**Le magie.** Sono la crescita che si vede.
+
+| Livello | Magia | Cosa cambia |
+|---|---|---|
+| 2 | Tartufo | Fiuta le carte vicine |
+| 3 | La bottega | Si può comprare |
+| 4 | Fuoco | Luce nei luoghi bui |
+| 5 | Sesto senso | Una bussola verso la carta nascosta più vicina |
+| 6 | Spostare i massi | Si aprono passaggi, scorciatoie, bauli |
+| 7 | Stordire | Un conestabile, ogni tanto |
+| 8 | Scopa | Volo tra i luoghi conosciuti |
+| 9 | Sesto senso pieno | Sulla mappa del grimorio si vedono le carte della zona |
+
+In più, dalla storia: la **luce grande**, che insegna Edera, per le cantine più buie. Prima di averla ci si
+può entrare, ma non si vede niente e ci si perde: il gioco la riporta all'ingresso e le fa capire che le
+manca una magia. Bauli e porte sigillate si aprono con una risposta, a ogni livello.
+
+**Dopo la storia.** Gran Maestra: la mappa mostra tutte le carte che mancano, in tutte le zone. Si può
+arrivare al cento per cento senza metterci un tempo infinito. Clienti nuovi continuano ad arrivare.
 
 ## Il ritratto: il gioco ti conosce
 
