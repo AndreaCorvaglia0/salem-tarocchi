@@ -478,3 +478,23 @@ solo che cambia testo sa di povero, e le etichette che spiegano («uno sguardo c
 - Provata con due lettori artificiali «ingenui» sulle sole schermate: capivano il percorso; hanno fatto
   correggere la didascalia della luna, il tasto durante la domanda, le scritte piccole e i puntini (ora si toccano).
 - Da fare: lo stesso gioco di memoria nel ripasso.
+
+## L'erbario (17 novembre)
+
+Andrea: «un giardino con delle erbe per le pozioni, vorrei imparare qualcosa anche sulle piante… piante e
+proprietà esoteriche e qualche consiglio su come coltivarle… sia salute che veleni, è più interessante».
+
+- **Le piante nel mondo.** Erbe vere vicino alle case, lungo i sentieri, negli angoli in ombra. Ci si avvicina
+  e il tasto dice «Guarda»: la prima volta la pianta entra nell'erbario. Arricchisce il paesaggio e dà un motivo
+  per girare; non blocca mai il passo e non interferisce con ronde, luci e carte.
+- **Il nastro «Erbe» nel grimorio.** Le piante notate, ciascuna con la sua tavola botanica dell'Ottocento
+  (Köhler 1887, Thomé 1885: pubblico dominio, crediti in `CREDITS.md`). Le altre sono solo un «?» da trovare.
+- **La pagina di una pianta.** Come riconoscerla; che cosa se ne diceva (credenze, dette come credenze); a che
+  cosa serviva (storia); che cosa c'è di vero (oggi); coltivarla (luce, acqua, quando, un consiglio: giardinaggio
+  vero); pianeta ed elemento della tradizione; una curiosità.
+- **Salute e veleni: sì, come storia e conoscenza.** Mai dosi, preparazioni o consigli di cura. Le velenose
+  sono segnate chiaramente e non si assaggiano.
+- **Poi:** il giardino alla capanna con Ortica (piantare, annaffiare passando, raccogliere dopo giorni veri), semi
+  in bottega e come doni della luna o premi delle prove; più avanti le pozioni.
+
+Dati: `data/herbs/base.js` (le 21 piante), `data/herbs/texts.js` (le pagine), `data/world/herbs.js` (dove sono).

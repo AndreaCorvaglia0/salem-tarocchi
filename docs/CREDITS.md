@@ -28,3 +28,9 @@ Sound effects are generated in code (`src/sound/`).
 ## Cards
 
 Rider-Waite-Smith deck, scans from the open dataset `metabismuth/tarot-json`. See `docs/RESEARCH.md`.
+
+## Tavole botaniche dell'erbario
+
+Da Wikimedia Commons, opere di pubblico dominio:
+- *Köhler's Medizinal-Pflanzen in naturgetreuen Abbildungen*, Gera, 1887 (file `Koeh-NNN.jpg`): tutte le piante tranne ortica e verbena.
+- Otto Wilhelm Thomé, *Flora von Deutschland, Österreich und der Schweiz*, Gera, 1885 (file `Illustration Urtica dioica0.jpg`, `Illustration Verbena officinalis0.jpg`): ortica e verbena.

@@ -11,9 +11,10 @@ import { RIB } from './paper.js';
 import { ioPages } from './io.js';
 import { cartePages } from './carte.js';
 import { mappaPages } from './mappa.js';
+import { herbPages } from './herbs.js';
 
-const TABS = [['io', 'Io'], ['carte', 'Carte'], ['mappa', 'Mappa']];
-const BUILD = { io: ioPages, carte: cartePages, mappa: mappaPages };
+const TABS = [['io', 'Io'], ['carte', 'Carte'], ['mappa', 'Mappa'], ['erbe', 'Erbe']];
+const BUILD = { io: ioPages, carte: cartePages, mappa: mappaPages, erbe: herbPages };
 
 function settingsPanel(panel, done) {
   const s = state.settings || (state.settings = { music: true, sfx: true });
@@ -54,8 +55,8 @@ export function openGrimoire({ tab = 'io', study = false } = {}) {
     if (e.target?.tagName === 'INPUT' || e.target?.tagName === 'TEXTAREA') return;
     if (document.querySelector('.sh-top')) return; // a sheet is open above
     const i = TABS.findIndex(([id]) => id === cur);
-    if (e.key >= '1' && e.key <= '3') { e.preventDefault(); show(TABS[+e.key - 1][0]); }
-    else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show(TABS[(i + (e.key === 'ArrowRight' ? 1 : 2)) % 3][0]); }
+    if (e.key >= '1' && e.key <= String(TABS.length)) { e.preventDefault(); show(TABS[+e.key - 1][0]); }
+    else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show(TABS[(i + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length][0]); }
   };
   return new Promise((resolve) => {
     resolveP = resolve;

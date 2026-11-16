@@ -26,6 +26,7 @@ import { Guide } from './guide.js';
 import { Obstacles } from './obstacles.js';
 import { Fog } from './fog.js';
 import { Minors } from './minors.js';
+import { Herbs } from './herbs.js';
 import { Sense } from './sense.js';
 import { Stranger } from './stranger.js';
 import { guideRoute } from '../guidepath.js';
@@ -62,7 +63,7 @@ export class WorldScene extends Phaser.Scene {
     this.things = new Things(this, map, this.built);
     this.away = !!map.elsewhere; // a world of Altrove (glue/elsewhere.js): its own rule, no Salem life
     this.rule = makeRule(this, map); this.trinkets = new Trinkets(this, map);
-    this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.sense = new Sense(this, map);
+    this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.herbs = new Herbs(this, map); this.sense = new Sense(this, map);
     this.stranger = new Stranger(this); // someone who stops her in the street (glue/street.js)
     if (this.things.solidAt(sx, sy)) { const [fx, fy] = this.freeNear(sx, sy, true); this.player.tx = fx; this.player.ty = fy; this.player.place(); }
     this.things.refresh(true);
@@ -188,7 +189,7 @@ export class WorldScene extends Phaser.Scene {
     this.night.extra = [...this.patrols.filter((q) => q.active).map((q) => ({ x: q.w.sprite.x, y: q.w.sprite.y - 10, r: 22, a: 0.8 })), ...(fire ? [{ x: this.hand.x, y: this.hand.y - 3, r: 26, a: 0.6 }] : [])];
     this.night.extra.push(...this.life.update(time, p.sprite.x, p.sprite.y - 10), ...this.guide.update(time));
     this.firstHints(time);
-    this.obstacles.update(time); this.minors.update(time); this.sense.update(time);
+    this.obstacles.update(time); this.minors.update(time); this.herbs.update(time); this.sense.update(time);
     const fog = this.fog.update(time, dt);
     this.night.update(time, dt, { px: p.sprite.x, py: p.sprite.y - 10, shortTarget: short ? 1 : 0, cones, fog, air: !!state.powers.stun });
     this.weather.update(time, dt);

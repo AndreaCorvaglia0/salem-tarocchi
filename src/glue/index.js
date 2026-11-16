@@ -4,6 +4,7 @@ import './finale.js'; // the final reading's ten cards
 import './diary.js'; // diary lines, Tartufo's remarks, the wake-up in the cell
 import './mood.js'; // sound.back: the music of the current map
 import './tools.js'; // tool.use: the bottle
+import './herbs.js'; // herb.look: a plant noticed in the world goes into the herbarium
 import './day.js'; // day.draw: the card of the day at the cottage bed
 import './clients.js'; // clients.next: story, returning and generated clients at the cottage table
 import './street.js'; // someone she read for stops her in the street for one card

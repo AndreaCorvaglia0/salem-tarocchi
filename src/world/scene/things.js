@@ -96,6 +96,7 @@ export class Things {
     out.push(...(this.scene.minors?.usableAt(x, y) || []), ...(this.scene.obstacles?.usableAt(x, y) || []));
     for (const c of this.chests) if (c.x === x && c.y === y && !state.world.opened[c.id] && !this.scene.obstacles?.guards(c.id)) out.push({ type: 'chest', x, y, label: c.seal ? 'Un baule sigillato' : 'Un baule', verb: 'Apri', c });
     for (const e of this.cast) if (e.kind === 'prop' && e.x === x && e.y === y) out.push({ type: 'prop', x, y, label: e.label || 'Guarda', verb: e.verb || 'Usa', e });
+    out.push(...(this.scene.herbs?.usableAt(x, y) || []));
     const d = this.doorAt(x, y);
     if (d) { const to = anchorOf(d.to); const name = to && getMap(to.map)?.name; out.push({ type: 'door', x, y, label: this.map.inside ? 'Esci' : name || 'Entra', verb: this.map.inside ? 'Esci' : 'Entra', d }); }
     const g = this.gateAt(x, y);
@@ -104,16 +105,16 @@ export class Things {
   }
   // What the player would use now: on her tile, in front of her, or a person next to her.
   current(p) {
-    const here = this.usableAt(p.tx, p.ty).filter((u) => u.type !== 'door');
+    const here = this.usableAt(p.tx, p.ty).filter((u) => u.type !== 'door' && u.type !== 'herb');
     if (here.length) return here[0];
     const [fx, fy] = p.facing();
-    const front = this.usableAt(fx, fy);
+    const front = this.usableAt(fx, fy).filter((u) => u.type !== 'herb');
     if (front.length) return front[0];
     for (const [dx, dy] of [[0, 1], [0, -1], [-1, 0], [1, 0]]) {
       const u = this.usableAt(p.tx + dx, p.ty + dy).find((v) => v.type === 'npc' || v.type === 'card' || v.type === 'prop' || v.type === 'minor');
       if (u) return u;
     }
-    return null;
+    return this.scene.herbs?.near(p) || null; // plants come last (scene/herbs.js)
   }
 
   // ---- using things ----
@@ -139,6 +140,7 @@ export class Things {
     else if (u.type === 'gate') await say(u.g.refuse || 'Chiuso.');
     else if (u.type === 'obstacle') await sc.obstacles.use(u);
     else if (u.type === 'minor') await sc.minors.use(u);
+    else if (u.type === 'herb') await sc.herbs.use(u);
     this.refresh();
   }
 
