@@ -66,11 +66,17 @@ export const alternatives = (plan, i, opts = {}) => {
 // 3. The final answer at three plain levels. `level` of a verdict code: bene | dipende | male.
 export const LEVEL = { si: 'bene', si_piano: 'bene', dipende: 'dipende', no_cosi: 'male', no: 'male' };
 const CODE_OF = { bene: 'si_piano', dipende: 'dipende', male: 'no_cosi' };
-export const verdictChoices = (plan, { rng = Math.random } = {}) => {
+// `answers`: the client's own three answers ({ bene, dipende, male }), written for that very question; without
+// them the closings of the form are used, and with a detail in the request the ones that name it ({di}).
+export const verdictChoices = (plan, { rng = Math.random, answers = null } = {}) => {
   const { forma, ref } = plan.question; const mine = LEVEL[plan.verdict.code];
   if (!CLOSINGS[forma]) return [];
+  const direct = (code) => {
+    const named = ref?.di ? CLOSINGS[forma][code].filter((t) => t.includes('{di}')) : [];
+    return named.length ? named[Math.floor(rng() * named.length)].replace('{di}', ref.di) : closingFor(forma, code, ref, rng);
+  };
   return ['bene', 'dipende', 'male'].map((level) => ({
     level, ok: level === mine,
-    text: closingFor(forma, level === mine ? plan.verdict.code : CODE_OF[level], ref, rng),
+    text: answers?.[level] || direct(level === mine ? plan.verdict.code : CODE_OF[level]),
   }));
 };

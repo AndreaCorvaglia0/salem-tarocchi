@@ -6,14 +6,14 @@
 import { h, css, cardUrl } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
 import { fill } from '../core/cond.js';
-import { answer, addCoins, addXp, addTrait, stat } from '../core/progress.js';
+import { answer, addCoins, addXp, stat } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { REACTIONS } from '../data/story/clients.js';
 import { plan as makePlan, recall, alternatives, verdictChoices, sayStep, say as sayAll, LEVEL, voice } from '../reading/index.js';
 import { btn, say, sleep, snd } from './theme.js';
 import { questionView } from './qview.js';
 import { xpFor } from './reading.rules.js';
-import { posLabel, helpNote, isGood, payOf, TONES, toneOf, reactionOf } from './consult.rules.js';
+import { posLabel, helpNote, isGood, payOf, reactionOf, toWhom } from './consult.rules.js';
 
 const CSS = `
 .sxc-head{flex:none;padding:6px 14px 8px;border-bottom:1px solid var(--line);background:#160f1dee}
@@ -137,11 +137,12 @@ export async function consult({ scr, sp, cl, cards, question, pool, verso = fals
   const glanceEl = glance.length ? [h('p.sx-lab', "Colpo d'occhio"), h('div.sxc-glance', glance.join(' '))] : null;
   const level = LEVEL[plan.verdict.code];
   let levelOk = true, answerText = parts[N - 1]?.text || '';
-  const fin = N > 1 ? verdictChoices(plan, { rng }) : [];
+  // the answer to what was asked: always, also after one card (the client's own answers when it has them)
+  const fin = verdictChoices(plan, { rng, answers: cl.answers || null });
   if (fin.length) {
     let resolve;
     const done = new Promise((r) => { resolve = r; });
-    const q = { prompt: 'Quindi, che cosa rispondi?', options: fin.map((o) => ({ t: o.text, ok: o.ok })), textOnly: true };
+    const q = { prompt: self ? 'Quindi, che cosa ti rispondi?' : `Quindi, che cosa rispondi ${toWhom(cl.name)}?`, options: fin.map((o) => ({ t: o.text, ok: o.ok })), textOnly: true };
     const view = questionView(q, { onPick: (k) => resolve(k) });
     scr.setBody(h('p.sx-lab', 'La lettura'), list, glanceEl, view.el);
     scr.setFoot();
@@ -172,14 +173,8 @@ export async function consult({ scr, sp, cl, cards, question, pool, verso = fals
     return { ok: isGood({ wrong, total, levelOk }), wrong, total, helped, level, levelOk, tone: null, cards: per, score, coins: 0 };
   }
 
-  // ---- the tone
-  let pickTone;
-  const toneDone = new Promise((r) => { pickTone = r; });
-  const tv = questionView({ prompt: 'Come glielo dici?', options: TONES.map((t) => ({ t: t.t, ok: true })), textOnly: true }, { onPick: (k) => pickTone(k) });
-  scr.setBody(answerText ? h('div.sxc-quote.sx-in', answerText) : null, tv.el);
-  const tone = toneOf(TONES[await toneDone]?.id).id;
-  tv.lock();
-  addTrait(toneOf(tone).trait);
+  // (no question about the tone: asked every time it said nothing; her answer above is what she tells them)
+  const tone = null;
 
   // ---- the client reacts and pays
   const good = isGood({ wrong, total, levelOk });
@@ -190,6 +185,7 @@ export async function consult({ scr, sp, cl, cards, question, pool, verso = fals
   stat('readings');
   const words = reactionOf({ good, tone, thanks: fill(cl.thanks || ''), lines: REACTIONS, rng });
   scr.setBody(
+    answerText ? h('div.sxc-quote.sx-in', answerText) : null,
     h('div.sxr-who', h('div.sxr-badge'), h('div', h('b', cl.name), h('small', cl.look || ''))),
     words.map((t) => say(cl.name, t)),
     h('div.sxr-score.sx-in', h('span.sx-num', `${total - wrong} su ${total}`)),

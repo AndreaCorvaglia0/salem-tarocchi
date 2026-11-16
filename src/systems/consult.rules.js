@@ -60,3 +60,13 @@ export function reactionOf({ good, tone, thanks, lines, rng = Math.random }) {
   const one = (a) => (a?.length ? a[Math.floor(rng() * a.length)] : null);
   return [tone === 'diretta' ? one(lines?.blunt) : null, good ? thanks || 'Grazie.' : one(lines?.doubtful)].filter(Boolean);
 }
+
+// "a Tobia", "alla vedova Bray", "ai gemelli Pike": to whom she answers, from the client's name.
+export function toWhom(name) {
+  const s = String(name || '').split(',')[0].trim();
+  if (!s) return 'a chi hai davanti';
+  const m = /^(La|Lo|Il|I|Le|Gli) (.+)$/.exec(s);
+  if (m) return `${{ La: 'alla', Lo: 'allo', Il: 'al', I: 'ai', Le: 'alle', Gli: 'agli' }[m[1]]} ${m[2]}`;
+  if (/^L'/.test(s)) return `all'${s.slice(2)}`;
+  return `a ${s.split(/ (?:il|la|lo|l'|i|le|gli) /)[0]}`;
+}
