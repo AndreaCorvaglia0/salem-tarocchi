@@ -25,7 +25,8 @@ export const HINTS = {
   trade: "Tocca un tuo doppione e poi la carta di Ginepra che vuoi in cambio.",
   // the trials (shown by glue/trials.js when it asks for them)
   trial: "A ogni bivio pesca una carta: è lei a dirti quale strada prendere, e ogni errore si paga.",
-  library: "Tocca un argomento con il nastro rosso per ripassarlo: ti servirà nella prossima prova.",
+  library: "Tocca uno dei primi argomenti dell'elenco per ripassarlo: ti servirà nella prossima prova.",
+  news: "Tra le missioni del grimorio c'è una prova nuova: toccala per sapere dove comincia.",
   escape: "Tocca la strada per correre verso la luce: se ti fermi, chi ti insegue ti raggiunge.",
 };
 export const HINTS_KEYS = {

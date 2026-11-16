@@ -12,9 +12,10 @@
 import { provide, call, has } from '../core/services.js';
 import { state, save } from '../core/state.js';
 import { fill, test } from '../core/cond.js';
-import { addXp, addCoins, addTrait, setFlag, confiscate, todayKey, stat } from '../core/progress.js';
+import { addXp, addCoins, addTrait, setFlag, confiscate, todayKey, stat, hintOnce } from '../core/progress.js';
+import { emit } from '../core/bus.js';
 import { addBond } from '../core/witches.js';
-import { EXTRAS } from '../core/extras.js';
+import { EXTRAS, extrasShown } from '../core/extras.js';
 import { SCRIPTS, CAST, STEPS, SIDE } from '../data/story/index.js';
 import { DEFS } from '../data/world/index.js';
 import { TRIALS, LIBRARY_SCRIPTS } from '../data/trials/index.js';
@@ -87,10 +88,10 @@ export async function startTrial(id, { rng = Math.random } = {}) {
     const res = await runTrial(def, {
       say,
       witchDraw: (w) => witchDrawScreen(w),
-      ask: (fork, step) => ask(fork, { who: step.who && step.who !== 'narra' ? step.who : def.with }, rng),
+      ask: (fork, step) => { setTimeout(() => hintOnce('trial'), 900); return ask(fork, { who: step.who && step.who !== 'narra' ? step.who : def.with }, rng); },
       judge: () => ({ ok: true }),
       room: (r) => say(r.lines),
-      escape: (spec) => (has('world.escape') ? call('world.escape', spec) : 'safe'),
+      escape: (spec) => (has('world.escape') ? (setTimeout(() => hintOnce('escape'), 300), call('world.escape', spec)) : 'safe'),
       choose: (texts) => call('story.choose', texts.map((t) => ({ t: fill(t) }))),
       apply,
       plan: { loss: (loss) => planLoss(loss, state, def, { rng, gates: gateSet() }) },
@@ -119,4 +120,17 @@ provide('trial.start', (id, o) => startTrial(id, o));
 provide('trial.witchDraw', (n = {}) => witchDrawScreen({ who: n.who, card: n.card, rev: !!n.rev, t: fill(n.t || '') }));
 provide('trial.ask', (fork = {}) => ask(fork, { who: fork.who }));
 provide('trial.sense', (id) => { if (TRIALS[id]) { state.trialSense = id; save(); toast('In biblioteca puoi ripassare quello che servirà.'); } return Promise.resolve(); });
-provide('library.open', () => openLibrary(suggested()));
+provide('library.open', () => { const sg = suggested(); if (sg.trial && sg.topics.length) setTimeout(() => hintOnce('library'), 700); return openLibrary(sg); });
+
+// ---- news: a trial that has just come onto her list is said once, outside the fiction ---------------
+// (interface line `news`, shown when the world is free: ui/hint.js). One at a time, never during a trial.
+export const trialNews = (s = state, list = extrasShown(s)) => list.find((e) => e.kind === 'trial' && e.id.startsWith('trial.') && e.status === 'new' && !s.world?.once?.[`news.${e.id}`]) || null;
+let newsAt = 0;
+setInterval(() => {
+  if (running || !state.started || state.chapter < 1 || Date.now() < newsAt) return;
+  const e = trialNews();
+  if (!e) return;
+  (state.world.once || (state.world.once = {}))[`news.${e.id}`] = true; save();
+  newsAt = Date.now() + 30000;
+  emit('hint', { id: 'news' });
+}, 6000)?.unref?.();

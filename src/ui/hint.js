@@ -25,9 +25,9 @@ const CSS = `
 `;
 
 // how long each hint may stay at most (ms), and what counts as "she did it"
-const MAX = { move: 16000, action: 14000, grimoire: 20000, exam: 9000, reading: 10000, tap: 12000, detail: 12000, words: 14000, number: 10000, guide: 12000, patrol: 9000 };
+const MAX = { move: 16000, action: 14000, grimoire: 20000, exam: 9000, reading: 10000, tap: 12000, detail: 12000, words: 14000, number: 10000, guide: 12000, patrol: 9000, trial: 12000, library: 12000, escape: 6000, news: 12000 };
 // hints about a screen that is itself on top: shown at once, over it; TOP ones at the top of the screen
-const OVER = ['exam', 'reading', 'tap', 'detail', 'words', 'number', 'draw', 'shop', 'trade'];
+const OVER = ['exam', 'reading', 'tap', 'detail', 'words', 'number', 'draw', 'shop', 'trade', 'trial', 'library', 'escape'];
 const TOP = ['tap', 'detail', 'words', 'number'];
 const DEFAULT = { move: 'Tocca un punto della strada per camminare.', action: 'Quando sei vicina a qualcosa, tocca il pulsante in basso.', grimoire: 'Tocca il libro in alto per aprire il grimorio.', exam: 'Rispondi con calma.', reading: 'Scegli la lettura adatta a chi hai davanti.' };
 export const hintText = (id) => {
@@ -84,7 +84,7 @@ export function showHint(id) {
   } else if (id === 'action') {
     c.offs.push(on('card:found', hide));
     c.poll = setInterval(() => { if (blocked()) hide(); }, 300); // she used it: a dialogue, a scene or the ceremony
-  } else if (id === 'tap' || id === 'detail' || id === 'number') {
+  } else if (['tap', 'detail', 'number', 'trial', 'library'].includes(id)) {
     const off = () => { window.removeEventListener('pointerdown', bye, true); window.removeEventListener('keydown', bye, true); };
     const bye = () => setTimeout(hide, 200); // she did it
     setTimeout(() => { if (cur === c) { window.addEventListener('pointerdown', bye, true); window.addEventListener('keydown', bye, true); } }, 300);
