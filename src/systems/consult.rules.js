@@ -11,9 +11,11 @@ import { SEMI, NUMERI, FIGURE } from '../data/reading/grid.js';
 // -> { use, pool }: use is true only when every card she can draw has a voice and there are enough of them.
 // The pool is never hard-coded: it is whatever owned card has a voice file today.
 // self: the final reading for herself (client 'self', glue/finale.js) asks to use the engine too.
-export function engineFor({ client, n, owned = [], given, voiced = hasVoice, self = false }) {
+// taught(id): a Minor whose number group she has not been taught yet stays out of client readings
+// (glue/lessons.rules.js minorTaught); Majors always pass. The final reading for herself takes everything.
+export function engineFor({ client, n, owned = [], given, voiced = hasVoice, self = false, taught = () => true }) {
   if (!client || (client === 'self' && !self) || !n) return { use: false, pool: [] };
-  const pool = [...new Set(owned)].filter((id) => voiced(id));
+  const pool = [...new Set(owned)].filter((id) => voiced(id) && (self || taught(id)));
   const fixed = (given || []).slice(0, n).filter((g) => g && g !== 'fan' && g !== 'number' && g !== 'top');
   if (fixed.some((id) => !voiced(id))) return { use: false, pool };
   const free = pool.filter((id) => !fixed.includes(id));

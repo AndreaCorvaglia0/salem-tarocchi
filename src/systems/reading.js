@@ -3,6 +3,7 @@
 // When every card she can draw has a voice (consult.rules.js engineFor), a client reading goes to the reading
 // engine instead (consult.js): the cards come only from the voiced ones she owns. Otherwise nothing changes.
 import { h, cardUrl } from '../core/dom.js';
+import { minorTaught } from '../glue/lessons.rules.js';
 import { fill } from '../core/cond.js';
 import { answer, addCoins, addXp, stat, ownedMajors, ownedIds, yourCard, dayCard } from '../core/progress.js';
 import { state } from '../core/state.js';
@@ -35,7 +36,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   // the reading engine: a client with tagged question, and enough voiced cards
   // the final reading for herself (glue/finale.js) goes to the engine too: a general picture, about her
   const question = questionOf(self ? 'self' : cl);
-  const eng = question ? engineFor({ client: self ? 'self' : cl.id, self, n: N, owned: ownedIds(), given: cards }) : { use: false };
+  const eng = question ? engineFor({ client: self ? 'self' : cl.id, self, n: N, owned: ownedIds(), given: cards, taught: (id) => minorTaught(id, state.flags) }) : { use: false };
   // reversed cards only after their lesson (a flag in the saved state; nothing sets it yet)
   const reversed = !!(state.flags?.['lesson.reversed'] || state.lessons?.reversed);
   const scr = screen({ cls: 'sxread' });
