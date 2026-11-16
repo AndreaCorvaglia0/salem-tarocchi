@@ -12,3 +12,7 @@ anything else. Then only work inside the folders of your area.
   `systems/tapnav.js`; pixel helpers: `art/px.js`, `art/palette.js`; sound: `systems/sound/`). Copy and adapt
   freely into your own folder; do not import from it.
 - Say what you verified and what you did not. Nobody can test a real phone or listen to audio here.
+- Someone is already playing with a saved game. Anything you add must reach her too: register it in
+  `src/core/extras.js` (chains with `after`, `key` for what the story needs), make it depend on what she
+  has and not on where she is in the story, and give every new state key a default. See DESIGN.md,
+  "Recuperare quello che si aggiunge dopo".

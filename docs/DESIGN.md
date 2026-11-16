@@ -334,3 +334,17 @@ Non importa se più d'una è sbloccata. Nella scelta devono vedersi subito come 
   fatto e lo propone.
 - Le missioni secondarie stanno nel grimorio e si possono scegliere: si giocano come le principali ma
   non fanno avanzare la storia, e si distinguono a colpo d'occhio (matita invece di inchiostro).
+
+### Recuperare quello che si aggiunge dopo
+
+Regola per ogni cosa nuova, da quando c'è chi sta già giocando:
+- Un pezzo nuovo dipende solo da quello che lei **ha** (un potere, una carta, un numero), mai dal punto
+  della storia in cui è: così chi è più avanti lo riceve lo stesso.
+- I pezzi che vanno in ordine sono una **catena** (`after`): si vede solo il primo anello non fatto, e
+  gli altri arrivano uno alla volta.
+- Un pezzo che serve per andare avanti è una **chiave** (`key`): compare sempre, e la storia può
+  chiederlo prima di un cancello.
+- Al massimo due cose nuove alla volta nell'elenco (chiavi e appunti della storia a parte): le altre
+  aspettano il loro turno. Mai dieci missioni in un colpo.
+- Se una cosa piccola salta per chi è molto avanti, pazienza: l'importante è che possa continuare.
+Codice: `src/core/extras.js`.

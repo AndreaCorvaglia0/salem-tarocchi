@@ -194,3 +194,26 @@ test('the trail follows a tracked side mission', () => {
   assert.equal(trailTarget({ chapter: 2, step: 's', steps, track: 'village.stall' }), null);
   assert.equal(trailTarget({ chapter: 2, step: 's', steps, track: 'village.stall', temp: true }), 'village.stall');
 });
+
+// ---- catching up: chains, keys and the cap on new entries
+import { extrasShown as shownX, extraStatus as statusX, keyPending as keysX, MAX_NEW } from '../src/core/extras.js';
+test('extras: a chain shows only its first undone link, keys are never held back, at most MAX_NEW new ones', () => {
+  const t = (c, s) => (c == null ? true : !!s.flags[c]);
+  const list = [
+    { id: 'a', when: null, done: 'a.done' }, { id: 'b', when: null, done: 'b.done', after: ['a'] }, { id: 'c', when: null, done: 'c.done', after: ['b'] },
+    { id: 'x', when: null, done: 'x.done' }, { id: 'y', when: null, done: 'y.done' }, { id: 'z', when: null, done: 'z.done' },
+    { id: 'k', when: null, done: 'k.done', key: true },
+  ];
+  const s = { flags: {}, extras: {}, track: null };
+  let ids = shownX(s, t, list).map((e) => e.id);
+  assert.deepEqual(ids.sort(), ['a', 'k', 'x'].sort()); // a (first of its chain), x (second place), k (key)
+  assert.equal(ids.filter((i) => i !== 'k').length, MAX_NEW);
+  assert.deepEqual(keysX(s, t, list).map((e) => e.id), ['k']);
+  s.flags['a.done'] = true; // the chain moves on, one link at a time
+  ids = shownX(s, t, list).filter((e) => e.status !== 'done').map((e) => e.id);
+  assert.ok(ids.includes('b') && !ids.includes('c'));
+  s.extras.b = 'seen'; s.extras.x = 'seen'; // both places taken by things already on her list
+  assert.equal(statusX(list[4], s, t, list), 'hidden');
+  s.flags['x.done'] = true; // a place frees: the next one comes
+  assert.equal(statusX(list[4], s, t, list), 'new');
+});
