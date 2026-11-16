@@ -1,5 +1,5 @@
-// The lessons of the mistresses (deck, single, ppf, celtic, suits, astro, and the two key lessons added
-// on 16 Nov: minors and reversed), each a few short pages.
+// The lessons of the mistresses (deck, single, ppf, celtic, suits, astro, and those added on 16 Nov: the
+// course on the Minors in five lessons, minors1..minors5, and reversed), each a few short pages.
 // A page may show a spread (`spread`) or some cards (`cards`). Italian. These are pages to study from,
 // so the register is the handbook's: plain paragraphs of whole, linked sentences (docs/WRITING.md),
 // with a touch of the voice of who teaches: Malva brisk and practical, Ortica talkative, Edera slow,
@@ -13,8 +13,8 @@ const NOMI = ['Asso', 'Due', 'Tre', 'Quattro', 'Cinque', 'Sei', 'Sette', 'Otto',
 // "Coppe, l'acqua: il cuore. Quello che senti: affetti, legami, desideri."
 const ART = { fuoco: 'il fuoco', acqua: "l'acqua", aria: "l'aria", terra: 'la terra' };
 const semi = ['w', 'c', 's', 'p'].map((k) => `${SEMI[k].nome}, ${ART[SEMI[k].elemento]}: ${SEMI[k].dove}. ${cap(SEMI[k].idea)}.`).join('\n');
-// "Cinque, scossa: qualcosa si rompe;" (one line per number, a single sentence from the Ace to the Ten)
-const numeri = `${NOMI.map((n, i) => `${n}, ${NUMERI[i + 1].parola}: ${NUMERI[i + 1].idea.split(/[:,]/)[0]}`).join(';\n')}.`;
+// "Cinque, scossa: qualcosa si rompe;" (one line per number of a lesson, a single sentence)
+const numeri = (from, to) => `${NOMI.slice(from - 1, to).map((n, i) => `${n}, ${NUMERI[from + i].parola}: ${NUMERI[from + i].idea.split(/[:,]/)[0]}`).join(';\n')}.`;
 // "Regina: chi custodisce. La padronanza dentro: cura, sensibilità, maturità."
 const figure = [11, 12, 13, 14].map((n) => `${FIGURE[n].nome}: ${FIGURE[n].parola}. ${cap(FIGURE[n].idea)}.`).join('\n');
 
@@ -72,12 +72,38 @@ export const LESSONS = [
     ],
   },
   {
-    id: 'minors', title: 'Le carte piccole', by: 'ortica',
+    id: 'minors1', title: 'I quattro semi', by: 'ortica',
     pages: [
-      { h: 'Un seme e un numero', body: "Le carte piccole sono cinquantasei, e non c'è bisogno di impararle una per una, perché ognuna è fatta di due pezzi. Il seme dice dove succede la cosa, cioè in quale parte della vita, e il numero dice che cosa succede lì. Prendi il Cinque di Coppe: il cinque vuol dire che qualcosa si rompe, le Coppe sono il cuore, e quindi è una perdita. Io l'ho capito tardi, e nel frattempo ne avevo imparate a memoria venti, tutte sbagliate.", cards: ['c05'] },
-      { h: 'I quattro semi: dove', body: `Il seme è la prima cosa da guardare, perché ti dice di quale parte della vita parla la carta.\n\n${semi}` },
-      { h: 'I dieci numeri: che cosa', body: `Il numero dice che cosa succede, ed è uguale in tutti e quattro i semi.\n\n${numeri}` },
-      { h: 'Le quattro figure: chi', body: `Le figure non dicono che cosa succede ma chi c'è: una persona vera, oppure un modo di stare nelle cose.\n\n${figure}\n\nPoi guarda il disegno, e vedi se avevi ragione.` },
+      { h: 'Dove succede', body: `Le carte piccole sono cinquantasei, e a memoria non le impara nessuna. Si comincia dal seme, perché ti dice di quale parte della vita parla la carta.\n\n${semi}` },
+      { h: 'Due Assi', body: "Per vedere che cosa fa il seme, metti vicine due carte con lo stesso numero. L'Asso di Coppe è un sentimento nuovo, mentre l'Asso di Denari è un'occasione concreta, da cui può venire un guadagno. È lo stesso inizio, ma uno succede nel cuore e l'altro nella borsa. Io me ne sono accorta tardi, e nel frattempo ne avevo imparate a memoria venti, tutte sbagliate.", cards: ['c01', 'p01'] },
+    ],
+  },
+  {
+    id: 'minors2', title: 'Uno, due, tre', by: 'ginepra',
+    pages: [
+      { h: 'Come comincia una cosa', body: `Questa pagina l'ha scritta Ginepra, e si vede dalle macchie. I primi tre numeri raccontano come una cosa comincia e cresce, in qualunque seme.\n\n${numeri(1, 3)}` },
+      { h: 'Due prove, con la stellina', body: "L'Asso di Bastoni è un inizio nella volontà, cioè una scintilla, una voglia di fare che si accende. Il Tre di Denari è una cosa concreta che cresce, cioè un lavoro fatto bene insieme ad altri. Il Due di Spade invece non sono due innamorati: sono due idee che si incontrano in testa, e chi le ha non sa quale scegliere.", cards: ['w01', 'p03', 's02'] },
+    ],
+  },
+  {
+    id: 'minors3', title: 'Quattro, cinque, sei', by: 'malva',
+    pages: [
+      { h: 'Fermo, rotto, aggiustato', body: `I tre numeri di mezzo vanno come un osso: prima sta fermo, poi si spezza, poi qualcuno lo rimette insieme. Vale per tutti e quattro i semi, e conviene ricordarselo così.\n\n${numeri(4, 6)}` },
+      { h: 'Due carte da tenere a mente', body: "Il Quattro di Spade è la sosta della mente, cioè una pausa in cui la testa si riposa e recupera. Il Cinque di Coppe è la scossa nel cuore, cioè una perdita, e quella prima o poi l'abbiamo in mano tutte. Dopo il cinque viene sempre un sei: nei Denari, per dire, è qualcuno che dà una mano a chi ne ha bisogno.", cards: ['s04', 'c05', 'p06'] },
+    ],
+  },
+  {
+    id: 'minors4', title: 'Dal sette al dieci', by: 'ortica',
+    pages: [
+      { h: "L'ultimo pezzo di strada", body: `I numeri alti sono l'ultimo pezzo di una strada, e io li ho imparati andando al mulino: al bivio ci si ferma, in discesa si corre, quando si vede la ruota manca poco, e poi si arriva.\n\n${numeri(7, 10)}` },
+      { h: 'Il bivio e la discesa', body: "Il Sette di Denari è il bivio: il lavoro è fatto, e ci si ferma a guardare se il raccolto viene su, con pazienza. L'Otto di Bastoni è la discesa, in cui tutto si muove in fretta e arrivano notizie. Il dieci è l'arrivo, con tutto il bene o tutto il peso del suo seme: nelle Coppe è una famiglia felice, nei Bastoni un carico troppo pesante.", cards: ['p07', 'w08', 'c10'] },
+    ],
+  },
+  {
+    id: 'minors5', title: 'Le figure', by: 'edera',
+    pages: [
+      { h: 'Chi c\'è', body: `Le figure sono quattro per seme, cara, e non dicono che cosa succede: dicono chi c'è. A volte sono una persona vera, a volte un modo di stare nelle cose.\n\n${figure}` },
+      { h: 'Gente che conosci', body: "Il Fante di Coppe è chi impara col cuore, e porta una sorpresa gentile. Il Re di Spade è chi governa con la testa, con regole e un giudizio giusto: conosciamo un signore che vorrebbe somigliargli. La Regina di Denari custodisce la casa e chi ci entra, e il Cavaliere di Bastoni va di corsa dove lo porta la passione. A guardarsi intorno, li si riconosce quasi tutti.", cards: ['c11', 's14', 'p13', 'w12'] },
     ],
   },
   {

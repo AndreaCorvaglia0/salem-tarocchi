@@ -84,8 +84,8 @@ test('spreads: positions as in the design', () => {
 });
 
 test('lessons: six, 2-4 pages, right teachers, valid references', () => {
-  assert.deepEqual(LESSONS.map((l) => l.id), ['deck', 'single', 'ppf', 'celtic', 'suits', 'astro', 'minors', 'reversed']);
-  const by = { deck: 'malva', single: 'malva', suits: 'malva', ppf: 'ortica', celtic: 'edera', astro: 'edera', minors: 'ortica', reversed: 'edera' };
+  assert.deepEqual(LESSONS.map((l) => l.id), ['deck', 'single', 'ppf', 'celtic', 'suits', 'astro', 'minors1', 'minors2', 'minors3', 'minors4', 'minors5', 'reversed']);
+  const by = { deck: 'malva', single: 'malva', suits: 'malva', ppf: 'ortica', celtic: 'edera', astro: 'edera', minors1: 'ortica', minors2: 'ginepra', minors3: 'malva', minors4: 'ortica', minors5: 'edera', reversed: 'edera' };
   for (const l of LESSONS) {
     assert.equal(l.by, by[l.id]); assert.ok(l.pages.length >= 2 && l.pages.length <= 4, l.id);
     for (const p of l.pages) {

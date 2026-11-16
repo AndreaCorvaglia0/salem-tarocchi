@@ -1,9 +1,12 @@
-// The lessons as missions (data/story/missions.js): the flying lesson, the Minors, the reversed cards.
+// The lessons as missions (data/story/missions.js): the flying lesson, the course on the Minors in five
+// small lessons, the reversed cards. Which one is due: lessons.rules.js (pure).
 // - registers them in the extras registry (core/extras.js EXTRAS), so the grimoire lists and tracks them;
 // - announces each with its short scene as soon as it is available and she is free: when the broom
-//   comes, when a lesson ends (the next opens), at a new chapter or step, and when a saved game is
-//   loaded (a player who was already past that point gets it too). It never starts over a scene;
+//   comes, when a lesson ends (the next may open), when she finds a small card, at a new chapter or
+//   step, and when a saved game is loaded (a player who was already past that point gets it too). It never starts over a scene;
 // - after the flying lesson shows the neutral hint `fly`, once (and keeps it from showing before);
+// - an announcement never comes up over a scene, nor while she stands where the current main step
+//   happens or where an announced lesson waits (the person there stays free to talk);
 // - registers the chapter card (story/chapter.js: service story.chapterCard).
 import { on, emit } from '../core/bus.js';
 import { call, has, wrap } from '../core/services.js';
@@ -12,7 +15,10 @@ import { blocked } from '../core/dom.js';
 import { test } from '../core/cond.js';
 import { hintOnce } from '../core/progress.js';
 import { EXTRAS } from '../core/extras.js';
-import { LESSON_MISSIONS, dueOffer } from '../data/story/missions.js';
+import { CARD } from '../data/cards.base.js';
+import { LESSON_MISSIONS } from '../data/story/missions.js';
+import { STEPS } from '../data/story/index.js';
+import { dueLesson, oldCourse, canAnnounce } from './lessons.rules.js';
 import '../story/chapter.js';
 
 // the lessons go first in the list, in their order
@@ -37,9 +43,15 @@ async function announce(delay = 0) {
   pending = true;
   try {
     if (delay) await sleep(delay);
-    while (dueOffer(state, test)) {
+    while (dueLesson(state, test)) {
       if (!(await free())) return;
-      const m = dueOffer(state, test); // it may have changed while waiting
+      // never where the story has business with her (lessons.rules.js canAnnounce): wait until she has moved on
+      const w = has('world.where') ? await call('world.where').catch(() => null) : null;
+      const stepAt = STEPS.find((x) => x.id === state.step)?.at || null;
+      const anchors = w && has('world.anchors') ? await call('world.anchors').catch(() => null) : null;
+      if (!canAnnounce({ near: w?.near, pos: w, anchors, stepAt, flags: state.flags })) { await sleep(4000); continue; }
+      if (await busy()) continue;
+      const m = dueLesson(state, test); // it may have changed while waiting
       if (!m) return;
       await call('story.run', m.offer);
       if (!state.flags[m.offered]) return; // the scene did not play to its end: try again at the next event
@@ -65,4 +77,14 @@ on('flag', ({ k, v } = {}) => {
   announce(7000);
 });
 for (const e of ['chapter', 'step']) on(e, () => announce(1500));
-wrap('world.start', async (prev) => { const r = await prev?.(); announce(2500); return r; });
+// a small card found: the lesson about it may be ready now (after the card's own scene and Tartufo's remark)
+on('card:found', ({ id } = {}) => { if (CARD[id]?.arcana === 'minor') announce(3500); });
+// a save that did the Minors as one lesson (the first version): the five lessons count as done
+function migrate() {
+  const { flags, lessons } = oldCourse(state);
+  if (!flags.length && !lessons.length) return;
+  for (const k of flags) state.flags[k] = true;
+  for (const k of lessons) state.lessons[k] = true;
+  save();
+}
+wrap('world.start', async (prev) => { migrate(); const r = await prev?.(); announce(2500); return r; });

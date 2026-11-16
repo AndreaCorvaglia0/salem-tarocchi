@@ -50,3 +50,23 @@
 - `ui/mappa.js` could mark `kind: 'lesson'` / `now: true` entries; they also get a pencil number with no note.
 - `story.chapterCard(1)` before s0 in main.js, if wanted.
 - c3.edera says "la Torre a nord", but `depths.tower` is south of the coven.
+
+## Second pass (16 Nov, evening): the Minors as a course, the chain, the bot's bug
+
+- **Course**: five lessons instead of one, scripts `minors.N.offer` / `minors.N.lesson` in `scripts/lessons.js`,
+  flags `lesson.minors.1..5` (+ `lesson.minors` set by the fifth), grimoire lessons `minors1..minors5`.
+  1 suits (Ortica, hut) · 2 one-two-three (zone `forest.grove`: Ginepra, or her notebook while she is held) ·
+  3 four-five-six (Malva at `malva.hearth`, CAST id `malva.lesson`) · 4 seven-to-ten (Ortica, walking, ends at
+  the mill) · 5 the court (Edera). Two examples, two questions each. The gesture is in 3 (Malva) and 4 (Ortica).
+- **Rules** `src/glue/lessons.rules.js` (pure): `dueLesson`, `minorLessonReady` (previous done AND (found >=
+  3/6/10/14 OR she holds a card of that lesson's group)), `minorTaught(id, flags)`, `taughtGroups(flags)`,
+  `oldCourse` (a save with only `lesson.minors`: the five count as done), `canAnnounce`.
+- **Registry**: one chain with `after` (fly -> 1 -> 2 -> 3 -> 4 -> 5; reversed after 1), `key` on fly and 1.
+  Entries 2-5 and reversed are listed once announced (`when` = their `offered` flag), because the count of
+  small cards is not a condition of core/cond.js.
+- **Bug at c3.edera** (bot): no CAST shadowing; the announcement of a lesson came up while she stood in
+  front of Edera, and its dialogue hid the action. Now no announcement within 8 tiles of the current step's
+  place or of a waiting lesson's place. Test: every step x 3^7 lesson states.
+- `src/main.js` line 18: `await call('story.chapterCard', 1);` before s0.
+- Also edited: `src/data/story/missions.js`, `src/data/story/cast.js` (lesson entries only), the id lists in
+  `tests/story.data.test.mjs` and `tests/cards.sheets.test.mjs`.

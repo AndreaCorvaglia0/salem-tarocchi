@@ -51,13 +51,16 @@ export const CAST = [
 
   // ---- chapter 2
   { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: { step: 'c2.ortica' }, script: 'c2.ortica', label: 'Ortica' },
-  { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: lessonOpen('lesson.minors'), script: 'minors.lesson', label: 'Ortica' }, // the lesson on the small cards, once
+  // the course on the small cards (data/story/missions.js): lessons 1 and 4 are hers, each once
+  { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: lessonOpen('lesson.minors.1'), script: 'minors.1.lesson', label: 'Ortica' },
+  { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: lessonOpen('lesson.minors.4'), script: 'minors.4.lesson', label: 'Ortica' },
   { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: [{ chapterMin: 2 }, { not: { step: 'c2.ortica' } }], script: 'ortica.chat', label: 'Ortica' },
   { id: 'enc.miller', kind: 'npc', who: 'miller', at: 'forest.mill', when: { step: 'c2.mill' }, script: 'c2.mill', label: 'Il mugnaio' },
 
   // ---- chapter 3
   { id: 'trapdoor', kind: 'zone', at: 'village.trapdoor', when: [{ chapter: 3 }, { not: { step: 'c3.trapdoor' } }], script: 'c3.trapdoor.again', label: 'La botola' },
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: { step: 'c3.edera' }, script: 'c3.edera', label: 'Nonna Edera' },
+  { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: lessonOpen('lesson.minors.5'), script: 'minors.5.lesson', label: 'Nonna Edera' }, // the court cards, once
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: lessonOpen('lesson.reversed'), script: 'reversed.lesson', label: 'Nonna Edera' }, // the lesson on reversed cards, once
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: { chapterMin: 3 }, script: 'edera.chat', label: 'Nonna Edera' },
   // the three mistresses wait round the cauldron when the council can meet (the zone in front of the cauldron plays the scene)
@@ -73,6 +76,10 @@ export const CAST = [
   { id: 'cottage.bed', kind: 'prop', at: 'cottage.bed', when: [{ chapterMin: 1 }, notIn(...OPENING)], script: 'prop.bed', label: 'La carta del giorno', verb: 'Pesca' },
 
   // ---- the flying lesson (data/story/missions.js): Malva comes to her door when she has the broom
+  // the course on the small cards: Ginepra (or what she left) in the tall grass by the campfire; Malva at home
+  // while her lesson waits (she has no other entry at the hearth after chapter 1, and her own id is busy elsewhere)
+  { id: 'minors.2', kind: 'zone', at: 'forest.grove', r: 1, when: lessonOpen('lesson.minors.2'), script: 'minors.2.lesson', label: 'L\'erba alta' },
+  { id: 'malva.lesson', kind: 'npc', who: 'malva', at: 'malva.hearth', when: [...lessonOpen('lesson.minors.3'), { chapterMin: 2 }], script: 'minors.3.lesson', label: 'Malva' },
   { id: 'fly.lesson', kind: 'zone', at: 'village.malva_door', r: 1, when: lessonOpen('lesson.fly'), script: 'fly.lesson', label: 'La lezione di volo' },
 
   // ---- optional encounters (reward wandering: xp 5, a rumour, sometimes a side mission)
