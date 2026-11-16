@@ -394,12 +394,24 @@ Una prova è un pezzo di storia con bivi, stanze buone e stanze cattive, e un co
 - Le prove sono dati, non codice: se ne possono aggiungere. Si parte con una principale per capitolo e
   tre o quattro secondarie, e passano dal registro (regola del recupero).
 
-### La simpatia delle streghe
+### Le streghe: affinità e legame, due assi diversi
 
-Ogni strega ha verso di lei una simpatia che si vede nel grimorio, come per Tartufo.
-- Una parte è **innata**: dipende dal carattere (il ritratto) e da quello della strega.
-- Una parte si **guadagna o si perde**: le missioni fatte insieme e come sono andate, i guai causati, gli aiuti dati.
-- Le streghe **ricordano**: cambiano come la accolgono, che cosa le offrono, se la aiutano in una prova.
+Ogni strega la guarda in due modi che non c'entrano l'uno con l'altro, e nel grimorio si vedono tutti e due.
+- **Affinità**: quanto la strega **si rivede in lei**. Viene da chi è (i cinque tratti del ritratto, la sua
+  carta), non da quello che fa per la strega. Cambia piano, solo se cambia il carattere.
+  - Malva (L'Imperatrice: asciutta, materna, pratica) si rivede in chi è gentile, prudente, e segue il cuore.
+  - Ortica (Il Mago: svelta, orgogliosa, brillante) in chi è audace, schietta, e ragiona di testa.
+  - Edera (La Sacerdotessa: lenta, esatta, silenziosa) in chi è accorta, curiosa, e ascolta prima di parlare.
+  - Ginepra (Il Carro: calda, buffa, impulsiva) in chi è audace, gentile, e segue il cuore.
+- **Legame**: quello che hanno **costruito insieme**. Sale con le missioni fatte con lei e andate bene, con gli
+  aiuti dati; scende con i guai causati e le prove fallite mentre la si aiutava.
+- I quattro casi danno quattro modi di trattarla, e ogni strega li recita a modo suo:
+  - affine e legata: la tratta da pari, le confida cose, la aiuta senza che chieda;
+  - affine ma senza legame: la capisce al volo ma non le deve niente; la mette alla prova;
+  - non affine ma legata: non la capisce, magari la trova insopportabile, e però le vuole bene per quello che
+    hanno passato: brontola e poi c'è;
+  - né l'una né l'altra: cortesia fredda, e nessun favore.
+- Le streghe **ricordano**: come la accolgono, che cosa le offrono, se la aiutano in una prova.
 
 ### Che cosa resta com'era
 
