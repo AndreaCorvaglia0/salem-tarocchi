@@ -28,6 +28,7 @@ export default {
     door: [4, 7, 'La porta'],
     table: [2, 5, 'Il tavolo delle letture'],
     bed: [7, 5, 'Il letto'],
+    shelf: [5, 2, 'La mensola'], // Altrove: the green bottle (glue/elsewhere.js)
   },
   doors: [{ at: 'door', to: 'village.cottage_door', look: 'mat' }],
 };

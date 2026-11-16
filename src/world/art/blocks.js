@@ -5,8 +5,9 @@ import { PROPS } from './props.js';
 import { INSIDE } from './inside.js';
 import { WILD } from './wild.js';
 import { MARKS } from './marks.js';
+import { ELSEWHERE } from './elsewhere.js';
 
-const PAINTERS = { house, cottage, shop, hut, meeting, court, mill, ...PROPS, ...INSIDE, ...WILD, ...MARKS };
+const PAINTERS = { house, cottage, shop, hut, meeting, court, mill, ...PROPS, ...INSIDE, ...WILD, ...MARKS, ...ELSEWHERE };
 
 // -> { canvas, over, ox?, windows?, smoke?, wall? }
 export function paintBlock(b, season) {

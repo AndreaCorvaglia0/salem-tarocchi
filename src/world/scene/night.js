@@ -15,7 +15,7 @@ export const sightRadius = (s = state) => (s.powers.fire ? SIGHT.fire : SIGHT.ba
 export class Night {
   constructor(scene, map, lights, season = 'winter', light = 'night') {
     Object.assign(this, { scene, map, lights, short: 0, extra: [] });
-    const sky = SKY[light === 'dawn' ? 'dawn' : season] || SKY.winter;
+    const sky = map.def.sky || SKY[light === 'dawn' ? 'dawn' : season] || SKY.winter; // a world of Altrove: its own
     this.tint = sky.tint;
     this.base = map.inside ? sky.inside ?? NIGHT.inside : sky.outside;
     this.brush = scene.make.image({ key: 'fx-light', add: false });

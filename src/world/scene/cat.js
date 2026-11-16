@@ -13,7 +13,7 @@ export class Cat {
     this.tx = x; this.ty = y; this.moving = false; this.target = null; this.sitting = false;
     this.sit();
   }
-  get on() { return !!state.powers.cat; }
+  get on() { return !!state.powers.cat && this.scene.map?.def?.cat !== false; } // some worlds of Altrove leave him behind
   // the player left tile (x, y)
   follow(x, y) { this.trail.push([x, y]); if (this.trail.length > 3) this.trail.shift(); }
   // run to a card spot and wait there

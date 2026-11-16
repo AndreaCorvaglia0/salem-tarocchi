@@ -1,6 +1,6 @@
 // Reads the hand-written map files (src/data/world/*.js, format in its README.md) into grids and
 // lists the engine and the tests use. Pure: no Phaser, no DOM, runs in node.
-import { TILES, KINDS, tileInfo } from './tiles.js';
+import { TILES, KINDS } from './tiles.js';
 import { DEFS } from '../data/world/index.js';
 
 const isLetter = (ch) => ch >= 'A' && ch <= 'Z';
@@ -10,6 +10,9 @@ export function parseMap(def) {
   const rows = def.rows;
   const H = rows.length, W = rows[0].length;
   const errors = [];
+  // a map with its own look (the worlds of Altrove) may bring its own tile legend: def.tiles
+  const LEG = def.tiles ? { ...TILES, ...def.tiles } : TILES;
+  const info = (ch) => LEG[ch] || TILES['.'];
   rows.forEach((r, y) => { if (r.length !== W) errors.push(`${def.id}: row ${y} has ${r.length} tiles, expected ${W}`); });
   const at = (x, y) => (x < 0 || y < 0 || x >= W || y >= H ? ' ' : rows[y][x] ?? ' ');
   const solid = new Uint8Array(W * H), grass = new Uint8Array(W * H), dark = new Uint8Array(W * H);
@@ -60,7 +63,7 @@ export function parseMap(def) {
   // walkability
   for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
     const ch = at(x, y);
-    const t = isLetter(ch) ? null : (TILES[ch] || (errors.push(`${def.id}: unknown tile "${ch}" at ${x},${y}`), TILES['.']));
+    const t = isLetter(ch) ? null : (LEG[ch] || (errors.push(`${def.id}: unknown tile "${ch}" at ${x},${y}`), TILES['.']));
     if (t?.solid) solid[y * W + x] = 1;
     if (t?.grass) grass[y * W + x] = 1;
   }
@@ -116,7 +119,8 @@ export function parseMap(def) {
     isSolid: (x, y) => x < 0 || y < 0 || x >= W || y >= H || !!solid[y * W + x],
     isGrass: (x, y) => !!grass[y * W + x],
     isDark: (x, y) => x >= 0 && y >= 0 && x < W && y < H && !!dark[y * W + x],
-    tile: (x, y) => tileInfo(groundAt(x, y)),
+    tile: (x, y) => info(groundAt(x, y)),
+    elsewhere: def.elsewhere || null, // a world of Altrove: { world, rule } (src/world/elsewhere.rules.js)
   };
 }
 

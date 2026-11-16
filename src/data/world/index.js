@@ -8,5 +8,8 @@ import shop from './shop.js';
 import forest from './forest.js';
 import depths from './depths.js';
 import library from './library.js'; // the trials' library (src/trials)
+import clouds from './clouds.js'; // Altrove: the small worlds outside Salem (glue/elsewhere.js)
+import book1 from './book1.js';
+import book2 from './book2.js';
 
-export const DEFS = [village, malva, cottage, court, meeting, shop, forest, depths, library];
+export const DEFS = [village, malva, cottage, court, meeting, shop, forest, depths, library, clouds, book1, book2];

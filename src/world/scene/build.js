@@ -9,13 +9,18 @@ import { makeNature } from '../art/nature.js';
 import { INSIDE } from '../art/inside.js';
 import { addTex, hash } from '../art/px.js';
 import { makeWild, archArt } from '../art/wild.js';
+import { paintSky, paintPage } from '../art/elsewhere.js';
+import { makeLookTex } from './elsewhere.js';
 
 const T = 16, ADD = Phaser.BlendModes.ADD;
 
 export function buildMap(scene, map, season = map.season) {
   const lights = [], grass = [];
   const gk = `ground-${map.id}-${season}`;
-  if (!scene.textures.exists(gk)) addTex(scene, gk, paintGround(map, season));
+  // a world of Altrove has its own look: the sky (its clouds are layers of its rule) or a page
+  const look = map.def.look;
+  if (look) makeLookTex(scene);
+  if (!scene.textures.exists(gk)) addTex(scene, gk, look === 'clouds' ? paintSky(map) : look === 'page' ? paintPage(map) : paintGround(map, season));
   scene.add.image(0, 0, gk).setOrigin(0).setDepth(0);
   makeNature(scene, season); makeWild(scene);
   const bells = [], perches = [];
@@ -68,7 +73,7 @@ export function buildMap(scene, map, season = map.season) {
     const key = `blk-${map.id}-${b.letter}-${b.x}-${b.y}-${season}`;
     if (!scene.textures.exists(key)) addTex(scene, key, art.canvas);
     const left = b.x * T - (art.ox || 0), bottom = (b.y + b.h) * T, top = bottom - art.canvas.height;
-    if (!map.inside && !['lamp', 'pillory', 'board', 'lantern', 'torch'].includes(b.kind) && b.w > 1) scene.add.image(left + (b.w * T) / 2 + 2, bottom - 2, 'fx-shadow').setScale((b.w * T) / 12, 1.6).setDepth(2);
+    if (!map.inside && !look && !['lamp', 'pillory', 'board', 'lantern', 'torch'].includes(b.kind) && b.w > 1) scene.add.image(left + (b.w * T) / 2 + 2, bottom - 2, 'fx-shadow').setScale((b.w * T) / 12, 1.6).setDepth(2);
     scene.add.image(left, bottom, key).setOrigin(0, 1).setDepth(bottom - 1);
     for (const w of art.windows) {
       if (!w.lit) continue;

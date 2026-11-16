@@ -29,6 +29,7 @@ import { Minors } from './minors.js';
 import { Sense } from './sense.js';
 import { Stranger } from './stranger.js';
 import { guideRoute } from '../guidepath.js';
+import { makeRule, Trinkets } from './elsewhere.js';
 
 // sounds (notes/sound.md): the service may be missing (harness), then nothing plays
 const MOOD = { forest: 'forest', depths: 'depths', court: 'depths' };
@@ -59,6 +60,8 @@ export class WorldScene extends Phaser.Scene {
     this.player = new Walker(this, 'ch-tu', sx, sy, d.dir || 'down');
     this.obstacles = new Obstacles(this, map); // before Things: it asks them what is solid
     this.things = new Things(this, map, this.built);
+    this.away = !!map.elsewhere; // a world of Altrove (glue/elsewhere.js): its own rule, no Salem life
+    this.rule = makeRule(this, map); this.trinkets = new Trinkets(this, map);
     this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.sense = new Sense(this, map);
     this.stranger = new Stranger(this); // someone who stops her in the street (glue/street.js)
     if (this.things.solidAt(sx, sy)) { const [fx, fy] = this.freeNear(sx, sy, true); this.player.tx = fx; this.player.ty = fy; this.player.place(); }
@@ -68,18 +71,19 @@ export class WorldScene extends Phaser.Scene {
     const nb = [[-1, 0], [1, 0], [0, 1], [0, -1]].map(([dx, dy]) => [this.player.tx + dx, this.player.ty + dy]).find(([x, y]) => this.canStand(x, y)) || [this.player.tx, this.player.ty];
     this.cat = new Cat(this, ...nb);
     this.night = new Night(this, map, this.built.lights, this.season, this.light);
-    this.weather = new Weather(this, map, this.season, this.light);
-    this.life = new Life(this, map, this.built, this.season, this.light);
-    this.guide = new Guide(this, map); this.guide.set(this.registry.get('guide'));
+    this.weather = this.away ? { update() {} } : new Weather(this, map, this.season, this.light);
+    this.life = this.away ? { update: () => [] } : new Life(this, map, this.built, this.season, this.light);
+    this.guide = new Guide(this, map); this.guide.set(this.away ? null : this.registry.get('guide'));
     this.setMission(this.registry.get('mission'));
     this.bornAt = this.time.now;
-    mood(moodFor(map.id));
+    mood(map.def.mood || moodFor(map.id));
     this.inputs = new Input(this);
     this.hand = this.add.sprite(0, 0, 'fx-flame').setOrigin(0.5, 1).setScale(0.55).setVisible(false).play('flame');
     this.input.keyboard?.on('keydown-Q', () => this.stun());
 
     const cam = this.cameras.main;
     cam.setRoundPixels(true);
+    if (!this.away) cam.setBackgroundColor('rgba(0,0,0,0)'); // a world of Altrove paints its own (scene/elsewhere.js)
     this.layout();
     cam.startFollow(this.player.sprite, true, 0.18, 0.18, 0, 10);
     cam.centerOn(this.player.sprite.x, this.player.sprite.y - 10);
@@ -89,9 +93,11 @@ export class WorldScene extends Phaser.Scene {
     const offs = ['step', 'flag', 'chapter', 'card:found', 'level:up', 'card:recovered'].map((e) => on(e, () => this.refresh()));
     this.events.once('shutdown', () => { offs.forEach((f) => f()); this.scale.off('resize', this.layout, this); this.night.destroy(); this.controls?.prompt(null); });
     state.pos = { map: map.id, x: this.player.tx, y: this.player.ty }; save();
-    this.markSeen(this.player.tx, this.player.ty);
-    this.cellAt(this.player.tx, this.player.ty, true);
-    emit('map:enter', { map: map.id }); // glue/bonds.js: Tartufo's walks
+    if (!this.away) {
+      this.markSeen(this.player.tx, this.player.ty);
+      this.cellAt(this.player.tx, this.player.ty, true);
+      emit('map:enter', { map: map.id }); // glue/bonds.js: Tartufo's walks
+    } else this.time.delayedCall(50, () => this.rule?.arrived(this.player.tx, this.player.ty));
     if (d.arrived) this.controls?.place(map.name);
     this.time.delayedCall(350, () => this.things.entered(this.player.tx, this.player.ty));
     this.game.events.emit('world:ready', map.id);
@@ -111,7 +117,7 @@ export class WorldScene extends Phaser.Scene {
 
   refresh() {
     if (!this.sys.isActive()) return;
-    this.things.refresh(); this.patrols.forEach((p) => p.refresh());
+    this.things.refresh(); this.patrols.forEach((p) => p.refresh()); this.trinkets?.refresh();
     // a new chapter changes the season: the map is drawn again, she stays where she is
     if (seasonFor(this.map.id, state.chapter) !== this.season || lightFor(this.map.id, state.chapter) !== this.light) this.reseason = true;
   }
@@ -119,7 +125,7 @@ export class WorldScene extends Phaser.Scene {
 
   // ---- the grid ----
   patrolAt(x, y) { return this.patrols.some((p) => p.active && p.w.tx === x && p.w.ty === y); }
-  canStand(x, y) { return !this.map.isSolid(x, y) && this.map.at(x, y) !== '+' && !this.things.solidAt(x, y) && !this.patrolAt(x, y); }
+  canStand(x, y) { return !this.map.isSolid(x, y) && this.map.at(x, y) !== '+' && !this.things.solidAt(x, y) && !this.patrolAt(x, y) && (!this.rule || this.rule.canStand(x, y)); }
   canEnter = (x, y) => {
     const door = this.things.doorAt(x, y);
     if (door) return { door };
@@ -186,6 +192,7 @@ export class WorldScene extends Phaser.Scene {
     const fog = this.fog.update(time, dt);
     this.night.update(time, dt, { px: p.sprite.x, py: p.sprite.y - 10, shortTarget: short ? 1 : 0, cones, fog, air: !!state.powers.stun });
     this.weather.update(time, dt);
+    this.rule?.update(time, dt); this.trinkets?.update(time);
     this.prompt();
   }
 
@@ -236,6 +243,7 @@ export class WorldScene extends Phaser.Scene {
 
   arrived(x, y, from) {
     this.cat.follow(...from);
+    if (this.away) { state.pos = { map: this.map.id, x, y }; if (++this.steps % 2 === 0) sfx('step'); this.rule?.arrived(x, y, from); return; }
     this.markSeen(x, y);
     state.pos = { map: this.map.id, x, y };
     stat('steps');
@@ -280,15 +288,16 @@ export class WorldScene extends Phaser.Scene {
   async use(u) {
     this.busy++;
     this.inputs.cancel();
-    try { if (u.type === 'door') { if (await this.things.tryDoor(u.d)) { sfx('door'); this.travel(u.d.to); } } else await this.things.use(u); }
+    try { if (u.type === 'door') { if (await this.things.tryDoor(u.d)) { sfx('door'); this.travel(u.d.to, false, u.d); } } else await this.things.use(u); }
     catch (e) { console.error('[world] use', e); }
     finally { this.busy--; }
   }
   useDoor(d) { return this.use({ type: 'door', d, x: d.x, y: d.y }); }
 
   // enter: true when a scene (world.travel) sends her, false through a door (zones under the door wait)
-  travel(ref, enter = false) {
-    const a = anchorOf(ref);
+  // ref: an anchor, or an exact place { map, x, y } (the way back from Altrove); door: the door taken, if any
+  travel(ref, enter = false, taken = null) {
+    const a = ref && typeof ref === 'object' ? ref : anchorOf(ref);
     if (!a) { console.warn(`[world] unknown anchor ${ref}`); return Promise.resolve(false); }
     const m = getMap(a.map);
     const door = [[0, 1, 'up'], [0, -1, 'down'], [-1, 0, 'right'], [1, 0, 'left']].find(([dx, dy]) => m.at(a.x + dx, a.y + dy) === '+');
@@ -300,17 +309,18 @@ export class WorldScene extends Phaser.Scene {
       Object.assign(this.player, { tx: x, ty: y }); this.player.place(); this.player.face(dir);
       this.cameras.main.centerOn(this.player.sprite.x, this.player.sprite.y);
       state.pos = { map: a.map, x, y }; save();
-      this.markSeen(x, y);
+      if (!this.away) this.markSeen(x, y);
       // a scene sent her onto a zone of this map: it starts like after a walk (zones already under her wait)
       this.things.refresh();
       this.time.delayedCall(350, () => { if (this.sys.isActive()) this.things.entered(this.player.tx, this.player.ty); });
       return Promise.resolve(true);
     }
     this.leaving = true;
-    return new Promise((res) => {
+    const pre = this.rule?.beforeTravel ? this.rule.beforeTravel(taken) : null;
+    return Promise.resolve(pre).then(() => new Promise((res) => {
       this.cameras.main.fadeOut(220, 0, 0, 0);
       this.cameras.main.once('camerafadeoutcomplete', () => { this.scene.restart({ map: a.map, x: a.x, y: a.y, dir, arrived: true, enter }); res(true); });
-    });
+    }));
   }
 
   // ---- patrols ----

@@ -69,7 +69,8 @@ export class Input {
     if (door || (stand && !usable.some((u) => u.type === 'npc'))) goals = new Set([`${tx},${ty}`]);
     else goals = new Set(Object.values(DIRS).map(([dx, dy]) => [tx + dx, ty + dy]).filter(([x, y]) => (x === pl.tx && y === pl.ty) || sc.canStand(x, y)).map(([x, y]) => `${x},${y}`));
     if (!goals.size) return this.flash(tx, ty, 0xd0605a);
-    const path = findPath(pl.tx, pl.ty, goals, (x, y) => sc.canStand(x, y), { limit: 6000 });
+    // a world of Altrove may ask taps to keep off what she has learnt to see (thin cloud after a fall)
+    const path = findPath(pl.tx, pl.ty, goals, (x, y) => sc.canStand(x, y) && !sc.rule?.avoid?.(x, y), { limit: 6000 });
     if (!path) return this.flash(tx, ty, 0xd0605a);
     this.path = path; this.target = [tx, ty];
     this.pendingUse = usable.length > 0;

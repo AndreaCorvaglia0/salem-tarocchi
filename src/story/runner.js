@@ -131,6 +131,7 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     // the trials (glue/trials.js): { do: 'witchDraw', who, card, rev, t }, { do: 'trial', id }, { do: 'bond', who, n }
     witchDraw: (n) => call('trial.witchDraw', { who: n.who, card: n.card, rev: n.rev, t: F(n.t) }),
     trial: (n) => call('trial.start', n.id),
+    elsewhere: (n) => call('elsewhere.go', n.id), // Altrove (glue/elsewhere.js): { do: 'elsewhere', id }
     bond: (n) => call('witches.bond', n.who, n.n, n.why),
   };
 

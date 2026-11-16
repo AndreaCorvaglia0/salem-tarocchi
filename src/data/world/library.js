@@ -28,6 +28,7 @@ export default {
   anchors: {
     door: [4, 6, 'La porta'],
     desk: [2, 4, 'Il tavolo dei libri'],
+    book: [4, 3, 'Un libro aperto'], // Altrove: the story read in the library (glue/elsewhere.js)
   },
   doors: [{ at: 'door', to: 'village.library_door', look: 'mat' }],
 };

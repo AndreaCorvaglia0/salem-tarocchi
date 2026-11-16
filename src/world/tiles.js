@@ -49,6 +49,8 @@ export const KINDS = {
   hearth: { light: { center: true, bottom: 4, r: 96, warm: true, big: true } }, table: {}, chair: {}, bed: {}, shelf: {},
   counter: {}, lectern: {}, pews: {}, bench2: {}, dais: {}, dock: {}, cabinet: {}, window: {}, stairs: { solid: false },
   candle: { light: { x: 8, y: 0, r: 50, warm: true } }, herbsHang: {}, chest: {}, rugdeco: { solid: false }, plant: {},
+  // Altrove (art/elsewhere.js): on the clouds, and inside a book
+  skydoor: {}, ladder: {}, teatable: {}, glyph: {}, capital: {}, blot: {},
 };
 
 export const tileInfo = (ch) => TILES[ch] || TILES['.'];
