@@ -267,3 +267,48 @@ il capitolo 1; dopo, compare toccando la riga del prossimo passo.
 
 Andando dritte, un'ora o poco più: è un ordine di grandezza, non un limite. Di certo non dieci. Chi
 vuole restare trova un mondo aperto in cui continuare a crescere.
+
+## Aggiunte del 16 novembre (da costruire)
+
+Decise con Andrea dopo la prima serata di gioco. Non sono ancora nel gioco: questa sezione serve a non perderle.
+
+### La lettura come attività centrale
+
+La lettura è lo scopo: conoscere le carte, conoscere i modi di leggerle, allenare l'intuito. Tutto il
+progetto del motore è in `docs/READING.md`. Chi legge può rispondere al cliente con garbo o male.
+
+### La popolarità
+
+- Un terzo numero accanto a esperienza e ritratto: cresce con le letture corrette, a punti e a livelli.
+- Ha parole sue, dette dai personaggi e mai dall'interfaccia. Livello 1: «sei piaciuta, qualcuno vuole
+  farsi rileggere le carte». Livello 2: «il tuo nome sta girando». Sono anche l'invito a tornare al cottage.
+- Porta clienti migliori e letture per strada.
+
+### La terza risposta
+
+- Di solito le scelte sono due. Con la persona giusta compare una terza, se una delle misure del
+  gioco è abbastanza alta: popolarità, rango (almeno Fattucchiera), esperienza, la scopa, quanto ha
+  esplorato, un tratto del ritratto.
+- La terza risposta mostra il perché si può dire, accanto al testo: «[Popolare]», «[Strega]», «[Hai la scopa]».
+- Può essere una battuta sola oppure aprire un ramo vero della conversazione o del gioco.
+
+### Il capitolo si apre dalla Lettrice
+
+Andare dalla Lettrice a fine capitolo fa avanzare il capitolo: schermo nero, nessuna musica, il titolo
+del capitolo e una frase sola, esoterica e che dà forza. Poi la seduta. Per ora è un'idea registrata.
+
+### I Minori
+
+Entrano con una lezione chiave, né all'inizio né tardi. Chi ha già giocato la prima mezz'ora non deve
+trovarsela alle spalle: va messa dopo il punto in cui si ottiene la scopa.
+
+### La lezione di volo
+
+Oggi la scopa arriva senza che nessuno dica come usarla. Serve una missione: una maestra la manda a
+imparare, c'è una lezione vera, e il modo di usarla (la mappa del grimorio) arriva come conseguenza
+naturale della scena, senza spiegare il parallelo.
+
+### Emerso dalla prova
+
+- La scopa è arrivata nella prima mezz'ora: l'esperienza sale troppo in fretta, i cancelli di rango
+  vanno ritarati.
