@@ -123,3 +123,27 @@ Regole di forma di una frase (le controlla un test):
 
 Domanda: `{ ambito, forma, ref?: { di: 'del campo', chi?: 'tuo marito' } }`.
 Carta stesa: `{ pos, card, rev }`. Ruolo di ogni posizione: tabella `ROLE` in `src/reading/plan.js`.
+
+## Come si scrive una voce
+
+Il modello è `src/data/reading/voices/c05.js` (Cinque di Coppe). Oltre alle regole di forma:
+
+- **Chi chiede può essere chiunque.** Mai aggettivi o participi che gli danno un genere: non
+  "ti sei accorta", "sei stanco", "ti senti sola". Si gira la frase: "hai capito", "ti pesa la stanchezza",
+  "ti senti in disparte".
+- **Ogni frase dice una cosa della vita, non della carta.** Prima si pensa a cosa vuol dire quella
+  carta, in quel verso, per quell'ambito e in quel ruolo; poi lo si dice come lo direbbe una persona
+  seduta davanti a te. Niente simboli ("le coppe rovesciate"), niente parole chiave messe in fila.
+- **L'ambito cambia la sostanza, non una parola.** La frase d'amore e quella di lavoro della stessa
+  carta devono essere due osservazioni diverse, non la stessa con un nome sostituito.
+- **Il ruolo cambia il tempo e l'angolo.** `origine` racconta un fatto già successo; `situazione` dice
+  com'è adesso; `ostacolo` nomina che cosa frena (comincia spesso con "Ti frena", "Ti pesa", "Ti
+  trattiene", "Resta"); `arrivo` dice che cosa viene; `consiglio` dà una cosa da fare, concreta.
+- **Rovesciata** è la stessa energia trattenuta, in ritardo, rivolta all'interno o esagerata: mai un
+  semplice "non". Per le carte dure, rovesciata è spesso il sollievo; per le carte felici, la fatica a goderne.
+- **Concreto ma aperto.** "Un affare andato male", "un posto a tavola": abbastanza preciso da sembrare
+  vero, abbastanza largo da valere per chiunque. Mai nomi, mestieri, oggetti della domanda.
+- **`favore`** dice quanto la carta, in quel verso, aiuta chi chiede (-2 molto contraria … +2 molto
+  favorevole). **`moto`** dice che cosa fa alla storia: `inizia`, `cresce`, `ferma`, `chiude`, `torna`.
+- Dentro la stessa carta non si ripete lo stesso attacco più di tre volte per verso, e non si ripete
+  la stessa immagine in due ambiti.
