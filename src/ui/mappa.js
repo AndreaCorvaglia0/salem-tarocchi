@@ -10,7 +10,7 @@ import { REGIONS, REGION_OF, sketch, SKETCH_CSS } from './sketch.js';
 import { nextStep, placeOf, isSeen } from './logic.js';
 import { test } from '../core/cond.js';
 import * as STORY from '../data/story/index.js';
-import { extrasShown, extrasDone, extrasTotal, trackedExtra, track, markSeen } from '../core/extras.js';
+import { EXTRAS, extrasShown, trackedExtra, track, markSeen } from '../core/extras.js';
 
 const CSS = `${SKETCH_CSS}
 .mp-reg{margin-top:4px}
@@ -35,6 +35,11 @@ const CSS = `${SKETCH_CSS}
 .mp-m.sec.on .tx,.mp-m.sec.open .tx{white-space:normal}
 .mp-m.sec.done .tx{text-decoration:line-through ${PENCIL}88}
 .mp-m .lb{display:inline-block;margin-right:8px;padding:0 6px;border:1px solid ${PENCIL}88;border-radius:9px;font-size:15px;line-height:18px;color:${PENCIL};transform:rotate(-2deg)}
+.mp-m .no{display:inline-block;margin-right:6px;font-size:17px;line-height:18px;color:${PENCIL}}
+/* on the sketch a side mission is a short numbered pencil tag beside its place (the text is in the list):
+   long notes over a phone-sized map covered the titles */
+.mp-reg .sk-note{max-width:none;white-space:nowrap;font-size:17px;line-height:19px;padding:0 5px;border-radius:7px;transform:translate(24px,6px) rotate(-3deg);visibility:hidden}
+.mp-reg .sk-note.mp-placed{visibility:visible}
 .mp-m .nw{display:inline-block;margin-right:8px;padding:0 6px;border-radius:9px;background:${RED};color:#fbf3e2;font-size:15px;line-height:18px;transform:rotate(1.5deg)}
 
 `;
@@ -44,7 +49,14 @@ const ALL = Object.values(REGIONS).flatMap((r) => Object.keys(r.places));
 // Active: its `when` holds and its `done` (if any) does not.
 export const sideNotes = (side = STORY.SIDE, t = test) => (Array.isArray(side) ? side : Object.values(side || {}))
   .filter((m) => m && m.note && m.at && t(m.when) && !(m.done != null && t(m.done)))
-  .map((m) => ({ place: placeOf(m.at), text: m.note }));
+  .map((m) => ({ id: m.id, place: placeOf(m.at), text: m.note }));
+// the number of each side mission still to do, in the registry's order: the same on the map tag and in the list
+export const sideNumbers = (list = extrasShown()) => {
+  const open = list.filter((e) => e.status !== 'done' && e.kind === 'side').map((e) => e.id); // only these have a tag on the map
+  const order = EXTRAS.map((e) => e.id).filter((id) => open.includes(id));
+  return Object.fromEntries(order.map((id, i) => [id, i + 1]));
+};
+const mapNotes = () => { const no = sideNumbers(); return sideNotes().filter((n) => no[n.id]).map((n) => ({ place: n.place, text: String(no[n.id]) })); };
 
 export function mappaPages(ctx) {
   css('ui-mappa', CSS);
@@ -74,10 +86,13 @@ export function mappaPages(ctx) {
     cap.replaceChildren(...kids);
   };
   const region = (rid, width) => {
-    const R = REGIONS[rid], any = Object.keys(R.places).some(seen) || REGION_OF(next) === rid || sideNotes().some((n) => R.places[n.place]);
+    const notes = ctx.study ? [] : mapNotes();
+    const R = REGIONS[rid], any = Object.keys(R.places).some(seen) || REGION_OF(next) === rid || notes.some((n) => R.places[n.place]);
     const box = h('div.mp-reg', h('h3', {}, R.name, h('small', {}, R.season)));
     if (!any) { box.append(h('p.pencil.mp-blank', {}, 'Non ci sono ancora stata.')); return box; }
-    box.append(sketch(rid, { width, seen, next, here, onPick: pick, notes: ctx.study ? [] : sideNotes() }));
+    const sk = sketch(rid, { width, seen, next, here, onPick: pick, notes });
+    box.append(sk);
+    if (notes.length) requestAnimationFrame(() => placeTags(sk));
     return box;
   };
   // sizes: the page's inner width; on a desktop the right page holds two sketches, so it is height-bound
@@ -100,19 +115,47 @@ export function mappaPages(ctx) {
   return { L: [L], R: [Rr], single: true };
 }
 
+// The numbered pencil tags on a sketch: beside their place, wherever they touch no label, no other tag,
+// no mark and stay inside the drawing. sketch.js puts each one 20 px above its place, centred; we try a
+// few spots around the place and keep the first free one.
+const SPOTS = [[24, 10, 0], [-24, 10, -1], [10, -8, 0], [-10, -8, -1], [24, 34, 0], [-24, 34, -1], [0, -14, -0.5], [0, 50, -0.5]];
+export function placeTags(sk) {
+  const box = sk.getBoundingClientRect();
+  if (!box.width) return;
+  const rel = (r) => ({ l: r.left - box.left, t: r.top - box.top, r: r.right - box.left, b: r.bottom - box.top });
+  const busy = [...sk.querySelectorAll('.sk-lab, .sk-me')].map((e) => rel(e.getBoundingClientRect()));
+  for (const e of sk.querySelectorAll('.sk-hit')) { const c = rel(e.getBoundingClientRect()), cx = (c.l + c.r) / 2, cy = (c.t + c.b) / 2; busy.push({ l: cx - 13, t: cy - 13, r: cx + 13, b: cy + 13 }); }
+  const hit = (a, b) => a.l < b.r + 2 && a.r > b.l - 2 && a.t < b.b + 2 && a.b > b.t - 2;
+  for (const el of sk.querySelectorAll('.sk-note')) {
+    el.classList.remove('sk-l', 'sk-r');
+    const x = parseFloat(el.style.left), y = parseFloat(el.style.top) + 20; // the place
+    const w = el.offsetWidth, hh = el.offsetHeight;
+    const mark = { l: x - 13, t: y - 13, r: x + 13, b: y + 13 };
+    const at = ([dx, dy, ax]) => { const l = x + (Math.abs(dx) < 1 ? dx * w : dx) + ax * w; const t = y + dy - hh; return { l, t, r: l + w, b: t + hh }; };
+    const fits = (q) => q.l >= 2 && q.t >= 2 && q.r <= box.width - 2 && q.b <= box.height - 2 && !hit(q, mark) && !busy.some((b) => hit(q, b));
+    const spot = SPOTS.map(at).find(fits) || at(SPOTS[0]);
+    el.style.left = `${spot.l}px`; el.style.top = `${spot.t}px`; el.style.transform = 'rotate(-3deg)';
+    el.classList.add('mp-placed');
+    busy.push(spot);
+  }
+}
+
 // "Missioni": the main mission in ink, then the optional ones in pencil (core/extras.js). Tapping one
 // follows it (the red circle and the trail point there); tapping the main one goes back to it.
 const STATUS = { active: 'la sto seguendo', new: 'da fare', seen: 'da fare', done: 'fatta' };
 function missions(ctx, tracked) {
-  const list = extrasShown();
+  const list = extrasShown(), no = sideNumbers(list);
+  // "fatte N di M" counts exactly the missions listed here (a card found before anyone spoke of it is
+  // neither listed nor counted)
+  const done = list.filter((e) => e.status === 'done').length;
   const main = h('button.mp-m', { type: 'button', class: tracked ? 'mp-m' : 'mp-m on', onclick: () => { track(null); ctx.rerender(); } },
     h('span.st', {}, tracked ? 'la storia: tocca per tornare a seguirla' : 'la storia: la sto seguendo'), nextStep().text);
   const rows = list.map((e) => {
     const on = !!e.tracked, done = e.status === 'done';
     const cls = ['mp-m', 'sec', on ? 'on' : '', done ? 'done' : ''].filter(Boolean).join(' ');
     return h('button', { type: 'button', class: cls, disabled: done, onclick: () => { markSeen(e.id); if (!done) track(e.id); ctx.rerender(); } },
-      h('span.st', {}, h('span.lb', {}, 'in più'), e.status === 'new' ? h('span.nw', {}, 'nuova') : null, on ? STATUS.active : STATUS[e.status] || ''),
+      h('span.st', {}, h('span.lb', {}, 'in più'), no[e.id] ? h('span.no', {}, `✎ ${no[e.id]}`) : null, e.status === 'new' ? h('span.nw', {}, 'nuova') : null, on ? STATUS.active : STATUS[e.status] || ''),
       h('span.tx', {}, e.text));
   });
-  return h('div.mp-ms', h('h3', {}, 'Missioni', h('small', {}, `in più: fatte ${extrasDone()} di ${extrasTotal()}`)), main, ...rows);
+  return h('div.mp-ms', h('h3', {}, 'Missioni', list.length ? h('small', {}, `in più: fatte ${done} di ${list.length}`) : null), main, ...rows);
 }

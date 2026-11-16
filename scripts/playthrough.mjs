@@ -32,6 +32,9 @@ function probe() {
   const last = (sel) => all(sel).pop() || null;
   const S = window.__salem?.state;
   const base = { step: S?.step, chapter: S?.chapter, xp: S?.xp, coins: S?.coins, map: S?.pos?.map, cards: S ? Object.keys(S.cards).length : 0, ended: !!S?.flags?.['ending.seen'] };
+  // the chapter card (story/chapter.js): black, the title and one line; a tap once the cue shows
+  const cc = last('.cc');
+  if (cc) return { ...base, kind: 'chapter', ready: !!cc.querySelector('.cc-c.in'), text: cc.querySelector('.cc-n')?.textContent || '', at: { x: 195, y: 420 } };
   const lv = last('.hud-lvup');
   if (lv) return { ...base, kind: 'levelup', at: box(lv), text: lv.textContent };
   const fd = last('.fd');
@@ -153,7 +156,7 @@ async function playRun(side, { stopStep = null } = {}) {
     if (p.step !== stepSeen) { stepSeen = p.step; stepAt = Date.now(); } else if (Date.now() - stepAt > STEP_MS) await fail(`step ${p.step} did not move in ${STEP_MS / 60000} minutes`);
 
     switch (p.kind) {
-      case 'levelup': { const lvl = /Livello (\d)/.exec(p.text)?.[1]; if (lvl && !levels.includes(lvl)) { levels.push(lvl); did.tries = {}; /* a new power may open the way */ say('level', lvl, 'xp', p.xp, 'step', p.step); } await shot('levelup'); await tap(p.at); break; }
+      case 'levelup': { const lvl = /Livello (\d)/.exec(p.text)?.[1]; if (lvl && !levels.includes(lvl)) { levels.push(lvl); did.tries = {}; stepTries = 0; /* a new power, or the rank a gate asked for: try the step again */ say('level', lvl, 'xp', p.xp, 'step', p.step); } await shot('levelup'); await tap(p.at); break; }
       case 'found-detail': await shot('found'); await tap(p.at); break;
       case 'found-words': {
         const words = ['neve', 'luce', 'passo'];
@@ -181,7 +184,10 @@ async function playRun(side, { stopStep = null } = {}) {
         if (/Accenderlo io|Insegnarle/.test(p.opts.map((o) => o.t).join())) await shot('campfire');
         if (p.where === 'session' && p.chapter >= 1) await shot('session-tree');
         if (p.where === 'visit') { did.visitAsked = true; await shot('visit-3-question'); }
-        const o = side === 'first' ? p.opts[0] : p.opts[p.opts.length - 1];
+        // a lesson's practice question (data/story/scripts/lessons.js, Ortica or Edera asking what to expect
+        // of a card): any answer, at random; everything else first/last, so both sides of every fork play
+        const practice = p.where === 'dialogue' && /ti aspetti\?|che cosa diventa quando/i.test(p.text);
+        const o = practice ? p.opts[Math.floor(Math.random() * p.opts.length)] : side === 'first' ? p.opts[0] : p.opts[p.opts.length - 1];
         say('choose', JSON.stringify(o.t.slice(0, 50)));
         await tap(o); break;
       }
@@ -208,6 +214,9 @@ async function playRun(side, { stopStep = null } = {}) {
         if (/Tre maestre/.test(p.text)) await shot('coven');
         if (/^Alba/.test(p.text)) await shot('dawn');
         await tap(p.at); break;
+      case 'chapter':
+        if (!p.ready) { await sleep(200); break; }
+        say('chapter card', JSON.stringify(p.text)); await shot(`chapter-${p.chapter}`); await tap(p.at); await sleep(600); break;
       case 'fan': await shot('fan-draw'); await tap(p.at); break;
       case 'top': await tap(p.at); break;
       case 'question': {
@@ -253,6 +262,7 @@ async function playRun(side, { stopStep = null } = {}) {
       say('act', b?.t);
       if (b && b.t !== '·') await tap(b); else await page.keyboard.press('Space');
       await sleep(700);
+      return b?.t || '';
     };
     if (p.hint && !did[`hint:${p.hint}`]) { did[`hint:${p.hint}`] = true; say('hint', JSON.stringify(p.hint)); }
     // the first minute: the move hint with the trail, then the action hint by the first card
@@ -317,7 +327,12 @@ async function playRun(side, { stopStep = null } = {}) {
     if (ok.length) { did.tries = did.tries || {}; did.tries[ok[0].id] = (did.tries[ok[0].id] || 0) + 1; await travel(ok[0].spot); await act(); stepTries = 1; return; }
     if (hidden.length && !did[`unreach${hidden[0].id}`]) { did[`unreach${hidden[0].id}`] = true; say('cannot reach', hidden.map((c) => c.spot).join(','), '- studying for xp instead'); }
     // more xp: a client at the cottage table
-    if ((stepTries % 3 === 0 || !ok.length) && st.chapter >= 1) { await travel('cottage.table'); await act(); return; }
+    // (when the table has nothing to offer right now, the action shows '·': go back to the step for a while)
+    if ((stepTries % 3 === 0 || !ok.length) && st.chapter >= 1 && Date.now() > (did.noTable || 0)) {
+      await travel('cottage.table');
+      if ((await act()) === '·') { did.noTable = Date.now() + 30000; say('nothing at the table now'); }
+      return;
+    }
     if (at) { await travel(at); await act(); return; }
     await sleep(500);
   }

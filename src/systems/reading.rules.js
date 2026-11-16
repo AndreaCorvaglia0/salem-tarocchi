@@ -44,7 +44,10 @@ export function payFor({ pay = 5, score = 0, owned = 0, yourCardOnTable = false,
   const base = pay * (0.4 + 0.6 * score) * (1 + 0.05 * owned);
   return Math.max(0, Math.round(base + (yourCardOnTable ? pay * 0.2 : 0) + (dayCardOnTable ? pay * 0.3 : 0)));
 }
-export const xpFor = (score) => 10 + Math.round(20 * score);
+// Experience of a reading: a little for sitting down, and some for every right answer, so that a longer
+// spread (more questions, more minutes) is worth more. score 0..1, total = the questions it asked.
+export const READ_XP = { base: 6, right: 5 };
+export const xpFor = (score, total = 4) => READ_XP.base + Math.round(READ_XP.right * score * total);
 
 // Which cards go where. given: the array the story prepared ('fan' | 'number' | id | null each) or undefined.
 // -> [{ id|null, how: 'given'|'fan'|'top'|'number' }]

@@ -12,6 +12,7 @@ import { levelProgress, titleOf } from '../core/progress.js';
 import { INK, RED, HAND, SERIF, GOLD, PENCIL, baseCss, paperBg, inkBar, svgEl } from './paper.js';
 import { book, starMark } from './art.js';
 import { nextStep } from './logic.js';
+import { trackedExtra } from '../core/extras.js';
 
 const CSS = `
 .hud{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:calc(8px + env(safe-area-inset-top)) 10px 0;pointer-events:none!important}
@@ -22,6 +23,9 @@ const CSS = `
 .hud-step .ar{flex:none;display:inline-grid;place-items:center;width:22px;height:22px;margin-top:2px}
 .hud-step .ar svg{display:block}
 .hud-step .t{display:block;flex:1;min-width:0;white-space:normal;overflow-wrap:break-word;text-wrap:pretty}
+.hud-step.side{color:${PENCIL}}
+.hud-step.side .lb{display:inline-block;margin:0 6px 0 0;padding:0 6px;border:1px solid ${PENCIL}88;border-radius:9px;font-size:15px;line-height:18px;vertical-align:2px;transform:rotate(-2deg)}
+.hud-step.side .t{font-size:19px;line-height:23px;text-decoration:underline dashed ${PENCIL}99;text-underline-offset:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .hud-slip.asked .hud-step .ar svg{animation:hud-spin 1s ease-out}
 @keyframes hud-spin{from{transform:rotate(-200deg)}}
 .hud-step.out .t{animation:hud-out .5s forwards}
@@ -55,6 +59,9 @@ const CSS = `
 @keyframes hud-spark{from{transform:translate(-50%,-50%);opacity:1}to{transform:translate(var(--dx),var(--dy));opacity:0}}
 .hud-lvup.bye{opacity:0;transition:opacity .35s}
 `;
+
+// The line on the slip: the secondary mission she follows (pencil, "in più"), else the main step (ink).
+export const slipLine = () => { const e = trackedExtra(); return e ? { text: e.text, side: true } : { text: nextStep().text, side: false }; };
 
 // a small compass: the next-step line can be tapped to see the way
 const COMPASS = `<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" fill="none" stroke="${PENCIL}" stroke-width="1.4"/><path d="M11 3.5 L13.4 11 L11 18.5 L8.6 11 Z" fill="${RED}"/><path d="M11 11 L13.4 11 L11 18.5 L8.6 11 Z" fill="${INK}"/><circle cx="11" cy="11" r="1.3" fill="#f3e7c9"/></svg>`;
@@ -102,6 +109,8 @@ export function mountHud() {
   if (mounted) return mounted;
   const stepT = h('span.t');
   const step = h('span.hud-step', h('span.ar', { 'aria-hidden': 'true' }, svgEl(COMPASS)), stepT);
+  let side = false;
+  const put = (line) => { side = line.side; stepT.replaceChildren(...(side ? [h('span.lb', {}, 'in più')] : []), line.text); step.classList.toggle('side', side); };
   const lvT = h('span');
   const bar = inkBar(0, { w: 110, h: 11 });
   const slip = h('div.hud-slip', { role: 'button', tabindex: '0', 'aria-label': 'Prossimo passo: mostrami la strada' }, step, h('div.hud-lv', lvT, bar));
@@ -124,20 +133,24 @@ export function mountHud() {
   const beckon = () => bk.classList.toggle('beckon', !!once()['hint.grimoire'] && !once()['grimoire.opened']);
   beckon();
   const drawLevel = () => { const lp = levelProgress(); lvT.textContent = `${titleOf(lp.level)} · ${lp.level}`; bar.set(lp.top ? 1 : lp.into); };
-  stepT.textContent = nextStep().text;
+  put(slipLine());
   drawLevel();
   openOverlay(el, { block: false });
-  const offs = [
-    on('step', () => {
-      const text = nextStep().text;
-      if (text === stepT.textContent) return;
-      if (reducedMotion()) { stepT.textContent = text; return; }
+  // a new line: a stroke of red pencil through the old one, then the new one written in
+  const change = () => {
+      const line = slipLine(), text = line.text;
+      if (text === stepT.lastChild?.textContent && line.side === side) return;
+      if (reducedMotion() || step.classList.contains('out')) { put(line); return; }
       const strike = h('span.strike');
       step.append(strike);
       requestAnimationFrame(() => { strike.style.width = `${Math.min(stepT.offsetWidth, 400)}px`; });
       step.classList.add('out');
-      setTimeout(() => { strike.remove(); step.classList.remove('out'); stepT.textContent = text; step.classList.remove('in'); void step.offsetWidth; step.classList.add('in'); }, 520);
-    }),
+      setTimeout(() => { strike.remove(); step.classList.remove('out'); put(slipLine()); step.classList.remove('in'); void step.offsetWidth; step.classList.add('in'); }, 520);
+  };
+  const offs = [
+    on('step', change),
+    on('track', change),
+    on('extra:done', change),
     on('xp', ({ n } = {}) => { drawLevel(); if (n > 0) slip.append(h('span.hud-plus', {}, `+${n}`)); setTimeout(() => slip.querySelector('.hud-plus')?.remove(), 1300); }),
     on('level:up', (d) => { drawLevel(); levelUp(d); }),
     on('yourcard:changed', ({ to } = {}) => { if (CARD[to]) toast('Le carte ti vedono diversa.', { card: to, small: CARD[to].name, ms: 3400 }); }),
@@ -146,7 +159,7 @@ export function mountHud() {
     on('cinema', (v) => { el.style.visibility = v ? 'hidden' : ''; }), // film bars and sessions: nothing of the HUD peeks through
     on('hint', ({ id } = {}) => { if (id === 'grimoire') beckon(); }),
     on('grimoire:open', () => { const o = state.world.once || (state.world.once = {}); if (!o['grimoire.opened']) { o['grimoire.opened'] = true; save(); } beckon(); }),
-    on('card:found', () => { if (!step.classList.contains('out')) stepT.textContent = nextStep().text; bk.classList.remove('pulse'); void bk.offsetWidth; bk.classList.add('pulse'); }),
+    on('card:found', () => { if (!step.classList.contains('out')) put(slipLine()); bk.classList.remove('pulse'); void bk.offsetWidth; bk.classList.add('pulse'); }),
   ];
   mounted = { el, unmount: () => { offs.forEach((f) => f()); el.remove(); mounted = null; } };
   return mounted;

@@ -10,8 +10,9 @@ import { SEMI, NUMERI, FIGURE } from '../data/reading/grid.js';
 // ('fan' | 'number' | 'top' | id | null each, or undefined); n: positions of the spread.
 // -> { use, pool }: use is true only when every card she can draw has a voice and there are enough of them.
 // The pool is never hard-coded: it is whatever owned card has a voice file today.
-export function engineFor({ client, n, owned = [], given, voiced = hasVoice }) {
-  if (!client || client === 'self' || !n) return { use: false, pool: [] };
+// self: the final reading for herself (client 'self', glue/finale.js) asks to use the engine too.
+export function engineFor({ client, n, owned = [], given, voiced = hasVoice, self = false }) {
+  if (!client || (client === 'self' && !self) || !n) return { use: false, pool: [] };
   const pool = [...new Set(owned)].filter((id) => voiced(id));
   const fixed = (given || []).slice(0, n).filter((g) => g && g !== 'fan' && g !== 'number' && g !== 'top');
   if (fixed.some((id) => !voiced(id))) return { use: false, pool };
@@ -22,6 +23,7 @@ export function engineFor({ client, n, owned = [], given, voiced = hasVoice }) {
 // The question object of a client (tags in data/story/clients.js); null when a tag is missing or wrong.
 export function questionOf(client) {
   if (!client) return null;
+  if (client === 'self') client = { ambito: 'se', forma: 'quadro' }; // the finale: a general picture of herself
   const forma = client.forma || (client.question == null ? 'quadro' : null);
   try { return makeQuestion({ ambito: client.ambito, forma, ref: client.ref }); } catch { return null; }
 }

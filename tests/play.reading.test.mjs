@@ -35,7 +35,7 @@ test('single uses says, the others as[position]', () => {
 });
 test('score, xp and pay', () => {
   assert.equal(scoreOf([true, true, false]), 2 / 3); assert.equal(scoreOf([]), 0);
-  assert.equal(xpFor(0), 10); assert.equal(xpFor(1), 30);
+  assert.equal(xpFor(0, 2), 6); assert.equal(xpFor(1, 2), 16); assert.ok(xpFor(6 / 7, 7) > xpFor(1, 2));
   assert.equal(payFor({ pay: 10, score: 1, owned: 0 }), 10);
   assert.equal(payFor({ pay: 10, score: 0, owned: 0 }), 4);
   assert.equal(payFor({ pay: 10, score: 1, owned: 10 }), 15); // +5% per card

@@ -9,11 +9,11 @@ test('the deck has 22 majors and 56 minors', () => { assert.equal(MAJORS.length,
 test('three rows of seven', () => { for (const r of [1, 2, 3]) assert.equal(MAJORS.filter((c) => c.row === r).length, 7); });
 test('signs', () => { assert.equal(signOf(5, 1).id, 'capricorno'); assert.equal(signOf(25, 12).id, 'capricorno'); assert.equal(signOf(1, 10).id, 'bilancia'); assert.equal(signOf(23, 9).id, 'bilancia'); assert.equal(signOf(22, 9).id, 'vergine'); assert.equal(signOf(20, 1).id, 'acquario'); });
 test('levels and titles', () => { setState({}); assert.equal(levelOf(0), 1); assert.equal(levelOf(30), 2); assert.equal(levelOf(729), 8); assert.equal(levelOf(9999), 9); assert.equal(titleOf(1), 'Novizia'); assert.equal(titleOf(4), 'Fattucchiera'); assert.equal(titleOf(9), 'Strega'); });
-test('level gifts', () => { setState({}); addXp(29); assert.equal(state.powers.cat, false); addXp(1); assert.equal(state.powers.cat, true); // level 2: Tartufo
-  addXp(200); assert.equal(state.powers.fire, true); assert.equal(state.powers.sense, false); addXp(1000);
+test('level gifts', () => { setState({}); addXp(19); assert.equal(state.powers.cat, false); addXp(1); assert.equal(state.powers.cat, true); // level 2: Tartufo
+  addXp(250); assert.equal(state.powers.fire, true); assert.equal(state.powers.sense, false); addXp(1000);
   for (const p of ['sense', 'move', 'stun', 'broom']) assert.equal(state.powers[p], true, p);
   assert.equal(levelOf(), 9, 'the story stops at 9'); assert.ok(!('seals' in state.powers)); assert.ok(!('sense2' in state.powers));
-  state.flags['ending.seen'] = true; assert.equal(levelOf(), 10, 'Gran Maestra goes on'); addXp(500); assert.equal(levelOf(), 12); });
+  state.flags['ending.seen'] = true; assert.equal(levelOf(), 10, 'Gran Maestra goes on'); addXp(900); assert.equal(levelOf(), 12); });
 test('the sixth sense grows from level 5 to the whole map', () => { assert.equal(senseRadius(4), 0); assert.equal(senseRadius(5), 10); assert.ok(senseRadius(9) > senseRadius(8)); assert.equal(senseRadius(12), Infinity); });
 test('your suit comes from the traits; the sign breaks ties', () => {
   setState({}); setPlayer({ name: 'A', birth: { d: 1, m: 10, y: 1995 } }); assert.equal(yourSuit(), 's');

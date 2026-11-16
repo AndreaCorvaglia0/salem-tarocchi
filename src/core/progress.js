@@ -7,10 +7,15 @@ import { CARD, MAJORS, SIGNS, signOf } from '../data/cards.base.js';
 import * as PD from '../data/portrait.js'; // SIGNATURES, ADJ (being written: every read tolerates gaps)
 
 // ---- levels ---------------------------------------------------------------------------------
-// Nine levels, three per title. The first three come within the first quarter of an hour.
 // Nine levels in the story, three per title; after the ending (Gran Maestra) three more, each needing
-// clearly more, whose only gift is a wider sixth sense.
-export const LEVEL_XP = [0, 30, 70, 200, 280, 370, 470, 590, 730, 950, 1250, 1650]; // xp for level 1..12
+// clearly more, whose only gift is a wider sixth sense. The first three come within the first quarter of an
+// hour. Tuned by scripts/balance.mjs (numbers in notes/balance.md, pinned by tests/balance.test.mjs): a player
+// who only follows the story reaches each rank gate (level 4 for chapter 2, 7 for chapter 3) a few readings
+// short, one who does about half of the optional things arrives level with it, the broom (6) comes in
+// chapter 2, level 9 near the ending.
+export const LEVEL_XP = [0, 20, 70, 270, 345, 465, 570, 700, 950, 1250, 1650, 2150]; // xp for level 1..12
+// the table before 16 Nov: a save made with it keeps the level it had reached (keepLevel, below)
+export const LEVEL_XP_V1 = [0, 30, 70, 200, 280, 370, 470, 590, 730, 950, 1250, 1650];
 export const STORY_MAX = 9;
 export const maxLevel = (s = state) => (s.flags?.['ending.seen'] ? LEVEL_XP.length : STORY_MAX);
 export const TITLES = ['Novizia', 'Fattucchiera', 'Strega'];
@@ -47,9 +52,14 @@ export const LEVEL_GIFTS = {
   11: { text: 'Senti le carte nascoste quasi da un capo all\'altro del bosco.' },
   12: { text: 'Adesso senti ogni carta nascosta del posto in cui ti trovi.' },
 };
+// The gains of the growth that live here (the other sources: scripts/balance.mjs lists them all).
+// card: a Major found; minor: a Minor found in the grass (they come often, so little each); star: a star of a
+// card; told: the second star when the Reader tells the card.
+export const XP = { card: 10, minor: 2, star: 5, told: 5 };
 export const addXp = (n, why = '') => {
   if (!n) return;
   const before = levelOf();
+  markTable();
   state.xp += n;
   const after = levelOf();
   emit('xp', { n, why, xp: state.xp });
@@ -76,7 +86,7 @@ export const findCard = (id, { silent = false } = {}) => {
   if (!CARD[id] || state.cards[id]?.found) return false;
   state.cards[id] = { found: true, stars: 0, right: 0, wrong: 0, detail: null, words: ['', '', ''], due: Date.now() + DAY, interval: 0, confiscated: false, at: Date.now() };
   if (!silent) emit('card:found', { id });
-  addXp(20, 'card');
+  addXp(CARD[id].arcana === 'major' ? XP.card : XP.minor, 'card');
   return true;
 };
 // A right or wrong answer about a card. kind: 'image' | 'meaning' | 'astro' (the three stars).
@@ -87,7 +97,7 @@ export const answer = (id, ok, kind = 'meaning') => {
     c.right += 1;
     const want = kind === 'image' ? 1 : kind === 'astro' ? 3 : 2;
     // stars come in order: one right answer of the right kind lifts the next star
-    if (c.stars < 3 && c.stars + 1 <= want) { c.stars += 1; emit('card:star', { id, stars: c.stars }); addXp(10, 'star'); }
+    if (c.stars < 3 && c.stars + 1 <= want) { c.stars += 1; emit('card:star', { id, stars: c.stars }); addXp(XP.star, 'star'); }
     c.interval = Math.min(INTERVALS.length - 1, c.interval + (isDue(id) ? 1 : 0));
     c.due = Date.now() + INTERVALS[c.interval] * DAY;
   } else {
@@ -216,7 +226,7 @@ export const tellCard = (id) => {
   const c = state.cards[id];
   if (!c) return false;
   state.told[id] = true;
-  if (c.stars === 1) { c.stars = 2; emit('card:star', { id, stars: 2 }); addXp(5, 'told'); }
+  if (c.stars === 1) { c.stars = 2; emit('card:star', { id, stars: 2 }); addXp(XP.told, 'told'); }
   save();
   return true;
 };
@@ -252,6 +262,25 @@ export const dayCard = () => (state.day?.date === todayKey() && hasCard(state.da
 export function syncPowers() {
   for (let l = 2; l <= levelOf(); l++) { const g = LEVEL_GIFTS[l]; if (g?.power) state.powers[g.power] = true; if (g?.flag) state.flags[g.flag] = true; }
 }
+// Old saves: the xp table changed on 16 Nov. A save that was already at a level keeps it: its xp is raised
+// to the new threshold of that level (never lowered); powers and flags stay as they are. Runs once per save,
+// when the game loads; a game started after the change is marked at its first xp.
+const TABLE_KEY = 'xp.table.2';
+function markTable(s = state) { const o = s.world?.once; if (o && !o[TABLE_KEY]) o[TABLE_KEY] = true; }
+export function keepLevel(s = state) {
+  const o = s.world?.once || (s.world && (s.world.once = {}));
+  if (!o || o[TABLE_KEY]) return false;
+  o[TABLE_KEY] = true;
+  let old = 1;
+  for (let i = 0; i < LEVEL_XP_V1.length; i++) if ((s.xp || 0) >= LEVEL_XP_V1[i]) old = i + 1;
+  const cap = s.flags?.['ending.seen'] ? LEVEL_XP.length : STORY_MAX;
+  const floor = LEVEL_XP[Math.min(old, cap) - 1] || 0;
+  if ((s.xp || 0) >= floor) return false;
+  s.xp = floor;
+  save();
+  return true;
+}
+keepLevel();
 syncPowers();
 
 // ---- added 16 Nov: popularity, Tartufo, the registry of optional things --------------------------

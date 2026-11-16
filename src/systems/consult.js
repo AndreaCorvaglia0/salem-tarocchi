@@ -101,10 +101,12 @@ const three = (fn, plan, i, { rng, pool, verso }) => {
   return a.length >= 3 ? a : fn(plan, i, { rng, verso });
 };
 
-export async function consult({ scr, sp, cl, cards, question, pool, verso = false, rng = Math.random }) {
+// self: the final reading for herself (glue/finale.js): no one to tell it to, so no tone and no client's
+// reaction; it ends on her answer and the count.
+export async function consult({ scr, sp, cl, cards, question, pool, verso = false, self = false, rng = Math.random }) {
   css('sxc', CSS);
   scr.el.classList.add('sxc');
-  const head = h('div.sxc-head', h('div', h('small', cl.name), h('p', cl.question ? `«${fill(cl.question)}»` : 'Un quadro generale')));
+  const head = h('div.sxc-head', h('div', h('small', cl.name), h('p', cl.question ? `«${fill(cl.question)}»` : self ? 'Un quadro generale, su di me' : 'Un quadro generale')));
   scr.el.insertBefore(head, scr.body);
 
   const plan = makePlan(question, sp.id, cards);
@@ -158,6 +160,18 @@ export async function consult({ scr, sp, cl, cards, question, pool, verso = fals
   }
   scr.setFoot();
 
+  // ---- for herself: her answer and the count, then the book closes
+  if (self) {
+    const score = total ? (total - wrong) / total : 0;
+    addXp(xpFor(score, total), 'reading');
+    stat('readings');
+    scr.setBody(answerText ? h('div.sxc-quote.sx-in', answerText) : null, h('div.sxr-score.sx-in', h('span.sx-num', `${total - wrong} su ${total}`)),
+      cl.thanks ? say('La Lettrice', fill(cl.thanks)) : null);
+    await new Promise((res) => scr.setFoot(btn('Chiudo il libro', res, 'go')));
+    head.remove();
+    return { ok: isGood({ wrong, total, levelOk }), wrong, total, helped, level, levelOk, tone: null, cards: per, score, coins: 0 };
+  }
+
   // ---- the tone
   let pickTone;
   const toneDone = new Promise((r) => { pickTone = r; });
@@ -172,7 +186,7 @@ export async function consult({ scr, sp, cl, cards, question, pool, verso = fals
   const coins = payOf(cl.pay ?? 0, good);
   const score = total ? (total - wrong) / total : 0;
   if (coins) addCoins(coins);
-  addXp(xpFor(score), 'reading');
+  addXp(xpFor(score, total), 'reading');
   stat('readings');
   const words = reactionOf({ good, tone, thanks: fill(cl.thanks || ''), lines: REACTIONS, rng });
   scr.setBody(

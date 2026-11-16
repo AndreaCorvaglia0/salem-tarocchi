@@ -33,8 +33,9 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   const self = !cl;
   const N = sp.positions.length;
   // the reading engine: a client with tagged question, and enough voiced cards
-  const question = self ? null : questionOf(cl);
-  const eng = question ? engineFor({ client: cl.id, n: N, owned: ownedIds(), given: cards }) : { use: false };
+  // the final reading for herself (glue/finale.js) goes to the engine too: a general picture, about her
+  const question = questionOf(self ? 'self' : cl);
+  const eng = question ? engineFor({ client: self ? 'self' : cl.id, self, n: N, owned: ownedIds(), given: cards }) : { use: false };
   // reversed cards only after their lesson (a flag in the saved state; nothing sets it yet)
   const reversed = !!(state.flags?.['lesson.reversed'] || state.lessons?.reversed);
   const scr = screen({ cls: 'sxread' });
@@ -76,7 +77,8 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   await wait(scr, 'Leggiamo');
 
   if (eng.use) {
-    const r = await consult({ scr, sp, cl, cards: sp.positions.map((p, i) => ({ pos: p.id, card: ids[i], rev: !!revs[i] })), question, pool: eng.pool, verso: reversed, rng });
+    const me = self ? { ...(CLIENTS.find((x) => x.id === 'self') || {}), id: 'self', name: fill('{name}') || 'Io', question: null, pay: 0 } : cl;
+    const r = await consult({ scr, sp, cl: me, self, cards: sp.positions.map((p, i) => ({ pos: p.id, card: ids[i], rev: !!revs[i] })), question, pool: eng.pool, verso: reversed, rng });
     scr.close();
     moodBack();
     return r;
@@ -112,7 +114,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
   const owned = ownedMajors().length;
   const coins = self ? 0 : payFor({ pay: cl.pay ?? 5, score, owned, yourCardOnTable: ids.includes(yourCard()), dayCardOnTable: !!dayCard() && ids.includes(dayCard()) });
   if (coins) addCoins(coins);
-  addXp(xpFor(score), 'reading');
+  addXp(xpFor(score, N), 'reading');
   stat('readings');
   const right = oks.filter(Boolean).length;
   scr.setBody(
