@@ -348,3 +348,59 @@ Regola per ogni cosa nuova, da quando c'è chi sta già giocando:
   aspettano il loro turno. Mai dieci missioni in un colpo.
 - Se una cosa piccola salta per chi è molto avanti, pazienza: l'importante è che possa continuare.
 Codice: `src/core/extras.js`.
+
+## La logica del gioco, ridefinita (16 novembre, pomeriggio)
+
+Tre cose contano più di tutto, nell'ordine: che il gioco **risponda a chi sei e a come hai giocato**; che le
+**scelte pesino**; che le **carte si ricordino** perché servono per muoversi nella storia, non solo per leggere agli altri.
+
+### Un solo gesto: chiedere alle carte
+
+Le streghe non decidono a caso: prima di fare una cosa che conta **tirano fuori una carta**. Lo fa lei, e lo
+fanno le altre davanti a lei. È il gesto che lega studio, storia e mondo.
+
+- **Lei, a un bivio.** Pesca una carta (tra quelle che ha già studiato) e la carta è l'indizio. Tre gradi:
+  1. *il segno*: carta favorevole o contraria, dritta o rovesciata: vado o non vado;
+  2. *l'idea*: le strade sono descritte con parole e cose (acqua che scorre, una porta murata, una scala che
+     sale, due voci che litigano) e l'idea della carta ne indica una. Chi ha studiato la carta lo vede; chi
+     guarda solo la figura no. Mai il nome della carta come soluzione;
+  3. *il quesito*: una regola detta chiara («a destra se parla di una fine, a sinistra se parla di un inizio»).
+  Dopo la scelta arriva sempre il riscontro: che cosa diceva la carta, e che cosa è successo.
+- **Le altre streghe.** In scena tirano una carta e agiscono di conseguenza: dritta, vanno; contraria, si
+  fermano. Qualche volta la carta è contraria e **vanno lo stesso**, perché devono: e allora qualcosa va
+  storto. Le carte avvertono, non comandano.
+- **In giro per il mondo** il gesto è sempre disponibile dove c'è una decisione: è presente spesso, in forma breve.
+
+### La biblioteca
+
+Un posto dove si ripassa prima di una cosa importante. Una strega, o Tartufo, «sente» che cosa servirà:
+tre o quattro argomenti, di cui ne serviranno davvero due. Ogni argomento è una pagina breve già vista
+(una carta, un gruppo di numeri, un seme, le rovesciate) più due domande. Non si studia la risposta: si
+ripassa quello da cui la risposta si ricava. La prima volta è obbligata (è una chiave), poi è consigliata.
+Vale per i Maggiori e per i Minori.
+
+### Le prove
+
+Una prova è un pezzo di storia con bivi, stanze buone e stanze cattive, e un conto degli errori.
+- Tutti giusti: un premio vero (un incenso speciale, un cappello, molti punti, una scena in più).
+- Uno o due errori: si passa, ma peggio.
+- Di più: **succede qualcosa di brutto, e si perde qualcosa**. Monete, un oggetto, la fiducia di una
+  strega, e nei casi rari una carta, che finisce in un posto da cui si può andare a riprenderla. Il gioco
+  non è una favola: deve poter fare paura, e a volte il guaio arriva anche se lo si era previsto.
+- **La fuga.** Certe volte bisogna scappare: correre fino a un punto con qualcuno dietro. È facile farcela,
+  ma mette fretta.
+- Un **labirinto** è una prova in un posto vero da attraversare: porte in cui conviene entrare e porte in
+  cui no, e le carte per capirlo.
+- Le prove sono dati, non codice: se ne possono aggiungere. Si parte con una principale per capitolo e
+  tre o quattro secondarie, e passano dal registro (regola del recupero).
+
+### La simpatia delle streghe
+
+Ogni strega ha verso di lei una simpatia che si vede nel grimorio, come per Tartufo.
+- Una parte è **innata**: dipende dal carattere (il ritratto) e da quello della strega.
+- Una parte si **guadagna o si perde**: le missioni fatte insieme e come sono andate, i guai causati, gli aiuti dati.
+- Le streghe **ricordano**: cambiano come la accolgono, che cosa le offrono, se la aiutano in una prova.
+
+### Che cosa resta com'era
+
+La storia grande, i tre bivi, il finale, le letture ai clienti, i capitoli. Queste cose si aggiungono dentro, non sopra.
