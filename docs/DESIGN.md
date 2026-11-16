@@ -459,3 +459,22 @@ Niente notifiche, niente catene che si spezzano, nessun premio che cresce: solo 
   in fondo, piccoli.
 
 Chi non ha ancora una partita vede il tavolo, la carta di oggi e «Nuova partita»: la soglia vale dal primo giorno.
+
+### La carta di oggi, in grande (16 novembre, notte)
+
+Dai riscontri di Andrea: sul tavolo la carta è troppo piccola per i dettagli di cui si parla, un foglietto
+solo che cambia testo sa di povero, e le etichette che spiegano («uno sguardo che nel gioco non c'è») stonano.
+
+- Toccata, la carta si alza dal tavolo girandosi e occupa lo schermo (`ui/daycard.js`). Sotto scorrono le
+  pagine, con uno swipe, con «Avanti» o toccando i puntini: la frase di oggi; lo sguardo; una domanda a
+  memoria; il suo significato.
+- Ogni pagina muove la carta: sul dettaglio del disegno si ingrandisce (punti in `data/daily/visual.js`), per
+  il rovescio si capovolge, per la storia prende un tono antico, per il contesto compare accanto l'altra carta.
+- La domanda a memoria: la carta si copre, tre risposte, poi si scopre sul punto giusto. Non dà e non toglie
+  niente; finché non risponde il tasto dice «Salto la domanda».
+- Due dita per ingrandire dove vuole, doppio tocco su un punto.
+- Le frasi del giorno sono state riscritte: una scena concreta di tutti i giorni e un gesto piccolo, 12–24
+  parole, mai «una cosa» o «un impegno».
+- Provata con due lettori artificiali «ingenui» sulle sole schermate: capivano il percorso; hanno fatto
+  correggere la didascalia della luna, il tasto durante la domanda, le scritte piccole e i puntini (ora si toccano).
+- Da fare: lo stesso gioco di memoria nel ripasso.

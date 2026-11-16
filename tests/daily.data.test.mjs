@@ -19,14 +19,14 @@ test('DAILY has exactly the 78 cards', () => {
   assert.equal(Object.keys(DAILY).length, 78);
 });
 
-test('every card has two different sentences for the day, 14-30 words', () => {
+test('every card has two different sentences for the day, 12-24 words', () => {
   for (const [id, d] of Object.entries(DAILY)) {
     assert.ok(Array.isArray(d.oggi) && d.oggi.length === 2, `${id} oggi`);
     assert.notEqual(d.oggi[0], d.oggi[1], `${id} oggi equal`);
     d.oggi.forEach((s, i) => {
       clean(s, `${id} oggi ${i}`);
       const n = words(s);
-      assert.ok(n >= 14 && n <= 30, `${id} oggi ${i}: ${n} words`);
+      assert.ok(n >= 12 && n <= 24, `${id} oggi ${i}: ${n} words`);
     });
     assert.equal(d.segreto, undefined, `${id} still has segreto`);
   }

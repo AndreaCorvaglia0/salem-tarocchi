@@ -10,11 +10,11 @@ import { call } from '../core/services.js';
 import { titleOf } from '../core/progress.js';
 import { restore, status, importCode, olderGame, takeOlder } from '../core/vault.js';
 import { CARD } from '../data/cards.base.js';
-import { sheet } from '../data/cards.js';
 import { MOON, moonName, moonPath } from '../glue/threshold.rules.js';
 import { moonNow, touchMoon, giftToday, today, turnToday, noteToday, pairToday } from '../glue/threshold.js';
 import { canSelfRead } from '../glue/selfread.rules.js';
 import { openSelfRead } from './selfread.js';
+import { openDayCard } from './daycard.js';
 import { CODE_CSS } from './savecode.js';
 import { SERIF, HAND, GOLD, baseCss, rnd } from './paper.js';
 import { cardBack } from './art.js';
@@ -48,7 +48,7 @@ const CSS = `
 .tt-card img{display:block;width:104px;height:178px;object-fit:cover;border:4px solid #fbf5e6;border-radius:6px;box-sizing:border-box}
 .tt-card.back svg{filter:drop-shadow(0 0 9px #ffd77a99);animation:tt-call 2.6s ease-in-out infinite}
 @keyframes tt-call{50%{filter:drop-shadow(0 0 16px #ffd77a)}}
-.tt-tap{position:absolute;left:calc(50% - 150px);width:210px;bottom:-6px;text-align:center;font:700 19px ${HAND};color:#ffe9a8;pointer-events:none}
+.tt-tap{position:absolute;left:calc(50% - 160px);width:230px;bottom:-6px;text-align:center;font:700 19px ${HAND};color:#ffe9a8;pointer-events:none}
 .tt-slip{position:relative;flex:none;width:min(340px,calc(100% - 44px));margin-top:14px;padding:11px 16px 13px;background:linear-gradient(#f1e6c8,#e6d8b4);color:#3a2c1c;border-radius:3px 8px 4px 8px;box-shadow:0 8px 22px #000b;transform:rotate(-.6deg);font:21px/25px ${HAND}}
 .tt-slip .lb{display:block;font:italic 14px/18px ${SERIF};color:#7a6a50;margin-bottom:2px}
 .tt-slip b{display:block;font:700 26px/28px ${HAND}}
@@ -72,7 +72,6 @@ const CSS = `
 @media (prefers-reduced-motion:reduce){.tt-card,.tt-card.back svg,.tt-glow,.tt-candle .fl,.tt-sky i{animation:none;transition:none}}
 `;
 
-const LOOK = { immagine: 'Guarda meglio il disegno', storia: 'Da dove viene', contesto: 'Dipende da dove cade', rovescio: 'A testa in giù' };
 const WEEK = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
 const MONTHS = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
 const dateIt = (d = new Date()) => `${WEEK[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
@@ -91,7 +90,7 @@ export function openTitle() {
     const close = openOverlay(el);
     const b = (t, fn, main, sub) => h(`button.tt-b${main ? '.main' : ''}`, { type: 'button', onclick: () => { snd('tap'); fn(); } }, t, sub ? h('small', {}, sub) : null);
     const link = (t, fn) => h('button.tt-l', { type: 'button', onclick: () => { snd('tap'); fn(); } }, t);
-    let mode = 'wait', older = null, off = () => {}, view = 'oggi', open = false;
+    let mode = 'wait', older = null, off = () => {};
     const done = (v) => { if (v !== 'study') touchMoon(); off(); close(); resolve(v); };
 
     // ---- the moon
@@ -99,7 +98,7 @@ export function openTitle() {
       const n = moonNow();
       const svg = `<svg width="74" height="74" viewBox="0 0 74 74" aria-hidden="true"><defs><radialGradient id="ttm" cx="40%" cy="35%" r="75%"><stop offset="0" stop-color="#fff7d8"/><stop offset=".6" stop-color="#e9d595"/><stop offset="1" stop-color="#c9b06a"/></radialGradient></defs><circle cx="37" cy="37" r="36" fill="#15131f" stroke="#d8b25a55"/><path d="${moonPath(n)}" fill="url(#ttm)"/></svg>`;
       const dots = h('div.tt-dots', Array.from({ length: MOON }, (_, i) => h(`i${i < n ? '.on' : ''}${grew && i === n - 1 ? '.new' : ''}`)));
-      moonEl.replaceChildren(h('span', { html: svg }), dots, h('p', {}, n >= MOON ? 'Luna piena · sette notti' : grew ? `Stanotte la luna è cresciuta · ${n} ${n === 1 ? 'notte' : 'notti'} su ${MOON}` : `${moonName(n)} · ${n} ${n === 1 ? 'notte' : 'notti'} su ${MOON}`));
+      moonEl.replaceChildren(h('span', { html: svg }), dots, h('p', {}, n >= MOON ? 'Luna piena: sette notti passate di qui' : grew ? `Stanotte la luna è cresciuta: ${n} ${n === 1 ? 'notte' : 'notti'} su ${MOON}` : n === 0 ? 'La luna cresce ogni giorno che passi di qui' : `${moonName(n)}: ${n} ${n === 1 ? 'notte' : 'notti'} su ${MOON}, e alla luna piena un dono`));
       moonEl.setAttribute('aria-label', `La luna: ${n} notti su ${MOON}`);
       moonEl.classList.toggle('grew', grew);
     };
@@ -108,25 +107,20 @@ export function openTitle() {
     const table = () => {
       const t = today();
       cardEl.className = `tt-card ${t.turned ? 'face' : 'back'}`;
-      cardEl.setAttribute('aria-label', t.turned ? `${t.name}: cosa dice la carta` : 'Gira la carta di oggi');
+      cardEl.setAttribute('aria-label', t.turned ? `${t.name}: guarda la carta` : 'Gira la carta di oggi');
       if (t.turned) cardEl.replaceChildren(h('img', { src: cardUrl(t.card), alt: t.name })); else cardEl.innerHTML = cardBack(104, 178);
       tapEl.textContent = t.turned ? '' : 'Gira la carta di oggi';
       if (!t.turned) { const n = noteToday(); slip.replaceChildren(...[giftBlock(), h('span.lb', {}, `Dal quaderno · ${WEEK[new Date().getDay()]}`), h('p', {}, n?.t || 'Stanotte il quaderno è rimasto chiuso.')].filter(Boolean)); return; }
-      if (view === 'carta') {
-        const S = sheet(t.card) || {};
-        slip.replaceChildren(h('span.lb', {}, 'Cosa dice di solito'), h('b', {}, t.name), h('p', {}, S.says || S.core || ''),
-          (S.keywords || []).length ? h('p.kw', {}, S.keywords.join(' · ')) : null, S.reversed ? h('p.kw', {}, /^capovolt/i.test(S.reversed) ? S.reversed : `Capovolta: ${S.reversed}`) : null,
-          h('button.tt-more', { type: 'button', onclick: () => { view = 'oggi'; table(); } }, 'Torna alla carta di oggi'));
-        return;
-      }
-      slip.replaceChildren(...[giftBlock(), h('span.lb', {}, `La carta di oggi · ${dateIt()}`), h('b', {}, t.name), h('p', {}, t.oggi),
-        t.look ? (open ? h('p', {}, h('span.lb', {}, LOOK[t.look.k] || 'Uno sguardo in più'), t.look.t) : h('button.tt-more', { type: 'button', onclick: () => { snd('tap'); open = true; table(); } }, 'Uno sguardo che nel gioco non c\'è')) : null].filter(Boolean));
+      slip.replaceChildren(...[giftBlock(), h('span.lb', {}, `La carta di oggi · ${dateIt()}`), h('b', {}, t.name), h('p', {}, t.oggi)].filter(Boolean));
+      tapEl.textContent = 'Tocca la carta per guardarla';
     };
-    cardEl.onclick = () => {
-      const t = today();
-      if (t.turned) { snd('tap'); view = view === 'carta' ? 'oggi' : 'carta'; table(); return; }
-      snd('card'); cardEl.classList.add('flip');
-      setTimeout(() => { turnToday(); const g = touchMoon(); view = 'oggi'; open = false; table(); cardEl.classList.add('flip'); requestAnimationFrame(() => requestAnimationFrame(() => cardEl.classList.remove('flip'))); moon(!!g); }, 290);
+    cardEl.onclick = async () => {
+      const first = !today().turned;
+      snd(first ? 'card' : 'tap');
+      if (first) turnToday();
+      await openDayCard({ flip: first });
+      table();
+      moon(!!touchMoon()); // she sees it grow, back at the table
     };
     // ---- the ways in
     const aside = async (fn) => { el.style.visibility = 'hidden'; try { await fn(); } finally { el.style.visibility = ''; mood('title'); const g = touchMoon(); moon(!!g); table(); menu(); } };

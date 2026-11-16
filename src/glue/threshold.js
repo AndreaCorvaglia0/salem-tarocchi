@@ -33,7 +33,7 @@ export function today() {
   const seen = Number(daily().looks?.[d.card]) || 0;
   // the look of today: the next one she has not read for this card (the same all day)
   const i = looks.length ? (d.turned ? Math.max(0, seen - 1) : seen) % looks.length : -1;
-  return { card: d.card, turned: !!d.turned, name: CARD[d.card]?.name || '', oggi: (e.oggi || [])[d.v] || (e.oggi || [])[0] || '', look: i >= 0 ? looks[i] : null };
+  return { card: d.card, turned: !!d.turned, name: CARD[d.card]?.name || '', oggi: (e.oggi || [])[d.v] || (e.oggi || [])[0] || '', look: i >= 0 ? looks[i] : null, lookIndex: i, seen };
 }
 export function turnToday() {
   const t = today();
