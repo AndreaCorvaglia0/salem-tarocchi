@@ -32,6 +32,7 @@ import { Sense } from './sense.js';
 const MOOD = { forest: 'forest', depths: 'depths', court: 'depths' };
 export const moodFor = (mapId) => MOOD[mapId] || 'village';
 const sfx = (name) => { if (has('sound.play')) try { Promise.resolve(call('sound.play', name)).catch(() => {}); } catch { /* no sound */ } };
+const HUD_PX = 124; // height of the HUD slip on a phone, in screen pixels
 const mood = (name) => { if (has('sound.mood')) try { Promise.resolve(call('sound.mood', name)).catch(() => {}); } catch { /* no sound */ } };
 
 const T = 16, SPEED = 165;
@@ -95,7 +96,10 @@ export class WorldScene extends Phaser.Scene {
     cam.setSize(W, H).setZoom(z);
     const vw = W / z, vh = H / z, mw = this.map.W * T, mh = this.map.H * T;
     const bx = mw < vw ? (mw - vw) / 2 : 0, by = mh < vh ? (mh - vh) / 2 : 0;
-    cam.setBounds(bx, by, Math.max(mw, vw), Math.max(mh, vh));
+    // on a tall map the camera may rise above the first row, so what stands at the top edge (the
+    // forest gate) shows below the paper slip of the HUD instead of under it
+    const top = mh < vh ? 0 : Math.round(HUD_PX / z);
+    cam.setBounds(bx, by - top, Math.max(mw, vw), Math.max(mh, vh) + top);
     this.night?.size();
   }
 

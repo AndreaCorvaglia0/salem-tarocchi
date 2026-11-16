@@ -46,6 +46,7 @@ const CSS = `
 .fd-b.main{background:#efe4c8;color:${INK};border-color:#efe4c8}
 .fd-b:focus-visible{outline:2px solid ${GOLD};outline-offset:2px}
 .fd-book{color:#d9cdb2;font-size:21px}
+.fd-says{margin:10px 4px 2px;font:italic 20px/27px ${SERIF};color:#f1e7cf;text-align:center;text-wrap:pretty;animation:gx-fade .5s}
 .fd-book b{color:${GOLD}}
 .fd.flying .fd-stage{transition:transform .75s cubic-bezier(.5,0,.8,.4),opacity .75s;opacity:0}
 .fd.flying .fd-top,.fd.flying .fd-note,.fd.flying .fd-words{transition:opacity .3s;opacity:0}
@@ -119,7 +120,11 @@ export function foundCeremony(id) {
       const bw = (c.words || []).filter(Boolean);
       const own = mine.map((w) => w.trim()).filter(Boolean);
       words.replaceChildren(...[own.length ? h('p.fd-book', {}, 'Le tue: ', h('b', {}, own.join(' · '))) : null, h('p.fd-book', {}, 'Quelle del libro: ', h('b', {}, bw.join(' · ')))].filter(Boolean));
-      await wait(1900);
+      // what the card says, at once: she reads it at her own pace and goes on with a tap
+      const tell = S.says || S.core || '';
+      if (tell) words.append(h('p.fd-says', {}, tell));
+      await wait(500);
+      await new Promise((res) => words.append(h('div.fd-acts', {}, h('button.fd-b.main', { type: 'button', onclick: res }, 'Continua'))));
       // into the grimoire: towards the HUD's book if there is one, else the top right corner
       const tgt = document.querySelector('.hud-book')?.getBoundingClientRect();
       const sr = stage.getBoundingClientRect();

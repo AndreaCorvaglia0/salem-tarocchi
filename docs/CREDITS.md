@@ -20,6 +20,9 @@ Which piece plays where, how loud and how it fades: `src/sound/tracks.js` (`cueF
 | Village in spring | The Carnival of the Animals, XIII. The Swan | Camille Saint-Saëns | see Musopen |
 | Village after the ending | Orchestral Suite No. 3, Air ("on the G string") | Johann Sebastian Bach | see Musopen |
 
+Darker pieces that take turns with the piano: "Ghost Story", "Ancient Rite" and "Ossuary 6 – Air" by Kevin MacLeod
+(incompetech.com), licensed under Creative Commons Attribution 4.0.
+
 Sound effects are generated in code (`src/sound/`).
 
 ## Cards

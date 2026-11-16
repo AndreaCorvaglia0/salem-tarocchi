@@ -29,27 +29,20 @@ export const SFX = {
     k.tone({ f: 135, to: 80, t, dur: 0.32, a: 0.008, gain: 0.3, dest: d, tc: 0.09 });
     k.noise({ t, dur: 0.08, a: 0.005, gain: 0.05, type: 'lowpass', f: 300, dest: d });
   },
-  suspicion(k, t, d) { // a rising hum with a slow tremble
-    const { osc } = k.tone({ f: 80, to: 190, t, dur: 1.6, a: 0.5, gain: 0.12, type: 'sawtooth', lp: 380, dest: d, tc: 0.5 });
-    const l = k.ctx.createOscillator(), lg = k.gain(35); l.frequency.value = 7; l.connect(lg); lg.connect(osc.detune); l.start(t); l.stop(t + 1.7);
+  suspicion(k, t, d) { // being noticed: two soft low knocks, no sweep
+    [[98, 0], [98, 0.22]].forEach(([f, dt]) => k.tone({ f, to: f * 0.8, t: t + dt, dur: 0.25, a: 0.006, gain: 0.14, type: 'triangle', lp: 420, dest: d, tc: 0.08 }));
   },
   caught(k, t, d) { // two low falling notes and a dull knock
     [[110, 0], [82, 0.28]].forEach(([f, dt]) => k.tone({ f, t: t + dt, dur: 1.2, a: 0.02, gain: 0.14, type: 'triangle', lp: 500, dest: d, tc: 0.3 }));
     k.tone({ f: 100, to: 55, t: t + 0.55, dur: 0.4, a: 0.005, gain: 0.2, dest: d, tc: 0.1 });
   },
-  door(k, t, d) { // old hinge, then the latch
-    k.tone({ f: 150, to: 330, t, dur: 0.5, a: 0.08, gain: 0.05, type: 'sawtooth', lp: 900, dest: d, tc: 0.2 });
-    k.noise({ t, dur: 0.5, a: 0.1, gain: 0.05, type: 'bandpass', f: 700, to: 1300, q: 4, dest: d });
-    k.tone({ f: 120, to: 70, t: t + 0.52, dur: 0.2, a: 0.004, gain: 0.16, dest: d, tc: 0.06 });
+  door(k, t, d) { // only the latch: a soft wooden knock (the creaking hinge sounded like a siren)
+    k.tone({ f: 120, to: 70, t, dur: 0.2, a: 0.004, gain: 0.12, dest: d, tc: 0.06 });
+    k.noise({ t, dur: 0.05, a: 0.004, gain: 0.03, type: 'lowpass', f: 500, dest: d });
   },
   coin(k, t, d) { [[1319, 0], [1760, 0.07]].forEach(([f, dt]) => k.tone({ f, t: t + dt, dur: 0.5, a: 0.002, gain: 0.09, dest: d, tc: 0.09 })); },
-  cat(k, t, d) { // a short meow: a voiced glide through two moving formants
-    const f0 = 480 * v(k, 0.08), g = k.gain(0), vo = k.ctx.createOscillator(), b1 = k.filter('bandpass', 700, 4), b2 = k.filter('bandpass', 1800, 5), s = k.gain(0.5);
-    vo.type = 'sawtooth'; vo.frequency.setValueAtTime(f0, t); vo.frequency.linearRampToValueAtTime(f0 * 1.7, t + 0.18); vo.frequency.linearRampToValueAtTime(f0 * 1.05, t + 0.55);
-    b1.frequency.setValueAtTime(700, t); b1.frequency.linearRampToValueAtTime(1000, t + 0.2); b1.frequency.linearRampToValueAtTime(600, t + 0.55);
-    b2.frequency.setValueAtTime(1500, t); b2.frequency.linearRampToValueAtTime(2300, t + 0.2); b2.frequency.linearRampToValueAtTime(1400, t + 0.55);
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.2, t + 0.06); g.gain.setValueAtTime(0.2, t + 0.38); g.gain.linearRampToValueAtTime(0, t + 0.6);
-    vo.connect(b1); vo.connect(b2); b1.connect(s); b2.connect(s); s.connect(g); g.connect(d); vo.start(t); vo.stop(t + 0.65);
+  cat(k, t, d) { // Tartufo noticing something: a tiny soft tick (the synthetic meow was unpleasant)
+    k.noise({ t, dur: 0.04, a: 0.003, gain: 0.04, type: 'lowpass', f: 900, dest: d });
   },
   purr(k, t, d) { // optional: a cat's purr, a low rumble pulsing at about 24 Hz
     const o = k.ctx.createOscillator(), lp = k.filter('lowpass', 260, 0.7), am = k.gain(0.5), lfo = k.ctx.createOscillator(), lg = k.gain(0.5), g = k.gain(0);

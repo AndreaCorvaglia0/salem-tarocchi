@@ -10,7 +10,8 @@
 
 export const MASTER = 1.25; // the files are quiet (-24 LUFS): a winter night in the village ends near -27
 
-// piece, level (0..1, before MASTER), seconds to come in
+// piece (or a list of pieces that take turns: when one ends the next begins), level (0..1, before
+// MASTER), seconds to come in. The darker pieces and the airy drone are by Kevin MacLeod.
 const cue = (t, v = 0.6, fade = 2.6) => ({ t, v, fade });
 export const SILENCE = { t: null, v: 0, fade: 2.4 };
 
@@ -29,14 +30,14 @@ export function cueFor(mood, { map = null, chapter = 0, ended = false } = {}) {
   if (map === 'court') return SILENCE;
   if (map === 'malva' || map === 'cottage') return cue('consolation', 0.42, 2.2);
   if (map === 'shop') return cue('gymnopedie', 0.32, 2.2);
-  if (map === 'meeting') return cue('pavane', 0.34, 2.2);
-  if (map === 'depths' || mood === 'depths') return cue('pavane', 0.5, 3.2);
-  if (map === 'forest' || mood === 'forest') return cue('reverie', chapter >= 3 ? 0.46 : 0.58, 3.2);
+  if (map === 'meeting') return cue(['pavane', 'ancientrite'], 0.34, 2.2);
+  if (map === 'depths' || mood === 'depths') return cue(['ancientrite', 'pavane', 'ossuary'], 0.5, 3.2);
+  if (map === 'forest' || mood === 'forest') return chapter >= 3 ? cue(['ossuary', 'reverie', 'ghoststory'], 0.46, 3.2) : cue(['reverie', 'ossuary'], 0.56, 3.2); // the drone is the wood breathing
   // the village, by season
-  if (ended || chapter >= 4) return cue('air', 0.6, 3.5); // the dawn after the trial
-  if (chapter === 2) return cue('swan', 0.52, 3.2); // spring
-  if (chapter >= 3) return cue('moonlight', 0.42, 3.2); // autumn, before the trial: lower
-  return cue('moonlight', 0.56, 3.2); // winter nights
+  if (ended || chapter >= 4) return cue(['air', 'swan'], 0.6, 3.5); // the dawn after the trial
+  if (chapter === 2) return cue(['swan', 'moonlight'], 0.52, 3.2); // spring
+  if (chapter >= 3) return cue(['ghoststory', 'moonlight'], 0.42, 3.2); // autumn, before the trial: lower
+  return cue(['moonlight', 'ghoststory'], 0.56, 3.2); // winter nights
 }
 
 const OUT = 2.2; // seconds a piece takes to leave
@@ -44,7 +45,10 @@ const OUT = 2.2; // seconds a piece takes to leave
 export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new Audio() : null), url = (id) => `music/${id}.mp3`, doc = globalThis.document, timers = globalThis } = {}) {
   let ctx = null, bus = null, wired = false;
   let on = true, wantCue = SILENCE, active = null, dipT = 0, ducked = false, dipped = 1;
-  const pos = {};
+  const pos = {}, turn = {};
+  // a cue with a list resolves to the piece whose turn it is
+  const resolve = (c) => { if (!c || !Array.isArray(c.t)) return c; const k = c.t.join('+'); return { ...c, t: c.t[(turn[k] || 0) % c.t.length], list: k }; };
+  let raw = SILENCE;
   const decks = [0, 1].map(() => ({ el: null, gain: null, id: null, level: 0, stopT: 0, stepT: 0, unlocked: false }));
   const busLevel = () => MASTER * (ducked ? 0.6 : 1) * dipped;
 
@@ -62,7 +66,8 @@ export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new 
     if (d.el) return d.el;
     d.el = make();
     if (!d.el) return null;
-    d.el.loop = true; d.el.preload = 'auto';
+    d.el.loop = false; d.el.preload = 'auto';
+    d.el.addEventListener?.('ended', () => ended(d));
     d.el.setAttribute?.('playsinline', ''); d.el.setAttribute?.('x-webkit-airplay', 'deny');
     try { d.el.volume = 0; } catch { /* read-only on some phones */ }
     if (ctx) wire(d);
@@ -104,13 +109,23 @@ export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new 
     timers.clearTimeout(d.stopT);
     if (d.id !== c.t) {
       if (d.id) pos[d.id] = d.el.currentTime || 0;
-      d.id = c.t; d.el.src = url(c.t);
+      d.id = c.t; d.el.loop = false; d.el.src = url(c.t);
       const at = pos[c.t] || 0;
       if (at > 1) { const seek = () => { try { d.el.currentTime = at; } catch { /* ignore */ } d.el.removeEventListener?.('loadedmetadata', seek); }; d.el.addEventListener?.('loadedmetadata', seek); }
       if (d.gain && ctx) { try { d.gain.gain.cancelScheduledValues(ctx.currentTime); d.gain.gain.setValueAtTime(0, ctx.currentTime); } catch { /* ignore */ } } else { try { d.el.volume = 0; } catch { /* ignore */ } }
     }
     if (!doc?.hidden && d.el.paused) play(d);
     ramp(d, c.v, c.fade);
+  }
+  // a piece is over: the next of the list, or the same one again from the top
+  function ended(d) {
+    if (!d.id) return;
+    pos[d.id] = 0;
+    if (d.id === 'silence') { play(d); return; }
+    if (d !== active) return;
+    if (wantCue.list) { turn[wantCue.list] = (turn[wantCue.list] || 0) + 1; wantCue = resolve(raw); }
+    if (wantCue.t === d.id) { try { d.el.currentTime = 0; } catch { /* ignore */ } play(d); return; }
+    d.id = null; d.level = 0; sync();
   }
   function sync() {
     const c = on ? wantCue : SILENCE;
@@ -128,7 +143,7 @@ export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new 
       if (ctx || !audioCtx?.createMediaElementSource) return;
       try { ctx = audioCtx; bus = ctx.createGain(); bus.gain.value = busLevel(); bus.connect(ctx.destination); for (const d of decks) { timers.clearInterval(d.stepT); wire(d); } } catch { ctx = null; bus = null; }
     },
-    setCue(c) { wantCue = c && c.t ? c : SILENCE; sync(); },
+    setCue(c) { raw = c && c.t ? c : SILENCE; const r = resolve(raw); if (active && r.t !== active.id && Array.isArray(raw.t) && raw.t.includes(active.id)) { wantCue = { ...r, t: active.id }; } else wantCue = r; sync(); },
     setOn(v) { if (on === !!v) return; on = !!v; sync(); },
     setDuck(v) { if (ducked === !!v) return; ducked = !!v; setBus(0.8); },
     // step back for a moment (a card found, a patrol close by), then come back slowly
@@ -138,7 +153,7 @@ export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new 
       for (const d of decks) {
         if (!elOf(d) || d.unlocked) continue;
         if (d.id) { play(d); continue; }
-        try { d.el.src = 'silence.wav'; } catch { /* ignore */ } // the idle deck: unlocked on silence
+        try { d.el.src = 'silence.wav'; d.el.loop = true; } catch { /* ignore */ } // the idle deck: unlocked on silence
         play(d);
       }
       if (active?.el?.paused && on && !doc?.hidden) play(active);
