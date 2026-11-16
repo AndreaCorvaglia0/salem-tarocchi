@@ -42,7 +42,7 @@ export const CLIENTS = [
     hello: 'Vivo nel bosco e non parlo con nessuno da un anno, a parte il cane, che è morto a marzo. Non ho domande da fare: gira le carte e parla tu, che io ascolto.',
     thanks: 'Era da tanto che non sentivo una voce parlare a me. Hai detto cose vere e non me la sono presa, quindi tornerò.', pay: 9 },
   { id: 'c2.mother', name: 'Comare Goodwin', look: 'un neonato in braccio, occhiaie fonde', chapter: 2,
-    question: 'Mio figlio crescerà sano?', ambito: 'casa', forma: 'quadro', ref: { di: 'di tuo figlio' }, theme: 'cura',
+    question: 'Mio figlio crescerà sano?', ambito: 'casa', forma: 'fare', ref: { di: 'di tuo figlio' }, theme: 'cura',
     hello: 'Questo bambino l\'ha fatto nascere Malva, tre settimane fa. È stata lei a dirmi di venire da te, e come al solito se n\'è andata senza aspettare che la ringraziassi.',
     thanks: 'Stanotte, per farlo dormire, gli racconto le carte che hai girato per lui. Dormi almeno tu, che io non ci riesco da un mese.', pay: 8 },
   // chapter 3: the Celtic cross
