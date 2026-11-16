@@ -9,6 +9,7 @@ import './clients.js'; // clients.next: the returning clients at the cottage tab
 import './traits.js'; // behaviour feeds the portrait (esplora, rischio)
 import './fly.js'; // the broom: fly.check, fly.to (the grimoire's map)
 import './hints.js'; // the interface hints and the trail of lights
+import './bonds.js'; // popularity, Tartufo's points and treats, the tracked side mission
 import './wire.js'; // fog, small cards, obstacles, trading, the last hints
 import './debug.js'; // ?debug only: window.__salem and ?skip=
 export { bootSkip } from './debug.js';

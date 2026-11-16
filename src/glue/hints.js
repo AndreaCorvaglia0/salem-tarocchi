@@ -9,6 +9,7 @@ import { state } from '../core/state.js';
 import { foundIds, hintOnce } from '../core/progress.js';
 import { STEPS } from '../data/story/index.js';
 import { trailTarget, TRAIL_MS } from './hints.rules.js';
+import { trackedExtra } from '../core/extras.js';
 
 const hint = (id, delay = 0) => setTimeout(() => hintOnce(id), delay);
 
@@ -22,7 +23,7 @@ wrap('reading.open', async (prev, o) => { hint('reading', 900); return prev?.(o)
 
 // ---- the trail
 let tempUntil = 0, tempT = 0, current;
-const target = () => trailTarget({ chapter: state.chapter, step: state.step, steps: STEPS, found: foundIds(), temp: Date.now() < tempUntil });
+const target = () => trailTarget({ chapter: state.chapter, step: state.step, steps: STEPS, found: foundIds(), temp: Date.now() < tempUntil, track: trackedExtra()?.at || null });
 export function refreshTrail() {
   if (!has('world.guide')) return;
   const t = target();
@@ -30,7 +31,7 @@ export function refreshTrail() {
   current = t;
   call('world.guide', t);
 }
-for (const e of ['step', 'chapter', 'card:found']) on(e, () => setTimeout(refreshTrail, 50));
+for (const e of ['step', 'chapter', 'card:found', 'track']) on(e, () => setTimeout(refreshTrail, 50));
 // from chapter 2 the trail is no longer always on: once, say how to ask for it (the HUD slip)
 const guideHint = () => { if (state.chapter >= 2 && has('world.guide')) hint('guide', 1500); };
 on('chapter', guideHint);

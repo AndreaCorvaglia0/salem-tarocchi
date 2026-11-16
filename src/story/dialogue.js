@@ -10,6 +10,7 @@ import { PEOPLE } from '../data/cards.base.js';
 import { cameo } from './stage/cameos.js';
 import { gate, isTapKey } from './pace.js';
 import { hintOnce } from '../core/progress.js';
+import { normalizeChoices } from './special.js';
 
 const CSS = `
 .sy-layer{position:fixed;inset:0;pointer-events:none;z-index:30;font-family:${FONT.pixel};color:#f1ead6;-webkit-user-select:none;user-select:none}
@@ -35,9 +36,15 @@ const CSS = `
 .sy-box.narra,.sy-box.plain{min-height:84px}
 .sy-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
 .sy-opt{display:flex;gap:12px;align-items:center;min-height:54px;padding:10px 14px;font:inherit;font-size:18px;line-height:1.3;text-align:left;color:#f1ead6;background:rgba(30,28,58,.97);border:3px solid #8c7f5e;box-shadow:0 0 0 3px #07070f,0 6px 16px rgba(0,0,0,.5);cursor:pointer;-webkit-tap-highlight-color:transparent;animation:syup .18s ease-out both}
-.sy-opt:nth-child(2){animation-delay:.04s}.sy-opt:nth-child(3){animation-delay:.08s}.sy-opt:nth-child(4){animation-delay:.12s}
+.sy-opt:nth-child(2){animation-delay:.04s}.sy-opt:nth-child(3){animation-delay:.08s}.sy-opt:nth-child(4){animation-delay:.12s}.sy-opt:nth-child(n+5){animation-delay:.16s}
 .sy-opt b{flex:none;display:grid;place-items:center;width:26px;height:26px;background:#d9c9a0;color:#1a1424;font-size:16px}
 .sy-opt:hover,.sy-opt:focus-visible{border-color:#ffe08a;background:rgba(48,42,86,.98);outline:none}
+.sy-opt.sp{border:2px solid #e2b84e;background:rgba(40,32,52,.97);box-shadow:0 0 0 3px #07070f,0 0 14px rgba(226,184,78,.22),0 6px 16px rgba(0,0,0,.5)}
+.sy-opt.sp b{background:#e2b84e;color:#1a1424;font-size:15px}
+.sy-opt.sp .tx{display:flex;flex-direction:column;gap:2px}
+.sy-opt.sp .tg{font-size:13px;line-height:1.1;letter-spacing:.08em;font-variant:small-caps;text-transform:lowercase;color:#f0cf74}
+.sy-opt.sp:hover,.sy-opt.sp:focus-visible{border-color:#ffe08a}
+.sy-gap{height:2px}
 .sy-opt:active{transform:translateY(2px)}
 @keyframes syup{from{opacity:0;transform:translateY(10px)}}
 .sy-moment{position:fixed;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:auto;max-width:calc(100% - 24px);padding:10px 18px;background:#d9c9a0;color:#1a1424;font-size:18px;font-weight:600;text-align:center;box-shadow:0 0 0 3px #07070f,0 8px 24px rgba(0,0,0,.6);animation:syup .25s ease-out both;pointer-events:none}
@@ -51,7 +58,7 @@ let release = null; // what a tap / Space / Enter does right now
 const onKey = (e) => {
   if (!release) return;
   if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); if (isTapKey(e)) release('key'); }
-  else if (/^[1-4]$/.test(e.key) && !e.repeat) release(`n${e.key}`);
+  else if (/^[1-6]$/.test(e.key) && !e.repeat) release(`n${e.key}`);
 };
 
 function ensure() {
@@ -112,16 +119,20 @@ export function say(who, text, { ask = false } = {}) {
   });
 }
 
-// Shows 2-4 options above the box. Resolves with the index.
-export function choose(texts) {
+// Shows the options above the box (2-4 ordinary, then any special ones: a gold border, a star and the
+// tag above the text). texts: strings or { t, special, tag }; metas[i]: null or { special, tag }.
+// Resolves with the index.
+export function choose(texts, metas) {
   ensure();
   active += 1;
   layer.classList.add('on');
   const list = h('div.sy-choices');
-  const btns = texts.slice(0, 4);
+  const btns = normalizeChoices(texts, metas).slice(0, 6);
   return new Promise((resolve) => {
     const pick = (i) => { list.remove(); release = null; active -= 1; scheduleHide(); resolve(i); };
-    btns.forEach((t, i) => list.append(h('button.sy-opt', { type: 'button', onclick: () => pick(i) }, h('b', String(i + 1)), h('span', t))));
+    btns.forEach(({ t, meta }, i) => list.append(meta
+      ? h('button.sy-opt.sp', { type: 'button', 'aria-label': `${meta.tag || ''} ${t}`.trim(), onclick: () => pick(i) }, h('b', { 'aria-hidden': 'true' }, '★'), h('span.tx', h('span.tg', meta.tag || ''), h('span', t)))
+      : h('button.sy-opt', { type: 'button', onclick: () => pick(i) }, h('b', String(i + 1)), h('span', t))));
     stack.insertBefore(list, box || null);
     release = (how) => { const m = /^n(\d)$/.exec(how || ''); if (m && +m[1] <= btns.length) pick(+m[1] - 1); };
     setTimeout(() => list.querySelector('.sy-opt')?.focus?.({ preventScroll: true }), 30);

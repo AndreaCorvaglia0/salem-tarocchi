@@ -16,6 +16,9 @@
 //   the portrait:  { trait: ['tono', '<=', -3] }  { trend: ['esplora', '>=', 2] } (since the last snapshot)
 //   { steady: 'parola' } (|v| >= 3, same sign as at the last snapshot)  { turned: 'rischio' }  { torn: 'guida' }
 //   { verdict: 'first' | 'same' | 'changed' }  { yourCardIsBirth: true }
+//   added 16 Nov: { pop: 2 } (popularity level >= 2)  { tartufo: 1 } (Tartufo level >= 1)
+//   { explored: 12 } (distinct places seen, state.stats.seen, >= 12)
+//   { title: 'fattucchiera' | 'strega' | 'gran maestra' } (her rank at least that; same as { level: 4 } / { level: 7 })
 //   birth:  { hasBirth: true } { hasYear: true } { element: 'Fuoco' } { modality: 'fisso' }
 //           { moon: 'piena' } { bornOn: 'giovedì' }   (moon and weekday need the year: false without it)
 //
@@ -25,6 +28,7 @@
 //   {dayPlanetCard} {moon}   (all safe when the birth data is missing: a neutral phrase)
 import { state as live } from './state.js';
 import { CARD, SIGNS, SIGN_LORE, PLANET_CARD, weekdayOf, moonOf } from '../data/cards.base.js';
+import { popLevel, tartufoLevel } from './bonds.js';
 import { levelOf, titleOf, yourCard, hasCard, majorsFound, seasonOfBirth, traitWord, traitWords, lastSnapshot, lastVerdict } from './progress.js';
 
 const signOfState = (s) => SIGNS.find((x) => x.id === s.player?.sign) || null;
@@ -37,6 +41,8 @@ const sameBool = (v, x) => (v === false ? !x : !!x);
 export const joinIt = (ws) => (ws.length < 2 ? ws[0] || '' : `${ws.slice(0, -1).join(', ')} e ${ws[ws.length - 1]}`);
 
 const cmp = (a, op, b) => (op === '>=' ? a >= b : op === '>' ? a > b : op === '<=' ? a <= b : op === '<' ? a < b : op === '!=' ? a !== b : a === b);
+
+const TITLE_LEVEL = { novizia: 1, fattucchiera: 4, strega: 7 };
 
 const TESTS = {
   flag: (v, s) => !!s.flags[v],
@@ -74,6 +80,10 @@ const TESTS = {
   moon: (v, s) => moonOf(fullBirth(s)) === v,
   bornOn: (v, s) => weekdayOf(fullBirth(s) || {})?.name === v,
   wrote: (v, s) => (s.cards?.[v]?.words || []).some((w) => String(w || '').trim()),
+  pop: (v, s) => popLevel(s) >= v,
+  tartufo: (v, s) => tartufoLevel(s) >= v,
+  explored: (v, s) => Object.keys(s.stats?.seen || {}).length >= v,
+  title: (v, s) => { const k = String(v).toLowerCase(); return k === 'gran maestra' ? !!s.flags?.['ending.seen'] : levelOf() >= (TITLE_LEVEL[k] ?? Infinity); },
   not: (v, s) => !test(v, s),
   any: (v, s) => v.some((c) => test(c, s)),
 };

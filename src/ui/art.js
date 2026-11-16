@@ -17,6 +17,11 @@ export const TOOL_ART = {
   pendulum: (o) => wrap(`<path d="M24 4v4"/><path d="M24 8c-.6 2 .6 3 0 5s.6 3 0 5 .6 3 0 5" stroke-width="1.3"/><circle cx="24" cy="4" r="2"/><path d="M24 24l-7 7 7 13 7-13z" fill="#7a6aa055"/><path d="M17 31h14" stroke-width="1.1"/>`, o),
 };
 
+// a treat for Tartufo: a little fish on a scrap of paper
+export const treat = (o) => wrap(`<path d="M7 33c8 4 26 5 34 0l-3-4c-8 3-21 3-28 0z" fill="#e8dcc055" stroke-width="1.2"/><path d="M11 24c5-6 15-7 22-2l5-4v12l-5-4c-7 5-17 4-22-2z" fill="#9ab0b855"/><circle cx="16" cy="23" r="1.1" fill="currentColor"/><path d="M22 20c1 2 1 4 0 6M26 20c1 2 1 4 0 6" stroke-width="1"/>`, o);
+// a paw print, filled or empty (Tartufo's bond on the "Io" page)
+export const paw = (on, size = 18, ink = INK) => `<svg viewBox="0 0 20 20" width="${size}" height="${size}" aria-hidden="true" fill="${on ? ink : 'none'}" stroke="${ink}" stroke-width="1.2"><ellipse cx="10" cy="13.4" rx="4.4" ry="3.6"/><circle cx="4.2" cy="8.6" r="1.9"/><circle cx="8" cy="5" r="2"/><circle cx="12.4" cy="5" r="2"/><circle cx="16" cy="8.6" r="1.9"/></svg>`;
+
 // a purse with a coin
 export const purse = (o) => wrap(`<path d="M15 16c-6 6-9 13-7 19 2 6 10 8 16 8s14-2 16-8c2-6-1-13-7-19"/><path d="M15 16c3 2 15 2 18 0M17 12c2 2 12 2 14 0l-2 4H19z"/><circle cx="35" cy="34" r="6" fill="${GOLD}66"/><path d="M35 31v6" stroke-width="1.2"/>`, o);
 

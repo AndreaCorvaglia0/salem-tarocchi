@@ -27,6 +27,7 @@ import { Obstacles } from './obstacles.js';
 import { Fog } from './fog.js';
 import { Minors } from './minors.js';
 import { Sense } from './sense.js';
+import { guideRoute } from '../guidepath.js';
 
 // sounds (notes/sound.md): the service may be missing (harness), then nothing plays
 const MOOD = { forest: 'forest', depths: 'depths', court: 'depths' };
@@ -68,6 +69,7 @@ export class WorldScene extends Phaser.Scene {
     this.weather = new Weather(this, map, this.season, this.light);
     this.life = new Life(this, map, this.built, this.season, this.light);
     this.guide = new Guide(this, map); this.guide.set(this.registry.get('guide'));
+    this.setMission(this.registry.get('mission'));
     this.bornAt = this.time.now;
     mood(moodFor(map.id));
     this.inputs = new Input(this);
@@ -86,6 +88,8 @@ export class WorldScene extends Phaser.Scene {
     this.events.once('shutdown', () => { offs.forEach((f) => f()); this.scale.off('resize', this.layout, this); this.night.destroy(); this.controls?.prompt(null); });
     state.pos = { map: map.id, x: this.player.tx, y: this.player.ty }; save();
     this.markSeen(this.player.tx, this.player.ty);
+    this.cellAt(this.player.tx, this.player.ty, true);
+    emit('map:enter', { map: map.id }); // glue/bonds.js: Tartufo's walks
     if (d.arrived) this.controls?.place(map.name);
     this.time.delayedCall(350, () => this.things.entered(this.player.tx, this.player.ty));
     this.game.events.emit('world:ready', map.id);
@@ -190,6 +194,43 @@ export class WorldScene extends Phaser.Scene {
     if (this.map.inside && !seen[`${this.map.id}.door`]) { seen[`${this.map.id}.door`] = true; save(); }
   }
 
+  // Visited 8x8-tile cells per map (state.world.cells[map]['cx,cy']): entering a cell tells the bus
+  // `cell` { map, fresh, nearRoute } (glue/bonds.js: Tartufo may find a treat). quiet: just record it.
+  cellAt(x, y, quiet = false) {
+    const key = `${x >> 3},${y >> 3}`;
+    if (key === this.cell) return;
+    this.cell = key;
+    const all = state.world.cells || (state.world.cells = {}), m = all[this.map.id] || (all[this.map.id] = {});
+    const fresh = !m[key];
+    if (fresh) { m[key] = 1; save(); }
+    if (!quiet) emit('cell', { map: this.map.id, cell: key, fresh, nearRoute: this.nearRoute(x, y) });
+  }
+  // The mission's way on this map (the tracked or main target; glue sets it with world.mission): the
+  // walkable path from where she was when the target was set. With no target, the roads count as the way.
+  setMission(ref) {
+    this.mission = ref || null;
+    const r = ref && this.player ? guideRoute(this.map, this.player.tx, this.player.ty, ref, (x, y) => !this.things?.solidAt(x, y)) : null;
+    this.route = r?.tiles?.length ? r.tiles : null;
+  }
+  nearRoute(x, y, d = 3) {
+    if (!this.route) return this.map.tile(x, y)?.ground === 'path';
+    return this.route.some(([a, b]) => Math.abs(a - x) <= d && Math.abs(b - y) <= d);
+  }
+  // A tap on Tartufo (input.js): near her, it is for him (glue/bonds.js gives a treat or a pat).
+  catHit(wx, wy) {
+    const c = this.cat?.s;
+    if (!state.powers.cat || !c?.visible) return false;
+    return Math.abs(wx - c.x) < 9 && wy < c.y + 3 && wy > c.y - 16;
+  }
+  tapCat() {
+    const p = this.player, c = this.cat;
+    if (Math.abs(c.tx - p.tx) + Math.abs(c.ty - p.ty) > 3) return false;
+    p.faceToward(c.tx, c.ty);
+    this.tweens.add({ targets: c.s, y: c.s.y - 4, duration: 120, yoyo: true, ease: 'Quad.easeOut' });
+    emit('tartufo:tap', { map: this.map.id });
+    return true;
+  }
+
   arrived(x, y, from) {
     this.cat.follow(...from);
     this.markSeen(x, y);
@@ -199,6 +240,7 @@ export class WorldScene extends Phaser.Scene {
     const dark = this.map.isDark(x, y);
     if (dark && !this.inDark && state.powers.fire) { stat('fires'); sfx('fire'); }
     this.inDark = dark;
+    this.cellAt(x, y);
     this.fog.arrived(x, y, from); this.minors.arrived(x, y, this.player.dir);
     this.things.entered(x, y);
   }

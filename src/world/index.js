@@ -20,7 +20,7 @@ import { senseRadius } from '../core/progress.js';
 import { sensedFrom } from './hidden.js';
 import { flyFrom, canLandOn } from './fly.js';
 
-let game = null, guideRef = null;
+let game = null, guideRef = null, missionRef = null;
 const scene = () => game?.scene.getScene('World') || null;
 const live = () => { const s = scene(); return s && s.sys.isActive() ? s : null; };
 
@@ -44,6 +44,7 @@ export function start() {
     });
     game.registry.set('controls', controls);
     game.registry.set('guide', guideRef);
+    game.registry.set('mission', missionRef);
     game.events.once('world:ready', () => resolve());
     game.scene.add('World', WorldScene, true, { ...startPoint(), arrived: true });
   });
@@ -109,6 +110,15 @@ export function guide(ref) {
   return Promise.resolve();
 }
 provide('world.guide', guide);
+// The mission's target (tracked side mission or main step), even when no trail shows: the world uses its
+// way to tell whether a new place is off the beaten track (Tartufo finds treats there).
+export function mission(ref) {
+  missionRef = ref || null;
+  game?.registry.set('mission', missionRef);
+  live()?.setMission(missionRef);
+  return Promise.resolve();
+}
+provide('world.mission', mission);
 // Where on screen (CSS px) the tile n steps ahead on the guide's trail is, or on the road ahead when
 // no trail is on; null when the world is not running. For the move hint's tap marker (ui/hint.js).
 export function ahead(n = 4) {

@@ -10,6 +10,7 @@ import { h } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
 import { gate, isTapKey } from './pace.js';
 import { hintOnce } from '../core/progress.js';
+import { normalizeChoices } from './special.js';
 
 export const TABLE_CSS = `
 .ss{position:fixed;inset:0;z-index:35;background:#000;font-family:${FONT.serif};color:#efe4cc;opacity:0;transition:opacity .7s;overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation}
@@ -36,6 +37,9 @@ export const TABLE_CSS = `
 .ss-opt:hover,.ss-opt:focus-visible{border-color:#ffe08a;outline:none;transform:translateY(-3px)}
 .ss-opt.no{opacity:0;transform:scale(.97)}.ss-opt.yes{border-color:#ffe08a;box-shadow:inset 0 0 0 4px rgba(10,6,12,.7),0 0 28px rgba(255,190,90,.5)}
 .ss-opt[disabled]{pointer-events:none}
+.ss-opt.sp{border-color:#e2b84e;background:linear-gradient(160deg,rgba(58,40,30,.96),rgba(26,16,20,.97));box-shadow:inset 0 0 0 4px rgba(10,6,12,.7),inset 0 0 0 5px rgba(226,184,78,.45),0 0 18px rgba(226,184,78,.18),0 8px 22px rgba(0,0,0,.6)}
+.ss-opt .tg{display:block;margin-bottom:4px;font-size:14px;line-height:1.1;letter-spacing:.14em;font-variant:small-caps;text-transform:lowercase;color:#e9c76c}
+.ss-opt .tg::before{content:'✦ ';letter-spacing:0}
 @keyframes ssu{from{opacity:0;transform:translateY(14px)}}
 .sgc{transition:opacity .5s}
 .ss.asking .sgc{opacity:.22}
@@ -55,7 +59,7 @@ export function tableUi({ root, ui, scene, reduced = false }) {
   const onKey = (e) => {
     if (e.target?.closest?.('input,select')) return;
     if (isTapKey(e)) { e.preventDefault(); e.stopPropagation(); t.release?.('tap'); }
-    else if (/^[1-4]$/.test(e.key) && !e.repeat) t.release?.(`n${e.key}`);
+    else if (/^[1-6]$/.test(e.key) && !e.repeat) t.release?.(`n${e.key}`);
   };
   window.addEventListener('keydown', onKey, true);
 
@@ -107,10 +111,12 @@ export function tableUi({ root, ui, scene, reduced = false }) {
     if (!ask) lingerCap(); // a question stays above its choices
   };
 
-  // two cards of text (stacked on a phone); they appear once the question is fully shown
-  t.choose = (texts) => {
+  // two cards of text (stacked on a phone); they appear once the question is fully shown. Special
+  // answers (story/special.js: texts as { t, special, tag } or metas[i]) come last, gold-edged, tag above.
+  t.choose = (texts, metas) => {
+    const items = normalizeChoices(texts, metas).slice(0, 6);
     clearTimeout(fadeT);
-    const list = h(`div.ss-choices${texts.length === 1 ? '.n1' : ''}`);
+    const list = h(`div.ss-choices${items.length === 1 ? '.n1' : ''}`);
     root.classList.add('asking'); // the cards on the table recede under the choices
     return new Promise((resolve) => {
       let picked = false;
@@ -121,7 +127,9 @@ export function tableUi({ root, ui, scene, reduced = false }) {
         await sleep(reduced ? 0 : 420);
         list.remove(); t.dropCap(); root.classList.remove('asking'); resolve(i);
       };
-      const btns = texts.slice(0, 4).map((x, i) => h('button.ss-opt', { type: 'button', onclick: () => pick(i) }, x));
+      const btns = items.map(({ t: x, meta }, i) => (meta
+        ? h('button.ss-opt.sp', { type: 'button', onclick: () => pick(i) }, h('span.tg', meta.tag || ''), x)
+        : h('button.ss-opt', { type: 'button', onclick: () => pick(i) }, x)));
       btns.forEach((b) => list.append(b)); ui.append(list);
       t.release = (how) => { const m = /^n(\d)$/.exec(how || ''); if (m && +m[1] <= btns.length) pick(+m[1] - 1); };
     });

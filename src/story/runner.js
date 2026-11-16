@@ -5,7 +5,7 @@
 //
 //   const r = createRunner({ ui, call, getScript, ext });
 //   await r.run('c1.malva');            // by id (getScript) or an array of nodes
-//   ui = { say(who, text), choose(texts) -> index, cinema(lines, node), moment(text), sleep(ms), end() }
+//   ui = { say(who, text), choose(texts, metas) -> index (metas[i]: null or { special, tag }, story/special.js), cinema(lines, node), moment(text), sleep(ms), end() }
 //   ext(node, api) -> true when it handled a node the runner does not know (the sessions' ask/turn/pick).
 import { state, save } from '../core/state.js';
 import { test, fill } from '../core/cond.js';
@@ -13,6 +13,7 @@ import * as P from '../core/progress.js';
 import { emit } from '../core/bus.js';
 import * as SPREAD_DATA from '../data/spreads.js';
 import * as LESSON_DATA from '../data/lessons.js';
+import { orderOptions, metaOf } from './special.js';
 
 const pad = (n) => String(n).padStart(2, '0');
 // The card with the number n among the Majors, 22 -> the Fool.
@@ -58,12 +59,14 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
   }
 
   async function choice(node) {
-    const opts = (Array.isArray(node.choice) ? node.choice : []).filter((o) => o && test(o.when));
+    // special answers (story/special.js) go after the ordinary ones; the UI gets their tag beside the text
+    const opts = orderOptions((Array.isArray(node.choice) ? node.choice : []).filter((o) => o && test(o.when)));
     if (!opts.length) { warn('choice with no options', node); return null; }
-    let i = await askSafe(() => ui.choose(opts.map((o) => F(o.t))), 0);
+    const metas = opts.map((o) => metaOf(o));
+    let i = await askSafe(() => (metas.some(Boolean) ? ui.choose(opts.map((o) => F(o.t)), metas) : ui.choose(opts.map((o) => F(o.t)))), 0);
     if (!Number.isInteger(i) || i < 0 || i >= opts.length) i = 0;
     const o = opts[i];
-    if (o.tag) P.addPoint(o.tag);
+    if (o.tag && typeof o.tag === 'object') P.addPoint(o.tag); // a string tag is a special option's label
     if (o.trait) P.addTrait(o.trait);
     if (o.trust) for (const [who, n] of Object.entries(o.trust)) P.addTrust(who, n);
     if (o.flag) P.setFlag(o.flag, true); // only options that name a flag are remembered

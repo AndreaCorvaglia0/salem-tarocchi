@@ -19,7 +19,8 @@ const runner = createRunner({
 
 provide('story.run', (scriptId) => runner.run(scriptId));
 provide('story.say', (who, text) => dialogue.say(who, text).then(() => dialogue.end()));
-provide('story.choose', (options) => dialogue.choose(options.map((o) => o.t)).then((i) => { dialogue.end(); return i; }));
+// options: [{ t, special?, tag? }] (special answers: story/special.js)
+provide('story.choose', (options) => dialogue.choose(options).then((i) => { dialogue.end(); return i; }));
 provide('story.session', (id) => playSession(id));
 provide('story.visit', (o = {}) => playVisit(o));
 provide('story.busy', () => Promise.resolve(runner.busy)); // a script is running (the broom waits)

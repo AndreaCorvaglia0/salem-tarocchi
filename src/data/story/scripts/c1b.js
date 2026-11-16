@@ -212,6 +212,15 @@ export const C1B = {
       o('Niente, passavo soltanto a salutare.', null, [
         malva('Allora hai salutato. Quando esci chiudi bene la porta, che entra il freddo.'),
       ]),
+      // special answers (story/special.js): shown only when their `when` holds, after the others
+      { t: 'Lascio che Tartufo ti salti in grembo.', special: 'tartufo', when: { tartufo: 1 }, then: [
+        malva('Toglimelo di dosso, che perde il pelo sul grembiule nero. Però guarda come fa le fusa, questo mascalzone: con me non le ha mai fatte.'),
+        malva('Si vede che ti ha presa in simpatia, e i gatti neri di rado si sbagliano. Dagli quel pezzo di lardo sulla madia, prima che se lo prenda da solo.'),
+      ] },
+      { t: 'Ti chiedo se è vero che in paese parlano di me.', special: 'pop', when: { pop: 1 }, then: [
+        malva('Parlano, sì, e per una volta non dicono male. La moglie del fabbro è venuta a chiedermi se sei brava quanto dicono, e io le ho risposto di venire a vedere da sé.'),
+        malva('Però non montarti la testa, perché la gente che oggi ti cerca è la stessa che domani ti indica col dito. Qui a Salem si fa presto a cambiare idea.'),
+      ] },
     ),
   ],
 };

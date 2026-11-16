@@ -9,7 +9,8 @@ import { call } from '../core/services.js';
 import { CARD } from '../data/cards.base.js';
 import { addCoins } from '../core/progress.js';
 import { INK, PENCIL, RED, HAND, SERIF, GOLD, baseCss, paperBg, svgEl } from './paper.js';
-import { TOOL_ART, purse, cardBack } from './art.js';
+import { TOOL_ART, purse, cardBack, treat } from './art.js';
+import { addTreats } from '../core/bonds.js';
 import { TOOLS, CARD_PRICE, shopRow, shopCards, canBuy } from './logic.js';
 import { onEscape } from './book.js';
 
@@ -43,6 +44,8 @@ const CSS = `
 }
 `;
 
+export const TREAT = { name: 'Un manicaretto per Tartufo', line: 'Glielo do toccandolo, quando mi segue.', price: 3 };
+
 export function openShop() {
   baseCss(); css('ui-shop', CSS);
   return new Promise((resolve) => {
@@ -63,6 +66,12 @@ export function openShop() {
           h('span.own', {}, n ? `ne ho ${n}` : ''),
           h('button.sp-buy', { type: 'button', disabled: !canBuy(t.price), onclick: () => buyTool(t) }, `${t.price} monete`));
       });
+      // a treat for Tartufo: cheap, as many as she likes (state.treats; given by tapping him in the world)
+      const nt = state.treats || 0;
+      tools.push(h('div.sp-tag', { style: '--r:1.5deg' },
+        svgEl(treat({ size: 50 })), h('span.nm', {}, TREAT.name), h('span.ln', {}, TREAT.line),
+        h('span.own', {}, nt ? `ne ho ${nt}` : ''),
+        h('button.sp-buy', { type: 'button', disabled: !canBuy(TREAT.price), onclick: buyTreat }, `${TREAT.price} monete`)));
       const ids = shopCards(), price = CARD_PRICE[shopRow()] || 40;
       const cards = ids.length ? h('div.sp-cards', ids.map((id, i) => h('div.sp-card',
         h('div.sp-back', { style: `--r:${i ? 2.5 : -2.5}deg`, html: cardBack(92, 158) }),
@@ -81,6 +90,14 @@ export function openShop() {
       save();
       draw();
       say.textContent = `Preso: ${t.name.toLowerCase()}.`;
+    };
+    const buyTreat = () => {
+      if (!canBuy(TREAT.price)) return;
+      addCoins(-TREAT.price);
+      snd('tap');
+      addTreats(1);
+      draw();
+      say.textContent = 'Preso: un manicaretto per Tartufo.';
     };
     const buyCard = async (id, price) => {
       if (!canBuy(price)) return;

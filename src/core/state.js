@@ -37,6 +37,14 @@ export const fresh = () => ({
   cardNow: null, // the last "la tua carta" announced (it keeps a small advantage: no flapping)
   told: {}, // card id -> true once the Reader has told it (a visit)
   visits: 0,
+  // added 16 Nov (docs/DESIGN.md "Aggiunte del 16 novembre"): popularity and Tartufo points (levels in
+  // core/bonds.js), treats she carries for him, the registry of optional things (core/extras.js:
+  // id -> 'seen' | 'active' | 'done'), and the secondary mission she tracks instead of the main step
+  pop: 0,
+  tartufo: 0,
+  treats: 0,
+  extras: {},
+  track: null,
 });
 
 const merge = (base, saved) => {
@@ -53,6 +61,9 @@ export const migrate = (s) => {
   for (const k of ['traitLog', 'verdicts']) if (!Array.isArray(s[k])) s[k] = [];
   if (typeof s.told !== 'object' || !s.told) s.told = {};
   s.visits = Number(s.visits) || 0;
+  for (const k of ['pop', 'tartufo', 'treats']) s[k] = Math.max(0, Number(s[k]) || 0);
+  if (typeof s.extras !== 'object' || !s.extras || Array.isArray(s.extras)) s.extras = {};
+  if (typeof s.track !== 'string') s.track = null;
   // the old power table: seals and the far sight are gone (sealed things open with a question)
   if (s.powers) for (const k of ['seals', 'sense2', 'light2']) delete s.powers[k];
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job

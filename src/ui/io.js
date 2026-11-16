@@ -8,7 +8,8 @@ import { CARD, SIGNS } from '../data/cards.base.js';
 import { sheet } from '../data/cards.js';
 import { levelProgress, titleOf, yourCard, lastDiary, traitWords } from '../core/progress.js';
 import { INK, PENCIL, RED, inkBar, svgEl } from './paper.js';
-import { TOOL_ART, purse, fan, silhouette } from './art.js';
+import { TOOL_ART, purse, fan, silhouette, treat, paw } from './art.js';
+import { POP, popProgress, tartufoLevel, tartufoJudge } from '../core/bonds.js';
 import { nextStep, foundMajors, slotOf, TOOLS } from './logic.js';
 
 const CSS = `
@@ -29,6 +30,11 @@ const CSS = `
 .io-next{margin-top:34px;font-size:24px;line-height:32px}
 .io-next .d{display:block;font-size:18px;line-height:22px;color:${PENCIL}}
 .io-next .ar{color:${RED};margin-right:8px}
+.io-bond{margin-top:12px;font-size:20px;line-height:25px}
+.io-bond .k{display:block;font-size:17px;line-height:20px;color:${PENCIL}}
+.io-bond .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.io-bond .paws{display:inline-flex;gap:3px;vertical-align:middle}
+.io-bond .j{display:block;margin-top:2px;font-size:19px;line-height:24px}
 .io-r{margin-top:0}
 @media (max-width:719px){.io-r{margin-top:34px}}
 .io-diary{list-style:none;padding:0;margin-top:8px!important}
@@ -59,6 +65,16 @@ export function ioPages(ctx) {
   const L = [];
   L.push(h('div.io-name', h('h2', {}, name || 'Io')));
   L.push(h('div.io-lv', h('span.t', {}, `${titleOf(lp.level)} · ${lp.level}`), inkBar(lp.top ? 1 : lp.into, { w: 150, h: 13 })));
+  // popularity and Tartufo: two small lines (core/bonds.js)
+  if (!study || state.started) {
+    const pp = popProgress();
+    L.push(h('div.io-bond', h('span.k', {}, 'Popolarità'), h('span.row', h('span', {}, `${POP[pp.level].name}.`), pp.top ? null : inkBar(pp.into, { w: 70, h: 7 }))));
+    if (state.powers?.cat) {
+      const tl = tartufoLevel(), paws = h('span.paws', { 'aria-label': `${tl + 1} su 5` });
+      for (let i = 0; i < 5; i++) paws.append(svgEl(paw(i <= tl, 16)));
+      L.push(h('div.io-bond', h('span.row', h('span.k', {}, 'Tartufo'), paws), h('span.j', {}, tartufoJudge())));
+    }
+  }
   // my card
   const mine = yourCard(), mineFound = slotOf(mine).kind !== 'missing';
   const S = sheet(mine) || {};
@@ -92,6 +108,7 @@ export function ioPages(ctx) {
     if (!study && USABLE[id]) things.push(h('button.io-thing.use', { type: 'button', title: TOOLS[id]?.name, onclick: () => { ctx.close?.(); call('tool.use', id); } }, ...kids, h('em', {}, USABLE[id])));
     else things.push(h('div.io-thing', { title: TOOLS[id]?.name }, ...kids));
   }
+  if (state.treats > 0) things.push(h('div.io-thing', { title: 'Manicaretti per Tartufo' }, svgEl(treat({ size: 52 })), h('span', {}, `manicaretti ×${state.treats}`)));
   R.push(h('div.io-things', things));
   return { L, R: [h('div.io-r', R)], single: true };
 }

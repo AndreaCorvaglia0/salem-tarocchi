@@ -51,6 +51,7 @@ export class Input {
     if (!sc.canAct() || p.getDistance() > 14) return;
     const wp = sc.cameras.main.getWorldPoint(p.x, p.y);
     let tx = Math.floor(wp.x / T), ty = Math.floor(wp.y / T);
+    if (sc.catHit?.(wp.x, wp.y) && sc.tapCat()) { this.cancel(); return; } // Tartufo, close by
     // a tap on a tall sprite (a person's head) means the person
     const person = sc.personNear(wp.x, wp.y);
     if (person) [tx, ty] = person;

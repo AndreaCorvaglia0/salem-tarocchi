@@ -253,3 +253,7 @@ export function syncPowers() {
   for (let l = 2; l <= levelOf(); l++) { const g = LEVEL_GIFTS[l]; if (g?.power) state.powers[g.power] = true; if (g?.flag) state.flags[g.flag] = true; }
 }
 syncPowers();
+
+// ---- added 16 Nov: popularity, Tartufo, the registry of optional things --------------------------
+export { POP, popLevel, popProgress, addPop, popForReading, TARTUFO, tartufoLevel, tartufoJudge, addTartufo, addTreats } from './bonds.js';
+export { extrasDone, extrasTotal } from './extras.js';
