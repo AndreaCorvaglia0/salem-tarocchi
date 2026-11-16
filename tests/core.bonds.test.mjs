@@ -100,7 +100,7 @@ test('the registry of extras: states derived for old saves, new entries, trackin
   assert.equal(extrasDone(), 1);
   // an entry added later is simply unknown to the save: available -> new
   const later = [{ id: 'x.later', text: 'Una cosa nuova.', at: 'village.square', when: null, done: { flag: 'x.done' } }];
-  assert.equal(extraStatus(later[0]), 'new');
+  assert.equal(extraStatus(later[0], state, cond, later), 'new');
   assert.deepEqual(extrasShown(state, cond, later).map((e) => e.status), ['new']);
   // tracking: only an open entry; it shows first; finishing it drops the tracking
   markSeen('side.m01');
