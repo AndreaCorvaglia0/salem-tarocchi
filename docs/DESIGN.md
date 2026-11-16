@@ -312,3 +312,25 @@ naturale della scena, senza spiegare il parallelo.
 
 - La scopa è arrivata nella prima mezz'ora: l'esperienza sale troppo in fretta, i cancelli di rango
   vanno ritarati.
+
+### Tartufo
+
+- Un quarto numero, piccolo e simpatico: i punti Tartufo. Si guadagnano dandogli manicaretti e portandolo in giro.
+- I manicaretti si comprano in bottega, oppure li trova lui mentre si esplora: quasi mai lungo la strada
+  della missione, poco nei posti già visti, più spesso nei posti nuovi.
+- Dai punti viene un giudizio su come Tartufo si sente verso di lei, scritto con ironia nel grimorio.
+- Il legame apre e potenzia i suoi poteri e le sue battute, dice qualcosa alla Lettrice, e apre risposte in più.
+
+### Le risposte speciali si sommano
+
+La stessa situazione può avere più risposte speciali insieme: chiederlo a Tartufo, risolvere con una
+magia potente, chiedere un favore a una strega affine, farsi aiutare dalla gente grazie alla popolarità.
+Non importa se più d'una è sbloccata. Nella scelta devono vedersi subito come speciali e in più.
+
+### Il registro delle cose in più
+
+- Ogni contenuto facoltativo ha un identificativo e il gioco tiene il conto di quelli fatti.
+- Così un pezzo aggiunto dopo non finisce alle spalle di chi è già avanti: il gioco sa che non è stato
+  fatto e lo propone.
+- Le missioni secondarie stanno nel grimorio e si possono scegliere: si giocano come le principali ma
+  non fanno avanzare la storia, e si distinguono a colpo d'occhio (matita invece di inchiostro).

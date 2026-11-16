@@ -96,3 +96,30 @@ così, e solo così:
 - Dopo molte letture si riconosce la forma: si attenua con varianti, non sparisce.
 - Il motore non capisce una domanda scritta a mano: per questo c'è l'albero (e la voce viva dove c'è).
 - I significati vengono dalla tradizione Rider-Waite-Smith; il confronto riga per riga col libro resta da fare.
+
+## Contratto dei dati (per chi scrive codice e frasi)
+
+```js
+// src/data/reading/voices/<id>.js   (id: m00..m21, w/c/s/p 01..14)
+export default {
+  id: 'c05',
+  up:  { favore: -1, moto: 'chiude',            // favore -2..2; moto: inizia|cresce|ferma|chiude|torna
+         amore: { situazione, origine, ostacolo, arrivo, consiglio },   // cinque frasi
+         lavoro: {...}, casa: {...}, altri: {...}, se: {...} },
+  rev: { favore: 0, moto: 'torna', amore: {...}, lavoro: {...}, casa: {...}, altri: {...}, se: {...} },
+};
+```
+
+Regole di forma di una frase (le controlla un test):
+- Frase intera, rivolta a chi chiede con il tu, tra 9 e 26 parole, con il punto finale.
+- Comincia con il verbo o con il soggetto, mai con un avverbio di tempo o di luogo e mai con
+  "ma", "e", "però", "invece": il motore può metterle davanti "Nel passato", "Adesso però", "Più avanti".
+  Deve reggere sia da sola (con la maiuscola) sia dopo uno di questi attacchi (con la minuscola).
+- Tempi: `origine` al passato; `situazione` e `ostacolo` al presente; `arrivo` al futuro o al presente
+  di chi vede arrivare; `consiglio` all'imperativo con il tu.
+- Non nomina la carta, non dice "la carta", "le carte", "questa posizione". Parla della vita di chi chiede.
+- Niente dettagli che la domanda non ha (nomi, mestieri, oggetti): quelli li mette il motore.
+- Vale tutto `docs/WRITING.md`: naturale, piana, niente frasi a effetto.
+
+Domanda: `{ ambito, forma, ref?: { di: 'del campo', chi?: 'tuo marito' } }`.
+Carta stesa: `{ pos, card, rev }`. Ruolo di ogni posizione: tabella `ROLE` in `src/reading/plan.js`.
