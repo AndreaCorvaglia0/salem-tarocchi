@@ -416,3 +416,14 @@ Ogni strega la guarda in due modi che non c'entrano l'uno con l'altro, e nel gri
 ### Che cosa resta com'era
 
 La storia grande, i tre bivi, il finale, le letture ai clienti, i capitoli. Queste cose si aggiungono dentro, non sopra.
+
+### Altrove: i piccoli mondi fuori da Salem
+
+Con un espediente da streghe si esce dal mondo per una missione breve: **una storia letta** in biblioteca,
+**un incubo**, **una pozione** bevuta per sbaglio. Si arriva in un posto piccolo, folle e tutto diverso,
+con un aspetto suo e **una regola sua** (sulle nuvole si può cadere; in un libro si cammina solo sulle
+righe scritte), e ci si muove con le stesse cose di sempre: chiedere alle carte, bivi, prove, premi e perdite.
+- Sono secondari e chiusi: non toccano la storia grande, quindi se ne possono aggiungere quanti se ne vuole.
+- Da ogni Altrove si torna con qualcosa: un oggetto speciale, una rivelazione, oppure niente se si cade.
+- Passano dal registro, uno alla volta, e li riceve anche chi è già avanti.
+- Si parte con due.
