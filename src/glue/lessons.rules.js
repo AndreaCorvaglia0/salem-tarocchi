@@ -62,8 +62,11 @@ export function oldCourse(s) {
 // person there must be free to talk), nor at the place of a lesson that is waiting for her.
 //   near: the anchor she stands at;  pos { map, x, y } and anchors { id: { map, x, y } }: for the distance
 export const KEEP_AWAY = 8; // tiles
+export const CALM_MAPS = ['village', 'forest', 'cottage', 'malva', 'shop', 'library'];
 export function canAnnounce({ near = null, stepAt = null, flags = {}, pos = null, anchors = null } = {}, list = LESSON_MISSIONS) {
   const places = [stepAt, ...list.filter((m) => flags[m.offered] && !flags[m.done.flag]).map((m) => m.at)].filter(Boolean);
+  // news of a lesson reaches her only where life is quiet: never underground, in the court or at a meeting
+  if (pos && !CALM_MAPS.includes(pos.map)) return false;
   if (near && places.includes(near)) return false;
   if (!pos || !anchors) return true;
   return !places.some((id) => { const a = anchors[id]; return !!a && a.map === pos.map && Math.abs(a.x - pos.x) + Math.abs(a.y - pos.y) <= KEEP_AWAY; });

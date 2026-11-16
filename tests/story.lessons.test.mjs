@@ -395,7 +395,7 @@ test('a lesson never takes the place of a main-story talk: at every main step, w
   // nor a few steps away from the place of the step: she is walking up to the person
   const A = allAnchors(), nook = A['depths.edera_nook'];
   assert.equal(canAnnounce({ pos: { map: 'depths', x: nook.x - 5, y: nook.y }, anchors: A, stepAt: 'depths.edera_nook' }), false);
-  assert.equal(canAnnounce({ pos: { map: 'depths', x: nook.x - 12, y: nook.y }, anchors: A, stepAt: 'depths.edera_nook' }), true);
+  assert.equal(canAnnounce({ pos: { map: 'depths', x: nook.x - 12, y: nook.y }, anchors: A, stepAt: 'depths.edera_nook' }), false); // never underground
   assert.equal(canAnnounce({ pos: { map: 'village', x: nook.x, y: nook.y }, anchors: A, stepAt: 'depths.edera_nook' }), true);
   assert.equal(canAnnounce({ near: 'village.malva_door', stepAt: 'forest.mill', flags: { 'fly.offered': true } }), false);
   assert.equal(canAnnounce({ near: 'village.malva_door', stepAt: 'forest.mill', flags: { 'fly.offered': true, 'lesson.fly': true } }), true);
