@@ -3,7 +3,10 @@
 // grimorio" (study, without playing). openTitle() -> 'new' | 'continue' | 'study'.
 import { snd, mood } from './sfx.js';
 import { h, css, openOverlay } from '../core/dom.js';
-import { hasSave } from '../core/state.js';
+import { hasSave, state, loadTrouble } from '../core/state.js';
+import { on } from '../core/bus.js';
+import { restore, status, importCode, olderGame, takeOlder } from '../core/vault.js';
+import { CODE_CSS } from './savecode.js';
 import { SERIF, HAND, GOLD, baseCss, rnd } from './paper.js';
 import { cardBack } from './art.js';
 
@@ -30,13 +33,16 @@ const CSS = `
 .tt-b{min-height:52px;border-radius:6px;border:1px solid #d8b25a66;background:#0b0a10b0;color:#f1e6cb;font:21px ${SERIF};cursor:pointer;letter-spacing:.02em;-webkit-tap-highlight-color:transparent;transition:background .2s,border-color .2s}
 .tt-b:hover,.tt-b:focus-visible{background:#2a2016;border-color:${GOLD};outline:none}
 .tt-b.main{border-color:${GOLD};background:#2a2016d0}
+.tt-s{margin:2px 0 0;text-align:center;font:18px/22px ${HAND};color:#b9a98a;min-height:22px}
+.tt-l{border:0;background:none;color:#cdbf9f;font:18px ${SERIF};text-decoration:underline;text-underline-offset:4px;min-height:40px;cursor:pointer}
+.tt-area{display:block;width:100%;height:96px;box-sizing:border-box;padding:8px;border-radius:6px;border:1px solid #d8b25a66;background:#0b0a10;color:#e9dcc0;font:13px/1.3 ui-monospace,monospace;resize:none;user-select:text;-webkit-user-select:text}
 .tt-q{margin:0 0 4px;text-align:center;font:22px/28px ${HAND};color:#e9dcc0}
 @media (min-width:720px){.tt-head h1{font-size:64px}.tt-head{margin-top:8vh}}
 @media (max-height:640px){.tt-head{margin-top:3vh}.tt-head h1{font-size:38px}}
 `;
 
 export function openTitle() {
-  baseCss(); css('ui-title', CSS);
+  baseCss(); css('ui-title', CSS); css('ui-savecode', CODE_CSS);
   mood('title');
   return new Promise((resolve) => {
     const sky = h('div.tt-sky');
@@ -48,20 +54,41 @@ export function openTitle() {
     const el = h('div.tt', { role: 'dialog', 'aria-label': 'Le carte di Salem' }, sky,
       h('div.tt-head', h('h1', {}, 'Le carte', h('br'), 'di Salem'), h('p', {}, 'Arrivano a chi le sa guardare.')), scene, acts);
     const close = openOverlay(el);
-    const done = (v) => { close(); resolve(v); };
     const b = (t, fn, main) => h(`button.tt-b${main ? '.main' : ''}`, { type: 'button', onclick: () => { snd('tap'); fn(); } }, t);
+    let mode = 'wait', older = null, off = () => {};
+    const done = (v) => { off(); close(); resolve(v); };
+    const where = () => {
+      if (!hasSave()) return loadTrouble ? 'Ho trovato una partita che non riesco a leggere: l\'ho messa da parte.' : '';
+      const who = state.player?.name ? `${state.player.name} · ` : '';
+      return `${who}${status().cloud === true ? 'partita salvata anche online' : 'partita salvata su questo telefono'}`;
+    };
     const menu = () => {
+      mode = 'menu';
       const saved = hasSave();
       acts.replaceChildren(...[
         saved ? b('Continua', () => done('continue'), true) : null,
         b('Nuova partita', () => (saved ? confirm() : done('new')), !saved),
-        b('Sfoglia il grimorio', () => done('study'))].filter(Boolean));
-      acts.querySelector('button')?.focus({ preventScroll: true });
+        !saved && older ? b('Riprendi la partita di prima', async () => { if (await takeOlder()) done('continue'); }) : null,
+        b('Sfoglia il grimorio', () => done('study')),
+        h('button.tt-l', { type: 'button', onclick: () => { snd('tap'); code(); } }, 'Ho un codice'),
+        h('p.tt-s', {}, where())].filter(Boolean));
     };
     const confirm = () => {
-      acts.replaceChildren(h('p.tt-q', {}, 'Ricominciare da capo? La partita salvata si perde.'),
+      mode = 'ask';
+      acts.replaceChildren(h('p.tt-q', {}, 'Ricominciare da capo? La partita di adesso viene messa da parte.'),
         b('Sì, ricomincio', () => done('new')), b('No, torno indietro', menu, true));
     };
-    menu();
+    const code = () => {
+      mode = 'code';
+      const area = h('textarea.tt-area', { placeholder: 'Incolla qui il codice della partita', 'aria-label': 'Il codice della partita', autocapitalize: 'off', autocomplete: 'off', spellcheck: false });
+      const said = h('p.tt-s', {}, '');
+      acts.replaceChildren(area, b('Riprendi da questo codice', async () => {
+        if (await importCode(area.value)) done('continue'); else said.textContent = 'Questo codice non lo riconosco: controlla di averlo incollato tutto.';
+      }, true), b('Torno indietro', menu), said);
+    };
+    off = on('vault', () => { if (mode === 'menu') menu(); });
+    // with no game here, look in the other places before offering a new one (a few seconds at most)
+    if (hasSave()) menu(); else acts.replaceChildren(h('p.tt-q', {}, 'Cerco la tua partita…'));
+    Promise.race([restore(), new Promise((r) => setTimeout(r, 9000))]).then(async () => { older = hasSave() ? null : await olderGame().catch(() => null); if (mode === 'wait' || mode === 'menu') menu(); });
   });
 }

@@ -3,6 +3,7 @@
 //                      hidden(), blocked() }
 //   ?debug&skip=c2 | c3 | trial  prepares a sane state at the start of chapter 2, 3 or before the trial
 //   (cards, level, flags, spreads) and boots straight into the world. The owner uses it from his phone.
+import { exportCode } from '../core/vault.js';
 import { state } from '../core/state.js';
 import { call } from '../core/services.js';
 import { blocked } from '../core/dom.js';
@@ -34,6 +35,7 @@ export async function bootSkip() {
 
 if (debugOn() && typeof window !== 'undefined') {
   window.__salem = {
+    code: () => exportCode(),
     state, call, blocked, scene: () => worldDebug.scene(),
     setStep: (id) => setStep(id),
     give: (list) => [].concat(list).forEach((id) => findCard(id)),

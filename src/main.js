@@ -5,6 +5,7 @@
 import './core/fonts.js';
 import { state, save, reset } from './core/state.js';
 import { call } from './core/services.js';
+import { freeze, restore } from './core/vault.js';
 import './sound/index.js'; // music and effects: silent until the first tap
 import './ui/index.js';
 import './story/index.js';
@@ -23,9 +24,10 @@ async function play() {
 }
 
 async function start() {
-  if (await bootSkip()) return play(); // ?debug&skip=c2|c3|trial
+  if (await bootSkip()) { freeze(); return play(); } // ?debug&skip=c2|c3|trial
   const pick = await call('title.open');
   if (pick === 'study') { await call('grimoire.open', { tab: 'carte', study: true }); return start(); }
+  freeze(); restore(); // the game begins: nothing is swapped from now on (the mirrors keep being written)
   if (pick === 'new') reset();
   if (!state.started) { state.started = true; save(); }
   return play();

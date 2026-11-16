@@ -15,6 +15,7 @@ import { canSelfRead } from '../glue/selfread.rules.js';
 import { openSelfRead } from './selfread.js';
 import { openReadings } from './readings.js';
 import { openWitches, witchesMet } from './witches.js';
+import { openCode } from './savecode.js';
 
 const CSS = `
 .io-name{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
@@ -113,6 +114,7 @@ export function ioPages(ctx) {
     R.push(h('ul.io-reads', canSelfRead(state) ? entry('Una lettura per me', '', () => away(openSelfRead)) : null,
       nRead ? entry('Le mie letture', `(${nRead})`, () => away(openReadings)) : null));
   }
+  R.push(h('ul.io-reads', h('li', h('button.gx-link', { type: 'button', onclick: () => openCode() }, h('span.ar', { 'aria-hidden': 'true' }, '→'), h('span.t', {}, 'Il codice della partita')))));
   if (witchesMet().length) R.push(h('ul.io-reads', h('li', h('button.gx-link', { type: 'button', onclick: async () => { ctx.book.el.style.visibility = 'hidden'; try { await openWitches(); } finally { ctx.book.el.style.visibility = ''; ctx.rerender(); } } }, h('span.ar', { 'aria-hidden': 'true' }, '→'), h('span.t', {}, 'Le streghe'))))); // ui/witches.js
   R.push(h('div.sp'), h('div.sp'));
   const things = [h('div.io-thing', svgEl(fan({ size: 52 })), h('span', {}, `${foundMajors()} su 22`))];

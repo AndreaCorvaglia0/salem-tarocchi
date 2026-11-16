@@ -56,6 +56,7 @@ export const fresh = () => ({
   studied: {},
   studiedXp: {},
   trialSense: null,
+  savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
 const merge = (base, saved) => {
@@ -87,20 +88,60 @@ export const migrate = (s) => {
   return s;
 };
 
+// ---- storage ---------------------------------------------------------------------------------------
+// Two copies in localStorage (KEY, and BAK refreshed about once a minute); a save that cannot be read is
+// never overwritten in silence: it is kept under BROKEN and `loadTrouble` says so. core/vault.js mirrors
+// every save outside localStorage (IndexedDB, the artifact's own store) and restores from there.
+const BAK = `${KEY}-bak`, OLD = `${KEY}-old`, BROKEN = `${KEY}-broken`;
+const ls = () => { try { return globalThis.localStorage || null; } catch { return null; } };
+const read = (k) => { try { return ls()?.getItem(k) || null; } catch { return null; } };
+const put = (k, v) => { try { ls()?.setItem(k, v); return true; } catch { return false; } };
+export const parseSave = (raw) => { try { const o = typeof raw === 'string' ? JSON.parse(raw) : raw; return o && typeof o === 'object' ? migrate(merge(fresh(), o)) : null; } catch { return null; } };
+export let loadTrouble = false;
 const load = () => {
-  try { const raw = globalThis.localStorage?.getItem(KEY); if (raw) return migrate(merge(fresh(), JSON.parse(raw))); } catch { /* no storage */ }
-  return fresh();
+  const raw = read(KEY), bak = read(BAK);
+  const a = raw ? parseSave(raw) : null, b = bak ? parseSave(bak) : null;
+  if (raw && !a) { loadTrouble = true; put(BROKEN, raw); }
+  if (a?.started) return a;
+  if (b?.started) return b;
+  return a || fresh();
 };
 
 export const state = load();
 
+const hooks = [];
+// fn(raw): called after every write of a started game (core/vault.js mirrors it elsewhere)
+export const onSaved = (fn) => { hooks.push(fn); };
+let lastBak = 0;
+const write = () => {
+  state.savedAt = Date.now();
+  let raw;
+  try { raw = JSON.stringify(state); } catch { return; }
+  put(KEY, raw);
+  if (!state.started) return;
+  if (state.savedAt - lastBak > 60000) { lastBak = state.savedAt; put(BAK, raw); }
+  for (const fn of hooks) { try { fn(raw); } catch { /* a mirror must never break the game */ } }
+};
 let timer = null;
 export const save = () => {
   if (timer) return;
-  timer = setTimeout(() => { timer = null; try { globalThis.localStorage?.setItem(KEY, JSON.stringify(state)); } catch { /* no storage */ } }, 150);
+  timer = setTimeout(() => { timer = null; write(); }, 150);
 };
-export const saveNow = () => { try { globalThis.localStorage?.setItem(KEY, JSON.stringify(state)); } catch { /* no storage */ } };
+export const saveNow = () => write();
 export const hasSave = () => !!state.started;
-export const reset = () => { const f = fresh(); for (const k of Object.keys(state)) delete state[k]; Object.assign(state, f); saveNow(); };
+const replace = (f) => { for (const k of Object.keys(state)) delete state[k]; Object.assign(state, f); };
+// A new game never destroys the old one: it is set aside (OLD, and the mirrors through `onArchive`).
+const archivers = [];
+export const onArchive = (fn) => { archivers.push(fn); };
+export const archived = () => { const s = read(OLD) ? parseSave(read(OLD)) : null; return s?.started ? s : null; };
+export const reset = () => {
+  if (state.started) { let raw = null; try { raw = JSON.stringify(state); } catch { /* keep going */ } if (raw) { put(OLD, raw); for (const fn of archivers) { try { fn(raw); } catch { /* */ } } } }
+  try { ls()?.removeItem(BAK); } catch { /* */ }
+  lastBak = 0;
+  replace(fresh()); saveNow();
+};
+// Replace the running game with a saved one (a mirror, the set-aside game, a code): -> true if it was taken
+export const adopt = (raw) => { const s = parseSave(raw); if (!s?.started) return false; replace(s); lastBak = 0; saveNow(); return true; };
+export const savedAtOf = (s) => (s?.started ? Math.max(1, Number(s.savedAt) || 0) : 0);
 // tests and harness pages: replace the state with a prepared one
-export const setState = (patch) => { const f = migrate(merge(fresh(), patch)); for (const k of Object.keys(state)) delete state[k]; Object.assign(state, f); };
+export const setState = (patch) => { replace(migrate(merge(fresh(), patch))); };
