@@ -4,6 +4,7 @@ export default {
   id: 'm00',
   up: {
     favore: 1, moto: 'inizia',
+    essenza: "Un inizio: saltare con fiducia.",
     amore: {
       situazione: "Stai per buttarti in una storia nuova senza sapere dove porta, e la cosa ti piace più di quanto ti spaventi.",
       origine: "Hai dato fiducia a qualcuno prima ancora di conoscerlo bene, e l'hai fatto con il cuore leggero.",
@@ -42,6 +43,7 @@ export default {
   },
   rev: {
     favore: -1, moto: 'ferma',
+    essenza: "Il salto sbagliato: imprudenza, o paura di saltare.",
     amore: {
       situazione: "Resti sulla soglia di una storia senza deciderti a entrare, e intanto l'altra persona si stanca di aspettare.",
       origine: "Hai bruciato le tappe con qualcuno che conoscevi appena, e da allora non ti lasci più andare.",

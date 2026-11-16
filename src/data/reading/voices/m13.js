@@ -4,6 +4,7 @@ export default {
   id: 'm13',
   up: {
     favore: 0, moto: 'chiude',
+    essenza: "Una fine che trasforma.",
     amore: {
       situazione: "Sta finendo una storia, o almeno il modo in cui l'avete vissuta finora, e in fondo lo sai da un pezzo.",
       origine: "Hai chiuso un amore che non aveva più niente da dare, e dopo quel taglio non hai più amato allo stesso modo.",
@@ -42,6 +43,7 @@ export default {
   },
   rev: {
     favore: -1, moto: 'ferma',
+    essenza: "Una fine rimandata, che non si lascia andare.",
     amore: {
       situazione: "Stai trascinando una storia che è finita da tempo, e ogni mese che passa ti costa un po' di più.",
       origine: "Hai rimandato a lungo un addio che andava detto, e quell'attesa ha fatto più male della separazione stessa.",

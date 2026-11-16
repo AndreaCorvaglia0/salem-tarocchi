@@ -4,6 +4,7 @@ export default {
   id: 'p04',
   up: {
     favore: 0, moto: 'ferma',
+    essenza: "Tenere stretto: sicurezza e controllo.",
     amore: {
       situazione: "Tieni stretta la persona che ami perché temi che ti sfugga, e senza volerlo le lasci poco spazio.",
       origine: "Hai imparato a non dare troppo di te dopo una delusione, e da allora il cuore lo dai con il contagocce.",
@@ -42,6 +43,7 @@ export default {
   },
   rev: {
     favore: 0, moto: 'torna',
+    essenza: "La presa si allenta: si dà, o si perde.",
     amore: {
       situazione: "Stai imparando a fidarti di chi ami senza bisogno di sapere tutto, e il rapporto respira meglio.",
       origine: "Hai tenuto qualcuno troppo stretto finché non se n'è andato, e da allora cerchi di amare con la mano più leggera.",

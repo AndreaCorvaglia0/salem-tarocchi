@@ -76,9 +76,16 @@ if (flag('sample')) {
     console.log(cards.map((c) => `${c.pos}: ${name(c.card)}${c.rev ? ' (rovesciata)' : ''}`).join(' | '));
     console.log(said.full);
     if (said.missing.length) console.log(`MISSING: ${JSON.stringify(said.missing)}`);
-    const k = Math.floor(rng() * plan.steps.length);
-    console.log(`  alternatives for step ${k + 1} (${plan.steps[k].pos}, ${plan.steps[k].role}):`);
-    for (const a of R.alternatives(plan, k, { rng, pool })) console.log(`   ${a.ok ? '[ok]    ' : `[${a.why}]`.padEnd(8)} ${a.text}`);
+    if (flag('play')) { // the questions she is asked, card by card, then the final answer
+      plan.steps.forEach((st, k) => {
+        console.log(`  [${st.pos}] ${name(st.card)}${st.rev ? ' (rovesciata)' : ''} — che idea porta?`);
+        for (const a of R.recall(plan, k, { rng, pool, verso: flag('verso') })) console.log(`     ${a.ok ? '(x)' : '( )'} ${a.text}`);
+        console.log(`      e qui (${st.role}, ${question.ambito}) che cosa vuol dire?`);
+        for (const a of R.alternatives(plan, k, { rng, pool, verso: flag('verso') })) console.log(`     ${a.ok ? '(x)' : '( )'} ${a.text}`);
+      });
+      console.log('  Quindi, che cosa rispondi?');
+      for (const c of R.verdictChoices(plan, { rng })) console.log(`     ${c.ok ? '(x)' : '( )'} ${c.text}`);
+    }
     console.log('');
   }
 }

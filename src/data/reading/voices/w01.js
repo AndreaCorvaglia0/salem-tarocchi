@@ -4,6 +4,7 @@ export default {
   id: 'w01',
   up: {
     favore: 2, moto: 'inizia',
+    essenza: "Una scintilla: un inizio pieno di slancio.",
     amore: {
       situazione: "Senti un'attrazione nuova e forte, di quelle che spingono a fare subito la prima mossa.",
       origine: "Hai sentito scattare qualcosa al primo incontro, e tutto il resto è venuto di conseguenza.",
@@ -42,6 +43,7 @@ export default {
   },
   rev: {
     favore: -1, moto: 'ferma',
+    essenza: "La scintilla che non prende: slancio in ritardo.",
     amore: {
       situazione: "Provi interesse per qualcuno ma non scatta niente di deciso, e tutto resta fermo alle prime parole.",
       origine: "Hai vissuto un inizio pieno di fuoco che si è spento in poche settimane, senza un vero motivo.",

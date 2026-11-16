@@ -58,6 +58,9 @@ export const validateVoice = (v) => {
     const s = v[o];
     if (!s) { out.push(`${o}: missing`); continue; }
     if (!Number.isInteger(s.favore) || s.favore < -2 || s.favore > 2) out.push(`${o}.favore: must be an integer in -2..2`);
+    // the idea of the card in a few words: what she must remember (optional for the test stubs)
+    if (s.essenza != null && (typeof s.essenza !== 'string' || !s.essenza.endsWith('.') || s.essenza.split(/\s+/).length > 10)) out.push(`${o}.essenza: a short phrase of at most 10 words ending with a full stop`);
+    if (s.essenza == null && !String(v.id).startsWith('_')) out.push(`${o}.essenza: missing`);
     if (!MOTI.includes(s.moto)) out.push(`${o}.moto: must be one of ${MOTI.join(', ')}`);
     for (const a of AMBITI) {
       if (!s[a]) { out.push(`${o}.${a}: missing`); continue; }

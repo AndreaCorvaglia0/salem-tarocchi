@@ -4,6 +4,7 @@ export default {
   id: 'c05',
   up: {
     favore: -1, moto: 'chiude',
+    essenza: "Una perdita, e il rimpianto.",
     amore: {
       situazione: "Stai ancora piangendo qualcosa che è finito, e intanto non vedi chi ti è rimasto accanto.",
       origine: "Hai perso una persona, o l'idea che avevi di lei, e non hai ancora trovato pace.",
@@ -42,6 +43,7 @@ export default {
   },
   rev: {
     favore: 1, moto: 'torna',
+    essenza: "Accettare la perdita e ripartire.",
     amore: {
       situazione: "Stai ricominciando a guardarti intorno, e il dolore di prima occupa meno posto di quanto credevi.",
       origine: "Hai sofferto a lungo per una storia finita, e a un certo punto hai smesso di aspettarne il ritorno.",

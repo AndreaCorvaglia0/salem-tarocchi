@@ -147,3 +147,20 @@ Il modello è `src/data/reading/voices/c05.js` (Cinque di Coppe). Oltre alle reg
   favorevole). **`moto`** dice che cosa fa alla storia: `inizia`, `cresce`, `ferma`, `chiude`, `torna`.
 - Dentro la stessa carta non si ripete lo stesso attacco più di tre volte per verso, e non si ripete
   la stessa immagine in due ambiti.
+
+## Il livello, dopo la prima lettura dei campioni (16 novembre)
+
+Riscontro di Andrea: il gioco insegna, e chi gioca è alle prime armi. Quindi:
+
+- **Livello superficiale.** Le letture dicono cose di massima: andrà bene, andrà male, dipende, un consiglio. Si può perdere specificità.
+- **Il legame con la carta si deve sempre vedere.** Chi gioca ricorda poche cose di una carta e deve capire come quelle poche cose cambiano con la domanda.
+- **Ogni carta ha un'`essenza`**: la sua idea in poche parole, dritta e rovesciata ("Una perdita, e il rimpianto." / "Accettare la perdita e ripartire."). Sta nel file della voce, accanto a `favore`.
+- **Si legge in due domande brevi per carta, poi una risposta finale** (`src/reading/wrong.js`):
+  1. *Che idea porta questa carta?* L'essenza giusta tra quelle di altre carte.
+  2. *E qui, che cosa vuol dire?* La frase giusta tra quelle che direbbero, nello stesso posto, altre carte chiaramente diverse.
+  3. *Quindi, che cosa rispondi?* Tre livelli soli: bene, dipende, male. Poi il tono: con garbo o male.
+- **Come sono le alternative sbagliate.** Mai la stessa carta in un altro ruolo o in un altro ambito: sono sfumature, non errori su cui si può ragionare. Sempre altre carte, lontane per significato (due inizi o due fini non si mettono mai una contro l'altra). La stessa carta nell'altro verso entra solo dopo la lezione sulle rovesciate.
+- **Chi sa la carta risponde facile; chi non la sa può ragionare.** C'è sempre un aiuto per rivedere le parole della carta.
+- **Con una carta sola** si va diretti: idea, significato, tono.
+- **Frasi più corte**: da 7 a 18 parole, un'idea sola, e l'idea della carta riconoscibile, con la sua parola o una vicinissima.
+- La lettura finale si mostra carta per carta: miniatura, essenza, frase. Poi la risposta.

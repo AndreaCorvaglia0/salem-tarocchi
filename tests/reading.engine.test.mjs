@@ -5,7 +5,7 @@ import { LEADS, CLOSINGS } from '../src/data/reading/frames.js';
 import c05 from '../src/data/reading/voices/c05.js';
 import {
   AMBITI, FORME, TREE, walk, allPaths, makeQuestion, ROLE, SINGLE_ROLE, roleOf, drawCards, scan, plan, linkOf, verdictOf,
-  seeded, say, sayStep, joinLead, alternatives, verdictChoices, validateVoice, useStubs, line, ROLES,
+  seeded, say, sayStep, joinLead, alternatives, recall, LEVEL, verdictChoices, validateVoice, useStubs, line, ROLES,
 } from '../src/reading/index.js';
 import { clashes, closingFor } from '../src/reading/say.js';
 import { CLOSINGS as CL, SCAN } from '../src/data/reading/frames.js';
@@ -201,32 +201,42 @@ test('every lead-in composes cleanly with every sentence of the model voice (c05
   }
 });
 
-test('alternatives: exactly one ok, distinct texts, right kinds first', () => {
-  const p = stubPlan();
+// The choices use the real voices: wrong options come from OTHER cards (never the same card in another role or ambito).
+const realPlan = (forma = 'andra', cards = [{ pos: 'past', card: 'c05', rev: false }, { pos: 'present', card: 'w01', rev: false }, { pos: 'future', card: 'p04', rev: true }]) => {
+  useStubs(false); // real voices only for building the plan; the stubs come back right after
+  try { return plan(makeQuestion({ ambito: 'amore', forma }), 'ppf', cards); } finally { useStubs(true); }
+};
+test('alternatives: one ok, three distinct texts, the wrong ones are other cards in the same place', () => {
+  const p = realPlan();
   for (let seed = 0; seed < 30; seed++) {
     const alts = alternatives(p, 0, { rng: seeded(seed) });
     assert.equal(alts.length, 3);
     assert.equal(alts.filter((a) => a.ok).length, 1);
     assert.equal(new Set(alts.map((a) => a.text)).size, 3);
-    assert.equal(alts.find((a) => a.ok).text, line('_a', false, 'amore', 'origine'));
-    assert.deepEqual(alts.filter((a) => !a.ok).map((a) => a.why).sort(), ['ruolo', 'verso']);
+    assert.equal(alts.find((a) => a.ok).text, line('c05', false, 'amore', 'origine'));
+    for (const a of alts.filter((x) => !x.ok)) { assert.notEqual(a.card, 'c05'); assert.equal(a.text, line(a.card, a.rev, 'amore', 'origine')); }
   }
-  const five = alternatives(p, 0, { rng: seeded(1), n: 6 });
-  assert.equal(new Set(five.map((a) => a.text)).size, 6);
-  assert.ok(five.some((a) => a.why === 'carta'));
 });
-test('alternatives skip a kind whose line is missing', () => {
-  const p = stubPlan(); p.steps[0].card = '_a';
-  const alts = alternatives(p, 0, { rng: seeded(1), pool: ['_a', 'zzz'] });
-  assert.equal(alts.filter((a) => a.why === 'carta').length, 0);
-  assert.equal(alts.filter((a) => a.ok).length, 1);
+test('alternatives with verso: the same card turned the other way is one of the wrong ones', () => {
+  const alts = alternatives(realPlan(), 0, { rng: seeded(2), verso: true });
+  assert.ok(alts.some((a) => !a.ok && a.card === 'c05' && a.rev === true));
 });
-test('verdictChoices: one ok, others from other verdict codes', () => {
-  const p = stubPlan(Q('amore', 'sino'));
+test('recall: the idea of the card among the ideas of other cards', () => {
+  const p = realPlan();
+  for (let seed = 0; seed < 20; seed++) {
+    const r = recall(p, 2, { rng: seeded(seed) });
+    assert.equal(r.length, 3); assert.equal(r.filter((a) => a.ok).length, 1);
+    assert.equal(r.find((a) => a.ok).text, 'La presa si allenta: si dà, o si perde.');
+    assert.ok(r.filter((a) => !a.ok).every((a) => a.card !== 'p04'));
+  }
+});
+test('verdictChoices: three plain levels, one ok', () => {
+  const p = realPlan('sino');
   const ch = verdictChoices(p, { rng: seeded(4) });
-  assert.equal(ch.length, 3); assert.equal(ch.filter((c) => c.ok).length, 1);
-  assert.equal(ch.find((c) => c.ok).code, p.verdict.code);
-  assert.equal(new Set(ch.map((c) => c.code)).size, 3);
+  assert.deepEqual(ch.map((c) => c.level), ['bene', 'dipende', 'male']);
+  assert.equal(ch.filter((c) => c.ok).length, 1);
+  assert.equal(ch.find((c) => c.ok).level, LEVEL[p.verdict.code]);
+  assert.equal(new Set(ch.map((c) => c.text)).size, 3);
 });
 
 // validateVoice: one test per rule
