@@ -2,6 +2,7 @@
 // my three words (editable, in my hand), what you see, what it says, other ways to see it, reversed,
 // planet/sign/element, how to embody it, a question, and who embodies it in this story.
 // showCard(id) -> Promise resolved when the page is closed.
+import { DAILY } from '../data/daily/cards.js';
 import { h, css, cardUrl, openOverlay } from '../core/dom.js';
 import { state } from '../core/state.js';
 import { CARD, PEOPLE, SIGNS } from '../data/cards.base.js';
@@ -95,6 +96,9 @@ export function cardBody(id) {
       sec(c.arcana === 'major' ? 'Pianeta, segno, elemento' : 'Elemento', astroLine(c)),
       sec('Come incarnarla', S.embody), sec('Una domanda', S.ask, 'cp-ask'));
   } else R.push(h('p.pencil', { style: { marginTop: '10px' } }, 'Quando la trovo, qui scrivo cosa vedo e cosa dice.'));
+  // the looks she has read at the threshold stay here (docs/DESIGN.md "La soglia")
+  const nLooks = Math.min(Number(state.daily?.looks?.[id]) || 0, (DAILY[id]?.sguardi || []).length);
+  if (nLooks) R.push(h('div.cp-sec', h('h3', {}, 'Sguardi dalla soglia'), ...DAILY[id].sguardi.slice(0, nLooks).map((g) => h('p', {}, g.t))));
   if (R[0]) R[0].style.marginTop = '4px';
   return { L, R: R.filter(Boolean) };
 }

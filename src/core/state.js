@@ -27,7 +27,9 @@ export const fresh = () => ({
   pos: null, // { map, x, y }
   world: { opened: {}, taken: {}, talked: {}, once: {} },
   dupes: {}, // Minor duplicates found in the grass: { id: count }
-  day: { date: null, card: null },
+  day: { date: null, card: null, turned: false, v: 0 }, // the card of the day (glue/threshold.rules.js)
+  moon: { n: 0, last: null, cycles: 0 }, // the moon of the threshold: one slice a day she does something
+  daily: { looks: {}, notes: 0, noteDay: null }, // looks read per card; notes shown so far
   settings: { music: true, sfx: true },
   // the portrait (docs/DESIGN.md "Il ritratto"): five axes -6..6, positive pole first
   traits: { esplora: 0, parola: 0, tono: 0, rischio: 0, guida: 0 },
@@ -138,7 +140,9 @@ export const reset = () => {
   if (state.started) { let raw = null; try { raw = JSON.stringify(state); } catch { /* keep going */ } if (raw) { put(OLD, raw); for (const fn of archivers) { try { fn(raw); } catch { /* */ } } } }
   try { ls()?.removeItem(BAK); } catch { /* */ }
   lastBak = 0;
-  replace(fresh()); saveNow();
+  // the threshold belongs to her, not to one game: the moon and the card of the day stay
+  const keep = { moon: state.moon, day: state.day, daily: state.daily };
+  replace({ ...fresh(), ...JSON.parse(JSON.stringify(keep)) }); saveNow();
 };
 // Replace the running game with a saved one (a mirror, the set-aside game, a code): -> true if it was taken
 export const adopt = (raw) => { const s = parseSave(raw); if (!s?.started) return false; replace(s); lastBak = 0; saveNow(); return true; };

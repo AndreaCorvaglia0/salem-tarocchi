@@ -31,7 +31,7 @@ const END = {
   none: ['Tartufo ti sale in grembo. «Giornata storta. Domani sarà un\'altra carta.»'],
 };
 
-export async function review({ ids } = {}) {
+export async function review({ ids, n } = {}) {
   css('sxv', CSS);
   const owned = new Set(ownedIds());
   let list;
@@ -40,7 +40,7 @@ export async function review({ ids } = {}) {
   const today = dayCard(); // the card of the day comes first
   if (!ids?.length && today && owned.has(today)) list = [today, ...list.filter((id) => id !== today)];
   list = list.slice(0, 10);
-  const N = 5, XP_RIGHT = 3;
+  const N = n || 5, XP_RIGHT = 3;
   mood('reading');
   const scr = screen({ title: 'Ripasso', cls: 'sxreview', onClose: () => { stop = true; kick?.(); } });
   let stop = false, kick = null;

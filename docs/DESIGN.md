@@ -427,3 +427,35 @@ righe scritte), e ci si muove con le stesse cose di sempre: chiedere alle carte,
 - Da ogni Altrove si torna con qualcosa: un oggetto speciale, una rivelazione, oppure niente se si cade.
 - Passano dal registro, uno alla volta, e li riceve anche chi è già avanti.
 - Si parte con due.
+
+## La soglia (16 novembre, sera)
+
+La prima schermata smette di essere un menu e diventa il tavolo della strega: qualcosa di legato alla
+partita che non è ancora la partita. Si entra per venti secondi, per curiosità; se poi c'è tempo, si gioca.
+Niente notifiche, niente catene che si spezzano, nessun premio che cresce: solo la luna e i suoi doni.
+
+- **La luna.** In alto. Uno spicchio per ogni giorno in cui fa almeno una cosa della soglia o gioca. Sette
+  notti, anche non di fila, e la luna è piena: arriva un dono piccolo fatto di cose che esistono già (un
+  manicaretto per Tartufo, qualche moneta, una riga della Lettrice), poi ricomincia. Saltare un giorno non
+  toglie niente. I doni non aprono mai la storia.
+- **La carta di oggi.** È la carta coperta sul tavolo: si tocca e si gira. Una al giorno, da tutte le 78,
+  la stessa se riapre. Sul foglietto: il nome, **una frase per la giornata** e **uno sguardo sulla carta**.
+  - La frase non predice: è un modo di guardare la giornata in cui riconoscersi, nelle piccole scelte, nelle
+    paure e nelle speranze di un giorno qualsiasi. Concreta, mai fumosa, e nasce dall'idea della carta, così
+    leggendola si impara la carta.
+  - Lo sguardo è un punto di vista che nel gioco non c'è: un dettaglio del disegno guardato in un altro modo,
+    la storia della carta, come cambia secondo il contesto, cosa dice a testa in giù. Ogni carta ne ha tre,
+    veri e diversi: ogni volta che torna ne mostra uno nuovo. Si apre con un tocco, per curiosità.
+  - Toccando la carta girata il foglietto mostra cosa dice la carta di solito: è il ripasso del significato,
+    anche per una carta che non ha ancora trovato.
+  - È la stessa carta del giorno della capanna: se ce l'ha, è la prima del ripasso e vale di più nelle letture.
+- **Dal quaderno.** Finché la carta è coperta, il foglietto porta una nota al giorno sul mondo attorno ai
+  tarocchi (giorni e pianeti, elementi, numeri, erbe, luna, storia del mazzo). Nozioni e detti con la voce
+  del gioco; niente citazioni attribuite a persone vere.
+- **Leggi le tue carte.** La lettura per sé che esiste già, aperta dalla soglia: lei pesca dal mazzo vero,
+  tocca le carte uscite, sceglie il tema. Una carta o tre; la croce celtica solo quando l'ha imparata.
+- **Ripassa due carte.** Le due più indietro tra le sue; il tasto dice già quali.
+- **Continua** resta il tasto principale e dice capitolo e rango. Grimorio, nuova partita e codice scendono
+  in fondo, piccoli.
+
+Chi non ha ancora una partita vede il tavolo, la carta di oggi e «Nuova partita»: la soglia vale dal primo giorno.

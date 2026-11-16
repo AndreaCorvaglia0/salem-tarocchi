@@ -20,7 +20,7 @@ async function open() {
   await p.goto(url, { waitUntil: 'networkidle0' }); await sleep(2500);
   return p;
 }
-const buttons = (p) => p.evaluate(() => [...document.querySelectorAll('.tt-acts button, .tt-acts p')].map((x) => x.textContent));
+const buttons = (p) => p.evaluate(() => [...document.querySelectorAll('.tt-acts button')].map((x) => x.textContent));
 const tap = async (p, text) => { const h = await p.evaluateHandle((t) => [...document.querySelectorAll('button')].find((x) => x.textContent.includes(t)), text); await h.click(); };
 const wipe = async (p0, idb) => { await p0.close(); const p = await b.newPage(); await p.goto(new URL('silence.wav', url).href); await p.evaluate(async (idb) => { localStorage.clear(); if (idb) await new Promise((r) => { const q = indexedDB.deleteDatabase('salem-tarocchi'); q.onsuccess = q.onerror = q.onblocked = r; }); }, idb); await p.close(); };
 
@@ -47,7 +47,7 @@ console.log('  code', code.slice(0, 16), code.length, 'chars');
 withCloud = false; await wipe(p, true);
 p = await open();
 console.log('5 empty, no store  ', await buttons(p));
-await tap(p, 'Ho un codice'); await sleep(300);
+await tap(p, 'Altro'); await sleep(300); await tap(p, 'Ho un codice'); await sleep(300);
 await p.evaluate((c) => { document.querySelector('.tt-area').value = c; }, code);
 await tap(p, 'Riprendi da questo codice'); await sleep(3000);
 console.log('  title gone', await p.evaluate(() => !document.querySelector('.tt')), 'keys', await p.evaluate(() => Object.keys(localStorage)));
