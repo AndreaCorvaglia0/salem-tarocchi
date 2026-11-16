@@ -16,6 +16,8 @@ const side = (id, rev) => voice(id)?.[rev ? 'rev' : 'up'] || null;
 const COMMON = new Set(['quell', 'altri', 'altro', 'altra', 'senza', 'tropp', 'ancor', 'anche', 'sempr', 'tutto', 'tutti', 'prima', 'propr', 'nuovo', 'nuova', 'buone', 'buona', 'cuore', 'cose', 'persona', 'perso'].map((w) => w.slice(0, 5)));
 const keys = (t) => new Set(String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(/[^a-z]+/).filter((w) => w.length >= 5).map((w) => w.slice(0, 5)).filter((w) => !COMMON.has(w)));
 export const tooClose = (a, b) => { const A = keys(a); for (const k of keys(b)) if (A.has(k)) return true; return false; };
+// For whole sentences one shared word is normal ("casa", "famiglia"); two shared key words make two readings one could both defend.
+export const shared = (a, b) => { const A = keys(a); let n = 0; for (const k of keys(b)) if (A.has(k)) n += 1; return n; };
 // how far two card faces are: the further, the easier to tell apart
 const far = (a, b) => (a && b ? Math.abs((a.favore ?? 0) - (b.favore ?? 0)) + (a.moto !== b.moto ? 1 : 0) : 0);
 
@@ -44,7 +46,7 @@ function pick(step, right, textOf, { rng = Math.random, n = 3, pool = voiceIds()
   for (const r of rivals(step, { pool, rng, verso })) {
     if (wrong.length >= n - 1) break;
     const text = textOf(r);
-    if (text && !seen.has(text)) { seen.add(text); wrong.push({ text, ok: false, card: r.card, rev: r.rev }); }
+    if (text && !seen.has(text) && shared(right, text) < 2 && !wrong.some((w) => shared(w.text, text) >= 2)) { seen.add(text); wrong.push({ text, ok: false, card: r.card, rev: r.rev }); }
   }
   return shuffle([{ text: right, ok: true, card: step.card, rev: step.rev }, ...wrong], rng);
 }
