@@ -35,7 +35,7 @@ wrap('reading.open', async (prev, o = {}) => {
   const wrong = wrongOf(r, n);
   const firstBack = !!back && back === client && !once()[`pop.back.${client}`];
   if (firstBack) { once()[`pop.back.${client}`] = true; save(); }
-  addPop(popForReading({ wrong: wrong ?? 99, firstBack }));
+  addPop(popForReading({ wrong: wrong ?? 99, total: Number(r.total) || 0, firstBack }));
   return r;
 });
 

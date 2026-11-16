@@ -48,6 +48,8 @@ function probe() {
   const sx = last('.sx');
   if (sx) {
     const cls = sx.className;
+    // the summary of an engine reading scrolls: bring the options on screen before measuring them
+    all('.sxq-o:not([disabled])', sx).forEach((b) => { const r = b.getBoundingClientRect(); if (r.bottom > innerHeight - 70 || r.top < 0) b.scrollIntoView({ block: 'center' }); });
     const opts = all('.sxq-o:not([disabled])', sx).map((b) => ({ ...box(b), ok: b.dataset.ok === '1' }));
     if (opts.length) return { ...base, kind: 'question', cls, opts, judge: !!sx.textContent.match(/Giudice/) };
     const fan = all('.sxd-fc:not([disabled])', sx);
@@ -98,7 +100,8 @@ async function playRun(side, { stopStep = null } = {}) {
   const errors = [];
   page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(`console: ${m.text()} ${m.location()?.url || ''}`); });
-  page.on('requestfailed', (r) => errors.push(`request failed: ${r.url()}`));
+  // a piece of music is dropped half-loaded every time the place changes: that is not an error
+  page.on('requestfailed', (r) => { if (!/\.(mp3|wav)(\?|$)/.test(r.url())) errors.push(`request failed: ${r.url()}`); });
   page.on('response', (r) => { if (r.status() >= 400) errors.push(`http ${r.status()}: ${r.url()}`); });
   await page.goto(BASE, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => localStorage.clear());

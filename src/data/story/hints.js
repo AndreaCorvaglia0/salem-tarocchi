@@ -7,7 +7,7 @@ export const HINTS = {
   action: "Quando sei vicina a una persona o a una cosa, tocca il pulsante in basso per parlarle o per prenderla.",
   grimoire: "La carta adesso è nel tuo grimorio: tocca il libro in alto per aprirlo.",
   exam: "Scegli con calma la risposta che ti sembra giusta: non c'è fretta, ma ogni errore fa crescere il sospetto.",
-  reading: "Per ogni carta, scegli la frase che ti sembra più adatta alla persona che hai davanti.",
+  reading: "Per ogni carta scegli prima l'idea che porta, poi che cosa vuol dire per chi hai davanti.",
   tap: "Quando hai finito di leggere, tocca lo schermo per andare avanti.",
   detail: "Tocca il punto dell'immagine che ti colpisce di più: qui non ci sono scelte sbagliate.",
   words: "Scrivi tre parole tue per questa carta, le prime che ti vengono in mente.",

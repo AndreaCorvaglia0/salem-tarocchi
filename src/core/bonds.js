@@ -34,9 +34,11 @@ export const popProgress = (s = state) => progressFrom(s.pop, POP_AT);
 
 // A client's reading: +2 with no wrong answer, +1 with one or two, 0 otherwise; +1 more the first time
 // a returning client is served. wrong: wrong answers in the reading.
-export const popForReading = ({ wrong = 0, firstBack = false } = {}) => {
+export const popForReading = ({ wrong = 0, total = 0, firstBack = false } = {}) => {
   const w = Math.max(0, Math.round(Number(wrong) || 0));
-  return (w === 0 ? 2 : w <= 2 ? 1 : 0) + (firstBack ? 1 : 0);
+  // a reading asks two questions per card and one at the end: "a few mistakes" is up to a third of them
+  const few = total > 0 ? w * 3 <= total : w <= 2;
+  return (w === 0 ? 2 : few ? 1 : 0) + (firstBack ? 1 : 0);
 };
 // wrong answers from a reading's result: { wrong } when the reading says it, else from score and size
 export const wrongOf = (result, n) => {
