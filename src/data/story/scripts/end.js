@@ -33,6 +33,11 @@ export const END = {
       N('Edera è seduta in prima fila, col vestito buono, proprio dove le avevi chiesto di mettersi. Sorride al Giudice come si sorride a un bambino sorpreso in sagrestia.'),
       judge('Vedo che c\'è anche la signora Edera, seduta di fronte a me. È curioso: non riesco a guardarla senza che mi tornino in mente certe candele.'),
     ], [IF({ trust: ['edera', '>=', 2] }, [N('Edera è vicino alla finestra, dritta sulla sedia. Quando incontra i tuoi occhi muove appena le labbra, e ci leggi sopra «Rosalba».')])]),
+    IF({ flag: 'coven.cat.in' }, [N('Sotto il mantello senti Tartufo che fa le fusa pianissimo, come gli capita soltanto quando ha paura e non vuole che si sappia.')]),
+    IF({ flag: 'coven.cat.out' }, [N('Sul davanzale della finestra alta, contro la luce, c\'è la sagoma di un gatto seduto. Non si è mosso di lì da quando sei entrata.')]),
+    IF({ flag: 'court.cook' }, [judge('E saluto la mia cuoca, là in fondo, che stamattina ha trovato il tempo di venire in aula ma non quello di scaldarmi il caffè.')]),
+    IF({ flag: 'depot.bray' }, [judge('Mi dicono anche che dal deposito manca il mazzo della vedova Bray. La vedova, interrogata, ha risposto che non ne ha mai avuto uno, e lo ha detto sorridendo.')]),
+    IF({ flag: 'b1.watched' }, [judge('Quella sera in piazza, mi riferiscono, lei ha guardato tutti in faccia senza dire una parola. Lo sta facendo anche adesso con me, e devo dire che non mi dispiace.')]),
     judge('Le farò alcune domande sulle carte che le hanno trovato addosso. Una ragazza istruita le conosce e ne parla senza turbarsi; una ragazza che esita, invece, ha dentro qualcosa che esita al posto suo.'),
     judge('Mi sembra un metodo semplice, e anche giusto. Quando vuole, cominciamo.'),
     choice(
@@ -42,12 +47,28 @@ export const END = {
       o('Prima di rispondere guardo Ginepra, e non lui.', { guida: 1 }, [
         N('Ginepra ti fa una smorfia, la stessa di quando sbagliava a leggere La Ruota. Ti viene quasi da ridere, nel momento più sbagliato, e finalmente capisci come si sente lei.'),
       ], { trust: { ginepra: 1 }, tag: tg('m07', 'c') }),
+      // special answers: a sharp tongue that knows about the candles; one the constables never caught out
+      sp('trait', { trait: ['tono', '<=', -3] }, '«Cominciamo pure, e dopo, se avanza tempo, mi racconta delle candele della chiesa.»', { tono: -1 }, [
+        N('Il Giudice sorride, come fa sempre, ma il sorriso gli arriva un momento in ritardo. In prima fila qualcuno tossisce per non ridere.'),
+        judge('Vedo che la signora Edera ha buona memoria, almeno per certe cose. Cominciamo, signorina, e lasciamo le candele dove stanno.'),
+      ], { flag: 'trial.candles' }),
+      sp('trait', [{ stat: ['examsPassed', '>=', 5] }, { stat: ['examsFailed', '==', 0] }], '«I suoi conestabili me ne hanno già fatte tante, di domande.»', { rischio: 1 }, [
+        judge('Lo so, signorina, ho letto i rapporti: l\'hanno fermata {stat:examsPassed} volte, e non hanno mai trovato niente da scrivere. È per questo che stavolta le domande le faccio io.'),
+      ], { tag: '[Non ti hanno mai colta]' }),
     ),
     exam('judge', 'court.dock'),
     IF({ flag: 'exam.passed' }, [
       judge('Bene. Molto bene, signorina. Forse perfino troppo bene, per una ragazza arrivata a Salem con la neve.'),
       judge('Una che sa tutte queste cose mi lascia pensieroso. Ma la legge chiede risposte, e lei le ha date: siete assolte tutte e due.'),
       judge('Mi permetto un consiglio da amico: lasciate Salem prima che la piazza cambi idea. La piazza cambia idea spesso, e io di solito le do retta.'),
+      choice(
+        o('«Grazie del consiglio, signor Giudice.»', { tono: 1 }, [
+          judge('Non mi ringrazi, signorina. A Salem dicono che porti male, e l\'ho imparato da una levatrice che conosce anche lei.'),
+        ]),
+        o('«Ce ne andiamo, ma non perché ce lo dite voi.»', { tono: -1 }, [
+          judge('È naturale, signorina: le persone come lei se ne vanno sempre per ragioni proprie, ed è quello che le rende interessanti.'),
+        ]),
+      ),
       flag('trial.won'),
       diary('Ho risposto a tutte le domande del Giudice. Ci ha assolte, e ci ha consigliato di sparire.'),
     ], [
@@ -55,6 +76,14 @@ export const END = {
       judge('Domattina all\'alba, sulla collina, tutte e due. Fino ad allora non vi mancherà niente, ve lo prometto.'),
       N('In quel momento dal fondo dell\'aula parte un calamaio. Dalla terza fila si alza una voce che non smette più, e tutte le candele si spengono insieme, come se qualcuno ci avesse soffiato sopra con garbo.'),
       malva('Fuori, voi due, fuori! Dalla porta piccola! E guai a chi si ferma a ringraziare!'),
+      choice(
+        o('Prendo Ginepra per mano e corro.', { rischio: 1 }, [
+          N('La trovi al buio dalla risata, che non riesce a tenere. Correte tra i banchi rovesciati tenendovi per mano, e la porta piccola è già aperta.'),
+        ]),
+        o('Prima mi volto a guardare l\'aula, un momento solo.', { esplora: 1 }, [
+          N('Al buio si vede soltanto la sagoma del Giudice contro le finestre, in piedi e immobile, che non grida e non insegue nessuno. Poi Ginepra ti tira per la manica, e correte.'),
+        ]),
+      ),
       flag('trial.lost'),
       diary('Davanti al Giudice ho sbagliato troppe risposte. Le maestre hanno spento l\'aula, e siamo scappate al buio.'),
     ]),
@@ -74,6 +103,14 @@ export const END = {
     N('Ginepra si ferma a riprendere fiato, ti guarda e scoppia a ridere. Per la prima volta da quando la conosci, è proprio il momento giusto.'),
     N('Il primo sole passa tra le sbarre del cancello e si posa su qualcosa che è infilato nel legno. È una carta, e stavolta nessuna delle due allunga la mano per prima.'),
     ginepra('Prendila tu, stavolta. Lo so che avevo detto che la prossima toccava a me, ma arrivo seconda, e mi va benissimo così.'),
+    choice(
+      o('La prendo, ma la guardiamo insieme.', { tono: 1 }, [
+        ginepra('Insieme, sì, mi piace. Tienila tu però, che io ho ancora le mani che tremano, e una carta così non voglio farla cadere nel fango.'),
+      ]),
+      o('La prendo io, e stavolta non te la lascio soffiare.', { tono: -1 }, [
+        ginepra('Ah ah, guarda che se volevo era già mia! Va bene, non è vero: stavolta sei stata più svelta tu, e lo ammetto davanti a un testimone col pelo.'),
+      ]),
+    ),
     give('m19'),
     // she already flies (the broom comes mid chapter 2): a broom for Ginepra waits at the gate
     IF({ flag: 'coven.ortica.brooms' },
@@ -92,7 +129,18 @@ export const END = {
         ginepra('Bassa e vicina, e un posto che conosco. Allora penso al bivacco, che l\'ho acceso io e me lo ricordo bene: se arrivo da un\'altra parte, la colpa è di Malva.'),
         ginepra('Aspetta, ma allora Malva vola? Ah ah, questa me la devi raccontare tutta, appena siamo in aria e non può sentirci.'),
       ], { trust: { ginepra: 1 } }),
+      // special: the cat shows her where the feet go
+      sp('tartufo', { tartufo: 3 }, 'Guarda Tartufo, che ti fa vedere dove si mettono i piedi.', { tono: 1 }, [
+        N('Tartufo salta sul manico della scopa di Ginepra, lo percorre fino in fondo con la coda dritta e torna indietro, senza guardare giù nemmeno una volta.'),
+        cat('(Si sta così, col peso in mezzo e lo sguardo avanti. Con lei però non ci salgo, l\'ho detto e lo ripeto: io la lezione la faccio da terra.)'),
+      ]),
     ),
+    IF({ flag: 'jail.keys' }, [ginepra('E il tuo gatto che arriva con le chiavi in bocca, come un cane da caccia! Non glielo dico in faccia perché si offende, ma è stato il più bravo di tutti.')]),
+    IF({ flag: 'jail.hinges' }, [ginepra('E quella grata aperta dai cardini me la sogno ancora. Me lo insegni davvero, vero? L\'avevi promesso, cioè, l\'avevo chiesto io, che è quasi uguale.')]),
+    IF({ flag: 'jail.ortica' }, [ginepra('E le chiavi calate con un filo d\'erba! Ortica dice che il nodo era perfetto. Non lo era, ma ha tenuto, e a lei non lo dirò mai.')]),
+    IF({ flag: 'jail.jailer' }, [ginepra('E il carceriere che ti dà la chiave senza una parola. Sua moglie adesso dice a tutti che le carte gliele leggi soltanto tu, e lui fa finta di non sentire.')]),
+    IF({ flag: 'court.card' }, [ginepra('E poi gli hai detto la tua carta in faccia, davanti a tutta l\'aula! Io la mia non la so nemmeno, e adesso voglio sapere qual è.')]),
+    IF({ flag: 'trial.candles' }, [ginepra('E le candele! Gli hai chiesto delle candele, al Giudice, davanti a tutti. Ho rischiato di morire dal ridere prima ancora della sentenza.')]),
     IF({ flag: 'fire.carriage' }, [ginepra('Te l\'avevo letto al fuoco, che avremmo fatto un viaggio noi due! Ho sbagliato soltanto la carrozza, e il colore, e la Ruota. Il resto era giusto.')]),
     IF({ flag: 'fire.promised' }, [ginepra('Al fuoco avevi detto che saresti venuta subito. Ci hai messo un po\', ma sei venuta, e adesso io a te credo per sempre.')]),
     IF({ flag: 'venus.looked' }, [ginepra('E quella bara nel bicchiere si sbagliava, hai visto? Non mi fiderò mai più di un uovo.')]),
@@ -116,6 +164,17 @@ export const END = {
   // by the campfire: the epilogue (what happened to everyone), then the last session
   'f.last': [
     N('Il bivacco è lo stesso dove Ginepra ti ha letto La Ruota. Stasera il fuoco è già acceso, e intorno ci sono anche le tre maestre, sedute più vicine tra loro di quanto ammetterebbero.'),
+    choice(
+      o('Mi siedo per terra, dove mi sedevo quella sera.', { guida: 1 }, [
+        N('Il posto è ancora quello, con le ginocchia tra le braccia e il fumo che ti viene sempre in faccia. Ti piace pensare che la terra si ricordi di te.'),
+      ]),
+      o('Resto in piedi ancora un momento, a guardarle tutte.', { esplora: 1 }, [
+        N('Le conti senza volerlo: tre maestre, un\'amica e un gatto. Un anno fa non conoscevi nessuno di loro, e adesso non sapresti da chi cominciare a ringraziare.'),
+      ]),
+    ),
+    IF({ flag: 'b1.candles' }, [N('Accanto al fuoco c\'è una cesta di candele nuove, con un biglietto senza firma. Le hai raccolte tu dalla neve una volta, e da allora non te ne manca mai una.')]),
+    IF({ flag: 'court.cook' }, [N('La cuoca del Giudice ha lasciato il tribunale e ha aperto una locanda sulla strada del porto. Dice a tutti che gliel\'hanno consigliato le carte, e non dice di chi.')]),
+    IF({ flag: 'tabita.owes' }, [N('Sul tronco c\'è una coperta piegata, lavata e stirata di fresco. Tabita la lavandaia continua a pagare un debito di tre monete, e non ha nessuna intenzione di smettere.')]),
     IF({ flag: 'b1.spoke' },
       [N('Comare Hale vende ancora le sue candele sotto il portico. Ogni settimana ne lascia una sulla soglia della tua capanna, senza biglietto.')],
       [N('Di Comare Hale non si è più saputo niente. Sotto il portico qualcun altro ha riaperto il suo banco, e vende candele più care.')]),
@@ -157,6 +216,11 @@ export const END = {
       o('Prima abbraccio Ginepra.', { guida: 1 }, [
         ginepra('Ah ah, scusa, rido perché se no piango. Vai, dai, che ti aspetta. Ti voglio bene, e adesso vai davvero.'),
       ], { trust: { ginepra: 1 }, tag: tg('m07', 'c') }),
+      // special: all three trust her, and she thanks them although it brings bad luck
+      sp('witch', [{ trust: ['malva', '>=', 2] }, { trust: ['ortica', '>=', 2] }, { trust: ['edera', '>=', 2] }], 'Prima ringrazio le maestre, una per una, anche se porta male.', { tono: 1 }, [
+        malva('Tre grazie in una sera sola! Tocco ferro per tutte, e che non si ripeta. Vai, prima che Ortica cominci a risponderti e faccia giorno.'),
+        N('Edera ti prende la mano tra le sue e dice il tuo nome, quello giusto, al primo colpo. Nessuna glielo fa notare, per paura che se ne accorga.'),
+      ], { tag: '[Si fidano di te]' }),
     ),
     chapterCard(4), // black screen, the title of the chapter that opens (story/chapter.js)
     session('s4'),

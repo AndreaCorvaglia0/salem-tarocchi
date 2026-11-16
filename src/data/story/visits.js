@@ -336,6 +336,13 @@ export const OPENERS = [
   once('st.guida+', [{ steady: 'guida' }, hi('guida')], "Decidi ancora col cuore, ho notato. Le carte con quelle come te parlano volentieri, perché non devono farsi strada tra troppi ragionamenti."),
   once('st.guida-', [{ steady: 'guida' }, lo('guida')], "Continui a ragionare su tutto prima di decidere. Alle carte farai domande difficili, e sono curiosa di sentire che cosa ti risponderanno."),
 
+  // what she did in the scenes (flags of notes/paths.md): the Reader notices, she does not flatter
+  once('candles', F('b1.candles'), "Mi hanno raccontato che in piazza ti sei chinata a raccogliere le candele di quella donna, davanti a tutti. Parlare è una cosa; chinarsi nella neve mentre ti guardano è un'altra, e mi interessa di più."),
+  once('watched', F('b1.watched'), "In piazza sei rimasta zitta, ma mi dicono che hai guardato tutti in faccia, uno per uno. Chi tace e guarda così non sta scappando: sta prendendo nota, e vorrei sapere per che cosa."),
+  once('bray', F('depot.bray'), "Dal deposito del tribunale è sparito un mazzo che non era né tuo né della tua amica. Non ti chiedo niente, perché non voglio sentirti mentire; mi limito a segnare che pensi anche alle carte degli altri."),
+  once('honest', F('mill.honest'), "Hai riportato a Ortica quattro monete che potevi tenerti, e che nessuno ti avrebbe chiesto. Me lo segno, anche se non ho ancora deciso se è onestà o se ti piace avere i conti in ordine."),
+  once('peeked', F('bundle.peeked'), "La prima sera hai slegato il fagotto di Malva per vedere che cosa portavi. Non lo dico per rimproverarti: una che vuole sapere che cos'ha in mano, davanti alle carte, parte avvantaggiata."),
+  once('tabita', F('tabita.owes'), "Ho saputo che alla lavandaia hai lasciato le sue tre monete. Non erano molte, e proprio per questo mi dice qualcosa: è nelle somme piccole che si vede come una persona fa i conti."),
   once('tartufo', { tartufo: 3 }, "Quel gatto ti viene dietro anche quando non hai niente in mano, mi dicono. Tartufo non si è mai affezionato a nessuna, quindi o sei cambiata tu o è cambiato lui, e io scommetterei su di te."),
   once('pop', { pop: 2 }, "Il tuo nome ormai gira per Salem, e arriva anche qui prima di te. Chi viene letta da te ne parla bene, e vorrei capire che cosa trova al tuo tavolo che non trova al mio."),
   once('malva', { trust: ['malva', '>=', 2] }, "Ho saputo che Malva ha cominciato a fidarsi di te. Lei non te lo dirà mai, e proprio per questo te lo dico io."),

@@ -23,7 +23,9 @@ const TOKENS = new Set(['name', 'sign', 'birthCard', 'yourCard', 'title', 'level
   'coins', 'majors', 'traits', 'trait', 'lastVerdict', 'element', 'modality', 'ruler', 'rulerCard', 'birthDay', 'dayPlanet',
   'dayPlanetCard', 'moon', 'picked']);
 // flags set by the story scenes (notes/story.md) that the Reader's conditions may read
-const STORY_FLAGS = new Set(['b1.spoke', 'b1.hid', 'b2.went', 'b2.stayed', 'b3.stealth', 'b3.open', 'lied.constable', 'trial.won', 'trial.lost']);
+const STORY_FLAGS = new Set(['b1.spoke', 'b1.hid', 'b2.went', 'b2.stayed', 'b3.stealth', 'b3.open', 'lied.constable', 'trial.won', 'trial.lost',
+  // set by the small paths of the scenes (notes/paths.md)
+  'b1.candles', 'b1.watched', 'depot.bray', 'mill.honest', 'bundle.peeked', 'tabita.owes', 'door.window', 'door.opened', 'arrest.hid', 'plan.lookout', 'court.card', 'coven.cat.in']);
 const STATS = new Set(['steps', 'exams', 'examsPassed', 'examsFailed', 'jailed', 'stuns', 'fires', 'readings', 'draws', 'locks']);
 
 function* walk(nodes, where) {

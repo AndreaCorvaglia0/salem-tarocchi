@@ -34,6 +34,16 @@ export const C1 = {
       ], { flag: 'malva.cheeky', tag: tg('m01', 'w') }),
     ),
     malva('Adesso fammi vedere cos\'hai trovato venendo qui. Hai la faccia di una che ha qualcosa in tasca e non sa se dirlo.'),
+    choice(
+      o('La tiro fuori e la poso sul tavolo, a faccia in su.', { parola: 1 }, [
+        malva('La posi lì come si posa il pane, senza tante cerimonie. Meglio così, perché le cerimonie io le lascio volentieri al pastore.'),
+      ]),
+      o('Gliela mostro, ma senza lasciarla andare.', { parola: -1 }, [
+        malva('Non la molli nemmeno per farmela vedere, eh? Fai bene, perché a Salem una carta lasciata in giro cambia padrona prima di sera.'),
+      ]),
+    ),
+    IF({ flag: 'p.grab' }, [malva('Hai ancora le dita rosse, quindi l\'hai tirata su dalla neve senza starci a pensare. Io avrei fatto lo stesso, e mi sarei presa i geloni come te.')]),
+    IF({ flag: 'p.looked' }, [malva('E hai la neve soltanto sulle scarpe, quindi prima di chinarti ti sei guardata intorno. A Salem è un\'abitudine che allunga la vita.')]),
     malva('Ecco, lo immaginavo. Di queste non se ne comprano in nessuna bottega: capitano, e di solito capitano a chi poi non riesce più a farne a meno.'),
     malva('Ne ho qualcuna da parte anch\'io. Te ne faccio scegliere due coperte, così non prendi quella col disegno più bello.'),
     draw(ROAD_POOL, 'Il dono di Malva'),
@@ -50,6 +60,14 @@ export const C1 = {
   'c1.read': [
     N('Ti siedi al tavolo con la tovaglia rossa. Malva si asciuga le mani nel grembiule e si siede di fronte a te, come farebbe una cliente qualsiasi.'),
     malva('Io ti dico cosa voglio sapere, tu giri una carta, la guardi bene e mi dici cosa ci vedi. Di quello che c\'è scritto nei libri parliamo un\'altra volta.'),
+    choice(
+      o('Mescolo le carte a modo mio, prima di cominciare.', { guida: 1 }, [
+        malva('Mescoli come una che impasta il pane, con tutte e due le mani. Va bene così: le carte non si offendono, e io nemmeno.'),
+      ]),
+      o('Chiedo a Malva di tagliare il mazzo.', { guida: -1 }, [
+        malva('Allora taglio io, come dal notaio. Vedo che le cose ti piace farle in regola, e con me su questo non sbagli mai.'),
+      ]),
+    ),
     reading('single', 'c0.malva'),
     malva('Ecco, leggere una carta sola è tutto qui: una domanda, una carta, e poche parole dette guardando in faccia chi te l\'ha chiesto.'),
     teach('single'),
@@ -94,6 +112,14 @@ export const C1 = {
     N('Conti dieci monete sul banco, e lui ti passa un sacchetto di tela che profuma di resina.'),
     coins(-10),
     tool('incense', 1),
+    choice(
+      o('Annuso il sacchetto, prima di metterlo in borsa.', { esplora: 1 }, [
+        keeper('Annusa pure, che è quello buono. La segatura la mescolo soltanto per chi non controlla, e Malva purtroppo controlla sempre.'),
+      ], { flag: 'shop.sniffed' }),
+      o('Lo metto in borsa e ringrazio.', { esplora: -1 }, [
+        keeper('Prego, anche se qui dentro non ringrazia mai nessuno. Si capisce subito che non sei di Salem, e non è detto che sia un male.'),
+      ]),
+    ),
     keeper('Già che ti piacciono le figure: il merciaio, su al mercato, tiene sotto il banco una carta con un tale in piedi davanti a un tavolo. Sul tavolo ha una coppa, una spada, un bastone e una moneta.'),
     keeper('Vuol dire che ha tutto quello che gli serve, e sa di averlo. Il merciaio invece non ha capito cos\'ha in mano, e una che sa guardare gliela troverebbe sotto il naso.'),
     flag('side.m01'),
@@ -107,6 +133,7 @@ export const C1 = {
   // ---- back to Malva: what the incense is to her, and errand 2
   'c1.back': [
     malva('Fammelo annusare un momento. Sì, ti ha dato quello buono: quando vuole fare il furbo ci mescola la segatura. Tienilo tu, che è tuo.'),
+    IF({ flag: 'shop.sniffed' }, [malva('Il nodo del sacchetto non è quello del bottegaio, quindi l\'hai annusato prima di me. Brava: a quello lì non si paga niente a scatola chiusa.')]),
     malva('Quando sono arrivata io a Salem avevo la tua età e una borsa più piccola della tua. La levatrice di allora mi mandò alla stessa bottega, la prima sera, e mi fece pagare di tasca mia.'),
     choice(
       o('E poi ti sei trovata bene, qui a Salem?', { esplora: 1 }, [
@@ -116,9 +143,20 @@ export const C1 = {
         malva('Appunto, e non farci l\'abitudine. È stata l\'ultima volta che pago qualcuno per sentirmi dire una cosa che sapevo già.'),
       ]),
     ),
+    // the gesture: a witch asks a card before something that matters (m14 upright: she sends her)
+    N('Prima di prendere il fagotto dalla madia, Malva gira una carta sul tavolo, per sé, e la guarda come si guarda il cielo prima di stendere il bucato.'),
+    malva('La Temperanza, e dritta. Parla della giusta misura, di mescolare con pazienza e di guarire: per un unguento non poteva uscire di meglio, quindi stasera si consegna.'),
     malva('Adesso un\'altra commissione, e poi ti lascio andare a dormire. Questo fagotto è per Tabita, la lavandaia: a quest\'ora la trovi col suo secchio davanti alla casa delle riunioni, nella parte alta del paese.'),
     malva('Dentro c\'è l\'unguento per le mani, che d\'inverno le si spaccano fino al sangue. Le ho fatto nascere sei figli e non mi ha mai dato una moneta, però il bucato di casa mia lo fa lei da vent\'anni.'),
     malva('La tua capanna è poco oltre, in cima alla strada che sale, proprio al limite del bosco. Ha un tetto, un letto e un tavolo, e per stanotte ti deve bastare.'),
+    choice(
+      o('Una capanna tutta per me? Non me l\'aspettavo.', { guida: 1 }, [
+        malva('Non farti illusioni, perché è storta e piena di spifferi. Però è tua, e a Salem una porta che si chiude da dentro vale più di una dote.'),
+      ]),
+      o('Chi ci abitava, prima di me?', { esplora: 1 }, [
+        malva('Una ragazza come te, che poi è andata a stare nel bosco e da allora parla dalla mattina alla sera. Il nome non te lo dico: lo capirai da sola appena apre bocca.'),
+      ], { flag: 'malva.hutstory' }),
+    ),
     malva('Ti dico un\'ultima cosa: di notte girano i conestabili con le lanterne, e alle ragazze sole fanno domande, perché sono convinti che una ragazza perbene risponda senza esitare.'),
     malva('Se capita anche a te non scappare e non agitarti: pensa alle carte che hai guardato stasera e rispondi con calma. Quelle le sai già meglio di loro.'),
     diary('Malva mi ha dato un fagotto da portare alla lavandaia Tabita, nella parte alta del paese. La mia capanna è poco più su.'),
@@ -127,8 +165,19 @@ export const C1 = {
 
   // ---- errand 2: the washerwoman in front of the meeting house (she speaks through the narrator)
   'c1.deliver': [
-    N('Davanti alla casa delle riunioni una donna rompe il ghiaccio in un secchio con il manico della spazzola. Ha le mani rosse e screpolate, e quando vede il fagotto capisce subito chi ti manda.'),
-    N('«Sei la ragazza di Malva! Dammi qua, che lo aspetto da domenica. Quella donna mi ha fatto nascere sei figli senza volere un grazie, e adesso mi manda pure l\'unguento a casa.»'),
+    T('Per tutta la salita ho tenuto il fagotto sotto il braccio, e per tutta la salita mi sono chiesta che cosa ci fosse dentro. Malva ha detto unguento, ma Malva dice sempre soltanto metà delle cose.'),
+    choice(
+      o('Lo consegno così com\'è, senza slegarlo.', { esplora: -1 }, [
+        N('Davanti alla casa delle riunioni una donna rompe il ghiaccio in un secchio con il manico della spazzola. Ha le mani rosse e screpolate, e quando vede il fagotto capisce subito chi ti manda.'),
+        N('«Sei la ragazza di Malva! Dammi qua, che lo aspetto da domenica. E il nodo è ancora il suo, guarda: sei la prima che me lo porta senza averci messo il naso.»'),
+      ], { flag: 'bundle.closed' }),
+      o('Prima slego un angolo, per vedere cosa porto.', { esplora: 1 }, [
+        T('Dentro c\'è un barattolo che sa di lanolina e di rosmarino, e nient\'altro. Rifaccio il nodo meglio che posso, anche se quello di Malva era più stretto del mio.'),
+        N('Davanti alla casa delle riunioni una donna rompe il ghiaccio in un secchio con il manico della spazzola. Ha le mani rosse e screpolate, e prima ancora di salutarti guarda il nodo del fagotto.'),
+        N('«Sei la ragazza di Malva, e questo nodo l\'hai rifatto tu: i suoi non si slegano nemmeno coi denti. Non fare quella faccia, che al posto tuo ci avrei guardato dentro anch\'io.»'),
+      ], { flag: 'bundle.peeked' }),
+    ),
+    N('«Quella donna mi ha fatto nascere sei figli senza volere un grazie, e adesso mi manda pure l\'unguento a casa.»'),
     choice(
       o('«Malva dice che il suo bucato lo fate voi da vent\'anni.»', { parola: 1 }, [
         N('«Da ventuno, se è per questo, e non le ho mai fatto pagare un fazzoletto. Tra noi due funziona così: lei non ringrazia e io non presento il conto.»'),
@@ -141,7 +190,15 @@ export const C1 = {
     N('«Mia nonna diceva che è la carta di chi insegna le regole e di chi le impara. Il pastore sfoglia quel libro ogni domenica e non se n\'è mai accorto, il che la dice lunga.»'),
     flag('side.m05'),
     N('Prima di tornare al suo secchio ti mette in mano tre monete. «Queste sono per la strada che hai fatto. L\'unguento a Malva lo pago in lenzuola.»'),
-    coins(3),
+    choice(
+      o('«Grazie, le tengo volentieri: mi servono.»', { guida: -1 }, [
+        N('«Brava, che i soldi rifiutati non hanno mai scaldato nessuno.» Ti chiude le dita sulle monete con le sue, che sono fredde e ruvide come la corda del pozzo.'),
+        coins(3),
+      ]),
+      o('«Tenetele voi: la strada era corta, e avete sei figli.»', { guida: 1 }, [
+        N('«Sette, con mio marito.» Si rimette le monete in tasca senza insistere, e ti guarda come si guarda un lenzuolo steso bene. «Allora ti devo un bucato, e io i debiti li pago.»'),
+      ], { flag: 'tabita.owes' }),
+    ),
     diary('Ho portato l\'unguento alla lavandaia Tabita. Dice che nella Bibbia grande della casa delle riunioni è nascosta una carta.'),
     xp(5),
     step('c1.cottage'),
@@ -169,6 +226,7 @@ export const C1 = {
         cat('Brava, vedo che hai capito con chi hai a che fare. Il pane che hai in borsa me lo prendo da solo più tardi, quando dormi.'),
       ], { flag: 'cat.proud', tag: tg('m08', 'w') }),
     ),
+    IF({ flag: 'cat.shout' }, [cat('E ti ringrazio di non aver più strillato, dopo la prima volta sulla strada. Ho le orecchie delicate, anche se a guardarmi non si direbbe.')]),
     cat('Ti conviene tenermi, comunque. Le carte nascoste le sento dall\'odore, come i topi, e i conestabili li sento ancora prima: se mi vedi il pelo dritto sulla schiena, ne sta arrivando uno.'),
     cat('Hai un quaderno, in quella borsa? Io al posto tuo mi siederei al tavolo e ci scriverei le carte di stasera, prima che una notte di sonno te le porti via.'),
     diary('Ho una capanna al limite del bosco, e dentro c\'era già Tartufo, che ha un\'opinione su tutto.'),
@@ -181,7 +239,19 @@ export const C1 = {
     open('grimoire.open', { tab: 'io' }),
     cat('Hai una bella calligrafia, per una con le dita gelate. Io non so leggere, ma le figure le capisco, e quel ragazzo col fagotto in prima pagina ha qualcosa di tuo.'),
     N('Qualcuno bussa alla porta. Sono tre colpi leggeri, come fa chi spera di non essere sentito dai vicini.'),
-    cat('A quest\'ora bussano soltanto quelli che di giorno si vergognano. Falli sedere qui e fai come hai fatto da Malva: una domanda, una carta.'),
+    choice(
+      o('Vado ad aprire subito.', { rischio: 1 }, [
+        N('Apri mentre la mano è ancora alzata per il quarto colpo. Sulla soglia c\'è una donna con uno scialle nero, che fa un passo indietro come se non si aspettasse di essere sentita.'),
+        IF({ flag: 's0.knock' }, [T('Alla Lettrice ho detto che davanti a una porta chiusa busso. Stasera hanno bussato alla mia, e ho aperto con la stessa fretta che vorrei dagli altri.')]),
+        cat('(Hai aperto prima che finisse di bussare, e l\'hai spaventata tu. Per una volta le parti si sono invertite, e non mi dispiace.)'),
+      ], { flag: 'door.opened' }),
+      o('Prima guardo dalla finestra chi è.', { rischio: -1 }, [
+        N('Dalla finestra vedi una donna con uno scialle nero, che si guarda alle spalle a ogni respiro. Quando le apri ha già il rosario in mano, e ti ringrazia con gli occhi di non averla fatta aspettare oltre.'),
+        IF({ flag: 's0.window' }, [T('Alla Lettrice ho detto che prima di entrare cerco una finestra. A quanto pare la cerco anche prima di aprire, e non me n\'ero mai accorta.')]),
+        cat('(Hai guardato prima di aprire, come una che a Salem ci vive da anni. Quella è la vedova Bray, comunque, e non ha mai morso nessuno.)'),
+      ], { flag: 'door.window' }),
+    ),
+    cat('A quest\'ora bussano soltanto quelli che di giorno si vergognano. Falla sedere qui e fai come hai fatto da Malva: una domanda, una carta.'),
     xp(5),
     step('c1.client'),
   ],

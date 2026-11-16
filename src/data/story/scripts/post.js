@@ -1,7 +1,7 @@
 // Optional encounters that reward wandering (a worry, a rumour that leads to a card, a little xp),
 // the small cards in the tall grass (the first Minor, the first duplicate, swapping with Ginepra) and
 // the lines after the ending. Villagers speak through the narrator, in «».
-import { N, T, ginepra, cat, cop, o, tg, choice, IF, xp, coins, flag, tool, open, sp } from '../h.js';
+import { N, T, ginepra, cat, cop, o, tg, choice, IF, xp, coins, flag, tool, open, sp, trust } from '../h.js';
 
 const reward = (k) => [xp(5), flag(`enc.${k}`)];
 
@@ -48,6 +48,11 @@ export const POST = {
       ], { tag: tg('m03', 'p') }),
     ),
     N('«Comare Malva è brusca, sì, ma con questo unguento domani ho le mani nuove. Dille che il bucato di questa settimana glielo porto stirato.»'),
+    IF({ flag: 'tabita.owes' }, [
+      N('«E il mio debito l\'ho pagato: guarda sul tuo letto, c\'è una coperta di lana lavata e stirata. A Malva ho detto che le monete non le hai volute, e lei ha fatto finta di non sentire.»'),
+      trust('malva', 1),
+    ]),
+    IF({ flag: 'bundle.peeked' }, [N('«E la prossima volta che guardi in un fagotto, il nodo fallo doppio, che te lo insegno io. Con sei figli ho imparato a richiudere tutto senza che si veda.»')]),
     ...reward('washer'),
   ],
   'enc.hale': [
@@ -60,6 +65,7 @@ export const POST = {
         N('Ti sorride anche lei. Ha ancora le mani che tremano un poco, e le nasconde sotto il grembiule.'),
       ], { tag: tg('m14', 'c') }),
     ),
+    IF({ flag: 'b1.candles' }, [N('«Le hai raccolte tu dalla neve, una per una, e hai rimesso in piedi anche me. Una cosa così non si paga, ma lasciami almeno provare.»')]),
     N('Nel pacchetto c\'è dell\'incenso, di quello buono, che calma i nervi a chi lo respira. Hale lo sa meglio di chiunque altro, dopo quella sera.'),
     tool('incense', 1),
     ...reward('hale'),
@@ -100,7 +106,13 @@ export const POST = {
       o('«Finché macina, lasciatela girare come vuole.»', { guida: -1 }, [
         N('«È quello che diceva mio nonno, parola per parola. Tu sei sicura di non essere di qui?»'),
       ]),
+      // special: she has seen the wheel from above
+      sp('broom', [{ power: 'broom' }, { flag: 'lesson.fly' }], '«Dall\'alto l\'ho guardata bene: gira al contrario davvero.»', { tono: 1 }, [
+        N('«Dall\'alto l\'hai guardata?» Guarda il cielo, poi la scopa, poi di nuovo te. «Allora siamo in due a saperlo, e l\'altra è una strega. A mia moglie lo racconto stasera, e vediamo chi è che beve.»'),
+      ]),
     ),
+    IF({ flag: 'client.c2.miller.done' }, [N('«A proposito di mia moglie: Prudenza è venuta da te a farsi leggere le carte, lo so. Da allora non dice più che bevo; dice che la ruota "segue il suo tempo", e non so se è meglio.»')]),
+    IF({ flag: 'mill.read' }, [N('«E il debito di mio nonno col vecchio pastore l\'ho pagato, sai, dopo che mi hai letto la ruota. Gira ancora al contrario, però cigola meno.»')]),
     ...reward('miller'),
   ],
   'enc.guard': [
@@ -108,10 +120,14 @@ export const POST = {
     choice(
       o('«Sono il fantasma del pozzo. Torna a dormire.»', { rischio: 1 }, [
         cop('Ah, buonasera, signor fantasma. Io non ho visto niente e non ho sentito niente, e se me lo chiedono giuro che ero sveglio.'),
-      ], { tag: tg('m18', 'c') }),
+      ], { flag: 'guard.ghost', tag: tg('m18', 'c') }),
       o('«Continuate pure a pensare. Io passo, e non disturbo.»', { rischio: -1 }, [
         cop('La ringrazio, signorina. Pensare stanca molto, sa, e non tutti lo capiscono. Lei mi sembra una persona comprensiva.'),
       ], { tag: tg('m00', 'w') }),
+      // special: the air of the Swords, used kindly
+      sp('magic', { power: 'stun' }, 'Gli soffio addosso un filo d\'aria, perché si riaddormenti tranquillo.', { tono: 1 }, [
+        N('Il conestabile sbatte le palpebre due volte e si riappoggia al muro del pozzo. Parla lo stesso, ma con gli occhi chiusi, come chi racconta un sogno a qualcuno che non c\'è.'),
+      ], { flag: 'guard.asleep' }),
     ),
     cop('Già che è qui, le dico perché non dormo. Dalla palude, di notte, vengono su due cani che abbaiano alla luna, e in mezzo al fango c\'è un sentiero che passa tra due torri.'),
     cop('In fondo a quel sentiero qualcuno ha visto una carta. Mia nonna diceva che con la luna le cose non sono mai come sembrano, e che metà della paura uno se la fa da solo. Io comunque non ci vado.'),
@@ -126,6 +142,14 @@ export const POST = {
     IF({ power: 'cat' },
       [cat('Questa è una delle piccole. Ce ne sono cinquantasei, sparse nell\'erba di tutta Salem, e parlano dei giorni qualunque. Conviene raccoglierle, perché i giorni qualunque sono quasi tutti.')],
       [T('Dev\'essere una delle cinquantasei piccole di cui parlava Malva, quelle dei giorni qualunque. Questa la tengo io.')]),
+    IF({ notFlag: 'minor.first' }, [choice(
+      o('La infilo nel mazzo, insieme alle grandi.', { guida: 1 }, [
+        T('Sta un po\' stretta tra una figura e l\'altra, ma non stona. In fondo anche le mie giornate sono fatte più di cose piccole che di cose solenni.'),
+      ]),
+      o('La tengo da parte, finché non capisco che cos\'è.', { guida: -1 }, [
+        T('La metto nella tasca davanti della borsa, da sola. Prima voglio vederne altre due o tre, e capire se hanno una regola.'),
+      ]),
+    )]),
     IF({ flag: 'met.ginepra' }, [T('Ginepra ne avrà già un mucchio, conoscendola. Appena la vedo gliela faccio vedere.')]),
     flag('minor.first'),
   ],

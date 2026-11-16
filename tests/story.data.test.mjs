@@ -12,7 +12,7 @@ const ANCHORS = new Set(Object.keys(allAnchors()));
 const COND_KEYS = new Set(['flag', 'notFlag', 'chapter', 'chapterMin', 'chapterMax', 'step', 'stepIn', 'has', 'lacks', 'majorsMin',
   'level', 'power', 'spread', 'trust', 'stat', 'yourCard', 'birthCard', 'sign', 'word', 'tool', 'coinsMin', 'not', 'any',
   'trait', 'trend', 'steady', 'turned', 'torn', 'verdict', 'yourCardIsBirth', 'hasBirth', 'hasYear', 'element', 'modality', 'moon', 'bornOn',
-  'pop', 'tartufo', 'explored', 'title']); // 16 Nov
+  'pop', 'tartufo', 'explored', 'title', 'wrote']); // 16 Nov
 const TOKENS = new Set(['name', 'sign', 'birthCard', 'yourCard', 'title', 'level', 'stat', 'word', 'words', 'card', 'trust', 'season', 'coins', 'majors', 'picked',
   'pickedId', 'pickedNumber', 'traits', 'trait', 'lastVerdict', 'element', 'modality', 'ruler', 'rulerCard', 'birthDay', 'dayPlanet', 'dayPlanetCard', 'moon']);
 const ACTIONS = new Set(['giveCard', 'draw', 'teach', 'lesson', 'reading', 'exam', 'session', 'xp', 'coins', 'flag', 'trust', 'point',
@@ -21,7 +21,7 @@ const AXES = ['esplora', 'parola', 'tono', 'rischio', 'guida'];
 const POWERS = new Set(['cat', 'fire', 'sense', 'move', 'stun', 'broom']);
 const TOOLS = new Set(['bottle', 'incense', 'pendulum']);
 // conversations she can repeat at will: their options carry no trait (it could be farmed)
-const REPEATABLE = new Set(['malva.chat', 'ortica.chat', 'edera.chat', 'trade.ginepra', 'post.ginepra', 'minors.lesson', 'reversed.lesson']); // + the practice questions of the two lessons
+const REPEATABLE = new Set(['malva.chat', 'ortica.chat', 'edera.chat', 'trade.ginepra', 'post.ginepra', 'minors.1.lesson', 'minors.2.lesson', 'minors.3.lesson', 'minors.4.lesson', 'minors.5.lesson', 'reversed.lesson']); // + the lessons with practice questions
 const SPEAKERS = new Set([...Object.keys(PEOPLE), 'tu', 'narra']);
 const STEP_IDS = new Set(STEPS.map((s) => s.id));
 const CLIENT_IDS = new Set(CLIENTS.map((c) => c.id));
@@ -107,7 +107,8 @@ test('every action is known and its ids exist', () => {
 
 test('choice tags point at real cards and suits', () => {
   for (const [n, w] of nodes()) if (n.choice) for (const o of n.choice) {
-    if (o.tag) { assert.ok(CARD[o.tag.card], `${w}: tag ${o.tag.card}`); assert.ok(['w', 'c', 's', 'p'].includes(o.tag.suit), `${w}: suit ${o.tag.suit}`); }
+    if (typeof o.tag === 'string') assert.ok(o.special && /^\[.+\]$/.test(o.tag), `${w}: a string tag is the label of a special answer: ${o.tag}`);
+    else if (o.tag) { assert.ok(CARD[o.tag.card], `${w}: tag ${o.tag.card}`); assert.ok(['w', 'c', 's', 'p'].includes(o.tag.suit), `${w}: suit ${o.tag.suit}`); }
     if (o.trust) for (const k of Object.keys(o.trust)) assert.ok(['malva', 'ortica', 'edera', 'ginepra'].includes(k), `${w}: trust ${k}`);
   }
 });

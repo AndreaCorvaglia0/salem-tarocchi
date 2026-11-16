@@ -148,6 +148,8 @@ export const SESSIONS = {
       say({ has: 'm03' }, "All'Imperatrice, quando l'hai trovata, hai dato tre parole tue: {words:m03}. Le ho lette, e mi hanno detto qualcosa anche di te."),
       say(true, "La prima sera avevi una carta sola, e adesso ne hai {majors}. Comincia a essere un mazzo vero."),
     ] },
+    IF(F('door.window'), [R("La prima sera mi hai detto come ti comporti davanti a una porta chiusa. Poi hanno bussato alla tua, e prima di aprire sei andata a guardare dalla finestra: l'ho saputo, e l'ho messo accanto a quella risposta.")]),
+    IF(F('door.opened'), [R("La prima sera mi hai detto come ti comporti davanti a una porta chiusa. Poi hanno bussato alla tua, e hai aperto prima che finissero di bussare: l'ho saputo, e l'ho messo accanto a quella risposta.")]),
     R("Stasera vorrei capire che cosa conta per te. Non te lo chiedo direttamente, perché a quella domanda rispondono tutte allo stesso modo."),
     { symbol: 'coin' }, // smoke: what is worth something
     R("Mettiamo che tu abbia una sera tutta per te, senza niente da fare per forza. La passi con qualcuno, oppure te la tieni per te?"),
@@ -232,6 +234,8 @@ export const SESSIONS = {
       say({ has: 'm13' }, "Alla Morte, quando l'hai trovata, hai dato tre parole tue: {words:m13}. Le ho rilette stasera, prima che arrivassi."),
       say(true, "Hai {majors} carte, adesso, e quando sei entrata nel bosco ne avevi molte meno. È stata una buona stagione, fino a stanotte."),
     ] },
+    IF(F('arrest.hid'), [R("So anche che quella notte, dietro la legnaia, qualcuno ti ha stretto la mano al buio. Non te lo dico per farti male: te lo dico perché certe mani poi si vanno a riprendere.")]),
+    IF(F('plan.lookout'), [R("Quella notte sei rimasta fuori a fare il palo, mi dicono, e hai fischiato in tempo. Restare a guardare una porta è più faticoso che entrarci, e non tutte lo sanno.")]),
     R("Stasera vorrei parlare di quello che ti fa paura. Niente di grave: mi interessano le paure piccole, quelle di tutti i giorni, perché dicono molto di una persona."),
     { symbol: 'moon' }, // smoke: the night
     R("Immagina di camminare da sola, di notte, per una strada che non conosci. Ti mette più a disagio un rumore che non capisci, o un silenzio troppo lungo?"),
@@ -319,6 +323,8 @@ export const SESSIONS = {
       say({ has: 'm17' }, "Alla Stella, quando l'hai trovata, hai dato tre parole tue: {words:m17}. Stasera mi sembrano scritte apposta."),
       say(true, "Hai {majors} carte, ormai, e il mazzo è quasi intero. Quello che manca lo tengo io ancora per un po'."),
     ] },
+    IF(F('court.card'), [R("In aula hai detto la tua carta ad alta voce, davanti al Giudice. Io te la dico sottovoce da un anno; sentirla dire da te, e in quel posto, mi ha fatto un certo effetto.")]),
+    IF(F('coven.cat.in'), [R("Mi dicono che davanti al Giudice avevi un gatto sotto il mantello. Non so se ti abbia aiutata a rispondere, ma chi si porta dietro un amico in un posto così di solito sa perché lo fa.")]),
     { observe: [
       say([F('s0.knock'), F('b3.open')], "La prima sera mi hai detto che davanti a una porta chiusa bussi. Al processo hai fatto proprio così: ti sei presentata a viso aperto, dalla porta grande."),
       say([F('s0.knock'), F('b3.stealth')], "La prima sera mi hai detto che davanti a una porta chiusa bussi. Da Ginepra però sei arrivata di nascosto, dalle cantine: stavolta hai cercato la finestra."),
