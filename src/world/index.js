@@ -10,6 +10,7 @@
 //   world.canFly()       { ok, why }: why 'inside' | 'under' | 'fog' | 'cell' | 'busy' | 'seen' (world.where() also says fog)
 //   world.fly(anchor)    the broom: true if she flew (only to a seen outdoor anchor, from where she may take off)
 //   world.travel(anchor, { by: 'broom' }) the same check through travel
+//   world.escape({ from?, to, seconds? }) a pursuer behind her, a place ahead to reach: 'safe' | 'caught'
 import Phaser from 'phaser';
 import { provide } from '../core/services.js';
 import { state } from '../core/state.js';
@@ -19,6 +20,7 @@ import { mountControls } from './controls.js';
 import { senseRadius } from '../core/progress.js';
 import { sensedFrom } from './hidden.js';
 import { flyFrom, canLandOn } from './fly.js';
+import { runEscape } from './escape.js';
 
 let game = null, guideRef = null, missionRef = null;
 const scene = () => game?.scene.getScene('World') || null;
@@ -142,6 +144,13 @@ export function stranger(spec) {
   return s.stranger.show(spec);
 }
 provide('world.stranger', (spec) => Promise.resolve(stranger(spec)));
+// The escape of a trial (src/world/escape.js): a pursuer behind her, a glowing place ahead. -> 'safe' | 'caught'
+export async function escape({ from = null, to = 'auto', seconds = null } = {}) {
+  if (from) await travel(from);
+  const s = live();
+  return s ? runEscape(s, { to, seconds }) : 'safe';
+}
+provide('world.escape', (o) => escape(o || {}));
 provide('world.refresh', () => { live()?.refresh(); return Promise.resolve(); });
 
 // For harness pages and screenshots only.

@@ -14,5 +14,7 @@ import './bonds.js'; // popularity, Tartufo's points and treats, the tracked sid
 import './selfread.js'; // the diary of readings: client readings kept, readings for herself saved
 import './wire.js'; // fog, small cards, obstacles, trading, the last hints
 import './lessons.js'; // the lessons as missions (flying, Minors, reversed) and the chapter card
+import './trials.js'; // asking the cards, the trials, the library (src/trials)
+import './witches.js'; // affinity and bond with the witches, their page
 import './debug.js'; // ?debug only: window.__salem and ?skip=
 export { bootSkip } from './debug.js';

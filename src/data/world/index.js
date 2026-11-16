@@ -7,5 +7,6 @@ import meeting from './meeting.js';
 import shop from './shop.js';
 import forest from './forest.js';
 import depths from './depths.js';
+import library from './library.js'; // the trials' library (src/trials)
 
-export const DEFS = [village, malva, cottage, court, meeting, shop, forest, depths];
+export const DEFS = [village, malva, cottage, court, meeting, shop, forest, depths, library];

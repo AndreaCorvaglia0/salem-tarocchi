@@ -47,6 +47,15 @@ export const fresh = () => ({
   track: null,
   // the diary of readings (glue/selfread.js): [{ at, who, question, spread, cards, closing, note, real }], newest first
   readings: [],
+  // the logic of 16 Nov afternoon (docs/DESIGN.md "La logica del gioco, ridefinita"): the bond with each witch
+  // (core/witches.js; old saves start from trust in migrate), the trials played (src/trials: id -> { result,
+  // errors, day, at }), the library (topic -> when it was last studied; topic -> the day it last gave xp),
+  // the trial a witch or Tartufo has "sensed" (its study list is suggested in the library)
+  bonds: {},
+  trials: {},
+  studied: {},
+  studiedXp: {},
+  trialSense: null,
 });
 
 const merge = (base, saved) => {
@@ -67,6 +76,10 @@ export const migrate = (s) => {
   if (typeof s.extras !== 'object' || !s.extras || Array.isArray(s.extras)) s.extras = {};
   if (typeof s.track !== 'string') s.track = null;
   if (!Array.isArray(s.readings)) s.readings = [];
+  for (const k of ['bonds', 'trials', 'studied', 'studiedXp']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {};
+  if (typeof s.trialSense !== 'string') s.trialSense = null;
+  // the bond with a witch starts from the trust she had (core/witches.js carryTrust: same rule)
+  for (const w of ['malva', 'ortica', 'edera', 'ginepra']) if (!Number.isFinite(s.bonds[w])) s.bonds[w] = Math.max(0, Math.round(Number(s.trust?.[w]) || 0));
   // the old power table: seals and the far sight are gone (sealed things open with a question)
   if (s.powers) for (const k of ['seals', 'sense2', 'light2']) delete s.powers[k];
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job

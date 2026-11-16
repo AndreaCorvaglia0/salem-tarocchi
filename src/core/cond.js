@@ -19,6 +19,10 @@
 //   added 16 Nov: { pop: 2 } (popularity level >= 2)  { tartufo: 1 } (Tartufo level >= 1)
 //   { explored: 12 } (distinct places seen, state.stats.seen, >= 12)
 //   { title: 'fattucchiera' | 'strega' | 'gran maestra' } (her rank at least that; same as { level: 4 } / { level: 7 })
+//   the witches (core/witches.js): { affinity: { malva: 2 } } (at least)  { bond: { ortica: 3 } } (level at least)
+//   { attitude: { edera: 'brontola' } } ('pari' | 'prova' | 'brontola' | 'fredda')
+//   the trials (src/trials): { trial: 'demo' } (done: passed, or a main one played)  { trial: ['demo', 'fail'] }
+//   (that outcome)  { trialPending: true } (a real trial is open now)  { studied: 'm13' } (studied in the library)
 //   birth:  { hasBirth: true } { hasYear: true } { element: 'Fuoco' } { modality: 'fisso' }
 //           { moon: 'piena' } { bornOn: 'giovedì' }   (moon and weekday need the year: false without it)
 //
@@ -29,6 +33,9 @@
 import { state as live } from './state.js';
 import { CARD, SIGNS, SIGN_LORE, PLANET_CARD, weekdayOf, moonOf } from '../data/cards.base.js';
 import { popLevel, tartufoLevel } from './bonds.js';
+import { affinityOf, bondOf, attitudeOf } from './witches.js';
+import { TRIALS } from '../data/trials/index.js';
+import { trialDone } from '../trials/run.js';
 import { levelOf, titleOf, yourCard, hasCard, majorsFound, seasonOfBirth, traitWord, traitWords, lastSnapshot, lastVerdict } from './progress.js';
 
 const signOfState = (s) => SIGNS.find((x) => x.id === s.player?.sign) || null;
@@ -84,6 +91,12 @@ const TESTS = {
   tartufo: (v, s) => tartufoLevel(s) >= v,
   explored: (v, s) => Object.keys(s.stats?.seen || {}).length >= v,
   title: (v, s) => { const k = String(v).toLowerCase(); return k === 'gran maestra' ? !!s.flags?.['ending.seen'] : levelOf() >= (TITLE_LEVEL[k] ?? Infinity); },
+  affinity: (v, s) => Object.entries(v || {}).every(([w, n]) => affinityOf(w, s) >= n),
+  bond: (v, s) => Object.entries(v || {}).every(([w, n]) => bondOf(w, s) >= n),
+  attitude: (v, s) => Object.entries(v || {}).every(([w, a]) => attitudeOf(w, s) === a),
+  trial: (v, s) => { const [id, res] = Array.isArray(v) ? v : [v]; const d = TRIALS[id]; if (!d) return false; return res ? s.trials?.[id]?.result === res : trialDone(d, s); },
+  trialPending: (v, s) => sameBool(v, Object.values(TRIALS).some((d) => !d.debug && !trialDone(d, s) && test(d.when, s))),
+  studied: (v, s) => !!s.studied?.[v],
   not: (v, s) => !test(v, s),
   any: (v, s) => v.some((c) => test(c, s)),
 };

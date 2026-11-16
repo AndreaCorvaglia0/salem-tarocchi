@@ -128,6 +128,10 @@ export function createRunner({ ui, call, getScript = () => null, ext = null, war
     cinema: (n) => askSafe(() => ui.cinema((n.lines || []).map(F), n)),
     wait: (n) => askSafe(() => ui.sleep(n.ms ?? 600)),
     goto: (n) => ({ goto: n.script }),
+    // the trials (glue/trials.js): { do: 'witchDraw', who, card, rev, t }, { do: 'trial', id }, { do: 'bond', who, n }
+    witchDraw: (n) => call('trial.witchDraw', { who: n.who, card: n.card, rev: n.rev, t: F(n.t) }),
+    trial: (n) => call('trial.start', n.id),
+    bond: (n) => call('witches.bond', n.who, n.n, n.why),
   };
 
   async function action(node) {

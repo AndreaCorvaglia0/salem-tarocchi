@@ -102,6 +102,7 @@ export default {
     trapdoor: [37, 17, 'La botola'],
     well: [20, 21, 'Il pozzo'],
     lane: [19, 32, 'Il vicolo di sotto'],
+    library_door: [30, 8, 'La biblioteca'], // the slate house of the upper village (data/world/library.js)
     reeds: [1, 20, "L'erba alta"],
     arrest_a: [2, 9, 'Conestabile'], arrest_b: [7, 9, 'Conestabile'], arrest_c: [5, 11, 'Conestabile'], // round the cottage door (c2.arrest)
   },
@@ -110,6 +111,7 @@ export default {
     { at: 'cottage_door', to: 'cottage.door' },
     { at: 'court_door', to: 'court.door' },
     { at: 'meeting_door', to: 'meeting.door' },
+    { at: 'library_door', to: 'library.door', when: { chapterMin: 1 }, refuse: 'La porta è chiusa, e dentro non c\'è nessuna luce.' },
     { at: 'shop_door', to: 'shop.door', when: { flag: 'shop.open' }, refuse: 'La porta nera è chiusa. Dietro, qualcuno ride piano.' },
     { at: 'forest_gate', to: 'forest.entry', look: 'gate', when: { chapterMin: 2 }, refuse: 'Il cancello è ghiacciato. Il bosco aspetta.' },
     { at: 'trapdoor', to: 'depths.entry', look: 'trapdoor', when: { chapterMin: 3 }, refuse: 'La botola non si muove. Sotto, qualcosa respira.' },
