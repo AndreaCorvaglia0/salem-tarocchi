@@ -23,11 +23,12 @@ function rivals(step, { pool, rng, verso }) {
     if (id === step.card) continue;
     for (const rev of verso ? [false, true] : [false]) { const s = side(id, rev); if (s) out.push({ card: id, rev, d: far(me, s) }); }
   }
-  let ranked = shuffle(out, rng).sort((a, b) => b.d - a.d);
+  const mixed = shuffle(out, rng);
   // two faces that say nearly the same thing (two beginnings, two endings) are never offered against each other,
-  // as long as enough clearly different ones exist
-  const clear = ranked.filter((r) => r.d >= 2);
-  if (new Set(clear.map((r) => r.card)).size >= 2) ranked = clear;
+  // as long as enough clearly different ones exist. Among the clearly different ones the choice is random:
+  // always taking the furthest would show the same two extreme cards every time.
+  const clear = mixed.filter((r) => r.d >= 2);
+  const ranked = new Set(clear.map((r) => r.card)).size >= 2 ? clear : [...mixed].sort((a, b) => b.d - a.d);
   const one = []; const seenCard = new Set(); // one face per card
   for (const r of ranked) if (!seenCard.has(r.card)) { seenCard.add(r.card); one.push(r); }
   return verso && side(step.card, !step.rev) ? [{ card: step.card, rev: !step.rev, d: 9 }, ...one] : one;
