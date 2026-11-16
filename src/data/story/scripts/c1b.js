@@ -2,8 +2,9 @@
 // glass, the square (fork 1), the gate to the forest (cards and rank), Malva at home.
 import {
   bell, N, T, malva, ginepra, cat, cop, say, o, tg, choice, IF, xp, flag, diary, step, chapter, travel, give,
-  exam, session, cinema, point, visit,
+  exam, session, cinema, point, visit, sp,
 } from '../h.js';
+import { chapterCard } from '../h.js';
 
 const FRANK = { trait: ['parola', '>=', 3] };
 const WARY = { trait: ['parola', '<=', -3] };
@@ -95,6 +96,15 @@ export const C1B = {
       o('È il bianco di un uovo, Ginepra, e nient\'altro.', { guida: -1 }, [
         ginepra('Hai ragione, è un uovo. Un uovo che ha fatto una bara. Me lo ripeto finché ci credo, e tu intanto parlami d\'altro.'),
       ], { tag: tg('m01', 's') }),
+      // special answers: two other ways to get rid of that shape
+      sp('tartufo', { tartufo: 1 }, 'Faccio un cenno a Tartufo, che sa già cosa fare.', { rischio: 1 }, [
+        N('Tartufo salta sul davanzale, annusa il bicchiere e lo spinge oltre il bordo con una zampa sola, guardandoti negli occhi mentre lo fa. Nella neve resta soltanto una macchia chiara.'),
+        ginepra('Ah ah, l\'ha fatto apposta, hai visto come ti guardava? Meglio lui di noi due: un gatto nero che rovescia una bara porta bene per forza, o almeno io ho deciso così.'),
+      ], { trust: { ginepra: 1 } }),
+      sp('magic', { power: 'fire' }, 'Ci passo sopra la fiammella, finché quella forma si scioglie.', { tono: 1 }, [
+        N('Apri la mano sopra il bicchiere, e la fiammella scalda l\'acqua finché l\'albume si rapprende in un grumo bianco, che non somiglia più a niente.'),
+        ginepra('Adesso è un uovo cotto male, e di un uovo cotto male non ha mai avuto paura nessuno. Me lo insegni, quel fuoco lì? Ortica dice che a me verrà tardi, perché non sto mai ferma.'),
+      ], { trust: { ginepra: 1 } }),
     ),
     ginepra('I patti sono patti: Il Carro è tuo, perché l\'avevi visto prima tu. Però te lo dico adesso, così dopo non ti offendi: la prossima carta che troviamo insieme la prendo io.'),
     give('m07'),
@@ -173,6 +183,7 @@ export const C1B = {
         ], { trust: { malva: 1 }, tag: tg('m06', 'c') }),
       ),
       diary('Ho lasciato il villaggio per il bosco. Malva mi ha accompagnata al cancello e ha fatto finta di guardare altrove.'),
+      chapterCard(2), // black screen, the title of the chapter that opens (story/chapter.js)
       session('s1'),
       chapter(2),
       xp(10),

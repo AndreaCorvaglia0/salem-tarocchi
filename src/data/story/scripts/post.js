@@ -1,7 +1,7 @@
 // Optional encounters that reward wandering (a worry, a rumour that leads to a card, a little xp),
 // the small cards in the tall grass (the first Minor, the first duplicate, swapping with Ginepra) and
 // the lines after the ending. Villagers speak through the narrator, in «».
-import { N, T, ginepra, cat, cop, o, tg, choice, IF, xp, flag, tool, open } from '../h.js';
+import { N, T, ginepra, cat, cop, o, tg, choice, IF, xp, coins, flag, tool, open, sp } from '../h.js';
 
 const reward = (k) => [xp(5), flag(`enc.${k}`)];
 
@@ -15,6 +15,18 @@ export const POST = {
       o('Gli faccio la faccia più spaventosa che so fare.', { tono: -1 }, [
         N('Scappa urlando fino all\'angolo della via. Poi torna indietro, piano, ti tira il mantello e ti chiede di rifarla.'),
       ], { tag: tg('m18', 'c') }),
+      // special answers: two ways to show him that she is a witch, and he pays like for a show
+      sp('magic', { power: 'fire' }, 'Gli accendo una fiammella sul palmo, e gliela faccio vedere.', { rischio: 1 }, [
+        N('Il bambino guarda la fiamma senza fiatare, poi guarda te, e fa un passo indietro e due avanti. «Allora sei una strega vera! Non lo dico a nessuno, giuro, nemmeno alla nonna.»'),
+        N('Poi fruga in tasca e ti mette in mano due monete calde. «Per vedere le streghe vere si paga, lo dice anche il pastore, soltanto che lui lo dice arrabbiato.»'),
+        coins(2),
+      ]),
+      sp('tartufo', { tartufo: 1 }, 'Gli faccio accarezzare Tartufo, che sbuffa ma lo lascia fare.', { esplora: 1 }, [
+        N('Tartufo si lascia toccare con l\'aria di chi fa un favore a tutto il villaggio. «È un gatto nero, ed è tuo! Allora sei una strega davvero, e sull\'ombra la nonna si sbagliava.»'),
+        cat('(Diglielo tu, che non sono di nessuno. Anzi no, lascia stare: ha le mani calde e sa dove grattare, per essere uno così piccolo.)'),
+        N('Prima di lasciarti andare ti apre la mano e ci mette due monete calde di tasca. «Queste sono per il gatto, non per te.»'),
+        coins(2),
+      ]),
     ),
     IF({ lacks: 'm02' }, [
       N('«Io un segreto lo so. Dietro la tenda della sarta c\'è una figura con una signora seduta tra due colonne, che tiene un rotolo sulle ginocchia e non lo fa leggere a nessuno.»'),
@@ -61,6 +73,13 @@ export const POST = {
       o('«Vi serve una mano con quella vanga?»', { tono: 1 }, [
         N('«Hai le mani da strega, non da becchino, e qui la terra è dura. Però è la prima volta che qualcuno me lo chiede, e ti ringrazio.»'),
       ], { tag: tg('m09', 'p') }),
+      // special answer: he is afraid of cats, and pays to have this one kept away
+      sp('tartufo', { tartufo: 1 }, 'Lascio che Tartufo gli si strusci contro gli stivali.', { tono: -1 }, [
+        N('Il becchino diventa bianco come le sue lapidi e alza la vanga tra sé e il gatto. «Portalo via, per carità! Seppellisco la gente da trent\'anni, ma quelle bestie mi guardano come se sapessero la data.»'),
+        cat('(La so, infatti, ma non gliela dico. Intanto che trema fatti pagare il disturbo: è la prima volta che la mia faccia rende qualcosa.)'),
+        N('Ti allunga tre monete tenendole per il bordo, senza staccare gli occhi da Tartufo. «Queste sono per il disturbo di tenerlo dall\'altra parte del cancello.»'),
+        coins(3),
+      ]),
     ),
     IF({ power: 'cat' }, [
       N('Mentre parla tiene d\'occhio Tartufo, e fa mezzo passo indietro ogni volta che il gatto muove la coda.'),
@@ -152,6 +171,17 @@ export const POST = {
       o('Scambiamo i doppioni, con calma.', null, [
         ginepra('Con calma, va bene. Io non so bene cosa voglia dire, ma tu fai strada e io ti vengo dietro, per una volta.'),
         open('trade.open'),
+      ]),
+      // special answers: a race on the brooms, and a walk with one who knows every corner
+      sp('broom', [{ power: 'broom' }, { flag: 'lesson.fly' }], 'Facciamo a gara in volo, fino al mulino e ritorno.', null, [
+        ginepra('In volo, contro di me? Guarda che da quando ho quella scopa ho perso soltanto due cappelli, e uno l\'ho anche ritrovato.'),
+        ginepra('Ah ah, hai vinto tu, e non lo dico a nessuno. Però il mulino da sopra l\'hai guardato anche tu? La ruota gira al contrario davvero, e adesso lo sappiamo in tre.'),
+      ]),
+      sp('explore', { explored: 25 }, 'Ti porto io dove cercare: ormai conosco ogni angolo di Salem.', null, [
+        ginepra('Ogni angolo, senti questa! E va bene, fai strada tu, che io gli angoli li conosco soltanto di corsa, mentre scappo da qualcuno.'),
+        IF({ notFlag: 'post.shared' },
+          [ginepra('Lo vedi che in due si fa prima? Tieni, queste le ho trovate io mentre guardavi dall\'altra parte: facciamo a metà, come le persone serie.'), coins(4), flag('post.shared')],
+          [ginepra('Oggi non ho trovato una moneta nemmeno a cercarla, ma ho visto tre posti che non conoscevo. Per una che corre sempre, è già un bel bottino.')]),
       ]),
     ),
     T('Sono una Gran Maestra, e passo le giornate a fare a gara con la mia amica nell\'erba alta. Mi sembra che vada benissimo così.'),

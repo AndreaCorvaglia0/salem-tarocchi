@@ -3,8 +3,9 @@
 // Also: Ortica at home, and the thick fog of the deep wood that sends her back.
 import {
   bell, N, T, ortica, ginepra, cat, cop, o, tg, choice, IF, xp, coins, flag, diary, step, draw, teach, lesson,
-  session, cinema, wait, trust, visit,
+  session, cinema, wait, trust, visit, tool, sp,
 } from '../h.js';
+import { chapterCard } from '../h.js';
 
 const CURIOUS = { trait: ['esplora', '>=', 3] };
 const STRAIGHT = { trait: ['esplora', '<=', -3] };
@@ -230,6 +231,7 @@ export const C2 = {
     flag('ginepra.taken'),
     diary('Hanno portato via Ginepra. Ha detto «Sono io» ai conestabili, perché non prendessero me.'),
     xp(10),
+    chapterCard(3), // black screen, the title of the chapter that opens (story/chapter.js)
     session('s2'),
     step('c3.trapdoor'),
   ],
@@ -242,7 +244,7 @@ export const C2 = {
         [ortica('Ginepra dice che al fuoco le hai promesso una cosa, e non ha voluto dirmi quale. Cioè, me l\'ha detta subito, ma le ho promesso di fare finta di niente.')],
         [ortica('Il mugnaio giura che la ruota del mulino gira al contrario. Sua moglie dice che è lui che beve. Io li ho ascoltati tutti e due per un pomeriggio, e non ho ancora deciso.')])]),
     IF({ level: 7 }, [ortica('Adesso che sei una strega fatta dovrei stare zitta e ascoltare te. Ci provo, eh. Comincia pure tu, che io resisto finché posso.')]),
-    IF([{ power: 'broom' }, { notFlag: 'ortica.broom' }], [
+    IF([{ power: 'broom' }, { flag: 'lesson.fly' }, { notFlag: 'ortica.broom' }], [
       ortica('Ti ho vista passare sopra i faggi a cavallo della scopa! Io la mia non la uso più da quando ho perso il cappello sopra il mulino, ma tu vai, vai: dall\'alto il bosco è tutto un altro pettegolezzo.'),
       flag('ortica.broom'),
     ]),
@@ -261,6 +263,24 @@ export const C2 = {
         ortica('Ah, quella nebbia lì! È vecchia, sta lì da prima di me. Si apre soltanto con l\'aria, che è la magia delle Spade, e l\'aria si fa aspettare: prima vengono il fuoco dei Bastoni e l\'acqua delle Coppe.'),
         ortica('Io ci ho messo undici anni, ma io parlavo troppo e mi mancava il fiato. A te verrà quando sarai una strega fatta, e allora con un soffio sposterai la nebbia, e anche qualche conestabile.'),
       ], { when: { flag: 'fog.lost' } }),
+      // special answers: what the wood looks like from above, and a Strega who makes her listen
+      sp('broom', [{ power: 'broom' }, { flag: 'lesson.fly' }], 'Dall\'alto ho visto il bosco intero: dimmi tu che cosa mi è sfuggito.', null, [
+        ortica('Dall\'alto si vede tutto tranne quello che conta, perché le carte stanno sotto le foglie! Però hai fatto bene a chiedere, che io il bosco lo conosco dal basso, sasso per sasso.'),
+        IF({ lacks: 'm08' },
+          [ortica('Allora ti dico della tana, a nord della mia capanna, dove il sentiero finisce. Dentro c\'è una carta con una donna che chiude la bocca a un leone con due dita, senza bisogno di gridare.')],
+          [IF({ lacks: 'm14' },
+            [ortica('Allora ti dico della fonte, in alto a levante, oltre lo stagno. Sul bordo c\'è una carta con un angelo che versa l\'acqua da una coppa all\'altra, e non ne perde una goccia.')],
+            [ortica('Per la verità non ti è sfuggito niente, perché le carte grosse che so io le hai già trovate tutte. Restano le piccole nell\'erba, e di quelle non tiene il conto nessuno.')])]),
+      ]),
+      sp('rank', { title: 'strega' }, 'Stavolta siediti tu, Ortica: ti racconto io una cosa.', null, [
+        ortica('A me, una storia? Aspetta che mi siedo, perché l\'ultima volta che qualcuno mi ha raccontato qualcosa ero in piedi, e mi sono dovuta appoggiare al muro.'),
+        IF({ notFlag: 'ortica.listened' }, [
+          ortica('Ho ascoltato fino in fondo e non ti ho interrotta nemmeno una volta. Va bene, due, ma la seconda era per darti ragione. Tieni questa bottiglia, che l\'ho tappata io: con lei addosso i conestabili guardano altrove.'),
+          tool('bottle', 1), trust('ortica', 1), flag('ortica.listened'),
+        ], [
+          ortica('Ho ascoltato fino in fondo anche stavolta, e comincio a prenderci gusto. Non dirlo al merlo, però, che poi lo racconta a tutto il bosco e mi rovina la fama.'),
+        ]),
+      ]),
     ),
   ],
 

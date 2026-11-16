@@ -21,7 +21,7 @@ const AXES = ['esplora', 'parola', 'tono', 'rischio', 'guida'];
 const POWERS = new Set(['cat', 'fire', 'sense', 'move', 'stun', 'broom']);
 const TOOLS = new Set(['bottle', 'incense', 'pendulum']);
 // conversations she can repeat at will: their options carry no trait (it could be farmed)
-const REPEATABLE = new Set(['malva.chat', 'ortica.chat', 'edera.chat', 'trade.ginepra', 'post.ginepra']);
+const REPEATABLE = new Set(['malva.chat', 'ortica.chat', 'edera.chat', 'trade.ginepra', 'post.ginepra', 'minors.lesson', 'reversed.lesson']); // + the practice questions of the two lessons
 const SPEAKERS = new Set([...Object.keys(PEOPLE), 'tu', 'narra']);
 const STEP_IDS = new Set(STEPS.map((s) => s.id));
 const CLIENT_IDS = new Set(CLIENTS.map((c) => c.id));

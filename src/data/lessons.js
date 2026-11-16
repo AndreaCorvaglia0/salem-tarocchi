@@ -1,8 +1,22 @@
-// The six lessons of the mistresses (deck, single, ppf, celtic, suits, astro), each a few short pages.
+// The lessons of the mistresses (deck, single, ppf, celtic, suits, astro, and the two key lessons added
+// on 16 Nov: minors and reversed), each a few short pages.
 // A page may show a spread (`spread`) or some cards (`cards`). Italian. These are pages to study from,
 // so the register is the handbook's: plain paragraphs of whole, linked sentences (docs/WRITING.md),
 // with a touch of the voice of who teaches: Malva brisk and practical, Ortica talkative, Edera slow,
 // kind and bad with names.
+// The grid of the Minors (four suits, ten numbers, four court ranks) is written out from
+// data/reading/grid.js, one line each, so the page and the reading engine never disagree.
+import { SEMI, NUMERI, FIGURE } from './reading/grid.js';
+
+const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+const NOMI = ['Asso', 'Due', 'Tre', 'Quattro', 'Cinque', 'Sei', 'Sette', 'Otto', 'Nove', 'Dieci'];
+// "Coppe, l'acqua: il cuore. Quello che senti: affetti, legami, desideri."
+const ART = { fuoco: 'il fuoco', acqua: "l'acqua", aria: "l'aria", terra: 'la terra' };
+const semi = ['w', 'c', 's', 'p'].map((k) => `${SEMI[k].nome}, ${ART[SEMI[k].elemento]}: ${SEMI[k].dove}. ${cap(SEMI[k].idea)}.`).join('\n');
+// "Cinque, scossa: qualcosa si rompe;" (one line per number, a single sentence from the Ace to the Ten)
+const numeri = `${NOMI.map((n, i) => `${n}, ${NUMERI[i + 1].parola}: ${NUMERI[i + 1].idea.split(/[:,]/)[0]}`).join(';\n')}.`;
+// "Regina: chi custodisce. La padronanza dentro: cura, sensibilità, maturità."
+const figure = [11, 12, 13, 14].map((n) => `${FIGURE[n].nome}: ${FIGURE[n].parola}. ${cap(FIGURE[n].idea)}.`).join('\n');
 
 export const LESSONS = [
   {
@@ -55,6 +69,24 @@ export const LESSONS = [
       { h: 'I sette pianeti', body: "Sette carte hanno un pianeta. Il Mago è Mercurio, che governa la mente e le parole. La Sacerdotessa è la Luna, cioè l'intuito, e l'Imperatrice è Venere, cioè l'amore e il piacere. La Ruota è Giove, che porta espansione e fortuna, mentre la Torre è Marte, che porta azione e scontro. Il Sole è il Sole, naturalmente, e vuol dire vita. Il Mondo è Saturno, che dà i limiti e porta le cose a compimento.", cards: ['m01', 'm02', 'm03', 'm10', 'm16', 'm19', 'm21'] },
       { h: 'I dodici segni', body: "Dodici carte hanno un segno, e per ricordarle basta seguire l'ordine dell'anno, dalla primavera all'inverno. L'Imperatore è l'Ariete, il Papa il Toro, gli Amanti i Gemelli, il Carro il Cancro, la Forza il Leone e l'Eremita la Vergine. Allo stesso modo la Giustizia è la Bilancia, la Morte lo Scorpione, la Temperanza il Sagittario, il Diavolo il Capricorno, la Stella l'Acquario e la Luna i Pesci.", cards: ['m04', 'm05', 'm06', 'm07', 'm08', 'm09', 'm11', 'm13', 'm14', 'm15', 'm17', 'm18'] },
       { h: 'I tre elementi', body: "Restano tre carte, e a ciascuna corrisponde un elemento: il Matto è l'Aria, l'Appeso è l'Acqua e il Giudizio è il Fuoco. La Terra non ha una carta sua tra i Maggiori, e la ritrovi nel seme dei Denari. Quanto alla tua carta di nascita, è semplicemente quella del tuo segno: questa, almeno, ricordala tu al posto mio.", cards: ['m00', 'm12', 'm20'] },
+    ],
+  },
+  {
+    id: 'minors', title: 'Le carte piccole', by: 'ortica',
+    pages: [
+      { h: 'Un seme e un numero', body: "Le carte piccole sono cinquantasei, e non c'è bisogno di impararle una per una, perché ognuna è fatta di due pezzi. Il seme dice dove succede la cosa, cioè in quale parte della vita, e il numero dice che cosa succede lì. Prendi il Cinque di Coppe: il cinque vuol dire che qualcosa si rompe, le Coppe sono il cuore, e quindi è una perdita. Io l'ho capito tardi, e nel frattempo ne avevo imparate a memoria venti, tutte sbagliate.", cards: ['c05'] },
+      { h: 'I quattro semi: dove', body: `Il seme è la prima cosa da guardare, perché ti dice di quale parte della vita parla la carta.\n\n${semi}` },
+      { h: 'I dieci numeri: che cosa', body: `Il numero dice che cosa succede, ed è uguale in tutti e quattro i semi.\n\n${numeri}` },
+      { h: 'Le quattro figure: chi', body: `Le figure non dicono che cosa succede ma chi c'è: una persona vera, oppure un modo di stare nelle cose.\n\n${figure}\n\nPoi guarda il disegno, e vedi se avevi ragione.` },
+    ],
+  },
+  {
+    id: 'reversed', title: 'Le carte capovolte', by: 'edera',
+    pages: [
+      { h: 'La stessa carta', body: "Sei tornata a rileggere, cara, e fai bene, perché io queste cose le dico una volta e poi non ricordo più a chi. Una carta capovolta non dice il contrario di quella dritta: dice la stessa cosa, che però fatica a uscire. Può essere trattenuta, può arrivare in ritardo, può restare chiusa dentro la persona. Qualche volta succede l'inverso, e allora ce n'è troppa." },
+      { h: 'Una carta dura', body: "Il Diavolo, da dritto, parla di una dipendenza, cioè di catene che uno si è scelto. Capovolto è ancora il Diavolo e parla ancora di catene, ma la presa si è allentata, e chi lo riceve si sta liberando. Per questo una carta dura, quando esce capovolta, porta spesso un sollievo: il peso c'è ancora, però comincia a sollevarsi.", cards: ['m15'] },
+      { h: 'Una carta lieta', body: "Con le carte liete bisogna stare più attente. Il Sole, da dritto, è una gioia piena, in cui tutto è chiaro. Capovolto non diventa buio: la gioia c'è ancora, ma tarda ad arrivare, oppure è così esagerata che non ci si crede, e chi ha la carta davanti fa fatica a godersela. Avevo un cugino fatto così, che teneva le imposte chiuse con il sole in casa.", cards: ['m19'] },
+      { h: 'Come leggerle', body: "Quando una carta esce capovolta, per prima cosa ricordati che cosa dice da dritta. Poi chiediti che cosa le impedisce di stare dritta: se la cosa è trattenuta, se è in ritardo, se resta dentro la persona invece di uscire, oppure se è troppa. Di solito basta guardare le carte vicine per capirlo. E non spaventare nessuno, mi raccomando, perché una carta capovolta non è mai una condanna." },
     ],
   },
 ];

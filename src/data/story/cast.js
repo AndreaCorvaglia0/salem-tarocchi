@@ -3,6 +3,8 @@
 // (`r`: radius in tiles); 'npc' runs it when the player talks; 'prop' when she uses it (`verb` on the
 // action button). `once` = never again (remembered by id: entries that share an id share it).
 
+import { lessonOpen } from './missions.js';
+
 const notIn = (...steps) => ({ not: { stepIn: steps } });
 // the guided opening: nothing else is offered while these steps last
 const OPENING = ['p.session', 'p.road', 'c1.malva', 'c1.read', 'c1.shop', 'c1.back', 'c1.deliver', 'c1.cottage', 'c1.grimoire'];
@@ -49,12 +51,14 @@ export const CAST = [
 
   // ---- chapter 2
   { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: { step: 'c2.ortica' }, script: 'c2.ortica', label: 'Ortica' },
+  { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: lessonOpen('lesson.minors'), script: 'minors.lesson', label: 'Ortica' }, // the lesson on the small cards, once
   { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: [{ chapterMin: 2 }, { not: { step: 'c2.ortica' } }], script: 'ortica.chat', label: 'Ortica' },
   { id: 'enc.miller', kind: 'npc', who: 'miller', at: 'forest.mill', when: { step: 'c2.mill' }, script: 'c2.mill', label: 'Il mugnaio' },
 
   // ---- chapter 3
   { id: 'trapdoor', kind: 'zone', at: 'village.trapdoor', when: [{ chapter: 3 }, { not: { step: 'c3.trapdoor' } }], script: 'c3.trapdoor.again', label: 'La botola' },
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: { step: 'c3.edera' }, script: 'c3.edera', label: 'Nonna Edera' },
+  { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: lessonOpen('lesson.reversed'), script: 'reversed.lesson', label: 'Nonna Edera' }, // the lesson on reversed cards, once
   { id: 'edera', kind: 'npc', who: 'edera', at: 'depths.edera_nook', when: { chapterMin: 3 }, script: 'edera.chat', label: 'Nonna Edera' },
   // the three mistresses wait round the cauldron when the council can meet (the zone in front of the cauldron plays the scene)
   ...['malva', 'ortica', 'edera'].map((who) => ({ id: `coven.${who}`, kind: 'npc', who, at: `depths.coven_${who}`, when: [{ step: 'c3.coven' }, { majorsMin: 19 }], script: 'coven.wait', face: 'down', label: who === 'edera' ? 'Nonna Edera' : who === 'malva' ? 'Malva' : 'Ortica' })),
@@ -67,6 +71,9 @@ export const CAST = [
   { id: 'shop.counter', kind: 'prop', at: 'shop.counter', script: 'prop.shop', label: 'Il bancone', verb: 'Compra' },
   { id: 'court.deposit', kind: 'prop', at: 'court.deposit', script: 'prop.deposit', label: 'Il deposito', verb: 'Cerca' },
   { id: 'cottage.bed', kind: 'prop', at: 'cottage.bed', when: [{ chapterMin: 1 }, notIn(...OPENING)], script: 'prop.bed', label: 'La carta del giorno', verb: 'Pesca' },
+
+  // ---- the flying lesson (data/story/missions.js): Malva comes to her door when she has the broom
+  { id: 'fly.lesson', kind: 'zone', at: 'village.malva_door', r: 1, when: lessonOpen('lesson.fly'), script: 'fly.lesson', label: 'La lezione di volo' },
 
   // ---- optional encounters (reward wandering: xp 5, a rumour, sometimes a side mission)
   { id: 'enc.child', kind: 'npc', who: 'child', at: 'village.shop_door', when: [{ chapterMin: 1, chapterMax: 3 }, notIn(...OPENING)], script: 'enc.child', once: true, label: 'Un bambino' },

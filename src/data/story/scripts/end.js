@@ -2,8 +2,9 @@
 // Every epilogue line is gated on what really happened (flags, trust, stats, the tasks she gave).
 import {
   bell, N, T, malva, ortica, edera, ginepra, cat, judge, o, tg, choice, IF, xp, flag, diary, step, chapter,
-  travel, give, exam, session, cinema, goto,
+  travel, give, exam, session, cinema, goto, sp,
 } from '../h.js';
+import { chapterCard } from '../h.js';
 
 const BOLD = { trait: ['rischio', '>=', 3] };
 
@@ -86,6 +87,11 @@ export const END = {
       o('Stammi dietro, fai quello che faccio io e non guardare giù.', { rischio: -1 }, [
         ginepra('Ti sto dietro, ti sto dietro. Però ti avverto: se cado, dico a tutti che l\'idea era tua.'),
       ], { tag: tg('m07', 'w') }),
+      // special answer: she passes on what Malva taught her in the garden
+      sp('broom', { flag: 'lesson.fly' }, 'Ti dico quello che Malva ha detto a me: tienila bassa, e pensa a un posto che conosci.', { parola: 1 }, [
+        ginepra('Bassa e vicina, e un posto che conosco. Allora penso al bivacco, che l\'ho acceso io e me lo ricordo bene: se arrivo da un\'altra parte, la colpa è di Malva.'),
+        ginepra('Aspetta, ma allora Malva vola? Ah ah, questa me la devi raccontare tutta, appena siamo in aria e non può sentirci.'),
+      ], { trust: { ginepra: 1 } }),
     ),
     IF({ flag: 'fire.carriage' }, [ginepra('Te l\'avevo letto al fuoco, che avremmo fatto un viaggio noi due! Ho sbagliato soltanto la carrozza, e il colore, e la Ruota. Il resto era giusto.')]),
     IF({ flag: 'fire.promised' }, [ginepra('Al fuoco avevi detto che saresti venuta subito. Ci hai messo un po\', ma sei venuta, e adesso io a te credo per sempre.')]),
@@ -152,6 +158,7 @@ export const END = {
         ginepra('Ah ah, scusa, rido perché se no piango. Vai, dai, che ti aspetta. Ti voglio bene, e adesso vai davvero.'),
       ], { trust: { ginepra: 1 }, tag: tg('m07', 'c') }),
     ),
+    chapterCard(4), // black screen, the title of the chapter that opens (story/chapter.js)
     session('s4'),
     flag('ending.seen'),
     chapter(4),

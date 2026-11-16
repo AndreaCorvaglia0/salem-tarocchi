@@ -3,7 +3,7 @@
 // the cellars or in the open), the jail or the court door.
 import {
   bell, N, T, malva, ortica, edera, ginepra, cat, judge, o, tg, choice, IF, xp, flag, diary, step, chapter, travel,
-  draw, teach, lesson, cinema, goto, trust, visit,
+  draw, teach, lesson, cinema, goto, trust, visit, sp,
 } from '../h.js';
 
 // the hidden Majors of the cellars (Il Sole, Il Giudizio, Il Mondo come from the story)
@@ -186,6 +186,27 @@ export const C3 = {
         ginepra('Sto bene, davvero. Il pane è di pietra e il topo l\'ho chiamato Giudice, perché mangia le candele, ah ah. Dai, apri, che se continuo a parlare mi metto a piangere.'),
         N('Ti metti al lavoro sulla serratura, che alla fine cede con un cigolio lunghissimo.'),
       ], { trust: { ginepra: 1 }, tag: tg('m14', 'c') }),
+      // special answers: four other ways to open the same grate, without that creak
+      sp('magic', { power: 'move' }, 'Chiedo ai cardini di farsi da parte, come si chiede a una pietra.', { esplora: -1 }, [
+        N('Posi la mano sul ferro e glielo chiedi piano, come hai imparato a fare con le radici. I cardini escono dal muro senza un rumore, e la grata si apre da sola, dalla parte sbagliata.'),
+        ginepra('Ma l\'hai aperta dai cardini! Ah ah, e io che in due giorni ho consumato una forcina sulla serratura. Insegnamelo, eh, appena siamo fuori di qui.'),
+        xp(5),
+      ]),
+      sp('tartufo', { tartufo: 2 }, 'Mando Tartufo a prendere le chiavi dal chiodo, in fondo al corridoio.', { rischio: 1 }, [
+        N('Tartufo sparisce nel buio senza fare domande. Torna dopo un momento con l\'anello delle chiavi tra i denti, e lo posa ai tuoi piedi come poserebbe un topo.'),
+        cat('(La guardia dorme con la bocca aperta, e le chiavi stavano appese sopra la sua testa. Non ringraziarmi adesso, che i conti li facciamo a casa.)'),
+        xp(5),
+      ]),
+      sp('witch', [{ flag: 'coven.ortica.talk' }, { trust: ['ortica', '>=', 2] }], 'Fischio piano verso la scala, come mi ha insegnato Ortica.', { tono: 1 }, [
+        N('Dall\'alto arriva la voce di Ortica, che chiede a una guardia di farle vedere com\'è fatto un mazzo di chiavi. Un momento dopo l\'anello scende dalla grata dell\'aria, legato a un filo d\'erba.'),
+        ginepra('Quella è Ortica, la riconosco dal nodo, che li fa tutti storti! Ah ah, apri, svelta, prima che ricominci a raccontare e si dimentichi di noi.'),
+        xp(5),
+      ]),
+      sp('pop', { pop: 2 }, 'Busso piano alla porta del carceriere: a sua moglie ho letto le carte.', { parola: 1 }, [
+        N('Il carceriere apre uno spiraglio, ti riconosce e resta un momento a pensare. Poi stacca una chiave dall\'anello, te la mette in mano e richiude la porta, come se non ti avesse vista.'),
+        ginepra('Ti ha dato la chiave così, senza una parola? Ah ah, io qui dentro ho fatto amicizia con un topo, e tu là fuori con mezza Salem.'),
+        xp(5),
+      ]),
     ),
     N('Alle vostre spalle qualcuno si schiarisce la voce. È una voce gentile, di quelle che chiedono scusa prima ancora di disturbare.'),
     judge('Buonasera a voi, signorine. Non correte, ve ne prego: questi gradini sono bagnati, e mi dispiacerebbe se una di voi si facesse male.'),
@@ -244,6 +265,24 @@ export const C3 = {
       o('Mi racconti ancora del Giudice?', null, [
         edera('Da bambino mangiava le candele della chiesa e chiedeva scusa al sagrestano. Da grande spegne le persone, e chiede scusa anche a loro. È sempre stato un ragazzo molto educato.'),
         IF({ notFlag: 'edera.told' }, [trust('edera', 1), flag('edera.told')]),
+      ]),
+      // special answers: the cat on her lap, and the cellars walked from end to end
+      sp('tartufo', { tartufo: 2 }, 'Ti lascio Tartufo sulle ginocchia, finché parliamo.', null, [
+        edera('Che bel gatto, e come sta composto. Lui si chiama Tartufo, vedi che questo me lo ricordo? I nomi delle bestie mi restano, e sono quelli dei cristiani che scappano.'),
+        cat('(Ha le ginocchia calde e non mi liscia il pelo al contrario. Resto qui finché non avete finito, e se vi dilungate non sarò io a lamentarmi.)'),
+        IF({ notFlag: 'edera.cat' }, [trust('edera', 1), flag('edera.cat')]),
+      ]),
+      sp('explore', { explored: 20 }, 'Ho girato tutte le cantine: dimmi tu se ho dimenticato un angolo.', null, [
+        edera('Tutte è una parola grossa, cara, perché queste gallerie sono più vecchie di me, e io sono vecchia. Però si vede che hai camminato: hai ancora la polvere sull\'orlo del mantello.'),
+        IF({ lacks: 'm15' },
+          [edera('Alle catene non ti sei fermata abbastanza. Sono dalla parte opposta alla mia, in fondo a tutte le gallerie, e il Diavolo sta lì, dove senti il ferro che batte contro il muro.')],
+          [IF({ lacks: 'm16' },
+            [edera('La Torre l\'hai lasciata indietro. Sta oltre la sala del calderone, scendendo, dove la galleria si allarga e dall\'alto cade ancora qualche pietra.')],
+            [IF({ lacks: 'm17' },
+              [edera('La Stella è nel pozzo vecchio, sotto questa mia nicchia. Scendi dritta, e quando senti l\'acqua guarda in fondo, perché luccica anche senza luna.')],
+              [IF({ lacks: 'm18' },
+                [edera('Ti manca la palude, che è in fondo a tutto, oltre la Torre. La Luna sta lì, tra due torri piccole, e i cani che senti abbaiare non mordono nessuno.')],
+                [edera('Di carte quaggiù non te ne manca nessuna, e te lo dico con una punta d\'invidia. Io per trovarle tutte ci ho messo undici inverni, e avevo le gambe buone.')])])])]),
       ]),
     ),
   ],

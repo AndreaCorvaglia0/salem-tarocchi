@@ -21,6 +21,7 @@ export const HINTS = {
   rank: "Per crescere leggi le carte ai clienti, ripassa quelle che hai e cercane di nuove: la barra in alto dice quanto manca.",
   side: "Sulla mappa del grimorio è comparso un appunto a matita: è una traccia in più, da seguire se ti va.",
   fly: "Adesso sai volare: apri la mappa nel grimorio e tocca un posto all'aperto che hai già visto.",
+  lesson: "Nel grimorio, alla pagina della mappa, c'è una missione nuova: toccala per seguirla.",
   trade: "Tocca un tuo doppione e poi la carta di Ginepra che vuoi in cambio.",
 };
 export const HINTS_KEYS = {

@@ -336,6 +336,8 @@ export const OPENERS = [
   once('st.guida+', [{ steady: 'guida' }, hi('guida')], "Decidi ancora col cuore, ho notato. Le carte con quelle come te parlano volentieri, perché non devono farsi strada tra troppi ragionamenti."),
   once('st.guida-', [{ steady: 'guida' }, lo('guida')], "Continui a ragionare su tutto prima di decidere. Alle carte farai domande difficili, e sono curiosa di sentire che cosa ti risponderanno."),
 
+  once('tartufo', { tartufo: 3 }, "Quel gatto ti viene dietro anche quando non hai niente in mano, mi dicono. Tartufo non si è mai affezionato a nessuna, quindi o sei cambiata tu o è cambiato lui, e io scommetterei su di te."),
+  once('pop', { pop: 2 }, "Il tuo nome ormai gira per Salem, e arriva anche qui prima di te. Chi viene letta da te ne parla bene, e vorrei capire che cosa trova al tuo tavolo che non trova al mio."),
   once('malva', { trust: ['malva', '>=', 2] }, "Ho saputo che Malva ha cominciato a fidarsi di te. Lei non te lo dirà mai, e proprio per questo te lo dico io."),
   once('ortica', { trust: ['ortica', '>=', 2] }, "Ortica parla bene di te. Lei parla di tutti, è vero, ma quando parla bene di qualcuna è una notizia."),
   once('edera', { trust: ['edera', '>=', 2] }, "Edera si fida di te, anche se il tuo nome continua a sfuggirle. Da lei è il massimo che si possa avere."),

@@ -19,6 +19,9 @@ export const opt = (t, card, suit, then = [], extra = {}) => ({ t, ...(card ? { 
 // trait axes (positive pole first): esplora curiosa/dritta, parola schietta/accorta, tono gentile/pungente,
 // rischio audace/prudente, guida cuore/testa. One point at a time, one or two axes.
 export const o = (t, trait, then = [], extra = {}) => ({ t, ...(trait ? { trait } : {}), then, ...extra });
+// a special answer (story/special.js): sp('tartufo', { tartufo: 1 }, 'Testo.', { tono: 1 }, [nodes], { tag, trust })
+// kind: 'pop' | 'rank' | 'magic' | 'broom' | 'tartufo' | 'witch' | 'explore' | 'trait'; shown only when `when` holds
+export const sp = (special, when, t, trait, then = [], extra = {}) => ({ t, special, when, ...(trait ? { trait } : {}), then, ...extra });
 export const tg = (card, suit) => ({ card, suit }); // a tag for `extra`: { tag: tg('m07', 'w') }
 export const choice = (...options) => ({ choice: options });
 export const IF = (cond, then, els) => (els ? { if: cond, then, else: els } : { if: cond, then });
@@ -50,6 +53,8 @@ export const wait = (ms = 600) => ({ do: 'wait', ms });
 export const visit = { do: 'visit' }; // a short visit of the Reader (composed by the narrative from the untold cards)
 export const keeper = (t) => say('bottegaio', t);
 export const open = (name, ...args) => ({ do: 'call', name, ...(args.length ? { args } : {}) }); // a service by name
+// the card that opens a chapter, right before the Reader's long session (data/story/chapters.js)
+export const chapterCard = (n) => ({ do: 'call', name: 'story.chapterCard', args: [n] });
 export const goto = (script) => ({ do: 'goto', script });
 
 // "her card did not move from the birth card": one pair per sign card
