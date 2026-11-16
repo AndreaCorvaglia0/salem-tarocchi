@@ -23,6 +23,20 @@ async function play() {
   await call('hud.mount');
 }
 
+// A newer build is out: load it, once (the address changes, so no cache answers with the old page).
+async function upToDate() {
+  try {
+    if (typeof __BUILD__ === 'undefined' || !/^https?:/.test(location.protocol) || /localhost|127\.0\.0\.1/.test(location.hostname)) return;
+    const r = await Promise.race([fetch(`./version.json?t=${Date.now()}`, { cache: 'no-store' }), new Promise((_, no) => setTimeout(no, 4000))]);
+    const v = (await r.json())?.v;
+    if (!v || v === __BUILD__ || sessionStorage.getItem('salem-upd') === v) return;
+    sessionStorage.setItem('salem-upd', v);
+    const u = new URL(location.href); u.searchParams.set('v', v);
+    location.replace(u.href);
+    await new Promise(() => {}); // the page is leaving
+  } catch { /* offline, or no such file: play what is here */ }
+}
+
 async function start() {
   if (await bootSkip()) { freeze(); return play(); } // ?debug&skip=c2|c3|trial
   const pick = await call('title.open');
@@ -32,4 +46,4 @@ async function start() {
   if (!state.started) { state.started = true; save(); }
   return play();
 }
-start().catch((e) => console.error('[main]', e));
+upToDate().then(start).catch((e) => console.error('[main]', e));

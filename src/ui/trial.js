@@ -113,7 +113,7 @@ export async function askScreen(decision, { title = 'Chiedi alle carte', who = n
   scr.set(rule, help, h('div.tr-big.tr-in', c.el), opts);
   await sleep(60); c.up();
   await sleep(700);
-  const buttons = decision.options.map((o, i) => h('button.tr-o.tr-in', { type: 'button', onclick: () => choose(i) }, o.text));
+  const buttons = decision.options.map((o, i) => h('button.tr-o.tr-opt.tr-in', { type: 'button', onclick: () => choose(i) }, o.text));
   let choose;
   const k = await new Promise((res) => { choose = res; opts.append(...buttons); });
   const j = judge(decision, face, k);

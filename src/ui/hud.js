@@ -3,7 +3,7 @@
 // It listens to the bus: the step line changes with a stroke of red pencil, the bar fills, a level up
 // is a short full-width moment, "la tua carta" changing, a star, coins. hud.toast(text) for the rest.
 import { snd } from './sfx.js';
-import { h, css, openOverlay, cardUrl, reducedMotion } from '../core/dom.js';
+import { h, css, openOverlay, cardUrl, reducedMotion, holdTaps } from '../core/dom.js';
 import { on } from '../core/bus.js';
 import { call, has } from '../core/services.js';
 import { state, save } from '../core/state.js';
@@ -149,6 +149,8 @@ export function mountHud() {
   };
   const offs = [
     on('step', change),
+    // moments that must be read: for an instant nothing can be tapped away (core/dom.js holdTaps)
+    on('step', () => holdTaps(1400)), on('level:up', () => holdTaps(1900)),
     on('track', change),
     on('extra:done', change),
     on('xp', ({ n } = {}) => { drawLevel(); if (n > 0) slip.append(h('span.hud-plus', {}, `+${n}`)); setTimeout(() => slip.querySelector('.hud-plus')?.remove(), 1300); }),

@@ -39,3 +39,25 @@ export const isTouch = () => globalThis.matchMedia?.('(pointer: coarse)').matche
 export const isNarrow = () => globalThis.innerWidth < 720;
 export const reducedMotion = () => globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 export const cardUrl = (id) => `cards/${id}.webp`;
+
+// ---- taps that land by mistake (16 Nov) ---------------------------------------------------------------
+// She taps fast to move through the lines, and the last tap falls on an answer that has just appeared.
+// Two guards, both for real taps only (not for code or the keyboard shortcuts of the story):
+// - a button cannot be pressed in its first GUARD ms on the page (answers also fade in, so it reads as "arriving");
+// - holdTaps(ms): nothing can be tapped for a moment, for the things that must be read (a new level,
+//   the next thing to do).
+export const GUARD = 650;
+let heldUntil = 0;
+export const holdTaps = (ms = 1500) => { heldUntil = Math.max(heldUntil, (globalThis.performance?.now?.() || 0) + ms); };
+if (typeof document !== 'undefined' && typeof MutationObserver !== 'undefined') {
+  const born = new WeakMap();
+  const SEL = 'button,[role=button]';
+  const mark = (n) => { if (n.nodeType !== 1) return; const t = performance.now(); if (n.matches(SEL)) born.set(n, t); n.querySelectorAll(SEL).forEach((b) => born.set(b, t)); };
+  new MutationObserver((ms) => { for (const m of ms) m.addedNodes.forEach(mark); }).observe(document.documentElement, { childList: true, subtree: true });
+  const off = () => !!globalThis.__salemNoGuard;
+  const young = (e) => { const b = e.target?.closest?.(SEL); const t = b ? born.get(b) : null; return t != null && performance.now() - t < GUARD; };
+  const stop = (e) => { e.stopPropagation(); e.preventDefault(); };
+  document.addEventListener('click', (e) => { if (!e.isTrusted || off()) return; if (performance.now() < heldUntil || young(e)) stop(e); }, true);
+  for (const type of ['pointerdown', 'touchstart', 'mousedown', 'keydown']) document.addEventListener(type, (e) => { if (e.isTrusted && !off() && performance.now() < heldUntil) { e.stopPropagation(); if (type === 'keydown') e.preventDefault(); } }, true);
+  css('tap-guard', '@keyframes tap-arm{0%,55%{opacity:.4}100%{opacity:1}}.sy-opt,.ss-opt,.sx-opt,.tr-opt{animation:tap-arm .65s both}@media (prefers-reduced-motion:reduce){.sy-opt,.ss-opt,.sx-opt,.tr-opt{animation:none}}');
+}

@@ -43,7 +43,12 @@ export class Guide {
     const [bx, by] = [this.dest[0] * T + 8, this.dest[1] * T + 8];
     const pulse = 0.5 + 0.5 * Math.sin(time / 420);
     this.beacon.setVisible(true).setPosition(bx, by).setScale(0.7 + 0.35 * pulse).setAlpha(0.45 + 0.4 * pulse);
-    this.ring.setVisible(true).setPosition(bx, by - 14 - pulse * 3).setAlpha(0.6 + 0.4 * pulse);
+    // the star marks the place itself; when the way only leads to a door (the place is on another map) there
+    // is just the soft light, or it looks like something to pick up that cannot be taken
+    const here = String(this.target).split('.')[0] === this.map.id;
+    this.ring.setVisible(here);
+    if (here) this.ring.setPosition(bx, by - 14 - pulse * 3).setAlpha(0.6 + 0.4 * pulse);
+    else this.beacon.setScale(0.5 + 0.2 * pulse).setAlpha(0.3 + 0.25 * pulse);
     void px; void py;
     return [{ x: bx, y: by, r: 22 + 8 * pulse, a: 0.7 }];
   }
