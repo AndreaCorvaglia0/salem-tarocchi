@@ -131,7 +131,18 @@ export function ahead(n = 4) {
   return { x: r.left + (t[0] * 16 + 8 - v.x) * z, y: r.top + (t[1] * 16 + 8 - v.y) * z };
 }
 provide('world.ahead', (n) => Promise.resolve(ahead(n)));
+// Someone who stops her in the street (glue/street.js): spec { who, label, run } puts them on a road tile
+// near her (true) unless she is indoors, busy, or a patrol is near (false); null sends them away.
+// world.stranger() with no argument: is someone there now?
+export function stranger(spec) {
+  const s = live();
+  if (!s) return false;
+  if (spec === undefined) return s.stranger.here;
+  if (spec === null) { s.stranger.hide(); return false; }
+  return s.stranger.show(spec);
+}
+provide('world.stranger', (spec) => Promise.resolve(stranger(spec)));
 provide('world.refresh', () => { live()?.refresh(); return Promise.resolve(); });
 
 // For harness pages and screenshots only.
-export const debug = { scene: live, game: () => game, travel, where, anchors, hint, guide, ahead, sensed, canFly, fly };
+export const debug = { scene: live, stranger, game: () => game, travel, where, anchors, hint, guide, ahead, sensed, canFly, fly };

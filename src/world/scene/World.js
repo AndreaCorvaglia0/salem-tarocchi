@@ -27,6 +27,7 @@ import { Obstacles } from './obstacles.js';
 import { Fog } from './fog.js';
 import { Minors } from './minors.js';
 import { Sense } from './sense.js';
+import { Stranger } from './stranger.js';
 import { guideRoute } from '../guidepath.js';
 
 // sounds (notes/sound.md): the service may be missing (harness), then nothing plays
@@ -59,6 +60,7 @@ export class WorldScene extends Phaser.Scene {
     this.obstacles = new Obstacles(this, map); // before Things: it asks them what is solid
     this.things = new Things(this, map, this.built);
     this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.sense = new Sense(this, map);
+    this.stranger = new Stranger(this); // someone who stops her in the street (glue/street.js)
     if (this.things.solidAt(sx, sy)) { const [fx, fy] = this.freeNear(sx, sy, true); this.player.tx = fx; this.player.ty = fy; this.player.place(); }
     this.things.refresh(true);
     if (d.enter) this.things.zonesIn = new Set(); // sent here by a scene or the broom: zones under her start
@@ -171,6 +173,7 @@ export class WorldScene extends Phaser.Scene {
       if (m) cones.push(m);
     }
     this.watch(time, dt);
+    this.stranger.update(time);
     this.tartufo(time);
 
     const dark = map.isDark(p.tx, p.ty), short = dark || map.isGrass(p.tx, p.ty);

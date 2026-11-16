@@ -19,7 +19,7 @@ export const say = async (t, who = 'tu') => (has('story.say') ? call('story.say'
 
 export class Things {
   constructor(scene, map, built) {
-    Object.assign(this, { scene, map, npcs: new Map(), zonesIn: new Set(), lastRefuse: 0 });
+    Object.assign(this, { scene, map, npcs: new Map(), zonesIn: new Set(), lastRefuse: 0, extra: new Map() }); // extra: people not in CAST (scene/stranger.js)
     this.gates = built.gates; this.chests = built.chests;
     this.cards = MAJORS.filter((c) => c.spot && c.spot.startsWith(`${map.id}.`) && map.anchors[c.spot]).map((c) => {
       const a = map.anchors[c.spot];
@@ -47,6 +47,7 @@ export class Things {
       if (e.kind === 'npc') [x, y] = this.besideDoor(x, y);
       out.set(e.id, { ...e, x, y });
     }
+    for (const e of this.extra.values()) if (!out.has(e.id)) out.set(e.id, e);
     return [...out.values()];
   }
   refresh(first = false) {
@@ -126,7 +127,8 @@ export class Things {
       if (n.e.once) state.world.once[n.e.id] = true;
       save();
       emit('talk', { id: n.e.id, at: n.e.at }); // glue/traits.js
-      if (n.e.script) await call('story.run', n.e.script);
+      if (n.e.run) await n.e.run();
+      else if (n.e.script) await call('story.run', n.e.script);
     } else if (u.type === 'prop') {
       state.world.talked[u.e.id] = (state.world.talked[u.e.id] || 0) + 1;
       if (u.e.once) state.world.once[u.e.id] = true;
