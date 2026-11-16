@@ -11,6 +11,11 @@ import { closingFor } from './say.js';
 import { shuffle } from './rng.js';
 
 const side = (id, rev) => voice(id)?.[rev ? 'rev' : 'up'] || null;
+// Two ideas that share a key word ("festa", "vittoria", "fretta", "intuito") are too close to be offered against
+// each other. Key words: 5+ letters, compared on their first five, without accents; common words do not count.
+const COMMON = new Set(['quell', 'altri', 'altro', 'altra', 'senza', 'tropp', 'ancor', 'anche', 'sempr', 'tutto', 'tutti', 'prima', 'propr', 'nuovo', 'nuova', 'buone', 'buona', 'cuore', 'cose', 'persona', 'perso'].map((w) => w.slice(0, 5)));
+const keys = (t) => new Set(String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').split(/[^a-z]+/).filter((w) => w.length >= 5).map((w) => w.slice(0, 5)).filter((w) => !COMMON.has(w)));
+export const tooClose = (a, b) => { const A = keys(a); for (const k of keys(b)) if (A.has(k)) return true; return false; };
 // how far two card faces are: the further, the easier to tell apart
 const far = (a, b) => (a && b ? Math.abs((a.favore ?? 0) - (b.favore ?? 0)) + (a.moto !== b.moto ? 1 : 0) : 0);
 
@@ -21,7 +26,7 @@ function rivals(step, { pool, rng, verso }) {
   const out = [];
   for (const id of pool) {
     if (id === step.card) continue;
-    for (const rev of verso ? [false, true] : [false]) { const s = side(id, rev); if (s) out.push({ card: id, rev, d: far(me, s) }); }
+    for (const rev of verso ? [false, true] : [false]) { const s = side(id, rev); if (s && !tooClose(me?.essenza, s.essenza)) out.push({ card: id, rev, d: far(me, s) }); }
   }
   const mixed = shuffle(out, rng);
   // two faces that say nearly the same thing (two beginnings, two endings) are never offered against each other,
