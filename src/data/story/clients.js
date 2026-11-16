@@ -8,7 +8,7 @@ import { N, cat, IF, xp, flag, reading, step, visit, open } from './h.js';
 export const CLIENTS = [
   // the tutorial: Malva sits at her own table and plays the client
   { id: 'c0.malva', name: 'Comare Malva', look: 'treccia a corona, scialle verde, mani forti', chapter: 0,
-    question: 'Il bambino dei Proctor nascerà stanotte, o mi lasciano dormire?', ambito: 'altri', forma: 'sino', ref: { di: 'del bambino dei Proctor' }, theme: 'attesa',
+    question: 'Le mie erbe, quest\'anno, mi daranno da vivere, o lavoro per niente?', ambito: 'lavoro', forma: 'sino', ref: { di: 'delle tue erbe' }, theme: 'attesa',
     hello: 'Fai conto che io abbia bussato alla tua porta e che tu non mi conosca. Ho una domanda sola, e la risposta la voglio corta.',
     thanks: 'Per essere la prima volta non è andata male. Non ti ringrazio, lo sai, però il lume stanotte te lo lascio acceso.', pay: 0 },
   // chapter 1: one card

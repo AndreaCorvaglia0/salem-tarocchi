@@ -37,6 +37,7 @@ const CSS = `
 .fd-note b{color:${GOLD};font-weight:700}
 .fd-words{display:none;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:360px}
 .fd.writing .fd-words{display:flex;animation:gx-in .4s}
+.fd.writing{justify-content:flex-start;gap:8px;overflow:hidden auto}.fd.writing .fd-note,.fd.writing .fd-birth{display:none}.fd.writing .fd-top{min-height:0}
 .fd-words .row{display:flex;gap:8px;width:100%}
 .fd-words input{flex:1;min-width:0;min-height:46px;padding:2px 6px;border:0;border-bottom:2px solid #e9dcc088;background:transparent;color:#fff7e2;font:700 23px ${HAND};text-align:center;outline:none;border-radius:0}
 .fd-words input:focus{border-bottom-color:${GOLD}}
@@ -73,8 +74,7 @@ export function foundCeremony(id) {
   const words = h('div.fd-words', h('p', {}, 'Tre parole tue.'), h('div.row', inputs));
   const el = h('div.fd', { role: 'dialog', 'aria-label': `Hai trovato ${c.name}` }, top, stage, birth, note, words);
   const close = openOverlay(el);
-  inputs.forEach((x) => x.addEventListener('input', () => snd('write')));
-  let detail = null;
+  let detail = null, fit = null;
 
   return new Promise((resolve) => {
     (async () => {
@@ -101,8 +101,16 @@ export function foundCeremony(id) {
         await wait(1500);
       }
       // the words: the card steps back to leave room
-      const k = 0.62;
-      stage.style.width = `${Math.round(W * k)}px`; stage.style.height = `${Math.round(H * k)}px`;
+      // ...and stays in sight while she writes: the screen follows the part the keyboard leaves free
+      const k = 0.62, vv = globalThis.visualViewport;
+      fit = () => {
+        const hh = Math.round(vv ? vv.height : globalThis.innerHeight || vh);
+        el.style.top = `${Math.round(vv ? vv.offsetTop : 0)}px`; el.style.bottom = 'auto'; el.style.height = `${hh}px`;
+        const ch = Math.round(Math.max(110, Math.min(H * k, hh - 236)));
+        stage.style.height = `${ch}px`; stage.style.width = `${Math.round(ch * 7 / 12)}px`;
+      };
+      fit();
+      vv?.addEventListener('resize', fit); vv?.addEventListener('scroll', fit);
       say.textContent = '';
       el.classList.add('writing');
       hintOnce('words');
@@ -125,6 +133,7 @@ export function foundCeremony(id) {
       if (tell) words.append(h('p.fd-says', {}, tell));
       await wait(500);
       await new Promise((res) => words.append(h('div.fd-acts', {}, h('button.fd-b.main', { type: 'button', onclick: res }, 'Continua'))));
+      if (fit) { globalThis.visualViewport?.removeEventListener('resize', fit); globalThis.visualViewport?.removeEventListener('scroll', fit); }
       // into the grimoire: towards the HUD's book if there is one, else the top right corner
       const tgt = document.querySelector('.hud-book')?.getBoundingClientRect();
       const sr = stage.getBoundingClientRect();
