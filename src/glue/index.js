@@ -5,11 +5,14 @@ import './diary.js'; // diary lines, Tartufo's remarks, the wake-up in the cell
 import './mood.js'; // sound.back: the music of the current map
 import './tools.js'; // tool.use: the bottle
 import './day.js'; // day.draw: the card of the day at the cottage bed
-import './clients.js'; // clients.next: the returning clients at the cottage table
+import './clients.js'; // clients.next: story, returning and generated clients at the cottage table
+import './street.js'; // someone she read for stops her in the street for one card
 import './traits.js'; // behaviour feeds the portrait (esplora, rischio)
 import './fly.js'; // the broom: fly.check, fly.to (the grimoire's map)
 import './hints.js'; // the interface hints and the trail of lights
 import './bonds.js'; // popularity, Tartufo's points and treats, the tracked side mission
+import './selfread.js'; // the diary of readings: client readings kept, readings for herself saved
 import './wire.js'; // fog, small cards, obstacles, trading, the last hints
+import './lessons.js'; // the lessons as missions (flying, Minors, reversed) and the chapter card
 import './debug.js'; // ?debug only: window.__salem and ?skip=
 export { bootSkip } from './debug.js';

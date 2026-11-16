@@ -15,6 +15,7 @@ import { bootSkip } from './glue/index.js';
 async function play() {
   if (state.step === 'p.session') {
     // the prologue session: name, birth, Il Matto; it ends with step p.road and state.pos at the road
+    await call('story.chapterCard', 1); // black screen: the title of the first chapter (story/chapter.js)
     await call('story.session', 's0');
   }
   await call('world.start');
