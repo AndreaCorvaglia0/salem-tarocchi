@@ -53,7 +53,7 @@ export default {
       consiglio: "Mostra quello che senti invece di tenerlo a freno, anche se ti costa.",
     },
     lavoro: {
-      situazione: "Tratti con una persona fredda, che gioca sui sentimenti altrui per guadagnarci.",
+      situazione: "Tieni il cuore fuori dal lavoro, e tratti tutti con freddezza e con calcolo.",
       origine: "Hai fatto affari con il calcolo e senza cuore, e qualcuno ne ha sofferto.",
       ostacolo: "Pesa la freddezza fra te e chi lavora con te: tutto è calcolo, e la fiducia manca.",
       arrivo: "Incontrerai chi cercherà di convincerti per calcolo, facendo leva su quello che provi.",

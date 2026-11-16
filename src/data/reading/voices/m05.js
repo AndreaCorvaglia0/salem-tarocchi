@@ -10,7 +10,7 @@ export default {
       situazione: "Vivi un amore secondo le regole, come vuole la tradizione.",
       origine: "Hai scelto in amore secondo le usanze, con la benedizione di tutti.",
       ostacolo: "Ti frena quello che la tradizione si aspetta da una coppia come la vostra.",
-      arrivo: "Arriverà un impegno fatto secondo tradizione, forse un fidanzamento o un matrimonio.",
+      arrivo: "Arriverà un impegno preso secondo tradizione, con le regole di sempre e davanti a tutti.",
       consiglio: "Chiedi consiglio in amore a una persona anziana, e ascolta quello che insegna.",
     },
     lavoro: {

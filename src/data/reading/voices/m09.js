@@ -8,7 +8,7 @@ export default {
     essenza: "Ritirarsi in solitudine a cercare la propria guida.",
     amore: {
       situazione: "Stai in solitudine per scelta, perché prima di amare cerchi di capire che cosa vuoi.",
-      origine: "Hai passato un periodo di solitudine, e ti è servito per capire chi cercavi.",
+      origine: "Hai vissuto un periodo di solitudine, e ti è servito per capire chi cercavi.",
       ostacolo: "Ti frena il bisogno di solitudine, e chi ti vuole bene resta fuori dalla porta.",
       arrivo: "Verrà un periodo di solitudine in amore, utile per capire che cosa cerchi.",
       consiglio: "Prenditi del tempo per conto tuo, prima di dare una risposta a chi ami.",
@@ -47,7 +47,7 @@ export default {
     essenza: "L'isolamento: solitudine che fa male, o che si fugge.",
     amore: {
       situazione: "Vivi un isolamento che ti pesa, e tieni chiusa la porta a chi si avvicina.",
-      origine: "Hai passato troppo tempo in solitudine, e hai perso l'abitudine a lasciarti amare.",
+      origine: "Hai vissuto troppo a lungo in solitudine, e hai perso l'abitudine a lasciarti amare.",
       ostacolo: "Ti frena la paura della solitudine, e accetti una compagnia qualsiasi.",
       arrivo: "Sentirai più forte la solitudine, finché non farai un passo verso qualcuno.",
       consiglio: "Esci dal tuo guscio, e lascia che una persona ti conosca davvero.",
@@ -67,7 +67,7 @@ export default {
       consiglio: "Bussa alla porta di chi in casa si isola, anche soltanto per sedergli accanto.",
     },
     altri: {
-      situazione: "Ti butti in mezzo alla gente ogni sera, per sfuggire alla solitudine e ai pensieri.",
+      situazione: "Fuggi la solitudine cercando gente ogni sera, e in mezzo a tutti ti senti in disparte.",
       origine: "Hai tagliato i ponti con tutti dopo una delusione, e l'isolamento è durato troppo.",
       ostacolo: "Resta la diffidenza verso tutti, che ti tiene fuori da ogni compagnia.",
       arrivo: "Riceverai un invito dopo tanto isolamento, e farai fatica ad accettarlo.",

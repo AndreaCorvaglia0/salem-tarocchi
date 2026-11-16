@@ -69,7 +69,7 @@ export default {
     altri: {
       situazione: "Rispondi d'impulso a tutti, e ti fai la fama di persona litigiosa.",
       origine: "Qualcuno è partito di corsa dalla tua vita, senza dare spiegazioni.",
-      ostacolo: "Ti trattiene un'esitazione, e mentre gli altri partono di corsa tu resti al via.",
+      ostacolo: "Ti frena la fretta con cui giudichi tutti, e la rabbia ti fa perdere amicizie.",
       arrivo: "Avrai uno scontro con una persona frettolosa e irascibile, che non sente ragioni.",
       consiglio: "Evita di seguire chi corre senza sapere dove, anche se ti trascina.",
     },

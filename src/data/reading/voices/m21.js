@@ -11,7 +11,7 @@ export default {
       origine: "Hai portato a buon fine una lunga storia, e ne sei felice.",
       ostacolo: "Ti frena la voglia di fermarti all'arrivo, mentre l'amore chiede un passo nuovo.",
       arrivo: "Arriverete insieme al traguardo che aspettavate, e ci sarà da festeggiare.",
-      consiglio: "Festeggia quello che avete costruito insieme, perché è arrivato a compimento.",
+      consiglio: "Godi con chi ami di una storia arrivata a compimento, dove tutto ha trovato posto.",
     },
     lavoro: {
       situazione: "Stai portando a termine un lavoro lungo, e raccogli tutto il frutto.",
@@ -25,7 +25,7 @@ export default {
       origine: "Avete portato a termine insieme un grande progetto di famiglia, senza lasciare niente a metà.",
       ostacolo: "Manca in casa la voglia di pensare al dopo, perché tutto è già compiuto.",
       arrivo: "Si compirà in casa quello che aspettate da tempo, e non mancherà più niente.",
-      consiglio: "Riunisci tutti intorno a un tavolo, e festeggiate la strada fatta fino all'arrivo.",
+      consiglio: "Festeggia con tutta la famiglia la strada fatta, e goditi con loro l'arrivo.",
     },
     altri: {
       situazione: "Occupi il posto giusto tra la gente, e dovunque vai ti accolgono bene.",

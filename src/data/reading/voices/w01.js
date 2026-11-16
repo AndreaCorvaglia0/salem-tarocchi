@@ -16,7 +16,7 @@ export default {
     lavoro: {
       situazione: "Ti gira in testa un'idea nuova, e hai una gran voglia di cominciare.",
       origine: "Hai cominciato dal niente, con una buona idea e tanta voglia di fare.",
-      ostacolo: "Mancano ancora i mezzi, e lo slancio da solo non basta.",
+      ostacolo: "Ti frena soltanto l'inesperienza degli inizi, mentre lo slancio non ti manca.",
       arrivo: "Si aprirà una possibilità nuova, e avrai l'energia per coglierla.",
       consiglio: "Metti mano al progetto finché la voglia è tanta, e comincia oggi stesso.",
     },
@@ -24,7 +24,7 @@ export default {
       situazione: "C'è aria di novità in casa, e tutti hanno voglia di darsi da fare.",
       origine: "Avete messo su casa di slancio, senza pensarci troppo, e vi ha dato forza.",
       ostacolo: "Pesa la fretta di chi vuole cominciare subito, mentre in casa gli altri vanno piano.",
-      arrivo: "Arriverà in casa un inizio nuovo, forse una nascita o un progetto da fare insieme.",
+      arrivo: "Arriverà in casa un inizio nuovo, qualcosa da cominciare insieme con slancio.",
       consiglio: "Proponi in famiglia la tua idea, e comincia tu a darti da fare.",
     },
     altri: {
@@ -37,7 +37,7 @@ export default {
     se: {
       situazione: "Stai sentendo un'energia nuova, e hai voglia di cominciare qualcosa di tuo.",
       origine: "Hai avuto un'ispirazione improvvisa, e l'hai seguita senza chiedere a nessuno.",
-      ostacolo: "Resta tutto una scintilla, perché cominci mille cose e non ne porti avanti nessuna.",
+      ostacolo: "Ti disperde la voglia di cominciare tutto insieme, tanto è lo slancio che senti.",
       arrivo: "Avrai un'idea chiara della strada da prendere, e lo slancio per partire.",
       consiglio: "Segui quello che ti accende di più, e fai subito il primo passo.",
     },

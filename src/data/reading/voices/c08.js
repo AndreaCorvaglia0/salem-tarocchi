@@ -70,7 +70,7 @@ export default {
       situazione: "Frequenti per abitudine gente che non ti dà più niente, per paura di restare senza compagnia.",
       origine: "Avevi degli amici, e li hai lasciati da un giorno all'altro, senza dare spiegazioni.",
       ostacolo: "Ti trattiene la paura di quello che dirà la gente, se lasci la solita compagnia.",
-      arrivo: "Sparirai per un po' dalla vista di tutti, e poi tornerai senza aver capito perché.",
+      arrivo: "Sparirai per un po' dalla vista di tutti, e tornerai senza aver capito perché.",
       consiglio: "Decidi chi vuoi davvero vicino, invece di restare con tutti o di sparire.",
     },
     se: {

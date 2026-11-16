@@ -9,14 +9,14 @@ export default {
     amore: {
       situazione: "Stai puntando con determinazione alla persona che vuoi, e non ti fermi.",
       origine: "Hai conquistato chi amavi con la tua costanza, superando più di un ostacolo.",
-      ostacolo: "Ti frena la voglia di vincere sempre, anche nelle discussioni con chi ami.",
+      ostacolo: "Ti costa tenere a freno l'impazienza, mentre vai con determinazione verso chi vuoi.",
       arrivo: "Vincerai le resistenze di chi ti piace, se continuerai con la stessa determinazione.",
       consiglio: "Vai avanti con decisione, e tieni a freno la gelosia e la fretta.",
     },
     lavoro: {
       situazione: "Hai una meta chiara nel lavoro, e ci stai arrivando con le tue forze.",
       origine: "Hai vinto una prova difficile, con determinazione e sangue freddo.",
-      ostacolo: "Pesa la fatica di tenere insieme due impegni che tirano da parti opposte.",
+      ostacolo: "Pesa la fatica di tenere tutto sotto controllo, giorno dopo giorno, fino alla meta.",
       arrivo: "Arriverà una vittoria meritata: un affare concluso, o un traguardo raggiunto.",
       consiglio: "Scegli un traguardo solo, e togli di mezzo quello che ti distrae.",
     },
@@ -30,7 +30,7 @@ export default {
     altri: {
       situazione: "Vai avanti senza voltarti, e gli altri faticano a starti dietro.",
       origine: "Qualcuno ha provato a fermarti, e hai vinto tu senza perdere la calma.",
-      ostacolo: "Corri così tanto verso la meta che lasci indietro chi vorrebbe aiutarti.",
+      ostacolo: "Ti pesa l'attesa di chi ti guarda avanzare e dà già per certa la tua vittoria.",
       arrivo: "Otterrai il rispetto di chi dubitava di te, perché arriverai fino in fondo.",
       consiglio: "Mostra agli altri dove vuoi arrivare, e porta con te chi ci crede.",
     },
@@ -68,7 +68,7 @@ export default {
     },
     altri: {
       situazione: "Vuoi spuntarla su tutti, e intorno a te cresce il fastidio.",
-      origine: "Qualcuno è passato sopra di te per arrivare primo, e te lo ricordi.",
+      origine: "Qualcuno ha calpestato te e le tue ragioni per arrivare primo, e te lo ricordi.",
       ostacolo: "Allontani la gente con la smania di vincere anche quando non serve.",
       arrivo: "Resterai senza alleati, se vorrai vincere senza guardare in faccia nessuno.",
       consiglio: "Lascia vincere gli altri ogni tanto, e guarda se la meta vale la corsa.",

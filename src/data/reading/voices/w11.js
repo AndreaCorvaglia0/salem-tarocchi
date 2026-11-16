@@ -39,7 +39,7 @@ export default {
       origine: "Hai scoperto una passione quasi per gioco, e hai voluto imparare tutto.",
       ostacolo: "Resta tutto un gioco, perché l'entusiasmo c'è ma ti manca ancora la pratica.",
       arrivo: "Scoprirai qualcosa che ti appassiona, e ti verrà voglia di imparare.",
-      consiglio: "Segui la curiosità e mettiti a imparare, senza paura di sbagliare da principiante.",
+      consiglio: "Butta il tuo entusiasmo in una cosa nuova da imparare, senza paura di sbagliare.",
     },
   },
   rev: {
@@ -54,7 +54,7 @@ export default {
     },
     lavoro: {
       situazione: "Cominci tante cose nel lavoro con entusiasmo, e non ne finisci nessuna.",
-      origine: "Avevi cominciato a imparare un mestiere, e hai lasciato alla prima difficoltà.",
+      origine: "Avevi preso un lavoro con grande entusiasmo, e la voglia si è spenta in poche settimane.",
       ostacolo: "Manca la costanza, perché la voglia dura qualche giorno e subito cerchi altro.",
       arrivo: "Arriverà una notizia di lavoro meno buona di quanto speri.",
       consiglio: "Finisci una cosa prima di cominciarne un'altra, anche quando la voglia cala.",

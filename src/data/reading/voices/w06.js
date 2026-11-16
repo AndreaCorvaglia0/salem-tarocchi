@@ -9,7 +9,7 @@ export default {
     amore: {
       situazione: "Vivi un amore riuscito, e tutti riconoscono quanto state bene insieme.",
       origine: "Hai vinto le resistenze di qualcuno, e ne è nata una storia felice.",
-      ostacolo: "Ti frena l'orgoglio della vittoria, e dai per scontato chi hai accanto.",
+      ostacolo: "Ti distrae il gusto della vittoria, e dai per scontato chi hai accanto.",
       arrivo: "Vincerai i dubbi di chi ami, e la vostra storia sarà riconosciuta da tutti.",
       consiglio: "Mostra con orgoglio la persona che ami, senza nasconderla a nessuno.",
     },
@@ -17,7 +17,7 @@ export default {
       situazione: "Stai raccogliendo un successo nel lavoro, e gli altri te lo riconoscono.",
       origine: "Hai portato a termine bene un incarico, e ne hai avuto lodi e stima.",
       ostacolo: "Pesa su di te l'attesa di tutti, dopo la tua prima vittoria.",
-      arrivo: "Arriverà un riconoscimento per il tuo lavoro, forse un premio o un avanzamento.",
+      arrivo: "Arriverà un riconoscimento per il tuo lavoro, e tutti vedranno la tua vittoria.",
       consiglio: "Fatti avanti e prendi il merito di quello che hai fatto bene.",
     },
     casa: {

@@ -30,7 +30,7 @@ export default {
     altri: {
       situazione: "Ti stai affacciando su un ambiente nuovo, dove puoi cominciare da capo.",
       origine: "Hai fatto di testa tua, con fiducia, senza badare a quello che si diceva.",
-      ostacolo: "Passi per chi si butta senza pensare, e in paese pochi ti danno credito.",
+      ostacolo: "Ti frena la poca esperienza dell'ambiente: sei all'inizio, e non sai ancora come muoverti.",
       arrivo: "Conoscerai gente nuova, e con loro ti verrà facile fidarti.",
       consiglio: "Fidati di chi incontri, e presentati senza paura di fare brutta figura.",
     },
@@ -67,7 +67,7 @@ export default {
       consiglio: "Parla chiaro con chi in casa prende tutto alla leggera, prima che costi caro.",
     },
     altri: {
-      situazione: "Ti fidi della persona sbagliata, e parli troppo con chi non lo merita.",
+      situazione: "Ti fidi con imprudenza di chi conosci appena, e rischi di parlare troppo.",
       origine: "Qualcuno ha approfittato della tua buona fede, e da allora hai paura di aprirti.",
       ostacolo: "Pesa la paura di quello che dirà la gente, e rinunci a buttarti.",
       arrivo: "Farai una leggerezza davanti a tutti, una promessa di troppo, e dovrai scusarti.",

@@ -9,14 +9,14 @@ export default {
     amore: {
       situazione: "Vivi un amore felice e chiaro, che puoi mostrare a tutti senza paura.",
       origine: "Hai conosciuto una gioia vera con una persona, semplice come da bambini.",
-      ostacolo: "Ti distrae la troppa felicità, e non vedi una piccola ombra da sistemare.",
+      ostacolo: "Hai quasi paura di dirlo ad alta voce, tanto è piena la gioia tra voi.",
       arrivo: "Arriverà una gioia grande in amore, e non avrai bisogno di spiegarla.",
       consiglio: "Mostra con gioia quello che provi, alla luce del giorno e senza giustificarti.",
     },
     lavoro: {
       situazione: "Va tutto bene nel lavoro: hai energia, e sai con chiarezza che cosa vuoi.",
       origine: "Hai avuto un bel successo, e ti ha dato gioia e fiducia.",
-      ostacolo: "Ti frena soltanto l'entusiasmo, che ti fa promettere più di quello che puoi.",
+      ostacolo: "Ti distrae la gioia per come vanno le cose, e fatichi a pensare al passo seguente.",
       arrivo: "Avrai successo in quello che fai, e arriveranno buone notizie sui guadagni.",
       consiglio: "Fatti avanti con fiducia, perché è il momento buono per farti vedere.",
     },
@@ -37,7 +37,7 @@ export default {
     se: {
       situazione: "Stai vivendo un momento chiaro e pieno di energia, e tutto ti viene facile.",
       origine: "Hai sempre avuto dentro una gioia semplice, che ti ha portato fin qui.",
-      ostacolo: "Ti manca soltanto il permesso di essere felice, e devi dartelo tu.",
+      ostacolo: "Resta soltanto l'abitudine a cercare il guaio, anche quando la gioia è piena.",
       arrivo: "Vedrai tutto con chiarezza, e avrai una gran voglia di vivere.",
       consiglio: "Fai una cosa solo perché ti dà gioia, senza spiegarla a nessuno.",
     },

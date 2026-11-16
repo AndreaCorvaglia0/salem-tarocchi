@@ -31,7 +31,7 @@ export default {
       situazione: "Ti senti in disparte dopo un'amicizia finita, e guardi solo le porte chiuse.",
       origine: "Qualcuno ti ha voltato le spalle, e da allora ti fidi meno di tutti.",
       ostacolo: "Ti blocca il ricordo di un torto, e tieni lontano anche chi non c'entra.",
-      arrivo: "Perderai l'appoggio di qualcuno, e scoprirai chi invece è rimasto.",
+      arrivo: "Perderai l'appoggio di qualcuno, e scoprirai chi è rimasto.",
       consiglio: "Smetti di contare chi se n'è andato, e bussa da chi è rimasto.",
     },
     se: {
@@ -48,7 +48,7 @@ export default {
     amore: {
       situazione: "Stai ricominciando a guardarti intorno, e il dolore di prima pesa meno.",
       origine: "Hai sofferto a lungo per una storia finita, e poi hai smesso di aspettarla.",
-      ostacolo: "Ti frena la paura di soffrire ancora, proprio ora che potresti riprovarci.",
+      ostacolo: "Ti frena la paura di soffrire ancora, proprio quando potresti riprovarci.",
       arrivo: "Tornerà la voglia di fidarti, e forse tornerà anche una persona.",
       consiglio: "Perdona quello che c'è da perdonare, a cominciare da te.",
     },
@@ -57,7 +57,7 @@ export default {
       origine: "Hai preso un colpo duro, e hai ricominciato da quello che ti restava.",
       ostacolo: "Ti rallenta la prudenza di chi ha già perso, e rischi di mancare un'occasione.",
       arrivo: "Recupererai una parte di quello che credevi perduto, abbastanza per ripartire.",
-      consiglio: "Riprendi quello che hai lasciato a metà: ora lo vedi con più calma.",
+      consiglio: "Riprendi quello che hai lasciato a metà: lo vedrai con più calma.",
     },
     casa: {
       situazione: "Si torna a respirare in casa: il peggio è passato.",
@@ -68,14 +68,14 @@ export default {
     },
     altri: {
       situazione: "Stai riallacciando i rapporti, e scopri che non tutti se n'erano andati.",
-      origine: "Hai chiuso con chi ti aveva deluso, e col tempo la rabbia è passata.",
+      origine: "Hai chiuso con chi ti aveva deluso, e un po' alla volta la rabbia se n'è andata.",
       ostacolo: "Ti trattiene l'orgoglio: vorresti tornare da qualcuno, ma aspetti che si muova per primo.",
       arrivo: "Ritroverai un'amicizia che davi per finita, più semplice di prima.",
       consiglio: "Accetta la mano che ti tendono, anche se arriva tardi.",
     },
     se: {
       situazione: "Stai facendo pace con un tuo sbaglio, e ricordarlo non ti fa più male.",
-      origine: "Hai passato molto tempo a rimproverarti, finché hai capito che non serviva.",
+      origine: "Hai continuato a lungo a rimproverarti, finché hai capito che non serviva.",
       ostacolo: "Ti resta l'abitudine alla tristezza, che torna anche quando non hai motivo.",
       arrivo: "Sentirai il peso alleggerirsi, e riprenderai i progetti che avevi messo via.",
       consiglio: "Raccogli quello che è rimasto in piedi, e riparti da lì.",

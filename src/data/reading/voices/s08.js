@@ -36,7 +36,7 @@ export default {
     },
     se: {
       situazione: "Vivi dentro una gabbia di pensieri e di paure, e non vedi che la porta è aperta.",
-      origine: "Hai passato molto tempo a dirti che non potevi, e hai finito per crederci.",
+      origine: "Hai continuato per molto tempo a dirti che non potevi, e hai finito per crederci.",
       ostacolo: "Manca la fiducia nelle tue forze, e ogni paura ti dice che non ce la farai.",
       arrivo: "Passerai un momento di blocco, in cui le paure sembreranno più forti di te.",
       consiglio: "Muovi un passo solo, anche piccolo, per dimostrare alle paure che puoi muoverti.",
@@ -48,14 +48,14 @@ export default {
     amore: {
       situazione: "Stai trovando il coraggio di dire quello che vuoi, e ti senti meno in trappola.",
       origine: "Hai lasciato una storia che ti teneva in gabbia, e hai ripreso la tua libertà.",
-      ostacolo: "Ti frena un resto di paura, proprio adesso che la porta è aperta.",
+      ostacolo: "Ti frena un resto di paura, proprio mentre la porta è aperta.",
       arrivo: "Riuscirai a liberarti di una paura che pesava sul tuo amore.",
       consiglio: "Esci dal silenzio e di' che cosa desideri, perché niente ti obbliga a tacere.",
     },
     lavoro: {
       situazione: "Vedi finalmente una via d'uscita nel lavoro, dove la paura mostrava solo muri.",
       origine: "Temevi di cambiare lavoro, e poi hai scoperto di poterlo fare senza paura.",
-      ostacolo: "Resta l'abitudine a sentirti senza scelta, anche adesso che la trappola è aperta.",
+      ostacolo: "Resta l'abitudine a sentirti senza scelta, anche se la trappola è aperta.",
       arrivo: "Si sbloccherà una situazione che sembrava chiusa, e potrai muoverti liberamente.",
       consiglio: "Approfitta della strada che si è aperta, senza aspettare il permesso di nessuno.",
     },

@@ -9,13 +9,13 @@ export default {
     amore: {
       situazione: "Senti nascere un sentimento nuovo, e il cuore ti si apre senza fatica.",
       origine: "Hai aperto il cuore a una persona, e da lì è cominciato tutto.",
-      ostacolo: "Ti frena la paura di mostrare un sentimento così nuovo e così grande.",
+      ostacolo: "Ti frena lo stupore: il sentimento è così nuovo che quasi non ti sembra vero.",
       arrivo: "Nascerà un amore nuovo, oppure quello che hai tornerà fresco come all'inizio.",
       consiglio: "Apri il cuore e di' quello che provi, senza aspettare il momento perfetto.",
     },
     lavoro: {
       situazione: "Stai cominciando qualcosa di nuovo nel lavoro, e ci metti tutto il cuore.",
-      origine: "Hai scelto il tuo lavoro col cuore, e all'inizio ti dava una gioia grande.",
+      origine: "Hai scelto il tuo lavoro col cuore, e nei primi tempi ti dava una gioia grande.",
       ostacolo: "Rischi di buttarti in ogni novità col cuore, e ai conti pensi soltanto dopo.",
       arrivo: "Arriverà un'occasione nuova, di quelle che si accettano col cuore leggero.",
       consiglio: "Di' di sì alla novità che ti dà gioia, anche se è piccola.",
@@ -23,14 +23,14 @@ export default {
     casa: {
       situazione: "C'è un affetto nuovo in casa, e tutti si parlano con più dolcezza.",
       origine: "È nato in famiglia un affetto nuovo, e la casa si è riempita di gioia.",
-      ostacolo: "Manca ancora l'abitudine: in casa questo affetto nuovo nessuno sa bene come mostrarlo.",
+      ostacolo: "Sorprende tutti in casa questo affetto nuovo, e qualcuno teme che sia solo un momento.",
       arrivo: "Entrerà in casa una gioia nuova, e la famiglia si sentirà più unita.",
       consiglio: "Accogli a cuore aperto chi arriva in casa, e fagli subito un posto a tavola.",
     },
     altri: {
       situazione: "Stai conoscendo una persona nuova, e ti viene naturale aprirle il cuore.",
       origine: "Qualcuno ti ha offerto la sua amicizia senza chiedere niente, e ti si è aperto il cuore.",
-      ostacolo: "Ti trattiene il timore di aprirti troppo presto con chi conosci appena.",
+      ostacolo: "Ti imbarazza un poco che gli altri vedano quanto ti si è aperto il cuore.",
       arrivo: "Nascerà un'amicizia nuova, di quelle in cui ci si vuole bene da subito.",
       consiglio: "Offri tu la tua amicizia, senza aspettare che siano gli altri a cominciare.",
     },

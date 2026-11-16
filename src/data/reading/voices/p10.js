@@ -9,7 +9,7 @@ export default {
     amore: {
       situazione: "Vivi un legame solido, di quelli che durano e diventano famiglia.",
       origine: "Hai avuto in famiglia l'esempio di un amore che dura, e te lo porti dentro.",
-      ostacolo: "Pesa il parere della famiglia su chi ami, perché da voi le tradizioni contano.",
+      ostacolo: "Ti frena il pensiero di essere all'altezza di una famiglia così solida e unita.",
       arrivo: "Metterete su casa e famiglia, e sarà una cosa fatta per durare.",
       consiglio: "Costruisci con chi ami qualcosa che duri negli anni, come si fa una famiglia.",
     },
@@ -30,7 +30,7 @@ export default {
     altri: {
       situazione: "Appartieni a una famiglia stimata in paese, e questo ti apre molte porte.",
       origine: "Avevi intorno gente solida, vicini e parenti su cui contare sempre.",
-      ostacolo: "Ti condiziona il buon nome della famiglia, che in paese tutti si aspettano di vederti onorare.",
+      ostacolo: "Ti lega quello che tutti si aspettano da chi viene da una famiglia come la tua.",
       arrivo: "Entrerai a far parte di una cerchia solida, che ti accoglierà come in famiglia.",
       consiglio: "Coltiva i legami che durano da generazioni, perché sono la tua vera ricchezza.",
     },
@@ -57,7 +57,7 @@ export default {
       origine: "Hai perso una parte di quello che ti spettava, per una lite tra parenti.",
       ostacolo: "Pesa una questione di eredità non risolta, che tiene fermi soldi e persone.",
       arrivo: "Si dividerà un bene di famiglia, e non tutti saranno contenti della loro parte.",
-      consiglio: "Metti per iscritto chi ha diritto a che cosa, prima che i soldi rovinino i rapporti.",
+      consiglio: "Chiarisci con i tuoi che cosa spetta a ciascuno, prima che i soldi dividano la famiglia.",
     },
     casa: {
       situazione: "Si litiga in casa per i soldi, e la famiglia non è più unita come sembrava.",

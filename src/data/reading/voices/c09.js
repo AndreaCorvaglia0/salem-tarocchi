@@ -30,7 +30,7 @@ export default {
     altri: {
       situazione: "La tua soddisfazione si vede, e la gente sta volentieri in tua compagnia.",
       origine: "Qualcuno ti ha fatto un favore che desideravi da tempo, senza che lo chiedessi.",
-      ostacolo: "Mostri un po' troppo la tua soddisfazione, e a qualcuno in paese dà fastidio.",
+      ostacolo: "Ti trattiene il riguardo per chi aspetta ancora, e nascondi un po' la tua soddisfazione.",
       arrivo: "Otterrai da qualcuno il sì che desideravi, e te ne tornerai a casa con il sorriso.",
       consiglio: "Dividi con gli amici la tua soddisfazione, e offri tu da bere.",
     },

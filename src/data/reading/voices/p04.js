@@ -77,7 +77,7 @@ export default {
       situazione: "Senti meno il bisogno di proteggerti, e lasci entrare cose che prima tenevi fuori.",
       origine: "Avevi una vita al riparo da ogni rischio, e a un certo punto ti è andata stretta.",
       ostacolo: "Ti spaventa quello che potresti perdere allentando la presa, e ti viene da richiudere tutto.",
-      arrivo: "Perderai qualcosa che credevi indispensabile, e scoprirai che si vive anche senza.",
+      arrivo: "Allenterai la presa su qualcosa a cui tenevi molto, e la perdita ti peserà poco.",
       consiglio: "Regala una cosa a cui tieni, e guarda come stai dopo averla data.",
     },
   },

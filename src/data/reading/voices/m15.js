@@ -21,8 +21,8 @@ export default {
       consiglio: "Chiediti che cosa fai solo per denaro, e se ne vale la pena.",
     },
     casa: {
-      situazione: "Si vive in casa secondo abitudini che legano tutti, e nessuno le discute.",
-      origine: "Qualcuno in famiglia ha tenuto gli altri in pugno, e l'avete lasciato fare.",
+      situazione: "C'è in casa una dipendenza da cui nessuno si stacca, anche se tutti potrebbero.",
+      origine: "La tua famiglia è dipesa a lungo da una persona sola, e ha accettato quella catena.",
       ostacolo: "Pesa sulla casa un vizio tenuto in ombra, e tutti lo coprono.",
       arrivo: "Uscirà dall'ombra in famiglia una dipendenza che finora è rimasta nascosta.",
       consiglio: "Rompi tu la cattiva abitudine da cui in casa dipendete tutti.",

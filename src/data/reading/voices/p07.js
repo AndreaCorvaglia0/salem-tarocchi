@@ -39,7 +39,7 @@ export default {
       origine: "Hai messo tempo e fatica in qualcosa che cresce lentamente.",
       ostacolo: "Resta il dubbio di aver lavorato per niente, mentre aspetti i frutti.",
       arrivo: "Raccoglierai quello che hai seminato, a patto di saper aspettare.",
-      consiglio: "Fermati a guardare quanta strada hai fatto, e aspetta il frutto con pazienza.",
+      consiglio: "Guarda quanto è cresciuto quello che hai seminato, e aspetta il frutto con pazienza.",
     },
   },
   rev: {

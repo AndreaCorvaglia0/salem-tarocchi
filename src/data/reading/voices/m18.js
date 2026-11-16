@@ -67,7 +67,7 @@ export default {
       consiglio: "Racconta in casa quello che temevi, e vedrai che fa meno paura.",
     },
     altri: {
-      situazione: "Cominci a capire chi ti ingannava, e chi invece era sincero.",
+      situazione: "Cominci a capire chi ti ingannava, e chi era sincero con te.",
       origine: "Qualcuno ti ingannava da tempo, e alla fine l'hai scoperto.",
       ostacolo: "Ti frena la vecchia diffidenza, che resta anche dopo che la paura è passata.",
       arrivo: "Cadrà la maschera di qualcuno, e saprai finalmente con chi hai a che fare.",

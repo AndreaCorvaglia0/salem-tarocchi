@@ -28,7 +28,7 @@ export default {
       consiglio: "Stringiti ai tuoi in questo momento duro, perché dopo il fondo viene la risalita.",
     },
     altri: {
-      situazione: "Chi credevi dalla tua parte ti ha voltato le spalle, e la tua fiducia tocca il fondo.",
+      situazione: "Tocchi il fondo nei rapporti con gli altri, e senti di non avere più nessuno accanto.",
       origine: "Hai subìto un torto grave da una persona amica, e l'amicizia è finita lì.",
       ostacolo: "Ti schiaccia la delusione per un voltafaccia, e dal fondo non ti fidi di nessuno.",
       arrivo: "Finirà in modo doloroso un rapporto con qualcuno, e peggio di così non potrà andare.",
@@ -47,7 +47,7 @@ export default {
     essenza: "Rialzarsi dal fondo: il peggio è passato.",
     amore: {
       situazione: "Ti stai rialzando dopo una fine dolorosa, e il peggio è alle spalle.",
-      origine: "Hai passato il momento peggiore di una storia, e poi hai cominciato a rialzarti.",
+      origine: "Hai superato il momento peggiore di una storia, e poi hai cominciato a rialzarti.",
       ostacolo: "Ti trattiene un dolore che tiri per le lunghe, quando potresti già rialzarti.",
       arrivo: "Tornerai ad avere fiducia in amore, piano, perché il peggio sarà passato.",
       consiglio: "Rialzati senza fretta, e non riaprire una storia che è arrivata alla fine.",

@@ -9,7 +9,7 @@ export default {
     amore: {
       situazione: "Stai vivendo un'unione sincera, in cui vi siete scelti con il cuore.",
       origine: "Hai scelto una persona seguendo il cuore, e quella scelta vi ha uniti.",
-      ostacolo: "Ti frena un dubbio fra due persone, e il cuore non ha ancora scelto.",
+      ostacolo: "Ti frena il pensiero di quello a cui rinunci, scegliendo col cuore questa persona.",
       arrivo: "Arriverà un amore vero, e ti chiederà di scegliere senza riserve.",
       consiglio: "Scegli la persona con cui puoi essere come sei, e dillo apertamente.",
     },
@@ -23,14 +23,14 @@ export default {
     casa: {
       situazione: "C'è armonia in casa tua, perché chi ci vive ha scelto di stare insieme.",
       origine: "Avete messo su casa per amore, d'accordo sulle cose che contano.",
-      ostacolo: "Fai fatica a scegliere fra quello che vuole la famiglia e quello che vuoi tu.",
-      arrivo: "Verrà un'unione in famiglia, forse un matrimonio o una pace fatta.",
+      ostacolo: "Ti pesa che in famiglia non tutti approvino la scelta che hai fatto col cuore.",
+      arrivo: "Verrà un'unione in famiglia, un legame scelto col cuore o una pace fatta.",
       consiglio: "Parla in casa di quello che conta per ciascuno, e scegli insieme agli altri.",
     },
     altri: {
       situazione: "Frequenti due compagnie diverse, e devi scegliere quella che ti somiglia.",
       origine: "Qualcuno ti ha chiesto di stare dalla sua parte, e hai scelto secondo coscienza.",
-      ostacolo: "Resta una tentazione: piacere a tutti, invece di scegliere con chi stare.",
+      ostacolo: "Ti costa sapere che, scegliendo con chi stare, a qualcuno darai un dispiacere.",
       arrivo: "Stringerai un legame sincero con una persona che la pensa come te.",
       consiglio: "Scegli le amicizie con il cuore, e tieniti vicino chi condivide i tuoi valori.",
     },
@@ -56,7 +56,7 @@ export default {
       situazione: "Stai rimandando una scelta di lavoro, e resti fra due strade.",
       origine: "Hai accettato un lavoro contrario ai tuoi principi, e ti è pesato.",
       ostacolo: "Pesa il disaccordo con chi lavora con te, perché volete arrivare in posti diversi.",
-      arrivo: "Si romperà un accordo, perché le due parti non vogliono la stessa cosa.",
+      arrivo: "Finirà in disaccordo un'unione d'affari, perché le due parti vogliono cose diverse.",
       consiglio: "Scegli una delle due strade entro pochi giorni, perché l'attesa costa.",
     },
     casa: {

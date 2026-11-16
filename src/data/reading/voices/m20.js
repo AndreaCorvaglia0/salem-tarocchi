@@ -75,7 +75,7 @@ export default {
     },
     se: {
       situazione: "Senti una chiamata dentro di te, e continui a rimandare la risposta.",
-      origine: "Chiudevi gli occhi davanti a un tuo sbaglio, per non doverci fare i conti.",
+      origine: "Evitavi di guardare un tuo sbaglio, per non doverci fare i conti.",
       ostacolo: "Continui a condannarti per il passato invece di farci i conti, e non ricominci.",
       arrivo: "Dovrai fare i conti con il passato, e più rimandi più sarà faticoso.",
       consiglio: "Perdonati per quello che è stato, e fai un bilancio senza cattiveria.",

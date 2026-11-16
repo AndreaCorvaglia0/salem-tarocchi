@@ -63,7 +63,7 @@ export default {
       situazione: "Regna in casa la noia, perché tutto è fermo da tempo e nessuno vuole cambiare.",
       origine: "Avete rimandato per anni un cambiamento in casa, perché qualcuno non voleva sentire ragioni.",
       ostacolo: "Blocca tutta la famiglia la testardaggine di uno solo, che non si sposta di un dito.",
-      arrivo: "Resterà tutto fermo in casa, finché qualcuno non si deciderà a cedere.",
+      arrivo: "Continuerà in casa un braccio di ferro, perché per testardaggine nessuno vorrà cedere.",
       consiglio: "Cedi su qualcosa in famiglia, perché a forza di impuntarsi non si va avanti.",
     },
     altri: {
@@ -74,7 +74,7 @@ export default {
       consiglio: "Smuovi chi è fermo con l'esempio, senza perdere tempo a discutere con i testardi.",
     },
     se: {
-      situazione: "Resti dove sei per paura di sbagliare strada, e chiami prudenza la tua immobilità.",
+      situazione: "Non ti muovi dalla solita strada per testardaggine, e la chiami costanza.",
       origine: "Hai perso molto tempo ad aspettare la certezza, senza fare un passo.",
       ostacolo: "Rimane l'abitudine a una vita sempre ferma, da cui non hai il coraggio di muoverti.",
       arrivo: "Ti impunterai su una decisione sbagliata, pur di non ammettere di dover cambiare.",

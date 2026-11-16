@@ -38,7 +38,7 @@ export default {
       situazione: "Stai guardando con onestà quello che hai fatto, e ne vedi le conseguenze.",
       origine: "Hai fatto una scelta importante, e oggi ne vivi le conseguenze.",
       ostacolo: "Ti pesa una responsabilità che è tua, e che non puoi dare ad altri.",
-      arrivo: "Raccoglierai quello che hai seminato, e ti sembrerà giusto.",
+      arrivo: "Vedrai le conseguenze di quello che hai fatto, e avrai quello che è giusto.",
       consiglio: "Prendi la decisione giusta anche se costa, e accettane le conseguenze.",
     },
   },

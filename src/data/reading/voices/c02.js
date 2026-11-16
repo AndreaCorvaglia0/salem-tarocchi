@@ -16,7 +16,7 @@ export default {
     lavoro: {
       situazione: "Lavori bene insieme a un'altra persona, e fra voi c'è un'intesa alla pari.",
       origine: "Hai stretto un patto giusto con qualcuno, e ci avete guadagnato tutti e due.",
-      ostacolo: "Resta da trovare l'intesa su un punto, prima che l'accordo sia davvero alla pari.",
+      ostacolo: "Ti rallenta la cura di non scontentare l'altro, in un'intesa che vuoi tenere alla pari.",
       arrivo: "Troverai un socio o un aiuto fidato, e vi intenderete con poche parole.",
       consiglio: "Cerca un accordo alla pari, che convenga a tutti e due, e stringi la mano.",
     },

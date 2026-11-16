@@ -10,7 +10,7 @@ export default {
       situazione: "Hai il cuore ferito da una verità che non volevi sapere.",
       origine: "Qualcuno che amavi ti ha detto parole che ti hanno fatto molto male.",
       ostacolo: "Ti pesa una ferita d'amore ancora aperta, che fa male ogni volta che ci pensi.",
-      arrivo: "Arriverà un dolore in amore, chiaro e senza inganni, e col tempo passerà.",
+      arrivo: "Arriverà un dolore in amore, chiaro e senza inganni, e piano piano si calmerà.",
       consiglio: "Lascia uscire il dolore senza vergogna, perché trattenerlo lo fa durare di più.",
     },
     lavoro: {
@@ -38,7 +38,7 @@ export default {
       situazione: "Porti un dolore chiaro nel cuore, e sai bene da dove viene.",
       origine: "Hai capito una verità triste su di te, e ti ha fatto male.",
       ostacolo: "Ti trattiene la tristezza, che in questi giorni colora ogni tuo pensiero.",
-      arrivo: "Attraverserai un dolore vero, di quelli che fanno piangere e poi passano.",
+      arrivo: "Attraverserai un dolore vero, di quelli che fanno piangere ma non durano per sempre.",
       consiglio: "Piangi quello che c'è da piangere, perché questo dolore passa solo attraversandolo.",
     },
   },

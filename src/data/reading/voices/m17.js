@@ -16,7 +16,7 @@ export default {
     lavoro: {
       situazione: "Stai riprendendo fiducia nel tuo lavoro, e le cose si rimettono in moto.",
       origine: "Hai superato un periodo duro, e ti è rimasta la speranza di farcela.",
-      ostacolo: "Resta solo un po' di stanchezza dopo la burrasca, mentre torna la quiete.",
+      ostacolo: "Resta qualche segno della burrasca passata, mentre tornano la quiete e la speranza.",
       arrivo: "Arriverà un segno di buon auspicio per i tuoi guadagni, piccolo ma chiaro.",
       consiglio: "Continua a sperare e a lavorare con calma, perché la strada è buona.",
     },
@@ -30,14 +30,14 @@ export default {
     altri: {
       situazione: "Hai intorno persone serene, che ti danno speranza senza chiedere niente.",
       origine: "Qualcuno ti ha aiutato senza secondi fini, e ti ha ridato fiducia nella gente.",
-      ostacolo: "Aspetti giorni migliori con fiducia, ma dimentichi di chiedere una mano.",
+      ostacolo: "Ti trattiene il pudore di mostrare agli altri una speranza appena tornata.",
       arrivo: "Riceverai un gesto generoso da qualcuno, e ti darà speranza.",
       consiglio: "Dai agli altri un po' della tua calma, senza paura che finisca.",
     },
     se: {
       situazione: "Stai ritrovando la calma dopo un periodo duro, e ricominci a sperare.",
       origine: "Tenevi viva una piccola speranza, anche quando tutto andava male.",
-      ostacolo: "Ti manca ancora un po' di fiducia nel futuro, ma sta tornando.",
+      ostacolo: "Ti frena la paura di sperare troppo, dopo tanto tempo passato senza quiete.",
       arrivo: "Sentirai rinascere la voglia di fare, e guarderai avanti con fiducia.",
       consiglio: "Prenditi cura di te con cose semplici, e lascia tornare la speranza.",
     },
@@ -54,7 +54,7 @@ export default {
     },
     lavoro: {
       situazione: "Lavori senza più crederci, e la stanchezza si vede in tutto quello che fai.",
-      origine: "Hai visto sfumare un progetto in cui speravi, e ti è passata la voglia.",
+      origine: "Hai visto sfumare un progetto in cui speravi, e hai perso la voglia.",
       ostacolo: "Ti pesa la sfiducia nel futuro, e non semini più niente di nuovo.",
       arrivo: "Tarderanno i risultati che speravi, e ti verrà voglia di lasciar perdere.",
       consiglio: "Riposa prima di decidere, perché in te parla la stanchezza.",

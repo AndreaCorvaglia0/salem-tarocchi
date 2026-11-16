@@ -9,8 +9,8 @@ export default {
     amore: {
       situazione: "Vivi un periodo felice e stabile in amore, e c'è qualcosa da festeggiare.",
       origine: "Avete festeggiato insieme un passo importante, e vi ha dato una base sicura.",
-      ostacolo: "Ti trattiene la comodità di un momento felice, e rimandi il passo successivo.",
-      arrivo: "Arriverà una festa per voi due, forse una promessa o un matrimonio.",
+      ostacolo: "Ti frena il pensiero che la festa finisca presto, proprio mentre siete al traguardo.",
+      arrivo: "Arriverà una festa per voi due, per un traguardo raggiunto insieme.",
       consiglio: "Festeggia quello che avete costruito insieme, senza pensare già al dopo.",
     },
     lavoro: {
@@ -21,7 +21,7 @@ export default {
       consiglio: "Concediti una sosta dopo la fatica, e festeggia con chi ha lavorato con te.",
     },
     casa: {
-      situazione: "C'è aria di festa in casa, e la famiglia sta bene insieme.",
+      situazione: "Si festeggia un traguardo in casa, e la famiglia sta bene insieme.",
       origine: "C'era a casa tua l'abitudine di festeggiare insieme ogni traguardo.",
       ostacolo: "Pesa la paura di rovinare l'armonia di casa, e nessuno osa cambiare niente.",
       arrivo: "Verrà una festa in famiglia, e la casa si riempirà di gente contenta.",
@@ -30,8 +30,8 @@ export default {
     altri: {
       situazione: "Stai bene tra la tua gente, e ti senti a casa in mezzo a loro.",
       origine: "Hai trovato un paese che ti ha fatto festa, e ci hai messo radici.",
-      ostacolo: "Ti tiene al caldo la solita compagnia, e fuori da lì non ti muovi.",
-      arrivo: "Riceverai un invito a una festa, e ritroverai persone care.",
+      ostacolo: "Ti tiene al caldo la festa con la solita compagnia, e fuori da lì non ti muovi.",
+      arrivo: "Sarai tra quelli che festeggiano un traguardo, e ritroverai persone care.",
       consiglio: "Raduna gli amici per festeggiare, anche se il motivo è piccolo.",
     },
     se: {

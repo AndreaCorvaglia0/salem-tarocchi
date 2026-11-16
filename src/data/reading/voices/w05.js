@@ -35,7 +35,7 @@ export default {
       consiglio: "Resta fuori dalle liti che non ti riguardano, e scegli per quali idee batterti.",
     },
     se: {
-      situazione: "Senti dentro di te troppe idee in lotta, e non sai quale seguire.",
+      situazione: "Hai in testa troppe idee in lotta fra loro, e nessuna riesce a prevalere.",
       origine: "Hai sempre dovuto lottare per farti ascoltare, e ti è rimasta l'abitudine.",
       ostacolo: "Ti porta via le forze uno scontro continuo, anche dove non serve.",
       arrivo: "Attraverserai un periodo di contrasti, e ne uscirai con le idee più chiare.",
@@ -69,7 +69,7 @@ export default {
     altri: {
       situazione: "Eviti le discussioni con amici e vicini, e mandi giù più di un boccone.",
       origine: "Qualcuno ti ha offerto la pace dopo una lunga lite, e hai accettato.",
-      ostacolo: "Ti rode un vecchio rancore verso qualcuno, che non hai mai affrontato.",
+      ostacolo: "Ti pesa uno scontro mai affrontato con qualcuno, che tieni dentro da molto tempo.",
       arrivo: "Finirà una rivalità che durava da tempo, e nessuno avrà vinto.",
       consiglio: "Accetta la tregua che ti offrono, e lascia cadere i vecchi rancori.",
     },

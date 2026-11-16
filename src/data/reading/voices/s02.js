@@ -50,7 +50,7 @@ export default {
       origine: "Hai rimandato una scelta d'amore finché qualcuno ha deciso al posto tuo.",
       ostacolo: "Ti confonde il troppo pensare: più ci ragioni, meno riesci a deciderti.",
       arrivo: "Finirà lo stallo tra voi, e dovrete dirvi che cosa avete scelto.",
-      consiglio: "Scegli adesso, anche se in ritardo, prima che sia il tempo a scegliere per te.",
+      consiglio: "Scegli senza aspettare oltre, anche se in ritardo, prima che sia il tempo a scegliere per te.",
     },
     lavoro: {
       situazione: "Si sblocca una situazione ferma da tempo, e tocca a te decidere.",

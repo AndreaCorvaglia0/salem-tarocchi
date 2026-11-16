@@ -18,14 +18,14 @@ export default {
       origine: "Avevi seguito le regole con rigore, e questo ti ha dato una buona reputazione.",
       ostacolo: "Decide della faccenda una persona autorevole, che guarda alle regole e non alle simpatie.",
       arrivo: "Otterrai un giudizio giusto su una questione di lavoro o di denaro.",
-      consiglio: "Rivolgiti a chi conosce le regole, e metti gli accordi per iscritto.",
+      consiglio: "Rivolgiti a chi conosce le regole, e stabilisci accordi chiari prima di cominciare.",
     },
     casa: {
       situazione: "C'è in casa chi tiene le regole e decide con giudizio, e gli altri si fidano.",
       origine: "Qualcuno in famiglia ha fatto da giudice in una questione, in modo giusto.",
       ostacolo: "Pesano in casa regole precise, giuste ma con poche eccezioni.",
       arrivo: "Si prenderà in famiglia una decisione ragionata, con regole giuste e rispettate da tutti.",
-      consiglio: "Stabilisci in casa poche regole giuste, e rispettale anche tu.",
+      consiglio: "Giudica le questioni di casa con equità, e segui anche tu le regole che dai.",
     },
     altri: {
       situazione: "Ti ascoltano in paese per il tuo giudizio, perché sai essere imparziale.",

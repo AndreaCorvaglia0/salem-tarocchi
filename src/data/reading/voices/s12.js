@@ -7,7 +7,7 @@ export default {
     favore: 1, moto: 'cresce',
     essenza: "Chi va dritto e veloce, e parla schietto.",
     amore: {
-      situazione: "Vai dritto verso chi ti piace, e dici schietto quello che pensi.",
+      situazione: "Vai dritto verso chi ti piace, e dici con franchezza quello che pensi.",
       origine: "Hai dichiarato in fretta quello che provavi, con parole schiette.",
       ostacolo: "Ti spinge una gran voglia di andare veloce, e chi ami fatica a starti dietro.",
       arrivo: "Arriverà qualcuno deciso e schietto, che ti dirà subito che cosa vuole.",
@@ -18,17 +18,17 @@ export default {
       origine: "Avevi un'idea in testa e l'hai seguita veloce, senza esitare.",
       ostacolo: "Corre tutto molto veloce, e devi decidere in fretta senza perdere la direzione.",
       arrivo: "Si muoverà tutto velocemente in un affare, e dovrai andare dritto allo scopo.",
-      consiglio: "Agisci con decisione e di' schietto come stanno le cose, senza perdere altro tempo.",
+      consiglio: "Agisci con decisione e di' chiaro come stanno le cose, senza perdere altro tempo.",
     },
     casa: {
       situazione: "C'è in casa qualcuno che decide e parte veloce, e trascina tutti con sé.",
       origine: "Una parola schietta, detta in famiglia, ha fatto muovere tutto in poco tempo.",
       ostacolo: "Cambia tutto molto veloce in casa, e qualcuno fatica a stare al passo.",
       arrivo: "Verrà una decisione veloce in famiglia, presa con parole schiette e senza ripensamenti.",
-      consiglio: "Prendi l'iniziativa in casa, e di' schietto quello che va cambiato.",
+      consiglio: "Prendi l'iniziativa in casa, e di' senza giri di parole quello che va cambiato.",
     },
     altri: {
-      situazione: "Dici schietto in faccia quello che pensi, e la gente sa sempre come la vedi.",
+      situazione: "Dici in faccia quello che pensi, da persona schietta, e la gente sa come la vedi.",
       origine: "Hai difeso un'idea davanti a tutti, andando dritto e senza paura.",
       ostacolo: "Ti viene incontro una persona decisa, che va veloce e non ama discutere.",
       arrivo: "Incontrerai chi va dritto allo scopo, e con la sua spinta farai più strada.",
@@ -47,10 +47,10 @@ export default {
     essenza: "Chi parte alla carica: fretta e parole avventate.",
     amore: {
       situazione: "Corri troppo in questo amore, e con la fretta dici parole avventate.",
-      origine: "Hai detto parole avventate in un momento di rabbia, e hanno fatto danno.",
+      origine: "Hai detto parole avventate per troppa fretta, e hanno fatto danno.",
       ostacolo: "Ti tradisce la fretta, che ti fa parlare e agire prima di pensare.",
       arrivo: "Arriverà uno scatto di parole avventate tra voi, detto senza riflettere.",
-      consiglio: "Conta fino a dieci prima di rispondere, e non decidere niente in fretta.",
+      consiglio: "Pesa le parole prima di rispondere, e non decidere niente in fretta.",
     },
     lavoro: {
       situazione: "Ti butti a testa bassa in un affare, con troppa fretta di concludere.",

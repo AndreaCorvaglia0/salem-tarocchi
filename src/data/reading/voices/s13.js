@@ -46,8 +46,8 @@ export default {
     favore: -1, moto: 'chiude',
     essenza: "Chi giudica con durezza: una lucidità fredda.",
     amore: {
-      situazione: "Tieni il cuore chiuso per non soffrire, e giudichi con freddezza chi si avvicina.",
-      origine: "Hai risposto a una delusione con la freddezza, e da allora tieni il cuore chiuso.",
+      situazione: "Guardi chi si avvicina con occhio freddo, e lo giudichi prima di conoscerlo.",
+      origine: "Hai risposto a una delusione con la freddezza, e da allora giudichi tutti con durezza.",
       ostacolo: "Ti frena la freddezza: vedi solo i difetti, e giudichi senza perdonare.",
       arrivo: "Sentirai parole fredde e dure in amore, dette o ricevute.",
       consiglio: "Ammorbidisci il giudizio su chi ami, perché la freddezza allontana anche chi ti vuole bene.",

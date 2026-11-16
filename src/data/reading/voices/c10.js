@@ -8,7 +8,7 @@ export default {
     essenza: "La felicità piena: una famiglia in armonia.",
     amore: {
       situazione: "Vivi un amore felice e tranquillo, di quelli su cui si costruisce una famiglia.",
-      origine: "Hai trovato la persona con cui ti senti a casa, e avete costruito una famiglia felice.",
+      origine: "Hai trovato la persona con cui ti senti in famiglia, e ne è nata una felicità piena.",
       ostacolo: "Ti frena il timore che tanta felicità non duri, e non te la godi fino in fondo.",
       arrivo: "Arriverà un amore che dura, di quelli che diventano una famiglia felice.",
       consiglio: "Fai progetti di famiglia con chi ami, perché il momento è felice.",

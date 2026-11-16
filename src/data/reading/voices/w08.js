@@ -56,8 +56,8 @@ export default {
       situazione: "Vanno a rilento gli affari, tra ritardi e risposte che non arrivano.",
       origine: "Hai agito con troppa fretta, e hai dovuto rifare tutto da capo.",
       ostacolo: "Mancano all'appello notizie importanti, e senza quelle resta tutto fermo.",
-      arrivo: "Subirai dei ritardi nei pagamenti o nelle consegne, e dovrai aspettare.",
-      consiglio: "Controlla due volte prima di spedire o firmare, perché la fretta confonde.",
+      arrivo: "Subirai dei ritardi in quello che ti devono, e dovrai aspettare.",
+      consiglio: "Controlla due volte prima di dare una risposta, perché la fretta confonde.",
     },
     casa: {
       situazione: "Regna la confusione in casa: tutti corrono, e niente arriva in fondo.",

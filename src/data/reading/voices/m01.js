@@ -9,14 +9,14 @@ export default {
     amore: {
       situazione: "Sai che cosa vuoi in amore, e hai i mezzi per farti avanti.",
       origine: "Hai conquistato qualcuno con le parole giuste, dette al momento giusto.",
-      ostacolo: "Ti frena l'attesa: hai tutto per agire, e ancora non ti muovi.",
+      ostacolo: "Ti frena un po' di soggezione verso chi ti piace, anche se hai tutto per agire.",
       arrivo: "Avrai l'occasione di farti avanti, e troverai le parole giuste per riuscirci.",
       consiglio: "Fai tu la prima mossa: hai già tutto quello che serve.",
     },
     lavoro: {
       situazione: "Hai in mano tutti i mezzi per riuscire, e tocca a te metterli in moto.",
       origine: "Hai cominciato con il tuo ingegno e poco altro, e hai fatto succedere le cose.",
-      ostacolo: "Fai fatica a scegliere: sai fare molte cose, e ti disperdi fra tutte.",
+      ostacolo: "Ti rallenta la voglia di preparare tutto alla perfezione, quando potresti già agire.",
       arrivo: "Riuscirai a trasformare un'idea in un guadagno, perché le capacità non ti mancano.",
       consiglio: "Usa quello che sai fare, e mettiti al lavoro senza aspettare.",
     },
@@ -30,14 +30,14 @@ export default {
     altri: {
       situazione: "Sai farti ascoltare, e in paese molti guardano che cosa farai.",
       origine: "Qualcuno ha notato la tua abilità, e ti ha dato modo di usarla.",
-      ostacolo: "Pesa la diffidenza di chi ti vede troppo abile con le parole.",
+      ostacolo: "Ti pesano gli occhi di tutti addosso, proprio mentre sei sul punto di agire.",
       arrivo: "Convincerai gli altri a seguirti, se dirai con chiarezza che cosa vuoi fare.",
       consiglio: "Parla con chi può aiutarti, e mostra con i fatti che cosa sai fare.",
     },
     se: {
       situazione: "Ti senti capace di far succedere le cose, ed è il momento di agire.",
       origine: "Volevi una cosa con tutte le forze, e hai trovato il modo di ottenerla.",
-      ostacolo: "Resta un talento che non usi, perché non hai ancora deciso da dove cominciare.",
+      ostacolo: "Stenti a credere di avere già tutti i mezzi, e aspetti un segno prima di agire.",
       arrivo: "Scoprirai di avere più mezzi di quanto pensi, e li metterai a frutto.",
       consiglio: "Decidi che cosa vuoi, e comincia con le capacità che hai già.",
     },

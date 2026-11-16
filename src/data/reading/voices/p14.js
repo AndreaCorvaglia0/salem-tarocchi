@@ -9,7 +9,7 @@ export default {
     amore: {
       situazione: "Offri a chi ami sicurezza e generosità, e su di te si può contare.",
       origine: "Hai avuto accanto una persona solida, che ha provveduto a tutto senza farlo pesare.",
-      ostacolo: "Ti frena l'idea che basti provvedere a tutto per dimostrare amore.",
+      ostacolo: "Mette un po' in soggezione chi ami la sicurezza con cui governi ogni cosa.",
       arrivo: "Troverai un amore stabile e generoso, con qualcuno che sa mantenere gli impegni.",
       consiglio: "Dai con larghezza a chi ami, del tuo tempo oltre che delle tue cose.",
     },
@@ -23,7 +23,7 @@ export default {
     casa: {
       situazione: "Governa la casa una mano sicura e generosa, e alla famiglia non manca niente.",
       origine: "Qualcuno in famiglia ha provveduto a tutti con larghezza, e ha fatto da guida.",
-      ostacolo: "Dipende tutta la casa da una persona sola, che decide e provvede per tutti.",
+      ostacolo: "Contano tutti in casa sulla generosità di chi provvede, e si adagiano un poco.",
       arrivo: "Avrete una casa solida e una tavola abbondante, grazie a chi sa amministrare.",
       consiglio: "Guida la famiglia con fermezza e generosità, e pensa al benessere di tutti.",
     },
@@ -54,7 +54,7 @@ export default {
     },
     lavoro: {
       situazione: "Pensi solo al guadagno, e per ottenerlo passi sopra a persone e scrupoli.",
-      origine: "Hai lavorato per un padrone avido e ostinato, che pagava poco e pretendeva molto.",
+      origine: "Hai avuto a che fare con chi comandava con i soldi, pagava poco e pretendeva molto.",
       ostacolo: "Pesa l'attaccamento ai soldi, che ti fa prendere decisioni fredde e sbagliate.",
       arrivo: "Guadagnerai bene e ti costerà caro, in rapporti rovinati e fiducia perduta.",
       consiglio: "Tratta bene chi lavora con te, perché la ricchezza fatta sugli altri non dura.",

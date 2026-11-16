@@ -67,11 +67,11 @@ export default {
       consiglio: "Cambia qualcosa in casa, anche una cosa piccola, senza chiedere permesso ai ricordi.",
     },
     altri: {
-      situazione: "Cerchi negli altri gli amici di una volta, e quelli di oggi ti deludono.",
+      situazione: "Cerchi negli altri gli amici di una volta, e le facce nuove ti deludono.",
       origine: "Qualcuno a cui tenevi è cambiato, e tu hai continuato a vederlo com'era una volta.",
       ostacolo: "Ti lega una vecchia amicizia che ormai vive soltanto di ricordi.",
       arrivo: "Rivedrai gente di una volta, e ti accorgerai che il tempo ha cambiato tutti.",
-      consiglio: "Smetti di ripetere com'era bello una volta, e fai conoscenza con chi c'è adesso.",
+      consiglio: "Smetti di ripetere com'era bello una volta, e fai conoscenza con chi hai intorno.",
     },
     se: {
       situazione: "Stai con la testa nel passato, e le tue giornate ti scivolano via.",

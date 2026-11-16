@@ -9,7 +9,7 @@ export default {
     amore: {
       situazione: "Vedi crescere la vostra storia, e cominci a guardare lontano insieme a chi ami.",
       origine: "Hai fatto il primo passo senza fretta, e la storia è cresciuta da lì.",
-      ostacolo: "Ti pesa l'attesa, perché i frutti in amore vogliono il loro tempo.",
+      ostacolo: "Ti pesa la distanza: guardi lontano con chi ami, e il presente vi sembra poco.",
       arrivo: "Crescerà quello che c'è tra voi, e farete progetti più grandi.",
       consiglio: "Guarda avanti con chi ami, e lascia alla storia il tempo di crescere.",
     },

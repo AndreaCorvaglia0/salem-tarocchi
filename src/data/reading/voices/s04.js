@@ -68,7 +68,7 @@ export default {
     },
     altri: {
       situazione: "Stai tornando tra la gente dopo un periodo in disparte, con le forze ancora poche.",
-      origine: "Hai passato troppo tempo per conto tuo, e il riposo è diventato isolamento.",
+      origine: "Hai trascorso troppo tempo per conto tuo, e il riposo è diventato isolamento.",
       ostacolo: "Ti stanca la compagnia più del solito, perché non hai ancora recuperato.",
       arrivo: "Qualcuno verrà a tirarti fuori dal tuo ritiro, quando ancora ti manca il riposo.",
       consiglio: "Rientra in compagnia un passo alla volta, e riposa tra un invito e l'altro.",

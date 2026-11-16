@@ -50,7 +50,7 @@ export default {
       origine: "Hai capito tardi quanto valeva un affetto che ti veniva offerto, e l'hai accolto.",
       ostacolo: "Ti frena un resto di svogliatezza: l'offerta la vedi, ma tardi a rispondere.",
       arrivo: "Tornerà la voglia di amare, e accetterai un affetto che prima lasciavi cadere.",
-      consiglio: "Rispondi a chi ti cerca, adesso che la voglia è tornata.",
+      consiglio: "Rispondi a chi ti cerca, visto che la voglia è tornata.",
     },
     lavoro: {
       situazione: "Ritrovi la voglia di fare, e guardi con occhi nuovi una proposta lasciata da parte.",
@@ -64,7 +64,7 @@ export default {
       origine: "Avete avuto mesi di noia, in casa, finché qualcuno ha proposto una cosa nuova.",
       ostacolo: "Pesa ancora un po' di pigrizia: la voglia è tornata, ma in casa ci si muove piano.",
       arrivo: "Finirà la noia in famiglia, e accoglierete volentieri una novità.",
-      consiglio: "Proponi tu qualcosa da fare insieme, ora che in casa la noia è passata.",
+      consiglio: "Proponi tu qualcosa da fare insieme, dato che in casa la noia è finita.",
     },
     altri: {
       situazione: "Torni ad avere voglia di gente, e accetti gli inviti che prima rifiutavi.",

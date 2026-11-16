@@ -7,7 +7,7 @@ export default {
     favore: 1, moto: 'torna',
     essenza: "La sorte gira: una svolta a tuo favore.",
     amore: {
-      situazione: "Sta girando la sorte in amore, e quello che era fermo si rimette in moto.",
+      situazione: "Vedi la sorte girare a tuo favore in amore, dopo un periodo in cui niente si muoveva.",
       origine: "Hai incontrato una persona per pura sorte, e quell'incontro è stato una svolta.",
       ostacolo: "Ti frena l'attesa che decida il destino, mentre l'occasione passa.",
       arrivo: "Arriverà una svolta in amore, un incontro o un ritorno che non aspettavi.",
@@ -61,9 +61,9 @@ export default {
     },
     casa: {
       situazione: "Capita in casa un guaio dopo l'altro, e sembra un periodo storto per tutti.",
-      origine: "Avete passato un'annata sfortunata in famiglia, e ne siete usciti stringendo i denti.",
+      origine: "Avete avuto un'annata sfortunata in famiglia, e ne siete usciti stringendo i denti.",
       ostacolo: "Manca in casa la voglia di reagire, perché tutti danno la colpa alla sfortuna.",
-      arrivo: "Dovrete rimandare un progetto di casa per un colpo di sfortuna, e poi riprenderlo.",
+      arrivo: "Dovrete rimandare un progetto di casa per un colpo di sfortuna, e riprenderlo in seguito.",
       consiglio: "Tieni unita la famiglia nel momento storto, e ricorda a tutti che passerà.",
     },
     altri: {

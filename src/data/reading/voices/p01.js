@@ -9,7 +9,7 @@ export default {
     amore: {
       situazione: "Si apre per te l'occasione di una storia seria, fatta di cose concrete.",
       origine: "Hai avuto l'occasione di conoscere una persona affidabile, e da lì è nato qualcosa di solido.",
-      ostacolo: "Ti frena il timore di sprecare un'occasione buona, e non ti decidi a coglierla.",
+      ostacolo: "Ti frena la cautela di chi ha davanti un'occasione seria e vuole coglierla bene.",
       arrivo: "Arriverà l'occasione di costruire qualcosa di vero con una persona.",
       consiglio: "Cogli l'occasione che hai davanti, e dimostra l'affetto con i fatti.",
     },
@@ -23,21 +23,21 @@ export default {
     casa: {
       situazione: "Si presenta l'occasione di sistemare la casa, o di trovarne una.",
       origine: "Avete cominciato da un piccolo dono, e la casa è cresciuta da quel seme.",
-      ostacolo: "Frena tutti la prudenza, e un'occasione buona per la casa rischia di passare.",
+      ostacolo: "Manca ancora l'accordo di tutti in casa, per far fruttare un'occasione così concreta.",
       arrivo: "Verrà un primo guadagno, e sarà il seme di qualcosa per tutta la famiglia.",
       consiglio: "Metti da parte il primo soldo per la casa: è un seme che crescerà.",
     },
     altri: {
       situazione: "Qualcuno del paese ti offre un'occasione concreta, e vale la pena ascoltare.",
       origine: "Un conoscente ti ha aperto un'occasione di guadagno, e da lì hai potuto cominciare.",
-      ostacolo: "Ti trattiene la diffidenza, e lasci cadere un'occasione che un amico ti offre.",
+      ostacolo: "Ti imbarazza accettare un'occasione così buona da un amico, e temi di restare in debito.",
       arrivo: "Qualcuno ti proporrà un affare buono, e da lì comincerà un lavoro in comune.",
       consiglio: "Chiedi in giro senza vergogna: l'occasione che cerchi passa dalle persone che conosci.",
     },
     se: {
       situazione: "Stai per cominciare qualcosa di concreto, e hai i mezzi per farlo bene.",
       origine: "Hai avuto in mano un'occasione vera, e hai saputo riconoscerla.",
-      ostacolo: "Ti manca soltanto il primo passo: l'occasione è lì, e tu aspetti.",
+      ostacolo: "Ti manca soltanto di credere che un'occasione così concreta sia proprio per te.",
       arrivo: "Avrai l'occasione di mettere a frutto quello che sai fare.",
       consiglio: "Comincia dal piccolo e dal concreto, e lascia che il seme cresca.",
     },

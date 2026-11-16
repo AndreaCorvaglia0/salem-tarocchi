@@ -28,7 +28,7 @@ export default {
       consiglio: "Fai coraggio ai tuoi, perché manca poco e avete già resistito al peggio.",
     },
     altri: {
-      situazione: "Ti muovi con cautela tra la gente dopo qualche delusione, e ti fidi a fatica.",
+      situazione: "Resisti in mezzo alla gente con la guardia alzata, anche se la stanchezza si fa sentire.",
       origine: "Qualcuno ha tradito la tua fiducia più di una volta, e hai imparato la cautela.",
       ostacolo: "Ti chiude agli altri la troppa prudenza, anche verso chi vorrebbe aiutarti.",
       arrivo: "Affronterai un'ultima resistenza da parte di qualcuno, e avrai pace.",
@@ -61,7 +61,7 @@ export default {
     },
     casa: {
       situazione: "Regge a stento la pazienza in casa, perché tutti sono sfiniti.",
-      origine: "Avete tirato avanti troppo a lungo senza riposo, e in famiglia qualcuno ha ceduto.",
+      origine: "Avete resistito in famiglia fino allo sfinimento, e qualcuno ha ceduto a un passo dalla fine.",
       ostacolo: "Pesa in casa la diffidenza di chi è sfinito, e nessuno crede più alle buone notizie.",
       arrivo: "Finiranno le forze di chi regge la casa, e servirà l'aiuto di tutti.",
       consiglio: "Dividi le fatiche di casa con gli altri, prima di restare senza forze.",

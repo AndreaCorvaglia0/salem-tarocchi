@@ -24,7 +24,7 @@ export default {
       situazione: "C'è in casa una persona giovane e sensibile, che porta tenerezza e qualche sorpresa.",
       origine: "È arrivata in casa una sorpresa gentile, e ha addolcito tutti.",
       ostacolo: "Pesa un po' l'ingenuità di qualcuno in casa, che ha ancora tutto da imparare.",
-      arrivo: "Verrà una sorpresa gentile in famiglia, forse l'annuncio di una nascita.",
+      arrivo: "Verrà una sorpresa gentile in famiglia, una notizia tenera che nessuno aspettava.",
       consiglio: "Ascolta il più giovane di casa, che ha una cosa gentile da dirti.",
     },
     altri: {
@@ -77,7 +77,7 @@ export default {
       situazione: "Cambi umore come fanno i ragazzi, e passi dal riso al broncio in un momento.",
       origine: "Hai tenuto a lungo i sentimenti acerbi di quando eri giovane, senza farli crescere.",
       ostacolo: "Ti manca la maturità per reggere una delusione, e scappi nei sogni.",
-      arrivo: "Lascerai perdere un'intuizione che ti viene dal cuore, e poi ti dispiacerà.",
+      arrivo: "Lascerai perdere un'intuizione che ti viene dal cuore, e te ne dispiacerà.",
       consiglio: "Impara a dire quello che senti, senza fare scenate e senza chiuderti nel silenzio.",
     },
   },

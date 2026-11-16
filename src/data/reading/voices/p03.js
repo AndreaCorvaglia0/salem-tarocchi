@@ -68,7 +68,7 @@ export default {
     },
     altri: {
       situazione: "Fatichi a lavorare con gli altri, e preferisci arrangiarti anche quando sbagli.",
-      origine: "Qualcuno non ha riconosciuto il tuo lavoro, e ti è passata la voglia di collaborare.",
+      origine: "Qualcuno non ha riconosciuto il tuo lavoro, e hai perso la voglia di collaborare.",
       ostacolo: "Ti danneggia chi lavora male accanto a te, perché il risultato è di tutti.",
       arrivo: "Mancherà l'accordo in un'impresa comune, e ognuno finirà per andare per la sua strada.",
       consiglio: "Scegli meglio con chi lavorare, e chiarisci prima chi deve fare che cosa.",

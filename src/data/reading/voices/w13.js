@@ -22,7 +22,7 @@ export default {
     },
     casa: {
       situazione: "Riscaldi la casa con la tua presenza, e tutti ci stanno volentieri.",
-      origine: "C'era in famiglia una donna forte e calorosa, che teneva tutti uniti.",
+      origine: "C'era in famiglia una persona forte e calorosa, che teneva tutti uniti.",
       ostacolo: "Gira tutta la casa intorno a una persona forte, e gli altri restano in ombra.",
       arrivo: "Renderai la tua casa un posto caldo e accogliente, dove tutti verranno volentieri.",
       consiglio: "Tieni acceso il calore di casa, e accogli chi bussa alla tua porta.",

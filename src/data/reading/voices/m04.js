@@ -54,8 +54,8 @@ export default {
     },
     lavoro: {
       situazione: "Regna il disordine nei tuoi affari, e nessuno sa chi deve fare cosa.",
-      origine: "Lavoravi sotto un padrone prepotente, e ti è rimasta la voglia di ribellarti.",
-      ostacolo: "Pesa un capo rigido, che usa le regole per dire sempre di no.",
+      origine: "Lavoravi sotto qualcuno di prepotente, e ti è rimasta la voglia di ribellarti.",
+      ostacolo: "Pesa un'autorità rigida, che usa le regole per dire sempre di no.",
       arrivo: "Dovrai fare i conti con una prepotenza sul lavoro, e tenere i nervi saldi.",
       consiglio: "Metti ordine nei conti, e non rispondere alla prepotenza con altra prepotenza.",
     },
