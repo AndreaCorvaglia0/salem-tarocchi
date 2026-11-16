@@ -9,9 +9,10 @@ import { END } from './scripts/end.js';
 import { POST } from './scripts/post.js';
 import { PROPS } from './scripts/props.js';
 import { LESSON_SCRIPTS } from './scripts/lessons.js';
+import { TRIAL_SCRIPTS } from './scripts/trials.js';
 import { CLIENTS, CLIENT_SCRIPTS } from './clients.js';
 
-export const SCRIPTS = { ...C0, ...C1, ...C1B, ...C2, ...C3, ...END, ...POST, ...PROPS, ...LESSON_SCRIPTS, ...CLIENT_SCRIPTS };
+export const SCRIPTS = { ...C0, ...C1, ...C1B, ...C2, ...C3, ...END, ...POST, ...PROPS, ...LESSON_SCRIPTS, ...TRIAL_SCRIPTS, ...CLIENT_SCRIPTS };
 export { LESSON_MISSIONS } from './missions.js';
 export { SESSIONS } from './sessions.js';
 export { STEPS, SIDE } from './steps.js';

@@ -23,6 +23,10 @@ export const HINTS = {
   fly: "Adesso sai volare: apri la mappa nel grimorio e tocca un posto all'aperto che hai già visto.",
   lesson: "Nel grimorio, alla pagina della mappa, c'è una missione nuova: toccala per seguirla.",
   trade: "Tocca un tuo doppione e poi la carta di Ginepra che vuoi in cambio.",
+  // the trials (shown by glue/trials.js when it asks for them)
+  trial: "A ogni bivio pesca una carta: è lei a dirti quale strada prendere, e ogni errore si paga.",
+  library: "Tocca un argomento con il nastro rosso per ripassarlo: ti servirà nella prossima prova.",
+  escape: "Tocca la strada per correre verso la luce: se ti fermi, chi ti insegue ti raggiunge.",
 };
 export const HINTS_KEYS = {
   move: "Per camminare usa le frecce della tastiera, oppure fai clic sul punto dove vuoi andare.",
