@@ -37,7 +37,7 @@ const checkLine = (text, where, cardName) => {
   if (typeof text !== 'string' || !text.trim()) return [`${where}: missing`];
   const out = [];
   const n = words(text).length;
-  if (n < 9 || n > 26) out.push(`${where}: ${n} words (need 9-26)`);
+  if (n < 7 || n > 18) out.push(`${where}: ${n} words (need 7-18)`);
   if (!text.trim().endsWith('.')) out.push(`${where}: does not end with a full stop`);
   const bad = BAD_START.find((w) => startsWith(text, w));
   if (bad) out.push(`${where}: starts with "${bad}"`);

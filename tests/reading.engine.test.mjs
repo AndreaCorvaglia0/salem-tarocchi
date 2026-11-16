@@ -1,4 +1,5 @@
 import test from 'node:test';
+import modelVoice from '../src/data/reading/voices/c05.js';
 import assert from 'node:assert/strict';
 import { SPREADS } from '../src/data/spreads.js';
 import { LEADS, CLOSINGS } from '../src/data/reading/frames.js';
@@ -240,7 +241,7 @@ test('verdictChoices: three plain levels, one ok', () => {
 });
 
 // validateVoice: one test per rule
-const clone = () => JSON.parse(JSON.stringify(stubA));
+const clone = () => JSON.parse(JSON.stringify(modelVoice)); // the model card: stubs are longer than a real voice may be
 const withLine = (text) => { const v = clone(); v.up.amore.situazione = text; return v; };
 const fine = 'Stai attraversando una questione di cuore con calma e non hai nessuna fretta.';
 test('validateVoice accepts a good voice', () => { assert.deepEqual(validateVoice(clone()), []); assert.deepEqual(validateVoice(withLine(fine)), []); });

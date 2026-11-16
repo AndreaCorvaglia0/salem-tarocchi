@@ -26,7 +26,7 @@ una lettura vera: legata alla domanda, alla posizione e alle altre carte.
    valori (contrasto: "adesso però"; continuità: "e infatti"; causa: "per questo"), aggiunge il colpo
    d'occhio, chiude rispondendo secondo la forma della domanda.
 
-Volume: 78 carte × 2 orientamenti × 5 ambiti × 5 ruoli = 3900 frasi. Si scrivono per carta, da un
+Volume: 78 carte × 2 orientamenti × 5 ambiti × 5 ruoli = 3900 frasi brevi. Si scrivono per carta, da un
 agente che ha davanti la scheda della carta: così il significato resta fedele.
 
 ## Il colpo d'occhio
@@ -111,7 +111,8 @@ export default {
 ```
 
 Regole di forma di una frase (le controlla un test):
-- Frase intera, rivolta a chi chiede con il tu, tra 9 e 26 parole, con il punto finale.
+- Frase intera, rivolta a chi chiede con il tu, tra 7 e 18 parole, con il punto finale. Un'idea sola.
+- L'idea della carta (`essenza`) si deve riconoscere nella frase, con la sua parola o una vicinissima.
 - Comincia con il verbo o con il soggetto, mai con un avverbio di tempo o di luogo e mai con
   "ma", "e", "però", "invece": il motore può metterle davanti "Nel passato", "Adesso però", "Più avanti".
   Deve reggere sia da sola (con la maiuscola) sia dopo uno di questi attacchi (con la minuscola).
@@ -164,3 +165,11 @@ Riscontro di Andrea: il gioco insegna, e chi gioca è alle prime armi. Quindi:
 - **Con una carta sola** si va diretti: idea, significato, tono.
 - **Frasi più corte**: da 7 a 18 parole, un'idea sola, e l'idea della carta riconoscibile, con la sua parola o una vicinissima.
 - La lettura finale si mostra carta per carta: miniatura, essenza, frase. Poi la risposta.
+
+## I Minori: numero × seme
+
+Non si imparano 56 carte a memoria. Il seme dice **dove** nella vita, il numero dice **che cosa succede**:
+la tabella è in `src/data/reading/grid.js`. "Cinque di Coppe" = cinque (qualcosa si rompe) × Coppe (il
+cuore) = una perdita che fa male al cuore. L'`essenza` di ogni Minore deve leggersi come questo prodotto,
+e le figure come **chi**: Fante chi impara, Cavaliere chi va, Regina chi custodisce, Re chi governa.
+La lezione dei Minori insegna la tabella; la schermata di lettura la può mostrare come aiuto.
