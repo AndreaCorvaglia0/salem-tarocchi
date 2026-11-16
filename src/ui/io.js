@@ -11,6 +11,9 @@ import { INK, PENCIL, RED, inkBar, svgEl } from './paper.js';
 import { TOOL_ART, purse, fan, silhouette, treat, paw } from './art.js';
 import { POP, popProgress, tartufoLevel, tartufoJudge } from '../core/bonds.js';
 import { nextStep, foundMajors, slotOf, TOOLS } from './logic.js';
+import { canSelfRead } from '../glue/selfread.rules.js';
+import { openSelfRead } from './selfread.js';
+import { openReadings } from './readings.js';
 
 const CSS = `
 .io-name{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
@@ -36,6 +39,9 @@ const CSS = `
 .io-bond .paws{display:inline-flex;gap:3px;vertical-align:middle}
 .io-bond .j{display:block;margin-top:2px;font-size:19px;line-height:24px}
 .io-r{margin-top:0}
+.io-reads{list-style:none;padding:0;margin:14px 0 0!important}
+.io-reads li{line-height:30px}
+.io-reads .n{color:${PENCIL};font-size:18px}
 @media (max-width:719px){.io-r{margin-top:34px}}
 .io-diary{list-style:none;padding:0;margin-top:8px!important}
 .io-diary li{position:relative;padding-left:22px;line-height:30px;margin-bottom:8px}
@@ -98,6 +104,14 @@ export function ioPages(ctx) {
   const R = [h('h2', {}, 'Diario')];
   const lines = lastDiary(3);
   R.push(lines.length ? h('ul.io-diary', lines.map((d) => h('li', {}, d.t))) : h('p.pencil', { style: { marginTop: '8px' } }, 'Ancora niente da scrivere.'));
+  // readings for myself and the diary of readings (ui/selfread.js, ui/readings.js), once I have read for someone
+  const nRead = Array.isArray(state.readings) ? state.readings.length : 0;
+  if (canSelfRead(state) || nRead) {
+    const away = async (fn) => { ctx.book.el.style.visibility = 'hidden'; try { await fn(); } finally { ctx.book.el.style.visibility = ''; ctx.rerender(); } };
+    const entry = (t, n, fn) => h('li', h('button.gx-link', { type: 'button', onclick: fn }, h('span.ar', { 'aria-hidden': 'true' }, '→'), h('span.t', {}, t), n ? h('span.n', {}, n) : null));
+    R.push(h('ul.io-reads', canSelfRead(state) ? entry('Una lettura per me', '', () => away(openSelfRead)) : null,
+      nRead ? entry('Le mie letture', `(${nRead})`, () => away(openReadings)) : null));
+  }
   R.push(h('div.sp'), h('div.sp'));
   const things = [h('div.io-thing', svgEl(fan({ size: 52 })), h('span', {}, `${foundMajors()} su 22`))];
   things.push(h('div.io-thing', svgEl(purse({ size: 52 })), h('span', {}, `${state.coins || 0} monete`)));

@@ -45,6 +45,8 @@ export const fresh = () => ({
   treats: 0,
   extras: {},
   track: null,
+  // the diary of readings (glue/selfread.js): [{ at, who, question, spread, cards, closing, note, real }], newest first
+  readings: [],
 });
 
 const merge = (base, saved) => {
@@ -64,6 +66,7 @@ export const migrate = (s) => {
   for (const k of ['pop', 'tartufo', 'treats']) s[k] = Math.max(0, Number(s[k]) || 0);
   if (typeof s.extras !== 'object' || !s.extras || Array.isArray(s.extras)) s.extras = {};
   if (typeof s.track !== 'string') s.track = null;
+  if (!Array.isArray(s.readings)) s.readings = [];
   // the old power table: seals and the far sight are gone (sealed things open with a question)
   if (s.powers) for (const k of ['seals', 'sense2', 'light2']) delete s.powers[k];
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job
