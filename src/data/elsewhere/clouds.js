@@ -6,69 +6,77 @@
 //   item { id, name }                the special object of a perfect visit (reward.item = id; flag item.<id>)
 //   fork steps carry `bridge`: the fork's index in the map (its bridges are digits 1-3, 4-6, 7-8)
 //   rooms may carry `at`: an anchor she must walk to before the room's lines
-// The forks are real (their tags are dealt unambiguously: tests/elsewhere.test.mjs). ALL LINES ARE
-// PLACEHOLDERS for the writer, each marked TODO-writer with an id:
-//   clouds.trigger clouds.intro clouds.at1 clouds.fork1 clouds.wrong1 clouds.at2 clouds.fork2 clouds.wrong2
-//   clouds.at3 clouds.fork3 clouds.wrong3 clouds.end clouds.perfect clouds.pass clouds.fail clouds.note
-//   clouds.item, and the option texts of the three forks (clouds.fork1.options ...)
+// The forks are real (their tags are dealt unambiguously: tests/elsewhere.test.mjs).
+// The place has a voice: the one who lives up there is the Wind, who never arrives on time and leaves notes
+// (the door, the ladder, the tea). She never meets him: the true moment is the cup he kept warm for her.
 import { T } from '../story/h.js';
 
 export default {
   id: 'clouds',
-  title: 'Sulle nuvole', // TODO-writer clouds.title
+  title: 'Sulle nuvole',
   map: 'clouds',
   start: 'clouds.start',
   device: 'potion', // the passage: a green swirl
   mood: 'title', // the airiest of the existing moods (glue/elsewhere.js asks for it on arrival)
   maxFalls: 3,
-  note: 'Sulla mensola del cottage c\'è una boccetta verde che non ricordo di avere comprato.', // TODO-writer clouds.note
+  note: 'Sulla mensola del cottage c\'è una boccetta verde che non ricordo di avere comprato, e ogni tanto il tappo si muove da solo.',
   when: { any: [{ chapterMin: 2 }, { flag: 'lesson.fly' }] },
   after: ['elsewhere.book'], // one at a time: the book first, then the clouds
   trigger: {
     at: 'cottage.shelf', art: 'bottle', dx: 0, dy: -1, label: 'Una boccetta verde', verb: 'Guarda',
     script: [
-      T('Sulla mensola c\'è una boccetta verde, e non ricordo proprio di averla messa lì.'), // TODO-writer clouds.trigger
-      T('Profuma di menta e di pioggia. Ne bevo un sorso soltanto, per capire che cos\'è.'), // TODO-writer clouds.trigger
+      T('Fra il barattolo del sale e quello della salvia c\'è una boccetta verde che non ho mai comprato. Sull\'etichetta qualcuno ha scritto, con una calligrafia tutta inclinata: «Per il mal di terra».'),
+      T('Io pensavo fosse lo sciroppo per la tosse, e ne ho già mandato giù un sorso. Sa di menta e di pioggia, e il pavimento ha appena smesso di essere dove l\'avevo lasciato.'),
     ],
   },
-  item: { id: 'clouds.feather', name: 'una piuma di nuvola' }, // TODO-writer clouds.item
+  item: { id: 'clouds.feather', name: 'una piuma di nuvola' },
   hint: 'Raggiungi il punto che brilla. Le nuvole sottili non reggono: guarda bene dove metti i piedi.',
   steps: [
-    { lines: [ // TODO-writer clouds.intro
-      ['narra', 'Il pavimento del cottage si fa morbido, poi bianco, e sotto i piedi adesso hai una nuvola.'],
-      ['tu', 'Sono in cielo. Laggiù, in fondo, c\'è una porta che sta in piedi da sola.'],
+    { lines: [
+      ['narra', 'Il pavimento del cottage si fa morbido, poi bianco, e quando guardi in basso hai sotto i piedi una nuvola larga come la piazza di Salem. Il villaggio è laggiù, piccolo come un presepe.'],
+      ['tu', 'Sono in cielo, e mi tiene su una cosa fatta di acqua e di aria. In fondo c\'è una porta che sta in piedi da sola, e ho idea che sia l\'unico modo di tornare a casa.'],
+      ['narra', 'Su un paletto piantato nella nuvola c\'è un biglietto, scritto con la stessa calligrafia inclinata della boccetta: «Benvenuta, e scusa il ritardo, che è il mio solito. Dove la nuvola è sottile non reggo nemmeno io. Firmato, il Vento».'],
     ] },
     { room: 'at1' },
-    { fork: { kind: 'segno', options: [ // TODO-writer clouds.fork1.options
-      { text: 'Il ponte in alto: vado spedita.', sign: 'go' },
-      { text: 'Il ponte in mezzo: vado piano.', sign: 'slow' },
-      { text: 'Il ponte in basso: aspetto e guardo.', sign: 'stop' },
-    ] }, bridge: 0, who: 'tu', t: 'Tre ponti di nuvola, e uno solo mi regge. Chiedo alle carte.', wrong: 'wrong1' }, // TODO-writer clouds.fork1
+    { fork: { kind: 'segno', options: [
+      { text: 'Prendo il ponte in alto, e lo passo di buon passo.', sign: 'go' },
+      { text: 'Prendo il ponte in mezzo, piano, provando ogni passo.', sign: 'slow' },
+      { text: 'Prendo il ponte in basso, dopo aver aspettato che smetta di muoversi.', sign: 'stop' },
+    ] }, bridge: 0, who: 'tu', t: 'Tre ponti, e da qui sembrano fatti tutti e tre della stessa panna. Chiedo a una carta quale mi regge.', wrong: 'wrong1' },
     { room: 'at2' },
-    { fork: { kind: 'idea', options: [ // TODO-writer clouds.fork2.options
-      { text: 'Il ponte a sinistra, che sale verso il sole.', tags: { moto: ['inizia', 'cresce'] } },
-      { text: 'Il ponte in mezzo, che finisce in un muro di nebbia.', tags: { moto: ['ferma', 'chiude'] } },
-      { text: 'Il ponte a destra, che gira e torna su se stesso.', tags: { moto: 'torna' } },
-    ] }, bridge: 1, who: 'tu', t: 'Ancora tre ponti, che salgono.', wrong: 'wrong2' }, // TODO-writer clouds.fork2
+    { fork: { kind: 'idea', options: [
+      { text: 'Il ponte a sinistra, che sale verso il sole appena spuntato.', tags: { moto: ['inizia', 'cresce'] } },
+      { text: 'Il ponte in mezzo, che finisce contro un muro di nebbia ferma.', tags: { moto: ['ferma', 'chiude'] } },
+      { text: 'Il ponte a destra, che fa un giro largo e torna verso di me.', tags: { moto: 'torna' } },
+    ] }, bridge: 1, who: 'tu', t: 'Qui il biglietto del Vento dice soltanto: «Uno dei tre è quello buono, e oggi non ricordo quale». Lo chiedo alla carta.', wrong: 'wrong2' },
     { room: 'at3' },
-    { fork: { kind: 'quesito', by: 'moto', rule: 'Se la carta parla di un inizio o di qualcosa che cresce, il ponte in alto; altrimenti quello in basso.', options: [ // TODO-writer clouds.fork3.options
-      { text: 'Il ponte in alto.', tags: { moto: ['inizia', 'cresce'] } },
-      { text: 'Il ponte in basso.', tags: { moto: ['ferma', 'chiude', 'torna'] } },
-    ] }, bridge: 2, who: 'tu', t: 'Sul tavolino qualcuno ha lasciato un biglietto con una regola.', wrong: 'wrong3' }, // TODO-writer clouds.fork3
+    { fork: { kind: 'quesito', by: 'moto', rule: 'Se la carta parla di qualcosa che comincia o che cresce, il ponte in alto. Se parla di qualcosa che si ferma, che finisce o che ritorna, il ponte in basso.', options: [
+      { text: 'Prendo il ponte in alto.', tags: { moto: ['inizia', 'cresce'] } },
+      { text: 'Prendo il ponte in basso.', tags: { moto: ['ferma', 'chiude', 'torna'] } },
+    ] }, bridge: 2, who: 'tu', t: 'Sotto la zuccheriera c\'è un altro biglietto, e stavolta il Vento si è ricordato la regola. La leggo, e poi pesco.', wrong: 'wrong3' },
     { room: 'end' },
   ],
   rooms: {
-    at1: { good: true, at: 'clouds.fork1', lines: [['narra', 'Il bordo della nuvola si sfilaccia in tre ponti.']] }, // TODO-writer clouds.at1
-    wrong1: { good: false, lines: [['narra', 'Il ponte trema appena sotto il primo passo.']] }, // TODO-writer clouds.wrong1
-    at2: { good: true, at: 'clouds.fork2', lines: [['narra', 'Una scala sale nel vuoto e non porta da nessuna parte.']] }, // TODO-writer clouds.at2
-    wrong2: { good: false, lines: [['narra', 'Il ponte è più sottile di quanto sembrava.']] }, // TODO-writer clouds.wrong2
-    at3: { good: true, at: 'clouds.fork3', lines: [['narra', 'Un tavolino da tè, apparecchiato per qualcuno che non c\'è.']] }, // TODO-writer clouds.at3
-    wrong3: { good: false, lines: [['narra', 'Qua e là la nuvola lascia vedere il cielo.']] }, // TODO-writer clouds.wrong3
-    end: { good: true, at: 'clouds.exit', lines: [['narra', 'La porta si apre da sola, e dietro c\'è il tuo cottage.']] }, // TODO-writer clouds.end
+    at1: { good: true, at: 'clouds.fork1', lines: [['narra', 'Il bordo della nuvola si sfilaccia in tre ponti, che dondolano appena, come panni stesi. Sotto, fra l\'uno e l\'altro, passa uno stormo di oche che non ti degna di uno sguardo.']] },
+    wrong1: { good: false, lines: [['narra', 'Non era il ponte che diceva la carta. Sotto il primo passo senti la nuvola cedere come neve vecchia, e in più punti adesso si vede attraverso: laggiù c\'è il tetto del tuo cottage, grande quanto un\'unghia.']] },
+    at2: { good: true, at: 'clouds.fork2', lines: [['narra', 'Qui c\'è una scala a pioli che sale dritta nel cielo e finisce nel niente. Sull\'ultimo piolo è posato un paio di scarpe, e un biglietto dice: «Torno subito, e non salite, che ci sono già io».']] },
+    wrong2: { good: false, lines: [['narra', 'La carta indicava un altro ponte. Questo è più sottile di quanto sembrava, e dai buchi sale un freddo che sa di camino spento: da quassù senti perfino la campana di Salem, piccola come un cucchiaino in una tazza.']] },
+    at3: { good: true, at: 'clouds.fork3', lines: [
+      ['narra', 'In mezzo alla nuvola c\'è un tavolino da tè apparecchiato per due, con la tovaglia fermata da quattro sassi. Una tazza è vuota e ha il segno di un labbro, e l\'altra è piena e fuma ancora.'],
+      ['tu', 'Sul piattino della tazza piena c\'è scritto il mio nome. Qualcuno che non conosco mi ha tenuto il tè in caldo, senza sapere a che ora sarei arrivata.'],
+    ] },
+    wrong3: { good: false, lines: [['narra', 'Hai letto la regola al contrario. Il ponte si apre qua e là come una calza smagliata, e dai buchi vedi passare, molto più in basso, l\'ombra della nuvola che cammina sopra i campi.']] },
+    end: { good: true, at: 'clouds.exit', lines: [['narra', 'La porta non ha muro né casa, soltanto uno stipite e un battente verde. Quando la tocchi si apre da sola, e dall\'altra parte c\'è il tuo cottage, con il fuoco acceso e la mensola al suo posto.']] },
   },
   outcomes: {
-    perfect: { lines: [['tu', 'Nella mano mi è rimasta una piuma bianca, leggera come il fiato.']], reward: { xp: 30, coins: 5, item: 'clouds.feather' } }, // TODO-writer clouds.perfect
-    pass: { lines: [['tu', 'Sono a casa, con le ginocchia che tremano ancora un poco.']], reward: { xp: 15, coins: 2 } }, // TODO-writer clouds.pass
-    fail: { lines: [['narra', 'Cadi, e cadendo ti svegli sul pavimento del cottage, con la boccetta vuota accanto.']], loss: { coins: 3, tool: 'bottle' } }, // TODO-writer clouds.fail
+    perfect: { lines: [
+      ['narra', 'Sei di nuovo in piedi sul tuo pavimento, e non hai messo un piede in fallo nemmeno una volta. Dalla porta, prima che sparisca, entra un soffio che ti scompiglia i capelli, come farebbe uno che saluta di corsa.'],
+      ['tu', 'In mano mi è rimasta una piuma bianca che non pesa niente e non si lascia posare: se la metto sul tavolo, sale. La tengo nel grimorio, e quando la guardo mi ricordo che lassù qualcuno mi aspetta per il tè.'],
+    ], reward: { xp: 30, coins: 5, item: 'clouds.feather' } },
+    pass: { lines: [['tu', 'Sono a casa, con le ginocchia che tremano ancora un poco e l\'orlo della gonna bagnato di nuvola. La boccetta verde è tornata sulla mensola, e giurerei che è di nuovo piena.']], reward: { xp: 15, coins: 2 } },
+    fail: { lines: [
+      ['narra', 'La nuvola si apre sotto di te un\'ultima volta, e stavolta non c\'è niente a cui tenersi. Cadi a lungo, attraverso un freddo bianco, e ti svegli sul pavimento del cottage con il cuore che batte forte e un ginocchio sbucciato.'],
+      ['tu', 'La boccetta è rotolata sotto il letto, vuota, e nella caduta dalla borsa mi è volato via qualcosa che adesso sarà sparso sui tetti di Salem. Un altro giorno, magari, ci riprovo.'],
+    ], loss: { coins: 3, tool: 'bottle' } },
   },
 };

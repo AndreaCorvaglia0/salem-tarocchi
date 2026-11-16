@@ -10,6 +10,8 @@
 //     faces (it asks for the lesson on reversed cards) and also with the court taught;
 //   after the ending (dare): twenty or more of the 22 Majors, with and without reversed faces.
 import test from 'node:test';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 import assert from 'node:assert/strict';
 import { state, setState } from '../src/core/state.js';
 import { test as cond } from '../src/core/cond.js';
@@ -307,4 +309,27 @@ test('the library\'s first scene and the sixteen sentences', () => {
     assert.deepEqual(Object.keys(WITCH_LINES[w]), ['pari', 'prova', 'brontola', 'fredda']);
     for (const t of Object.values(WITCH_LINES[w])) { assert.ok(t.startsWith(`${PEOPLE[w].short} `), t); assert.equal(sentences(t).length, 1, t); }
   }
+});
+
+// ---- Altrove, and nothing left to write anywhere ---------------------------------------------------
+test('no TODO-writer text is left under src, outside the files marked debug', () => {
+  const root = new URL('../src/', import.meta.url).pathname, left = [];
+  const walk = (dir) => { for (const f of readdirSync(dir)) { const p = join(dir, f); if (statSync(p).isDirectory()) walk(p); else if (/\.(js|mjs|json|css|html)$/.test(f)) { const t = readFileSync(p, 'utf8'); if (/TODO-writer/.test(t) && !/debug: true/.test(t)) left.push(p.replace(root, '')); } } };
+  walk(root);
+  assert.deepEqual(left, []);
+});
+
+test('the two Altrove worlds are written: every line follows the rules, the sentences keep their blank', async () => {
+  const { default: clouds } = await import('../src/data/elsewhere/clouds.js');
+  const { default: book } = await import('../src/data/elsewhere/book.js');
+  for (const W of [clouds, book]) {
+    const texts = [W.title, W.note, W.item.name, ...linesIn(W), ...W.trigger.script.map((n) => n.t)];
+    assert.ok(texts.length > 25, W.id);
+    for (const t of texts) { assert.deepEqual(faults(t), [], `${W.id}: ${t}`); assert.ok(!/[—–]/.test(t), t); }
+    assert.ok(W.trigger.script.length === 2 && W.outcomes.perfect.reward.item === W.item.id && W.outcomes.perfect.lines.some((l) => l[0] === 'tu'), `${W.id}: trigger, prize, what it is for her`);
+    for (const s of W.steps.filter((x) => x.fork)) assert.ok(s.t && W.rooms[s.wrong]?.lines.length && s.fork.options.every((o) => o.text && (o.sign || o.tags)), `${W.id}: fork`);
+  }
+  const forks = book.steps.filter((s) => s.fork);
+  for (const s of forks) { assert.ok(/ ___$/.test(s.sentence) && s.sentence.length <= 52, s.sentence); for (const o of s.fork.options) assert.ok(o.text.split(' ').length <= 2 && !/[.A-Z]/.test(o.text), `a word for the blank: ${o.text}`); }
+  assert.ok(JSON.stringify(book).includes('tartufo') && !JSON.stringify(clouds.steps).includes('tartufo') && !JSON.stringify(clouds.rooms).includes('artufo'), 'Tartufo is in the book, not on the clouds');
 });

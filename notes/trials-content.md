@@ -55,3 +55,20 @@ A real phone, audio, the escape played by hand; in the browser only night, fog (
 its door) and cellars (fail) were played; well, kettle, grave, room, dare only by the tests' fake player.
 The widow as `who` of a witchDraw ('La vedova Bray', not in PEOPLE) was not looked at.
 `tests/world.*` "every block kind has art: skydoor" failed once during my runs: another agent's file.
+
+## Altrove texts (16 Nov, night)
+`src/data/elsewhere/clouds.js`, `book.js`: every TODO-writer line written; tags, signs, bridges, anchors unchanged.
+- Clouds: the green bottle is labelled «Per il mal di terra»; up there lives the Wind, always late, who leaves
+  notes (welcome, the ladder with his shoes, the rule under the sugar bowl) and a cup of tea kept warm with her
+  name on the saucer (the true moment). A bridge that gives way shows Salem far below. Prize kept: "una piuma
+  di nuvola" (it rises when put down; it reminds her someone waits for her up there).
+- Book: a small untitled book whose tale is a girl arriving in the snow with one card; sentences
+  «Arrivò al villaggio nella neve, e la sua strada ___» (cominciò / si fermò / tornò indietro),
+  «Davanti alla porta chiusa, la ragazza ___» (bussò / aspettò), «Quella notte, alla sua finestra, il lume ___»
+  (si accese / si spense). Each blot holds the tale as it would have gone with the wrong word. Tartufo is in
+  the book (and finds himself written in it). Perfect: the book gets her name on the spine, and the red silk
+  bookmark comes out with her.
+Tests added to tests/trials.content.test.mjs: no TODO-writer under src outside debug files; both worlds follow
+the prose rules, sentences end in ` ___`, words are one or two lowercase words, Tartufo only in the book.
+Not looked at in the browser after the rewrite (the painted sentences are a little longer than the placeholders:
+45-48 characters against 30-42).
