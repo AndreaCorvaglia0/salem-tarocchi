@@ -56,6 +56,41 @@ under the music, chosen by place (`src/sound/beds.js`).
 | `public/ambience/stream.mp3` | "Flowing-water-100019" | see the file page | https://commons.wikimedia.org/wiki/File:Flowing-water-100019.ogg | Public domain |
 | `public/ambience/wind.mp3` | "Gentle breeze and birds singing" (low-passed: the birds are filtered out, the wind stays) | ezwa | https://commons.wikimedia.org/wiki/File:Gentle_breeze_and_birds_singing.ogg | Public domain |
 
+## The smoke rite (`public/rite/`, notes/rito/musica.md)
+
+Music: pieces by Kevin MacLeod ([incompetech.com](https://incompetech.com/)), licensed under Creative Commons
+Attribution 4.0 ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), fetched from
+`https://incompetech.com/music/royalty-free/mp3-royaltyfree/<file>` (`scripts/audio/fetch-rite.sh`), cut after the
+leading silence, loudness evened out to -24 LUFS, faded (`scripts/audio/encode-rite.sh`). None of them plays
+anywhere else in the game. The airs' pieces are provisional until the blind listening test.
+
+| File | Title | Author | Licence | Use |
+|---|---|---|---|---|
+| `public/rite/music/rosa.mp3` | "Reawakening" | Kevin MacLeod | CC BY 4.0 | the rose (provisional) |
+| `public/rite/music/alloro.mp3` | "Errigal" | Kevin MacLeod | CC BY 4.0 | the laurel (provisional) |
+| `public/rite/music/cipresso.mp3` | "Heart of Nowhere" | Kevin MacLeod | CC BY 4.0 | the cypress (provisional) |
+| `public/rite/music/salvia.mp3` | "Fairytale Waltz" | Kevin MacLeod | CC BY 4.0 | the sage (provisional) |
+| `public/rite/music/mirra.mp3` | "Mourning Song" | Kevin MacLeod | CC BY 4.0 | the myrrh (provisional) |
+| `public/rite/cand/*.mp3` (13 clips of 20 s) | "Reawakening", "Simple Duet", "Water Lily", "Errigal", "Somewhere Sunny (ver 2)", "Cello Suite 1 in G - Prelude", "Heart of Nowhere", "Night Vigil", "Fairytale Waltz", "Wizardtorium", "Mourning Song", "Plaint", "Virtutes Instrumenti" | Kevin MacLeod | CC BY 4.0 | the blind listening page (`<site>/ascolto/`); which clip is which: `scripts/audio/ascolto-key.json` |
+
+"Reawakening", "Simple Duet", "Water Lily", "Errigal", "Somewhere Sunny (ver 2)", "Cello Suite 1 in G - Prelude",
+"Heart of Nowhere", "Night Vigil", "Fairytale Waltz", "Wizardtorium", "Mourning Song", "Plaint" and "Virtutes
+Instrumenti" by Kevin MacLeod (incompetech.com), licensed under Creative Commons Attribution 4.0.
+
+Single notes and the opening stroke: recordings of the University of Iowa Electronic Music Studios
+([theremin.music.uiowa.edu/MIS.html](https://theremin.music.uiowa.edu/MIS.html)), which "may be downloaded and used
+for any projects, without restrictions". One note cut from each run, pitch-checked and tuned onto the note when more
+than 12 cents off, -20 LUFS (`scripts/audio/notes.py`).
+
+| File | Instrument, note | Iowa file |
+|---|---|---|
+| `public/rite/notes/knock.mp3` | Thai gong, D4 (the opening motif; tuned 56 cents down) | `Percussion/gongs & tamtams/thaigongs/thaigong.D4.mf.aif` |
+| `public/rite/notes/rosa.mp3` | cello arco, A3 | `Strings/cello/Cello.arco.mf.sulD.D3B3.aiff` |
+| `public/rite/notes/alloro.mp3` | guitar, D4 | `Piano_Other/guitar/Guitar.mf.sulA.C4E4.mono.aif` |
+| `public/rite/notes/cipresso.mp3` | double bass arco, D2 | `Strings/doublebass/Bass.arco.mf.sulD.D2B2.aiff` |
+| `public/rite/notes/salvia.mp3` | crotale, A6 | `Percussion/crotales/crotale.A6.pp.aif` |
+| `public/rite/notes/mirra.mp3` | alto flute, E4 | `Woodwinds/altoflute/AltoFlute.mf.C4B4.aiff` |
+
 ## Cards
 
 Rider-Waite-Smith deck, scans from the open dataset `metabismuth/tarot-json`. See `docs/RESEARCH.md`.

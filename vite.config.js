@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { readFileSync, existsSync } from 'node:fs';
 import { buildSite, siteFiles } from './scripts/lore/site.mjs';
 // Multi-file build with relative paths (index.html + assets + cards/ + music/), served by GitHub Pages.
 // Every build has a stamp: the page compares it with version.json and reloads itself when a newer one is out
@@ -28,10 +29,33 @@ export const lorePlugin = () => ({
   generateBundle() { for (const f of siteFiles(buildSite(), BUILD)) this.emitFile({ type: 'asset', ...f }); },
 });
 
+// The blind listening page of the smoke rite (harness/ascolto.*, notes/rito/musica.md): copied as it is to
+// <site>/ascolto/ (noindex); its clips are in public/rite/cand/. In dev, /ascolto/ serves the same files.
+const ASCOLTO = () => {
+  const font = 'node_modules/@fontsource/im-fell-english/files/im-fell-english-latin-400-normal.woff2';
+  return [{ fileName: 'ascolto/index.html', source: readFileSync('harness/ascolto.html', 'utf8') }, { fileName: 'ascolto/ascolto.js', source: readFileSync('harness/ascolto.js', 'utf8') },
+    ...(existsSync(font) ? [{ fileName: 'ascolto/fell.woff2', source: readFileSync(font) }] : [])];
+};
+export const ascoltoPlugin = () => ({
+  name: 'ascolto',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      const url = (req.url || '').split('?')[0];
+      if (url === '/ascolto') { res.statusCode = 302; res.setHeader('Location', '/ascolto/'); return res.end(); }
+      if (!url.startsWith('/ascolto/')) return next();
+      const f = ASCOLTO().find((x) => x.fileName === `ascolto/${url.slice(9) || 'index.html'}`);
+      if (!f) return next();
+      res.setHeader('Content-Type', TYPES[f.fileName.split('.').pop()] || 'application/octet-stream');
+      res.setHeader('Cache-Control', 'no-store'); res.end(f.source);
+    });
+  },
+  generateBundle() { for (const f of ASCOLTO()) this.emitFile({ type: 'asset', ...f }); },
+});
+
 export default defineConfig({
   base: './',
   define: { __BUILD__: JSON.stringify(BUILD) },
-  plugins: [{ name: 'version-file', generateBundle() { this.emitFile({ type: 'asset', fileName: 'version.json', source: JSON.stringify({ v: BUILD }) }); } }, lorePlugin()],
+  plugins: [{ name: 'version-file', generateBundle() { this.emitFile({ type: 'asset', fileName: 'version.json', source: JSON.stringify({ v: BUILD }) }); } }, lorePlugin(), ascoltoPlugin()],
   build: { outDir: process.env.OUT || 'dist', chunkSizeWarningLimit: 4000, target: 'es2020' },
   server: { host: '127.0.0.1' },
 });

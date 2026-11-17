@@ -1,0 +1,16 @@
+{
+  "_": "Which air each clip of the blind listening page was measured for (scripts/audio/encode-rite.sh, notes/rito/musica.md). Not shipped: the page has only the codes.",
+  "vfs": { "air": "rosa", "title": "Reawakening", "provisional": true },
+  "gln": { "air": "rosa", "title": "Simple Duet" },
+  "pbr": { "air": "rosa", "title": "Water Lily" },
+  "lbv": { "air": "alloro", "title": "Errigal", "provisional": true },
+  "sgm": { "air": "alloro", "title": "Somewhere Sunny (ver 2)" },
+  "tdd": { "air": "alloro", "title": "Cello Suite 1 in G - Prelude (dulcimer)" },
+  "jpm": { "air": "cipresso", "title": "Heart of Nowhere", "provisional": true },
+  "djr": { "air": "cipresso", "title": "Night Vigil" },
+  "ffj": { "air": "salvia", "title": "Fairytale Waltz", "provisional": true },
+  "tdj": { "air": "salvia", "title": "Wizardtorium" },
+  "smr": { "air": "mirra", "title": "Mourning Song", "provisional": true },
+  "jvs": { "air": "mirra", "title": "Plaint" },
+  "pgb": { "air": "mirra", "title": "Virtutes Instrumenti" }
+}

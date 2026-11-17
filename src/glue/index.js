@@ -15,6 +15,7 @@ import './fly.js'; // the broom: fly.check, fly.to (the grimoire's map)
 import './hints.js'; // the interface hints and the trail of lights
 import './bonds.js'; // popularity, Tartufo's points and treats, the tracked side mission
 import './selfread.js'; // the diary of readings: client readings kept, readings for herself saved
+import './rite.js'; // the smoke rite before a reading (ui/rite), the line after it
 import './wire.js'; // fog, small cards, obstacles, trading, the last hints
 import './lessons.js'; // the lessons as missions (flying, Minors, reversed) and the chapter card
 import './trials.js'; // asking the cards, the trials, the library (src/trials)

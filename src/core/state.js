@@ -66,6 +66,8 @@ export const fresh = () => ({
   // «Che ne pensi di lei?» (glue/opinions.rules.js): what she said of the people she met, what she heard of them
   opinions: {},
   notesAck: null, // place notes she has read (ui/placenotes.js); null on an old save: what is true now counts as read
+  // the smoke rite before a reading (glue/rite.rules.js freshRite: the same shape; normRite mends old values)
+  rite: { n: 0, last: null, owned: ['rosa', 'alloro', 'cipresso'], picks: {}, mine: {}, skipped: 0, shown: 0, times: {}, lineDay: null, malva: false, gifts: {}, deck: 0 },
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 

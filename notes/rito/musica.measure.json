@@ -1,0 +1,985 @@
+[
+ {
+  "air": "alloro",
+  "title": "Cello Suite #1 in G - Prelude",
+  "file": "alloro--Cello Suite #1 in G - Prelude.mp3",
+  "catalogueBpm": 88.0,
+  "whole": {
+   "tempo": 99.4,
+   "modeScore": 0.249,
+   "key": "D maggiore",
+   "modeConf": 0.249,
+   "register": 65.0,
+   "centroid": 1543,
+   "onsets": 4.99,
+   "perc": 0.041,
+   "space": 0.059,
+   "poly": 0.832
+  },
+  "first20": {
+   "tempo": 117.5,
+   "modeScore": 0.105,
+   "key": "G maggiore",
+   "modeConf": 0.105,
+   "register": 65.1,
+   "centroid": 1663,
+   "onsets": 5.25,
+   "perc": 0.032,
+   "space": 0.0,
+   "poly": 0.821
+  },
+  "lufs": -15.5,
+  "lra": 3.9,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "alloro",
+  "title": "Errigal",
+  "file": "alloro--Errigal.mp3",
+  "catalogueBpm": 112.0,
+  "whole": {
+   "tempo": 161.5,
+   "modeScore": 0.205,
+   "key": "C maggiore",
+   "modeConf": 0.205,
+   "register": 64.7,
+   "centroid": 1479,
+   "onsets": 2.08,
+   "perc": 0.047,
+   "space": 0.09,
+   "poly": 0.852
+  },
+  "first20": {
+   "tempo": 161.5,
+   "modeScore": 0.181,
+   "key": "C maggiore",
+   "modeConf": 0.181,
+   "register": 65.1,
+   "centroid": 1694,
+   "onsets": 2.45,
+   "perc": 0.049,
+   "space": 0.001,
+   "poly": 0.841
+  },
+  "lufs": -16.8,
+  "lra": 3.1,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "alloro",
+  "title": "Evening",
+  "file": "alloro--Evening.mp3",
+  "catalogueBpm": 101.0,
+  "whole": {
+   "tempo": 129.2,
+   "modeScore": 0.361,
+   "key": "E maggiore",
+   "modeConf": 0.361,
+   "register": 55.9,
+   "centroid": 719,
+   "onsets": 1.81,
+   "perc": 0.024,
+   "space": 0.005,
+   "poly": 0.742
+  },
+  "first20": {
+   "tempo": 129.2,
+   "modeScore": 0.347,
+   "key": "E maggiore",
+   "modeConf": 0.347,
+   "register": 53.5,
+   "centroid": 479,
+   "onsets": 2.45,
+   "perc": 0.026,
+   "space": 0.024,
+   "poly": 0.747
+  },
+  "lufs": -13.4,
+  "lra": 4.2,
+  "dist": 0.84,
+  "miss": [
+   "onsets 1.81",
+   "perc 0.024"
+  ],
+  "dist20": 0.78,
+  "miss20": [
+   "register 53.5",
+   "perc 0.026"
+  ]
+ },
+ {
+  "air": "alloro",
+  "title": "Midnight Tale",
+  "file": "alloro--Midnight Tale.mp3",
+  "catalogueBpm": 73.0,
+  "whole": {
+   "tempo": 143.6,
+   "modeScore": 0.059,
+   "key": "A maggiore",
+   "modeConf": 0.059,
+   "register": 52.3,
+   "centroid": 622,
+   "onsets": 2.89,
+   "perc": 0.025,
+   "space": 0.04,
+   "poly": 0.716
+  },
+  "first20": {
+   "tempo": 143.6,
+   "modeScore": 0.135,
+   "key": "A maggiore",
+   "modeConf": 0.135,
+   "register": 52.6,
+   "centroid": 622,
+   "onsets": 2.65,
+   "perc": 0.021,
+   "space": 0.022,
+   "poly": 0.705
+  },
+  "lufs": -17.5,
+  "lra": 5.2,
+  "dist": 1.91,
+  "miss": [
+   "tempo 73.0",
+   "register 52.3",
+   "perc 0.025"
+  ],
+  "dist20": 2.23,
+  "miss20": [
+   "tempo 73.0",
+   "register 52.6",
+   "perc 0.021"
+  ]
+ },
+ {
+  "air": "alloro",
+  "title": "Somewhere Sunny (ver 2)",
+  "file": "alloro--Somewhere Sunny (ver 2).mp3",
+  "catalogueBpm": 106.0,
+  "whole": {
+   "tempo": 107.7,
+   "modeScore": 0.361,
+   "key": "C maggiore",
+   "modeConf": 0.361,
+   "register": 57.8,
+   "centroid": 921,
+   "onsets": 3.59,
+   "perc": 0.033,
+   "space": 0.044,
+   "poly": 0.823
+  },
+  "first20": {
+   "tempo": 107.7,
+   "modeScore": 0.271,
+   "key": "C maggiore",
+   "modeConf": 0.271,
+   "register": 57.8,
+   "centroid": 911,
+   "onsets": 3.85,
+   "perc": 0.032,
+   "space": 0.0,
+   "poly": 0.825
+  },
+  "lufs": -16.9,
+  "lra": 4.0,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "cipresso",
+  "title": "Agnus Dei X",
+  "file": "cipresso--Agnus Dei X.mp3",
+  "catalogueBpm": 60.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.169,
+   "key": "C maggiore",
+   "modeConf": 0.169,
+   "register": 39.6,
+   "centroid": 1153,
+   "onsets": 0.5,
+   "perc": 0.049,
+   "space": 0.131,
+   "poly": 0.8
+  },
+  "first20": {
+   "tempo": 117.5,
+   "modeScore": 0.23,
+   "key": "C maggiore",
+   "modeConf": 0.23,
+   "register": 38.3,
+   "centroid": 914,
+   "onsets": 0.6,
+   "perc": 0.039,
+   "space": 0.087,
+   "poly": 0.782
+  },
+  "lufs": -14.5,
+  "lra": 11.6,
+  "dist": 4.39,
+  "miss": [
+   "modeScore 0.169",
+   "perc 0.049"
+  ],
+  "dist20": 4.0,
+  "miss20": [
+   "modeScore 0.23",
+   "perc 0.039"
+  ]
+ },
+ {
+  "air": "cipresso",
+  "title": "Dissappointment",
+  "file": "cipresso--Dissappointment.mp3",
+  "catalogueBpm": 67.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.241,
+   "key": "D maggiore",
+   "modeConf": 0.241,
+   "register": 47.9,
+   "centroid": 713,
+   "onsets": 0.78,
+   "perc": 0.01,
+   "space": 0.036,
+   "poly": 0.76
+  },
+  "first20": {
+   "tempo": 129.2,
+   "modeScore": 0.297,
+   "key": "D maggiore",
+   "modeConf": 0.297,
+   "register": 50.7,
+   "centroid": 864,
+   "onsets": 1.55,
+   "perc": 0.004,
+   "space": 0.095,
+   "poly": 0.803
+  },
+  "lufs": -13.1,
+  "lra": 4.8,
+  "dist": 2.71,
+  "miss": [
+   "modeScore 0.241"
+  ],
+  "dist20": 3.27,
+  "miss20": [
+   "modeScore 0.297"
+  ]
+ },
+ {
+  "air": "cipresso",
+  "title": "Heart of Nowhere",
+  "file": "cipresso--Heart of Nowhere.mp3",
+  "catalogueBpm": 47.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": -0.065,
+   "key": "F# minore",
+   "modeConf": 0.065,
+   "register": 40.4,
+   "centroid": 639,
+   "onsets": 2.69,
+   "perc": 0.003,
+   "space": 0.044,
+   "poly": 0.69
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": -0.04,
+   "key": "A minore",
+   "modeConf": 0.04,
+   "register": 40.0,
+   "centroid": 524,
+   "onsets": 2.05,
+   "perc": 0.003,
+   "space": 0.052,
+   "poly": 0.668
+  },
+  "lufs": -19.3,
+  "lra": 7.4,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "cipresso",
+  "title": "Lost Time",
+  "file": "cipresso--Lost Time.mp3",
+  "catalogueBpm": 55.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": -0.257,
+   "key": "G minore",
+   "modeConf": 0.257,
+   "register": 45.2,
+   "centroid": 779,
+   "onsets": 6.19,
+   "perc": 0.008,
+   "space": 0.005,
+   "poly": 0.723
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": -0.151,
+   "key": "G minore",
+   "modeConf": 0.151,
+   "register": 51.2,
+   "centroid": 798,
+   "onsets": 5.2,
+   "perc": 0.003,
+   "space": 0.034,
+   "poly": 0.705
+  },
+  "lufs": -17.0,
+  "lra": 5.0,
+  "dist": 3.99,
+  "miss": [
+   "onsets 6.19"
+  ],
+  "dist20": 2.75,
+  "miss20": [
+   "onsets 5.2"
+  ]
+ },
+ {
+  "air": "cipresso",
+  "title": "Night Vigil",
+  "file": "cipresso--Night Vigil.mp3",
+  "catalogueBpm": 54.0,
+  "whole": {
+   "tempo": 112.3,
+   "modeScore": -0.275,
+   "key": "A minore",
+   "modeConf": 0.275,
+   "register": 48.1,
+   "centroid": 1058,
+   "onsets": 4.04,
+   "perc": 0.008,
+   "space": 0.076,
+   "poly": 0.85
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.048,
+   "key": "F maggiore",
+   "modeConf": 0.048,
+   "register": 39.9,
+   "centroid": 735,
+   "onsets": 5.05,
+   "perc": 0.012,
+   "space": 0.129,
+   "poly": 0.823
+  },
+  "lufs": -14.3,
+  "lra": 12.6,
+  "dist": 1.3,
+  "miss": [
+   "onsets 4.04"
+  ],
+  "dist20": 3.34,
+  "miss20": [
+   "modeScore 0.048",
+   "onsets 5.05"
+  ]
+ },
+ {
+  "air": "mirra",
+  "title": "Mourning Song",
+  "file": "mirra--Mourning Song.mp3",
+  "catalogueBpm": 57.0,
+  "whole": {
+   "tempo": 129.2,
+   "modeScore": 0.082,
+   "key": "A maggiore",
+   "modeConf": 0.082,
+   "register": 44.6,
+   "centroid": 640,
+   "onsets": 1.52,
+   "perc": 0.001,
+   "space": 0.162,
+   "poly": 0.551
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.036,
+   "key": "A maggiore",
+   "modeConf": 0.036,
+   "register": 43.7,
+   "centroid": 435,
+   "onsets": 2.2,
+   "perc": 0.001,
+   "space": 0.061,
+   "poly": 0.521
+  },
+  "lufs": -18.6,
+  "lra": 15.0,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "mirra",
+  "title": "Nu Flute",
+  "file": "mirra--Nu Flute.mp3",
+  "catalogueBpm": 60.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.18,
+   "key": "C maggiore",
+   "modeConf": 0.18,
+   "register": 54.5,
+   "centroid": 965,
+   "onsets": 1.36,
+   "perc": 0.006,
+   "space": 0.087,
+   "poly": 0.764
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.106,
+   "key": "C maggiore",
+   "modeConf": 0.106,
+   "register": 57.3,
+   "centroid": 1123,
+   "onsets": 2.05,
+   "perc": 0.005,
+   "space": 0.097,
+   "poly": 0.704
+  },
+  "lufs": -13.2,
+  "lra": 9.2,
+  "dist": 0.88,
+  "miss": [
+   "modeScore 0.18",
+   "poly 0.764"
+  ],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "mirra",
+  "title": "Plaint",
+  "file": "mirra--Plaint.mp3",
+  "catalogueBpm": 65.0,
+  "whole": {
+   "tempo": 129.2,
+   "modeScore": -0.17,
+   "key": "A minore",
+   "modeConf": 0.17,
+   "register": 61.6,
+   "centroid": 666,
+   "onsets": 1.73,
+   "perc": 0.003,
+   "space": 0.013,
+   "poly": 0.698
+  },
+  "first20": {
+   "tempo": 129.2,
+   "modeScore": -0.127,
+   "key": "A minore",
+   "modeConf": 0.127,
+   "register": 63.2,
+   "centroid": 598,
+   "onsets": 2.5,
+   "perc": 0.001,
+   "space": 0.014,
+   "poly": 0.635
+  },
+  "lufs": -21.4,
+  "lra": 5.5,
+  "dist": 0.5,
+  "miss": [
+   "modeScore -0.17"
+  ],
+  "dist20": 0.07,
+  "miss20": [
+   "modeScore -0.127"
+  ]
+ },
+ {
+  "air": "mirra",
+  "title": "Virtutes Instrumenti",
+  "file": "mirra--Virtutes Instrumenti.mp3",
+  "catalogueBpm": 56.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.031,
+   "key": "D maggiore",
+   "modeConf": 0.031,
+   "register": 67.7,
+   "centroid": 1369,
+   "onsets": 3.58,
+   "perc": 0.002,
+   "space": 0.031,
+   "poly": 0.751
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.054,
+   "key": "D maggiore",
+   "modeConf": 0.054,
+   "register": 67.8,
+   "centroid": 1287,
+   "onsets": 5.9,
+   "perc": 0.002,
+   "space": 0.08,
+   "poly": 0.746
+  },
+  "lufs": -16.6,
+  "lra": 11.3,
+  "dist": 0.75,
+  "miss": [
+   "onsets 3.58",
+   "poly 0.751"
+  ],
+  "dist20": 3.63,
+  "miss20": [
+   "onsets 5.9"
+  ]
+ },
+ {
+  "air": "mirra",
+  "title": "Virtutes Vocis",
+  "file": "mirra--Virtutes Vocis.mp3",
+  "catalogueBpm": 56.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.049,
+   "key": "E maggiore",
+   "modeConf": 0.049,
+   "register": 60.6,
+   "centroid": 1040,
+   "onsets": 5.91,
+   "perc": 0.002,
+   "space": 0.012,
+   "poly": 0.68
+  },
+  "first20": {
+   "tempo": 117.5,
+   "modeScore": 0.034,
+   "key": "E maggiore",
+   "modeConf": 0.034,
+   "register": 58.8,
+   "centroid": 964,
+   "onsets": 5.5,
+   "perc": 0.001,
+   "space": 0.051,
+   "poly": 0.676
+  },
+  "lufs": -18.7,
+  "lra": 6.0,
+  "dist": 3.64,
+  "miss": [
+   "onsets 5.91"
+  ],
+  "dist20": 3.12,
+  "miss20": [
+   "onsets 5.5"
+  ]
+ },
+ {
+  "air": "rosa",
+  "title": "Ever Mindful",
+  "file": "rosa--Ever Mindful.mp3",
+  "catalogueBpm": 40.0,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.116,
+   "key": "C maggiore",
+   "modeConf": 0.116,
+   "register": 44.0,
+   "centroid": 901,
+   "onsets": 1.03,
+   "perc": 0.004,
+   "space": 0.022,
+   "poly": 0.67
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.193,
+   "key": "C maggiore",
+   "modeConf": 0.193,
+   "register": 42.9,
+   "centroid": 785,
+   "onsets": 0.15,
+   "perc": 0.002,
+   "space": 0.162,
+   "poly": 0.63
+  },
+  "lufs": -22.3,
+  "lra": 5.3,
+  "dist": 1.0,
+  "miss": [
+   "register 44.0"
+  ],
+  "dist20": 1.28,
+  "miss20": [
+   "register 42.9"
+  ]
+ },
+ {
+  "air": "rosa",
+  "title": "Morning",
+  "file": "rosa--Morning.mp3",
+  "catalogueBpm": 60.0,
+  "whole": {
+   "tempo": 117.5,
+   "modeScore": 0.156,
+   "key": "A maggiore",
+   "modeConf": 0.156,
+   "register": 53.5,
+   "centroid": 778,
+   "onsets": 2.09,
+   "perc": 0.021,
+   "space": 0.021,
+   "poly": 0.726
+  },
+  "first20": {
+   "tempo": 117.5,
+   "modeScore": 0.157,
+   "key": "D maggiore",
+   "modeConf": 0.157,
+   "register": 54.9,
+   "centroid": 775,
+   "onsets": 2.2,
+   "perc": 0.026,
+   "space": 0.001,
+   "poly": 0.71
+  },
+  "lufs": -18.0,
+  "lra": 3.6,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.1,
+  "miss20": [
+   "perc 0.026"
+  ]
+ },
+ {
+  "air": "rosa",
+  "title": "Reawakening",
+  "file": "rosa--Reawakening.mp3",
+  "catalogueBpm": 56.0,
+  "whole": {
+   "tempo": 143.6,
+   "modeScore": 0.027,
+   "key": "C maggiore",
+   "modeConf": 0.027,
+   "register": 53.9,
+   "centroid": 564,
+   "onsets": 0.47,
+   "perc": 0.018,
+   "space": 0.33,
+   "poly": 0.723
+  },
+  "first20": {
+   "tempo": 129.2,
+   "modeScore": 0.087,
+   "key": "C maggiore",
+   "modeConf": 0.087,
+   "register": 53.6,
+   "centroid": 359,
+   "onsets": 0.3,
+   "perc": 0.007,
+   "space": 0.242,
+   "poly": 0.639
+  },
+  "lufs": -34.6,
+  "lra": 16.4,
+  "dist": 0.23,
+  "miss": [
+   "modeScore 0.027"
+  ],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "rosa",
+  "title": "Simple Duet",
+  "file": "rosa--Simple Duet.mp3",
+  "catalogueBpm": 57.0,
+  "whole": {
+   "tempo": 95.7,
+   "modeScore": 0.158,
+   "key": "C maggiore",
+   "modeConf": 0.158,
+   "register": 63.2,
+   "centroid": 1224,
+   "onsets": 1.44,
+   "perc": 0.017,
+   "space": 0.043,
+   "poly": 0.807
+  },
+  "first20": {
+   "tempo": 95.7,
+   "modeScore": 0.264,
+   "key": "C maggiore",
+   "modeConf": 0.264,
+   "register": 62.8,
+   "centroid": 768,
+   "onsets": 2.35,
+   "perc": 0.017,
+   "space": 0.036,
+   "poly": 0.798
+  },
+  "lufs": -19.0,
+  "lra": 8.8,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "rosa",
+  "title": "Water Lily",
+  "file": "rosa--Water Lily.mp3",
+  "catalogueBpm": 62.0,
+  "whole": {
+   "tempo": 117.5,
+   "modeScore": 0.216,
+   "key": "Bb maggiore",
+   "modeConf": 0.216,
+   "register": 42.1,
+   "centroid": 413,
+   "onsets": 0.78,
+   "perc": 0.011,
+   "space": 0.199,
+   "poly": 0.743
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.152,
+   "key": "F maggiore",
+   "modeConf": 0.152,
+   "register": 53.6,
+   "centroid": 379,
+   "onsets": 0.85,
+   "perc": 0.012,
+   "space": 0.111,
+   "poly": 0.735
+  },
+  "lufs": -27.6,
+  "lra": 8.9,
+  "dist": 1.47,
+  "miss": [
+   "register 42.1"
+  ],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "salvia",
+  "title": "Ethereal Relaxation",
+  "file": "salvia--Ethereal Relaxation.mp3",
+  "catalogueBpm": null,
+  "whole": {
+   "tempo": 129.2,
+   "modeScore": 0.153,
+   "key": "D maggiore",
+   "modeConf": 0.153,
+   "register": 55.2,
+   "centroid": 398,
+   "onsets": 1.22,
+   "perc": 0.006,
+   "space": 0.012,
+   "poly": 0.725
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.192,
+   "key": "D maggiore",
+   "modeConf": 0.192,
+   "register": 54.0,
+   "centroid": 350,
+   "onsets": 1.2,
+   "perc": 0.004,
+   "space": 0.006,
+   "poly": 0.711
+  },
+  "lufs": -19.2,
+  "lra": 13.8,
+  "dist": 3.96,
+  "miss": [
+   "register 55.2",
+   "space 0.012"
+  ],
+  "dist20": 4.38,
+  "miss20": [
+   "register 54.0",
+   "space 0.006"
+  ]
+ },
+ {
+  "air": "salvia",
+  "title": "Fairytale Waltz",
+  "file": "salvia--Fairytale Waltz.mp3",
+  "catalogueBpm": null,
+  "whole": {
+   "tempo": 112.3,
+   "modeScore": -0.233,
+   "key": "C minore",
+   "modeConf": 0.233,
+   "register": 73.0,
+   "centroid": 1250,
+   "onsets": 1.91,
+   "perc": 0.005,
+   "space": 0.123,
+   "poly": 0.657
+  },
+  "first20": {
+   "tempo": 112.3,
+   "modeScore": -0.126,
+   "key": "G minore",
+   "modeConf": 0.126,
+   "register": 77.7,
+   "centroid": 1138,
+   "onsets": 1.75,
+   "perc": 0.008,
+   "space": 0.168,
+   "poly": 0.667
+  },
+  "lufs": -29.6,
+  "lra": 7.1,
+  "dist": 0.0,
+  "miss": [],
+  "dist20": 0.0,
+  "miss20": []
+ },
+ {
+  "air": "salvia",
+  "title": "That Zen Moment",
+  "file": "salvia--That Zen Moment.mp3",
+  "catalogueBpm": null,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.306,
+   "key": "A maggiore",
+   "modeConf": 0.306,
+   "register": 45.0,
+   "centroid": 719,
+   "onsets": 1.22,
+   "perc": 0.025,
+   "space": 0.017,
+   "poly": 0.793
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.06,
+   "key": "A maggiore",
+   "modeConf": 0.06,
+   "register": 42.6,
+   "centroid": 597,
+   "onsets": 0.6,
+   "perc": 0.013,
+   "space": 0.041,
+   "poly": 0.683
+  },
+  "lufs": -19.3,
+  "lra": 8.1,
+  "dist": 6.41,
+  "miss": [
+   "register 45.0",
+   "space 0.017"
+  ],
+  "dist20": 6.53,
+  "miss20": [
+   "register 42.6",
+   "space 0.041"
+  ]
+ },
+ {
+  "air": "salvia",
+  "title": "Wizardtorium",
+  "file": "salvia--Wizardtorium.mp3",
+  "catalogueBpm": 58.0,
+  "whole": {
+   "tempo": 117.5,
+   "modeScore": -0.068,
+   "key": "E minore",
+   "modeConf": 0.068,
+   "register": 69.4,
+   "centroid": 1610,
+   "onsets": 1.33,
+   "perc": 0.006,
+   "space": 0.006,
+   "poly": 0.742
+  },
+  "first20": {
+   "tempo": 112.3,
+   "modeScore": -0.281,
+   "key": "C minore",
+   "modeConf": 0.281,
+   "register": 69.5,
+   "centroid": 1295,
+   "onsets": 4.7,
+   "perc": 0.002,
+   "space": 0.044,
+   "poly": 0.723
+  },
+  "lufs": -37.0,
+  "lra": 6.4,
+  "dist": 1.88,
+  "miss": [
+   "space 0.006"
+  ],
+  "dist20": 5.62,
+  "miss20": [
+   "onsets 4.7",
+   "space 0.044"
+  ]
+ },
+ {
+  "air": "salvia",
+  "title": "Wood and Metal and Water",
+  "file": "salvia--Wood and Metal and Water.mp3",
+  "catalogueBpm": null,
+  "whole": {
+   "tempo": 123.0,
+   "modeScore": 0.115,
+   "key": "F# maggiore",
+   "modeConf": 0.115,
+   "register": 43.2,
+   "centroid": 799,
+   "onsets": 0.11,
+   "perc": 0.004,
+   "space": 0.015,
+   "poly": 0.695
+  },
+  "first20": {
+   "tempo": 123.0,
+   "modeScore": 0.078,
+   "key": "F# maggiore",
+   "modeConf": 0.078,
+   "register": 44.7,
+   "centroid": 733,
+   "onsets": 7.15,
+   "perc": 0.008,
+   "space": 0.074,
+   "poly": 0.718
+  },
+  "lufs": -25.2,
+  "lra": 9.3,
+  "dist": 6.9,
+  "miss": [
+   "register 43.2",
+   "space 0.015"
+  ],
+  "dist20": 13.93,
+  "miss20": [
+   "register 44.7",
+   "onsets 7.15",
+   "space 0.074"
+  ]
+ }
+]

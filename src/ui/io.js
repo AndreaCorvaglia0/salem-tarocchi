@@ -17,6 +17,8 @@ import { openReadings } from './readings.js';
 import { openWitches, witchesMet } from './witches.js';
 import { openCode } from './savecode.js';
 import { openPeople, peopleShown } from './people.js';
+import { traditionLines } from '../glue/rite.rules.js';
+import { AIRS, TEXT as RITE_TEXT } from '../data/rite.js';
 
 const CSS = `
 .io-name{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
@@ -107,6 +109,9 @@ export function ioPages(ctx) {
   const R = [h('h2', {}, 'Diario')];
   const lines = lastDiary(3);
   R.push(lines.length ? h('ul.io-diary', lines.map((d) => h('li', {}, d.t))) : h('p.pencil', { style: { marginTop: '8px' } }, 'Ancora niente da scrivere.'));
+  // my own tradition of the smoke rite (glue/rite.rules.js): after three times the same air for a kind of question
+  const fumi = traditionLines(state.rite);
+  if (fumi.length) R.push(h('p.pencil', { style: { marginTop: '14px', fontSize: '18px' } }, RITE_TEXT.mineTitle), h('ul.io-diary', fumi.map((f) => h('li', {}, RITE_TEXT.mine(f.ambito, AIRS[f.air], AIRS[f.malva])))));
   // readings for myself and the diary of readings (ui/selfread.js, ui/readings.js), once I have read for someone
   const nRead = Array.isArray(state.readings) ? state.readings.length : 0;
   if (canSelfRead(state) || nRead) {

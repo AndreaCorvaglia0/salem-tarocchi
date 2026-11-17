@@ -27,6 +27,9 @@ export const FOREST_SPOTS = [
 // player's tile). Sessions, readings, exams, the title and the ending have no bed; the court and the
 // cellars are silent places.
 export function bedFor(mood, { map = null, chapter = 0, ended = false, x = null, y = null } = {}) {
+  // the smoke rite: the fire leads while she searches, and stays low under the air she lit
+  if (mood === 'rite') return bed('fire', 0.7, 1.5);
+  if (typeof mood === 'string' && mood.startsWith('air.')) return bed('fire', 0.22, 3);
   if (mood !== 'village' && mood !== 'forest' && mood !== 'depths') return NONE;
   if (map === 'court' || map === 'depths' || mood === 'depths') return NONE;
   if (map === 'malva' || map === 'cottage') return bed('fire', 0.55, 2.5); // a hearth in the house

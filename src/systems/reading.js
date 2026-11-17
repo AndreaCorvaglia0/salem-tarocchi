@@ -3,6 +3,7 @@
 // When every card she can draw has a voice (consult.rules.js engineFor), a client reading goes to the reading
 // engine instead (consult.js): the cards come only from the voiced ones she owns. Otherwise nothing changes.
 import { h, cardUrl } from '../core/dom.js';
+import { call, has } from '../core/services.js';
 import { minorTaught } from '../glue/lessons.rules.js';
 import { fill } from '../core/cond.js';
 import { answer, addCoins, addXp, stat, ownedMajors, ownedIds, yourCard, dayCard } from '../core/progress.js';
@@ -23,6 +24,7 @@ import { consult } from './consult.js';
 
 
 const coreLine = (id) => { const c = sheet(id)?.core; return c ? h('p', { style: { color: 'var(--gold)' } }, `In una frase: ${c}`) : null; };
+const afterRite = () => { const n = has('rite.after') ? call('rite.after') : null; return n?.nodeType ? n : null; }; // the line after the smoke rite
 const wait = (scr, label, cls = 'go') => new Promise((res) => scr.setFoot(btn(label, res, cls)));
 const firstSentence = (t) => (t.length > 110 ? (t.match(/^.*?[.!?](\s|$)/)?.[0] || t).trim() : t);
 const clientOf = (c) => (c === 'self' ? null : (CLIENTS || []).find((x) => x.id === c) || (typeof c === 'object' && c) || { id: c, name: 'Una cliente', look: '', question: null, hello: 'Buonasera.', thanks: 'Grazie.', pay: 5 });
@@ -50,6 +52,7 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
     h('p.sx-lab', self ? 'Un quadro generale: dieci carte, la tua storia.' : cl.question ? `Domanda: «${fill(cl.question)}»` : 'Non ha una domanda: vuole un quadro generale.'),
     h('p.sx-lab', `Stesa: ${sp.name}.`));
   await wait(scr, self ? 'Comincio' : 'Mescolo');
+  if (!self && has('rite.run')) await call('rite.run', { where: 'client', ambito: question?.ambito || cl.ambito || null }); // the smoke rite (glue/rite.js)
 
   // ---- draw ----------------------------------------------------------------------------------
   const ids = new Array(N).fill(null);
@@ -123,7 +126,8 @@ export async function open({ spread = 'single', client, cards, script, rng = Mat
     h('p.sx-lab', 'La storia che raccontano:'),
     h('div.sxr-story', chosen.map((t, i) => h('div', h('small', N > 1 ? sp.positions[i].label : CARD[ids[i]]?.name), firstSentence(t)))),
     self ? null : say(cl.name, fill(cl.thanks || 'Grazie.')),
-    coins ? h('div.sxr-coins', `+${coins} monete`) : null);
+    coins ? h('div.sxr-coins', `+${coins} monete`) : null,
+    self ? null : afterRite());
   await wait(scr, 'Chiudo il libro');
   scr.close();
   moodBack();

@@ -4,6 +4,7 @@
 // final answer at three levels (verdictChoices); then the tone; then the client reacts and pays.
 // Rules: consult.rules.js. Returns { ok, wrong, total, helped, level, levelOk, tone, cards, score, coins }.
 import { h, css, cardUrl } from '../core/dom.js';
+import { call, has } from '../core/services.js';
 import { FONT } from '../core/fonts.js';
 import { fill } from '../core/cond.js';
 import { answer, addCoins, addXp, stat } from '../core/progress.js';
@@ -189,7 +190,8 @@ export async function consult({ scr, sp, cl, cards, question, pool, verso = fals
     h('div.sxr-who', h('div.sxr-badge'), h('div', h('b', cl.name), h('small', cl.look || ''))),
     words.map((t) => say(cl.name, t)),
     h('div.sxr-score.sx-in', h('span.sx-num', `${total - wrong} su ${total}`)),
-    coins ? h('div.sxr-coins', `+${coins} monete`) : null);
+    coins ? h('div.sxr-coins', `+${coins} monete`) : null,
+    ((n) => (n?.nodeType ? n : null))(has('rite.after') ? call('rite.after') : null)); // the line after the smoke rite (glue/rite.js)
   await new Promise((res) => scr.setFoot(btn('Chiudo il libro', res, 'go')));
   head.remove();
   return { ok: good, wrong, total, helped, level, levelOk, tone, cards: per, score, coins };

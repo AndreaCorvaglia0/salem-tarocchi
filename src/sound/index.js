@@ -15,6 +15,8 @@ import { musicOn, sfxOn, makeThrottle, wantsMood } from './gate.js';
 import { lookahead } from './theory.js';
 import { createTracks, cueFor } from './tracks.js';
 import { createBeds, bedFor } from './beds.js';
+import { createSamples } from './samples.js';
+import { RITE_MOODS } from './tracks.js';
 
 const TICK = 0.25; // seconds between scheduler runs
 let ctx = null, engine = null, timer = null, armed = false, broken = false;
@@ -23,6 +25,8 @@ let ducked = false, running = false;
 const allow = makeThrottle();
 const tracks = createTracks(); // the music is recorded piano (tracks.js); the engine keeps the effects
 const beds = createBeds(); // the ambience under it: real loops of wind, fire, rain, water (beds.js)
+const samples = createSamples(); // the smoke rite's gong and ember notes (samples.js)
+const KNOWN = [...MOOD_NAMES, ...RITE_MOODS]; // the generated moods, and the rite's cues (recorded only)
 
 function start() {
   if (ctx || broken) return;
@@ -31,7 +35,7 @@ function start() {
     if (!AC) { broken = true; return; }
     ctx = new AC();
     engine = createEngine(ctx, { seed: (Date.now() & 0xffff) || 1 });
-    tracks.attach(ctx); beds.attach(ctx);
+    tracks.attach(ctx); beds.attach(ctx); samples.attach(ctx);
     apply();
     timer = setInterval(tick, TICK * 1000);
     resume();
@@ -53,7 +57,7 @@ function apply() {
   try { beds.setOn(musicOn(state)); beds.setDuck(ducked); setBed(bedFor(want.name, { ...where, x: state.pos?.x, y: state.pos?.y })); } catch (e) { console.warn('[sound] beds', e?.message || e); }
   if (!engine) return;
   try {
-    engine.setMusicOn(false); engine.setMood(null); running = false;
+    engine.setMusicOn(false); engine.setMood(null); running = false; // (the rite's cues have no generated mood either)
   } catch (e) { console.warn('[sound]', e?.message || e); }
 }
 let ticks = 0;
@@ -104,7 +108,7 @@ export function play(name) {
   } catch (e) { console.warn('[sound] play', name, e?.message || e); }
 }
 export function mood(name, opts) {
-  const w = wantsMood(name, opts, MOOD_NAMES);
+  const w = wantsMood(name, opts, KNOWN);
   if (!w) { console.warn(`[sound] unknown mood "${name}"`); return; }
   want = w; apply();
   setTimeout(apply, 350); // the world reports the new map a moment after asking for its mood
@@ -114,6 +118,11 @@ function setSetting(k, v) { state.settings[k] = !!v; save(); apply(); emit('sett
 
 provide('sound.play', (name) => { play(name); return Promise.resolve(); });
 provide('sound.mood', (name, opts) => { mood(name, opts); return Promise.resolve(); });
+// the smoke rite (ui/rite): the mood asked for last, to give it back; a recorded sample (an effect: it
+// follows the effects setting) -> { stop(fade) }; and loading the samples ahead of the gesture that plays them
+provide('sound.want', () => Promise.resolve(want.name));
+provide('sound.sample', (url, opts) => { if (!sfxOn(state)) return { stop() {} }; resume(); return samples.play(url, opts); });
+provide('sound.preload', (urls) => { samples.preload(urls); return Promise.resolve(); });
 provide('sound.stop', () => { stop(); return Promise.resolve(); });
 provide('sound.music', (v) => { setSetting('music', v); return Promise.resolve(); });
 provide('sound.sfx', (v) => { setSetting('sfx', v); return Promise.resolve(); });

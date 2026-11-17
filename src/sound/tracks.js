@@ -8,6 +8,8 @@
 // AudioContext when there is one (the only way to set a level on an iPhone, which ignores
 // element.volume); without a context the element's own volume is stepped instead.
 
+import { AIRS } from '../data/rite.js';
+
 export const MASTER = 1.25; // the files are quiet (-24 LUFS): a winter night in the village ends near -27
 
 // piece (or a list of pieces that take turns: when one ends the next begins), level (0..1, before
@@ -38,7 +40,12 @@ export function cueFor(mood, { map = null, chapter = 0, ended = false } = {}) {
     case 'exam': return cue('elegie', 0.7, 0.7); // it comes in at once
     case 'ending': return cue('nocturne', 0.85, 3.5);
     case 'village': case 'forest': case 'depths': break;
-    default: return SILENCE;
+    case 'rite': return SILENCE; // the smoke rite while she searches: only the fire (beds.js)
+    default: {
+      // the air she lit (src/data/rite.js): its piece enters from the beginning and stays for the reading
+      const air = typeof mood === 'string' && mood.startsWith('air.') ? AIRS[mood.slice(4)] : null;
+      return air ? { ...cue(air.track, 0.55, 3), top: true } : SILENCE; // top: always from the beginning, never a seek
+    }
   }
   // rooms: warmer, lower; the court says nothing at all
   if (map === 'court') return SILENCE;
@@ -55,9 +62,12 @@ export function cueFor(mood, { map = null, chapter = 0, ended = false } = {}) {
   return calm(['moonlight', 'ghoststory'], 0.56, 3.2); // winter nights
 }
 
+// the moods of the smoke rite: the search, and one per air (their pieces live in public/rite/music/)
+export const RITE_MOODS = ['rite', ...Object.keys(AIRS).map((a) => `air.${a}`)];
+
 const OUT = 2.2; // seconds a piece takes to leave
 
-export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new Audio() : null), url = (id) => `music/${id}.mp3`, doc = globalThis.document, timers = globalThis } = {}) {
+export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new Audio() : null), url = (id) => (id.includes('/') ? `${id}.mp3` : `music/${id}.mp3`), doc = globalThis.document, timers = globalThis } = {}) {
   let ctx = null, bus = null, wired = false;
   let on = true, wantCue = SILENCE, active = null, dipT = 0, ducked = false, dipped = 1;
   const pos = {}, turn = {};
@@ -125,7 +135,7 @@ export function createTracks({ make = () => (typeof Audio !== 'undefined' ? new 
     if (d.id !== c.t) {
       if (d.id) pos[d.id] = d.el.currentTime || 0;
       d.id = c.t; d.el.loop = false; d.el.src = url(c.t);
-      const at = pos[c.t] || 0;
+      const at = c.top ? 0 : pos[c.t] || 0;
       if (at > 1) { const seek = () => { try { d.el.currentTime = at; } catch { /* ignore */ } d.el.removeEventListener?.('loadedmetadata', seek); }; d.el.addEventListener?.('loadedmetadata', seek); }
       if (d.gain && ctx) { try { d.gain.gain.cancelScheduledValues(ctx.currentTime); d.gain.gain.setValueAtTime(0, ctx.currentTime); } catch { /* ignore */ } } else { try { d.el.volume = 0; } catch { /* ignore */ } }
     }

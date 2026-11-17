@@ -224,7 +224,7 @@ export function openSelfRead() {
     (async () => {
       const seen = await call('selfread.intro');
       if (!seen) await guard(intro(scr));
-      let q = { answers: [], text: '' }, spread = null, how = null, cards = null;
+      let q = { answers: [], text: '' }, spread = null, how = null, cards = null, lit = false;
       for (let stage = 0; stage < 4;) {
         if (stage === 0) { const t = await guard(theme(scr, q)); if (!t) return finish(); q = t; stage = 1; }
         else if (stage === 1) {
@@ -235,13 +235,16 @@ export function openSelfRead() {
           how = await guard(choose(scr, 'Le carte', [['Pesco qui', null, 'here'], ['Le ho pescate io', 'con il mio mazzo, a casa', 'real']]));
           stage = how ? 3 : 1;
         } else {
+          // the smoke rite (glue/rite.js), once per reading: closing it goes back to «Le carte»
+          if (!lit && has('rite.run')) { const r = await guard(call('rite.run', { where: 'self', ambito: q.ambito, real: how === 'real' })); if (r?.cancelled) { stage = 2; continue; } lit = true; }
           cards = await guard(how === 'here' ? drawHere(scr, spread) : pickReal(scr, spread));
           stage = cards ? 4 : 2;
         }
       }
       const entry = makeEntry({ at: new Date().toISOString(), who: 'me', question: { ambito: q.ambito, forma: q.forma, text: q.text }, spread, cards, real: how === 'real' });
       const note = h('textarea.sr-field', { rows: 2, maxLength: 600, placeholder: 'Una nota mia', 'aria-label': 'Una nota mia' });
-      scr.body(themeBox(entry.question, 'me', entry.real), readingNodes(entry), h('p.sr-lab', { style: { marginTop: '8px' } }, 'Una nota mia'), note);
+      const after = has('rite.after') ? call('rite.after') : null; // the line after the rite, once a day
+      scr.body(themeBox(entry.question, 'me', entry.real), readingNodes(entry), after?.nodeType ? after : null, h('p.sr-lab', { style: { marginTop: '8px' } }, 'Una nota mia'), note);
       scr.foot(B('Tieni nel diario', async () => {
         entry.note = note.value.trim().slice(0, 600);
         await call('readings.keep', entry);
