@@ -42,6 +42,36 @@ testo. È il passo verso il mazzo vero.
 
 ## 3. Modi nuovi di giocare (scelti il 17 novembre)
 
+**3.0 La sibilla dell'ambulante: un gioco nel gioco per allenare l'intuito.** *Medio.* (viene prima di 3.1)
+- *Che cos'è:* un ambulante ha un mazzo di figurine semplici (la casa, la lettera, l'anello, la nave,
+  l'ancora…). Si leggono **a coppie**: due carte fanno una frase («lettera + anello»: una promessa scritta).
+  Lei dice che cosa vede nella coppia, poi scopre come la leggerebbe l'ambulante. Nessuna risposta sbagliata
+  che costi: è il posto dove si prova.
+- *Perché:* allena il gesto che manca, unire due immagini in un senso, con figure così semplici che l'intuito
+  basta. È il gradino prima di «raccontare con tre carte» e della lettura col mazzo vero.
+- *Più piccola:* 12 figurine delle 36, coppie pescate a caso, tre letture possibili per coppia scritte a mano
+  per le coppie più belle e composte dal motore per le altre (ogni figurina ha due o tre parole chiave).
+- *In più, dopo:* il gioco dei dadi originale (le 36 carte stese, un dado, vince chi arriva all'ancora).
+- *Nel mondo:* un ambulante di passaggio al mercato; non si dice il nome storico del mazzo. Le streghe la
+  pensano diversamente: per Malva è roba da fiera, a Ginepra piace. Una di loro dice la differenza a modo
+  suo: la sibilla ti dice che cosa succede, i tarocchi come stai tu mentre succede.
+- *Le immagini (cercate il 17 novembre):*
+  - **Museum De Lakenhal, Leida, inv. 3133:** «Das Spiel der Hofnung», 36 carte colorate con le regole in
+    tedesco e francese, seconda metà del Settecento; la pagina lo segna **pubblico dominio (CC0)**. Ma mostra
+    una sola immagine d'insieme: non si sa se le carte si leggono una per una. Da scaricare e guardare.
+  - **British Museum** (collezione Schreiber): l'esemplare più noto. Le immagini del museo sono CC BY-NC-SA
+    4.0: si possono usare in un gioco non commerciale con il credito e la stessa licenza, non in uno venduto.
+  - **Wikimedia Commons:** c'è un file «Das Spiel der Hofnung (The Game of Hope).png» e una serie di una
+    settantina di file «Die achten Wahrsagekarten der Kartenschlägerin Mlle Lenormand in Paris» (un mazzo
+    dell'Ottocento, probabilmente carta per carta). Licenza e qualità **non ancora lette**: Commons ha
+    risposto «troppe richieste» e non si è forzato. Da riprovare con calma.
+  - Se nessuna è buona: le figurine si disegnano a inchiostro nello stile della mappa (i disegnini ci sono
+    già: casa, cancello, albero…). Costa poco ed è coerente; si perde il fascino dell'antico.
+- *Dipende da:* le immagini; le parole chiave delle figurine (tradizione da verificare e scrivere in
+  `RESEARCH.md`).
+- *Verifica:* test sui dati; lettori ingenui: «questa coppia che cosa ti dice?» e si guarda se le tre letture
+  proposte sono tra quelle che vengono in mente.
+
 **3.1 Raccontare con tre carte.** *Medio.*
 - *Che cos'è:* il bambino della porta nera vuole una storia. Lei pesca tre carte, sceglie l'ordine e, per
   ogni passaggio, uno fra tre modi di legarle. Ne esce una storia breve, sua.
@@ -119,5 +149,8 @@ contro il Giudice.
 - Semi ed elementi (Bastoni fuoco, Coppe acqua, Spade aria, Denari terra): è l'abbinamento reso comune dalla
   Golden Dawn a fine Ottocento, non l'unico; altri scambiano aria e fuoco, altri negano che i semi siano gli
   elementi. Va presentato come una tradizione.
-- Non verificato: le sibille italiane e i mazzi «da salotto»; il romanzo delle storie raccontate con le carte
+- Le Lenormand derivano da un gioco da salotto tedesco, «Das Spiel der Hoffnung» (Norimberga, 1799 circa,
+  J. K. Hechtel): 36 carte stese, i dadi, vince chi arriva all'ancora; il nome della cartomante francese è stato
+  aggiunto dopo la sua morte. Si leggono a coppie e in fila. La Vera Sibilla italiana: 52 carte, Ottocento.
+- Non verificato: le parole chiave tradizionali delle 36 figure; aprire un libro a caso come oracolo; il romanzo delle storie raccontate con le carte
   (citato a memoria: da controllare prima di nominarlo nel gioco).
