@@ -412,5 +412,14 @@ Per `docs/BACKLOG.md` 3.5. Letto nei risultati di ricerca, non per intero.
   timbro, articolazione. Il modo è una convenzione occidentale, imparata. Fonti: Swaminathan & Schellenberg
   2015 (Emotion Review); Corrigall & Schellenberg 2013; Morreale et al. 2013. La «ricetta della calma» (lento,
   grave, legato, timbro scuro, maggiore) è riportata da un articolo divulgativo: affidabilità media.
-- **Non verificato:** che un profumo si possa evocare con la musica (è una scelta di design: si rende la
-  sensazione, non l'odore); se `src/sound/moods.js` è ancora in uso.
+- **Odori e suoni: c'è ricerca** (correzione del 17 novembre: prima era scritto «non verificato»). Le persone
+  abbinano in modo non casuale odori ad altezze e a famiglie di strumenti: per esempio odori fruttati al
+  pianoforte, e la scelta dell'altezza dipende da quanto l'odore è gradevole e complesso (Crisinel & Spence 2012,
+  Chemical Senses; rassegna di Deroy, Crisinel & Spence 2013, Psychonomic Bulletin & Review; lavori più recenti
+  sul timbro). Sono tendenze della maggioranza, non regole; e riguardano l'abbinamento, non il far «sentire» un
+  odore. `src/sound/moods.js` risulta importato da `engine.js` e `index.js`: in uso, da provare per questo scopo.
+
+### Progettare per i sensi (metodo, `lore/metodo/progettare-per-i-sensi-senza-averli.md`)
+
+Che cosa si può misurare al posto dell'orecchio: tempo, modo, altezza media, intensità e distanza tra varianti
+sul suono reso; scelta forzata dei lettori artificiali sulle immagini. Che cosa no: se è bello, se emoziona.

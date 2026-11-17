@@ -53,3 +53,4 @@ Le schede del metodo: come abbiamo fatto, in Salem, a far imparare, a variare la
 - [[verificare-e-dirlo]] — Dire che cosa è verificato e come; lettori ingenui sulle schermate. (generale)
 - [[il-salvataggio-sopravvive]] — Ogni chiave nuova ha un valore di partenza. (generale)
 - [[guardia-sui-tocchi]] — 650 millisecondi di guardia, righe che non si saltano. (generale)
+- [[progettare-per-i-sensi-senza-averli]] (generale) — Sensazioni progettate da chi non le prova: ricette dalla ricerca, misure, lettori, e le persone per l'ultimo miglio.

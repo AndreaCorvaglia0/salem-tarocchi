@@ -12,7 +12,7 @@ in_salem:
   - "[[seguire-le-lezioni]]"
   - "[[imparare-da-ortica]]"
   - "[[trovare-una-carta]]"
-si_controlla_con: "tests/core.bonds.test.mjs (una catena mostra solo il primo anello, le chiavi non aspettano, al massimo MAX_NEW nuove); tests/story.lessons.test.mjs; tests/elsewhere.test.mjs (la catena degli Altrove)"
+si_controlla_con: "tests/core.bonds.test.mjs (una catena mostra solo il primo anello, le chiavi non aspettano, al massimo MAX_NEW nuove); tests/story.lessons.test.mjs; tests/elsewhere.test.mjs (la catena degli Altrove); tests/missions.page.test.mjs (ogni voce ha la sua scheda sulla mappa, in src/ui/missions/titles.js)"
 rischi: "Una voce con `when: { step: … }` non arriva a chi è avanti. Le note a matita della storia (kind 'side') e le chiavi non contano nel tetto di due: se crescono, il tetto non le ferma."
 fonte: "DESIGN.md, Il registro delle cose in più; Recuperare quello che si aggiunge dopo"
 ---
