@@ -258,6 +258,22 @@ minerali di Sowerby; e i libri antichi veri di erbe, astri e carte sono in gran 
   l'album è la scheda, il libro è il racconto e le figure); lavoro di ricerca immagini (una richiesta alla
   volta, crediti in CREDITS.md).
 
+**Libri veri, antichi e liberi, trovati il 18 novembre (da cui prendere figure e passi):**
+- Erbe: Castore Durante, *Herbario nuovo* (Roma 1585), in italiano, centinaia di xilografie; scansione alla
+  Biodiversity Heritage Library (https://www.biodiversitylibrary.org/bibliography/113714) e alla Wellcome
+  (ed. Venezia 1684).
+- Pietre: Camillo Leonardi, *Speculum lapidum* (Venezia 1502), lapidario con le pietre legate ai pianeti;
+  in italiano nella versione di Lodovico Dolce (Venezia 1565, *Libri tre… delle gemme*); una scansione latina a
+  Dresda è marcata Public Domain Mark (Deutsche Digitale Bibliothek). Poche figure: quelle vengono da Sowerby.
+- Carte: A. E. Waite, *The Pictorial Key to the Tarot* (1911), con le 78 figure di Pamela Colman Smith in
+  bianco e nero; testo su Wikisource. È il libro delle nostre carte.
+- Sibilla: il foglietto di istruzioni del mazzo di Yale (c'è, digitalizzato) e le regole del «Gioco della
+  speranza».
+- Da cercare ancora: un libro degli astri e dei giorni (lunari, almanacchi), un ricettario di segreti
+  (i «libri di segreti» del Cinquecento), un libretto di sogni; e la qualità reale delle scansioni, una per una.
+- Regola: da un libro vero si prendono figure e si riassumono notizie con parole nostre, citando titolo e
+  anno nel colophon del libro finto e in CREDITS.md; le traduzioni moderne (es. Leopardi 2023) non si copiano.
+
 **Ordine proposto:** dopo le collezioni (pietre e sibilla), perché ne usa le immagini e le schede. Prima una
 pagina di concetto con tre libri scritti per intero come prova, poi lo scaffale.
 
