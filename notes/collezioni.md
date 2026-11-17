@@ -30,6 +30,11 @@ missioni, a corredo, con due parole e senza spiegone; chi vuole legge l'album o 
   fuoco: vicino alla fucina o al forno), poche e una sola per tipo nel mondo; le altre solo in regalo.
 - Figurine della sibilla: anche per terra (Andrea: «si possono anche trovare a terra, certo»), come una carta
   persa: tra le radici, sotto una panca, in un libro, in un cassetto; e le danno le persone e l'ambulante.
+- **A gruppi, non solo singole** (Andrea, 18 novembre): con 36 figurine una alla volta sarebbe lento. Chi le dà
+  ne dà spesso **due o tre che insieme fanno una frase** («lettera, anello»: «Una promessa scritta. Tienile
+  insieme.»): una riga sola, ed è già il primo assaggio della lettura a coppie, senza spiegarla. Per terra si
+  trovano anche mazzetti di due o tre (legati con uno spago). Nell'album le carte arrivate insieme ricordano la
+  frase con cui sono arrivate. Conto indicativo: 36 carte in circa 14-16 ritrovamenti, non 36.
 - Ogni posto è nei dati del mondo con una condizione, e la mappa a matita non le segna (si scoprono).
 
 ## Immagini (cercate il 18 novembre)
