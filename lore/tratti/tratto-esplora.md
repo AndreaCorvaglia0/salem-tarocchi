@@ -47,6 +47,9 @@ stabilisce:
   - { dove: "trials.js#trial.well.door", n: 1, scelta: "[[trials-trial-well-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "trials.js#trial.hat.door", n: 1, scelta: "[[trials-trial-hat-door-1]]" }
+  - { dove: "trials.js#trial.hat.door", n: -1, scelta: "[[trials-trial-hat-door-1]]" }
+  - { dove: "trials.js#trial.hat.door", n: 1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-1]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-1]]" }
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-5]]" }
@@ -79,6 +82,7 @@ mette_alla_prova:
   - { dove: "end.js#f.last", condizione: "trait esplora >= 3" }
   - { dove: "end.js#f.last", condizione: "trait esplora <= -3" }
   - { dove: "trials.js#trial.room.door", condizione: "trait esplora >= 3" }
+  - { dove: "trials.js#trial.hat.door", condizione: "trait esplora >= 3" }
   - { dove: "sessions.js#s1", condizione: "trait esplora >= 3" }
   - { dove: "sessions.js#s1", condizione: "trait esplora <= -3" }
   - { dove: "sessions.js#s1", condizione: "trend esplora >= 2" }
@@ -130,6 +134,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): curiosa (+) o dritta (-), da -6 a 6.
 
-Lo muovono 67 punti dei copioni e lo leggono 54 condizioni.
+Lo muovono 70 punti dei copioni e lo leggono 55 condizioni.
 
-Verso curiosa: 48 punti; verso dritta: 19 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso curiosa: 50 punti; verso dritta: 20 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

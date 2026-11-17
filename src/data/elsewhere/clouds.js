@@ -19,7 +19,7 @@ export default {
   device: 'potion', // the passage: a green swirl
   mood: 'title', // the airiest of the existing moods (glue/elsewhere.js asks for it on arrival)
   maxFalls: 3,
-  note: 'Sulla mensola del cottage c\'è una boccetta verde che non ricordo di avere comprato, e ogni tanto il tappo si muove da solo.',
+  note: 'Sulla mensola della capanna c\'è una boccetta verde che non ricordo di avere comprato, e ogni tanto il tappo si muove da solo.',
   when: { any: [{ chapterMin: 2 }, { flag: 'lesson.fly' }] },
   after: ['elsewhere.book'], // one at a time: the book first, then the clouds
   trigger: {
@@ -33,7 +33,7 @@ export default {
   hint: 'Raggiungi il punto che brilla. Le nuvole sottili non reggono: guarda bene dove metti i piedi.',
   steps: [
     { lines: [
-      ['narra', 'Il pavimento del cottage si fa morbido, poi bianco, e quando guardi in basso hai sotto i piedi una nuvola larga come la piazza di Salem. Il villaggio è laggiù, piccolo come un presepe.'],
+      ['narra', 'Il pavimento della capanna si fa morbido, poi bianco, e quando guardi in basso hai sotto i piedi una nuvola larga come la piazza di Salem. Il villaggio è laggiù, piccolo come un presepe.'],
       ['tu', 'Sono in cielo, e mi tiene su una cosa fatta di acqua e di aria. In fondo c\'è una porta che sta in piedi da sola, e ho idea che sia l\'unico modo di tornare a casa.'],
       ['narra', 'Su un paletto piantato nella nuvola c\'è un biglietto, scritto con la stessa calligrafia inclinata della boccetta: «Benvenuta, e scusa il ritardo, che è il mio solito. Dove la nuvola è sottile non reggo nemmeno io. Firmato, il Vento».'],
     ] },
@@ -58,7 +58,7 @@ export default {
   ],
   rooms: {
     at1: { good: true, at: 'clouds.fork1', lines: [['narra', 'Il bordo della nuvola si sfilaccia in tre ponti, che dondolano appena, come panni stesi. Sotto, fra l\'uno e l\'altro, passa uno stormo di oche che non ti degna di uno sguardo.']] },
-    wrong1: { good: false, lines: [['narra', 'Non era il ponte che diceva la carta. Sotto il primo passo senti la nuvola cedere come neve vecchia, e in più punti adesso si vede attraverso: laggiù c\'è il tetto del tuo cottage, grande quanto un\'unghia.']] },
+    wrong1: { good: false, lines: [['narra', 'Non era il ponte che diceva la carta. Sotto il primo passo senti la nuvola cedere come neve vecchia, e in più punti adesso si vede attraverso: laggiù c\'è il tetto della tua capanna, grande quanto un\'unghia.']] },
     at2: { good: true, at: 'clouds.fork2', lines: [['narra', 'Qui c\'è una scala a pioli che sale dritta nel cielo e finisce nel niente. Sull\'ultimo piolo è posato un paio di scarpe, e un biglietto dice: «Torno subito, e non salite, che ci sono già io».']] },
     wrong2: { good: false, lines: [['narra', 'La carta indicava un altro ponte. Questo è più sottile di quanto sembrava, e dai buchi sale un freddo che sa di camino spento: da quassù senti perfino la campana di Salem, piccola come un cucchiaino in una tazza.']] },
     at3: { good: true, at: 'clouds.fork3', lines: [
@@ -66,7 +66,7 @@ export default {
       ['tu', 'Sul piattino della tazza piena c\'è scritto il mio nome. Qualcuno che non conosco mi ha tenuto il tè in caldo, senza sapere a che ora sarei arrivata.'],
     ] },
     wrong3: { good: false, lines: [['narra', 'Hai letto la regola al contrario. Il ponte si apre qua e là come una calza smagliata, e dai buchi vedi passare, molto più in basso, l\'ombra della nuvola che cammina sopra i campi.']] },
-    end: { good: true, at: 'clouds.exit', lines: [['narra', 'La porta non ha muro né casa, soltanto uno stipite e un battente verde. Quando la tocchi si apre da sola, e dall\'altra parte c\'è il tuo cottage, con il fuoco acceso e la mensola al suo posto.']] },
+    end: { good: true, at: 'clouds.exit', lines: [['narra', 'La porta non ha muro né casa, soltanto uno stipite e un battente verde. Quando la tocchi si apre da sola, e dall\'altra parte c\'è la tua capanna, con il fuoco acceso e la mensola al suo posto.']] },
   },
   outcomes: {
     perfect: { lines: [
@@ -75,7 +75,7 @@ export default {
     ], reward: { xp: 30, coins: 5, item: 'clouds.feather' } },
     pass: { lines: [['tu', 'Sono a casa, con le ginocchia che tremano ancora un poco e l\'orlo della gonna bagnato di nuvola. La boccetta verde è tornata sulla mensola, e giurerei che è di nuovo piena.']], reward: { xp: 15, coins: 2 } },
     fail: { lines: [
-      ['narra', 'La nuvola si apre sotto di te un\'ultima volta, e stavolta non c\'è niente a cui tenersi. Cadi a lungo, attraverso un freddo bianco, e ti svegli sul pavimento del cottage con il cuore che batte forte e un ginocchio sbucciato.'],
+      ['narra', 'La nuvola si apre sotto di te un\'ultima volta, e stavolta non c\'è niente a cui tenersi. Cadi a lungo, attraverso un freddo bianco, e ti svegli sul pavimento della capanna con il cuore che batte forte e un ginocchio sbucciato.'],
       ['tu', 'La boccetta è rotolata sotto il letto, vuota, e nella caduta dalla borsa mi è volato via qualcosa che adesso sarà sparso sui tetti di Salem. Un altro giorno, magari, ci riprovo.'],
     ], loss: { coins: 3, tool: 'bottle' } },
   },

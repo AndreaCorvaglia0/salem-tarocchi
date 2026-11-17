@@ -169,7 +169,7 @@ export const C2 = {
       IF({ flag: 'mill.honest' }, [ginepra('Ortica racconta a tutto il bosco che le hai riportato le monete del mugnaio. Io me le sarei tenute, sia chiaro, e poi me ne sarei vergognata per una settimana.')]),
       IF({ flag: 'mill.flew' }, [ginepra('E il mugnaio giura che gli è scesa una strega in cortile! Sua moglie dice che beve, ma io lo so chi era, e sono verde d\'invidia.')]),
       ginepra('Adesso ti leggo una carta io. Ho studiato, sai, almeno un pochino. Diciamo che ho guardato le figure mentre Ortica parlava.'),
-      N('Pesca dal suo mazzo, gira la carta sul ginocchio e la guarda a lungo. È La Ruota della Fortuna.'),
+      N('Sfila una carta dal guanto, gira la carta sul ginocchio e la guarda a lungo. È La Ruota della Fortuna.'),
       ginepra('Allora, vediamo un po\'. Qui c\'è una ruota, quindi vuol dire che farai un viaggio, e lo farai in carrozza. Sarà una carrozza rossa, con le tendine.'),
       choice(
         o('Veramente la Ruota parla di una cosa che gira e cambia.', { parola: 1 }, [
@@ -323,7 +323,7 @@ export const C2 = {
     IF({ flag: 'depot.window' }, [cop('E sotto la finestra della legnaia del tribunale c\'è l\'impronta di uno stivale piccolo, da ragazza. Il tuo piede lo misuriamo dopo, con comodo.')]),
     IF({ stat: ['jailed', '>=', 1] }, [cop('E tu nelle nostre celle ci hai già dormito. Per noi non sei una faccia nuova.')]),
     IF({ flag: 'exam1.bray' }, [cop('E stavolta non tirare in mezzo la vedova Bray, come hai fatto in piazza col mio collega. L\'abbiamo già sentita, e dice che a quell\'ora dormiva.')]),
-    IF({ flag: 'lied.constable' }, [cop('La prima sera, al mio collega, hai detto che eri di passaggio e che ripartivi la mattina dopo. Sono passati dei mesi, ragazza, e noi le bugie ce le segniamo.')]),
+    IF({ flag: 'lied.constable' }, [cop('La prima volta, al mio collega, hai detto che eri di passaggio e che ripartivi la mattina dopo. Sono passati dei mesi, ragazza, e noi le bugie ce le segniamo.')]),
     cop('Te lo chiedo una volta sola, quindi pensa bene a cosa rispondi. Sei tu la strega della capanna?'),
     choice(
       o('«Sì, sono io.»', { parola: 1, rischio: 1 }, [

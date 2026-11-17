@@ -123,7 +123,7 @@ export const C3 = {
     edera('Bada alla seconda, quella che si mette di traverso sulla prima. È ciò che attraversa la persona in quel momento: qualche volta la sorregge e qualche volta le sbarra il passo, e sta a te capire quale delle due.'),
     edera('Qui invece ti ho copiato i pianeti e i segni di ogni carta, con la mia mano di una volta, quando scrivevo ancora dritto.'),
     lesson('astro'),
-    edera('Le altre carte di quaggiù le devi cercare tu, perché con queste gambe io non ci arrivo più. Il Diavolo sta alle catene, la Torre a nord, la Stella in fondo al pozzo e la Luna giù alla palude.'),
+    edera('Le altre carte di quaggiù le devi cercare tu, perché con queste gambe io non ci arrivo più. Il Diavolo sta alle catene, la Torre più in basso, la Stella in fondo al pozzo e la Luna giù alla palude.'),
     IF({ flag: 'edera.well' }, [edera('Il pozzo è quello da cui sei salita, e quel luccichio sul fondo l\'hai già visto. Sei passata accanto alla Stella senza saperlo, come capita quasi sempre con lei.')]),
     choice(
       o('Quando le trovo te le porto a vedere, una per una.', { tono: 1 }, [

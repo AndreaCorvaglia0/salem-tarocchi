@@ -11,7 +11,7 @@ import { INK, PENCIL, RED, HAND, canvas, rnd } from './paper.js';
 export const REGIONS = {
   village: { name: 'Il villaggio', season: 'inverno', ratio: 0.86, places: {
     'village.forest_gate': { x: 48, y: 7, label: 'il cancello del bosco', kind: 'gate' },
-    'village.cottage_door': { x: 16, y: 18, label: 'il mio cottage', kind: 'hut' },
+    'village.cottage_door': { x: 16, y: 18, label: 'la mia capanna', kind: 'hut' },
     'village.garden': { x: 86, y: 10, label: "l'orto", kind: 'garden' },
     'village.malva_door': { x: 70, y: 22, label: 'Malva', kind: 'house' },
     'village.curtain': { x: 30, y: 70, label: 'la tenda', kind: 'tent' },

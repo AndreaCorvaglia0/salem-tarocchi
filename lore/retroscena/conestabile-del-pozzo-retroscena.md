@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[conestabile-del-pozzo]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Il più giovane dei conestabili: ha preso la lanterna per lo stipendio, e la notte dorme in piedi contro il pozzo."
 vuole: "Arrivare a mattina senza che sia successo niente."
 teme: "La palude, e che il Giudice legga un rapporto in cui c'è scritto che dormiva."

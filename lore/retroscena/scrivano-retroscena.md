@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[scrivano]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Figlio del sagrestano, entrato in tribunale perché sapeva scrivere dritto; da qualche tempo tiene un secondo foglio, e non sa che il Giudice lo sa."
 vuole: "Che da qualche parte resti scritto come sono andate le cose."
 teme: "Che il foglio venga trovato. E, quasi di più, che non lo legga mai nessuno."

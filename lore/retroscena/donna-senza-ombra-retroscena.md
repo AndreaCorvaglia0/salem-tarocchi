@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[donna-senza-ombra]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Non si sa chi è, e questo foglio non lo decide: si scrive soltanto quello che si vede."
 vuole: "Sapere da che parte deve andare."
 teme: "Non si sa."

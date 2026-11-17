@@ -246,7 +246,7 @@ export const grave = {
   steps: [
     { lines: [
       ['narra', 'La vedova Bray ti aspetta al limite del bosco con lo scialle nero tirato sulla testa, una lanterna spenta in una mano e il libro delle preghiere nell\'altra.'],
-      ['narra', '«Stanotte fa un anno che l\'ho messo sotto terra. Ogni mese vado da lui di giorno, e ogni mese trovo sulla pietra una candela consumata che non ho acceso io. Voglio sapere chi viene di notte da mio marito, e da sola non ne ho il coraggio.»'],
+      ['narra', '«Stanotte è il giorno del mese in cui l\'ho messo sotto terra. Ogni mese vado da lui di giorno, e ogni mese trovo sulla pietra una candela consumata che non ho acceso io. Voglio sapere chi viene di notte da mio marito, e da sola non ne ho il coraggio.»'],
       ['narra', '«Voi quella sera mi avete letto giusto, e da allora penso che vediate più di me. Prima di andare, però, lasciatemi fare una cosa che il mio Josiah faceva sempre, e che il ministro non deve sapere.»'],
     ] },
     { witchDraw: { who: 'La vedova Bray', card: 'm09', rev: false, t: '«Teneva questa carta nel libro delle preghiere, e la guardava prima di ogni viaggio. È il vecchio con la lanterna, dritto. Lui diceva che vuol dire andare da soli a cercare, con un lume piccolo. Io stanotte da sola non vado, ma il lume piccolo ce l\'ho.»' } },
@@ -275,7 +275,7 @@ export const grave = {
       { text: 'Qualcuno che gli voleva bene, e che andrebbe abbracciato senza tante domande.', tags: { cards: ['m03', 'm06', 'm08'], rev: false } },
     ] }, right: 'good.who', wrong: 'bad.who' },
     { lines: [
-      ['narra', 'L\'uomo si volta, ed è il becchino, con il berretto in mano. Non scappa e non si scusa: guarda la vedova come uno che aspettava questo momento da un anno.'],
+      ['narra', 'L\'uomo si volta, ed è il becchino, con il berretto in mano. Non scappa e non si scusa: guarda la vedova come uno che aspettava questo momento da mesi.'],
       ['narra', '«Vostro marito mi prestò i soldi per la bara di mia figlia, e non li volle mai indietro. Io non so pregare, comare. So scavare, e so accendere una candela, e allora ogni mese faccio quello che so.»'],
       ['narra', 'La vedova Bray non dice niente per un pezzo. Poi posa la sua lanterna accanto alla candela di lui, e si inginocchia dall\'altra parte della pietra.'],
     ] },

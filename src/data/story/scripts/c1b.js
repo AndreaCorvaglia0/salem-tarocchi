@@ -58,9 +58,6 @@ export const C1B = {
     ], [IF({ flag: 'square.front' }, [
       N('Attraversi la piazza vuota proprio nel mezzo, senza affrettare il passo. La lanterna, che prima era lontana, cambia strada apposta per venirti incontro e si ferma a due passi da te.'),
       cop('Ferma lì, ragazza. Cammini come se la piazza fosse tua, e invece io a Salem conosco tutte le facce, e la tua non l\'ho mai vista.'),
-    ], [
-      N('Attraversi la piazza vuota tenendoti vicina al pozzo. La lanterna, che prima era lontana, adesso ti viene incontro e si ferma a due passi da te.'),
-      cop('Ferma lì, ragazza. Io a Salem conosco tutte le facce, comprese quelle che preferirei non conoscere, e la tua non l\'ho mai vista.'),
     ])]),
     IF({ power: 'cat' }, [cat('(Il pelo non mi si rizza mai per niente, te l\'avevo detto. Stai calma e lascia parlare lui.)')]),
     cop('Sei in giro da sola, di notte, con un gatto nero alle calcagna. Dimmi tu come la dovrei chiamare, una così.'),

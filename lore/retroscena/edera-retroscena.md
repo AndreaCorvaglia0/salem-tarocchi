@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[edera]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Figlia del vecchio pastore e nipote di una donna che leggeva le carte: fu lei a insegnare le figure al bambino che è diventato il Giudice, e gli ha detto di no per la prima volta dieci anni fa."
 vuole: "Sapere che la stanza della nonna c'era davvero, cioè che la sua memoria ha sempre detto il vero. E stare vicino alle porte delle celle, per il giorno in cui servono."
 teme: "Che avesse ragione suo padre, e che quello che ricorda siano cose sognate. Adesso che i nomi le scappano, la paura ha qualcosa a cui attaccarsi."

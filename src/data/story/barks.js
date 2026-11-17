@@ -8,6 +8,9 @@
 // popularity level (glue/bonds.js); `who` speaks it, `level` is the level it announces.
 // tartufo.treat / tartufo.pat / tartufo.found: toasts when she gives him a treat, pats him with empty
 // hands, or he finds a treat while they explore (he never speaks: his thoughts, in parentheses).
+// Who hears Tartufo (lore/retroscena/tartufo-retroscena.md): a line in parentheses is a low voice, only for her.
+// A line without parentheses is his full voice: the three teachers hear it and, when he wants, Ginepra; never
+// the village, the constables or the Judge.
 // diaryFor: event or flag -> first-person diary line (the scripts already write the fork lines).
 
 export const BARKS = {
@@ -50,7 +53,7 @@ export const BARKS = {
     { on: 'minor.dup', t: '(Questa ce l\'hai già. Tienila da parte per Ginepra, che in cambio ti darà una delle sue.)' },
   ],
   pop: [
-    { level: 1, who: 'malva', t: '«La Bray va dicendo in giro che le hai fatto bene, e ieri un\'altra mi ha chiesto dove abiti. Tieni il lume acceso, la sera.»' },
+    { level: 1, who: 'malva', t: '«La Bray giura di non conoscerti e intanto va dicendo in giro che le hai fatto bene, e ieri un\'altra mi ha chiesto dove abiti. Tieni il lume acceso, la sera.»' },
     { level: 2, who: 'ginepra', t: '«Al lavatoio stamattina parlavano di te, e nessuna ti chiamava più "quella nuova". Il tuo nome sta girando, e se bussano alla capanna io non mi stupirei.»' },
     { level: 3, who: 'malva', t: '«Stanotte ne sono passati due a chiedere di te prima ancora di chiedere di me. Non montarti la testa, e non lasciarli aspettare al freddo.»' },
   ],

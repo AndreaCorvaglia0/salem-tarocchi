@@ -8,7 +8,8 @@
 //     any of m08-m14 up to the trial's `majorsMin`; also with the Minors 1-6 taught;
 //   chapter 3 (cellars, room): the same with five or more of m08-m14 and any of m15-m18; cellars with both
 //     faces (it asks for the lesson on reversed cards) and also with the court taught;
-//   after the ending (dare): twenty or more of the 22 Majors, with and without reversed faces.
+//   after the ending (dare): twenty or more of the 22 Majors, with and without reversed faces;
+//   after the dare (hat, a small side story): the same, also with every Minor taught.
 import test from 'node:test';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -54,6 +55,7 @@ function poolsOf(id) {
   if (id === 'grave') { later(2, false, false, minors(1, 6)); out.push({ ids: [...m(0, 14), ...minors(1, 6)], reversed: false, name: 'rich', full: true }); }
   if (id === 'room') { later(5, true, false, minors(1, 10)); later(5, true, true); out.push({ ids: m(0, 18), reversed: false, name: 'majors', full: true }); }
   if (id === 'cellars') { later(5, true, true, minors(11, 14)); out.push({ ids: [...m(0, 18), ...minors(1, 14)], reversed: true, name: 'rich', full: true }, { ids: m(0, 18), reversed: true, name: 'no court', full: true, noCourt: true }); }
+  if (id === 'hat') { for (let i = 0; i < 60; i++) out.push({ ids: [...pick(m(0, 21), 20 + Math.floor(rng() * 3), rng), ...(i % 3 === 0 ? minors(1, 14) : [])], reversed: i % 2 === 0, name: `sample ${i}` }); out.push({ ids: m(0, 21), reversed: true, name: 'all Majors', full: true }, { ids: [...m(0, 21), ...minors(1, 14)], reversed: true, name: 'all', full: true }); }
   if (id === 'dare') { for (let i = 0; i < 60; i++) out.push({ ids: pick(m(0, 21), 20 + Math.floor(rng() * 3), rng), reversed: i % 2 === 0, name: `sample ${i}` }); out.push({ ids: m(0, 21), reversed: true, name: 'all', full: true }); }
   return out;
 }
@@ -65,9 +67,9 @@ const linesIn = (d) => [
   ...Object.values(d.outcomes).flatMap((o) => o.lines.map((l) => l[1])), d.note,
 ].filter((t) => typeof t === 'string');
 
-test('there are three main trials and six side ones, each a complete piece', () => {
+test('there are three main trials and seven side ones, each a complete piece', () => {
   assert.deepEqual(MAIN.map((d) => d.id), ['night', 'fog', 'cellars']);
-  assert.deepEqual(SIDES.map((d) => d.id), ['vigil', 'well', 'kettle', 'grave', 'room', 'dare']);
+  assert.deepEqual(SIDES.map((d) => d.id), ['vigil', 'well', 'kettle', 'grave', 'room', 'dare', 'hat']);
   assert.deepEqual(WITCHES.map((w) => SIDES.filter((d) => d.with === w).length), [1, 1, 1, 1], 'one side trial with each witch');
   const anchors = allAnchors();
   for (const d of REAL) {
@@ -196,11 +198,11 @@ const save = ({ chapter = 1, majors = [], flags = [], spreads = [], minorsFound 
 const finish = (s, id, result = 'perfect') => { s.trials[id] = { result, errors: 0, day: 'x', at: 1 }; s.flags[`trial.${id}.${result}`] = true; };
 const open = (s) => ENTRIES.filter((e) => e.id !== 'library.first' && extraStatus(e, s, cond, ENTRIES) !== 'hidden' && extraStatus(e, s, cond, ENTRIES) !== 'done').map((e) => e.id.slice(6));
 const OLD2 = () => save({ chapter: 2, majors: m(0, 9), flags: ['exam1.done', 'client.c1.widow.done'], spreads: ['single', 'ppf'] });
-const ENDED = () => save({ chapter: 4, majors: m(0, 21), flags: ['exam1.done', 'client.c1.widow.done', 'lesson.reversed', 'ending.seen'], spreads: ['single', 'ppf', 'celtic'] });
+const ENDED = () => { const s = save({ chapter: 4, majors: m(0, 21), flags: ['exam1.done', 'client.c1.widow.done', 'lesson.reversed', 'ending.seen', 'side.m12', 'lesson.fly'], spreads: ['single', 'ppf', 'celtic'] }); s.powers.broom = true; return s; };
 
 test('the chains hold: after the main trials one by one, the side ones one by one', () => {
   assert.deepEqual(MAIN.map((d) => d.after || []), [[], ['trial.night'], ['trial.fog']]);
-  assert.deepEqual(SIDES.map((d) => d.after || []), [[], ['trial.vigil'], ['trial.well'], ['trial.kettle'], ['trial.grave'], ['trial.room']]);
+  assert.deepEqual(SIDES.map((d) => d.after || []), [[], ['trial.vigil'], ['trial.well'], ['trial.kettle'], ['trial.grave'], ['trial.room'], ['trial.dare']]);
   for (const d of REAL) for (const a of d.after || []) assert.ok(ENTRIES.some((e) => e.id === a), `${d.id}: after ${a}`);
 });
 
@@ -225,7 +227,9 @@ test('a new player meets them in order, never more than one main and one side at
   s.flags['lesson.reversed'] = true; assert.deepEqual(open(s), ['cellars', 'room']);
   finish(s, 'cellars'); finish(s, 'room'); assert.deepEqual(open(s), []);
   s.flags['ending.seen'] = true; assert.deepEqual(open(s), ['dare']);
-  finish(s, 'dare'); assert.deepEqual(open(s), []);
+  finish(s, 'dare'); assert.deepEqual(open(s), [], 'the sack from the mill waits for the miller met and the broom');
+  s.flags['side.m12'] = true; s.flags['lesson.fly'] = true; s.powers.broom = true; assert.deepEqual(open(s), ['hat']);
+  finish(s, 'hat'); assert.deepEqual(open(s), []);
   assert.ok(ENTRIES.filter((e) => e.id !== 'library.first').every((e) => extraStatus(e, s, cond, ENTRIES) === 'done'));
 });
 

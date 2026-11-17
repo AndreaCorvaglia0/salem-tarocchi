@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[mercy]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Quindici anni: la notte del bicchiere era con le amiche, e uscì dalla cucina prima che rompessero l'uovo."
 vuole: "Sapere se doveva restare."
 teme: "Che un giorno le amiche indichino lei, oppure di mettersi a gridare come loro."

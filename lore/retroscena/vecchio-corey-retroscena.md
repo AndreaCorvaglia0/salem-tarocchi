@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[vecchio-corey]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Muratore, ottantaquattro anni: da garzone portò i mattoni il giorno in cui murarono una stanza sotto il villaggio, e su uno incise una data e una croce."
 vuole: "Finire dritto, come è sempre stato."
 teme: "Di dire, per stanchezza, una cosa che non è vera."

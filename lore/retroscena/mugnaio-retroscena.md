@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[mugnaio]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Terza generazione in un mulino fatto con le pietre di una chiesa e mai pagate; un mese prima della primavera il suo unico figlio è partito per i cantieri di Boston dopo una lite, e da allora lui guarda la ruota per non guardare il posto vuoto."
 vuole: "Che qualcuno gli creda, almeno sulla ruota. E che il ragazzo scriva."
 teme: "Di essere quello dei tre che perde il mulino. E di avere avuto torto, quella sera, sugli ingranaggi di ferro."

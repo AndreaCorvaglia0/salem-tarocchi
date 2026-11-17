@@ -39,7 +39,7 @@ export const STEPS = [
   { id: 'c3.court', chapter: 3, text: 'Devo risalire al villaggio ed entrare in tribunale dalla porta principale.', at: 'village.court_door' },
   { id: 'c3.trial', chapter: 3, text: 'Devo rispondere alle domande del Giudice, in tribunale.', at: 'court.dock' },
   // finale
-  { id: 'f.dawn', chapter: 3, text: 'Devo volare via da Salem insieme a Ginepra, adesso che è l\'alba.', at: 'village.forest_gate' },
+  { id: 'f.dawn', chapter: 3, text: 'Devo volare via dal paese insieme a Ginepra, adesso che è l\'alba.', at: 'village.forest_gate' },
   { id: 'f.last', chapter: 3, text: 'Devo tornare al bivacco nel bosco, dove mi aspettano tutte.', at: 'forest.campfire' },
   { id: 'post.minors', chapter: 4, text: 'Posso cercare le carte piccole nell\'erba alta, cominciando dal bosco.', at: 'forest.entry' },
 ];

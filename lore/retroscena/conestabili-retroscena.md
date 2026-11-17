@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[conestabili]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Una dozzina di uomini di Salem pagati dal tribunale da vent'anni per girare con una lanterna; da dieci hanno in tasca un foglio di domande sulle figure."
 vuole: "Lo stipendio, e un rapporto senza buchi da consegnare la mattina."
 teme: "Di fermare la figlia di uno che conoscono. Succede quasi sempre."

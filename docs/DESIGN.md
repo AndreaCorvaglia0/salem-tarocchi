@@ -132,7 +132,7 @@ modo in cui il mondo dice che manca qualcosa.
 **I luoghi.** Il villaggio (la strada d'arrivo con la casa di Malva, la piazza e il mercato, la parte
 alta con la casa delle adunanze e il tribunale), il cottage al limite del bosco, il bosco (la capanna di
 Ortica, il mulino, lo stagno, il cimitero, il bosco fondo), le cantine sotto il villaggio (Edera, la
-torre della prigione, il pozzo, la palude). Le stagioni seguono i capitoli: inverno, primavera, autunno,
+torre della prigione, il pozzo, la palude). Le stagioni seguono i capitoli: inverno, primavera (il capitolo 2 copre primavera ed estate, e l'arresto è a fine estate), autunno,
 e un'alba chiara dopo il finale. Nell'erba alta e al buio si vede solo qualche passo.
 
 **Chi ti ferma.** Conestabili con la lanterna, che si possono evitare, e le Afflitte, che ti indicano
@@ -192,7 +192,7 @@ Ognuna incarna una carta, e aiuta a ricordarla.
 
 - **Tu**: una strega giovane e bella, cappello a punta. Il Matto.
 - **Ginepra** (Il Carro): novizia come te, ricci rossi, impulsiva, ride nei momenti sbagliati. Rivale, poi amica.
-- **Comare Malva** (L'Imperatrice): levatrice, bella donna sui quaranta, treccia a corona. Brusca, non
+- **Comare Malva** (L'Imperatrice): levatrice, bella donna vicina ai sessanta, treccia a corona. Brusca, non
   ringrazia mai. Insegna la carta singola.
 - **Ortica** (Il Mago): vive nel bosco, chioma selvaggia, parla senza sosta. Insegna passato-presente-futuro.
 - **Nonna Edera** (La Sacerdotessa): la più grande, capelli d'argento, regale. Scorda i nomi, ricorda
@@ -209,7 +209,7 @@ portare una cosa nella parte alta. Arriva Tartufo. Il primo cliente. Ginepra le 
 naso, poi glielo rende. Il primo Esame. **Bivio 1, la piazza**: un'Afflitta indica una donna del
 villaggio; parli o resti nascosta?
 
-**Capitolo 2, il bosco (primavera).** Ortica, la seconda stesa, una commissione al mulino, l'ultima. La
+**Capitolo 2, il bosco (primavera ed estate; l'arresto è a fine estate).** Ortica, la seconda stesa, una commissione al mulino, l'ultima. La
 notte al fuoco con Ginepra, che ora è un'amica. **Bivio 2, il mazzo sequestrato**: vai con lei a
 riprenderlo o no? I conestabili arrivano al cottage per te; Ginepra si fa avanti: «Sono io.»
 

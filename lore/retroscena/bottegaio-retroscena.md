@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[bottegaio]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Arrivato da Boston vent'anni fa a prendere la bottega dello zio, il primo inverno fece credito a mezzo paese e a primavera non lo pagò quasi nessuno: da allora niente credito, niente insegna, e un registro dove i clienti non hanno nome."
 vuole: "Restare il posto dove entrano tutti, streghe e conestabili, senza appartenere a nessuno dei due. E una lettera all'anno da sua sorella."
 teme: "Il giorno in cui il Giudice, con molto garbo, gli chiederà di vedere il registro."

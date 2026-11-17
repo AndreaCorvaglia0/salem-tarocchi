@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[gatto-del-giudice]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Un gatto grigio, grosso, con un sonaglio d'argento al collo: l'unica compagnia del Giudice, e il padrone dei tetti di Salem."
 vuole: "I tetti, la stuoia sotto il portico, e nessun gatto nero sul suo territorio."
 teme: "Niente, fino alla sera in cui è caduto nel pozzo."

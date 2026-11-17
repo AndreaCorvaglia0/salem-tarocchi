@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[tartufo]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Non si sa che cos'è. Qui c'è soltanto quello che si vede: come si comporta, chi lo sente, che cosa sembra volere e che cosa non fa mai."
 vuole: "Sembra volere che lei trovi le carte e che le legga bene. Sembra volere un posto caldo vicino a una persona che le sa guardare. Di più non dice."
 teme: "Il Giudice, più di ogni lanterna: è la sola persona davanti a cui tace del tutto."

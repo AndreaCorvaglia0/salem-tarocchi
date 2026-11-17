@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[cuoca-del-giudice]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Cucina da undici anni per un uomo che mangia da solo e non dorme; ne sa più di chiunque e non ha mai chiesto niente."
 vuole: "L'aumento, e più sotto un posto suo: una locanda sulla strada del porto."
 teme: "Che lui sappia già che è stata alla capanna, e che glielo dica con un sorriso."

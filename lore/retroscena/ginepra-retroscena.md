@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[ginepra]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "L'ultima di cinque in un podere sulla strada del mulino, con quattro fratelli che la sfidavano a tutto: ha imparato a ridere perché nessuno vedesse la paura, e a ottobre ha perso il mazzo della nonna perché non l'aveva mai studiato."
 vuole: "Riavere il mazzo della nonna, e meritarselo stavolta. E avere accanto qualcuno a cui dire che ha avuto paura, come lo diceva alla nonna."
 teme: "Che la vedano avere paura. E, più sotto, di essere stata lei a perdere il mazzo: lo sa, e non l'ha detto a casa."

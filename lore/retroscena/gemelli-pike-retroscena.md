@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[gemelli-pike]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Due fratelli identici che litigano da trentacinque anni su chi sia nato prima, e che non saprebbero che cosa farsene di una risposta."
 vuole: "Avere ragione, a turno."
 teme: "Di restare senza l'altro con cui litigare."

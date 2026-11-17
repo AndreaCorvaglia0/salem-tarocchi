@@ -394,7 +394,7 @@ export const THREAD = [
   once('fear', [{ chapter: 3 }, F('leaf.fear.m18')], "L'altra volta mi hai detto che un rumore che non capisci vai a vedere che cos'è. Sotto il villaggio ne sentirai parecchi, e sono curiosa di sapere se lo farai anche lì."),
   once('fear', [{ chapter: 3 }, F('leaf.fear.m16')], "L'altra volta mi hai detto che non ti piace farti cogliere impreparata. Là sotto è difficile non esserlo, eppure ci sei scesa: vedo che certe paure ti rallentano e non ti fermano."),
   once('fear', [{ chapter: 3 }, F('leaf.fear.m06')], "L'altra volta mi hai detto che ti pesa il silenzio di una persona che non risponde. Da quando hanno portato via Ginepra ne hai uno addosso, e stai facendo l'unica cosa sensata: andare a riprenderla."),
-  once('fear', [{ chapter: 3 }, F('leaf.fear.m09')], "L'altra volta mi hai detto che ti pesa una casa dove non c'è nessuno. Senza Ginepra che passa a disturbare il cottage dev'essere più silenzioso, e ho idea che sia anche per questo che la vuoi fuori."),
+  once('fear', [{ chapter: 3 }, F('leaf.fear.m09')], "L'altra volta mi hai detto che ti pesa una casa dove non c'è nessuno. Senza Ginepra che passa a disturbare la capanna dev'essere più silenzioso, e ho idea che sia anche per questo che la vuoi fuori."),
 
   once('notebook', [{ chapter: 3 }, { not: { word: ['value', null] } }, { not: { word: ['fear', null] } }], "Prima che arrivassi ho riletto il quaderno. Di te c'è scritto «{word:value}» alla voce di quello che conta, e «{word:fear}» alla voce della paura. Ne manca ancora una, e la riempiremo presto."),
 ];

@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[comare-goodwin]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Madre per la prima volta a trentaquattro anni, con il marito imbarcato fino all'estate; non dorme da un mese e conta i respiri del bambino."
 vuole: "Che qualcuno le dica che sta facendo bene."
 teme: "Di addormentarsi e di non sentirlo."

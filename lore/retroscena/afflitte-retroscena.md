@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[afflitte]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Cinque o sei ragazze della parte alta, tra i tredici e i sedici anni, compagne di banco alla scuola del pastore; che cosa le punga non si scrive qui."
 vuole: "Essere credute, e che smetta."
 teme: "Che nel bicchiere ci fosse davvero quello che hanno visto."

@@ -27,6 +27,7 @@ luoghi:
 carte:
 aperto:
   - "Che cosa fa girare la ruota al contrario?"
+  - "Proposto (17 novembre): [[cappello-in-soffitta]] è un fatto del suo arco, dopo il finale; da aggiungere ad `arco` quando Andrea lo conferma."
 ---
 
 Il mugnaio guarda la sua ruota come un figlio che ha preso una brutta strada: giura che gira al contrario, sua moglie dice che beve. Da ragazzo si appendeva per i piedi al salice dello stagno, e racconta della carta che c'è rimasta.

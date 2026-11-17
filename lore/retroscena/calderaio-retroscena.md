@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[calderaio]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Uno stagnino di passaggio, con una bambina e un cane, che prende l'anticipo e poi dice domani perché lo stagno lo compra soltanto quando ha venduto qualcos'altro."
 vuole: "Arrivare alla costa prima del brutto tempo, dove la bambina ha una zia."
 teme: "Che qualcuno gli chieda indietro i soldi che ha già speso."

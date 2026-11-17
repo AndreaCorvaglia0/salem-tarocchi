@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[ortica]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Trent'anni fa le chiesero di parlare per distrarre un carceriere, e crede di aver detto una frase di troppo; da allora parla sempre, perché in mezzo a tante parole nessuna pesi abbastanza da fare danno."
 vuole: "Che qualcuno le chieda di parlare, come quella volta, e che stavolta vada bene. E sentire da Edera, una volta sola, che cosa successe a quella porta."
 teme: "Il silenzio, perché dentro c'è ancora quella sera. E che Edera dimentichi quell'inverno prima di averle detto se è perdonata."

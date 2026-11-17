@@ -155,6 +155,8 @@ stabilisce:
   - { dove: "visits.js#talk.m19", n: 1, scelta: "[[visits-talk-m19-1]]" }
   - { dove: "visits.js#talk.m19", n: -1, scelta: "[[visits-talk-m19-1]]" }
   - { dove: "trials/demo.js#default.steps[7].choice[1]", n: 1 }
+  - { dove: "trials/hat.js#hat.steps[7].choice[0]", n: 1 }
+  - { dove: "trials/hat.js#hat.steps[7].choice[1]", n: -1 }
   - { dove: "trials/intro.js#LIBRARY_SCRIPTS.library.first[3].choice[1]", n: 1 }
   - { dove: "trials/main.js#fog.steps[5].choice[1]", n: 1 }
   - { dove: "trials/side.js#dare.steps[9].choice[1]", n: -1 }
@@ -225,6 +227,7 @@ stabilisce:
   - { dove: "trials.js#trial.grave.door", n: -1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: -1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "trials.js#trial.hat.door", n: 1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
@@ -277,11 +280,12 @@ stabilisce:
   - { dove: "opinions.js#READER.events[6].a[2]", n: 1 }
   - { dove: "opinions.js#READER.events[7].a[0]", n: 1 }
   - { dove: "opinions.js#READER.events[7].a[1]", n: -1 }
-mette_alla_prova: []
+mette_alla_prova:
+  - { dove: "trials.js#trial.hat.door", condizione: "affinity ortica 2" }
 ---
 
 Quanto ortica si riconosce in lei (core/witches.js AFFINITY): audace, schietta, testa, più la sua carta. Calcolata dai tratti, mai salvata.
 
-Lo muovono 273 punti dei copioni e lo leggono 0 condizioni.
+Lo muovono 276 punti dei copioni e lo leggono 1 condizioni.
 
 Qui `n` è il verso rispetto all'affinità: +1 avvicina, -1 allontana. La mostra il codice: ui/witches.js.

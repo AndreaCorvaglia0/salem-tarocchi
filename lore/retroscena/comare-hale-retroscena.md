@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[comare-hale]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Vende candele sotto il portico da cinquant'anni, al banco che era di sua madre, e parla poco perché da bambina balbettava; la sola frase lunga che ha detto quest'inverno è quella per cui l'hanno indicata."
 vuole: "Che il banco resti dov'è. E riavere il mazzo di sua madre, che a ottobre le hanno portato via e di cui girava una carta ogni mattina prima di aprire."
 teme: "Di dover parlare davanti a tante persone. In piazza non si difese: la voce non le veniva."

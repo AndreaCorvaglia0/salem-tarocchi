@@ -2,21 +2,20 @@
 
 _generato da scripts/lore.mjs, non modificare a mano_
 
-161 scelte nei copioni, nelle sedute e nelle visite. Classe: `stabilisce` (lascia qualcosa che la storia rilegge), `mette_alla_prova` (le risposte o il seguito dipendono dallo stato), `entrambe`, `colore` (niente delle due).
+162 scelte nei copioni, nelle sedute e nelle visite. Classe: `stabilisce` (lascia qualcosa che la storia rilegge), `mette_alla_prova` (le risposte o il seguito dipendono dallo stato), `entrambe`, `colore` (niente delle due).
 
 | Classe | Scelte |
 |---|---:|
 | stabilisce | 95 |
 | mette_alla_prova | 0 |
-| entrambe | 46 |
+| entrambe | 47 |
 | colore | 20 |
 
 ## Tratti mossi e mai messi alla prova
 
-- [[tratto-affinita-malva]] (279 punti): nessuna condizione la legge; la mostra ui/witches.js
-- [[tratto-affinita-ortica]] (273 punti): nessuna condizione la legge; la mostra ui/witches.js
-- [[tratto-affinita-edera]] (249 punti): nessuna condizione la legge; la mostra ui/witches.js
-- [[tratto-affinita-ginepra]] (279 punti): nessuna condizione la legge; la mostra ui/witches.js
+- [[tratto-affinita-malva]] (280 punti): nessuna condizione la legge; la mostra ui/witches.js
+- [[tratto-affinita-edera]] (255 punti): nessuna condizione la legge; la mostra ui/witches.js
+- [[tratto-affinita-ginepra]] (280 punti): nessuna condizione la legge; la mostra ui/witches.js
 
 ## Tratti messi alla prova ma mossi in meno di tre posti
 
@@ -33,6 +32,7 @@ Né da una condizione, né per nome dal codice (src fuori da src/data).
 - `depot.door`: c2.js#c2.plan
 - `edera.light`: c3.js#c3.edera
 - `exam1.malva`: c1b.js#c1.exam1
+- `hat.miller`: trials.js#trial.hat.after
 - `jail.barrels`: c3.js#c3.jail
 - `jail.chains`: c3.js#c3.jail
 - `s0.doubts`: sessions.js#s0
@@ -153,6 +153,7 @@ Nessuno.
 | [[trials-trial-grave-door-1]] | entrambe | [[prova-della-tomba]] |
 | [[trials-trial-room-door-1]] | entrambe | [[prova-della-stanza-murata]] |
 | [[trials-trial-dare-door-1]] | entrambe | [[prova-della-scommessa]] |
+| [[trials-trial-hat-door-1]] | entrambe | [[cappello-in-soffitta]] |
 | [[garden-lessons-garden-lesson-acqua-1]] | colore |  |
 | [[garden-lessons-garden-lesson-luce-1]] | colore |  |
 | [[garden-lessons-garden-lesson-terra-1]] | colore |  |

@@ -3,7 +3,7 @@ tipo: retroscena
 persona: "[[villaggio]]"
 vuole: "Una ragione per i suoi guai che abbia un nome e una faccia, e che non sia di casa."
 teme: "Sé stessa, di sera, quando è tutta in piazza."
-fonte: proposto
+fonte: "deciso"
 in_breve: "Salem negli ultimi settant'anni: quando si fecero le prigioni, l'inverno di Ruta, le lanterne, gli Esami, l'ottobre dei mazzi."
 persone:
   - "[[pastore]]"

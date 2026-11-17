@@ -224,7 +224,7 @@ export const LESSON_SCRIPTS = {
     malva('È come con un osso. Finché uno sta fermo va tutto bene, poi qualcosa si spezza, e poi, se c\'è chi sa fare, si rimette insieme. Di ossa ne ho aggiustate quasi quanti bambini ho fatto nascere.'),
     // the gesture (docs/DESIGN.md "Un solo gesto"): she asks the cards before a small decision of her own
     N('Prima di andare avanti Malva prende il suo mazzo dalla mensola, gira una carta sulla tovaglia e la guarda un momento, con lo scialle già mezzo sulle spalle.'),
-    malva(`Il Quattro di Spade, che dice ${q(s04.up.essenza)}. Allora dalla Goodwin ci vado domattina, perché stanotte quel bambino non nasce. Chiedo sempre a loro, prima di uscire al freddo per niente.`),
+    malva(`Il Quattro di Spade, che dice ${q(s04.up.essenza)}. Allora dalla moglie del fabbro ci vado domattina, perché stanotte quel bambino non nasce. Chiedo sempre a loro, prima di uscire al freddo.`),
     malva(`Ti serve anche da esempio, perché è la sosta della mente. Il Cinque di Coppe invece è la scossa nel cuore, e dice ${q(c05.up.essenza)}: quella l'abbiamo avuta in mano tutte.`),
     ...practice(malva, 'Adesso dimmelo tu, e non tirare a indovinare. Il Sei di Denari: che cosa ti aspetti?', [
       wrong(p05.up.essenza, 'Quella è la scossa, cioè il cinque, quando i soldi mancano e uno resta fuori al freddo. Il sei viene dopo: torna l\'equilibrio, e qualcuno dà una mano a chi ne ha bisogno.'),

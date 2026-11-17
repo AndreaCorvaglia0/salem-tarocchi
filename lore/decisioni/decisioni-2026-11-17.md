@@ -47,3 +47,11 @@ Chi lo sente e chi no è da fissare nel retroscena, e deve essere coerente con i
 È un mistero che resta. Sulle cose che non vogliamo spiegare (le carte, le Afflitte, Tartufo, la Lettrice)
 personaggi diversi possono avere ipotesi diverse, e nessuna viene confermata.
 Regola: un'ipotesi è sempre detta da qualcuno, con le sue ragioni per crederci; mai dal gioco.
+
+## 7. I retroscena sono canone (deciso il 17 novembre, pomeriggio)
+
+Andrea ha approvato la rete dell'inverno di Ruta e le tre scelte proposte: tre colpe mai confrontate
+(Malva, Ortica, Edera); la sposa morta era la moglie dello scrivano che oggi è il Giudice; Rosalba è viva a
+Boston. I file in `lore/retroscena/` passano a `fonte: deciso`. Restano nascosti: affiorano poco e mai spiegati.
+Il tempo: il capitolo 2 copre primavera ed estate, l'arresto è a fine estate. Malva è vicina ai sessanta.
+Le correzioni di parole ai copioni sono in `notes/retroscena.md`, sezione c.

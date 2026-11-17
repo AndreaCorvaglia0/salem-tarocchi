@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[silas-cacciatore]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Fu conestabile per un inverno, vent'anni fa; riportò la lanterna al tribunale e se ne andò a vivere nel bosco."
 vuole: "Sentire una voce che parla a lui, senza dover rispondere."
 teme: "Di avere dimenticato come si sta in una stanza con una persona."

@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[tobia-fornaio]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Fornaio da vent'anni, uno che capisce il mondo dal pane: se lievita storto, in casa c'è qualcosa che non sa."
 vuole: "Che in casa sua sia tutto come ieri."
 teme: "Le sorprese, anche quelle buone."

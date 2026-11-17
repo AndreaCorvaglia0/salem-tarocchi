@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[bambino-della-porta-nera]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Un bambino di sette anni che aspetta fuori dalla bottega mentre sua madre compra quello che giura di non comprare."
 vuole: "Vedere una strega vera, e poterlo dire a qualcuno."
 teme: "Che sua nonna abbia ragione su tutto, anche sull'ombra."

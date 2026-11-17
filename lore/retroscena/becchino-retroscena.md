@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[becchino]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Scava le fosse di Salem da trent'anni e paga un debito con l'unica moneta che ha: una candela al mese sulla tomba di chi gli prestò i soldi."
 vuole: "Sdebitarsi con Josiah Bray, e che la vedova lo sappia senza doverglielo dire lui."
 teme: "I vivi un poco, i gatti parecchio: lo guardano come se sapessero la data."

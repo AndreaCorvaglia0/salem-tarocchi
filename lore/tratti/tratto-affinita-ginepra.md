@@ -231,6 +231,7 @@ stabilisce:
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "trials.js#trial.hat.door", n: -1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }
@@ -288,6 +289,6 @@ mette_alla_prova: []
 
 Quanto ginepra si riconosce in lei (core/witches.js AFFINITY): audace, gentile, cuore, più la sua carta. Calcolata dai tratti, mai salvata.
 
-Lo muovono 279 punti dei copioni e lo leggono 0 condizioni.
+Lo muovono 280 punti dei copioni e lo leggono 0 condizioni.
 
 Qui `n` è il verso rispetto all'affinità: +1 avvicina, -1 allontana. La mostra il codice: ui/witches.js.

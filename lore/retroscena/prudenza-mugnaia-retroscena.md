@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[prudenza-mugnaia]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Fa i conti del mulino da ventotto anni, e a fine inverno ha dato lei al figlio i soldi per andarsene a Boston."
 vuole: "Che il mulino regga finché il ragazzo torna, o finché scrive."
 teme: "Che suo marito scopra da dove venivano quei soldi."

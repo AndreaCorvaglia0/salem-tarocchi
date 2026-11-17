@@ -158,7 +158,7 @@ export const TRIAL_SCRIPTS = {
     offer: [
       N('Al limite del bosco, seduta su un ceppo con le mani in grembo, c\'è la vedova Bray. Ha l\'aria di aspettare da un pezzo, e quando ti riconosce si alza troppo in fretta.'),
       N('«Figliola, speravo proprio che passaste di qui. Voi mi avete letto le carte la sera che nevicava, e quello che avete detto si è avverato, parola per parola. Per questo vengo da voi, e non dal ministro.»'),
-      N('«Domani notte fa un anno che ho seppellito Josiah. Ogni mese, sulla sua pietra, trovo una candela che non ho acceso io. Devo sapere chi viene da lui di notte, e da sola nel bosco non ci vado.»'),
+      N('«Domani notte è il giorno del mese in cui ho seppellito Josiah. Ogni mese, sulla sua pietra, trovo una candela che non ho acceso io. Devo sapere chi viene da lui di notte, e da sola nel bosco non ci vado.»'),
       choice(
         o('Le dico che l\'accompagno io.', { tono: 1 }, [N('«Lo sapevo che avreste detto di sì. Avete la stessa faccia di quando giravate le carte: di una che non scappa.»')]),
         o('Le chiedo di chi ha paura che sia.', { parola: 1 }, [N('La vedova abbassa gli occhi. «Di una donna, se proprio volete saperlo. Trent\'anni di matrimonio, e adesso mi viene questo pensiero. Vedete che ho bisogno di andarci?»')]),
@@ -228,3 +228,7 @@ for (const d of Object.values(TRIALS)) {
   if (CAST.some((c) => c.id === id)) continue;
   CAST.push({ id, kind: 'prop', at: d.start.at, when: [...[d.when ?? true].flat(), ...open3(d.id, d.main)], script: `trial.${d.id}.door`, label: d.start.label || d.title, verb: d.start.verb || 'Vai' });
 }
+
+// «Un sacco dal mulino» (a small side story in its own file, with its own door: scripts/hat.js)
+import { HAT_SCRIPTS } from './hat.js';
+Object.assign(TRIAL_SCRIPTS, HAT_SCRIPTS);

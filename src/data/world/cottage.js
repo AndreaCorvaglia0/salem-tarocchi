@@ -1,7 +1,7 @@
 // The cottage at the edge of the woods: your home, readings at the table, the card of the day in bed.
 export default {
   id: 'cottage',
-  name: 'Il cottage',
+  name: 'La capanna',
   inside: true,
   ground: '_',
   start: 'door',

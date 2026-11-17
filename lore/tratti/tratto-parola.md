@@ -64,6 +64,8 @@ stabilisce:
   - { dove: "visits.js#talk.m19", n: 1, scelta: "[[visits-talk-m19-1]]" }
   - { dove: "visits.js#talk.m19", n: -1, scelta: "[[visits-talk-m19-1]]" }
   - { dove: "trials/demo.js#default.steps[7].choice[1]", n: 1 }
+  - { dove: "trials/hat.js#hat.steps[7].choice[0]", n: 1 }
+  - { dove: "trials/hat.js#hat.steps[7].choice[1]", n: -1 }
   - { dove: "trials/intro.js#LIBRARY_SCRIPTS.library.first[3].choice[1]", n: 1 }
   - { dove: "trials/main.js#fog.steps[5].choice[1]", n: 1 }
   - { dove: "trials/side.js#dare.steps[9].choice[1]", n: -1 }
@@ -140,6 +142,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): schietta (+) o accorta (-), da -6 a 6.
 
-Lo muovono 77 punti dei copioni e lo leggono 54 condizioni.
+Lo muovono 79 punti dei copioni e lo leggono 54 condizioni.
 
-Verso schietta: 48 punti; verso accorta: 29 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso schietta: 49 punti; verso accorta: 30 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

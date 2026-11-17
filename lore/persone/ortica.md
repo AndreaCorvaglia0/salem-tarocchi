@@ -81,6 +81,7 @@ aperto:
   - "Quanti anni ha? Dice «trent'anni» di bosco e «me a vent'anni» (c2.js#ortica.chat)."
   - "Perché non usa più la scopa? Solo «da quando ho perso il cappello sopra il mulino» (c2.js#ortica.chat)."
   - "Com'è il suo rapporto con Edera fuori dal consiglio? Nei copioni non si vedono mai da sole."
+  - "Proposto (17 novembre): [[cappello-in-soffitta]] è un fatto del suo arco, dopo il finale (il cappello torna e lei non se lo mette); da aggiungere ad `arco` quando Andrea lo conferma."
 ---
 
 Ortica vive nel bosco in una capanna coperta di erbe appese, e non smette mai di parlare: divaga, si corregge, cita il merlo, promette storie che non finisce. Dietro la chiacchiera c'è una strega precisa, che insegna a leggere il tempo in tre carte, cura le ginocchia del mugnaio, conosce ogni sasso del bosco e ogni pianta dell'orto. Le pesa che nessuno la ascolti da trent'anni, e quando la protagonista le chiede di parlare per una buona causa lo vive come un onore.

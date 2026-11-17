@@ -12,7 +12,8 @@ const ANCHORS = new Set(Object.keys(allAnchors()));
 const COND_KEYS = new Set(['flag', 'notFlag', 'chapter', 'chapterMin', 'chapterMax', 'step', 'stepIn', 'has', 'lacks', 'majorsMin',
   'level', 'power', 'spread', 'trust', 'stat', 'yourCard', 'birthCard', 'sign', 'word', 'tool', 'coinsMin', 'not', 'any',
   'trait', 'trend', 'steady', 'turned', 'torn', 'verdict', 'yourCardIsBirth', 'hasBirth', 'hasYear', 'element', 'modality', 'moon', 'bornOn',
-  'pop', 'tartufo', 'explored', 'title', 'wrote']); // 16 Nov
+  'pop', 'tartufo', 'explored', 'title', 'wrote', // 16 Nov
+  'affinity', 'bond', 'attitude']); // 17 Nov: the witches (core/cond.js already knew them; no script read them)
 const TOKENS = new Set(['name', 'sign', 'birthCard', 'yourCard', 'title', 'level', 'stat', 'word', 'words', 'card', 'trust', 'season', 'coins', 'majors', 'picked',
   'pickedId', 'pickedNumber', 'traits', 'trait', 'lastVerdict', 'element', 'modality', 'ruler', 'rulerCard', 'birthDay', 'dayPlanet', 'dayPlanetCard', 'moon']);
 const ACTIONS = new Set(['giveCard', 'draw', 'teach', 'lesson', 'reading', 'exam', 'session', 'xp', 'coins', 'flag', 'trust', 'point',

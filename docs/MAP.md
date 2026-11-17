@@ -51,9 +51,9 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/data/herbs` | 2 | 351 |
 | `src/data/reading` | 5 | 758 |
 | `src/data/reading/voices` | 81 | 6645 |
-| `src/data/story` | 12 | 2021 |
-| `src/data/story/scripts` | 12 | 2749 |
-| `src/data/trials` | 6 | 830 |
+| `src/data/story` | 12 | 2024 |
+| `src/data/story/scripts` | 13 | 2848 |
+| `src/data/trials` | 7 | 920 |
 | `src/data/world` | 14 | 865 |
 | `src/glue` | 38 | 2553 |
 | `src/reading` | 9 | 702 |
@@ -214,7 +214,7 @@ Touch these with care: many files depend on them.
 - `src/core/cond.js` (26)
 - `src/data/story/index.js` (24)
 - `src/ui/paper.js` (24)
-- `src/data/story/h.js` (20)
+- `src/data/story/h.js` (21)
 - `src/world/art/px.js` (18)
 - `src/core/fonts.js` (13)
 - `src/data/cards.js` (13)

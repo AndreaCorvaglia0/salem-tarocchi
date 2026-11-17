@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[malva]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Trent'anni fa lesse male una carta a una donna che piangeva, un'altra pagò al posto suo e le proibì di ringraziare; da allora non ringrazia, non si fa pagare i parti e cerca una ragazza a cui lasciare le mani."
 vuole: "Trovare, prima che le mani comincino a tremarle, una ragazza che resti: una a cui lasciare la casa, il cesto e i trecento bambini che devono ancora nascere."
 teme: "Le mani. Ha visto quelle di Ruta dopo un inverno in cella, e ogni mattina prova le sue sul chiavistello prima di uscire."

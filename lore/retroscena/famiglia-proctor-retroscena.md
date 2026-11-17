@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[famiglia-proctor]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Una casa di chiesa della parte alta, dove da trent'anni non si nomina una levatrice senza abbassare la voce: la sposa morta di febbre era una Proctor."
 vuole: "Lui: che suo figlio viva, senza doverlo a nessuna di quelle donne. Lei: che viva, e basta."
 teme: "Lui: di dover dire domenica, dal primo banco, che in casa sua è entrata Malva. Lei: il barbiere."

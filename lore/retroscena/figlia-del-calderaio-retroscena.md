@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[figlia-del-calderaio]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Sei o sette anni, una vita sul carro, e una bambola che è un coperchio di rame con la faccia disegnata col carbone."
 vuole: "Qualcosa di suo che non si debba rivendere."
 teme: "Di svegliarsi e non trovare il carro."

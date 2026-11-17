@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[conestabile-della-piazza]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Un uomo che da bambino non dormiva senza il lume e che da vent'anni se lo porta in giro appeso a un bastone; ha una figlia dell'età delle Afflitte, e ogni sera a cena le fa le stesse domande che fa in piazza."
 vuole: "Che sua figlia, se un giorno la fermano, risponda senza esitare. E che le regole siano le stesse per tutte, perché solo così possono proteggere anche lei."
 teme: "Il buio, da sempre. E il giorno in cui un dito in piazza indicherà sua figlia, oppure sarà sua figlia a indicare."

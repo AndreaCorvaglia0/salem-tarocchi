@@ -28,12 +28,11 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
 
 ## Units in the scenes that were played
 
-1313 units: 757 common, 90 rare (under 1% of the runs), 466 never shown.
+1312 units: 757 common, 90 rare (under 1% of the runs), 465 never shown.
 
 ### Never shown
 
-- `c1b.js#c1.exam1` (2)
-  - else of flag square.front
+- `c1b.js#c1.exam1` (1)
   - else of tool incense
 - `c1b.js#c1.venus` (1)
   - option «Appoggio Gli Amanti accanto al bicchiere, e guard…» (if has m06)

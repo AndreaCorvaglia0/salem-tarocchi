@@ -57,6 +57,7 @@ stabilisce:
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "trials.js#trial.hat.door", n: -1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }
@@ -161,6 +162,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): cuore (+) o testa (-), da -6 a 6.
 
-Lo muovono 105 punti dei copioni e lo leggono 47 condizioni.
+Lo muovono 106 punti dei copioni e lo leggono 47 condizioni.
 
-Verso cuore: 55 punti; verso testa: 50 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso cuore: 55 punti; verso testa: 51 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

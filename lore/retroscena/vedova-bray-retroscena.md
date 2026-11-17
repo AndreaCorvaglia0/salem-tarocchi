@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[vedova-bray]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Trent'anni accanto a un uomo che teneva una carta nel libro delle preghiere e non le disse mai perché; la settimana dopo il funerale consegnò il mazzo di lui al tribunale, per obbedienza, e non se lo perdona."
 vuole: "Sapere chi era suo marito nelle cose che non le ha detto. E riavere quello che ha dato via."
 teme: "Di scoprire che c'era un'altra. Sotto, di scoprire che non c'era niente e che è stata lei a non chiedere mai."

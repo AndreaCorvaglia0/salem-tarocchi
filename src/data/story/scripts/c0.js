@@ -11,7 +11,7 @@ export const C0 = {
   'p.arrive': [
     cinema([
       "È una notte d'inverno, e a Salem nevica ormai da tre giorni.",
-      'Sei arrivata a piedi dalla strada del porto, con una borsa in spalla e il nome di una levatrice che non sa ancora di aspettarti.',
+      'Sei arrivata a piedi dalla strada del porto, con una borsa in spalla e il nome di una levatrice che non sa ancora chi sta aspettando.',
     ], 'village.arrival'),
   ],
 
@@ -49,7 +49,7 @@ export const C0 = {
       ], { tag: tg('m00', 'w') }),
     ),
     power('cat'),
-    cat('Vedi quella finestra accesa, poco più avanti? È la casa di Malva, la levatrice. Sulla porta ha scritto di non bussare, ma tu bussa lo stesso: è così che capisce se una ragazza le serve.'),
+    cat('Vedi quella finestra accesa, poco più avanti? È la casa di Malva, la levatrice. Sulla porta, dice lei, ha scritto di non bussare, ma tu bussa lo stesso: è così che capisce se una ragazza le serve.'),
     diary('Sono arrivata a Salem di notte, con la neve alle caviglie. Sul bordo della strada ho trovato una carta, e un gatto nero ha trovato me.'),
     chapter(1),
     step('c1.malva'),

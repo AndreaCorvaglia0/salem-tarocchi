@@ -4,7 +4,7 @@ persona:
   - "[[malva]]"
   - "[[ortica]]"
   - "[[edera]]"
-fonte: proposto
+fonte: "deciso"
 vuole: "Tirare fuori Ginepra da quelle celle, senza dover dire ad alta voce perché nessuna delle tre sopporta di lasciarci una ragazza."
 teme: "Che una delle altre due dica per prima come andò quell'inverno."
 in_breve: "Tre donne legate da un inverno di trent'anni fa, in cui ognuna crede di essere stata lei a rovinare le cose, e nessuna l'ha mai detto alle altre due."

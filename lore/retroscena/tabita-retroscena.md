@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[tabita]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Lavandaia figlia e nipote di lavandaie, da novembre è la sola in casa a portare soldi; ha una figlia grande con le mani buone e vorrebbe che Malva la prendesse con sé, ma tra lei e Malva non si chiede niente."
 vuole: "Che la figlia maggiore impari un mestiere che non spacchi le mani. Vorrebbe che fosse quello di Malva."
 teme: "Di essere lei a rompere, chiedendo, l'unico conto che in vita sua è rimasto aperto senza far male. E, di questi tempi, di mandare una figlia a fare la strega."

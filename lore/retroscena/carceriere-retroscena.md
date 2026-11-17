@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[carceriere]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Figlio del vecchio custode, quello a cui trent'anni fa una ragazza raccontava il bosco ogni sera; apre uno spiraglio, e sa quando conviene non aver visto."
 vuole: "Che in casa sua moglie sia contenta, e che di sotto non muoia nessuno di freddo."
 teme: "Il Giudice che scende a chiedere, con molto garbo, come mai una grata è aperta."

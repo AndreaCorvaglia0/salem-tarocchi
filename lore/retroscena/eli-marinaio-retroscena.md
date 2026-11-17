@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[eli-marinaio]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Da mozzo imparò i nodi da Josiah Bray; parte per le isole il primo inverno in cui il vecchio non c'è più a dirgli che tempo farà."
 vuole: "Portarsi in mare una frase da ripetere quando non si vede la costa."
 teme: "Di non tornare, e non lo dice: per questo non ha una domanda."

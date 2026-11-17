@@ -1,7 +1,7 @@
 ---
 tipo: retroscena
 persona: "[[giudice]]"
-fonte: proposto
+fonte: "deciso"
 in_breve: "Un bambino povero che ha imparato a chiedere scusa prima di prendere, e un vedovo che trent'anni fa vide la piazza usare il suo lutto: da allora crede che tra la folla e una donna sola ci debba stare un'aula, e non si accorge di essere diventato la porta da cui la folla entra."
 vuole: "Che a Salem nessuno venga più preso dalla piazza. Che ogni accusa passi da un metodo uguale per tutte, alla luce del giorno, e che chi sa rispondere torni a casa."
 teme: "La piazza di sera. E la gratitudine: la domenica ringraziò una levatrice davanti a tutti, e il giovedì quella stessa piazza era sotto la porta di lei, e gridava il nome di lui."
