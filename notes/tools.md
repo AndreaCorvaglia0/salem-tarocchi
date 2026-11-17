@@ -2,9 +2,9 @@
 
 _Written by `node scripts/lore.mjs check`: do not edit by hand. What the rules mean: docs/TOOLS.md._
 
-Errors: 0. Warnings: 10.
+Errors: 0. Warnings: 11.
 
-Links checked: 3213. Fact clauses checked: 201 names; 51 clauses not understood (not checked).
+Links checked: 3235. Fact clauses checked: 201 names; 51 clauses not understood (not checked).
 Continuity: 160 claims (who knows what), 49 placed on the main path and checked, 7 guarded by a test of the fact's flags, 112 not placeable (skipped), 0 violations.
 
 ## Errors
@@ -28,3 +28,7 @@ None.
 ### fatto.scena (1)
 
 - `fatti/cappello-in-soffitta.md`: scene "trials/hat.js#hat" not found in hat.js
+
+### tipo (1)
+
+- `inizio.md`: tipo "indice" has no row in lore/README.md, its fields are not checked

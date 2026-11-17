@@ -1,0 +1,113 @@
+{
+ "collapse-filter": false,
+ "search": "-path:scelte -path:finali",
+ "showTags": false,
+ "showAttachments": false,
+ "hideUnresolved": true,
+ "showOrphans": false,
+ "collapse-color-groups": false,
+ "colorGroups": [
+  {
+   "query": "path:persone/",
+   "color": {
+    "a": 1,
+    "rgb": 14711391
+   }
+  },
+  {
+   "query": "path:retroscena/",
+   "color": {
+    "a": 1,
+    "rgb": 11883338
+   }
+  },
+  {
+   "query": "path:luoghi/",
+   "color": {
+    "a": 1,
+    "rgb": 8499866
+   }
+  },
+  {
+   "query": "path:fatti/",
+   "color": {
+    "a": 1,
+    "rgb": 15912079
+   }
+  },
+  {
+   "query": "path:scelte/",
+   "color": {
+    "a": 1,
+    "rgb": 11051678
+   }
+  },
+  {
+   "query": "path:finali/",
+   "color": {
+    "a": 1,
+    "rgb": 13934615
+   }
+  },
+  {
+   "query": "path:tratti/",
+   "color": {
+    "a": 1,
+    "rgb": 13073919
+   }
+  },
+  {
+   "query": "path:meccaniche/",
+   "color": {
+    "a": 1,
+    "rgb": 5155038
+   }
+  },
+  {
+   "query": "path:obiettivi/",
+   "color": {
+    "a": 1,
+    "rgb": 5689313
+   }
+  },
+  {
+   "query": "path:tecniche/",
+   "color": {
+    "a": 1,
+    "rgb": 6610911
+   }
+  },
+  {
+   "query": "path:principi/",
+   "color": {
+    "a": 1,
+    "rgb": 4020864
+   }
+  },
+  {
+   "query": "path:metodo/",
+   "color": {
+    "a": 1,
+    "rgb": 10182117
+   }
+  },
+  {
+   "query": "path:decisioni/",
+   "color": {
+    "a": 1,
+    "rgb": 16777215
+   }
+  }
+ ],
+ "collapse-display": true,
+ "showArrow": true,
+ "textFadeMultiplier": 0,
+ "nodeSizeMultiplier": 1.1,
+ "lineSizeMultiplier": 1,
+ "collapse-forces": true,
+ "centerStrength": 0.5,
+ "repelStrength": 10,
+ "linkStrength": 1,
+ "linkDistance": 250,
+ "scale": 0.4
+}
