@@ -224,6 +224,43 @@ Ordine proposto: (1) la base di conoscenza; (2) una pagina di progetto con le ca
 sulle scene che esistono; (3) il primo interesse completo come prova (erbe e orto, che è il più avanti);
 (4) gli altri, uno per fase. Le voci 3.0 (sibilla), 3.4 (sacchetti) e «pietre e incensi» confluiscono qui.
 
+## 7. I libri (tema di Andrea, 18 novembre; da sviluppare bene prima del codice)
+
+**L'idea.** Finti libri che si sfogliano nella biblioteca di Edera, con belle figure e poche notizie
+interessanti; i libri si guadagnano in giro (un regalo, un baule, il banco dell'ambulante, il premio di una
+missione) e vanno a riempire gli scaffali. La funzione è nozionistica: il posto di quello che sappiamo e che
+il gioco non fa dire a nessuno (la base di conoscenza `lore/sapere`, la storia delle carte in `RESEARCH.md`).
+
+**Perché ci sta.** (1) La biblioteca c'è ed è quasi vuota di cose da fare. (2) Chiude il discorso «senza
+spiegone»: i personaggi dicono due parole, l'album dice l'essenziale, il libro è per chi vuole di più. (3) È
+la quarta collezione, la più lenta e la più bella da vedere crescere: uno scaffale. (4) Abbiamo già le
+immagini giuste e libere: le carte del 1909, le tavole botaniche, il mazzo della sibilla di Yale, le tavole di
+minerali di Sowerby; e i libri antichi veri di erbe, astri e carte sono in gran parte di pubblico dominio.
+
+**Da decidere nella pagina di progetto (concetto prima, poi i titoli):**
+- *Che cos'è un libro nel gioco:* poche pagine (6-10), ogni pagina una figura grande e tre o quattro righe;
+  si legge in due minuti; ha un autore, un'epoca, una voce sua e magari note a margine di chi l'ha avuto
+  prima (Edera, o una mano sconosciuta: lì passa un po' di storia senza dirla).
+- *Veri o finti:* proposta, libri **inventati ma fatti di cose vere**: figure autentiche d'epoca con il loro
+  credito, notizie controllate (`prima-di-tutto-corretto`), titolo e autore del mondo di Salem. Un libro che
+  cita un libro vero lo dice. I libri possono anche **sbagliare o contraddirsi**, come le fonti vere: va
+  segnato, perché è il modo onesto di dire «la tradizione non è una sola».
+- *Tipi:* un erbario figurato; un lapidario; un libro degli astri e dei giorni; una storia delle carte (dai
+  tarocchi come gioco ai mazzi per leggere); un libretto della sibilla (le regole originali del gioco con i
+  dadi); un quaderno di ricette e sacchetti; un libro di Salem (cronaca del paese, solo ciò che si può
+  sapere); un libro che nessuno riesce a leggere.
+- *Come si guadagnano:* ognuno ha un donatore o un posto con una ragione (il lapidario da Edera, la cronaca
+  dal sagrestano); alcuni a pagine sparse da ricomporre; mai annunciati prima (`vede-solo-quello-che-sa`).
+- *A che cosa servono, oltre a leggere:* un libro letto può sbloccare una nota sulla mappa, una domanda nuova
+  da fare a qualcuno, una pagina in più dell'album, un gradino di un interesse. Poco, ma non zero: sennò è
+  una vetrina.
+- *Rischi:* troppo testo su un telefono (limite duro di righe per pagina); doppione degli album (regola:
+  l'album è la scheda, il libro è il racconto e le figure); lavoro di ricerca immagini (una richiesta alla
+  volta, crediti in CREDITS.md).
+
+**Ordine proposto:** dopo le collezioni (pietre e sibilla), perché ne usa le immagini e le schede. Prima una
+pagina di concetto con tre libri scritti per intero come prova, poi lo scaffale.
+
 ## Idee non ancora scelte
 
 **Pietre e incensi** (idea di Andrea, 17 novembre; da verificare prima di progettarla). Non una terza
