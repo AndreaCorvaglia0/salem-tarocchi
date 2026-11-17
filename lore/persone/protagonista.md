@@ -1,6 +1,6 @@
 ---
 tipo: "persona"
-nome: "La protagonista ({name})"
+nome: "La protagonista"
 id: "tu"
 ruolo:
   - { t: "Una ragazza arrivata a Salem a piedi dalla strada del porto, di notte, con una borsa e il nome di una levatrice.", fonte: copione, scena: "c0.js#p.arrive" }

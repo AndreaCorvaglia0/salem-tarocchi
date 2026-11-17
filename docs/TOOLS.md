@@ -109,6 +109,25 @@ trial with two places and a person who changes with her affinity: `src/data/tria
    counts per folder change): the lead rewrites `docs/MAP.md` with `node scripts/map.mjs`.
 7. Screens: `Looking at it` below.
 
+## The vault in a browser: `<site>/lore/`
+
+A small read-only viewer of `lore/` for a phone, with no Obsidian: home (`lore/inizio.md`, search, the
+types), one page per note (frontmatter as a card, body, «Collegato da», a local graph), lists per type
+(fatti in `quando` order), and the whole graph (`#/grafo`; choices, endings and indices start hidden).
+Routes are hashes (`#/n/<id>`, `#/t/<tipo>`, `#/grafo[/<id>]`, `#/cerca/<q>`), so links can be shared.
+
+- `scripts/lore/site.mjs` builds the data from the vault with `vault.mjs`: every note (id, tipo, title,
+  frontmatter, body, links, broken links, backlinks), the type colours of `lore/.obsidian/graph.json`, and
+  the graph positions (computed once here with `lore-site/layout.js`, so the phone only draws). Above
+  1.5 MB the bodies go to `bodies.json`.
+- `lore-site/` is the page: vanilla ES modules, no framework, no CDN (`app.js`, `graph.js` canvas with pan,
+  pinch and tap, `md.js` minimal markdown, `style.css`; the title font is copied from `@fontsource`).
+- `vite.config.js` (`lorePlugin`) emits all of it under `dist/lore/` at every `npm run build`, so the
+  hosted copy is always the vault of that commit; `npx vite` serves `/lore/` rebuilt on every request (edit a
+  note, reload). `npx vite preview` serves the built copy.
+- `tests/lore.site.test.mjs`: built from the real vault, every link resolves or is flagged, backlinks mirror
+  links, the plugin emits `lore/index.html` and `lore/data.json`.
+
 ## Looking at it
 
 `scripts/shot.mjs` drives headless Chrome (puppeteer-core; set `CHROME` if it is not `/usr/bin/google-chrome`

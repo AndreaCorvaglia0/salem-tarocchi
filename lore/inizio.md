@@ -5,9 +5,9 @@ nome: "Inizio"
 
 # Le carte di Salem: il vault
 
-Apri la **vista grafo** (icona dei tre pallini collegati). I colori dicono il tipo: persone, retroscena, luoghi,
-fatti, meccaniche, obiettivi, tecniche, principi, metodo. Scelte e finali sono nascosti nel grafo all'inizio
-perché sono tanti: togli il filtro in alto per vederli.
+Apri il **grafo** (in Obsidian l'icona dei pallini collegati, nel sito il pulsante «Grafo»). I colori dicono il tipo:
+persone, retroscena, luoghi, fatti, meccaniche, obiettivi, tecniche, principi, metodo. Scelte e finali sono tanti e
+all'inizio sono nascosti: si accendono dai filtri.
 
 ## Da dove partire
 
