@@ -3,7 +3,8 @@
 Questa pagina è l'ingresso per chi deve aggiungere qualcosa al gioco: una storia secondaria, una persona,
 un mondo. È anche la base per tornare a Mnemopolis e farne un generatore di storie (`docs/MNEMOPOLIS.md`).
 
-Il perché di tutto questo, con gli errori corretti e le trovate, è in `docs/LEZIONI.md`.
+Il perché di tutto questo, con gli errori corretti e le trovate, è in `docs/LEZIONI.md`. Dove stiamo andando:
+`docs/ARRIVO.md`; che cosa viene dopo: `docs/BACKLOG.md`.
 
 ## Tre prodotti
 
@@ -78,8 +79,9 @@ completo, una prova in due posti con una persona che cambia con l'affinità: `sr
    `src/data/story/scripts/`, che `trials.js` unisce a `TRIAL_SCRIPTS` in fondo (`lore` vede da solo ogni file
    di quella cartella). Se la storia comincia in un posto e si gioca in un altro, le voci di CAST vanno fatte
    come dice `docs/TRIALS.md`, «Una storia in due posti».
-5. **Il registro.** Non serve scrivere niente: `src/glue/trials.js` registra da solo ogni prova vera in
-   `src/core/extras.js`. Il tetto di due novità alla volta vale anche per lei.
+5. **Il registro.** `src/glue/trials.js` registra da solo ogni prova vera in `src/core/extras.js`. Il tetto
+   di due novità alla volta vale anche per lei. Serve solo la sua scheda sulla mappa: una riga in
+   `src/ui/missions/titles.js` («La mappa del grimorio», sotto; il test la chiede).
 6. **I controlli.** Aggiungere la riga della prova a `poolsOf` in `tests/trials.content.test.mjs` (i mazzi che lei
    può avere in quel momento) e, se serve, a `OLD2` / `ENDED`; poi `npm test`, `node scripts/lore.mjs gen` e
    `check`, `node scripts/prose.mjs`. `node scripts/map.mjs --check` fallisce anche solo per le righe in più:
@@ -137,8 +139,8 @@ Modello: `src/data/elsewhere/book.js` (Dentro un libro) e `clouds.js` (Sulle nuv
    viaggio: `at`, `art`, `label`, `verb`, e due battute), `item` (il premio senza errori), `hint` (la regola
    in una riga d'interfaccia), `steps` con tre bivi (uno per grado: segno, idea, quesito), `rooms`. Aggiungerlo
    a `WORLD_LIST` in `src/data/elsewhere/index.js`.
-5. **Il registro.** Non serve scrivere niente: `src/glue/elsewhere.rules.js` crea la voce `elsewhere.<id>`, la
-   catena e l'oggetto in Salem. Controllare che l'ancora di `trigger.at` esista nella mappa di Salem.
+5. **Il registro.** `src/glue/elsewhere.rules.js` crea la voce `elsewhere.<id>`, la catena e l'oggetto in
+   Salem; la scheda sulla mappa è una riga in `src/ui/missions/titles.js` (il test la chiede). Controllare che l'ancora di `trigger.at` esista nella mappa di Salem.
 6. **I controlli.** `npm test` (`tests/elsewhere.test.mjs`, `tests/world.maps.test.mjs`), poi
    `node scripts/lore.mjs check`. Per entrare subito: `/?debug`, poi `window.__salem.call('elsewhere.go', '<id>')`.
 7. **Sul telefono.** Il passaggio d'andata; la riga in alto «Altrove · <nome>»; la regola si capisce dalla
@@ -156,6 +158,25 @@ nei copioni; `kind` è il disegnino, in `src/ui/sketchink.js`), `{ in: '<ancora>
 dei Minori). Una mappa nuova dentro una casa o in Altrove dice a quale porta appartiene: `mapDoor:
 'village.<porta>'`. Posizioni e strade si calcolano dalle mattonelle: non si scrivono a mano. Un'ancora nuova,
 una porta nuova, un posto nuovo dove la storia la manda: `tests/map.sketch.test.mjs` chiede dove va.
+
+**Un edificio nuovo con l'insegna.** Il disegno sta in `src/world/art/facades.js` (case e edifici del paese) o
+`src/world/art/witchhomes.js` (le case delle streghe), registrato per il suo `kind` in `src/world/art/blocks.js`;
+in `src/world/tiles.js` (`KINDS`) il suo `over` (quanti px sale sopra l'ingombro) e `ox` (quanto sporge ai
+lati). Il simbolo dell'insegna si sceglie UNA volta in `src/data/world/symbols.js` (`PLACES`: simbolo, `kind`
+del blocco, `kind` del disegnino della mappa; un simbolo nuovo vuole `GLYPHS` 5x5 per i cartelli, `SIGN_GLYPHS`
+7x7 per l'insegna e `SYMBOL_INK` in `src/ui/sketchink.js`); il disegnino della mappa si fa con `signed(kind,
+forma)` in `sketchink.js`, che ci appende l'insegna. `tests/world.buildings.test.mjs` controlla che insegna,
+cartelli e mappa diano lo stesso simbolo, che le frecce dei cartelli puntino dalla parte giusta e che nessuna
+erba, ancora o forziere finisca sotto il disegno di un edificio. Due case con la stessa lettera si
+distinguono con `blockOpts: { 'x,y': {...} }` (la casella in alto a sinistra); il terreno dei quartieri si
+cambia con `districts` (solo l'aspetto, non dove si cammina).
+
+**Le cose in più sulla mappa.** Ogni voce del registro (`src/core/extras.js`: una prova, una lezione, un
+mondo, una missione) compare come un foglietto appuntato accanto al suo posto, e toccandolo si apre la sua
+scheda. La scheda si scrive a mano in `TITLES` di `src/ui/missions/titles.js`: `T(titolo, tipo, chi me
+l'ha detto, cosa ci guadagno)`; il titolo è corto e non svela niente, «cosa ci guadagno» è concreto ma senza
+nominare l'oggetto del premio. `tests/missions.page.test.mjs` fallisce finché una voce nuova non ha la sua
+scheda, e anche se un file nuovo aggiunge voci al registro (allora si aggiunge a `registryIds()` del test).
 
 ## Dopo
 
