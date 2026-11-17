@@ -15,6 +15,6 @@ provide('day.draw', async () => {
   if (!id) return null;
   state.day = { date: todayKey(), card: id }; save();
   addXp(5, 'day');
-  call('hud.toast', `Oggi: ${CARD[id]?.name}. Sarà la prima del ripasso, e chi la vede in una lettura paga di più.`, { card: id, ms: 4500 });
+  call('hud.toast', `Oggi: ${CARD[id]?.name}. Sarà la prima del ripasso.`, { card: id, ms: 4500 });
   return id;
 });

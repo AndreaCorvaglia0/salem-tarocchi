@@ -291,3 +291,83 @@ Sources (short names used below):
 
 ## Not horticulture
 - The seed after the last lesson is one of the herbarium's poisonous plants (`rareSeed`); Ortica's last line (cover lightly, keep moist, gloves) is general sowing advice, not checked for each of those five species.
+
+## Tecniche di apprendimento (17 novembre)
+
+Le affermazioni usate in `lore/tecniche/`. Controllate il 17 novembre 2026 sulla pagina indicata (abstract o
+riassunto dell'autore). PubMed ha chiesto un controllo anti-robot dopo due pagine: non è stato aggirato, si sono
+usate le copie degli autori. Una pagina (Hattie e Timperley 2007) è chiusa ai robot: al suo posto la meta-analisi
+del 2020 dello stesso gruppo.
+
+### Verificate
+
+- **Utilità delle dieci tecniche.** Dunlosky, Rawson, Marsh, Nathan e Willingham 2013, *Psychological Science in
+  the Public Interest*: utilità alta per la pratica di recupero (practice testing) e lo studio distribuito;
+  moderata per elaborative interrogation, self-explanation e interleaving; bassa per riassumere, sottolineare,
+  keyword mnemonic, immagini mentali per imparare un testo, rileggere. https://scholars.duke.edu/publication/954654
+- **Recupero contro rilettura.** Roediger e Karpicke 2006: a 5 minuti vince la rilettura; a 2 giorni e a una
+  settimana chi si era messo alla prova ricorda molto di più, anche se chi rileggeva si sentiva più sicuro.
+  https://pubmed.ncbi.nlm.nih.gov/16507066/
+- **Spaziatura.** Cepeda e altri 2006, meta-analisi (317 esperimenti): lo studio distribuito batte quello
+  concentrato; l'intervallo migliore cresce con il tempo per cui si vuole ricordare.
+  https://pubmed.ncbi.nlm.nih.gov/16719566/ . Gli intervalli del gioco (1, 3, 7, 16 giorni) sono una scelta nostra.
+- **Alternanza con le immagini.** Kornell e Bjork 2008: imparare lo stile di pittori con i quadri mescolati
+  funziona meglio che a blocchi, e chi studia crede il contrario.
+  https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/07/Kornell_Bjork_2008_PsychScience.pdf .
+  Brunmair e Richter 2019, meta-analisi (59 studi): g 0,42 in media, 0,67 per i quadri, a favore del blocco per le
+  liste di parole (g -0,39); l'effetto cresce quando le categorie si somigliano tra loro.
+  https://www.psychologie.uni-wuerzburg.de/fileadmin/06020400/2019/Brunmair_Richter_in_press__2019_META-ANALYSIS_OF_INTERLEAVED_LEARNING.pdf
+- **Effetto generazione.** Bertsch, Pesta, Wiscott e McDaniel 2007, 86 studi: d 0,40; più forte dopo più di un
+  giorno (0,64). https://mcdaniel97.github.io/Publications/Bertsch%20et%20al.%202007.pdf
+- **Autospiegazione.** Bisra e altri 2018, 64 studi: g 0,55, meglio della spiegazione data da altri; la forma a
+  scelta multipla sembra la meno efficace (poche prove). Letto nel riassunto della British Psychological Society:
+  https://www.bps.org.uk/research-digest/self-explanation-powerful-learning-technique-according-meta-analysis-64-studies
+- **Difficoltà desiderabili.** E. Bjork e R. Bjork 2011: spaziare, alternare, mettersi alla prova, generare,
+  variare le condizioni; una difficoltà è utile solo se chi impara ha le basi per affrontarla.
+  https://bjorklab.psych.ucla.edu/wp-content/uploads/sites/13/2016/04/EBjork_RBjork_2011.pdf
+- **Tentativo prima della risposta.** Hays, Kornell e Bjork (la copia letta dice «in press», anno non
+  controllato): un tentativo fallito aiuta se la risposta giusta arriva subito; con il riscontro in ritardo non
+  aiuta. L'articolo più citato, Kornell, Hays e Bjork 2009, non è stato aperto.
+  https://sites.lifesci.ucla.edu/psych-bjorklab/wp-content/uploads/sites/13/2016/07/Hays_Kornell_RBjork_inpress.pdf
+- **Riscontro.** Wisniewski, Zierer e Hattie 2020, meta-analisi: d 0,48; molto più efficace quando porta
+  informazione su compito, procedimento e autoregolazione; premi e castighi sono i meno efficaci (0,24).
+  https://www.frontiersin.org/articles/10.3389/fpsyg.2019.03087/full
+- **Trasferimento.** Pan e Rickard 2018, meta-analisi: d 0,40; più trasferimento quando la risposta finale
+  somiglia a quella allenata, quando l'allenamento è elaborato o ha un riscontro ricco, e quando all'inizio si
+  risponde bene; senza queste condizioni spesso non c'è. https://sc-pan.github.io/pdf/PR_2018.pdf
+- **Immagini e parole.** Oates e Reder 2010: le immagini si ricordano meglio dei loro nomi (picture superiority);
+  la doppia codifica di Paivio lo spiega solo se il nome distingue l'immagine.
+  https://www.cmu.edu/dietrich/psychology/memorylab/publications/10Oates_Reder.pdf
+- **Esempi concreti.** Rawson, Thomas e Jacoby 2015: studiare esempi fa classificare meglio che rileggere le
+  definizioni (effetti tra 0,74 e 1,67). https://link.springer.com/doi/10.1007/s10648-014-9273-3
+- **Metodo dei loci.** Revisione sistematica e meta-analisi del 2025 (83 studi): d 0,88 sul richiamo in ordine
+  subito dopo, contro la ripetizione; qualità delle prove bassa o molto bassa.
+  https://pmc.ncbi.nlm.nih.gov/articles/PMC12514325/
+- **Confronto tra casi (analogia).** Alfieri, Nokes-Malach e Schunn 2013, 57 esperimenti: d 0,50; meglio cercare
+  le somiglianze, e dire il principio dopo il confronto. https://www.lrdc.pitt.edu/Schunn/papers/ContrastingCasesMeta-AlfieriEtAl2013.pdf
+- **Racconto.** Mar e altri 2021, meta-analisi: i testi narrativi si ricordano e si capiscono meglio di quelli
+  espositivi, g 0,55 (memoria 0,72). https://pmc.ncbi.nlm.nih.gov/articles/PMC8219577
+- **Emozione.** Tyng e altri 2017, rassegna: l'emozione aiuta attenzione, codifica e consolidamento; uno stress
+  lieve e breve aiuta, uno forte o cronico fa male. https://www.frontiersin.org/articles/10.3389/fpsyg.2017.01454/full
+
+### Contestate o da non usare
+
+- **Stili di apprendimento.** Pashler, McDaniel, Rohrer e Bjork 2008: nessuna base adeguata per adattare
+  l'insegnamento allo «stile» di chi impara; gli studi fatti bene contraddicono l'ipotesi. Il gioco non li usa.
+  https://pubmed.ncbi.nlm.nih.gov/26162104/
+- **Immagini mentali e keyword mnemonic** per studiare testi: utilità bassa in Dunlosky 2013. La doppia codifica
+  del gioco è un'altra cosa: un'immagine vera (la carta) legata a una parola.
+- **Interleaving con materiale verbale**: può andare peggio del blocco (Brunmair e Richter 2019).
+
+### Lette solo in un riassunto
+
+- **Pressione e recupero.** Hinze e Rapp 2014: una forte pressione durante la pratica riduce il vantaggio del
+  recupero. Smith, Floerke e Thomas 2016: chi ha studiato con il recupero ricorda anche sotto uno stress breve.
+  Tutti e due dal blog The Learning Scientists, non dagli articoli: https://www.learningscientists.org/blog/2026/3/19
+
+### Non verificate
+
+- La metafora da sola come tecnica di studio: nessuna rassegna trovata; si usa solo il confronto tra casi.
+- Se gli intervalli che crescono (1, 3, 7, 16) battano quelli uguali: non controllato.
+- PubMed non ha dato gli abstract di Bertsch 2007 e Kornell e Bjork 2008 (controllo anti-robot): letti dalle copie
+  degli autori, non aggirato.
