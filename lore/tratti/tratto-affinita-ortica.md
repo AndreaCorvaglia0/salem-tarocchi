@@ -48,11 +48,11 @@ stabilisce:
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
   - { dove: "post.js#enc.guard", n: -1, scelta: "[[post-enc-guard-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
   - { dove: "trials.js#trial.fog.door", n: 1, scelta: "[[trials-trial-fog-door-1]]" }
@@ -128,8 +128,8 @@ stabilisce:
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
-  - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "trials.js#trial.cellars.door", n: -1, scelta: "[[trials-trial-cellars-door-1]]" }
   - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
   - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
@@ -216,6 +216,7 @@ stabilisce:
   - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-1]]" }
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
   - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-2]]" }
+  - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "post.js#enc.washer", n: 1, scelta: "[[post-enc-washer-1]]" }
   - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "post.js#enc.miller", n: 1, scelta: "[[post-enc-miller-1]]" }
@@ -227,7 +228,6 @@ stabilisce:
   - { dove: "trials.js#trial.grave.door", n: -1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: -1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
-  - { dove: "trials.js#trial.hat.door", n: 1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
@@ -281,7 +281,7 @@ stabilisce:
   - { dove: "opinions.js#READER.events[7].a[0]", n: 1 }
   - { dove: "opinions.js#READER.events[7].a[1]", n: -1 }
 mette_alla_prova:
-  - { dove: "trials.js#trial.hat.door", condizione: "affinity ortica 2" }
+  - { dove: "hat.js#trial.hat.door", condizione: "affinity ortica 2" }
 ---
 
 Quanto ortica si riconosce in lei (core/witches.js AFFINITY): audace, schietta, testa, più la sua carta. Calcolata dai tratti, mai salvata.

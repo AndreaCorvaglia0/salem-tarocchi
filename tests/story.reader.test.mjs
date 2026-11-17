@@ -4,7 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { setState, state } from '../src/core/state.js';
 import { findCard, setPlayer, snapshot, AXES } from '../src/core/progress.js';
-import { test as cond, fill } from '../src/core/cond.js';
+import { test as cond, fill, COND_KEYS as CONDITION_KEYS } from '../src/core/cond.js';
 import { CARD, MAJORS, SIGNS } from '../src/data/cards.base.js';
 import { SHEETS } from '../src/data/cards.js';
 import { SESSIONS, PICKED } from '../src/data/story/sessions.js';
@@ -15,10 +15,8 @@ import { LESSONS } from '../src/data/lessons.js';
 import { createRunner, cardOfNumber } from '../src/story/runner.js';
 
 const MAJOR_IDS = MAJORS.map((c) => c.id);
-// core/cond.js TESTS, with the portrait and birth keys of docs/CONTRACT.md ("Portrait over time")
-const COND_KEYS = new Set(['flag', 'notFlag', 'chapter', 'chapterMin', 'chapterMax', 'step', 'stepIn', 'has', 'lacks', 'majorsMin',
-  'level', 'power', 'spread', 'trust', 'stat', 'yourCard', 'birthCard', 'sign', 'word', 'tool', 'coinsMin', 'not', 'any',
-  'trait', 'trend', 'steady', 'turned', 'torn', 'verdict', 'yourCardIsBirth', 'hasBirth', 'hasYear', 'element', 'modality', 'moon', 'bornOn', 'pop', 'tartufo']); // + 16 Nov
+// every key of core/cond.js (one exported list, derived from its handlers)
+const COND_KEYS = new Set(CONDITION_KEYS);
 const TOKENS = new Set(['name', 'sign', 'birthCard', 'yourCard', 'title', 'level', 'stat', 'word', 'words', 'card', 'trust', 'season',
   'coins', 'majors', 'traits', 'trait', 'lastVerdict', 'element', 'modality', 'ruler', 'rulerCard', 'birthDay', 'dayPlanet',
   'dayPlanetCard', 'moon', 'picked']);

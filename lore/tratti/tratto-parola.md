@@ -37,8 +37,8 @@ stabilisce:
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
-  - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "trials.js#trial.cellars.door", n: -1, scelta: "[[trials-trial-cellars-door-1]]" }
   - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
   - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }

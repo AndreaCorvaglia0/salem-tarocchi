@@ -81,12 +81,63 @@ main-path scene and every top-level ordinary option of it is reached.
 
 ## Adding a side story
 
-1. Write the script in `src/data/story/scripts/<file>.js`, a CAST entry in `cast.js` (or `extras.js` for
-   someone already playing), flags that are set by an option or `flag()` and tested by a later `IF`.
-2. Add a fatto in `lore/fatti/` with `flag: "cast <id>; flag a / b"` and `scena: "<file>.js#<scene>"`;
-   list who knows it in `chi_lo_sa`, with the `file.js#scene` where they learn it in `come`.
-3. `npm run lore gen`, then `npm run lore check`: the fatto warning disappears, new choices get pages.
-4. `npm run coverage`: the scene should not be in "never played"; if it is, its CAST conditions are too narrow.
+The recipe, in order, is `docs/KIT.md` section 1 (Italian). This is the machinery behind it.
+
+**Which kind.** If the cards must decide something in the story (forks exist only there) it is a **trial**:
+data in `src/data/trials/<id>.js` (rules the tests enforce: `docs/TRIALS.md`), the scenes round it in
+`src/data/story/scripts/<id>.js`. If it is only dialogue it is a **dialogue story**: a script, a CAST entry
+(`cast.js`, or `extras.js` for someone already playing), a fatto, flags set by an option or `flag()` and
+tested by a later `IF`. `SIDE` in `steps.js` is only for a hidden card someone tells about. Worked example of a
+trial with two places and a person who changes with her affinity: `src/data/trials/hat.js` +
+`src/data/story/scripts/hat.js` («Il cappello in soffitta»).
+
+1. **Script files are discovered.** `scripts/lore/story.mjs` reads every `.js` file of
+   `src/data/story/scripts/` and takes each exported map `{ sceneId: [nodes] }`; a new file is seen by `lore gen`
+   and `lore check` with no list to edit. A scene exported by two files (merged into another map, like `hat.js`
+   into `TRIAL_SCRIPTS` at the end of `trials.js`) is listed once, under the file that defines it: write that
+   file in the fatto's `scena` (`hat.js#trial.hat.door`).
+2. **The fatto.** `lore/fatti/<name>.md` with `flag: "cast <id>; flag a / b"` and `scena: "<file>.js#<scene>"`;
+   list who knows it in `chi_lo_sa`, with the `file.js#scene` where they learn it in `come`. `fonte: proposto`
+   until Andrea says yes; the persons get a line in `aperto`, not in `arco` (`lore/README.md`).
+3. **Conditions** are the keys of `src/core/cond.js` (syntax in the comment at its top; the list `COND_KEYS`
+   is exported and is what the data tests accept, so nothing is copied by hand any more). Not expressible:
+   «a trial failed today» (`wait`) and «talked to her once» (`once`); see `docs/TRIALS.md`.
+4. `npm run lore gen`, then `npm run lore check`: the fatto warning disappears, new choices get pages.
+5. `npm run coverage`: a dialogue scene should not be in "never played" (if it is, its CAST conditions are too
+   narrow); trials and the doors after them cannot be reached by random play, so a zero there is expected.
+6. `npm test`, `node scripts/prose.mjs`. `node scripts/map.mjs --check` fails after any new file (the line
+   counts per folder change): the lead rewrites `docs/MAP.md` with `node scripts/map.mjs`.
+7. Screens: `Looking at it` below.
+
+## Looking at it
+
+`scripts/shot.mjs` drives headless Chrome (puppeteer-core; set `CHROME` if it is not `/usr/bin/google-chrome`
+or `chromium`). Start a server first: `npx vite` (or `npm run build && npx vite preview`).
+
+    node scripts/shot.mjs 'http://localhost:5173/?debug&skip=trial' /tmp/a.png --phone --until domcontentloaded --steps steps.mjs
+
+- `--phone`: 390 x 844, scale 2, touch. `--wait ms`: pause before the shot (default 1200).
+- `--until domcontentloaded`: the page never reaches network idle (the default), so without it the shot times out.
+- `--steps file.mjs`: `export default async (page) => {...}` runs before the shot and may take its own shots
+  with `page.screenshot({ path })`. Examples: `harness/play.steps.mjs` (exam, readings, draws); `harness/trial.steps.mjs`
+  plays a whole post-ending side story (the hat) from a hand-made state, shooting every moment (`OUT` is the
+  folder, it must exist).
+- New buttons ignore taps for 650 ms: in the steps set `window.__salemNoGuard = true` via `page.evaluate`.
+- Never `return` the promise of a service that opens a screen (`window.__salem.call('grimoire.open')`) from
+  `page.evaluate`: it resolves only when the screen closes, and the step hangs. Wrap it in braces.
+- `?debug` gives `window.__salem` (`state`, `call(name, ...)`, `travel(anchor)`, `where()`, `give(ids)`,
+  `setStep(id)`, `jump(key)`). The skip points that exist (`SKIPS` in `src/glue/debug.rules.js`) are
+  `?debug&skip=c2`, `c3` and `trial` (the start of chapter 2, chapter 3, and just before the trial; the hosted
+  page takes `#skip-c2` etc.). There is no skip for after the ending.
+- **After the ending**: prepare the state by hand in `page.evaluate`, as the tests do (`ENDED()` in
+  `tests/trials.content.test.mjs`): `s = window.__salem.state; s.chapter = 4; s.step = 'post.minors'`, set
+  the flags the story reads (`ending.seen`, and what the piece asks: `side.m12`, `lesson.fly`,
+  `trial.dare.pass`...), `s.powers.broom = true`, `s.cards[id] = { found: true, stars: 1 }` for the Majors,
+  `s.trials.<id>`, then `window.__salem.travel('<map>.<anchor>')`.
+- Taps: the action button is `.w-act` (dispatch `new PointerEvent('pointerdown', { bubbles: true })`); a line of
+  dialogue advances with `pointerdown` on `.sy-layer` (once to finish the line, once to go on), her answers are
+  `.sy-opt`; in a trial the fan is `.tr-fc`, the options `.tr-opt`, the screens' button `.tr-btn`, and a
+  witch's card turns with `pointerup` on the parent of `.trw-veil`.
 
 ## Adding a person
 
@@ -98,6 +149,6 @@ main-path scene and every top-level ordinary option of it is reached.
 ## Adding a world
 
 A new world is a new `lore/` vault and new story data with the same shapes. Copy `lore/README.md` (its table
-is the schema: change rows to change types), keep `scripts/lore/` as it is, point `story.mjs` at the new
-script files (the list at the top of `loadStory`), then: `lore check` until no errors, `lore gen`,
+is the schema: change rows to change types), keep `scripts/lore/` as it is, put the new script files in
+`src/data/story/scripts/` (`story.mjs` discovers them), then: `lore check` until no errors, `lore gen`,
 `coverage` to see what the new world leaves unreachable.

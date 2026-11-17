@@ -48,11 +48,11 @@ stabilisce:
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
   - { dove: "post.js#enc.guard", n: -1, scelta: "[[post-enc-guard-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
   - { dove: "trials.js#trial.fog.door", n: 1, scelta: "[[trials-trial-fog-door-1]]" }

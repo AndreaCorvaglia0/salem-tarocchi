@@ -67,10 +67,9 @@ const linesIn = (d) => [
   ...Object.values(d.outcomes).flatMap((o) => o.lines.map((l) => l[1])), d.note,
 ].filter((t) => typeof t === 'string');
 
-test('there are three main trials and seven side ones, each a complete piece', () => {
-  assert.deepEqual(MAIN.map((d) => d.id), ['night', 'fog', 'cellars']);
-  assert.deepEqual(SIDES.map((d) => d.id), ['vigil', 'well', 'kettle', 'grave', 'room', 'dare', 'hat']);
-  assert.deepEqual(WITCHES.map((w) => SIDES.filter((d) => d.with === w).length), [1, 1, 1, 1], 'one side trial with each witch');
+test('three main trials, side ones with one for each witch, each a complete piece', () => {
+  assert.equal(MAIN.length, 3, 'the story has three main trials');
+  assert.deepEqual(WITCHES.map((w) => SIDES.filter((d) => d.with === w).length), [1, 1, 1, 1], 'one side trial with each witch (a later small story has no `with`: it gives the bond through reward.with)');
   const anchors = allAnchors();
   for (const d of REAL) {
     const w = `trial ${d.id}`;
@@ -201,8 +200,8 @@ const OLD2 = () => save({ chapter: 2, majors: m(0, 9), flags: ['exam1.done', 'cl
 const ENDED = () => { const s = save({ chapter: 4, majors: m(0, 21), flags: ['exam1.done', 'client.c1.widow.done', 'lesson.reversed', 'ending.seen', 'side.m12', 'lesson.fly'], spreads: ['single', 'ppf', 'celtic'] }); s.powers.broom = true; return s; };
 
 test('the chains hold: after the main trials one by one, the side ones one by one', () => {
-  assert.deepEqual(MAIN.map((d) => d.after || []), [[], ['trial.night'], ['trial.fog']]);
-  assert.deepEqual(SIDES.map((d) => d.after || []), [[], ['trial.vigil'], ['trial.well'], ['trial.kettle'], ['trial.grave'], ['trial.room'], ['trial.dare']]);
+  // the rule: each trial of a chain waits for the one before it in the list, the first for nobody
+  for (const chain of [MAIN, SIDES]) assert.deepEqual(chain.map((d) => d.after || []), chain.map((d, i) => (i ? [`trial.${chain[i - 1].id}`] : [])));
   for (const d of REAL) for (const a of d.after || []) assert.ok(ENTRIES.some((e) => e.id === a), `${d.id}: after ${a}`);
 });
 

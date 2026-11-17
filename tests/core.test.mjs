@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { setState, state } from '../src/core/state.js';
 import { MAJORS, MINORS, signOf, CARD } from '../src/data/cards.base.js';
 import { senseRadius, yourSuit, levelOf, titleOf, addXp, findCard, answer, setPlayer, yourCard, addPoint, hasCard, confiscate } from '../src/core/progress.js';
-import { test as cond, fill } from '../src/core/cond.js';
+import { readFileSync } from 'node:fs';
+import { test as cond, fill, COND_KEYS } from '../src/core/cond.js';
 
 test('the deck has 22 majors and 56 minors', () => { assert.equal(MAJORS.length, 22); assert.equal(MINORS.length, 56); assert.equal(CARD.m11.name, 'La Giustizia'); });
 test('three rows of seven', () => { for (const r of [1, 2, 3]) assert.equal(MAJORS.filter((c) => c.row === r).length, 7); });
@@ -24,3 +25,9 @@ test('old saves lose seals and the far sight', () => { setState({ powers: { seal
 test('cards, stars, confiscation', () => { setState({}); assert.equal(findCard('m02'), true); assert.equal(findCard('m02'), false); answer('m02', true, 'image'); assert.equal(state.cards.m02.stars, 1); answer('m02', true, 'astro'); assert.equal(state.cards.m02.stars, 2); answer('m02', false); assert.equal(state.stats.wrongByCard.m02, 1); confiscate(['m02']); assert.equal(hasCard('m02'), false); });
 test('your card starts as the birth card and moves', () => { setState({}); setPlayer({ name: 'Ada', birth: { d: 1, m: 10, y: 1995 } }); assert.equal(state.player.birthCard, 'm11'); assert.equal(yourCard(), 'm11'); addPoint({ card: 'm09' }); addPoint({ card: 'm09' }); assert.equal(yourCard(), 'm11', 'with no traits the birth card holds'); });
 test('conditions and fill', () => { setState({ flags: { a: true }, chapter: 2, player: { name: 'Ada' } }); assert.equal(cond({ flag: 'a', chapterMin: 2 }), true); assert.equal(cond({ not: { flag: 'a' } }), false); assert.equal(cond({ any: [{ flag: 'x' }, { chapter: 2 }] }), true); assert.equal(fill('Ciao {name}, {stat:exams}'), 'Ciao Ada, 0'); });
+
+test('every condition key is exported (COND_KEYS) and described in the comment at the top of core/cond.js', () => {
+  assert.ok(COND_KEYS.length > 40 && COND_KEYS.includes('affinity') && COND_KEYS.includes('trial'));
+  const head = readFileSync(new URL('../src/core/cond.js', import.meta.url), 'utf8').split('\nimport ')[0];
+  for (const k of COND_KEYS) assert.ok(new RegExp(`\\b${k}:`).test(head), `${k} is not described in the comment of core/cond.js`);
+});

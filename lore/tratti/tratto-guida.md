@@ -46,6 +46,7 @@ stabilisce:
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-1]]" }
   - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-2]]" }
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
+  - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
   - { dove: "post.js#enc.hale", n: 1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
@@ -57,7 +58,6 @@ stabilisce:
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
-  - { dove: "trials.js#trial.hat.door", n: -1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }

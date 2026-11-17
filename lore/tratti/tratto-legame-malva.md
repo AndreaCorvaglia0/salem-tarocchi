@@ -7,8 +7,8 @@ stabilisce:
   - { dove: "c1.js#c1.malva", n: 1, scelta: "[[c1-c1-malva-2]]" }
   - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
   - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-1]]" }
-  - { dove: "post.js#enc.washer", n: 1 }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "post.js#enc.washer", n: 1 }
 mette_alla_prova:
   - { dove: "c1b.js#c1.gate", condizione: "trust malva >= 2" }
   - { dove: "c3.js#c3.coven", condizione: "trust malva >= 2" }

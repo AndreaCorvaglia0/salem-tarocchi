@@ -24,7 +24,7 @@ Niente viene inventato in silenzio: quello che manca va in `aperto:`.
 | `scelte/` | `scelta` | generato: `nome`, `dove` (file e scena), `fatto` (il `[[fatto]]` della scena, se c'è), `classe` (`stabilisce`, `mette_alla_prova`, `entrambe`, `colore`), `opzioni` (lista di `{ t, quando, imposta }`) |
 | `finali/` | `finale` | generato: `nome`, `dove`, `condizione`, `si_guadagna` (lista di `{ serve, dove }`) |
 | `metodo/` | `metodo` | `nome`, `famiglia` (imparare, variare, personalizzare, scrivere, far-crescere), `ambito` (generale, salem), `problema`, `soluzione`, `in_salem` (lista di `[[...]]`), `si_controlla_con`, `rischi`, `fonte` |
-| `retroscena/` | `retroscena` | `persona`, `fonte` (proposto finché Andrea non lo legge, poi deciso), `in_breve`, `vuole`, `teme` (non mostrato nel gioco: serve a dare profondità alle battute) |
+| `retroscena/` | `retroscena` | `persona`, `fonte` (proposto finché Andrea non lo legge, poi deciso), `in_breve`, `vuole`, `teme` (non mostrato nel gioco: serve a dare profondità alle battute; campi facoltativi, nei retroscena lunghi: `ferita`, `non_direbbe_mai`, `bugia_che_si_racconta`, `cosa_pensa` (lista `{ di, cosa }`), `ipotesi` (lista `{ su, cosa, perche }`), `sente_tartufo`, `affiora`, `non_affiora`, `sostiene` (lista `{ dove, cosa }`: le righe dei copioni che il retroscena spiega), `corregge` (lista `{ contraddizione, come, cambia }`)) |
 | `decisioni/` | `decisione` | `nome`, `fonte` |
 
 Le pagine che cominciano con `_` sono indici: possono non avere la testa. Le cartelle `tratti/`, `scelte/`
@@ -33,3 +33,24 @@ e `finali/` sono scritte da `node scripts/lore.mjs gen` a partire dai copioni: n
 
 Sotto la testa: un paragrafo che una persona legge volentieri, poi, se serve, `## Note`.
 Italiano semplice, frasi corte, niente gergo. I nomi dei file: minuscole, trattini, senza accenti.
+
+## Per chi scrive una scena nuova
+
+**`affiora` e `non_affiora`.** Sono la parte del retroscena che serve a chi scrive. `affiora` sono gesti e
+battute di lato che si possono mostrare, e mostrare così: senza spiegarli. `non_affiora` è quello che non si dice
+mai, nemmeno per allusione chiara: non lo dice un personaggio, non lo spiega il narratore. `non_direbbe_mai` è
+la stessa cosa dal lato della persona: la frase che lei non pronuncerebbe. Una scena può far intravedere un
+`non_affiora` solo come un gesto che non lo nomina (come le due mani passate due volte sul sacco nel cappello).
+
+**`arco` o `aperto`.** Un fatto scritto da un agente (`fonte: proposto`) si annota nell'`aperto` delle persone,
+in una riga che lo cita; entra nell'`arco` quando Andrea lo conferma e il fatto passa a `deciso`. L'`arco`
+elenca solo fatti accettati, in ordine.
+
+**Il genere di lei.** Le fonti: `lore/metodo/non-dare-un-genere.md` dice che la storia principale si rivolge a
+lei al femminile («sei arrivata»), che le frasi delle carte (`src/data/reading/voices/`) e le opinioni sono
+senza genere, e che un testo per chi non si conosce evita aggettivi e participi con un genere
+(`docs/READING.md`, «Chi chiede può essere chiunque»). Nel codice, oltre alla storia principale, anche sessioni,
+visite, ritratto e le righe di diario delle prove secondarie esistenti (`trials.js`) la trattano al femminile.
+Nessun documento dice che cosa debba fare una storia secondaria nuova: la storia del cappello è senza genere
+perché lo chiedeva il compito. Non è deciso: chi scrive non sceglie in silenzio, dice nelle note quale forma ha
+usato e lo lascia ad Andrea.

@@ -101,6 +101,11 @@ const TESTS = {
   any: (v, s) => v.some((c) => test(c, s)),
 };
 
+// Every condition key there is, derived from the handlers above so it cannot drift: the tests that check the
+// shape of the story data (tests/story.data.test.mjs, tests/story.reader.test.mjs) read this list.
+// (A key added to TESTS must also be described in the comment at the top; tests/core.test.mjs checks that.)
+export const COND_KEYS = Object.keys(TESTS);
+
 export function test(cond, s = live) {
   if (cond == null || cond === true) return true;
   if (cond === false) return false;

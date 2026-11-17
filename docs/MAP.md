@@ -21,6 +21,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | The wiring of that rule | `src/glue/<name>.js` | one import line in `src/glue/index.js` |
 | A screen | `src/ui/<name>.js`, built with `h()`/`css()` and `ui/paper.js` | a service so others can open it |
 | Something in the pixel world | `src/world/scene/<name>.js`, art in `src/world/art/` | spots in `src/data/world/` |
+| A side story, a person, a world | `docs/KIT.md` (the recipe; trials: `docs/TRIALS.md`) | `npm test`, `node scripts/lore.mjs check` |
 | A new key in the save | default in `fresh()` of `src/core/state.js` | old saves must load: test it |
 
 ## Three rules that are easy to break
@@ -34,7 +35,7 @@ by the lead before each commit (a test fails when a service is called but never 
 ## Looking at it
 
 `npm test` · `npm run build && npx vite preview` · `/?debug&skip=c2` (or `c3`) · `window.__salem` ·
-`node scripts/shot.mjs <url> <out.png> --phone --steps <file.mjs>` · publish: `sh scripts/deploy.sh` (lead only).
+`node scripts/shot.mjs <url> <out.png> --phone --until domcontentloaded --steps <file.mjs>` (details, selectors and the `?debug&skip=` points: `docs/TOOLS.md`, "Looking at it") · publish: `sh scripts/deploy.sh` (lead only).
 
 <!-- Everything below is written by scripts/map.mjs: do not edit by hand. -->
 
@@ -43,7 +44,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1087 |
+| `src/core` | 11 | 1092 |
 | `src/data` | 7 | 741 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |

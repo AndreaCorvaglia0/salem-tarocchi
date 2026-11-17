@@ -48,11 +48,11 @@ stabilisce:
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
   - { dove: "post.js#enc.guard", n: -1, scelta: "[[post-enc-guard-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
   - { dove: "trials.js#trial.fog.door", n: 1, scelta: "[[trials-trial-fog-door-1]]" }
@@ -220,6 +220,7 @@ stabilisce:
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-1]]" }
   - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-2]]" }
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
+  - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
   - { dove: "post.js#enc.hale", n: 1, scelta: "[[post-enc-hale-1]]" }
   - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
@@ -231,7 +232,6 @@ stabilisce:
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
-  - { dove: "trials.js#trial.hat.door", n: -1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }

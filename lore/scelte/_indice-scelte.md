@@ -32,7 +32,7 @@ Né da una condizione, né per nome dal codice (src fuori da src/data).
 - `depot.door`: c2.js#c2.plan
 - `edera.light`: c3.js#c3.edera
 - `exam1.malva`: c1b.js#c1.exam1
-- `hat.miller`: trials.js#trial.hat.after
+- `hat.miller`: hat.js#trial.hat.after
 - `jail.barrels`: c3.js#c3.jail
 - `jail.chains`: c3.js#c3.jail
 - `s0.doubts`: sessions.js#s0
@@ -119,15 +119,12 @@ Nessuno.
 | [[end-f-dawn-2]] | entrambe | [[volo-all-alba]] |
 | [[end-f-last-1]] | stabilisce | [[epilogo-al-bivacco]] |
 | [[end-f-last-2]] | entrambe | [[epilogo-al-bivacco]] |
-| [[post-enc-child-1]] | entrambe | [[incontro-col-bambino]] |
-| [[post-enc-washer-1]] | stabilisce | [[tabita-di-nuovo]] |
-| [[post-enc-hale-1]] | stabilisce | [[dono-di-hale]] |
-| [[post-enc-gravedigger-1]] | entrambe | [[incontro-col-becchino]] |
-| [[post-enc-miller-1]] | entrambe | [[mugnaio-di-nuovo]] |
-| [[post-enc-guard-1]] | entrambe | [[guardia-del-pozzo]] |
-| [[post-minor-first-1]] | stabilisce |  |
-| [[post-trade-ginepra-1]] | colore |  |
-| [[post-post-ginepra-1]] | entrambe | [[dopo-il-finale]] |
+| [[garden-lessons-garden-lesson-acqua-1]] | colore |  |
+| [[garden-lessons-garden-lesson-luce-1]] | colore |  |
+| [[garden-lessons-garden-lesson-terra-1]] | colore |  |
+| [[garden-lessons-garden-lesson-vaso-1]] | colore |  |
+| [[garden-lessons-garden-lesson-semina-1]] | colore |  |
+| [[hat-trial-hat-door-1]] | entrambe | [[cappello-in-soffitta]] |
 | [[lessons-fly-lesson-1]] | stabilisce | [[lezione-di-volo]] |
 | [[lessons-fly-lesson-2]] | stabilisce | [[lezione-di-volo]] |
 | [[lessons-minors-1-lesson-1]] | colore | [[lezione-dei-semi]] |
@@ -144,6 +141,15 @@ Nessuno.
 | [[lessons-minors-5-lesson-2]] | colore | [[lezione-delle-figure]] |
 | [[lessons-reversed-lesson-1]] | colore | [[lezione-delle-capovolte]] |
 | [[lessons-reversed-lesson-2]] | colore | [[lezione-delle-capovolte]] |
+| [[post-enc-child-1]] | entrambe | [[incontro-col-bambino]] |
+| [[post-enc-washer-1]] | stabilisce | [[tabita-di-nuovo]] |
+| [[post-enc-hale-1]] | stabilisce | [[dono-di-hale]] |
+| [[post-enc-gravedigger-1]] | entrambe | [[incontro-col-becchino]] |
+| [[post-enc-miller-1]] | entrambe | [[mugnaio-di-nuovo]] |
+| [[post-enc-guard-1]] | entrambe | [[guardia-del-pozzo]] |
+| [[post-minor-first-1]] | stabilisce |  |
+| [[post-trade-ginepra-1]] | colore |  |
+| [[post-post-ginepra-1]] | entrambe | [[dopo-il-finale]] |
 | [[trials-trial-night-door-1]] | entrambe | [[prova-del-cesto]] |
 | [[trials-trial-fog-door-1]] | entrambe | [[prova-della-nebbia]] |
 | [[trials-trial-cellars-door-1]] | entrambe | [[prova-delle-porte-di-sotto]] |
@@ -153,12 +159,6 @@ Nessuno.
 | [[trials-trial-grave-door-1]] | entrambe | [[prova-della-tomba]] |
 | [[trials-trial-room-door-1]] | entrambe | [[prova-della-stanza-murata]] |
 | [[trials-trial-dare-door-1]] | entrambe | [[prova-della-scommessa]] |
-| [[trials-trial-hat-door-1]] | entrambe | [[cappello-in-soffitta]] |
-| [[garden-lessons-garden-lesson-acqua-1]] | colore |  |
-| [[garden-lessons-garden-lesson-luce-1]] | colore |  |
-| [[garden-lessons-garden-lesson-terra-1]] | colore |  |
-| [[garden-lessons-garden-lesson-vaso-1]] | colore |  |
-| [[garden-lessons-garden-lesson-semina-1]] | colore |  |
 | [[sessions-s0-1]] | stabilisce | [[prima-seduta]] |
 | [[sessions-s0-2]] | stabilisce | [[prima-seduta]] |
 | [[sessions-s0-3]] | stabilisce | [[prima-seduta]] |

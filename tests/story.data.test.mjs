@@ -5,15 +5,12 @@ import assert from 'node:assert/strict';
 import { SCRIPTS, SESSIONS, STEPS, SIDE, CAST, CLIENTS, BARKS } from '../src/data/story/index.js';
 import { allAnchors } from '../src/world/maps.js';
 import { PEOPLE, CARD } from '../src/data/cards.base.js';
+import { COND_KEYS as CONDITION_KEYS } from '../src/core/cond.js';
 
 // the anchors of the real maps (src/data/world), read by the pure map parser
 const ANCHORS = new Set(Object.keys(allAnchors()));
-// copied from core/cond.js TESTS
-const COND_KEYS = new Set(['flag', 'notFlag', 'chapter', 'chapterMin', 'chapterMax', 'step', 'stepIn', 'has', 'lacks', 'majorsMin',
-  'level', 'power', 'spread', 'trust', 'stat', 'yourCard', 'birthCard', 'sign', 'word', 'tool', 'coinsMin', 'not', 'any',
-  'trait', 'trend', 'steady', 'turned', 'torn', 'verdict', 'yourCardIsBirth', 'hasBirth', 'hasYear', 'element', 'modality', 'moon', 'bornOn',
-  'pop', 'tartufo', 'explored', 'title', 'wrote', // 16 Nov
-  'affinity', 'bond', 'attitude']); // 17 Nov: the witches (core/cond.js already knew them; no script read them)
+// every key of core/cond.js (one exported list, derived from its handlers)
+const COND_KEYS = new Set(CONDITION_KEYS);
 const TOKENS = new Set(['name', 'sign', 'birthCard', 'yourCard', 'title', 'level', 'stat', 'word', 'words', 'card', 'trust', 'season', 'coins', 'majors', 'picked',
   'pickedId', 'pickedNumber', 'traits', 'trait', 'lastVerdict', 'element', 'modality', 'ruler', 'rulerCard', 'birthDay', 'dayPlanet', 'dayPlanetCard', 'moon']);
 const ACTIONS = new Set(['giveCard', 'draw', 'teach', 'lesson', 'reading', 'exam', 'session', 'xp', 'coins', 'flag', 'trust', 'point',

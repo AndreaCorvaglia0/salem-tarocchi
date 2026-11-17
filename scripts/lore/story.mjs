@@ -249,16 +249,26 @@ const imp = (p) => import(pathToFileURL(p).href);
 
 export async function loadStory() {
   const M = createModel();
-  const scripts = {
-    'c0.js': ['C0'], 'c1.js': ['C1'], 'c1b.js': ['C1B'], 'c2.js': ['C2'], 'c3.js': ['C3'], 'end.js': ['END'], 'post.js': ['POST'],
-    'props.js': ['PROPS'], 'lessons.js': ['LESSON_SCRIPTS'], 'trials.js': ['TRIAL_SCRIPTS'], 'garden.js': ['GARDEN_SCRIPTS'],
-    'garden-lessons.js': ['GARDEN_LESSON_SCRIPTS'],
-  };
+  // every file of data/story/scripts is read, so a new one is seen without touching this list. A script
+  // file exports one or more maps { sceneId: [nodes] } (C0, TRIAL_SCRIPTS, ...). A scene that two files
+  // both export (the same array merged into another map, e.g. hat.js into TRIAL_SCRIPTS) is listed once,
+  // under the file that defines it: trials.js is read last so the files merged into it keep their own name.
+  const scriptsDir = join(STORY, 'scripts');
+  const files = readdirSync(scriptsDir).filter((n) => n.endsWith('.js')).sort((a, b) => (a === 'trials.js') - (b === 'trials.js') || a.localeCompare(b));
   const byFile = {};
-  for (const [file, names] of Object.entries(scripts)) {
-    const mod = await imp(join(STORY, 'scripts', file));
+  const seen = new Set();
+  const isSceneMap = (v) => v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).length > 0 && Object.values(v).every(Array.isArray);
+  for (const file of files) {
+    const mod = await imp(join(scriptsDir, file));
     byFile[file] = {};
-    for (const name of names) for (const [id, nodes] of Object.entries(mod[name] || {})) { byFile[file][id] = nodes; sceneOf(M, file, id, 'script', nodes); }
+    for (const value of Object.values(mod)) {
+      if (!isSceneMap(value)) continue;
+      for (const [id, nodes] of Object.entries(value)) {
+        if (seen.has(nodes)) continue;
+        seen.add(nodes);
+        byFile[file][id] = nodes; sceneOf(M, file, id, 'script', nodes);
+      }
+    }
   }
   const clients = await imp(join(STORY, 'clients.js'));
   byFile['clients.js'] = {};

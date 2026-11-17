@@ -9,7 +9,7 @@ un mondo. È anche la base per tornare a Mnemopolis e farne un generatore di sto
 |---|---|---|
 | **Il metodo** | Come si impara, come si varia, come si personalizza, come si scrive, come cresce il progetto. Le regole, le tecniche con le loro fonti, e le schede che dicono come le abbiamo messe in pratica | `lore/principi`, `lore/tecniche`, `lore/metodo` (indice: `lore/metodo/_indice-metodo.md`) |
 | **Lo schema** | I tipi di contenuto e i loro campi: persona, luogo, fatto, principio, meccanica, tecnica, obiettivo | `lore/README.md`; le istanze nelle cartelle di `lore/` |
-| **Gli strumenti** | Che cosa controlla il vault e il gioco, e che cosa dice quello che manca | `docs/TOOLS.md`, `scripts/`, `tests/` |
+| **Gli strumenti** | Che cosa controlla il vault e il gioco, e che cosa dice quello che manca | `docs/TOOLS.md`, `docs/TRIALS.md`, `scripts/`, `tests/` |
 
 Come stanno insieme: il metodo dice **perché** una cosa si fa in un certo modo; lo schema dice **che
 forma** ha un pezzo prima di diventare codice; gli strumenti dicono **se** il pezzo è a posto. Un pezzo
@@ -27,6 +27,8 @@ Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `doc
 - Niente si inventa in silenzio: nel vault ogni riga nuova è `fonte: proposto` finché Andrea non dice sì.
 - Il testo segue `docs/WRITING.md`. Lo si legge ad alta voce prima di consegnare.
 - Si dice che cosa è stato verificato e che cosa no. Nessuno strumento prova un telefono vero o ascolta l'audio.
+- Il genere di lei: la storia principale le parla al femminile, le frasi delle carte e le opinioni no. Per una
+  storia secondaria la regola non è decisa (`lore/README.md`, «Il genere»): non sceglierla in silenzio.
 
 ## I comandi che dicono che cosa manca
 
@@ -37,40 +39,55 @@ Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `doc
 | `node scripts/lore.mjs gen` | Riscrive `lore/tratti`, `lore/scelte`, `lore/finali` dai dati della storia |
 | `node scripts/prose.mjs` | I difetti meccanici del testo (raffiche di frasi corte, frasi di una parola) |
 | `node scripts/map.mjs --check` | Se `docs/MAP.md` è da riscrivere (un servizio nuovo, un evento nuovo) |
-| `node scripts/shot.mjs <url> <out.png> --phone --steps <file.mjs>` | Una schermata da telefono (390 x 844) |
-| `/?debug&skip=c2` e `window.__salem` | Saltare a un capitolo, chiamare un servizio a mano |
+| `node scripts/shot.mjs <url> <out.png> --phone --until domcontentloaded --steps <file.mjs>` | Una schermata da telefono (390 x 844); tutto in `docs/TOOLS.md`, «Looking at it» |
+| `/?debug&skip=c2` (`c3`, `trial`) e `window.__salem` | Saltare a un capitolo, chiamare un servizio a mano |
 
 ## 1. Aggiungere una storia secondaria
 
-Modello: le sei prove secondarie (`src/data/trials/side.js`), una catena vigil, well, kettle, grave, room,
-dare. Per una cosa più piccola (una carta nascosta raccontata da qualcuno) il modello è `SIDE` in
-`src/data/story/steps.js`.
+**Prima si sceglie il genere.** Se nella storia le carte devono decidere qualcosa, è una **prova** (i bivi
+esistono solo lì): dati in `src/data/trials/<id>.js`, scene intorno in `src/data/story/scripts/<id>.js`. Se è
+solo dialogo, è un **copione** con una voce in `CAST` e un fatto (`docs/TOOLS.md`, «Adding a side story»).
+`SIDE` in `src/data/story/steps.js` serve solo per una carta nascosta che qualcuno racconta. Esempio
+completo, una prova in due posti con una persona che cambia con l'affinità: `src/data/trials/hat.js` e
+`src/data/story/scripts/hat.js` («Il cappello in soffitta»). Le regole scritte delle prove: `docs/TRIALS.md`.
 
-1. **Nel vault.** Scrivere `lore/fatti/<nome>.md` (tipo `fatto`: chi c'è, chi lo sa, conseguenze, `aperto`)
-   e aggiungere il fatto all'`arco` delle persone coinvolte. Se c'è un posto nuovo, `lore/luoghi/<nome>.md`.
-   Tutto quello che non viene dai copioni è `fonte: proposto`.
+1. **Nel vault.** Prima di scrivere, leggere il retroscena di ogni persona coinvolta (`lore/retroscena/`) e
+   `lore/decisioni/`: quello che sta in `non_affiora` e `non_direbbe_mai` non si dice mai, affiora in un gesto
+   o in una battuta di lato. Scrivere `lore/fatti/<nome>.md` (tipo `fatto`, `fonte: proposto`: chi c'è, chi lo
+   sa, conseguenze, `aperto`). Alle persone coinvolte si aggiunge una riga in `aperto` che lo cita; entra
+   nell'`arco` solo quando Andrea lo conferma. Se c'è un posto nuovo, `lore/luoghi/<nome>.md`.
 2. **Decidere il perché.** Quale obiettivo di `lore/obiettivi` allena, quale meccanica usa (di solito
-   `lore/meccaniche/affrontare-le-prove.md` e `lore/meccaniche/chiedere-alle-carte.md`), che cosa si vince e che cosa si perde
-   (`lore/metodo/posta-vera-ma-recuperabile.md`). Una riga per ciascuno, prima del testo.
-3. **Decidere quando arriva.** Un `when` su quello che lei ha (`{ majorsMin: 8 }`, `{ power: 'cat' }`,
-   `{ spread: 'ppf' }`) e la catena: `after: ['trial.dare']` più la condizione `won('dare')` nel `when`, come
-   fanno le altre (la porta nel mondo legge solo `when`).
-4. **I dati.** L'oggetto della prova in `src/data/trials/side.js` (o in un file nuovo), con il formato scritto
-   in testa a `src/trials/run.js`: `id`, `title`, `with`, `when`, `note` (una frase intera, è la riga del
-   grimorio), `start` (`at` deve essere un'ancora di `src/data/world/<mappa>.js`), `study` (gli argomenti
-   della biblioteca), `steps`, `rooms`, `outcomes`. Aggiungerlo a `LIST` in `src/data/trials/index.js`.
-   La scena che la apre e le battute che la ricordano dopo vanno in `src/data/story/scripts/trials.js`.
+   `lore/meccaniche/affrontare-le-prove.md` e `lore/meccaniche/chiedere-alle-carte.md`), che cosa si vince e che
+   cosa si perde (`lore/metodo/posta-vera-ma-recuperabile.md`). Una riga per ciascuno, prima del testo. Per
+   insegnare carte precise: una strega le tira davanti a lei (`witchDraw`), poi un bivio chiede la loro idea;
+   nel ventaglio ci sono solo le carte che lei conosce.
+3. **Decidere quando arriva.** Un `when` su quello che lei ha (`{ majorsMin: 8 }`, `{ power: 'cat' }`, un flag,
+   una persona incontrata), mai sul passo. Le chiavi valide sono in testa a `src/core/cond.js`; l'elenco
+   `COND_KEYS` si esporta da lì e i test lo leggono, quindi non c'è un elenco da aggiornare. La catena delle
+   prove secondarie tiene una nuova alla volta: `after: ['trial.<id dell'ultima>']`, e la catena è la regola; una
+   storia che deve arrivare a chiunque abbia finito il gioco, anche senza le prove, va fuori dalla catena e il
+   test va cambiato (decide Andrea). Non si possono scrivere «fallita oggi» e «ha già parlato una volta»
+   (`docs/TRIALS.md`, limiti noti).
+4. **I dati.** La prova: `id`, `title` (si legge prima di cominciare: non deve svelare niente), `with`, `when`,
+   `note` (una frase intera: la riga del grimorio), `start.at` (un'ancora di `src/data/world/<mappa>.js`),
+   `study`, `steps`, `rooms`, `outcomes`; in fondo a `LIST` in `src/data/trials/index.js`. Una prova non ha
+   `if`: quello che cambia per tratti, affinità o legame si scrive nella scena intorno, prima o dopo
+   `trial.start`. Le scene (apertura, ritorno dopo un fallimento, ricordo del premio) in un file proprio di
+   `src/data/story/scripts/`, che `trials.js` unisce a `TRIAL_SCRIPTS` in fondo (`lore` vede da solo ogni file
+   di quella cartella). Se la storia comincia in un posto e si gioca in un altro, le voci di CAST vanno fatte
+   come dice `docs/TRIALS.md`, «Una storia in due posti».
 5. **Il registro.** Non serve scrivere niente: `src/glue/trials.js` registra da solo ogni prova vera in
    `src/core/extras.js`. Il tetto di due novità alla volta vale anche per lei.
-6. **I controlli.** `npm test` (in particolare `tests/trials.content.test.mjs`, che verifica che la prova sia
-   giusta con le carte che lei può avere a quel punto, e `tests/story.data.test.mjs`), poi
-   `node scripts/lore.mjs check` e `node scripts/prose.mjs`.
-7. **Sul telefono.** Schermate di: la riga nel grimorio (dice dove andare, in una riga); la scena d'apertura;
-   ogni bivio (la regola del quesito si legge intera, nessuna risposta è visibile prima della scelta); una
-   stanza buona e una cattiva (non dicono quale strada era giusta); la schermata finale (che cosa ha vinto o
-   perso). Le scritte devono leggersi senza ingrandire.
-8. **Che cosa decide Andrea.** Se la storia entra nel canone (i fatti da `proposto` a `deciso`), con quale
-   strega, che cosa si può perdere, e il testo letto ad alta voce.
+6. **I controlli.** Aggiungere la riga della prova a `poolsOf` in `tests/trials.content.test.mjs` (i mazzi che lei
+   può avere in quel momento) e, se serve, a `OLD2` / `ENDED`; poi `npm test`, `node scripts/lore.mjs gen` e
+   `check`, `node scripts/prose.mjs`. `node scripts/map.mjs --check` fallisce anche solo per le righe in più:
+   `docs/MAP.md` lo rifà chi guida.
+7. **Sul telefono.** Schermate (come, in `docs/TOOLS.md`, «Looking at it») di: la riga nel grimorio (dice dove
+   andare, in una riga); la scena d'apertura; ogni bivio (la regola del quesito si legge intera, nessuna risposta
+   è visibile prima della scelta); una stanza buona e una cattiva (non dicono quale strada era giusta); la
+   schermata finale. Le scritte devono leggersi senza ingrandire.
+8. **Che cosa decide Andrea.** Se la storia entra nel canone (i fatti da `proposto` a `deciso`, e dall'`aperto`
+   all'`arco`), con quale persona, che cosa si può perdere, il genere di lei, e il testo letto ad alta voce.
 
 ## 2. Aggiungere una persona
 

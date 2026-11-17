@@ -37,19 +37,19 @@ stabilisce:
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-1]]" }
+  - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
+  - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
+  - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.gravedigger", n: 1, scelta: "[[post-enc-gravedigger-1]]" }
   - { dove: "post.js#enc.miller", n: 1, scelta: "[[post-enc-miller-1]]" }
-  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "trials.js#trial.night.door", n: 1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.cellars.door", n: 1, scelta: "[[trials-trial-cellars-door-1]]" }
   - { dove: "trials.js#trial.well.door", n: 1, scelta: "[[trials-trial-well-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
-  - { dove: "trials.js#trial.hat.door", n: 1, scelta: "[[trials-trial-hat-door-1]]" }
-  - { dove: "trials.js#trial.hat.door", n: -1, scelta: "[[trials-trial-hat-door-1]]" }
-  - { dove: "trials.js#trial.hat.door", n: 1, scelta: "[[trials-trial-hat-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-1]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-1]]" }
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-5]]" }
@@ -81,8 +81,8 @@ mette_alla_prova:
   - { dove: "end.js#f.last", condizione: "steady esplora e trait esplora >= 3" }
   - { dove: "end.js#f.last", condizione: "trait esplora >= 3" }
   - { dove: "end.js#f.last", condizione: "trait esplora <= -3" }
+  - { dove: "hat.js#trial.hat.door", condizione: "trait esplora >= 3" }
   - { dove: "trials.js#trial.room.door", condizione: "trait esplora >= 3" }
-  - { dove: "trials.js#trial.hat.door", condizione: "trait esplora >= 3" }
   - { dove: "sessions.js#s1", condizione: "trait esplora >= 3" }
   - { dove: "sessions.js#s1", condizione: "trait esplora <= -3" }
   - { dove: "sessions.js#s1", condizione: "trend esplora >= 2" }

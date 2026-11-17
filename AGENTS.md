@@ -2,7 +2,8 @@
 
 Read `docs/MAP.md` (where things are, who calls what), `docs/DESIGN.md` (what the game is, in Italian)
 and `docs/CONTRACT.md` (how the parts fit) before
-anything else. Then only work inside the folders of your area.
+anything else. Then only work inside the folders of your area. Adding a side story, a person or a world:
+follow `docs/KIT.md` (trials: `docs/TRIALS.md`; tools and screenshots: `docs/TOOLS.md`).
 
 - The lead session owns `src/core/`, `src/main.js`, the docs, git. Agents never run git.
 - Player-facing text is Italian, warm, short, never mocking. Code and comments are English.

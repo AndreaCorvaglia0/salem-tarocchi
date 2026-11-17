@@ -5,7 +5,7 @@
 import demo from './demo.js';
 import { night, fog, cellars } from './main.js';
 import { vigil, well, kettle, grave, room, dare } from './side.js';
-import { hat } from './hat.js'; // a small side story, outside the chain (data/story/scripts/hat.js)
+import { hat } from './hat.js'; // a small side story, the last link of the side chain (data/story/scripts/hat.js)
 
 const LIST = [demo, night, fog, cellars, vigil, well, kettle, grave, room, dare, hat];
 export const TRIALS = Object.fromEntries(LIST.map((t) => [t.id, t]));

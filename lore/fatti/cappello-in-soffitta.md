@@ -4,7 +4,7 @@ nome: "Il cappello in soffitta (un sacco dal mulino)"
 flag: "cast trial.hat; cast hat.after; flag trial.hat.offered / trial.hat.perfect / trial.hat.pass / trial.hat.fail / hat.after / hat.miller"
 capitolo: 4
 quando: 420
-scena: "trials.js#trial.hat.door, trials.js#trial.hat.after, trials/hat.js#hat"
+scena: "hat.js#trial.hat.door, hat.js#trial.hat.after, trials/hat.js#hat"
 fonte: proposto
 chi_c_e:
   - "[[protagonista]]"
@@ -12,7 +12,7 @@ chi_c_e:
   - "[[ortica]]"
   - "[[tartufo]]"
 chi_lo_sa:
-  - { chi: "[[mugnaio]]", come: "Ha dato lui il sacco, e ha conservato il cappello per ventotto anni (trials.js#trial.hat.door).", fonte: proposto }
+  - { chi: "[[mugnaio]]", come: "Ha dato lui il sacco, e ha conservato il cappello per ventotto anni (hat.js#trial.hat.door).", fonte: proposto }
   - { chi: "[[ortica]]", come: "Apre il sacco e riconosce il cappello (trials/hat.js#hat).", fonte: proposto }
 conseguenze:
 rami:

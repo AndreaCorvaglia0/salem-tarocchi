@@ -11,12 +11,12 @@ stabilisce:
   - { dove: "c2.js#ortica.chat", n: 1, scelta: "[[c2-ortica-chat-1]]" }
   - { dove: "c2.js#ortica.chat", n: 1, scelta: "[[c2-ortica-chat-1]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-4]]" }
-  - { dove: "garden.js#garden.ortica", n: 1 }
   - { dove: "garden-lessons.js#garden.lesson.acqua", n: 1 }
   - { dove: "garden-lessons.js#garden.lesson.luce", n: 1 }
   - { dove: "garden-lessons.js#garden.lesson.terra", n: 1 }
   - { dove: "garden-lessons.js#garden.lesson.vaso", n: 1 }
   - { dove: "garden-lessons.js#garden.lesson.semina", n: 1 }
+  - { dove: "garden.js#garden.ortica", n: 1 }
 mette_alla_prova:
   - { dove: "c3.js#c3.coven", condizione: "trust ortica >= 2" }
   - { dove: "c3.js#c3.jail", condizione: "flag coven.ortica.talk e trust ortica >= 2" }

@@ -17,7 +17,7 @@ rischi: "Una voce con `when: { step: … }` non arriva a chi è avanti. Le note 
 fonte: "DESIGN.md, Il registro delle cose in più; Recuperare quello che si aggiunge dopo"
 ---
 
-Il registro è src/core/extras.js. Le voci arrivano da quattro posti: le missioni secondarie (`SIDE` in src/data/story/steps.js), le lezioni (`LESSON_MISSIONS` in src/data/story/missions.js), le prove (src/data/trials/, registrate da src/glue/trials.js), i mondi Altrove (src/glue/elsewhere.rules.js). Le sei prove secondarie sono una catena: vigil, well, kettle, grave, room, dare.
+Il registro è src/core/extras.js. Le voci arrivano da quattro posti: le missioni secondarie (`SIDE` in src/data/story/steps.js), le lezioni (`LESSON_MISSIONS` in src/data/story/missions.js), le prove (src/data/trials/, registrate da src/glue/trials.js), i mondi Altrove (src/glue/elsewhere.rules.js). Le prove secondarie sono una catena: vigil, well, kettle, grave, room, dare, hat.
 
 Se una cosa piccola salta per chi è molto avanti, pazienza: conta che possa continuare.
 
