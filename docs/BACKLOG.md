@@ -128,6 +128,42 @@ Carte antiche accanto agli sguardi di storia; tavole botaniche mancanti; ambient
 della Lettrice (esclusa per ora); `scripts/savecheck.mjs` da aggiornare; una pila di foglietti che dice a quale
 luogo appartiene.
 
+## 6. Gli interessi da strega (idea di Andrea, 17 novembre sera)
+
+**Prima viene la base di conoscenza** (`lore/sapere/`, in costruzione): un cerchio piccolo e chiuso in cui
+erbe, fumi, pietre e tarocchi si tengono attraverso pochi perni (quattro elementi, sette pianeti, otto
+intenzioni). Affidabile quanto basta su «quello che si dice in giro», semplice quanto basta per impararlo.
+Senza la base, niente di quanto segue si progetta.
+
+**L'idea.** Gli hobby da strega sono interessi che lei coltiva presso una delle streghe. Ogni interesse è una
+catena di piccole missioni che si alimentano l'una con l'altra; più ne fa, più quell'interesse diventa il suo,
+e le dà un'abilità che cambia qualcosa nella storia.
+
+| Interesse | Da chi | Che cosa si fa | L'abilità nella storia (proposte) |
+|---|---|---|---|
+| Le carte (il tronco, per tutte) | Malva | letture, lezioni, mazzo vero | già c'è |
+| Erbe e orto | Ortica | coltivare, riconoscere, seccare | riconosce una pianta in una scena: una risposta in più |
+| Fumi e sacchetti | Malva (il focolare) | preparare il tavolo, comporre un sacchetto | un tavolo preparato bene dà una carta in più o un aiuto in lettura |
+| Pietre | Edera (sotto terra) | trovarle, sapere a che servono | una pietra in tasca vale una seconda possibilità a un Esame |
+| La sibilla e i giochi | Ginepra | leggere a coppie, i dadi | l'intuito: una volta per lettura, «senti» quale carta pesa di più |
+
+Come si alimentano tra loro: un sacchetto vuole un'erba dell'orto, una pietra e una carta; il tavolo vuole un
+fumo fatto con erbe secche; la sibilla allena a unire, che serve nelle letture; le letture danno i clienti
+che chiedono sacchetti. Tutto passa dagli stessi perni, quindi imparare una cosa aiuta le altre.
+
+Diventare «preponderante»: l'interesse più coltivato si vede. Sulla casa al terzo stadio (le caselle prese
+dalla sua partita ci sono già), in un titolo («strega delle erbe»), nel legame con la strega che lo insegna
+(affinità e legame esistono), in una battuta della Lettrice. Nessun interesse si chiude: si può coltivarli
+tutti, ma uno pesa di più.
+
+Regole: facoltativi e raggiungibili da chi è già avanti (voci del registro, catene con `after`); al massimo un
+gradino al giorno per interesse, mai assillante; ogni abilità ha una ragione nel mondo e non rende
+obbligatorio l'interesse (la storia si finisce anche senza).
+
+Ordine proposto: (1) la base di conoscenza; (2) una pagina di progetto con le catene e le abilità, misurate
+sulle scene che esistono; (3) il primo interesse completo come prova (erbe e orto, che è il più avanti);
+(4) gli altri, uno per fase. Le voci 3.0 (sibilla), 3.4 (sacchetti) e «pietre e incensi» confluiscono qui.
+
 ## Idee non ancora scelte
 
 **Pietre e incensi** (idea di Andrea, 17 novembre; da verificare prima di progettarla). Non una terza
