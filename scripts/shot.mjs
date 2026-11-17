@@ -18,7 +18,7 @@ await page.setViewport(phone ? { width: 390, height: 844, deviceScaleFactor: 2, 
 const errors = [];
 page.on('pageerror', (e) => errors.push(String(e)));
 page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
-await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+await page.goto(url, { waitUntil: opt('--until', 'networkidle2'), timeout: 30000 });
 await new Promise((r) => setTimeout(r, Number(opt('--wait', 1200))));
 const steps = opt('--steps');
 if (steps) { const mod = await import(pathToFileURL(resolve(steps)).href); await mod.default(page); }

@@ -18,6 +18,7 @@ import './wire.js'; // fog, small cards, obstacles, trading, the last hints
 import './lessons.js'; // the lessons as missions (flying, Minors, reversed) and the chapter card
 import './trials.js'; // asking the cards, the trials, the library (src/trials)
 import './witches.js'; // affinity and bond with the witches, their page
+import './opinions.js'; // what people say of each other, and what she thinks of them (after everyday chats, at the bed)
 import './elsewhere.js'; // Altrove: the small worlds outside Salem (the clouds, inside a book)
 import './debug.js'; // ?debug only: window.__salem and ?skip=
 export { bootSkip } from './debug.js';

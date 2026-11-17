@@ -78,6 +78,9 @@ export async function playVisit({ force = false } = {}) {
     }
     scene.table.highlight(null);
     await remark(plan.ritual);
+    // one question of her own, about the people she has met or something that happened (glue/opinions.js)
+    const op = await call('opinions.reader');
+    if (op) { await say(op.lead); await say(op.q, { ask: true }); const k = await T.choose(op.a.map((o) => fill(o.t))); await say(op.answer(k)); }
     await remark(plan.closer);
     state.visits = (state.visits || 0) + 1; save();
     addXp(10, 'visit');

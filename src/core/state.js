@@ -62,6 +62,8 @@ export const fresh = () => ({
   studied: {},
   studiedXp: {},
   trialSense: null,
+  // «Che ne pensi di lei?» (glue/opinions.rules.js): what she said of the people she met, what she heard of them
+  opinions: {},
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
