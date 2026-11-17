@@ -3,6 +3,8 @@
 Questa pagina è l'ingresso per chi deve aggiungere qualcosa al gioco: una storia secondaria, una persona,
 un mondo. È anche la base per tornare a Mnemopolis e farne un generatore di storie (`docs/MNEMOPOLIS.md`).
 
+Il perché di tutto questo, con gli errori corretti e le trovate, è in `docs/LEZIONI.md`.
+
 ## Tre prodotti
 
 | Prodotto | Che cosa è | Dove |
