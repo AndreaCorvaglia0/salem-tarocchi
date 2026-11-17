@@ -65,3 +65,11 @@ Le correzioni di parole ai copioni sono in `notes/retroscena.md`, sezione c.
   è per lei. Restano neutre solo le frasi che si riusano (motore delle letture, opinioni, testi generati).
   Una storia già scritta in forma neutra (il sacco dal mulino) va bene così.
 - **Dati di nascita.** Restano solo sul telefono: la copia del salvataggio nell'archivio dell'artefatto è spenta.
+
+## 9. Erbe, pietre, fumi: nel gioco fanno effetto (17 novembre, sera)
+
+Andrea: «cancella questa menata che non devono essere cose curative, è un gioco! Non facciamo i
+paternalistici». La regola «mai dosi, preparazioni o consigli di cura» è tolta. Erbe, pietre, incensi,
+sacchetti e pozioni possono curare, proteggere, calmare, e lo si dice come lo dice la tradizione («il quarzo
+giallo contro la malinconia»), senza avvertenze. Tenuto dal capofila un solo limite pratico: per le piante
+velenose vere dell'erbario non si scrive una ricetta con dosi reali.

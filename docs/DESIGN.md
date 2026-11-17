@@ -231,8 +231,8 @@ Quasi tutte muovono un tratto; alcune la fiducia di un personaggio; tre sono i b
 di più è far ricordare una scelta a qualcuno, più tardi.
 
 **Missioni secondarie.** Circa otto, facoltative: qualcuno racconta una cosa che porta nella zona di un
-Arcano Maggiore e intanto insegna qualcosa di quella carta. Non stanno in un elenco: sono appunti a
-matita sulla mappa del grimorio. Ogni carta si trova anche senza.
+Arcano Maggiore e intanto insegna qualcosa di quella carta. Non stanno in un elenco: sono foglietti
+appuntati sulla mappa del grimorio. Ogni carta si trova anche senza.
 
 ## Il grimorio
 
@@ -242,7 +242,12 @@ Il menù è un oggetto della storia, scritto a mano in prima persona. Tre segnal
    riga; le ultime righe di diario; in fondo carte, monete, strumenti.
 2. **Carte**: le caselle (quelle vuote: sagoma e una diceria); la pagina di una carta segue la scheda del
    libro; da qui lezioni, ripasso, lettura col mazzo vero.
-3. **Mappa**: schizzo a inchiostro, prossimo luogo cerchiato, appunti a matita; con la scopa, "Vola qui".
+3. **Mappa**: schizzo a inchiostro, prossimo luogo cerchiato; con la scopa, "Vola qui". Ogni cosa in più di
+   cui qualcuno le ha parlato è un foglietto di carta appuntato accanto al suo posto, con un simbolo a matita
+   del tipo; la storia è un foglietto con la stella. Toccando un foglietto si apre la sua scheda (chi me l'ha
+   detto, dove, cosa ci guadagno, «Seguila»: il cerchio rosso si sposta lì). In cima, che cosa sto seguendo;
+   le cose fatte stanno piegate sotto una riga «già fatte». Niente elenco (prova con lettori ingenui, giro 1:
+   `notes/missions-test/round-1.md`).
    Lo schizzo resta disegnato a mano ma dice il vero: i luoghi, i loro nomi, dove stanno e le strade tra
    loro vengono dalle mappe del mondo (`map` in `src/data/world/<regione>.js`, letto da `src/ui/sketchmap.js`).
    Una croce rossa a matita e «io» stanno dove lei è davvero (dentro una casa o in Altrove: alla sua porta), e
@@ -338,7 +343,8 @@ Non importa se più d'una è sbloccata. Nella scelta devono vedersi subito come 
 - Così un pezzo aggiunto dopo non finisce alle spalle di chi è già avanti: il gioco sa che non è stato
   fatto e lo propone.
 - Le missioni secondarie stanno nel grimorio e si possono scegliere: si giocano come le principali ma
-  non fanno avanzare la storia, e si distinguono a colpo d'occhio (matita invece di inchiostro).
+  non fanno avanzare la storia, e si distinguono a colpo d'occhio (un foglietto appuntato sulla mappa
+  invece della stella della storia).
 
 ### Recuperare quello che si aggiunge dopo
 
@@ -349,7 +355,7 @@ Regola per ogni cosa nuova, da quando c'è chi sta già giocando:
   gli altri arrivano uno alla volta.
 - Un pezzo che serve per andare avanti è una **chiave** (`key`): compare sempre, e la storia può
   chiederlo prima di un cancello.
-- Al massimo due cose nuove alla volta nell'elenco (chiavi e appunti della storia a parte): le altre
+- Al massimo due cose nuove alla volta sulla mappa (chiavi e appunti della storia a parte): le altre
   aspettano il loro turno. Mai dieci missioni in un colpo.
 - Se una cosa piccola salta per chi è molto avanti, pazienza: l'importante è che possa continuare.
 Codice: `src/core/extras.js`.
@@ -497,8 +503,9 @@ proprietà esoteriche e qualche consiglio su come coltivarle… sia salute che v
 - **La pagina di una pianta.** Come riconoscerla; che cosa se ne diceva (credenze, dette come credenze); a che
   cosa serviva (storia); che cosa c'è di vero (oggi); coltivarla (luce, acqua, quando, un consiglio: giardinaggio
   vero); pianeta ed elemento della tradizione; una curiosità.
-- **Salute e veleni: sì, come storia e conoscenza.** Mai dosi, preparazioni o consigli di cura. Le velenose
-  sono segnate chiaramente e non si assaggiano.
+- **Salute e veleni: sì.** È un gioco: erbe, pietre, fumi e pozioni possono curare, proteggere, fare effetto, e
+  lo si dice come lo dice la tradizione, senza scusarsi (deciso da Andrea il 17 novembre). Unico limite pratico:
+  per le piante velenose vere non si scrive una ricetta con dosi reali; restano segnate come velenose.
 - **Poi:** il giardino alla capanna con Ortica (piantare, annaffiare passando, raccogliere dopo giorni veri), semi
   in bottega e come doni della luna o premi delle prove; più avanti le pozioni.
 

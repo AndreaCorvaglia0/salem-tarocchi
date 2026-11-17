@@ -117,6 +117,11 @@ scena con un oggetto batte una frase a effetto.
 **23. Ogni riga di canone dice da dove viene.**
 `copione`, `deciso`, `proposto`. Niente si inventa in silenzio. I dubbi di fatto si cercano e si scrivono.
 
+**23b. È un gioco: non ci si scusa.**
+*Avevamo scritto «erbe e pietre mai come cura». Andrea: «è un gioco, non facciamo i paternalistici».* Nel gioco
+un'erba guarisce e una pietra protegge, e lo si dice con convinzione. Resta un solo limite pratico: niente
+ricette con dosi reali per le piante velenose vere.
+
 ## F. Vedere e sentire, con poco
 
 **24. I trucchi per non dover disegnare volti e animazioni.**

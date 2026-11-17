@@ -12,7 +12,7 @@ La filosofia del gioco in 16 regole. Ognuna dice come una cosa nuova la rompereb
 - [[niente-tocchi-per-sbaglio]] — I tasti nuovi ignorano i tocchi per un attimo, e i momenti da leggere non si saltano per sbaglio.
 - [[interfaccia-che-premia]] — L'interfaccia è fluida e moderna, e ogni gesto riuscito si vede: la carta si gira, il sigillo cede, la stella si accende.
 - [[prima-di-tutto-corretto]] — Quello che il gioco insegna è vero: nel dubbio si cerca, e la fonte si scrive in RESEARCH.md.
-- [[erbe-come-storia]] — Delle erbe si raccontano storia, tradizione e giardinaggio vero; mai dosi, preparazioni o consigli di cura.
+- [[erbe-come-storia]] — È un gioco: erbe, pietre, fumi e pozioni possono curare e proteggere; solo per le velenose vere niente ricetta con dosi reali.
 - [[la-lettrice-legge-lei]] — La Lettrice racconta le carte, ma soprattutto legge lei: il ritratto nasce dalle sue risposte e dal suo modo di giocare.
 - [[alla-fine-il-suo-mazzo]] — Alla fine lei sa leggere il suo mazzo vero, a casa, senza il gioco.
 - [[pochi-concetti-legati]] — Pochi concetti, legati tra loro; prima di aggiungere si guarda se una cosa che c'è già può farlo.

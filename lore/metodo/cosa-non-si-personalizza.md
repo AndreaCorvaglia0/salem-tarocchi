@@ -15,6 +15,6 @@ rischi: "Una frase della Lettrice che suona come una diagnosi. Una pianta presen
 fonte: "DESIGN.md, Il ritratto («far vedere qualcosa di sé, mai giudicare»); L'erbario; RESEARCH.md, Contestate o da non usare (Pashler e altri 2008)"
 ---
 
-Il taglio è quello di una buona cartomante: far vedere qualcosa di sé. Le risposte del ritratto non sono mai giuste o sbagliate, e i tratti non hanno un polo migliore. Le erbe si raccontano come storia e tradizione, con «che cosa c'è di vero»; mai dosi, preparazioni o cure (src/data/herbs/texts.js). La ricerca non sostiene l'idea di adattare l'insegnamento a uno «stile» di chi impara, e il gioco non lo fa.
+Il taglio è quello di una buona cartomante: far vedere qualcosa di sé. Le risposte del ritratto non sono mai giuste o sbagliate, e i tratti non hanno un polo migliore. Erbe, pietre e fumi nel gioco fanno effetto e lo si dice come la tradizione (vedi [[erbe-come-storia]]). La ricerca non sostiene l'idea di adattare l'insegnamento a uno «stile» di chi impara, e il gioco non lo fa.
 
 Per un altro gioco: vale uguale per Mnemopolis. Per il mondo dei bambini va deciso con Andrea se un ritratto ha senso del tutto.

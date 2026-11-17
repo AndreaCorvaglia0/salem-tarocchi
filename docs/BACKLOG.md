@@ -110,8 +110,7 @@ testo. È il passo verso il mazzo vero.
   che «vanno d'accordo» (pianeta ed elemento sono già nell'erbario).
 - *Perché:* dà un senso alla dispensa, lega erbario e carte, è richiamo attivo con una ragione.
 - *Più piccola:* tre richieste di personaggi, una scelta di erba e una di carta, una risposta di chi lo riceve.
-- *Nel mondo:* portafortuna da appendere a una porta. **Mai un rimedio:** resta la regola sulle erbe (storia e
-  tradizione, nessuna dose, nessuna cura).
+- *Nel mondo:* sacchetti che proteggono, calmano, portano fortuna, guariscono un malumore: nel gioco funzionano.
 - *Verifica:* test sui dati (ogni abbinamento ha una fonte in `RESEARCH.md` o è detto «tradizione di Ortica»).
 
 ## 4. Il mondo e le persone
@@ -136,8 +135,9 @@ collezione grande: (a) *preparare il tavolo* prima di una lettura, scegliendo un
 domanda (insegna gli ambiti: amore, lavoro, casa…, e i pianeti che l'erbario ha già); (b) gli incensi sono le
 erbe secche del suo orto (salvia, rosmarino, lavanda): danno un uso alla dispensa; (c) poche pietre, sette al
 massimo, trovate nel mondo (il ruscello, le cantine), più la pietra forata come amuleto di paese; (d) entrano
-nei sacchetti (3.4): un'erba, una pietra, una carta. Stessa regola delle erbe: tradizione e storia, mai
-proprietà curative. Le corrispondenze cambiano da una tradizione all'altra: le dice un personaggio.
+nei sacchetti (3.4): un'erba, una pietra, una carta. Le pietre hanno le loro virtù, dette come le dice la
+tradizione (il quarzo giallo contro la malinconia, l'ametista per il sonno…): è un gioco, e nel gioco fanno
+effetto. Le corrispondenze cambiano da una tradizione all'altra: le dice un personaggio.
 
 Sogni dentro la carta del giorno; lo specchio d'acqua (riconoscere una carta dalla sagoma); Tartufo che
 descrive una carta a modo suo; letture diverse con la luna nuova e la piena; la congrega che legge la stessa
