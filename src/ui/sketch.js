@@ -4,7 +4,8 @@
 // and «io» where she stands. What is drawn where comes from the world's maps (sketchmap.js: places,
 // positions, lanes, her position); this file only gives it the hand-drawn look.
 // sketch(region, { width, minWidth, seen, next, where, onPick, notes }) -> element
-//   where: world.where() ({ map, x, y }) or null; notes: [{ place, text }] pencil notes beside their place
+//   where: world.where() ({ map, x, y }) or null; notes: [{ place, text, id? }] pencil notes beside their place;
+//   onNote(id): a tap on a note (its hit area is padded to 44 px, the look is not)
 import { h } from '../core/dom.js';
 import { INK, PENCIL, RED, HAND, canvas, rnd } from './paper.js';
 import { REGIONS, REGION_OF, heightOf, layout, network, whereOnSketch, placeMe } from './sketchmap.js';
@@ -19,7 +20,7 @@ function mark(g, kind, k) {
   g.restore(); g.stroke();
 }
 
-export function sketch(regionId, { width = 320, minWidth = 330, seen = () => false, next = null, where = null, onPick = null, notes = [] } = {}) {
+export function sketch(regionId, { width = 320, minWidth = 330, seen = () => false, next = null, where = null, onPick = null, notes = [], onNote = null } = {}) {
   const R = REGIONS[regionId], W = Math.round(width), H = heightOf(regionId, W, minWidth), d = Math.min(2, globalThis.devicePixelRatio || 1);
   const Lay = layout(regionId, W, H), k = Lay.k;
   const [cv, g] = canvas(W * d, H * d);
@@ -69,6 +70,11 @@ export function sketch(regionId, { width = 320, minWidth = 330, seen = () => fal
     if (!R.places[n.place] || !n.text) continue;
     const [x, y] = P(n.place);
     const el = h('span.sk-note', { style: { left: `${x}px`, top: `${y - 20 * k}px` } }, n.text);
+    if (onNote && n.id) {
+      el.dataset.id = n.id; el.setAttribute('role', 'button'); el.tabIndex = 0; el.setAttribute('aria-label', `missione in più ${n.text}: vai all'elenco`);
+      el.onclick = (e) => { e.stopPropagation(); onNote(n.id); };
+      el.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onNote(n.id); } };
+    }
     if (x < W * 0.3) el.classList.add('sk-l'); else if (x > W * 0.7) el.classList.add('sk-r');
     wrap.append(el);
   }
@@ -92,6 +98,10 @@ export const SKETCH_CSS = `
 .sk-lab{position:absolute;transform:translate(-50%,0);font:18px/19px ${HAND};color:${PENCIL};white-space:pre;text-align:center;pointer-events:none;padding:0 4px;border-radius:6px;background:#ede2c5e0}
 .sk-note{position:absolute;transform:translate(-50%,-100%) rotate(-3deg);max-width:130px;font:italic 16px/17px ${HAND};color:${PENCIL};text-align:center;pointer-events:none;padding:1px 5px;background:#ede2c5cc;border-bottom:1px dashed ${PENCIL}}
 .sk-note::before{content:'✎ '}
+.sk-note[role=button]{pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sk-note[role=button]::after{content:'';position:absolute;left:-10px;right:-10px;top:-13px;bottom:-13px}
+.sk-note.mp-pulse{animation:mp-flash 1.2s ease-out 1}
+@keyframes mp-flash{0%,35%{background:#f6e27a;box-shadow:0 0 0 4px #f6e27acc}100%{background:#ede2c5cc;box-shadow:0 0 0 4px #f6e27a00}}
 .sk-note.sk-l{transform:translate(-20%,-100%) rotate(-3deg)}.sk-note.sk-r{transform:translate(-80%,-100%) rotate(-3deg)}
 .sk-hit{position:absolute;width:48px;height:48px;transform:translate(-50%,-50%);border:0;background:none;border-radius:50%;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .sk-hit:focus-visible{outline:2px dashed ${RED}}

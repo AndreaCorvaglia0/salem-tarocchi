@@ -38,7 +38,11 @@ const CSS = `${SKETCH_CSS}
 .mp-m.sec.on .tx,.mp-m.sec.open .tx{white-space:normal}
 .mp-m.sec.done .tx{text-decoration:line-through ${PENCIL}88}
 .mp-m .lb{display:inline-block;margin-right:8px;padding:0 6px;border:1px solid ${PENCIL}88;border-radius:9px;font-size:15px;line-height:18px;color:${PENCIL};transform:rotate(-2deg)}
-.mp-m .no{display:inline-block;margin-right:6px;font-size:17px;line-height:18px;color:${PENCIL}}
+.mp-m .no{display:inline-block;position:relative;margin-right:6px;font-size:17px;line-height:18px;color:${PENCIL}}
+.mp-m .no::after{content:'';position:absolute;left:-8px;right:-8px;top:-13px;bottom:-13px}
+.mp-m.mp-pulse{animation:mp-rowflash 1.2s ease-out 1}
+@keyframes mp-rowflash{0%,35%{background:#f6e27acc}100%{background:#f6e27a00}}
+.mp-lg{margin:2px 0 0!important;font-size:18px;line-height:22px;color:${PENCIL};text-align:right}
 /* on the sketch a side mission is a short numbered pencil tag beside its place (the text is in the list):
    long notes over a phone-sized map covered the titles */
 .mp-reg .sk-note{max-width:none;white-space:nowrap;font-size:17px;line-height:19px;padding:0 5px;border-radius:7px;transform:translate(24px,6px) rotate(-3deg);visibility:hidden}
@@ -59,7 +63,11 @@ export const sideNumbers = (list = extrasShown()) => {
   const order = EXTRAS.map((e) => e.id).filter((id) => open.includes(id));
   return Object.fromEntries(order.map((id, i) => [id, i + 1]));
 };
-const mapNotes = () => { const no = sideNumbers(); return sideNotes().filter((n) => no[n.id]).map((n) => ({ place: n.place, text: String(no[n.id]) })); };
+const mapNotes = () => { const no = sideNumbers(); return sideNotes().filter((n) => no[n.id]).map((n) => ({ place: n.place, text: String(no[n.id]), id: n.id })); };
+// scroll to an element and flash it once (a soft paper-yellow, no movement)
+const flash = (el) => { if (!el) return; el.scrollIntoView({ block: 'center', behavior: 'smooth' }); el.classList.remove('mp-pulse'); void el.offsetWidth; el.classList.add('mp-pulse'); setTimeout(() => el.classList.remove('mp-pulse'), 1300); };
+const toRow = (id) => flash([...document.querySelectorAll('.mp-m[data-id]')].find((e) => e.dataset.id === id));
+const toTag = (id) => { const t = [...document.querySelectorAll('.sk-note[data-id]')].find((e) => e.dataset.id === id); if (t) { t.closest('.mp-reg')?.scrollIntoView({ block: 'start', behavior: 'smooth' }); setTimeout(() => flash(t), 350); } };
 
 // A place new on the map (or an anchor added after she walked by) is marked seen when the save proves she
 // has been there (logic.js provenSeen): an old save does not show blank where she has certainly been, and
@@ -107,9 +115,10 @@ export function mappaPages(ctx) {
     const R = REGIONS[rid], any = Object.keys(R.places).some(seen) || REGION_OF(next) === rid || notes.some((n) => R.places[n.place]);
     const box = h('div.mp-reg', h('h3', {}, R.name, h('small', {}, R.season)));
     if (!any) { box.append(h('p.pencil.mp-blank', {}, 'Non ci sono ancora stata.')); return box; }
-    const sk = sketch(rid, { width, minWidth: phone ? 330 : 0, seen, next, where: ctx.study ? null : where, onPick: pick, notes });
+    const sk = sketch(rid, { width, minWidth: phone ? 330 : 0, seen, next, where: ctx.study ? null : where, onPick: pick, notes, onNote: toRow });
     box.dataset.region = rid;
     box.append(sk);
+    if (sk.querySelector('.sk-note')) box.append(h('p.pencil.mp-lg', {}, '✎ una missione in più: è nell\'elenco qui sopra'));
     if (notes.length) requestAnimationFrame(() => placeTags(sk));
     return box;
   };
@@ -156,7 +165,12 @@ export function placeTags(sk) {
     const mark = { l: x - 13, t: y - 13, r: x + 13, b: y + 13 };
     const at = ([dx, dy, ax]) => { const l = x + (Math.abs(dx) < 1 ? dx * w : dx) + ax * w; const t = y + dy - hh; return { l, t, r: l + w, b: t + hh }; };
     const fits = (q) => q.l >= 2 && q.t >= 2 && q.r <= box.width - 2 && q.b <= box.height - 2 && !hit(q, mark) && !busy.some((b) => hit(q, b));
-    const spot = SPOTS.map(at).find(fits) || at(SPOTS[0]);
+    // the usual spots first; then rings further out; if nothing is free, the spot that covers least
+    const ring = (rad) => Array.from({ length: 12 }, (_, i) => { const a = (i / 12) * Math.PI * 2; const cx = x + Math.cos(a) * rad, cy = y + Math.sin(a) * rad; return { l: cx - w / 2, t: cy - hh / 2, r: cx + w / 2, b: cy + hh / 2 }; });
+    const tries = [...SPOTS.map(at), ...ring(30), ...ring(44), ...ring(58)];
+    const inside = (q) => q.l >= 2 && q.t >= 2 && q.r <= box.width - 2 && q.b <= box.height - 2;
+    const cover = (q) => [mark, ...busy].reduce((n, b) => n + Math.max(0, Math.min(q.r, b.r) - Math.max(q.l, b.l)) * Math.max(0, Math.min(q.b, b.b) - Math.max(q.t, b.t)), 0);
+    const spot = tries.find(fits) || tries.filter(inside).sort((a, b) => cover(a) - cover(b))[0] || at(SPOTS[0]);
     el.style.left = `${spot.l}px`; el.style.top = `${spot.t}px`; el.style.transform = 'rotate(-3deg)';
     el.classList.add('mp-placed');
     busy.push(spot);
@@ -176,8 +190,8 @@ function missions(ctx, tracked) {
   const rows = list.map((e) => {
     const on = !!e.tracked, done = e.status === 'done';
     const cls = ['mp-m', 'sec', on ? 'on' : '', done ? 'done' : ''].filter(Boolean).join(' ');
-    return h('button', { type: 'button', class: cls, disabled: done, onclick: () => { markSeen(e.id); if (!done) track(e.id); ctx.rerender(); } },
-      h('span.st', {}, h('span.lb', {}, 'in più'), no[e.id] ? h('span.no', {}, `✎ ${no[e.id]}`) : null, e.status === 'new' ? h('span.nw', {}, 'nuova') : null, on ? STATUS.active : STATUS[e.status] || ''),
+    return h('button', { type: 'button', class: cls, disabled: done, 'data-id': e.id, onclick: () => { markSeen(e.id); if (!done) track(e.id); ctx.rerender(); } },
+      h('span.st', {}, h('span.lb', {}, 'in più'), no[e.id] ? h('span.no', { onclick: (ev) => { ev.stopPropagation(); toTag(e.id); } }, `✎ ${no[e.id]}`) : null, e.status === 'new' ? h('span.nw', {}, 'nuova') : null, on ? STATUS.active : STATUS[e.status] || ''),
       h('span.tx', {}, e.text));
   });
   return h('div.mp-ms', h('h3', {}, 'Missioni', list.length ? h('small', {}, `in più: fatte ${done} di ${list.length}`) : null), main, ...rows);

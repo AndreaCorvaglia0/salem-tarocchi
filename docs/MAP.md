@@ -63,7 +63,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/story/stage` | 14 | 1925 |
 | `src/systems` | 19 | 1523 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 34 | 3726 |
+| `src/ui` | 34 | 3745 |
 | `src/world` | 18 | 1376 |
 | `src/world/art` | 17 | 2401 |
 | `src/world/scene` | 20 | 2102 |
