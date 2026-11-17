@@ -10,9 +10,9 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | # | Lavoro | Stato | Dove guardare |
 |---|---|---|---|
 | 0 | Mappa: solo quello che lei sa + note dei luoghi | **fatto, pubblicato** (main 602c0df, gh-pages 2896b60) | `tests/knows-only.test.mjs` |
-| 1 | Rito dell'incenso (`notes/rito/PROGETTO.md`) | agente in corso | file non ancora committati: `src/ui/rite/`, `src/glue/rite*`, `src/data/rite.js`, `src/sound/`, `public/rite/`, `scripts/audio/`, `harness/ascolto*`, `tests/rite*`, modifiche in `systems/reading.js`, `systems/consult.js`, `ui/selfread.js`, `ui/io.js`, `glue/index.js`, `vite.config.js`, chiave `rite` in `core/state.js` |
+| 1 | Rito dell'incenso (`notes/rito/PROGETTO.md`) | **fatto, pubblicato** (main 3b8bc48, gh-pages 2704fe8); musiche provvisorie fino all'ascolto alla cieca: https://andreacorvaglia0.github.io/salem-tarocchi/ascolto/ ; codice → `node scripts/audio/ascolto-decode.mjs <codice>` | `notes/rito/costruzione.md`, `notes/rito/musica.md` |
 | 2 | Promesse (BACKLOG 1.1–1.4: tratti, affinità, domande della Lettrice, fiducia/legame, Ricordamela) | agente in corso | schermate in `/home/claude/shots/promesse/` |
-| 3 | Collezioni: pietre e sibilla come l'erbario | da fare | `notes/collezioni.md`; **le 36 carte della sibilla già ritagliate e controllate** in `/home/claude/ext/sibilla/cards/01..36.jpg` (ordine giusto, foglio di prova `contact.jpg`) |
+| 3 | Collezioni: pietre e sibilla come l'erbario | agente in corso | `notes/collezioni.md`; **le 36 carte della sibilla già ritagliate e controllate** in `/home/claude/ext/sibilla/cards/01..36.jpg` (ordine giusto, foglio di prova `contact.jpg`) |
 | 4 | Test dei lettori ingenui sul villaggio | da fare (lo lancia il capofila: haiku) | `notes/village-test.md` |
 | 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | da fare | BACKLOG sezione 7 |
 | 6 | Imparare meglio (BACKLOG 2.1–2.4) | da fare | |
