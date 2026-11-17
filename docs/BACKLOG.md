@@ -131,6 +131,14 @@ luogo appartiene.
 
 ## Idee non ancora scelte
 
+**Pietre e incensi** (idea di Andrea, 17 novembre; da verificare prima di progettarla). Non una terza
+collezione grande: (a) *preparare il tavolo* prima di una lettura, scegliendo una pietra e un fumo secondo la
+domanda (insegna gli ambiti: amore, lavoro, casa…, e i pianeti che l'erbario ha già); (b) gli incensi sono le
+erbe secche del suo orto (salvia, rosmarino, lavanda): danno un uso alla dispensa; (c) poche pietre, sette al
+massimo, trovate nel mondo (il ruscello, le cantine), più la pietra forata come amuleto di paese; (d) entrano
+nei sacchetti (3.4): un'erba, una pietra, una carta. Stessa regola delle erbe: tradizione e storia, mai
+proprietà curative. Le corrispondenze cambiano da una tradizione all'altra: le dice un personaggio.
+
 Sogni dentro la carta del giorno; lo specchio d'acqua (riconoscere una carta dalla sagoma); Tartufo che
 descrive una carta a modo suo; letture diverse con la luna nuova e la piena; la congrega che legge la stessa
 carta in quattro modi; due carte che litigano; «che cosa vedi?» (una lettura da tre dettagli toccati);
