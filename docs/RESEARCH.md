@@ -392,3 +392,25 @@ Controllato per il backlog (`docs/BACKLOG.md`, sezione 3). Fonti lette nei risul
   l'abbinamento. Nel gioco è «una tradizione», detta da un personaggio. Fonti: discussioni di praticanti
   (patheos.com, angelorum.co), non storiografia: affidabilità media.
 - **Non verificato:** sibille italiane; il romanzo delle storie raccontate con le carte.
+
+## Il fumo nelle letture, e la musica che lo fa sentire (17 novembre 2026)
+
+Per `docs/BACKLOG.md` 3.5. Letto nei risultati di ricerca, non per intero.
+
+- **Si brucia qualcosa per leggere le carte.** Ricette «per la divinazione» da fumare prima o durante l'uso dei
+  tarocchi (raccolte che riprendono Cunningham: paganmuses.com); artemisia, incenso e sandalo come fumi «che
+  aprono» (mysticryst.com; paganpages.org sull'artemisia); un articolo di Llewellyn abbina erbe e incensi alle
+  singole carte. Fonti di praticanti: dicono che cosa si usa, non che funzioni.
+- **Il fumo si sceglie secondo l'intenzione:** rosa per l'amore, cannella per denaro e riuscita, lavanda per la
+  pace, incenso per elevarsi; per proteggere incenso, sangue di drago, rosmarino, ginepro (più fonti concordi:
+  consenso alto sulle principali).
+- **Il segnale.** Bruciare sempre la stessa miscela prima di leggere «condiziona»: quel profumo diventa
+  attenzione (easure.net). È un'osservazione di buon senso riportata da un venditore, non uno studio.
+- **Musica ed emozione.** Rassegne di psicologia della musica: il tempo muove soprattutto l'energia (veloce =
+  attivazione alta), il modo soprattutto il colore (maggiore positivo, minore negativo); quando le due leve
+  vanno d'accordo l'effetto è più forte, e se divergono prevale il tempo. Contano anche altezza, intensità,
+  timbro, articolazione. Il modo è una convenzione occidentale, imparata. Fonti: Swaminathan & Schellenberg
+  2015 (Emotion Review); Corrigall & Schellenberg 2013; Morreale et al. 2013. La «ricetta della calma» (lento,
+  grave, legato, timbro scuro, maggiore) è riportata da un articolo divulgativo: affidabilità media.
+- **Non verificato:** che un profumo si possa evocare con la musica (è una scelta di design: si rende la
+  sensazione, non l'odore); se `src/sound/moods.js` è ancora in uso.

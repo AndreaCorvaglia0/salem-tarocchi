@@ -113,6 +113,53 @@ testo. È il passo verso il mazzo vero.
 - *Nel mondo:* sacchetti che proteggono, calmano, portano fortuna, guariscono un malumore: nel gioco funzionano.
 - *Verifica:* test sui dati (ogni abbinamento ha una fonte in `RESEARCH.md` o è detto «tradizione di Ortica»).
 
+**3.5 La lettura come rito: il fumo e la musica.** *Medio.* (teoria; fa parte dell'interesse «fumi e sacchetti»)
+
+*Ha fondamento?* Sì, due volte. (1) Chi legge le carte brucia davvero qualcosa prima o durante: le miscele
+«per la divinazione» più citate sono artemisia, incenso (olibano) e sandalo; e la regola generale di chi
+pratica è scegliere il fumo secondo l'intenzione (rosa per l'amore, cannella per denaro e riuscita, lavanda per
+la pace, incenso per elevarsi, ginepro e rosmarino per proteggere). (2) C'è anche una ragione che non chiede
+di crederci: bruciare sempre lo stesso profumo prima di leggere diventa un segnale, «questo odore = attenzione».
+È esattamente ciò che ci serve: un rito che apre.
+
+*Il problema:* un telefono non ha odore. Il profumo va reso con ciò che abbiamo: **la musica**, il colore e
+il movimento del fumo, due parole.
+
+*Come si fa sentire un profumo con la musica.* Le ricerche sulla musica e le emozioni concordano su poche leve:
+il **tempo** muove l'energia (veloce = attivo, lento = quieto), il **modo** muove il colore (maggiore = sereno,
+minore = scuro), e contano l'altezza, il timbro e il legato. La calma, per esempio, si riconosce quasi sempre con
+tempo lento, suoni gravi, legato, timbro scuro e modo maggiore. Quindi ogni fumo ha una ricetta musicale, non
+«un brano che ci sembra adatto».
+
+| Ambito della domanda | Fumo (da confermare con `lore/sapere/`) | La sensazione | La ricetta musicale |
+|---|---|---|---|
+| per aprire, sempre | artemisia e incenso | attenzione, soglia | **sempre lo stesso** breve motivo: è il segnale del rito |
+| amore | rosa, lavanda | tenerezza | lento, maggiore, legato, timbro caldo (violoncello, piano morbido), suoni medi |
+| casa e famiglia | salvia, rosmarino | riparo, quiete | lento, maggiore, grave, timbro scuro, quasi fermo |
+| lavoro e denaro | cannella, alloro | slancio, fiducia | moderato, maggiore, staccato leggero (arpa, pizzicati), intervalli ampi |
+| sé, una decisione | incenso (olibano) | chiarezza | piano solo nel registro alto, poche note, molto spazio; né allegro né triste |
+| gli altri, un torto, un addio | mirra, ginepro | gravità, lasciar andare | lento, minore, legato, grave; si schiarisce alla fine della lettura |
+
+*Come si gioca.* (1) Lei accende il fumo d'apertura: il motivo del rito, sempre uguale; dopo poche volte basta
+sentirlo per «entrare». (2) Ascolta la domanda e sceglie il secondo fumo: così impara a riconoscere **di che
+cosa parla una domanda**, cosa che oggi il gioco decide in silenzio. (3) Il fumo sale con il suo colore e la
+musica prende quella ricetta per tutta la lettura. (4) Scelta giusta: il cliente «si sente a casa», un
+piccolo bene (una parola in più da lui, un aiuto). Scelta diversa: nessuna perdita, la musica sarà solo meno
+intonata alla domanda, e una strega può dirlo a modo suo.
+
+*Con che cosa.* Il gioco ha già un piccolo motore che genera musica da parametri (`src/sound/moods.js`: tonica,
+modo, battito, voci): se è ancora in uso, le cinque ricette sono cinque righe di parametri e non servono brani
+nuovi. Da verificare; altrimenti si cercano brani liberi scelti con la stessa tabella. Gli incensi sono le
+erbe secche dell'orto più due resine comprate in bottega.
+
+*Verifica.* Nessuno strumento ascolta: decide l'orecchio di Andrea e di lei. Una prova onesta: far sentire le
+cinque musiche senza dire quale è quale e chiedere a quale domanda le abbinerebbe; se tre su cinque tornano,
+la ricetta funziona. Le corrispondenze dei fumi si prendono dalla base di conoscenza, con il loro consenso.
+
+*Rischi.* Un passo in più prima di ogni lettura: deve durare pochi secondi e si deve poter saltare dopo le
+prime volte («il solito»). Cinque musiche diverse devono restare la stessa stanza: stessa tonalità di fondo,
+cambia il carattere.
+
 ## 4. Il mondo e le persone
 
 **4.1 Il segno sopra chi ha qualcosa per lei** (seconda metà delle missioni «alla GTA»). *Medio.*
