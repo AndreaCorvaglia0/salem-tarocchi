@@ -2,6 +2,8 @@
 //   node scripts/lore.mjs check         the linter: errors exit 1; errors and warnings go to notes/tools.md
 //   node scripts/lore.mjs gen           write lore/tratti/, lore/scelte/, lore/finali/ from the story data
 //   node scripts/lore.mjs gen --check   exit 1 when those folders are out of date (used by the tests)
+//   node scripts/lore.mjs sapere        write src/data/sapere.js and the tables of lore/sapere/_il-cerchio.md
+//   node scripts/lore.mjs sapere --check  exit 1 when either is out of step with lore/sapere/
 // The pieces live in scripts/lore/: frontmatter.mjs (the reader), story.mjs (the story walked once),
 // vault.mjs (the vault on disk), check.mjs (the rules), gen.mjs (the generated pages).
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, unlinkSync } from 'node:fs';
@@ -11,8 +13,17 @@ import { loadStory, ROOT } from './lore/story.mjs';
 import { loadVault, LORE } from './lore/vault.mjs';
 import { check } from './lore/check.mjs';
 import { generate, GEN_DIRS } from './lore/gen.mjs';
+import { readSapere, sapereSource, withTables, circle } from './lore/sapere.mjs';
 
 const NOTES = join(ROOT, 'notes', 'tools.md');
+export const SAPERE_JS = join(ROOT, 'src', 'data', 'sapere.js');
+export const CIRCLE_MD = join(LORE, 'sapere', '_il-cerchio.md');
+
+// what `sapere` would write: [[path, text]]
+export function sapereOutputs(vault = loadVault()) {
+  const data = readSapere(vault);
+  return { data, files: [[SAPERE_JS, sapereSource(data)], [CIRCLE_MD, withTables(readFileSync(CIRCLE_MD, 'utf8'), data)]] };
+}
 
 export async function runCheck() {
   const S = await loadStory();
@@ -85,8 +96,20 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
       console.log(`wrote ${pages.size} files in lore/${GEN_DIRS.join(', lore/')} (${diff.length} changed)`);
       console.log(JSON.stringify(pages.summary, null, 1));
     }
+  } else if (cmd === 'sapere') {
+    const { data, files } = sapereOutputs();
+    const stale = files.filter(([p, t]) => !existsSync(p) || readFileSync(p, 'utf8') !== t);
+    const { empty } = circle(data);
+    if (rest.includes('--check')) {
+      if (stale.length) { console.error(`out of step with lore/sapere/: ${stale.map(([p]) => p).join(', ')}: run \`node scripts/lore.mjs sapere\``); process.exit(1); }
+      console.log('sapere is in step with the vault');
+    } else {
+      for (const [p, t] of files) writeFileSync(p, t);
+      console.log(`sapere: ${data.hubs.length} hubs, ${data.signs.length} signs, ${data.leaves.length} leaves; ${stale.length} files changed`);
+    }
+    console.log(empty.length ? `empty cells: ${empty.map((e) => `${e.hub}/${e.group}`).join(', ')}` : 'the circle closes: no empty cell');
   } else {
-    console.log('usage: node scripts/lore.mjs check | gen [--check]');
+    console.log('usage: node scripts/lore.mjs check | gen [--check] | sapere [--check]');
     process.exit(2);
   }
 }

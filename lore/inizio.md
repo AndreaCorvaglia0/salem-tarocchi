@@ -17,6 +17,7 @@ all'inizio sono nascosti: si accendono dai filtri.
 - **Scelte e finali:** [[_indice-scelte]] · [[_tabella-finali]]
 - **Come si impara:** [[_indice-obiettivi]] · [[_indice-tecniche]] · [[_indice-meccaniche]] · [[_matrice]]
 - **Filosofia e metodo:** [[_indice-principi]] · [[_indice-metodo]]
+- **Erbe, fumi, pietre, tarocchi:** [[_il-cerchio]] · [[_indice-sapere]]
 
 ## Tre giri che valgono la pena
 

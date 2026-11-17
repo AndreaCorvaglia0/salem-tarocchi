@@ -18,7 +18,7 @@ export const TYPES = [
   ['persona', 'Persone'], ['retroscena', 'Retroscena'], ['luogo', 'Luoghi'], ['fatto', 'Fatti'],
   ['meccanica', 'Meccaniche'], ['obiettivo', 'Obiettivi'], ['tecnica', 'Tecniche'], ['principio', 'Principi'],
   ['metodo', 'Metodo'], ['tratto', 'Tratti'], ['scelta', 'Scelte'], ['finale', 'Finali'],
-  ['decisione', 'Decisioni'], ['indice', 'Indici'],
+  ['decisione', 'Decisioni'], ['sapere', 'Sapere'], ['indice', 'Indici'],
 ];
 const INDEX_COLOR = '#8a8173';
 

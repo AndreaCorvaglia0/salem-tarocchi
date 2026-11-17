@@ -423,3 +423,78 @@ Per `docs/BACKLOG.md` 3.5. Letto nei risultati di ricerca, non per intero.
 
 Che cosa si può misurare al posto dell'orecchio: tempo, modo, altezza media, intensità e distanza tra varianti
 sul suono reso; scelta forzata dei lettori artificiali sulle immagini. Che cosa no: se è bello, se emoziona.
+
+## Il cerchio: erbe, fumi, pietre, tarocchi (17 novembre 2026)
+
+Il vault `lore/sapere/` (una pagina per elemento, pianeta, intenzione, segno, seme, arcano, erba, fumo, pietra; la
+pagina unica è `lore/sapere/_il-cerchio.md`). Dati: `src/data/sapere.js`, generato da `node scripts/lore.mjs sapere`;
+test: `tests/sapere.test.mjs`. Le sigle qui sotto sono quelle del campo `fonte` di ogni pagina.
+
+### Regola di scelta
+
+- **Erbe dell'erbario:** pianeta ed elemento sono quelli del gioco (`src/data/herbs/texts.js`: pianeta da Culpeper,
+  elemento da Cunningham). Nessuna eccezione: le altre versioni sono nelle `varianti`.
+- **Arcani:** Golden Dawn, come `src/data/cards.base.js`. Le carte dei segni prendono elemento del segno e
+  governatore antico (`SIGN_LORE`); le carte dei pianeti prendono l'elemento del pianeta (sotto). Le intenzioni degli
+  Arcani non vengono da nessuna tradizione comune: sono nostre, prese dall'idea della carta (`consenso: nostro`).
+- **Pianeti ed elementi:** qualità di Tolomeo tradotte negli elementi (caldo e secco fuoco, ecc.): Sole e Marte fuoco,
+  Luna e Venere acqua, Giove aria, Saturno terra; Mercurio, che per Tolomeo cambia, aria per convenzione.
+- **Fumi e pietre fuori dall'erbario:** la versione moderna più copiata; quella antica (Agrippa) nelle `varianti`.
+
+### Fonti (sigla, indirizzo, a che cosa serve, quanto è stato letto)
+
+| Sigla | Fonte | Serve per | Letto |
+|---|---|---|---|
+| AGR | Agrippa, *De occulta philosophia* I, capp. 23-29 (cose del Sole, della Luna…) e 44 (fumi dei pianeti), trad. inglese 1651: https://www.esotericarchives.com/agrippa/agripp1b.htm | storia: pianeti di piante, pietre e fumi | i capitoli, tramite riassunto dello strumento di lettura (elenchi, non il testo intero) |
+| CUL | Culpeper, *The English Physitian* (1652): https://www.gutenberg.org/ebooks/49513 | pianeti delle erbe | già controllato il 17 novembre (sezione «L'erbario»); qui nulla di nuovo; il salice alla Luna solo da citazioni di seconda mano (shadowsmagickplace.blogspot.com, permies.com) |
+| CUN | Scott Cunningham, *Encyclopedia of Magical Herbs* (1985) e *…of Crystal, Gem & Metal Magic* (1988) | il canone moderno che quasi tutti copiano | **non letto**: i libri sono sotto diritto d'autore e le anteprime dell'editore (issuu.com/llewellyn) non mostrano le voci. I valori «di Cunningham» vengono da pagine che lo riportano (sotto) e dalla memoria: vanno presi come probabili, non come verificati |
+| ROTH | Harold Roth, alchemy-works.com: pagine dei pianeti (https://alchemy-works.com/planets_moon.html, https://www.alchemy-works.com/planets_saturn.html) e incensi planetari (https://alchemy-works.com/incense_planetary.html), mirra (https://alchemy-works.com/incense_myrrh.html) | un secondo praticante, indipendente da Cunningham | pagine lette |
+| GRIM | grimoire.love (grimoire-3sj.pages.dev): tabella degli incensi (https://grimoire-3sj.pages.dev/encyclopedia/incense-correspondences), benzoino, pietra di luna | aggregatore moderno; dice esplicitamente dove le fonti litigano (benzoino) | pagine lette |
+| MYST | mysticryst.com, erbe per pianeta (https://mysticryst.com/blogs/the-mystic-journal/planetary-herb-correspondences-saturn-jupiter-mars-sun-venus-mercury-moon-plants) | che cosa governa ogni pianeta, giorni, colori | pagina letta; affidabilità media (blog commerciale) |
+| KERY | kerykeion.net, pietre per pianeta (https://kerykeion.net/content/learn-crystals/astrology/crystals-by-planet) | pietre moderne | pagina letta |
+| SNAV | Deb Snavely, «Rocks in Her Head» (1992-93), su wiccanrede.org (https://wiccanrede.org/?p=8718) | pietre: pianeta, elemento, usi di un'altra scuola | pagina letta |
+| GD / ANG | Golden Dawn, tabella in angelorum.co (https://angelorum.co/topics/divination/golden-dawn-astrologica/) | pianeta, segno o elemento dei 22 Arcani; Mondo anche terra; pianeti moderni per Matto, Appeso, Giudizio (aggiunti dopo) | pagina letta; coincide con il gioco e con BIDDY |
+| TE | tarotelements.com, lettere ebraiche e pianeti (https://tarotelements.com/hebrew-for-tarot-readers-assigning-the-seven-planets/) | da dove viene lo schema: 3 lettere madri elementi, 7 doppie pianeti, 12 semplici segni; versioni del Sefer Yetzirah diverse | pagina letta |
+| BIDDY | biddytarot.com (già in «Fonti») | conferma Golden Dawn | non riletta |
+| CRAFT | craftofwicca.com (https://craftofwicca.com/elemental-magic-for-beginners/) | elementi e intenzioni, direzioni; esempio della scuola che dà l'aria ai Bastoni | pagina letta |
+| PTOL | Tolomeo, *Tetrabiblos* I.4-5 (https://penelope.uchicago.edu/thayer/e/roman/texts/ptolemy/tetrabiblos/1b*.html) | qualità dei pianeti, benefici e malefici | capitoli letti |
+| WIKI-GIORNI | Wikipedia, «Names of the days of the week» | settimana planetaria, nomi italiani | letto in parte |
+| WIKI-LAP | Wikipedia, «Lapidary (text)» | lapidari: Marbode (morto nel 1123, 60 pietre), ametista contro l'ebbrezza, lapidario di Alfonso X con segni e pianeti | letto |
+| WIKI-BIRTH | Wikipedia, «Birthstone» | pietre del mese: pettorale di Aronne, Giuseppe Flavio, lista dei gioiellieri americani del 1912; non usate nel cerchio perché recenti e poco concordi | letto |
+| PRM | Pitt Rivers Museum, pietra forata del Dorset (https://england.prm.ox.ac.uk/englishness-Dorset-hag-stone.html) | pietra forata: porte e stalle, streghe che cavalcano i cavalli, incubo che schiaccia | letto |
+| SP8 | forum.spells8.com, mirra (https://forum.spells8.com/t/myrrh-and-its-correspondences/21021) | mostra la mirra data a Sole e Saturno da altri autori | letto |
+| FTH | flyingthehedge.com, sangue di drago (https://www.flyingthehedge.com/2025/07/magical-uses-of-dragons-blood.html) | Marte, fuoco, usi; Socotra nel Periplo | letto |
+| ERBARIO | `src/data/herbs/texts.js` e la sezione «L'erbario» qui sopra | storia e tradizione delle 21 piante | testi del gioco |
+| RESEARCH-SALEM | sezioni «Salem, 1692» e «Magia popolare del tempo» qui sopra | bottiglia della strega, vetro di Venere | testi del gioco |
+| GIOCO | `src/data/cards.base.js`, `src/data/cards/*.js` | idea di ogni carta, segni, governatori | dati del gioco |
+| MEMORIA | — | cose scritte da conoscenza generale, non confermate da una pagina in questa sessione (elenco sotto) | — |
+
+### Dove la tradizione non è d'accordo (consenso basso)
+
+- **Mirra:** Luna (CUN, GRIM, la più copiata) · Saturno (AGR, fumo di Saturno; MYST) · Marte (ROTH) · Sole (SP8). Scelta: Luna.
+- **Benzoino:** Sole e aria (GRIM: «il più comune») · Venere (ROTH) · Mercurio · per AGR Giove nel fumo, Sole tra le gomme, Saturno l'albero. Scelta: Sole, aria.
+- **Quarzo ialino:** Luna (AGR, SNAV) · Sole e Luna (CUN) · Mercurio (KERY). Scelta: Luna.
+- **Ossidiana:** Plutone (SNAV, KERY) · Saturno (ROTH). Fuori dai sette pianeti: scelta Saturno; elemento fuoco (SNAV) o terra (ROTH): fuoco.
+- **Lapislazzuli:** Venere (AGR) · Giove (KERY) · Sole (SNAV). Scelta: Venere.
+- **Ametista:** Giove (KERY) · Marte (AGR) · Urano e aria (SNAV). Scelta: Giove, acqua (consenso medio).
+- **Erbe con il pianeta del gioco contestato:** menta, melissa, valeriana, ruta (pagine con le due versioni).
+- **Elemento di Giove:** aria (Tolomeo, caldo e umido) o fuoco (Sagittario).
+- **Semi:** Golden Dawn (Bastoni fuoco, Spade aria) contro la scuola che scambia aria e fuoco (CRAFT).
+
+### Scritto da conoscenza generale (MEMORIA), non confermato in questa sessione
+
+Empedocle e Aristotele per gli elementi; metalli dei pianeti; luna crescente e calante; verbena raccolta «senza sole
+né luna» (Plinio); achillea e i sette anni degli sposi, calendula sotto il letto, giusquiamo e la pioggia, cipresso
+e la lunga vita, mirra che rafforza l'olibano (tutte da Cunningham, a memoria); «portare il salice»; salicina e
+aspirina; Culpeper sulle rose (damascena Venere, bianca Luna); cristallo come ghiaccio (Plinio); citrino come ametista
+scaldata; occhio di tigre e fibre; specchio di ossidiana di John Dee; tormalina «tira cenere»; lapislazzuli
+dell'Afghanistan e blu oltremare; agata e il fiume Acate; pietra forata per vedere il popolo nascosto; quarzo rosa
+senza capitolo nei libri antichi. Le direzioni degli elementi (aria est, fuoco sud, acqua ovest, terra nord) sono da
+CRAFT, non da una fonte storica. I colori di pianeti e intenzioni sono la consuetudine moderna (MYST per i pianeti;
+per le intenzioni nessuna fonte letta).
+
+### Non verificabile qui
+
+Le voci dei due libri di Cunningham, una per una. Book T della Golden Dawn nel testo originale. La storia dei singoli
+fumi nelle botteghe del New England del 1692 (se olibano, benzoino, canfora o sangue di drago si trovassero a Salem):
+plausibile per gli speziali del tempo, non cercato.

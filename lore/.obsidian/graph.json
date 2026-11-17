@@ -97,6 +97,13 @@
     "a": 1,
     "rgb": 16777215
    }
+  },
+  {
+   "query": "path:sapere/",
+   "color": {
+    "a": 1,
+    "rgb": 6986062
+   }
   }
  ],
  "collapse-display": true,
