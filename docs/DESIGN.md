@@ -536,3 +536,26 @@ vogliono luce. L'orto è quindi una piccola scuola di giardinaggio vero, calata 
   drenaggio, il vaso e la potatura, semina e talea), una alla volta, ciascuna apre o spiega un pezzo dell'orto e fa
   crescere il legame con Ortica. Chi non le segue ha comunque l'orto e i consigli sotto le aiuole.
 - **Affidabile.** Ogni consiglio è giardinaggio vero, verificato; le fonti in `RESEARCH.md`.
+
+## Che ne pensi di lei? (17 novembre)
+
+Andrea: «mi piacerebbe che i personaggi ti chiedessero cosa ne pensi di altri personaggi, e che parlassero degli
+altri per aiutare a conoscerli meglio e spingerti a chiederti come ti senti rispetto a loro… la Lettrice potrebbe
+chiederti cosa ne pensi di un certo avvenimento, o il personaggio che ti piace di più o di meno… per conoscere i
+personaggi, e anche per conoscerti per confronto con gli altri».
+
+- **Le voci.** Ogni personaggio importante dice ogni tanto qualcosa di un altro: una riga che mostra un lato di
+  chi viene nominato e, insieme, lo sguardo di chi parla (Malva su Ortica non dice quello che dice Ginepra).
+  Solo su persone che lei ha già incontrato. Mai pettegolezzo cattivo: le streghe sono belle e positive.
+- **La domanda.** Ogni tanto chi parla chiede: «E tu, che ne pensi di lei?». Tre risposte vere e diverse, scritte
+  per quella persona (non «mi piace / non mi piace»): ciascuna dice qualcosa anche di chi risponde. Non c'è una
+  risposta giusta e niente si perde. Chi ha chiesto reagisce secondo il suo carattere, e il legame con lui può
+  muoversi di poco.
+- **La Lettrice.** Nelle sue visite, ogni tanto, una domanda sola: che cosa pensa di una cosa appena successa, o
+  chi le piace di più, o chi le dà più fastidio, tra le persone incontrate. Poi lo rimanda indietro: quello che
+  le piace o la urta negli altri dice qualcosa di lei. È il «conoscerti per confronto».
+- **Dove resta.** Nel grimorio, pagina «Io», «Le persone»: chi ha incontrato, la sua nota a matita su ciascuno
+  (quello che ha risposto) e quello che gli altri ne hanno detto. Le risposte alimentano il ritratto (i cinque
+  tratti) e la lettura finale della Lettrice.
+- **Misura.** Al massimo una domanda per giorno di gioco, mai durante una scena della storia, mai due volte la
+  stessa. Dipende da chi ha incontrato e non dal punto della storia, così arriva anche a chi è avanti.

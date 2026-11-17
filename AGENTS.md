@@ -1,6 +1,7 @@
 # Agents
 
-Read `docs/DESIGN.md` (what the game is, in Italian) and `docs/CONTRACT.md` (how the parts fit) before
+Read `docs/MAP.md` (where things are, who calls what), `docs/DESIGN.md` (what the game is, in Italian)
+and `docs/CONTRACT.md` (how the parts fit) before
 anything else. Then only work inside the folders of your area.
 
 - The lead session owns `src/core/`, `src/main.js`, the docs, git. Agents never run git.
