@@ -25,6 +25,37 @@ Darker pieces that take turns with the piano: "Ghost Story", "Ancient Rite" and 
 
 Sound effects are generated in code (`src/sound/`).
 
+### Graver pieces (added later)
+
+Five more pieces by Kevin MacLeod ([incompetech.com](https://incompetech.com/)), licensed under Creative Commons
+Attribution 4.0 ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)). Cut to about three minutes, loudness
+evened out, faded in and out (`scripts/fetch-sound.sh`). They take turns with the others: one in five in the calm
+places, most of what plays in the cellars, the wood in autumn and the village before the trial.
+
+| File | Title | Author | Source | Licence |
+|---|---|---|---|---|
+| `public/music/hopes.mp3` | "SCP-x6x (Hopes)" | Kevin MacLeod | https://incompetech.com/music/royalty-free/mp3-royaltyfree/SCP-x6x.mp3 | CC BY 4.0 |
+| `public/music/wounded.mp3` | "Wounded" | Kevin MacLeod | https://incompetech.com/music/royalty-free/mp3-royaltyfree/Wounded.mp3 | CC BY 4.0 |
+| `public/music/darktimes.mp3` | "Dark Times" | Kevin MacLeod | https://incompetech.com/music/royalty-free/mp3-royaltyfree/Dark%20Times.mp3 | CC BY 4.0 |
+| `public/music/funeral.mp3` | "Music for Funeral Home - Part 11" | Kevin MacLeod | https://incompetech.com/music/royalty-free/mp3-royaltyfree/Music%20for%20Funeral%20Home%20-%20Part%2011.mp3 | CC BY 4.0 |
+| `public/music/colorless.mp3` | "Colorless Aura" | Kevin MacLeod | https://incompetech.com/music/royalty-free/mp3-royaltyfree/Colorless%20Aura.mp3 | CC BY 4.0 |
+
+"SCP-x6x (Hopes)", "Wounded", "Dark Times", "Music for Funeral Home - Part 11" and "Colorless Aura" by Kevin MacLeod
+(incompetech.com), licensed under Creative Commons Attribution 4.0.
+
+## Ambience
+
+Real recordings from [Wikimedia Commons](https://commons.wikimedia.org/), all public domain, made into short
+seamless mono loops (`scripts/fetch-sound.sh`; high-pass, crossfaded ends, about 10 LU under the music). They play
+under the music, chosen by place (`src/sound/beds.js`).
+
+| File | Title (Commons file) | Author | Source | Licence |
+|---|---|---|---|---|
+| `public/ambience/fire.mp3` | "Dry grass burning in open fireplace" | ezwa | https://commons.wikimedia.org/wiki/File:Dry_grass_burning_in_open_fireplace.ogg | Public domain |
+| `public/ambience/rain.mp3` | "Rain (1)" | ezwa | https://commons.wikimedia.org/wiki/File:Rain_(1).ogg | Public domain |
+| `public/ambience/stream.mp3` | "Flowing-water-100019" | see the file page | https://commons.wikimedia.org/wiki/File:Flowing-water-100019.ogg | Public domain |
+| `public/ambience/wind.mp3` | "Gentle breeze and birds singing" (low-passed: the birds are filtered out, the wind stays) | ezwa | https://commons.wikimedia.org/wiki/File:Gentle_breeze_and_birds_singing.ogg | Public domain |
+
 ## Cards
 
 Rider-Waite-Smith deck, scans from the open dataset `metabismuth/tarot-json`. See `docs/RESEARCH.md`.

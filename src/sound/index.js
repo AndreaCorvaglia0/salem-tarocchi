@@ -1,6 +1,7 @@
 // Sound area entry: importing this registers the services and the bus listeners. It does nothing
 // (no AudioContext) until the first tap or key press, never throws if Web Audio is missing, and
-// reads state.settings.music / .sfx live, every time. All sound is generated in code.
+// reads state.settings.music / .sfx live, every time. Effects are generated in code; the music is
+// recorded (tracks.js) and so is the ambience bed under it (beds.js).
 //
 // Services: sound.play(name) · sound.mood(name, { tension }) · sound.stop() · sound.music(on) · sound.sfx(on)
 // Bus in: card:found, card:star, level:up, coins, cinema, settings.  What to call from where: notes/sound.md
@@ -13,6 +14,7 @@ import { MOOD_NAMES } from './moods.js';
 import { musicOn, sfxOn, makeThrottle, wantsMood } from './gate.js';
 import { lookahead } from './theory.js';
 import { createTracks, cueFor } from './tracks.js';
+import { createBeds, bedFor } from './beds.js';
 
 const TICK = 0.25; // seconds between scheduler runs
 let ctx = null, engine = null, timer = null, armed = false, broken = false;
@@ -20,6 +22,7 @@ let want = { name: 'title', opts: { tension: 0 } }; // the mood the game asked f
 let ducked = false, running = false;
 const allow = makeThrottle();
 const tracks = createTracks(); // the music is recorded piano (tracks.js); the engine keeps the effects
+const beds = createBeds(); // the ambience under it: real loops of wind, fire, rain, water (beds.js)
 
 function start() {
   if (ctx || broken) return;
@@ -28,7 +31,7 @@ function start() {
     if (!AC) { broken = true; return; }
     ctx = new AC();
     engine = createEngine(ctx, { seed: (Date.now() & 0xffff) || 1 });
-    tracks.attach(ctx);
+    tracks.attach(ctx); beds.attach(ctx);
     apply();
     timer = setInterval(tick, TICK * 1000);
     resume();
@@ -36,19 +39,28 @@ function start() {
 }
 function resume() { try { if (ctx && ctx.state !== 'running') ctx.resume?.()?.catch?.(() => {}); } catch { /* ignore */ } }
 function onVisible() {
-  try { tracks.hidden(document.hidden); } catch { /* ignore */ }
+  try { tracks.hidden(document.hidden); beds.hidden(document.hidden); } catch { /* ignore */ }
   if (!ctx) return;
   try { if (document.hidden) { hush?.pause?.(); ctx.suspend?.(); } else { ctx.resume?.(); engine?.resync(); } } catch { /* ignore */ }
 }
+// the bed only hears of a change (a new loop or level), so a steady cue does not restart its fade
+let bedKey = '';
+function setBed(c) { const k = `${c.t}|${c.v}`; if (k === bedKey) return; bedKey = k; beds.setCue(c); }
 // bring the graph in line with the settings and the wanted mood (called on every change)
 function apply() {
-  try { tracks.setOn(musicOn(state)); tracks.setDuck(ducked); tracks.setCue(cueFor(want.name, { map: state.pos?.map, chapter: state.chapter, ended: !!state.flags?.['ending.seen'] })); } catch (e) { console.warn('[sound] tracks', e?.message || e); }
+  const where = { map: state.pos?.map, chapter: state.chapter, ended: !!state.flags?.['ending.seen'] };
+  try { tracks.setOn(musicOn(state)); tracks.setDuck(ducked); tracks.setCue(cueFor(want.name, where)); } catch (e) { console.warn('[sound] tracks', e?.message || e); }
+  try { beds.setOn(musicOn(state)); beds.setDuck(ducked); setBed(bedFor(want.name, { ...where, x: state.pos?.x, y: state.pos?.y })); } catch (e) { console.warn('[sound] beds', e?.message || e); }
   if (!engine) return;
   try {
     engine.setMusicOn(false); engine.setMood(null); running = false;
   } catch (e) { console.warn('[sound]', e?.message || e); }
 }
+let ticks = 0;
 function tick() {
+  // in the wood the bed follows her: the fire, the brook, the graveyard wind (every two seconds)
+  ticks += 1;
+  if (ticks % 8 === 0 && state.pos?.map === 'forest') { try { setBed(bedFor(want.name, { map: 'forest', chapter: state.chapter, x: state.pos.x, y: state.pos.y })); } catch { /* ignore */ } }
   return; // the generated music is off: nothing to schedule
   // eslint-disable-next-line no-unreachable
   if (!engine || !ctx || ctx.state !== 'running' || !musicOn(state)) return;
@@ -79,7 +91,7 @@ function arm() {
   armed = true;
   // iOS 17+: play like a game, also with the ring switch on silent
   try { if (globalThis.navigator?.audioSession) globalThis.navigator.audioSession.type = 'playback'; } catch { /* ignore */ }
-  const go = () => { if (!ctx) start(); else resume(); apply(); tracks.gesture(); unmute(); };
+  const go = () => { if (!ctx) start(); else resume(); apply(); tracks.gesture(); beds.gesture(); unmute(); };
   globalThis.document?.addEventListener?.('visibilitychange', onVisible);
   for (const ev of ['touchend', 'pointerup', 'click', 'keydown']) window.addEventListener(ev, go, { capture: true, passive: true });
 }
@@ -122,4 +134,4 @@ on('patrol:seen', () => tracks.dip(0.3, 6));
 arm();
 
 // for the harness and for debugging: what the audio side is doing
-export const status = () => ({ context: ctx ? ctx.state : null, mood: engine ? engine.mood : null, counts: engine ? { ...engine.counts } : {}, broken, music: musicOn(state), sfx: sfxOn(state) });
+export const status = () => ({ context: ctx ? ctx.state : null, mood: engine ? engine.mood : null, counts: engine ? { ...engine.counts } : {}, broken, music: musicOn(state), sfx: sfxOn(state), track: tracks.track, bed: beds.track });

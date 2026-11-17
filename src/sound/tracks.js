@@ -12,8 +12,22 @@ export const MASTER = 1.25; // the files are quiet (-24 LUFS): a winter night in
 
 // piece (or a list of pieces that take turns: when one ends the next begins), level (0..1, before
 // MASTER), seconds to come in. The darker pieces and the airy drone are by Kevin MacLeod.
-const cue = (t, v = 0.6, fade = 2.6) => ({ t, v, fade });
+const cue = (t, v = 0.6, fade = 2.6, heavy = false) => ({ t, v, fade, heavy });
 export const SILENCE = { t: null, v: 0, fade: 2.4 };
+
+// The graver pieces (dark academia: solo piano, cello, slow strings, organ), all by Kevin MacLeod.
+// In the calm playlists they are one piece in five, never two in a row: weave() puts one dark piece
+// after every four of the usual ones. In the heavy playlists (the cellars, the wood in autumn, the
+// village before the trial) they are the main colour.
+export const DARK = ['hopes', 'darktimes', 'wounded', 'funeral', 'colorless'];
+export function weave(base, darks = DARK, per = 4) {
+  const out = []; let b = 0;
+  for (const d of darks) { for (let i = 0; i < per; i += 1) out.push(base[b++ % base.length]); out.push(d); }
+  return out;
+}
+// what plays where: the dark pieces take turns with the old ones
+const calm = (base, v, fade) => cue(weave(base), v, fade);
+const heavy = (list, v, fade) => cue(list, v, fade, true);
 
 // what plays for a mood the game asks for; place moods are refined by the map and the chapter
 export function cueFor(mood, { map = null, chapter = 0, ended = false } = {}) {
@@ -28,16 +42,17 @@ export function cueFor(mood, { map = null, chapter = 0, ended = false } = {}) {
   }
   // rooms: warmer, lower; the court says nothing at all
   if (map === 'court') return SILENCE;
-  if (map === 'malva' || map === 'cottage') return cue('consolation', 0.42, 2.2);
-  if (map === 'shop') return cue('gymnopedie', 0.32, 2.2);
-  if (map === 'meeting') return cue(['pavane', 'ancientrite'], 0.34, 2.2);
-  if (map === 'depths' || mood === 'depths') return cue(['ancientrite', 'pavane', 'ossuary'], 0.5, 3.2);
-  if (map === 'forest' || mood === 'forest') return chapter >= 3 ? cue(['ossuary', 'reverie', 'ghoststory'], 0.46, 3.2) : cue(['reverie', 'ossuary'], 0.56, 3.2); // the drone is the wood breathing
+  if (map === 'malva' || map === 'cottage') return calm(['consolation', 'gymnopedie'], 0.42, 2.2);
+  if (map === 'shop') return calm(['gymnopedie', 'consolation'], 0.32, 2.2);
+  if (map === 'meeting') return calm(['pavane', 'ancientrite'], 0.34, 2.2);
+  if (map === 'depths' || mood === 'depths') return heavy(['hopes', 'ancientrite', 'darktimes', 'pavane', 'wounded', 'ossuary', 'funeral', 'ancientrite', 'colorless', 'pavane'], 0.5, 3.2);
+  // the wood: the ambience bed (beds.js) leads, the music stays well under it
+  if (map === 'forest' || mood === 'forest') return chapter >= 3 ? heavy(['darktimes', 'ossuary', 'wounded', 'reverie', 'colorless', 'ghoststory', 'hopes', 'reverie', 'funeral', 'ossuary'], 0.2, 3.6) : calm(['reverie', 'ossuary'], 0.24, 3.6);
   // the village, by season
-  if (ended || chapter >= 4) return cue(['air', 'swan'], 0.6, 3.5); // the dawn after the trial
-  if (chapter === 2) return cue(['swan', 'moonlight'], 0.52, 3.2); // spring
-  if (chapter >= 3) return cue(['ghoststory', 'moonlight'], 0.42, 3.2); // autumn, before the trial: lower
-  return cue(['moonlight', 'ghoststory'], 0.56, 3.2); // winter nights
+  if (ended || chapter >= 4) return calm(['air', 'swan'], 0.6, 3.5); // the dawn after the trial
+  if (chapter === 2) return calm(['swan', 'moonlight'], 0.52, 3.2); // spring
+  if (chapter >= 3) return heavy(['ghoststory', 'wounded', 'moonlight', 'hopes', 'ghoststory', 'darktimes', 'moonlight', 'colorless', 'ghoststory', 'funeral', 'moonlight'], 0.42, 3.2); // autumn, before the trial: lower
+  return calm(['moonlight', 'ghoststory'], 0.56, 3.2); // winter nights
 }
 
 const OUT = 2.2; // seconds a piece takes to leave
