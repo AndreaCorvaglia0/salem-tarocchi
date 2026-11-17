@@ -131,7 +131,7 @@ minore = scuro), e contano l'altezza, il timbro e il legato. La calma, per esemp
 tempo lento, suoni gravi, legato, timbro scuro e modo maggiore. Quindi ogni fumo ha una ricetta musicale, non
 «un brano che ci sembra adatto».
 
-| Ambito della domanda | Fumo (da confermare con `lore/sapere/`) | La sensazione | La ricetta musicale |
+| Come le suona la domanda | Fumo (da confermare con `lore/sapere/`) | La sensazione | La ricetta per scegliere la musica |
 |---|---|---|---|
 | per aprire, sempre | artemisia e incenso | attenzione, soglia | **sempre lo stesso** breve motivo: è il segnale del rito |
 | amore | rosa, lavanda | tenerezza | lento, maggiore, legato, timbro caldo (violoncello, piano morbido), suoni medi |
@@ -140,25 +140,38 @@ tempo lento, suoni gravi, legato, timbro scuro e modo maggiore. Quindi ogni fumo
 | sé, una decisione | incenso (olibano) | chiarezza | piano solo nel registro alto, poche note, molto spazio; né allegro né triste |
 | gli altri, un torto, un addio | mirra, ginepro | gravità, lasciar andare | lento, minore, legato, grave; si schiarisce alla fine della lettura |
 
-*Come si gioca.* (1) Lei accende il fumo d'apertura: il motivo del rito, sempre uguale; dopo poche volte basta
-sentirlo per «entrare». (2) Ascolta la domanda e sceglie il secondo fumo: così impara a riconoscere **di che
-cosa parla una domanda**, cosa che oggi il gioco decide in silenzio. (3) Il fumo sale con il suo colore e la
-musica prende quella ricetta per tutta la lettura. (4) Scelta giusta: il cliente «si sente a casa», un
-piccolo bene (una parola in più da lui, un aiuto). Scelta diversa: nessuna perdita, la musica sarà solo meno
-intonata alla domanda, e una strega può dirlo a modo suo.
+*Come si gioca (rivisto con Andrea il 17 novembre: è un momento di ascolto di sé, non una domanda con la
+risposta giusta).*
+1. **Il fumo d'apertura.** Lo stesso gesto e lo stesso breve motivo, ogni volta: dopo poche letture basta
+   sentirlo per «entrare».
+2. **Il respiro.** Tre respiri lenti: qualcosa sullo schermo si allarga e si stringe piano, il suono si
+   abbassa. «Ascolta il respiro. Pensa alla domanda.» Dura pochi secondi e le prime volte non si salta.
+3. **«Quale fumo accenderesti?»** Sceglie lei, a sentimento. **Non c'è una scelta sbagliata**: la scelta dice
+   come *lei* sente quella domanda. Ogni fumo si presenta con il suo colore e una parola, non con una regola.
+4. **L'atmosfera segue la sua scelta:** il colore del fumo, la luce, la musica. È lei che ha deciso l'aria
+   della stanza, e per questo la sente sua. Qui lavora anche la convinzione: un rito fa effetto perché lo si
+   compie con attenzione, e il gioco deve darle il tempo di crederci.
+5. **Dopo la lettura, uno specchio leggero:** «Hai acceso la mirra: questa domanda ti è sembrata un addio.» E, se
+   vuole saperlo, che cosa avrebbe acceso una delle streghe e perché: la tradizione arriva *dopo* l'intuizione,
+   come confronto, mai come correzione. Le sue scelte nel tempo entrano nel ritratto.
+6. Vale anche fuori dalla storia, in **«Leggi le tue carte»** col mazzo vero: è lì che il momento di ascolto
+   serve di più.
 
-*Con che cosa.* Il gioco ha già un piccolo motore che genera musica da parametri (`src/sound/moods.js`: tonica,
-modo, battito, voci): se è ancora in uso, le cinque ricette sono cinque righe di parametri e non servono brani
-nuovi. Da verificare; altrimenti si cercano brani liberi scelti con la stessa tabella. Gli incensi sono le
-erbe secche dell'orto più due resine comprate in bottega.
+*La musica: brani veri, non generati* (indicazione di Andrea: quelli veri sono migliori). Le ricette della
+tabella servono a **scegliere**, non a comporre: per ogni sensazione si cercano registrazioni libere (le
+raccolte che usiamo già: Musopen, Kevin MacLeod, che hanno etichette d'atmosfera e spesso il tempo), se ne
+prendono molte candidate, si misurano con il codice (tempo, modo, altezza media, intensità) per scartare quelle
+fuori ricetta, e tra le due o tre che restano scelgono Andrea e lei, alla cieca. Il motore che genera musica
+resta solo per il motivo d'apertura, se serve, o per niente. Strati d'ambiente veri (il crepitio della
+brace, un soffio) fanno il resto.
 
-*Verifica.* Nessuno strumento ascolta: decide l'orecchio di Andrea e di lei. Una prova onesta: far sentire le
-cinque musiche senza dire quale è quale e chiedere a quale domanda le abbinerebbe; se tre su cinque tornano,
-la ricetta funziona. Le corrispondenze dei fumi si prendono dalla base di conoscenza, con il loro consenso.
+*Verifica.* Nessuno strumento ascolta: decide l'orecchio di Andrea e di lei, con una paginetta di ascolto alla
+cieca (cinque musiche senza etichetta: «a quale fumo la daresti?»). Per colore e forma del fumo, lettori
+ingenui a scelta forzata. Metodo in `lore/metodo/progettare-per-i-sensi-senza-averli.md`.
 
-*Rischi.* Un passo in più prima di ogni lettura: deve durare pochi secondi e si deve poter saltare dopo le
-prime volte («il solito»). Cinque musiche diverse devono restare la stessa stanza: stessa tonalità di fondo,
-cambia il carattere.
+*Rischi.* Un passo in più prima di ogni lettura: pochi secondi, e dopo le prime volte si può abbreviare («il
+solito»), ma il respiro resta. Cinque musiche diverse devono sembrare la stessa stanza. Lo specchio non deve
+diventare un giudizio né una diagnosi: una riga, e solo ogni tanto.
 
 ## 4. Il mondo e le persone
 
