@@ -6,8 +6,9 @@ missioni, a corredo, con due parole e senza spiegone; chi vuole legge l'album o 
 
 ## Che cosa si vede
 
-- **Tre album nel grimorio**: erbario (23, c'è), pietre (12, da `lore/sapere/pietra-*`), sibilla (12 figurine
-  per ora: casa, lettera, anello, nave, ancora… vedi BACKLOG 3.0). Caselle numerate vuote per quelle mancanti.
+- **Tre album nel grimorio**: erbario (23, c'è), pietre (12, da `lore/sapere/pietra-*`), sibilla (**tutte e 36** le
+  figurine, deciso da Andrea: «non limitare gli oracoli»; ognuna con pagina, due o tre parole chiave e un donatore
+  o un posto; vedi BACKLOG 3.0). Caselle numerate vuote per quelle mancanti.
 - **Trovare non ferma il gioco.** Si tocca, la figurina vola verso l'icona del grimorio, un suono piccolo, una
   riga breve in basso («Un'ametista.»). Niente pagina che si apre. Nel grimorio un puntino sul nastro; nell'album
   la casella ha «nuova» finché non la si apre.
