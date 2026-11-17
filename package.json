@@ -9,7 +9,10 @@
     "preview": "vite preview",
     "test": "node --test \"tests/*.test.mjs\"",
     "shot": "node scripts/shot.mjs",
-    "play": "node scripts/playthrough.mjs"
+    "play": "node scripts/playthrough.mjs",
+    "lore": "node scripts/lore.mjs",
+    "coverage": "node scripts/coverage.mjs",
+    "map": "node scripts/map.mjs"
   },
   "dependencies": {
     "@fontsource/caveat": "^5.2.5",

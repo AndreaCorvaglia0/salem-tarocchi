@@ -1,0 +1,293 @@
+---
+# generato da scripts/lore.mjs, non modificare a mano
+tipo: "tratto"
+nome: "Affinità con ginepra"
+cosa: "Quanto ginepra si riconosce in lei (core/witches.js AFFINITY): audace, gentile, cuore, più la sua carta. Calcolata dai tratti, mai salvata."
+stabilisce:
+  - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-1]]" }
+  - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-1]]" }
+  - { dove: "c1.js#c1.read", n: -1, scelta: "[[c1-c1-read-2]]" }
+  - { dove: "c1.js#c1.read", n: 1, scelta: "[[c1-c1-read-2]]" }
+  - { dove: "c1.js#c1.grimoire", n: 1, scelta: "[[c1-c1-grimoire-1]]" }
+  - { dove: "c1.js#c1.grimoire", n: -1, scelta: "[[c1-c1-grimoire-1]]" }
+  - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-2]]" }
+  - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-3]]" }
+  - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.square", n: -1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c1b.js#c1.gate", n: -1, scelta: "[[c1b-c1-gate-2]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-2]]" }
+  - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-4]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-3]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-4]]" }
+  - { dove: "c2.js#c2.plan", n: 1, scelta: "[[c2-c2-plan-1]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-3]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-1]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-1]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-1]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-1]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-4]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-2]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-2]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-5]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-5]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-3]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
+  - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
+  - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
+  - { dove: "post.js#enc.guard", n: -1, scelta: "[[post-enc-guard-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
+  - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
+  - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
+  - { dove: "trials.js#trial.fog.door", n: 1, scelta: "[[trials-trial-fog-door-1]]" }
+  - { dove: "trials.js#trial.vigil.door", n: -1, scelta: "[[trials-trial-vigil-door-1]]" }
+  - { dove: "trials.js#trial.well.door", n: 1, scelta: "[[trials-trial-well-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.dare.door", n: 1, scelta: "[[trials-trial-dare-door-1]]" }
+  - { dove: "trials.js#trial.dare.door", n: -1, scelta: "[[trials-trial-dare-door-1]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
+  - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-3]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-5]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-2]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-2]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-2]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-4]]" }
+  - { dove: "visits.js#talk.m00", n: 1, scelta: "[[visits-talk-m00-1]]" }
+  - { dove: "visits.js#talk.m00", n: -1, scelta: "[[visits-talk-m00-1]]" }
+  - { dove: "visits.js#talk.m05", n: -1, scelta: "[[visits-talk-m05-1]]" }
+  - { dove: "visits.js#talk.m05", n: 1, scelta: "[[visits-talk-m05-1]]" }
+  - { dove: "visits.js#talk.m10", n: 1, scelta: "[[visits-talk-m10-1]]" }
+  - { dove: "visits.js#talk.m10", n: -1, scelta: "[[visits-talk-m10-1]]" }
+  - { dove: "visits.js#talk.m15", n: 1, scelta: "[[visits-talk-m15-1]]" }
+  - { dove: "visits.js#talk.m15", n: -1, scelta: "[[visits-talk-m15-1]]" }
+  - { dove: "visits.js#talk.m16", n: 1, scelta: "[[visits-talk-m16-1]]" }
+  - { dove: "visits.js#talk.m16", n: -1, scelta: "[[visits-talk-m16-1]]" }
+  - { dove: "trials/intro.js#LIBRARY_SCRIPTS.library.first[8].choice[1]", n: 1 }
+  - { dove: "trials/side.js#kettle.steps[7].choice[1]", n: 1 }
+  - { dove: "trials/side.js#well.steps[7].choice[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[2].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[3].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[3].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[5].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[6].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[10].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#READER.events[0].a[1]", n: 1 }
+  - { dove: "opinions.js#READER.events[2].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[3].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[5].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[5].a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[6].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[7].a[2]", n: -1 }
+  - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-3]]" }
+  - { dove: "c1.js#c1.malva", n: 1, scelta: "[[c1-c1-malva-2]]" }
+  - { dove: "c1.js#c1.malva", n: -1, scelta: "[[c1-c1-malva-2]]" }
+  - { dove: "c1.js#c1.back", n: -1, scelta: "[[c1-c1-back-1]]" }
+  - { dove: "c1.js#c1.deliver", n: 1, scelta: "[[c1-c1-deliver-2]]" }
+  - { dove: "c1.js#c1.cottage", n: 1, scelta: "[[c1-c1-cottage-2]]" }
+  - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.exam1", n: 1, scelta: "[[c1b-c1-exam1-2]]" }
+  - { dove: "c1b.js#c1.exam1", n: -1, scelta: "[[c1b-c1-exam1-2]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-2]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-3]]" }
+  - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-3]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-1]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-1]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-3]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-3]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-2]]" }
+  - { dove: "c2.js#c2.plan", n: 1, scelta: "[[c2-c2-plan-4]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-1]]" }
+  - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-2]]" }
+  - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-4]]" }
+  - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-5]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-4]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-4]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.court", n: -1, scelta: "[[c3-c3-court-2]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-2]]" }
+  - { dove: "end.js#c3.trial", n: -1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-2]]" }
+  - { dove: "end.js#c3.trial", n: -1, scelta: "[[end-c3-trial-2]]" }
+  - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-1]]" }
+  - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-1]]" }
+  - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
+  - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
+  - { dove: "post.js#enc.child", n: -1, scelta: "[[post-enc-child-1]]" }
+  - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
+  - { dove: "post.js#enc.gravedigger", n: 1, scelta: "[[post-enc-gravedigger-1]]" }
+  - { dove: "post.js#enc.gravedigger", n: -1, scelta: "[[post-enc-gravedigger-1]]" }
+  - { dove: "post.js#enc.miller", n: 1, scelta: "[[post-enc-miller-1]]" }
+  - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
+  - { dove: "trials.js#trial.cellars.door", n: 1, scelta: "[[trials-trial-cellars-door-1]]" }
+  - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
+  - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
+  - { dove: "trials.js#trial.well.door", n: 1, scelta: "[[trials-trial-well-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
+  - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
+  - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "trials.js#trial.dare.door", n: -1, scelta: "[[trials-trial-dare-door-1]]" }
+  - { dove: "trials.js#trial.dare.door", n: 1, scelta: "[[trials-trial-dare-door-1]]" }
+  - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-3]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-1]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-4]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-3]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-3]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-5]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-4]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-6]]" }
+  - { dove: "sessions.js#s4", n: 1, scelta: "[[sessions-s4-1]]" }
+  - { dove: "visits.js#talk.m03", n: 1, scelta: "[[visits-talk-m03-1]]" }
+  - { dove: "visits.js#talk.m03", n: -1, scelta: "[[visits-talk-m03-1]]" }
+  - { dove: "visits.js#talk.m08", n: 1, scelta: "[[visits-talk-m08-1]]" }
+  - { dove: "visits.js#talk.m08", n: -1, scelta: "[[visits-talk-m08-1]]" }
+  - { dove: "visits.js#talk.m14", n: 1, scelta: "[[visits-talk-m14-1]]" }
+  - { dove: "visits.js#talk.m14", n: -1, scelta: "[[visits-talk-m14-1]]" }
+  - { dove: "visits.js#talk.m20", n: 1, scelta: "[[visits-talk-m20-1]]" }
+  - { dove: "visits.js#talk.m20", n: -1, scelta: "[[visits-talk-m20-1]]" }
+  - { dove: "trials/main.js#fog.steps[5].choice[0]", n: 1 }
+  - { dove: "trials/side.js#grave.steps[9].choice[0]", n: 1 }
+  - { dove: "trials/side.js#kettle.steps[7].choice[0]", n: 1 }
+  - { dove: "trials/side.js#well.steps[7].choice[1]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[1].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[2].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[4].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[5].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[0].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[4].a[1]", n: -1 }
+  - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-2]]" }
+  - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-2]]" }
+  - { dove: "c1.js#c1.read", n: 1, scelta: "[[c1-c1-read-1]]" }
+  - { dove: "c1.js#c1.read", n: -1, scelta: "[[c1-c1-read-1]]" }
+  - { dove: "c1.js#c1.back", n: 1, scelta: "[[c1-c1-back-2]]" }
+  - { dove: "c1.js#c1.deliver", n: -1, scelta: "[[c1-c1-deliver-3]]" }
+  - { dove: "c1.js#c1.deliver", n: 1, scelta: "[[c1-c1-deliver-3]]" }
+  - { dove: "c1.js#c1.cottage", n: 1, scelta: "[[c1-c1-cottage-1]]" }
+  - { dove: "c1.js#c1.cottage", n: -1, scelta: "[[c1-c1-cottage-1]]" }
+  - { dove: "c1.js#c1.cottage", n: -1, scelta: "[[c1-c1-cottage-2]]" }
+  - { dove: "c1b.js#c1.exam1", n: -1, scelta: "[[c1b-c1-exam1-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c1b.js#c1.gate", n: -1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-2]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-1]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-3]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-4]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-2]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-4]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-3]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-3]]" }
+  - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-2]]" }
+  - { dove: "c3.js#c3.trapdoor", n: -1, scelta: "[[c3-c3-trapdoor-2]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-1]]" }
+  - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-1]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-5]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-3]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-3]]" }
+  - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.court", n: -1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "end.js#c3.trial", n: -1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-1]]" }
+  - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-2]]" }
+  - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
+  - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
+  - { dove: "post.js#enc.hale", n: 1, scelta: "[[post-enc-hale-1]]" }
+  - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
+  - { dove: "post.js#minor.first", n: 1, scelta: "[[post-minor-first-1]]" }
+  - { dove: "post.js#minor.first", n: -1, scelta: "[[post-minor-first-1]]" }
+  - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
+  - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: -1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
+  - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
+  - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
+  - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-2]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-2]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-6]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-6]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-7]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-7]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-1]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-1]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-7]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-2]]" }
+  - { dove: "sessions.js#s3", n: -1, scelta: "[[sessions-s3-5]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-5]]" }
+  - { dove: "visits.js#talk.m02", n: 1, scelta: "[[visits-talk-m02-1]]" }
+  - { dove: "visits.js#talk.m02", n: -1, scelta: "[[visits-talk-m02-1]]" }
+  - { dove: "visits.js#talk.m06", n: 1, scelta: "[[visits-talk-m06-1]]" }
+  - { dove: "visits.js#talk.m06", n: -1, scelta: "[[visits-talk-m06-1]]" }
+  - { dove: "visits.js#talk.m13", n: -1, scelta: "[[visits-talk-m13-1]]" }
+  - { dove: "visits.js#talk.m13", n: 1, scelta: "[[visits-talk-m13-1]]" }
+  - { dove: "visits.js#talk.m17", n: 1, scelta: "[[visits-talk-m17-1]]" }
+  - { dove: "visits.js#talk.m17", n: -1, scelta: "[[visits-talk-m17-1]]" }
+  - { dove: "visits.js#talk.m18", n: 1, scelta: "[[visits-talk-m18-1]]" }
+  - { dove: "visits.js#talk.m18", n: -1, scelta: "[[visits-talk-m18-1]]" }
+  - { dove: "trials/side.js#dare.steps[9].choice[0]", n: 1 }
+  - { dove: "trials/side.js#grave.steps[9].choice[1]", n: 1 }
+  - { dove: "trials/side.js#room.steps[9].choice[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[0].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[3].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[4].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[6].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[7].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[8].domanda.a[0]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[8].domanda.a[1]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[9].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[9].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[10].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[10].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[0].a[2]", n: 1 }
+  - { dove: "opinions.js#READER.events[1].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[1].a[1]", n: 1 }
+  - { dove: "opinions.js#READER.events[2].a[1]", n: -1 }
+  - { dove: "opinions.js#READER.events[2].a[2]", n: 1 }
+  - { dove: "opinions.js#READER.events[3].a[2]", n: 1 }
+  - { dove: "opinions.js#READER.events[4].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[4].a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[5].a[1]", n: -1 }
+  - { dove: "opinions.js#READER.events[6].a[1]", n: 1 }
+  - { dove: "opinions.js#READER.events[6].a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[7].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[7].a[1]", n: 1 }
+mette_alla_prova: []
+---
+
+Quanto ginepra si riconosce in lei (core/witches.js AFFINITY): audace, gentile, cuore, più la sua carta. Calcolata dai tratti, mai salvata.
+
+Lo muovono 279 punti dei copioni e lo leggono 0 condizioni.
+
+Qui `n` è il verso rispetto all'affinità: +1 avvicina, -1 allontana. La mostra il codice: ui/witches.js.

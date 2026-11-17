@@ -1,0 +1,166 @@
+---
+# generato da scripts/lore.mjs, non modificare a mano
+tipo: "tratto"
+nome: "Il tratto rischio"
+cosa: "Un asse del ritratto (core/progress.js AXES): audace (+) o prudente (-), da -6 a 6."
+stabilisce:
+  - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-1]]" }
+  - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-1]]" }
+  - { dove: "c1.js#c1.read", n: -1, scelta: "[[c1-c1-read-2]]" }
+  - { dove: "c1.js#c1.read", n: 1, scelta: "[[c1-c1-read-2]]" }
+  - { dove: "c1.js#c1.grimoire", n: 1, scelta: "[[c1-c1-grimoire-1]]" }
+  - { dove: "c1.js#c1.grimoire", n: -1, scelta: "[[c1-c1-grimoire-1]]" }
+  - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-2]]" }
+  - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-3]]" }
+  - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.square", n: -1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c1b.js#c1.gate", n: -1, scelta: "[[c1b-c1-gate-2]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-2]]" }
+  - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-4]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-3]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-4]]" }
+  - { dove: "c2.js#c2.plan", n: 1, scelta: "[[c2-c2-plan-1]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-3]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-1]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-1]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-1]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-1]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-4]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-2]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-2]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-5]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-5]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-3]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
+  - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
+  - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
+  - { dove: "post.js#enc.guard", n: -1, scelta: "[[post-enc-guard-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
+  - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
+  - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
+  - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
+  - { dove: "trials.js#trial.fog.door", n: 1, scelta: "[[trials-trial-fog-door-1]]" }
+  - { dove: "trials.js#trial.vigil.door", n: -1, scelta: "[[trials-trial-vigil-door-1]]" }
+  - { dove: "trials.js#trial.well.door", n: 1, scelta: "[[trials-trial-well-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.dare.door", n: 1, scelta: "[[trials-trial-dare-door-1]]" }
+  - { dove: "trials.js#trial.dare.door", n: -1, scelta: "[[trials-trial-dare-door-1]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
+  - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-3]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-5]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-2]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-2]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-2]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-4]]" }
+  - { dove: "visits.js#talk.m00", n: 1, scelta: "[[visits-talk-m00-1]]" }
+  - { dove: "visits.js#talk.m00", n: -1, scelta: "[[visits-talk-m00-1]]" }
+  - { dove: "visits.js#talk.m05", n: -1, scelta: "[[visits-talk-m05-1]]" }
+  - { dove: "visits.js#talk.m05", n: 1, scelta: "[[visits-talk-m05-1]]" }
+  - { dove: "visits.js#talk.m10", n: 1, scelta: "[[visits-talk-m10-1]]" }
+  - { dove: "visits.js#talk.m10", n: -1, scelta: "[[visits-talk-m10-1]]" }
+  - { dove: "visits.js#talk.m15", n: 1, scelta: "[[visits-talk-m15-1]]" }
+  - { dove: "visits.js#talk.m15", n: -1, scelta: "[[visits-talk-m15-1]]" }
+  - { dove: "visits.js#talk.m16", n: 1, scelta: "[[visits-talk-m16-1]]" }
+  - { dove: "visits.js#talk.m16", n: -1, scelta: "[[visits-talk-m16-1]]" }
+  - { dove: "trials/intro.js#LIBRARY_SCRIPTS.library.first[8].choice[1]", n: 1 }
+  - { dove: "trials/side.js#kettle.steps[7].choice[1]", n: 1 }
+  - { dove: "trials/side.js#well.steps[7].choice[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[2].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[3].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[3].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[5].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[6].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[10].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#READER.events[0].a[1]", n: 1 }
+  - { dove: "opinions.js#READER.events[2].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[3].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[5].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[5].a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[6].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[7].a[2]", n: -1 }
+mette_alla_prova:
+  - { dove: "c1b.js#c1.square", condizione: "trait rischio >= 3" }
+  - { dove: "c2.js#c2.fire", condizione: "trait rischio >= 3" }
+  - { dove: "c2.js#c2.fire", condizione: "trait rischio <= -3" }
+  - { dove: "c2.js#c2.plan", condizione: "power cat e trait rischio >= 3" }
+  - { dove: "c2.js#c2.plan", condizione: "power cat e trait rischio <= -3" }
+  - { dove: "c2.js#c2.arrest", condizione: "trait rischio >= 3" }
+  - { dove: "end.js#f.dawn", condizione: "trait rischio >= 3" }
+  - { dove: "props.js#prop.bed", condizione: "trait rischio >= 3" }
+  - { dove: "props.js#prop.bed", condizione: "trait rischio <= -3" }
+  - { dove: "trials.js#trial.night.door", condizione: "trait rischio <= -3" }
+  - { dove: "trials.js#trial.kettle.door", condizione: "trait rischio >= 3" }
+  - { dove: "sessions.js#s1", condizione: "trend rischio >= 2" }
+  - { dove: "sessions.js#s1", condizione: "trend rischio <= -2" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio >= 6" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio <= -6" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio >= 5" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio <= -5" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio >= 4" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio <= -4" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio >= 3" }
+  - { dove: "sessions.js#s1", condizione: "trait rischio <= -3" }
+  - { dove: "sessions.js#s2", condizione: "trend rischio >= 2" }
+  - { dove: "sessions.js#s2", condizione: "trend rischio <= -2" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio >= 6" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio <= -6" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio >= 5" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio <= -5" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio >= 4" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio <= -4" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio >= 3" }
+  - { dove: "sessions.js#s2", condizione: "trait rischio <= -3" }
+  - { dove: "sessions.js#s3", condizione: "trend rischio >= 2" }
+  - { dove: "sessions.js#s3", condizione: "trend rischio <= -2" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio >= 6" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio <= -6" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio >= 5" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio <= -5" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio >= 4" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio <= -4" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio >= 3" }
+  - { dove: "sessions.js#s3", condizione: "trait rischio <= -3" }
+  - { dove: "sessions.js#s4", condizione: "portrait" }
+  - { dove: "visits.js#openers", condizione: "turned rischio e trait rischio > 0" }
+  - { dove: "visits.js#openers", condizione: "turned rischio e trait rischio < 0" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.torn.rischio e torn rischio" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.pair.bold-quiet e trait rischio >= 3 e trait parola <= -3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.pair.kind-bold e trait tono >= 3 e trait rischio >= 3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.pair.curious-careful e trait esplora >= 3 e trait rischio <= -3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.st.rischio+ e steady rischio e trait rischio >= 3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.st.rischio- e steady rischio e trait rischio <= -3" }
+  - { dove: "visits.js#thread", condizione: "notFlag rd.square e chapter 2 e flag b1.spoke e trait rischio >= 2" }
+  - { dove: "visits.js#thread", condizione: "notFlag rd.square e chapter 2 e flag b1.spoke e trait rischio <= -2" }
+  - { dove: "visits.js#thread", condizione: "notFlag rd.square e chapter 2 e flag b1.hid e trait rischio >= 2" }
+  - { dove: "visits.js#thread", condizione: "notFlag rd.square e chapter 2 e flag b1.hid e trait rischio <= -2" }
+  - { dove: "visits.js#closers", condizione: "verdict changed e trend rischio >= 2" }
+  - { dove: "visits.js#closers", condizione: "verdict changed e trend rischio <= -2" }
+  - { dove: "portrait.js#PAIRS[0]", condizione: "trait rischio >= 3 e trait parola <= -3" }
+  - { dove: "portrait.js#PAIRS[2]", condizione: "trait tono >= 3 e trait rischio >= 3" }
+  - { dove: "portrait.js#PAIRS[4]", condizione: "trait esplora >= 3 e trait rischio <= -3" }
+  - { dove: "portrait.js#PAIRS[7]", condizione: "trait esplora >= 3 e trait rischio >= 3" }
+  - { dove: "portrait.js#PAIRS[9]", condizione: "trait rischio <= -3 e trait guida <= -3" }
+---
+
+Un asse del ritratto (core/progress.js AXES): audace (+) o prudente (-), da -6 a 6.
+
+Lo muovono 91 punti dei copioni e lo leggono 61 condizioni.
+
+Verso audace: 52 punti; verso prudente: 39 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

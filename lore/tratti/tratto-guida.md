@@ -1,0 +1,166 @@
+---
+# generato da scripts/lore.mjs, non modificare a mano
+tipo: "tratto"
+nome: "Il tratto guida"
+cosa: "Un asse del ritratto (core/progress.js AXES): cuore (+) o testa (-), da -6 a 6."
+stabilisce:
+  - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-2]]" }
+  - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-2]]" }
+  - { dove: "c1.js#c1.read", n: 1, scelta: "[[c1-c1-read-1]]" }
+  - { dove: "c1.js#c1.read", n: -1, scelta: "[[c1-c1-read-1]]" }
+  - { dove: "c1.js#c1.back", n: 1, scelta: "[[c1-c1-back-2]]" }
+  - { dove: "c1.js#c1.deliver", n: -1, scelta: "[[c1-c1-deliver-3]]" }
+  - { dove: "c1.js#c1.deliver", n: 1, scelta: "[[c1-c1-deliver-3]]" }
+  - { dove: "c1.js#c1.cottage", n: 1, scelta: "[[c1-c1-cottage-1]]" }
+  - { dove: "c1.js#c1.cottage", n: -1, scelta: "[[c1-c1-cottage-1]]" }
+  - { dove: "c1.js#c1.cottage", n: -1, scelta: "[[c1-c1-cottage-2]]" }
+  - { dove: "c1b.js#c1.exam1", n: -1, scelta: "[[c1b-c1-exam1-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c1b.js#c1.gate", n: -1, scelta: "[[c1b-c1-gate-1]]" }
+  - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-2]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-1]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-3]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-4]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-2]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-4]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-3]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-3]]" }
+  - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-2]]" }
+  - { dove: "c3.js#c3.trapdoor", n: -1, scelta: "[[c3-c3-trapdoor-2]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-1]]" }
+  - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-1]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-5]]" }
+  - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-3]]" }
+  - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-3]]" }
+  - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.court", n: -1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "end.js#c3.trial", n: -1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-1]]" }
+  - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-2]]" }
+  - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
+  - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
+  - { dove: "post.js#enc.hale", n: 1, scelta: "[[post-enc-hale-1]]" }
+  - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
+  - { dove: "post.js#minor.first", n: 1, scelta: "[[post-minor-first-1]]" }
+  - { dove: "post.js#minor.first", n: -1, scelta: "[[post-minor-first-1]]" }
+  - { dove: "trials.js#trial.fog.door", n: -1, scelta: "[[trials-trial-fog-door-1]]" }
+  - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
+  - { dove: "trials.js#trial.kettle.door", n: -1, scelta: "[[trials-trial-kettle-door-1]]" }
+  - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
+  - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
+  - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
+  - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-4]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-4]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-2]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-2]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-6]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-6]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-7]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-7]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-1]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-1]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-7]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-2]]" }
+  - { dove: "sessions.js#s3", n: -1, scelta: "[[sessions-s3-5]]" }
+  - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-5]]" }
+  - { dove: "visits.js#talk.m02", n: 1, scelta: "[[visits-talk-m02-1]]" }
+  - { dove: "visits.js#talk.m02", n: -1, scelta: "[[visits-talk-m02-1]]" }
+  - { dove: "visits.js#talk.m06", n: 1, scelta: "[[visits-talk-m06-1]]" }
+  - { dove: "visits.js#talk.m06", n: -1, scelta: "[[visits-talk-m06-1]]" }
+  - { dove: "visits.js#talk.m13", n: -1, scelta: "[[visits-talk-m13-1]]" }
+  - { dove: "visits.js#talk.m13", n: 1, scelta: "[[visits-talk-m13-1]]" }
+  - { dove: "visits.js#talk.m17", n: 1, scelta: "[[visits-talk-m17-1]]" }
+  - { dove: "visits.js#talk.m17", n: -1, scelta: "[[visits-talk-m17-1]]" }
+  - { dove: "visits.js#talk.m18", n: 1, scelta: "[[visits-talk-m18-1]]" }
+  - { dove: "visits.js#talk.m18", n: -1, scelta: "[[visits-talk-m18-1]]" }
+  - { dove: "trials/side.js#dare.steps[9].choice[0]", n: 1 }
+  - { dove: "trials/side.js#grave.steps[9].choice[1]", n: 1 }
+  - { dove: "trials/side.js#room.steps[9].choice[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[0].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[3].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[4].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[6].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[7].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[8].domanda.a[0]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[8].domanda.a[1]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[9].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[9].domanda.a[1]", n: -1 }
+  - { dove: "opinions.js#PEOPLE_OP[10].domanda.a[0]", n: 1 }
+  - { dove: "opinions.js#PEOPLE_OP[10].domanda.a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[0].a[2]", n: 1 }
+  - { dove: "opinions.js#READER.events[1].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[1].a[1]", n: 1 }
+  - { dove: "opinions.js#READER.events[2].a[1]", n: -1 }
+  - { dove: "opinions.js#READER.events[2].a[2]", n: 1 }
+  - { dove: "opinions.js#READER.events[3].a[2]", n: 1 }
+  - { dove: "opinions.js#READER.events[4].a[0]", n: 1 }
+  - { dove: "opinions.js#READER.events[4].a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[5].a[1]", n: -1 }
+  - { dove: "opinions.js#READER.events[6].a[1]", n: 1 }
+  - { dove: "opinions.js#READER.events[6].a[2]", n: -1 }
+  - { dove: "opinions.js#READER.events[7].a[0]", n: -1 }
+  - { dove: "opinions.js#READER.events[7].a[1]", n: 1 }
+mette_alla_prova:
+  - { dove: "trials.js#trial.fog.door", condizione: "trait guida <= -3" }
+  - { dove: "trials.js#trial.grave.door", condizione: "trait guida >= 3" }
+  - { dove: "sessions.js#s1", condizione: "trend guida >= 2" }
+  - { dove: "sessions.js#s1", condizione: "trend guida <= -2" }
+  - { dove: "sessions.js#s1", condizione: "trait guida >= 6" }
+  - { dove: "sessions.js#s1", condizione: "trait guida <= -6" }
+  - { dove: "sessions.js#s1", condizione: "trait guida >= 5" }
+  - { dove: "sessions.js#s1", condizione: "trait guida <= -5" }
+  - { dove: "sessions.js#s1", condizione: "trait guida >= 4" }
+  - { dove: "sessions.js#s1", condizione: "trait guida <= -4" }
+  - { dove: "sessions.js#s1", condizione: "trait guida >= 3" }
+  - { dove: "sessions.js#s1", condizione: "trait guida <= -3" }
+  - { dove: "sessions.js#s2", condizione: "trend guida >= 2" }
+  - { dove: "sessions.js#s2", condizione: "trend guida <= -2" }
+  - { dove: "sessions.js#s2", condizione: "trait guida >= 6" }
+  - { dove: "sessions.js#s2", condizione: "trait guida <= -6" }
+  - { dove: "sessions.js#s2", condizione: "trait guida >= 5" }
+  - { dove: "sessions.js#s2", condizione: "trait guida <= -5" }
+  - { dove: "sessions.js#s2", condizione: "trait guida >= 4" }
+  - { dove: "sessions.js#s2", condizione: "trait guida <= -4" }
+  - { dove: "sessions.js#s2", condizione: "trait guida >= 3" }
+  - { dove: "sessions.js#s2", condizione: "trait guida <= -3" }
+  - { dove: "sessions.js#s3", condizione: "trend guida >= 2" }
+  - { dove: "sessions.js#s3", condizione: "trend guida <= -2" }
+  - { dove: "sessions.js#s3", condizione: "trait guida >= 6" }
+  - { dove: "sessions.js#s3", condizione: "trait guida <= -6" }
+  - { dove: "sessions.js#s3", condizione: "trait guida >= 5" }
+  - { dove: "sessions.js#s3", condizione: "trait guida <= -5" }
+  - { dove: "sessions.js#s3", condizione: "trait guida >= 4" }
+  - { dove: "sessions.js#s3", condizione: "trait guida <= -4" }
+  - { dove: "sessions.js#s3", condizione: "trait guida >= 3" }
+  - { dove: "sessions.js#s3", condizione: "trait guida <= -3" }
+  - { dove: "sessions.js#s4", condizione: "portrait" }
+  - { dove: "visits.js#openers", condizione: "turned guida e trait guida > 0" }
+  - { dove: "visits.js#openers", condizione: "turned guida e trait guida < 0" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.torn.guida e torn guida" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.pair.sharp-heart e trait tono <= -3 e trait guida >= 3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.pair.frank-head e trait parola >= 3 e trait guida <= -3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.st.guida+ e steady guida e trait guida >= 3" }
+  - { dove: "visits.js#openers", condizione: "notFlag rd.st.guida- e steady guida e trait guida <= -3" }
+  - { dove: "visits.js#closers", condizione: "verdict changed e trend guida >= 2" }
+  - { dove: "visits.js#closers", condizione: "verdict changed e trend guida <= -2" }
+  - { dove: "portrait.js#PAIRS[3]", condizione: "trait tono <= -3 e trait guida >= 3" }
+  - { dove: "portrait.js#PAIRS[5]", condizione: "trait esplora <= -3 e trait guida >= 3" }
+  - { dove: "portrait.js#PAIRS[6]", condizione: "trait parola >= 3 e trait guida <= -3" }
+  - { dove: "portrait.js#PAIRS[8]", condizione: "trait parola <= -3 e trait guida >= 3" }
+  - { dove: "portrait.js#PAIRS[9]", condizione: "trait rischio <= -3 e trait guida <= -3" }
+---
+
+Un asse del ritratto (core/progress.js AXES): cuore (+) o testa (-), da -6 a 6.
+
+Lo muovono 105 punti dei copioni e lo leggono 47 condizioni.
+
+Verso cuore: 55 punti; verso testa: 50 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
