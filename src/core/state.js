@@ -51,6 +51,7 @@ export const fresh = () => ({
   treats: 0,
   extras: {},
   track: null,
+  extrasAck: null, // done missions already shown once in the grimoire list (ui/mappa.js); null = a save from before: all acknowledged
   // the diary of readings (glue/selfread.js): [{ at, who, question, spread, cards, closing, note, real }], newest first
   readings: [],
   // the logic of 16 Nov afternoon (docs/DESIGN.md "La logica del gioco, ridefinita"): the bond with each witch
@@ -84,6 +85,7 @@ export const migrate = (s) => {
   for (const k of ['pop', 'tartufo', 'treats']) s[k] = Math.max(0, Number(s[k]) || 0);
   if (typeof s.extras !== 'object' || !s.extras || Array.isArray(s.extras)) s.extras = {};
   if (typeof s.track !== 'string') s.track = null;
+  if (s.extrasAck != null && (typeof s.extrasAck !== 'object' || Array.isArray(s.extrasAck))) s.extrasAck = null;
   if (!Array.isArray(s.readings)) s.readings = [];
   for (const k of ['bonds', 'trials', 'studied', 'studiedXp']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {};
   if (typeof s.trialSense !== 'string') s.trialSense = null;

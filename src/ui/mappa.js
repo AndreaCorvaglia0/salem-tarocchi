@@ -37,6 +37,14 @@ const CSS = `${SKETCH_CSS}
 .mp-m.sec .tx{display:block;text-decoration:underline dashed ${PENCIL}99;text-underline-offset:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mp-m.sec.on .tx,.mp-m.sec.open .tx{white-space:normal}
 .mp-m.sec.done .tx{text-decoration:line-through ${PENCIL}88}
+.mp-m.fresh{cursor:default;box-sizing:border-box}
+.mp-m.fresh .tx{white-space:normal}
+.mp-m .fa{display:inline-block;margin-right:8px;font-size:16px;color:${PENCIL};transform:rotate(-2deg)}
+.mp-fold{display:block;margin:10px 0 0;padding:4px 8px 4px 30px;border:0;background:none;font:inherit;font-size:18px;line-height:24px;color:${PENCIL};text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mp-fold i{display:inline-block;font-style:normal;transition:transform .15s}
+.mp-fold[aria-expanded=true] i{transform:rotate(90deg)}
+.mp-fd{margin:2px 0 0;padding:1px 8px 1px 30px;font-size:16px;line-height:21px;color:${PENCIL};text-decoration:line-through ${PENCIL}88}
+.mp-fds[hidden]{display:none}
 .mp-m .lb{display:inline-block;margin-right:8px;padding:0 6px;border:1px solid ${PENCIL}88;border-radius:9px;font-size:15px;line-height:18px;color:${PENCIL};transform:rotate(-2deg)}
 .mp-m .no{display:inline-block;position:relative;margin-right:6px;font-size:17px;line-height:18px;color:${PENCIL}}
 .mp-m .no::after{content:'';position:absolute;left:-8px;right:-8px;top:-13px;bottom:-13px}
@@ -180,19 +188,39 @@ export function placeTags(sk) {
 // "Missioni": the main mission in ink, then the optional ones in pencil (core/extras.js). Tapping one
 // follows it (the red circle and the trail point there); tapping the main one goes back to it.
 const STATUS = { active: 'la sto seguendo', new: 'da fare', seen: 'da fare', done: 'fatta' };
+// Done missions leave the list: under a quiet "fatte: N" line, folded at every opening (not saved). One
+// finished since the grimoire was last opened stays in its place once, struck through, then moves there.
+// state.extrasAck: ids of done missions already shown once; null = a save from before this (all acknowledged).
+const SESSION = new WeakMap(); // ctx (one per opening) -> { fresh: Set of ids, open: bool }
 function missions(ctx, tracked) {
   const list = extrasShown(), no = sideNumbers(list);
   // "fatte N di M" counts exactly the missions listed here (a card found before anyone spoke of it is
   // neither listed nor counted)
-  const done = list.filter((e) => e.status === 'done').length;
+  const doneIds = list.filter((e) => e.status === 'done').map((e) => e.id);
+  const done = doneIds.length;
+  let ses = SESSION.get(ctx);
+  if (!ses) { ses = { fresh: new Set(), open: false }; SESSION.set(ctx, ses); }
+  const first = state.extrasAck == null;
+  const ack = state.extrasAck && typeof state.extrasAck === 'object' ? state.extrasAck : (state.extrasAck = {});
+  let dirty = first;
+  for (const id of doneIds) if (!ack[id]) { if (!first) ses.fresh.add(id); ack[id] = true; dirty = true; }
+  if (dirty) save();
   const main = h('button.mp-m', { type: 'button', class: tracked ? 'mp-m' : 'mp-m on', onclick: () => { track(null); ctx.rerender(); } },
     h('span.st', {}, tracked ? 'la storia: tocca per tornare a seguirla' : 'la storia: la sto seguendo'), nextStep().text);
-  const rows = list.map((e) => {
-    const on = !!e.tracked, done = e.status === 'done';
-    const cls = ['mp-m', 'sec', on ? 'on' : '', done ? 'done' : ''].filter(Boolean).join(' ');
-    return h('button', { type: 'button', class: cls, disabled: done, 'data-id': e.id, onclick: () => { markSeen(e.id); if (!done) track(e.id); ctx.rerender(); } },
+  const rows = list.filter((e) => e.status !== 'done' || ses.fresh.has(e.id)).map((e) => {
+    const on = !!e.tracked, isDone = e.status === 'done';
+    if (isDone) return h('div', { class: 'mp-m sec done fresh', 'data-id': e.id }, h('span.st', {}, h('span.lb', {}, 'in più'), h('span.fa', {}, 'fatta')), h('span.tx', {}, e.text));
+    const cls = ['mp-m', 'sec', on ? 'on' : ''].filter(Boolean).join(' ');
+    return h('button', { type: 'button', class: cls, 'data-id': e.id, onclick: () => { markSeen(e.id); track(e.id); ctx.rerender(); } },
       h('span.st', {}, h('span.lb', {}, 'in più'), no[e.id] ? h('span.no', { onclick: (ev) => { ev.stopPropagation(); toTag(e.id); } }, `✎ ${no[e.id]}`) : null, e.status === 'new' ? h('span.nw', {}, 'nuova') : null, on ? STATUS.active : STATUS[e.status] || ''),
       h('span.tx', {}, e.text));
   });
-  return h('div.mp-ms', h('h3', {}, 'Missioni', list.length ? h('small', {}, `in più: fatte ${done} di ${list.length}`) : null), main, ...rows);
+  const old = list.filter((e) => e.status === 'done' && !ses.fresh.has(e.id));
+  let fold = null;
+  if (old.length) {
+    const box = h('div.mp-fds', { hidden: !ses.open }, ...old.map((e) => h('p.mp-fd', {}, e.text)));
+    const btn = h('button.mp-fold', { type: 'button', 'aria-expanded': String(ses.open), onclick: () => { ses.open = !ses.open; box.hidden = !ses.open; btn.setAttribute('aria-expanded', String(ses.open)); } }, `fatte: ${old.length} `, h('i', {}, '›'));
+    fold = [btn, box];
+  }
+  return h('div.mp-ms', h('h3', {}, 'Missioni', list.length ? h('small', {}, `in più: fatte ${done} di ${list.length}`) : null), main, ...rows, ...(fold || []));
 }

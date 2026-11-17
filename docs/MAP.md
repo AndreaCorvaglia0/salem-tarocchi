@@ -44,7 +44,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1103 |
+| `src/core` | 11 | 1105 |
 | `src/data` | 7 | 741 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |
@@ -63,9 +63,9 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/story/stage` | 14 | 1925 |
 | `src/systems` | 19 | 1523 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 34 | 3745 |
+| `src/ui` | 34 | 3778 |
 | `src/world` | 18 | 1376 |
-| `src/world/art` | 17 | 2401 |
+| `src/world/art` | 19 | 2987 |
 | `src/world/scene` | 20 | 2102 |
 
 ## Services
@@ -216,8 +216,8 @@ Touch these with care: many files depend on them.
 - `src/data/story/index.js` (24)
 - `src/ui/paper.js` (24)
 - `src/data/story/h.js` (21)
-- `src/world/art/px.js` (18)
+- `src/world/art/px.js` (20)
+- `src/world/art/palette.js` (15)
 - `src/core/fonts.js` (13)
 - `src/data/cards.js` (13)
-- `src/world/art/palette.js` (13)
 - `src/world/maps.js` (11)
