@@ -117,9 +117,13 @@ trial with two places and a person who changes with her affinity: `src/data/tria
    place, and checks that no two names overlap from 300 to 520 px.
 9. **Its slip on the map.** Every entry of the extras registry is a paper slip beside its place on the Mappa
    page, with a card on tap (`src/ui/missions/`: `model.js` pure, `page.js` draws, `pins.js` places the slips,
-   `titles.js` the cards). A new entry needs a card in `TITLES` of `titles.js` (title, kind, who told her,
-   what she gets): `tests/missions.page.test.mjs` fails until it has one, and also when a new file pushes
-   entries into `EXTRAS` (add that file's ids to `registryIds()` in the test). Harness:
+   `titles.js` the cards). A new entry needs a card in `TITLES` of `titles.js`: a title (2-4 words, never the
+   content or the outcome), the kind only if she knows what it is (else `null`: the neutral note on the slip),
+   who told her, what she was told (`told`, her own note), optional `later: [cond, told]` and a rare `hunch`;
+   never what she gets. `tests/missions.page.test.mjs` fails until it has one, and also when a new file pushes
+   entries into `EXTRAS` (add that file's entries to `registry()` in the test); `tests/knows-only.test.mjs`
+   fails on a reward field or a spoiler word. Tapping a place shows her notes on it
+   (`src/data/world/notes.js`, one `unknown` line and notes with a condition each; same test). Harness:
    `harness/missions.html?s=1..6[&tall=1][&tap=<id>][&done=1]` (the real page in six hand-made states).
 
 ## The vault in a browser: `<site>/lore/`

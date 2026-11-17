@@ -1,10 +1,11 @@
 // The missions on the grimoire's map (src/ui/missions/, notes/missions-design.md): the pure parts.
 // The drift guard: every entry of the extras registry needs a card in src/ui/missions/titles.js.
+// What a card may SAY is guarded by tests/knows-only.test.mjs (lore/principi/vede-solo-quello-che-sa.md).
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { TITLES, KIND, cardOf } from '../src/ui/missions/titles.js';
+import { TITLES, KIND, NEUTRAL, cardOf, toldNow } from '../src/ui/missions/titles.js';
 import { ackDone, missionsModel, inWords, regionCount, doneLine, hereCount, STACK } from '../src/ui/missions/model.js';
 import { choosePin } from '../src/ui/missions/pins.js';
 import { REGIONS, placeOf, REGION_OF } from '../src/ui/sketchmap.js';
@@ -13,46 +14,63 @@ import { TRIALS } from '../src/data/trials/index.js';
 import { WORLD_LIST } from '../src/data/elsewhere/index.js';
 import { lessonEntries } from '../src/glue/garden.rules.js';
 
-const SYMS = ['carta', 'lezione', 'prova', 'orto', 'altrove', 'storia', 'storiaMain', 'fatta'];
+const SYMS = ['carta', 'lezione', 'prova', 'orto', 'altrove', 'storia', 'nota', 'storiaMain', 'fatta'];
 
 // Every place that registers entries (core/extras.js EXTRAS). The glue files cannot be imported in node
-// (they pull in fonts and screens), so the ids are rebuilt from the same data they read.
+// (they pull in fonts and screens), so the entries (id and place) are rebuilt from the same data they read.
 const SITES = 6; // EXTRAS.push / EXTRAS.unshift outside core/extras.js
-function registryIds() {
+function registry() {
   const asList = (x) => (Array.isArray(x) ? x : Object.values(x || {}));
   return [
-    ...asList(SIDE).filter((m) => m && m.id).map((m) => m.id), // core/extras.js itself
-    ...LESSON_MISSIONS.map((m) => m.id), // glue/lessons.js
-    'garden.ortica', ...lessonEntries().map((e) => e.extra.id), // glue/garden.js
-    ...Object.values(TRIALS).filter((d) => !d.debug).map((d) => `trial.${d.id}`), 'library.first', // glue/trials.js
-    ...WORLD_LIST.map((w) => `elsewhere.${w.id}`), // glue/elsewhere.rules.js
+    ...asList(SIDE).filter((m) => m && m.id).map((m) => [m.id, m.at]), // core/extras.js itself
+    ...LESSON_MISSIONS.map((m) => [m.id, m.at]), // glue/lessons.js
+    ['garden.ortica', 'forest.ortica_hut'], ...lessonEntries().map((e) => [e.extra.id, e.extra.at]), // glue/garden.js
+    ...Object.values(TRIALS).filter((d) => !d.debug).map((d) => [`trial.${d.id}`, d.start?.at]), ['library.first', 'library.desk'], // glue/trials.js
+    ...WORLD_LIST.map((w) => [`elsewhere.${w.id}`, w.trigger.at]), // glue/elsewhere.rules.js
   ];
 }
+const registryIds = () => registry().map(([id]) => id);
 const srcFiles = (dir) => readdirSync(dir).flatMap((f) => { const p = join(dir, f); return statSync(p).isDirectory() ? srcFiles(p) : p.endsWith('.js') ? [p] : []; });
 
-test('every entry of the extras registry has a card (title, kind, who, gets): add it to src/ui/missions/titles.js', () => {
+test('every entry of the extras registry has a card (title, who, where, told; kind and hunch only where she knows): src/ui/missions/titles.js', () => {
   const sites = srcFiles('src').filter((f) => !f.endsWith(join('core', 'extras.js')))
     .reduce((n, f) => n + (readFileSync(f, 'utf8').match(/EXTRAS\.(push|unshift)\(/g) || []).length, 0);
-  assert.equal(sites, SITES, 'a new place registers optional things: add its ids to registryIds() in tests/missions.page.test.mjs');
+  assert.equal(sites, SITES, 'a new place registers optional things: add its entries to registry() in tests/missions.page.test.mjs');
   const ids = registryIds();
   assert.equal(new Set(ids).size, ids.length);
-  for (const id of ids) {
+  for (const [id, at] of registry()) {
     const t = TITLES[id];
-    assert.ok(t, `${id}: no entry in src/ui/missions/titles.js (title, kind, who, gets)`);
-    assert.ok(t.title && t.title.length <= 28, `${id}: a short title`);
-    assert.ok(KIND[t.kind], `${id}: unknown kind ${t.kind}`);
+    assert.ok(t, `${id}: no entry in src/ui/missions/titles.js (title, kind, who, told)`);
+    const words = String(t.title || '').trim().split(/\s+/);
+    assert.ok(t.title && t.title.length <= 28 && words.length <= 4 && (words.length >= 2 || /'/.test(t.title)), `${id}: a short title, 2-4 words`);
+    assert.ok(t.kind === null || KIND[t.kind], `${id}: unknown kind ${t.kind} (null when she does not know what it is)`);
     assert.ok(t.who === null || (typeof t.who === 'string' && t.who), `${id}: who told her (null: she noticed it)`);
-    assert.ok(t.gets && !/ricordo/.test(t.gets), `${id}: what she gets, concrete`);
+    const place = placeOf(at);
+    assert.ok(place && REGIONS[REGION_OF(place)]?.places[place]?.label, `${id}: where, a named place of the map (${at})`);
+    assert.ok(typeof t.told === 'string' && t.told.length > 20, `${id}: what she was told`);
+    if (t.later != null) assert.ok(Array.isArray(t.later) && t.later[0] && typeof t.later[1] === 'string', `${id}: later is [condition, told]`);
+    if (t.hunch != null) assert.ok(typeof t.hunch === 'string' && t.hunch.length <= 110, `${id}: a short presentiment`);
   }
   for (const id of Object.keys(TITLES)) assert.ok(ids.includes(id), `${id}: in titles.js but not in the registry`);
+  // what a card may say (no reward, no spoiler, no backstory) is checked in tests/knows-only.test.mjs
 });
 
-test('every kind has a word and a pencil symbol', () => {
+test('a card says what she knows now: the later note once its condition holds', () => {
+  const c = cardOf({ id: 'trial.vigil' });
+  assert.equal(toldNow(c, () => false), TITLES['trial.vigil'].told);
+  assert.match(toldNow(c, (k) => k.flag === 'trial.vigil.offered'), /Proctor/);
+  assert.doesNotMatch(TITLES['trial.vigil'].told, /febbre/); // the fever is told at the door, not before
+});
+
+test('every kind has a word and a pencil symbol; an entry whose kind she does not know has the neutral note', () => {
   for (const [k, v] of Object.entries(KIND)) { assert.ok(v.word, k); assert.ok(SYMS.includes(v.sym), `${k}: symbol ${v.sym}`); }
   const symbols = readFileSync('src/ui/missions/symbols.js', 'utf8');
   for (const s of SYMS) assert.match(symbols, new RegExp(`\\b${s}:`), `symbols.js: ${s}`);
-  // an entry with no card still shows, with a kind that has a symbol
-  for (const kind of ['lesson', 'side', 'errand', 'trial']) assert.ok(KIND[cardOf({ id: 'x.new', kind, text: 'Una cosa nuova: da fare' }).kind]);
+  const n = cardOf({ id: 'trial.night' });
+  assert.equal(n.sym, NEUTRAL); assert.equal(n.kindWord, '');
+  // an entry with no card still shows, with no guessed kind (a lesson stays a lesson)
+  for (const kind of ['side', 'errand', 'trial']) { const c = cardOf({ id: 'x.new', kind, text: 'Una cosa nuova: da fare' }); assert.equal(c.sym, NEUTRAL); assert.equal(c.kindWord, ''); }
+  assert.equal(cardOf({ id: 'x.new', kind: 'lesson', text: 'Una lezione: da fare' }).sym, 'lezione');
 });
 
 // a few registry entries, as extrasShown() gives them

@@ -9,6 +9,7 @@ dove:
   - "src/data/garden.js"
 cosa_fa_la_giocatrice: "Quattro aiuole alla capanna, ognuna con la sua luce. Pianta un'erba scegliendo la terra, tocca la terra prima di annaffiare (bagnata, asciutta sopra, asciutta a un dito), annaffia, raccoglie. Si apre anche dalla soglia, senza entrare in partita."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[mai-assillare]]"
   - "[[prima-di-tutto-corretto]]"
   - "[[erbe-come-storia]]"

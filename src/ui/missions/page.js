@@ -1,7 +1,8 @@
 // The missions ON the grimoire's map (notes/missions-design.md, variant A): every optional thing someone
 // told her about is a small paper slip pinned beside its place, with a pencil symbol of its kind
 // (symbols.js); the main story is an ink star slip; the red circle is the one thing she follows. Tapping a
-// slip opens its card (kind, title, who told her, where, what she gets, the whole note, «Seguila»).
+// slip opens its card: the title, the kind only if she knows it, who told her, where, what she was told (as
+// she would note it), sometimes a line of presentiment, «Seguila». Never what she gets (titles.js).
 // What is where comes from model.js (pure); this file draws it. mappa.js builds the page and calls:
 //   missionsParts(ctx, { items, main, onTrack }) -> { top, legend, done, count(rid), pin(sk, rid, next), hasRegion(rid) }
 // Two things at one place: two slips side by side and «due qui»; three or more: a small stack («tre qui»)
@@ -13,7 +14,8 @@ import { PENCIL, RED, INK, HAND } from '../paper.js';
 import { REGIONS, REGION_OF } from '../sketch.js';
 import { placeOf } from '../sketchmap.js';
 import { onEscape } from '../book.js';
-import { cardOf } from './titles.js';
+import { cardOf, toldNow } from './titles.js';
+import { test } from '../../core/cond.js';
 import { symbol } from './symbols.js';
 import { ackDone, missionsModel, regionCount, doneLine, hereCount, inWords, STACK } from './model.js';
 import { placePins } from './pins.js';
@@ -78,6 +80,7 @@ const CSS = `
 .ms-card dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0 0 10px;font-size:21px;line-height:25px}
 .ms-card dt{color:${PENCIL}}
 .ms-card dd{margin:0}
+.ms-card .hn{margin:-6px 0 14px;font-size:19px;line-height:24px;font-style:italic;color:${PENCIL}}
 .ms-card blockquote{margin:0 0 14px;padding:8px 10px;border-left:2px solid ${PENCIL}88;font-size:20px;line-height:25px;color:${INK}dd;background:#ffffff40}
 .ms-card .bt{display:flex;gap:10px 14px;flex-wrap:wrap;align-items:flex-start}
 .ms-card .bt button{min-height:46px;padding:0 18px;border-radius:10px;font:inherit;font-size:22px;cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -120,13 +123,14 @@ export function openCard(e, { onTrack }) {
   const rows = [
     ['Chi me l\'ha detto', c.who ? cap(c.who) : 'L\'ho notato io'],
     ['Dove', whereText(place) || '—'],
-    ['Cosa ci guadagno', c.gets || '—'],
   ];
+  const kd = done ? (c.kindWord ? `${c.kindWord}, fatta` : 'fatta') : c.kindWord;
   veil.append(h('div.ms-card',
-    h('div.kd', {}, slip({ sym: c.sym, done }), h('span', {}, done ? `${c.kindWord}, fatta` : c.kindWord)),
+    h('div.kd', {}, slip({ sym: c.sym, done }), kd ? h('span', {}, kd) : null),
     h('h4', {}, c.title),
     h('dl', {}, ...rows.flatMap(([k, v]) => [h('dt', {}, k), h('dd', {}, v)])),
-    h('blockquote', {}, nums(e.text)),
+    h('blockquote', {}, nums(toldNow(c, test) || e.text)),
+    c.hunch && !done ? h('p.hn', {}, c.hunch) : null,
     h('div.bt', {}, ...act, h('button.no', { type: 'button', onclick: shut }, 'Chiudi'))));
   document.body.append(veil);
   popEsc = onEscape(shut);
@@ -142,7 +146,7 @@ export function openChooser(place, slips, { open }) {
   veil.append(h('div.ms-card',
     h('div.kd', {}, h('span', {}, `${inWords(slips.length, { fem: true })} cose in più, qui`)),
     h('h4', {}, cap(whereText(place))),
-    ...slips.map((s) => h('button', { type: 'button', class: `pick${s.on ? ' on' : ''}`, onclick: () => { shut(); open(s.id); } }, slip(s), h('span', {}, h('b', {}, s.title), h('small', {}, s.on ? `${s.kindWord}: la sto seguendo` : s.kindWord)))),
+    ...slips.map((s) => h('button', { type: 'button', class: `pick${s.on ? ' on' : ''}`, onclick: () => { shut(); open(s.id); } }, slip(s), h('span', {}, h('b', {}, s.title), h('small', {}, [s.kindWord, s.on ? 'la sto seguendo' : ''].filter(Boolean).join(': ') || (s.who ? `me l'ha detto ${s.who}` : 'l\'ho notato io'))))),
     h('div.bt', {}, h('button.no', { type: 'button', onclick: shut }, 'Chiudi'))));
   document.body.append(veil);
   popEsc = onEscape(shut);
@@ -170,13 +174,13 @@ export function missionsParts(ctx, { items = [], main = { text: '', at: null }, 
     top.append(h('span.k', {}, h('i'), 'Sto seguendo la storia'), h('span.t', {}, nums(main.text)), M.mainPlace ? h('span.w', {}, whereText(M.mainPlace)) : null);
   } else {
     const c = cardOf(M.tracked), p = placeOf(M.tracked.at);
-    top.append(h('span.k', {}, h('i'), `Sto seguendo ${c.kindWord}`), h('span.t', {}, c.title), h('span.w', {}, whereText(p)));
+    top.append(h('span.k', {}, h('i'), c.kindWord ? `Sto seguendo ${c.kindWord}` : 'Sto seguendo'), h('span.t', {}, c.title), h('span.w', {}, whereText(p)));
     top.append(h('button.ms-back', { type: 'button', onclick: () => follow(null) }, symbol('storiaMain', { size: 22, color: INK, fill: `${INK}22` }),
       h('span', {}, h('b', {}, 'La storia: tocca per tornare a seguirla'), nums(main.text))));
   }
   const legend = h('p.ms-lg', {},
     h('span', {}, slip({ main: true, sym: 'storiaMain' }, { size: 22 }), 'la storia'),
-    h('span', {}, slip({ sym: 'carta' }, { size: 22 }), 'cose in più: toccane una per leggerla'),
+    h('span', {}, slip({ sym: 'nota' }, { size: 22 }), 'cose in più: toccane una per leggerla'),
     h('span', {}, h('i.ring'), 'quella che seguo'));
   // the done ones: folded under one line, unfolding a compact list (title and place)
   let done = null;
@@ -193,7 +197,7 @@ export function missionsParts(ctx, { items = [], main = { text: '', at: null }, 
     for (const g of M.pins) {
       if (g.region !== rid || !R.places[g.place]) continue;
       const one = (s) => {
-        const label = s.main ? `la storia: ${main.text}` : s.done ? `${s.title}: fatta` : `${s.kindWord}: ${s.title}`;
+        const label = s.main ? `la storia: ${main.text}` : s.done ? `${s.title}: fatta` : (s.kindWord ? `${s.kindWord}: ${s.title}` : s.title);
         const onclick = s.main ? () => { if (M.tracked) follow(null); } : (btn) => card(s.id, btn);
         return slip({ ...s, label }, { onclick });
       };

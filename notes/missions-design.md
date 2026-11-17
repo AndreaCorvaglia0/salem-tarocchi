@@ -18,8 +18,8 @@
 - In cima: «Sto seguendo …» con titolo e posto; se segue una cosa in più, sotto c'è il riquadro tratteggiato
   «La storia: tocca per tornare a seguirla» con il testo della storia.
 - Una riga di legenda: stella = la storia, foglietto = cose in più (toccale), cerchio = quella che seguo.
-- Toccando un foglietto si apre la **scheda**: tipo, titolo, chi me l'ha detto, dove, cosa ci guadagno, il
-  testo intero, «Seguila» / «Chiudi» (se la segue già: «La sto seguendo» e «Torna alla storia»).
+- Toccando un foglietto si apre la **scheda**: titolo, il tipo solo se lei lo sa, chi me l'ha detto, dove,
+  quello che le hanno detto (a volte un presentimento), mai che cosa ci guadagna (18 novembre), «Seguila» / «Chiudi» (se la segue già: «La sto seguendo» e «Torna alla storia»).
 - Più cose nello stesso posto: foglietti uno accanto all'altro. Una appena finita: foglietto sbiadito con la
   spunta, solo a questa apertura. Le vecchie: «Cose in più già fatte: 7 ›», chiuso.
 - Ogni regione dice quante cose in più ha («4 cose in più»). Il tetto delle novità resta quello di oggi.
@@ -102,3 +102,13 @@ matita tratteggiata verso il suo); sul desktop la pagina sinistra scorre un poco
 Prototipo: `src/ui/missions/{page,symbols,titles}.js`, `harness/missions.html`, `harness/missions.js`
 (oggi: la pagina vera, `?s=1..6[&tap=id][&tall=1][&done=1]`). Schermate: `/home/claude/shots/missions-design/round1/`
 (intere), `phone/` (altezza telefono), `board.png` (oggi, A, B negli stati 2 e 3). `npm test`: 523 verdi.
+
+## 18 novembre: la mappa mostra quello che lei sa
+
+Correzione di Andrea: niente più «Cosa ci guadagno». La scheda ha titolo, chi, dove, quello che le hanno detto
+(`told`, e `later` dopo la scena alla porta di una prova) e, raramente, un presentimento (`hunch`). Il tipo resta
+solo dove qualcuno le ha detto che cos'è; le prove, la lanterna, il dono di Ortica, la biblioteca, il sacco del
+mugnaio e i due Altrove hanno il foglietto neutro (`nota`). Toccando un posto escono i suoi appunti
+(`src/data/world/notes.js`): «?» e una riga finché non ne sa niente, poi fino a tre note, con un puntino a
+matita sulle nuove. Guardia: `tests/knows-only.test.mjs`. Schermate: `/home/claude/shots/missions-know/`
+(harness `?s=7`, `harness/missions-know.steps.mjs`).

@@ -1,7 +1,7 @@
 // Harness for the missions on the map (src/ui/missions/, notes/missions-design.md): the REAL grimoire's
 // Mappa page in six hand-made states. Variant A shipped; B and C (prototype, today's old list) are gone,
 // their round-1 images stay in /home/claude/shots/missions-design/round1/.
-// &s=1..6 (the states below)  [&tap=<id>] open that card  [&tall=1] the page is not cut at the phone's
+// &s=1..7 (the states below)  [&tap=<id>] open that card  [&tall=1] the page is not cut at the phone's
 // height (for the testers: the whole page in one image)  [&done=1] the «già fatte» list unfolded
 // The registry is the real one (core/extras.js EXTRAS with the lessons, the garden, the trials and Altrove
 // registered by their glue); each state forces which entries are available and their stored status.
@@ -30,6 +30,9 @@ const STATES = {
     done: ['side.m02', 'side.m03', 'garden.ortica', 'lesson.fly', 'trial.vigil', 'side.m11'], fresh: ['side.m12'], me: ['forest', 'forest.entry'] },
   4: { chapter: 2, step: 'c2.mill', open: [], done: [], fresh: [], me: ['forest', 'forest.ortica_hut'] },
   5: { chapter: 2, step: 'c2.mill', open: MID.map(([id, s]) => [id, id === 'side.m05' ? 'active' : s]), done: [], fresh: [], me: ['village', 'village.square'], tap: 'trial.dare' },
+  // one entry of each sort (the cards of what she knows) and her place notes, chapter 3
+  7: { chapter: 3, step: 'c3.client', open: [['side.m05', 'seen'], ['lesson.minors.3', 'seen'], ['trial.vigil', 'seen'], ['garden.lesson.luce', 'seen'], ['elsewhere.book', 'seen'], ['trial.hat', 'seen'], ['side.m09', 'seen']],
+    done: ['side.m02', 'lesson.fly'], fresh: [], me: ['village', 'village.square'], regions: ['village', 'forest', 'depths'] },
   6: { chapter: 2, step: 'c2.plan', open: MID.map(([id, s]) => [id, id === 'trial.dare' ? 'active' : s]), done: [], fresh: [], me: ['forest', 'forest.campfire'] },
 };
 const st = STATES[S] || STATES[2];
@@ -55,6 +58,8 @@ const where = { map: meMap, x: mx + 1, y: my + 2, near: meAt };
 provide('world.where', () => Promise.resolve(where));
 provide('world.travel', () => Promise.resolve());
 window.__state = state;
+// reopen the map after a test changed the state (her place notes: harness/missions-know.steps.mjs)
+window.__reopen = () => { document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); globalThis.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })); setTimeout(() => { call('grimoire.open', { tab: 'mappa' }); }, 200); };
 
 call('grimoire.open', { tab: 'mappa' });
 if (q.get('done')) setTimeout(() => document.querySelector('.ms-done')?.click(), 600);
@@ -63,7 +68,7 @@ if (q.get('done')) setTimeout(() => document.querySelector('.ms-done')?.click(),
 window.__tap = async (id) => {
   const { cardOf } = await import('../src/ui/missions/titles.js');
   const c = cardOf({ id });
-  const el = [...document.querySelectorAll('.ms-pin .ms-slip')].find((x) => x.getAttribute('aria-label') === `${c.kindWord}: ${c.title}`);
+  const el = [...document.querySelectorAll('.ms-pin .ms-slip')].find((x) => x.getAttribute('aria-label') === (c.kindWord ? `${c.kindWord}: ${c.title}` : c.title));
   el?.click();
   return !!el;
 };

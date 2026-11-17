@@ -12,12 +12,14 @@ in_salem:
   - "[[seguire-le-lezioni]]"
   - "[[imparare-da-ortica]]"
   - "[[trovare-una-carta]]"
-si_controlla_con: "tests/core.bonds.test.mjs (una catena mostra solo il primo anello, le chiavi non aspettano, al massimo MAX_NEW nuove); tests/story.lessons.test.mjs; tests/elsewhere.test.mjs (la catena degli Altrove); tests/missions.page.test.mjs (ogni voce ha la sua scheda sulla mappa, in src/ui/missions/titles.js)"
+si_controlla_con: "tests/core.bonds.test.mjs (una catena mostra solo il primo anello, le chiavi non aspettano, al massimo MAX_NEW nuove); tests/story.lessons.test.mjs; tests/elsewhere.test.mjs (la catena degli Altrove); tests/missions.page.test.mjs (ogni voce ha la sua scheda sulla mappa, in src/ui/missions/titles.js); tests/knows-only.test.mjs (la scheda dice solo quello che lei sa)"
 rischi: "Una voce con `when: { step: … }` non arriva a chi è avanti. Le note a matita della storia (kind 'side') e le chiavi non contano nel tetto di due: se crescono, il tetto non le ferma."
 fonte: "DESIGN.md, Il registro delle cose in più; Recuperare quello che si aggiunge dopo"
 ---
 
 Il registro è src/core/extras.js. Le voci arrivano da quattro posti: le missioni secondarie (`SIDE` in src/data/story/steps.js), le lezioni (`LESSON_MISSIONS` in src/data/story/missions.js), le prove (src/data/trials/, registrate da src/glue/trials.js), i mondi Altrove (src/glue/elsewhere.rules.js). Le prove secondarie sono una catena: vigil, well, kettle, grave, room, dare, hat.
+
+Sulla mappa ogni voce è un foglietto con la sua scheda, e la scheda dice solo quello che lei sa: un titolo che evoca, chi gliel'ha detto, dove, quello che le hanno detto con le sue parole, a volte un presentimento. Mai che cosa ci guadagna; il tipo (una carta, una lezione) solo se qualcuno gliel'ha detto, altrimenti un foglietto neutro ([[vede-solo-quello-che-sa]]).
 
 Se una cosa piccola salta per chi è molto avanti, pazienza: conta che possa continuare.
 

@@ -8,6 +8,7 @@ dove:
   - "src/world/scene/minors.js"
 cosa_fa_la_giocatrice: "Gira per Salem e trova una carta nascosta, o un Minore nell'erba alta. La carta si gira grande: lei tocca il dettaglio che la colpisce e legge la sua nota, scrive tre parole sue, poi vede le tre parole del libro e che cosa dice la carta."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[le-carte-servono-a-muoversi]]"
   - "[[interfaccia-che-premia]]"
   - "[[la-lettrice-legge-lei]]"

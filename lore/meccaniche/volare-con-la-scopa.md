@@ -9,6 +9,7 @@ dove:
   - "src/data/story/scripts/lessons.js"
 cosa_fa_la_giocatrice: "Al livello 6 arriva la scopa. Malva le insegna a volare nell'orto dietro casa; poi dalla mappa del grimorio tocca un luogo già visto e ci arriva."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[interfaccia-che-premia]]"
 insegna: []

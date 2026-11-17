@@ -57,13 +57,13 @@ export function missionsModel({ items = [], main = { text: '', at: null }, fresh
   for (const e of open) {
     const p = placeOf(e.at); if (!p) continue;
     const c = cardOf(e), g = pin(p, false);
-    g.slips.push({ id: e.id, main: false, on: !!e.tracked, isNew: e.status === 'new', done: false, sym: c.sym, title: c.title, kindWord: c.kindWord });
+    g.slips.push({ id: e.id, main: false, on: !!e.tracked, isNew: e.status === 'new', done: false, sym: c.sym, title: c.title, kindWord: c.kindWord, who: c.who });
     g.count += 1;
   }
   for (const e of freshDone) {
     const p = placeOf(e.at); if (!p) continue;
     const c = cardOf(e);
-    pin(p, true).slips.push({ id: e.id, main: false, on: false, isNew: false, done: true, sym: c.sym, title: c.title, kindWord: c.kindWord });
+    pin(p, true).slips.push({ id: e.id, main: false, on: false, isNew: false, done: true, sym: c.sym, title: c.title, kindWord: c.kindWord, who: c.who });
   }
   const perRegion = {};
   for (const e of open) { const r = REGION_OF(placeOf(e.at)); if (r) perRegion[r] = (perRegion[r] || 0) + 1; }

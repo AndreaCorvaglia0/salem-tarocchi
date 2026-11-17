@@ -9,6 +9,7 @@ dove:
   - "src/world/elsewhere.rules.js"
 cosa_fa_la_giocatrice: "Con un espediente da streghe (un libro della biblioteca, una pozione) esce da Salem in un piccolo mondo con una regola sua: sulle nuvole si può cadere, in un libro si cammina solo sulle righe scritte. Si muove chiedendo alle carte, in tutti e tre i modi."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[arriva-a-chi-e-avanti]]"
   - "[[nelle-prove-si-perde]]"
   - "[[le-carte-servono-a-muoversi]]"

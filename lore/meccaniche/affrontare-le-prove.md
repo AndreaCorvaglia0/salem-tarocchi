@@ -9,6 +9,7 @@ dove:
   - "src/data/trials/"
 cosa_fa_la_giocatrice: "Una prova è un pezzo di storia con bivi: a ogni bivio lei chiede alle carte e sceglie la strada. Ci sono stanze buone e cattive, fughe con qualcuno dietro, e un conto degli errori. Tre principali, una per capitolo, e alcune secondarie con le streghe."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[nelle-prove-si-perde]]"
   - "[[le-carte-servono-a-muoversi]]"
   - "[[arriva-a-chi-e-avanti]]"

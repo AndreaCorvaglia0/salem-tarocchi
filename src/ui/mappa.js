@@ -4,7 +4,9 @@
 // region. The optional things are paper slips pinned beside their place, with a card on tap
 // (missions/page.js; notes/missions-design.md). With the broom, and not in study mode, tapping a seen
 // outdoor place offers "Vola qui" (glue/fly.js decides whether she can take off from where she is; if
-// not, the caption says why).
+// not, the caption says why). Tapping a seen place shows HER notes on it (placenotes.js, data in
+// src/data/world/notes.js): «?» and one plain line while she knows nothing of it, then up to three short
+// notes; a place with a note she has not read yet has a small pencil dot, once.
 import { h, css, isNarrow } from '../core/dom.js';
 import { state, save } from '../core/state.js';
 import { call, has } from '../core/services.js';
@@ -15,6 +17,7 @@ import { nextStep, placeOf, isSeen, provenSeen } from './logic.js';
 import { test } from '../core/cond.js';
 import { EXTRAS, extrasShown, trackedExtra, track, extraDone } from '../core/extras.js';
 import { missionsParts } from './missions/page.js';
+import { placeNotes, adoptNotes, freshNotes, readNotes } from './placenotes.js';
 
 const CSS = `${SKETCH_CSS}
 .mp-reg{margin-top:4px}
@@ -24,6 +27,14 @@ const CSS = `${SKETCH_CSS}
 .mp-blank{margin:10px 0 18px!important}
 .mp-cap{min-height:56px;margin-top:10px!important;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .mp-cap .nx{color:${RED}}
+.mp-cap .q{font-size:1.25em;line-height:1}
+.mp-nt{flex:1 1 100%;min-width:0;margin:-6px 0 0;padding:0;list-style:none;overflow-wrap:anywhere}
+.mp-nt li{position:relative;padding-left:14px;line-height:1.22}
+.mp-nt li::before{content:'–';position:absolute;left:0;color:${PENCIL}}
+.mp-nt li.nw::before{content:'';top:.5em;left:1px;width:7px;height:7px;border-radius:50%;background:${PENCIL}}
+.mp-nt.un li::before{content:none}
+.mp-nt.un li{padding-left:0}
+.sk-hit .mp-dot{position:absolute;right:6px;top:5px;width:7px;height:7px;border-radius:50%;background:${PENCIL};box-shadow:0 0 0 1.5px #f3e9cf;pointer-events:none}
 `;
 
 const ALL = ALL_PLACES;
@@ -42,6 +53,7 @@ export function adoptSeen(s = state) {
 export function mappaPages(ctx) {
   css('ui-mappa', CSS);
   adoptSeen();
+  if (adoptNotes(state, test)) save();
   const extra = []; // anchors of the world that the sketch does not draw (interiors, card spots) still count as seen
   const seenAnchors = Object.keys(state.stats?.seen || {});
   for (const a of seenAnchors) if (!ALL.includes(a)) extra.push(a);
@@ -65,20 +77,31 @@ export function mappaPages(ctx) {
     for (const b of document.querySelectorAll('.sk-hit.on')) b.classList.remove('on');
     btn?.classList.add('on');
     cap.classList.add('gx-live');
-    const kids = [h('span', {}, `${p.label[0].toUpperCase()}${p.label.slice(1)}.`)];
+    // her notes: what she knows of the place, or «?» and one plain line
+    const N = placeNotes(id, test), fresh = new Set(freshNotes(state, id, test));
+    const name = `${p.label[0].toUpperCase()}${p.label.slice(1)}.`;
+    const kids = [N.known || N.named ? h('span', {}, name) : h('span.pencil.q', { 'aria-label': 'Non so che posto è' }, '?')];
     if (id === next) kids.push(h('span.nx', {}, tracked ? 'La cosa in più che seguo è qui.' : 'Devo andare qui.'));
     if (id === here) kids.push(h('span.pencil', {}, 'Sono qui.'));
     if (fly && id !== here && landable(id)) kids.push(h('button.gx-btn', { type: 'button', onclick: () => { ctx.close(); call('fly.to', id); } }, 'Vola qui'));
     else if (!fly && why && state.powers?.broom && !ctx.study) kids.push(h('span.pencil', {}, why));
+    const lines = N.known ? N.lines.map((l) => h(fresh.has(l.key) ? 'li.nw' : 'li', {}, l.t)) : N.unknown ? [h('li', {}, N.unknown)] : [];
+    if (lines.length) kids.splice(1, 0, h(N.known ? 'ul.mp-nt.pencil' : 'ul.mp-nt.pencil.un', {}, ...lines));
     cap.replaceChildren(...kids);
+    if (readNotes(state, id, test)) { save(); btn?.querySelector('.mp-dot')?.remove(); }
   };
   const region = (rid, width) => {
     const R = REGIONS[rid], any = Object.keys(R.places).some(seen) || REGION_OF(next) === rid || !!ms?.hasRegion(rid);
     const box = h('div.mp-reg', h('h3', {}, R.name, ms?.count(rid) ? h('small', {}, ms.count(rid)) : null));
     if (!any) { box.append(h('p.pencil.mp-blank', {}, 'Non ci sono ancora stata.')); return box; }
-    const sk = sketch(rid, { width, minWidth: phone ? 330 : 0, seen, next, where: ctx.study ? null : where, onPick: pick });
+    const sk = sketch(rid, { width, minWidth: phone ? 330 : 0, seen, next, where: ctx.study ? null : where, onPick: pick, unnamed: ctx.study ? null : (id) => { const N = placeNotes(id, test); return !N.known && !N.named; } });
     box.dataset.region = rid;
     box.append(sk);
+    // a pencil dot on a place with a note she has not read yet
+    for (const b of sk.querySelectorAll('.sk-hit')) {
+      const pid = Object.keys(R.places).find((k) => R.places[k].label === b.getAttribute('aria-label'));
+      if (pid && seen(pid) && freshNotes(state, pid, test).length) b.append(h('i.mp-dot'));
+    }
     ms?.pin(sk, rid, next);
     return box;
   };

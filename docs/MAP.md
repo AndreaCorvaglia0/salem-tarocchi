@@ -44,8 +44,8 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1105 |
-| `src/data` | 8 | 864 |
+| `src/core` | 11 | 1109 |
+| `src/data` | 9 | 992 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |
 | `src/data/elsewhere` | 3 | 179 |
@@ -55,16 +55,17 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/data/story` | 12 | 2034 |
 | `src/data/story/scripts` | 13 | 2848 |
 | `src/data/trials` | 7 | 920 |
-| `src/data/world` | 15 | 994 |
-| `src/glue` | 39 | 2595 |
+| `src/data/world` | 16 | 1185 |
+| `src/glue` | 41 | 2843 |
 | `src/reading` | 9 | 702 |
-| `src/sound` | 10 | 948 |
+| `src/sound` | 11 | 1013 |
 | `src/story` | 12 | 1067 |
 | `src/story/stage` | 14 | 1925 |
-| `src/systems` | 19 | 1523 |
+| `src/systems` | 19 | 1529 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 34 | 3691 |
-| `src/ui/missions` | 5 | 502 |
+| `src/ui` | 35 | 3765 |
+| `src/ui/missions` | 5 | 542 |
+| `src/ui/rite` | 2 | 504 |
 | `src/world` | 19 | 1428 |
 | `src/world/art` | 19 | 3232 |
 | `src/world/scene` | 20 | 2114 |
@@ -110,15 +111,24 @@ Provided by one file, sometimes wrapped by glue, called by name from anywhere.
 | `readings.keep` | glue/selfread |  | ui/selfread |
 | `readings.note` | glue/selfread |  | ui/selfread |
 | `review.open` | systems/index |  | ui/title |
+| `rite.after` | glue/rite |  | systems/consult, systems/reading, ui/selfread |
+| `rite.malva` | glue/rite |  | — |
+| `rite.overlay` | ui/rite/index |  | glue/rite |
+| `rite.preview` | ui/rite/index |  | glue/rite |
+| `rite.run` | glue/rite |  | systems/reading, ui/selfread |
+| `rite.state` | glue/rite |  | — |
 | `selfread.intro` | glue/selfread |  | ui/selfread |
 | `shop.open` | ui/index | glue/wire | — |
 | `sound.back` | glue/mood |  | glue/elsewhere, story/session, story/visit, systems/theme, ui/selfread, world/escape |
 | `sound.hold` | glue/mood |  | story/session, story/visit |
-| `sound.mood` | sound/index |  | glue/mood, story/session, story/visit, systems/theme, ui/selfread, ui/sfx … (+2) |
+| `sound.mood` | sound/index |  | glue/mood, glue/rite, story/session, story/visit, systems/theme, ui/rite/index … (+4) |
 | `sound.music` | sound/index |  | — |
-| `sound.play` | sound/index |  | glue/bonds, glue/fly, story/dialogue, story/session, story/visit, systems/theme … (+6) |
+| `sound.play` | sound/index |  | glue/bonds, glue/fly, glue/rite, story/dialogue, story/session, story/visit … (+8) |
+| `sound.preload` | sound/index |  | ui/rite/index |
+| `sound.sample` | sound/index |  | ui/rite/index |
 | `sound.sfx` | sound/index |  | — |
 | `sound.stop` | sound/index |  | story/chapter |
+| `sound.want` | sound/index |  | glue/rite |
 | `story.busy` | story/index |  | glue/bonds, glue/fly, glue/home, glue/lessons, glue/street, glue/wire |
 | `story.chapterCard` | story/chapter |  | main |
 | `story.choose` | story/index |  | glue/clients, glue/elsewhere, glue/trials |
@@ -207,18 +217,18 @@ Every service that is called is provided.
 
 Touch these with care: many files depend on them.
 
-- `src/core/state.js` (73)
-- `src/core/dom.js` (62)
+- `src/core/state.js` (74)
+- `src/core/dom.js` (64)
+- `src/core/services.js` (56)
 - `src/core/progress.js` (54)
-- `src/core/services.js` (52)
 - `src/data/cards.base.js` (52)
 - `src/core/bus.js` (39)
-- `src/core/cond.js` (27)
+- `src/core/cond.js` (28)
 - `src/ui/paper.js` (25)
 - `src/data/story/index.js` (24)
 - `src/data/story/h.js` (21)
 - `src/world/art/px.js` (20)
+- `src/core/fonts.js` (15)
 - `src/world/art/palette.js` (15)
-- `src/core/fonts.js` (13)
 - `src/data/cards.js` (13)
 - `src/world/maps.js` (12)

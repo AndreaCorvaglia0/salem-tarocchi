@@ -65,6 +65,7 @@ export const fresh = () => ({
   trialSense: null,
   // «Che ne pensi di lei?» (glue/opinions.rules.js): what she said of the people she met, what she heard of them
   opinions: {},
+  notesAck: null, // place notes she has read (ui/placenotes.js); null on an old save: what is true now counts as read
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
@@ -86,6 +87,7 @@ export const migrate = (s) => {
   if (typeof s.extras !== 'object' || !s.extras || Array.isArray(s.extras)) s.extras = {};
   if (typeof s.track !== 'string') s.track = null;
   if (s.extrasAck != null && (typeof s.extrasAck !== 'object' || Array.isArray(s.extrasAck))) s.extrasAck = null;
+  if (s.notesAck != null && (typeof s.notesAck !== 'object' || Array.isArray(s.notesAck))) s.notesAck = null;
   if (!Array.isArray(s.readings)) s.readings = [];
   for (const k of ['bonds', 'trials', 'studied', 'studiedXp']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {};
   if (typeof s.trialSense !== 'string') s.trialSense = null;

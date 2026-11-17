@@ -7,6 +7,7 @@ dove:
   - "src/glue/garden.js"
 cosa_fa_la_giocatrice: "Cinque lezioni brevi dietro la capanna di Ortica: l'acqua, la luce, la terra e il drenaggio, il vaso e la potatura, semina e talea. Ognuna mostra una cosa, fa una domanda con tre cose da fare e finisce con un compito per il suo orto."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[prima-di-tutto-corretto]]"
   - "[[erbe-come-storia]]"
   - "[[arriva-a-chi-e-avanti]]"

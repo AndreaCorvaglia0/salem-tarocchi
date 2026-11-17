@@ -10,6 +10,7 @@ dove:
   - "src/ui/lessons.js"
 cosa_fa_la_giocatrice: "Ascolta una maestra in una scena breve. Le lezioni della storia (il mazzo, la carta singola, passato-presente-futuro, la croce celtica, semi ed elementi, pianeti) restano come pagine nel grimorio. Le cinque lezioni sui Minori e quella sulle capovolte hanno due esempi svolti e due domande di pratica."
 serve:
+  - "[[vede-solo-quello-che-sa]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[arriva-a-chi-e-avanti]]"
   - "[[prima-di-tutto-corretto]]"

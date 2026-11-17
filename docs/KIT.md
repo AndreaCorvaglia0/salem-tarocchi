@@ -178,8 +178,12 @@ cambia con `districts` (solo l'aspetto, non dove si cammina).
 **Le cose in più sulla mappa.** Ogni voce del registro (`src/core/extras.js`: una prova, una lezione, un
 mondo, una missione) compare come un foglietto appuntato accanto al suo posto, e toccandolo si apre la sua
 scheda. La scheda si scrive a mano in `TITLES` di `src/ui/missions/titles.js`: `T(titolo, tipo, chi me
-l'ha detto, cosa ci guadagno)`; il titolo è corto e non svela niente, «cosa ci guadagno» è concreto ma senza
-nominare l'oggetto del premio. `tests/missions.page.test.mjs` fallisce finché una voce nuova non ha la sua
+l'ha detto, che cosa le hanno detto, { later, hunch })`. Vale `lore/principi/vede-solo-quello-che-sa.md`:
+il titolo evoca e non svela; il tipo è `null` (foglietto neutro) se lei non sa ancora che cosa sia; il testo
+è solo quello che ha sentito, con parole sue; `later` cambia il testo dopo una scena; `hunch` è un
+presentimento vago, facoltativo e raro. Mai premi né contenuto: `tests/knows-only.test.mjs` lo controlla.
+Ogni posto della mappa ha le sue note in `src/data/world/notes.js` (`named`, una riga `unknown`, note con
+condizione); toccandolo lei legge i suoi appunti, o «?» se non lo conosce. `tests/missions.page.test.mjs` fallisce finché una voce nuova non ha la sua
 scheda, e anche se un file nuovo aggiunge voci al registro (allora si aggiunge a `registryIds()` del test).
 
 ## Dopo

@@ -3,7 +3,7 @@
 // in pencil. Places not yet seen stay blank; the next one is circled in red pencil; a red pencil cross
 // and «io» where she stands. What is drawn where comes from the world's maps (sketchmap.js: places,
 // positions, lanes, her position); this file only gives it the hand-drawn look.
-// sketch(region, { width, minWidth, seen, next, where, onPick }) -> element
+// sketch(region, { width, minWidth, seen, next, where, onPick, unnamed }) -> element
 //   where: world.where() ({ map, x, y }) or null; onPick(id, place, button): a tap on a seen place.
 //   The optional things' slips are added on top by ui/missions/page.js.
 import { h } from '../core/dom.js';
@@ -20,7 +20,7 @@ function mark(g, kind, k) {
   g.restore(); g.stroke();
 }
 
-export function sketch(regionId, { width = 320, minWidth = 330, seen = () => false, next = null, where = null, onPick = null } = {}) {
+export function sketch(regionId, { width = 320, minWidth = 330, seen = () => false, next = null, where = null, onPick = null, unnamed = null } = {}) {
   const R = REGIONS[regionId], W = Math.round(width), H = heightOf(regionId, W, minWidth), d = Math.min(2, globalThis.devicePixelRatio || 1);
   const Lay = layout(regionId, W, H), k = Lay.k;
   const [cv, g] = canvas(W * d, H * d);
@@ -62,8 +62,9 @@ export function sketch(regionId, { width = 320, minWidth = 330, seen = () => fal
     if (on) {
       const b = Lay.labels[id];
       shown.push(b);
-      wrap.append(h('span.sk-lab', { style: { left: `${(b.l + b.r) / 2}px`, top: `${b.t}px` } }, b.lines.join('\n')));
-      if (onPick) wrap.append(h('button.sk-hit', { type: 'button', 'aria-label': p.label, style: { left: `${x}px`, top: `${y}px` }, onclick: (e) => onPick(id, p, e.currentTarget) }));
+      const anon = !!(unnamed && unnamed(id)); // seen from outside, name not known yet: a pencil «?» (lore/principi/vede-solo-quello-che-sa.md)
+      wrap.append(h(anon ? 'span.sk-lab.sk-anon' : 'span.sk-lab', { style: { left: `${(b.l + b.r) / 2}px`, top: `${b.t}px` } }, anon ? '?' : b.lines.join('\n')));
+      if (onPick) wrap.append(h('button.sk-hit', { type: 'button', 'aria-label': anon ? 'Un posto che non conosco' : p.label, style: { left: `${x}px`, top: `${y}px` }, onclick: (e) => onPick(id, p, e.currentTarget) }));
     }
   }
   // where she is: a small red pencil cross and «io», on her real spot, moved off any name
@@ -83,6 +84,7 @@ export function sketch(regionId, { width = 320, minWidth = 330, seen = () => fal
 export const SKETCH_CSS = `
 .sk{position:relative;margin:4px auto 0}
 .sk canvas{display:block}
+.sk-anon{font-weight:700;font-size:22px}
 .sk-lab{position:absolute;transform:translate(-50%,0);font:18px/19px ${HAND};color:${PENCIL};white-space:pre;text-align:center;pointer-events:none;padding:0 4px;border-radius:6px;background:#ede2c5e0}
 .sk-hit{position:absolute;width:48px;height:48px;transform:translate(-50%,-50%);border:0;background:none;border-radius:50%;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .sk-hit:focus-visible{outline:2px dashed ${RED}}

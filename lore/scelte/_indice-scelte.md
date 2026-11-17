@@ -33,13 +33,12 @@ Né da una condizione, né per nome dal codice (src fuori da src/data).
 - `edera.light`: c3.js#c3.edera
 - `exam1.malva`: c1b.js#c1.exam1
 - `hat.miller`: hat.js#trial.hat.after
-- `jail.barrels`: c3.js#c3.jail
-- `jail.chains`: c3.js#c3.jail
 - `s0.doubts`: sessions.js#s0
 
 ## Flag letti e mai impostati
 
-Nessuno.
+- `garden.lesson.acqua`
+- `library.first`
 
 ## Tutte le scelte
 
