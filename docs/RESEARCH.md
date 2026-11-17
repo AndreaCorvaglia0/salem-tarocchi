@@ -371,3 +371,24 @@ del 2020 dello stesso gruppo.
 - Se gli intervalli che crescono (1, 3, 7, 16) battano quelli uguali: non controllato.
 - PubMed non ha dato gli abstract di Bertsch 2007 e Kornell e Bjork 2008 (controllo anti-robot): letti dalle copie
   degli autori, non aggirato.
+
+## I tarocchi come gioco, le minchiate, semi ed elementi (17 novembre 2026)
+
+Controllato per il backlog (`docs/BACKLOG.md`, sezione 3). Fonti lette nei risultati di ricerca, non per intero.
+
+- **Nascono come gioco.** I primi mazzi sono dell'Italia del nord, prima metà del Quattrocento, per un gioco
+  di prese; la novità era il seme dei trionfi. La lettura e le origini «egizie» arrivano a fine Settecento con
+  Court de Gébelin (1781) ed Etteilla. Fonti: World of Playing Cards (wopc.co.uk/tarot); History.com
+  (history.com/articles/tarot-cards-renaissance); Mary K. Greer (marykgreer.com, 2011).
+- **Le regole comuni.** Si risponde al seme; chi non può deve giocare un trionfo se ne ha; vince il trionfo più
+  alto o, senza trionfi, la carta più alta del seme d'uscita; chi prende esce alla mano dopo. Il Matto nei
+  giochi italiani è una scusa: si gioca in qualunque momento e non prende. Fonti: pagat.com (Tarocchi in
+  Piedicavallo); Britannica («Tarot game»); Wikipedia («Tarot card games», «Tarocchini»).
+- **Minchiate fiorentine.** 97 carte: ai trionfi si aggiungono i dodici segni dello zodiaco, i quattro elementi
+  e le virtù. Gioco fiorentino, in uso dal Cinquecento. Fonti: wopc.co.uk/italy/minchiate; naibi.net (F. Pratesi).
+  Le date variano tra le fonti (inizio o metà Cinquecento): non dare una data nel gioco.
+- **Semi ed elementi.** Bastoni fuoco, Coppe acqua, Spade aria, Denari terra è l'abbinamento della Golden
+  Dawn, oggi il più diffuso; esistono tradizioni che scambiano aria e fuoco e autori che rifiutano
+  l'abbinamento. Nel gioco è «una tradizione», detta da un personaggio. Fonti: discussioni di praticanti
+  (patheos.com, angelorum.co), non storiografia: affidabilità media.
+- **Non verificato:** sibille italiane; il romanzo delle storie raccontate con le carte.
