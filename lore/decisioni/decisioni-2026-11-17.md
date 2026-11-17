@@ -55,3 +55,13 @@ Andrea ha approvato la rete dell'inverno di Ruta e le tre scelte proposte: tre c
 Boston. I file in `lore/retroscena/` passano a `fonte: deciso`. Restano nascosti: affiorano poco e mai spiegati.
 Il tempo: il capitolo 2 copre primavera ed estate, l'arresto è a fine estate. Malva è vicina ai sessanta.
 Le correzioni di parole ai copioni sono in `notes/retroscena.md`, sezione c.
+
+## 8. Tre decisioni lasciate al capofila (17 novembre, «decidi tu»)
+
+- **«Un sacco dal mulino» resta in fondo alla catena delle storie secondarie** (dopo la sfida di Ginepra).
+  Perché: la scena comincia dal mugnaio che l'ha vista volare all'alba, cosa che succede solo dopo il finale, e le
+  storie secondarie arrivano una alla volta. Costo accettato: chi non fa le prove secondarie non la vede.
+- **Il genere di lei.** Nelle storie scritte a mano (principale e secondarie) le si parla al femminile: il gioco
+  è per lei. Restano neutre solo le frasi che si riusano (motore delle letture, opinioni, testi generati).
+  Una storia già scritta in forma neutra (il sacco dal mulino) va bene così.
+- **Dati di nascita.** Restano solo sul telefono: la copia del salvataggio nell'archivio dell'artefatto è spenta.

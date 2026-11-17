@@ -10,7 +10,7 @@ in_salem:
   - "[[protagonista]]"
   - "[[conoscere-pianeti-e-segni]]"
 si_controlla_con: "tests/core.portrait.test.mjs (i dati della nascita); a mano: ogni segnaposto di `fill()` in src/core/cond.js ha la sua frase neutra"
-rischi: "DESIGN.md dice «tenuti solo sul telefono», ma src/core/vault.js copia tutto il salvataggio, data compresa, anche nell'archivio dell'artefatto legato all'account. Va detto chiaro, oppure cambiato."
+rischi: "Il salvataggio contiene nome e data: ogni copia fuori dal telefono rompe la promessa. Dal 17 novembre la copia nell'archivio dell'artefatto è spenta (CLOUD in src/core/vault.js); il codice della partita da copiare resta, ed è lei a decidere dove incollarlo."
 fonte: "DESIGN.md, Il ritratto («chiesti all'inizio e tenuti solo sul telefono»); WRITING.md, Esempio: la prima seduta"
 ---
 

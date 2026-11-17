@@ -27,8 +27,8 @@ Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `doc
 - Niente si inventa in silenzio: nel vault ogni riga nuova è `fonte: proposto` finché Andrea non dice sì.
 - Il testo segue `docs/WRITING.md`. Lo si legge ad alta voce prima di consegnare.
 - Si dice che cosa è stato verificato e che cosa no. Nessuno strumento prova un telefono vero o ascolta l'audio.
-- Il genere di lei: la storia principale le parla al femminile, le frasi delle carte e le opinioni no. Per una
-  storia secondaria la regola non è decisa (`lore/README.md`, «Il genere»): non sceglierla in silenzio.
+- Il genere di lei: nelle storie scritte a mano, principale e secondarie, le si parla al femminile; restano senza
+  genere solo i testi che si riusano (frasi delle carte, opinioni). Deciso in `lore/decisioni/`, punto 8.
 
 ## I comandi che dicono che cosa manca
 

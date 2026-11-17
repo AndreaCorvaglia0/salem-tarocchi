@@ -31,7 +31,12 @@ const idbPut = async (k, v) => { const d = await idb(); if (!d) return false; re
 // cloud: null = not known yet, false = not available to this viewer, true = a write has been confirmed
 const st = { cloud: null, idb: null, cloudAt: 0, restored: null };
 let docsP = null;
+// OFF since 17 Nov 2026: the game promises that the name and the birth date stay on the phone, and the save
+// holds them. The game is played on its own page, where this store does not exist anyway; set CLOUD to true
+// only together with a change of that promise (docs/DESIGN.md, «Il ritratto»).
+const CLOUD = false;
 const docs = () => (docsP ||= (async () => {
+  if (!CLOUD) return null;
   const use = globalThis.claude?.use;
   if (typeof use !== 'function') return null;
   const [db, user] = await Promise.all([withTimeout(use.call(globalThis.claude, 'db'), 8000), withTimeout(use.call(globalThis.claude, 'user'), 8000)]);

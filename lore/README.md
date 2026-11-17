@@ -46,11 +46,7 @@ la stessa cosa dal lato della persona: la frase che lei non pronuncerebbe. Una s
 in una riga che lo cita; entra nell'`arco` quando Andrea lo conferma e il fatto passa a `deciso`. L'`arco`
 elenca solo fatti accettati, in ordine.
 
-**Il genere di lei.** Le fonti: `lore/metodo/non-dare-un-genere.md` dice che la storia principale si rivolge a
-lei al femminile («sei arrivata»), che le frasi delle carte (`src/data/reading/voices/`) e le opinioni sono
-senza genere, e che un testo per chi non si conosce evita aggettivi e participi con un genere
-(`docs/READING.md`, «Chi chiede può essere chiunque»). Nel codice, oltre alla storia principale, anche sessioni,
-visite, ritratto e le righe di diario delle prove secondarie esistenti (`trials.js`) la trattano al femminile.
-Nessun documento dice che cosa debba fare una storia secondaria nuova: la storia del cappello è senza genere
-perché lo chiedeva il compito. Non è deciso: chi scrive non sceglie in silenzio, dice nelle note quale forma ha
-usato e lo lascia ad Andrea.
+**Il genere di lei.** Deciso il 17 novembre ([[decisioni-2026-11-17]], punto 8): nelle storie scritte a mano,
+principale e secondarie, le si parla al femminile («sei arrivata»). Restano senza genere solo i testi che si
+riusano: le frasi delle carte (`src/data/reading/voices/`), le opinioni, i testi generati (`docs/READING.md`,
+«Chi chiede può essere chiunque»).
