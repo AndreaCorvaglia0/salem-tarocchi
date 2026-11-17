@@ -27,6 +27,10 @@ Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `doc
 - Qualcuno sta già giocando. Il pezzo dipende da quello che lei **ha** (un flag, una carta, un potere, una
   persona incontrata), mai dal passo della storia in cui si trova. Ogni chiave nuova del salvataggio ha un
   valore in `fresh()` di `src/core/state.js`.
+- **Lei vede solo quello che sa.** Ogni riga mostrata (biglietti, note dei luoghi, persone, diario) risponde a
+  «come lo sa, lei?»: l'ha visto, gliel'hanno detto, o è un presentimento vago. Mai il premio, il contenuto o
+  qualcosa preso da `lore/retroscena`. Quello che non sa è un «?» con una riga misteriosa; quello che sa sono
+  appunti brevi, non il solo nome. Principio: `lore/principi/vede-solo-quello-che-sa.md`.
 - Niente si inventa in silenzio: nel vault ogni riga nuova è `fonte: proposto` finché Andrea non dice sì.
 - Il testo segue `docs/WRITING.md`. Lo si legge ad alta voce prima di consegnare.
 - Si dice che cosa è stato verificato e che cosa no. Nessuno strumento prova un telefono vero o ascolta l'audio.

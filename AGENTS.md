@@ -13,6 +13,11 @@ follow `docs/KIT.md` (trials: `docs/TRIALS.md`; tools and screenshots: `docs/TOO
   duel screen: `mechanics/duel/`; locks: `mechanics/riddles/`; walking and taps: `systems/walker.js`,
   `systems/tapnav.js`; pixel helpers: `art/px.js`, `art/palette.js`; sound: `systems/sound/`). Copy and adapt
   freely into your own folder; do not import from it.
+- She sees only what she knows. Before showing any line, ask "how does she know this?" (she saw it, was told,
+  or it is a vague presentiment in her own voice). Never show a reward, what will happen, or anything from
+  `lore/retroscena`. Unknown things get a "?" and one mysterious line; known things get short notes, never the
+  bare name. Every world-facing text carries a condition (`src/core/cond.js`). See
+  `lore/principi/vede-solo-quello-che-sa.md`.
 - Say what you verified and what you did not. Nobody can test a real phone or listen to audio here.
 - Someone is already playing with a saved game. Anything you add must reach her too: register it in
   `src/core/extras.js` (chains with `after`, `key` for what the story needs), make it depend on what she

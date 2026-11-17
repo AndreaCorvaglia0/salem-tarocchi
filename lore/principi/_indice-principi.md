@@ -18,3 +18,4 @@ La filosofia del gioco in 16 regole. Ognuna dice come una cosa nuova la rompereb
 - [[pochi-concetti-legati]] — Pochi concetti, legati tra loro; prima di aggiungere si guarda se una cosa che c'è già può farlo.
 - [[sempre-chiaro-cosa-fare]] — Si capisce sempre che cosa fare e che cosa viene dopo; si impara una cosa alla volta, usandola.
 - [[le-carte-servono-a-muoversi]] — Le carte si ricordano perché servono nella storia: aprono sigilli, salvano dagli Esami, indicano la strada ai bivi.
+- [[vede-solo-quello-che-sa]] — Ogni schermata mostra solo quello che lei ha visto o le hanno detto: mai il premio, il contenuto o i retroscena; l'ignoto è un «?» misterioso.

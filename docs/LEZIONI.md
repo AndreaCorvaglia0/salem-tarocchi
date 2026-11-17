@@ -168,6 +168,15 @@ Vale per il generatore di storie e per il motore comune con Mnemopolis.
 Una pagina di progetto prima del codice; un tema per fase, che finisce con qualcosa da provare dal telefono;
 agenti economici per i compiti chiari, ognuno con le sue cartelle; uno solo unisce, prova e pubblica.
 
+**34. Chi scrive sa più di chi gioca: si mostra solo quello che lei sa.**
+*Sul biglietto di una missione avevamo messo «Cosa ci guadagno»; toccando un edificio usciva solo il nome.*
+Sono lo stesso errore dai due lati: dire troppo e dire niente. Regola: prima di mostrare una riga ci si chiede
+«come lo sa, lei?» (l'ha visto, gliel'hanno detto, lo sente). Premio e contenuto non si annunciano mai; al
+massimo un titolo evocativo. Quello che non conosce è un «?» misterioso, quello che conosce sono appunti brevi
+che crescono. Ogni testo ha una condizione, e un test impedisce che i retroscena arrivino sullo schermo.
+E la richiesta a un agente lo dice per prima cosa: chiedere «che cosa ci guadagna» è stato un errore di chi
+ha scritto la consegna, non di chi l'ha eseguita.
+
 ## Da aggiungere
 
 Questo elenco non è finito. Candidati: come si sceglie che cosa lasciare fuori; quanto testo regge una
