@@ -243,6 +243,11 @@ Il menù è un oggetto della storia, scritto a mano in prima persona. Tre segnal
 2. **Carte**: le caselle (quelle vuote: sagoma e una diceria); la pagina di una carta segue la scheda del
    libro; da qui lezioni, ripasso, lettura col mazzo vero.
 3. **Mappa**: schizzo a inchiostro, prossimo luogo cerchiato, appunti a matita; con la scopa, "Vola qui".
+   Lo schizzo resta disegnato a mano ma dice il vero: i luoghi, i loro nomi, dove stanno e le strade tra
+   loro vengono dalle mappe del mondo (`map` in `src/data/world/<regione>.js`, letto da `src/ui/sketchmap.js`).
+   Una croce rossa a matita e «io» stanno dove lei è davvero (dentro una casa o in Altrove: alla sua porta), e
+   la pagina si apre sulla regione in cui si trova. I nascondigli delle carte non sono luoghi a sé: stanno nel
+   luogo che li contiene (la tenda e il davanzale nel vicolo, il banco e il carretto nel mercato).
 
 Dal titolo, "Sfoglia il grimorio" apre le stesse pagine senza giocare. A schermo durante il gioco: il
 prossimo passo e la barra del livello. Nient'altro. Niente statistiche, numeri di fiducia, elenchi di missioni.

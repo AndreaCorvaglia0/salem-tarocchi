@@ -107,6 +107,36 @@ export default {
     reeds: [1, 20, "L'erba alta"],
     arrest_a: [2, 9, 'Conestabile'], arrest_b: [7, 9, 'Conestabile'], arrest_c: [5, 11, 'Conestabile'], // round the cottage door (c2.arrest)
   },
+  // The grimoire's hand-drawn map (src/ui/sketchmap.js, docs/KIT.md "La mappa del grimorio"): one entry per anchor.
+  //   { label, kind }  a place on the sketch: its pencil name (what the game calls it) and its little drawing
+  //   { in: 'name' }   part of that place: its red circle, its pencil notes and «seen» go to the place
+  //   { off: 'why' }   not on the map
+  // Card hiding spots are not places of their own: they belong to the place they are in.
+  map: {
+    forest_gate: { label: 'il cancello del bosco', kind: 'gate' },
+    cottage_door: { label: 'la mia capanna', kind: 'hut' },
+    orto: { label: 'il mio orto', kind: 'garden', when: { flag: 'garden.given' } }, // once Ortica has given the beds
+    library_door: { label: 'la biblioteca', kind: 'library' },
+    upper: { label: 'la parte alta', kind: 'trough' },
+    meeting_door: { label: 'la casa delle riunioni', kind: 'church' },
+    court_door: { label: 'il tribunale', kind: 'court' },
+    trapdoor: { label: 'la botola', kind: 'trap' },
+    market: { label: 'il mercato', kind: 'stall' },
+    stall: { in: 'market' }, // the haberdasher's stall (a card under it)
+    cart: { in: 'market' }, // the hay cart (a card under it)
+    square: { label: 'la piazza', kind: 'well' },
+    well: { in: 'square' }, // the well in the middle of the square
+    lane: { label: 'il vicolo', kind: 'lane' },
+    curtain: { in: 'lane' }, // the seamstress's curtained window (a card behind it)
+    venusglass: { in: 'lane' }, // the windowsill with a glass (a card on it)
+    shop_door: { label: 'la bottega', kind: 'shop' },
+    malva_door: { label: 'casa di Malva', kind: 'house' },
+    garden: { in: 'malva_door' }, // Malva's own vegetable patch, beside her house (a card in it)
+    arrival: { label: 'la strada', kind: 'road' },
+    road_card: { in: 'arrival' }, // the first card, in the snow of the road
+    reeds: { off: 'tall grass at the market edge: Minor Arcana, no place of its own' },
+    arrest_a: { off: 'a constable at the arrest' }, arrest_b: { off: 'a constable at the arrest' }, arrest_c: { off: 'a constable at the arrest' },
+  },
   doors: [
     { at: 'malva_door', to: 'malva.door' },
     { at: 'cottage_door', to: 'cottage.door' },

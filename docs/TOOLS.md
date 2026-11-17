@@ -108,6 +108,12 @@ trial with two places and a person who changes with her affinity: `src/data/tria
 6. `npm test`, `node scripts/prose.mjs`. `node scripts/map.mjs --check` fails after any new file (the line
    counts per folder change): the lead rewrites `docs/MAP.md` with `node scripts/map.mjs`.
 7. Screens: `Looking at it` below.
+8. **The grimoire's map.** A new anchor in a region's map (`village.js`, `forest.js`, `depths.js`) needs an
+   entry in that file's `map`: `{ label, kind }` (a place: its pencil name and its drawing in
+   `src/ui/sketchink.js`), `{ in: '<anchor>' }` (part of a place: a card's hiding spot) or `{ off: 'why' }`. A new
+   room or Altrove map needs `mapDoor: 'village.<door>'`. Positions, lanes and her mark are computed from the tiles
+   (`src/ui/sketchmap.js`); `tests/map.sketch.test.mjs` fails until the new anchor, door or story target has a
+   place, and checks that no two names overlap from 300 to 520 px.
 
 ## The vault in a browser: `<site>/lore/`
 
@@ -144,6 +150,10 @@ or `chromium`). Start a server first: `npx vite` (or `npm run build && npx vite 
 - New buttons ignore taps for 650 ms: in the steps set `window.__salemNoGuard = true` via `page.evaluate`.
 - Never `return` the promise of a service that opens a screen (`window.__salem.call('grimoire.open')`) from
   `page.evaluate`: it resolves only when the screen closes, and the step hangs. Wrap it in braces.
+- The map tab: `window.__salem.call('grimoire.open', { tab: 'mappa' })` (in braces, see below). To see every
+  place, mark them seen first: `s.stats.seen[a] = true` for each key of `await window.__salem.call('world.anchors')`
+  (and `s.flags['garden.given'] = true` for her garden). `window.__salem.travel({ map, x, y })` puts her on an exact
+  tile, to see her mark between two places.
 - `?debug` gives `window.__salem` (`state`, `call(name, ...)`, `travel(anchor)`, `where()`, `give(ids)`,
   `setStep(id)`, `jump(key)`). The skip points that exist (`SKIPS` in `src/glue/debug.rules.js`) are
   `?debug&skip=c2`, `c3` and `trial` (the start of chapter 2, chapter 3, and just before the trial; the hosted

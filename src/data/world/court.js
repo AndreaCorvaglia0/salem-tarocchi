@@ -2,6 +2,7 @@
 export default {
   id: 'court',
   name: 'Il tribunale',
+  mapDoor: 'village.court_door', // inside: on the grimoire's map she is at its door
   inside: true,
   ground: ':',
   start: 'door',

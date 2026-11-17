@@ -78,6 +78,21 @@ export default {
     deep: [33, 10, 'Il bosco fitto'],
     grove: [5, 33, "L'erba alta"],
   },
+  // the grimoire's map (format: village.js `map`)
+  map: {
+    entry: { label: 'il cancello', kind: 'gate' }, // the same gate as the village's «cancello del bosco»
+    campfire: { label: 'il bivacco', kind: 'fire' },
+    ortica_hut: { label: 'la capanna di Ortica', kind: 'hut' },
+    grove: { label: "l'erba alta", kind: 'grass' },
+    den: { label: 'la tana', kind: 'den' },
+    pond: { label: 'lo stagno', kind: 'pond' },
+    mill: { label: 'il mulino', kind: 'mill' },
+    boundary: { label: 'il confine', kind: 'stones' },
+    graveyard: { label: 'il cimitero', kind: 'graves' },
+    spring: { label: 'la fonte', kind: 'spring' },
+    deep: { label: 'il bosco fitto', kind: 'pines' },
+    lantern: { in: 'deep' }, // the Hermit's lantern, inside the deep wood (a card by it)
+  },
   doors: [{ at: 'entry', to: 'village.forest_gate', look: 'gate' }],
   chests: [
     { id: 'forest.chest.mill', at: [29, 21], ask: { kind: 'astro' }, give: { coins: 10, xp: 15 } },

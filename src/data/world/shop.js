@@ -2,6 +2,7 @@
 export default {
   id: 'shop',
   name: 'La bottega',
+  mapDoor: 'village.shop_door', // inside: on the grimoire's map she is at its door
   inside: true,
   ground: '_',
   start: 'door',

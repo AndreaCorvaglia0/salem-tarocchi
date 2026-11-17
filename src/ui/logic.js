@@ -6,6 +6,7 @@ import { MAJORS, MINORS, SUITS, CARD } from '../data/cards.base.js';
 import { LESSONS } from '../data/lessons.js';
 import { STEPS } from '../data/story/index.js';
 import { fill } from '../core/cond.js';
+import { placeOf, ALL_PLACES } from './sketchmap.js';
 
 // ---- the 22 slots: the Fool apart, then three rows of seven (the three chapters)
 export const majorSlots = () => ({
@@ -47,16 +48,26 @@ export const shopRow = (s = live) => Math.max(1, Math.min(3, s.chapter || 1));
 export const shopCards = (s = live) => MAJORS.filter((c) => c.row === shopRow(s) && !s.cards?.[c.id]?.found).sort((a, b) => a.n - b.n).slice(0, 2).map((c) => c.id);
 export const canBuy = (price, s = live) => (s.coins || 0) >= price;
 
-// ---- the map: the places of the sketch, and which place an anchor belongs to
-// interiors belong to their door; anything else is its own place
-const INTERIOR = { malva: 'village.malva_door', cottage: 'village.cottage_door', court: 'village.court_door', meeting: 'village.meeting_door', shop: 'village.shop_door' };
-export const placeOf = (anchor) => {
-  if (!anchor || typeof anchor !== 'string') return null;
-  const map = anchor.split('.')[0];
-  return INTERIOR[map] || anchor;
-};
+// ---- the map: which place of the sketch an anchor belongs to (sketchmap.js, from the world's maps:
+// an interior or a world of Altrove belongs to its door, a card's spot to the place it is in)
+export { placeOf };
 export const anchorsOfPlace = (place, all) => [place, ...(all || []).filter((a) => placeOf(a) === place && a !== place)];
 export const isSeen = (place, s = live, all = []) => anchorsOfPlace(place, all).some((a) => !!s.stats?.seen?.[a]);
+// The places a save proves she has been to even if `stats.seen` does not say so (a place new on the map,
+// an anchor added after she walked by): every anchor she has seen gives its place; every story step
+// before the current one, her place; every optional piece she has done (a trial, a lesson, an errand: not
+// a side note, whose card she may have bought), its place; her garden once Ortica has given it.
+// extras: the registry (core/extras.js EXTRAS); done(e): whether that entry is done.
+export function provenSeen(s = live, { steps = STEPS, extras = [], done = () => false } = {}) {
+  const out = new Set();
+  for (const a of Object.keys(s.stats?.seen || {})) if (s.stats.seen[a]) out.add(placeOf(a));
+  const i = (steps || []).findIndex((x) => x.id === s.step);
+  const past = i < 0 ? (s.flags?.['ending.seen'] ? steps : []) : steps.slice(0, i);
+  for (const st of past) if (st.at) out.add(placeOf(st.at));
+  for (const e of extras || []) if (e?.at && e.kind !== 'side' && done(e)) out.add(placeOf(e.at));
+  if (s.flags?.['garden.given']) out.add('village.orto');
+  return [...out].filter((p) => ALL_PLACES.includes(p));
+}
 
 // the ceremony: the detail nearest to a tap (x, y in % of the image)
 export function nearestDetail(details, x, y) {

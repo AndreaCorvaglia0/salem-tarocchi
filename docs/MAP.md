@@ -55,7 +55,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/data/story` | 12 | 2024 |
 | `src/data/story/scripts` | 13 | 2848 |
 | `src/data/trials` | 7 | 920 |
-| `src/data/world` | 14 | 865 |
+| `src/data/world` | 14 | 933 |
 | `src/glue` | 38 | 2553 |
 | `src/reading` | 9 | 702 |
 | `src/sound` | 10 | 948 |
@@ -63,7 +63,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/story/stage` | 14 | 1925 |
 | `src/systems` | 19 | 1523 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 32 | 3345 |
+| `src/ui` | 34 | 3726 |
 | `src/world` | 18 | 1376 |
 | `src/world/art` | 17 | 2401 |
 | `src/world/scene` | 20 | 2102 |

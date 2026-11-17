@@ -4,6 +4,7 @@
 export default {
   id: 'library',
   name: 'La biblioteca',
+  mapDoor: 'village.library_door', // inside: on the grimoire's map she is at its door
   inside: true,
   ground: '_',
   start: 'door',

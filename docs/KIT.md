@@ -145,6 +145,16 @@ Modello: `src/data/elsewhere/book.js` (Dentro un libro) e `clouds.js` (Sulle nuv
 8. **Che cosa decide Andrea.** Se il mondo gli piace («piccolo, folle e tutto diverso»), la regola, l'oggetto
    che si porta a casa, che cosa si perde cadendo.
 
+## La mappa del grimorio
+
+Ogni ancora di una regione (`village.js`, `forest.js`, `depths.js`) ha una voce nel suo campo `map`, accanto
+alle ancore: `{ label, kind }` se è un luogo dello schizzo (il nome a matita, minuscolo, quello che il gioco usa
+nei copioni; `kind` è il disegnino, in `src/ui/sketchink.js`), `{ in: '<ancora>' }` se fa parte di un luogo
+(il nascondiglio di una carta, un punto vicino), `{ off: 'perché' }` se non va sulla mappa (le guardie, l'erba
+dei Minori). Una mappa nuova dentro una casa o in Altrove dice a quale porta appartiene: `mapDoor:
+'village.<porta>'`. Posizioni e strade si calcolano dalle mattonelle: non si scrivono a mano. Un'ancora nuova,
+una porta nuova, un posto nuovo dove la storia la manda: `tests/map.sketch.test.mjs` chiede dove va.
+
 ## Dopo
 
 Ogni pezzo aggiunto si annota: in `notes/<area>.md` le decisioni prese e quello che non è verificato; in

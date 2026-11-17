@@ -7,6 +7,7 @@
 export default {
   id: 'book1',
   name: 'Dentro un libro',
+  mapDoor: 'village.library_door', // Altrove: the book read in the library
   elsewhere: { world: 'book', rule: 'page' },
   look: 'page',
   cat: true, // Tartufo jumped into the book with her

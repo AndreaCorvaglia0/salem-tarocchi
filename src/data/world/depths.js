@@ -79,6 +79,20 @@ export default {
     jail: [8, 29, 'La cella'],
     cells: [12, 22, 'Le prigioni'],
   },
+  // the grimoire's map (format: village.js `map`)
+  map: {
+    entry: { label: 'la scala', kind: 'stairs' }, // down from the trapdoor
+    cellar: { in: 'entry' }, // the barrel cellar at the foot of the stair
+    edera_nook: { label: 'la nicchia di Edera', kind: 'nook' },
+    coven: { label: 'la congrega', kind: 'circle' },
+    coven_malva: { in: 'coven' }, coven_ortica: { in: 'coven' }, coven_edera: { in: 'coven' },
+    chains: { label: 'le catene', kind: 'chains' },
+    tower: { label: 'la torre', kind: 'tower' },
+    well: { label: 'il pozzo', kind: 'well' },
+    swamp: { label: 'la palude', kind: 'swamp' },
+    cells: { label: 'la scala del tribunale', kind: 'stairs' }, // up to the court
+    jail: { label: 'la cella', kind: 'jail' },
+  },
   doors: [
     { at: 'entry', to: 'village.trapdoor', look: 'stairs' },
     { at: 'cells', to: 'court.stairs', look: 'stairs' },

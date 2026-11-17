@@ -19,8 +19,8 @@ export const STEPS = [
   { id: 'c1.client', chapter: 1, text: 'Hanno bussato alla porta: devo tornare al tavolo e leggere una carta a chi è entrato.', at: 'cottage.table' },
   // chapter 1, from here she is freer
   { id: 'c1.cart', chapter: 1, text: 'Devo andare a vedere cosa luccica sotto il carretto del fieno, giù al mercato.', at: 'village.cart' },
-  { id: 'c1.explore', chapter: 1, text: 'Devo attraversare la piazza per raggiungere Ginepra dietro la canonica.', at: 'village.square' },
-  { id: 'c1.venus', chapter: 1, text: 'Devo raggiungere Ginepra al davanzale dietro la canonica, poco oltre la piazza.', at: 'village.venusglass' },
+  { id: 'c1.explore', chapter: 1, text: 'Devo attraversare la piazza per raggiungere Ginepra nel vicolo di sotto.', at: 'village.square' },
+  { id: 'c1.venus', chapter: 1, text: 'Devo raggiungere Ginepra al davanzale nel vicolo, poco sotto la piazza.', at: 'village.venusglass' },
   { id: 'c1.square', chapter: 1, text: 'Devo tornare in piazza all\'imbrunire: c\'è gente, e qualcuno grida.', at: 'village.square' },
   { id: 'c1.gate', chapter: 1, text: 'Devo raggiungere Malva al cancello del bosco, in cima al villaggio.', at: 'village.forest_gate', need: 6, rank: 4 },
   // chapter 2, the forest

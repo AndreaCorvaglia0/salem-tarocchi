@@ -8,6 +8,7 @@
 export default {
   id: 'clouds',
   name: 'Sulle nuvole',
+  mapDoor: 'village.cottage_door', // Altrove: she drank the green bottle in her cottage
   elsewhere: { world: 'clouds', rule: 'clouds' },
   look: 'clouds',
   cat: false, // Tartufo stays behind: the potion was hers

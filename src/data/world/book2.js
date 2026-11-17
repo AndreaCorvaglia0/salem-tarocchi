@@ -2,6 +2,7 @@
 export default {
   id: 'book2',
   name: 'Dentro un libro',
+  mapDoor: 'village.library_door', // Altrove: the book read in the library
   elsewhere: { world: 'book', rule: 'page' },
   look: 'page',
   cat: true,

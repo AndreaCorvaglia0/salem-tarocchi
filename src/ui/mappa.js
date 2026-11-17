@@ -1,16 +1,19 @@
 // The "Mappa" ribbon: the village, the wood and the cellars as ink sketches (sketch.js). Places not
-// seen yet stay blank; the next place is circled in red pencil; "× io" marks where I am. With the
+// seen yet stay blank; the next place is circled in red pencil; a red cross and "io" mark where I really
+// stand (world.where through sketchmap.js; inside a building: at its door), and the page opens on that
+// region. With the
 // broom, and not in study mode, tapping a seen outdoor place offers "Vola qui" (glue/fly.js decides
 // whether she can take off from where she is; if not, the caption says why).
 import { h, css, isNarrow } from '../core/dom.js';
-import { state } from '../core/state.js';
+import { state, save } from '../core/state.js';
 import { call, has } from '../core/services.js';
 import { PENCIL, RED, INK } from './paper.js';
 import { REGIONS, REGION_OF, sketch, SKETCH_CSS } from './sketch.js';
-import { nextStep, placeOf, isSeen } from './logic.js';
+import { ALL_PLACES, hereOf, regionOf, inFog } from './sketchmap.js';
+import { nextStep, placeOf, isSeen, provenSeen } from './logic.js';
 import { test } from '../core/cond.js';
 import * as STORY from '../data/story/index.js';
-import { EXTRAS, extrasShown, trackedExtra, track, markSeen } from '../core/extras.js';
+import { EXTRAS, extrasShown, trackedExtra, track, markSeen, extraDone } from '../core/extras.js';
 
 const CSS = `${SKETCH_CSS}
 .mp-reg{margin-top:4px}
@@ -44,7 +47,7 @@ const CSS = `${SKETCH_CSS}
 
 `;
 
-const ALL = Object.values(REGIONS).flatMap((r) => Object.keys(r.places));
+const ALL = ALL_PLACES;
 // side missions (data/story SIDE, optional): the active ones are pencil notes at their place, not a list.
 // Active: its `when` holds and its `done` (if any) does not.
 export const sideNotes = (side = STORY.SIDE, t = test) => (Array.isArray(side) ? side : Object.values(side || {}))
@@ -58,12 +61,26 @@ export const sideNumbers = (list = extrasShown()) => {
 };
 const mapNotes = () => { const no = sideNumbers(); return sideNotes().filter((n) => no[n.id]).map((n) => ({ place: n.place, text: String(no[n.id]) })); };
 
+// A place new on the map (or an anchor added after she walked by) is marked seen when the save proves she
+// has been there (logic.js provenSeen): an old save does not show blank where she has certainly been, and
+// the broom may land there.
+export function adoptSeen(s = state) {
+  const seen = s.stats.seen || (s.stats.seen = {});
+  let n = 0;
+  for (const p of provenSeen(s, { extras: EXTRAS, done: (e) => extraDone(e, s) })) if (!seen[p]) { seen[p] = true; n += 1; }
+  if (n) save();
+  return n;
+}
+
 export function mappaPages(ctx) {
   css('ui-mappa', CSS);
-  const extra = []; // anchors of the world that the sketch does not draw (interiors) still count as seen
+  adoptSeen();
+  const extra = []; // anchors of the world that the sketch does not draw (interiors, card spots) still count as seen
   const seenAnchors = Object.keys(state.stats?.seen || {});
   for (const a of seenAnchors) if (!ALL.includes(a)) extra.push(a);
-  const seen = (place) => isSeen(place, state, extra);
+  // a place that shows only from some point on (her garden: `when` in the world's map) stays blank before
+  const shows = (place) => { const w = REGIONS[REGION_OF(place)]?.places[place]?.when; return !w || test(w); };
+  const seen = (place) => shows(place) && isSeen(place, state, extra);
   const tracked = ctx.study ? null : trackedExtra();
   const next = placeOf(tracked?.at || nextStep().at);
   let fly = false, why = '';
@@ -72,8 +89,8 @@ export function mappaPages(ctx) {
   if (!ctx.study && state.powers?.broom && has('fly.check')) {
     Promise.resolve(call('fly.check')).then((c) => { fly = !!c?.ok; why = c?.why || ''; if (!cap.classList.contains('gx-live')) cap.replaceChildren(intro()); }).catch(() => {});
   }
-  const landable = (id) => ['village', 'forest'].includes(REGION_OF(id)) && seen(id);
-  let here = null;
+  const landable = (id) => ['village', 'forest'].includes(REGION_OF(id)) && seen(id) && !inFog(id);
+  let here = null, where = null;
   const pick = (id, p, btn) => {
     for (const b of document.querySelectorAll('.sk-hit.on')) b.classList.remove('on');
     btn?.classList.add('on');
@@ -90,7 +107,8 @@ export function mappaPages(ctx) {
     const R = REGIONS[rid], any = Object.keys(R.places).some(seen) || REGION_OF(next) === rid || notes.some((n) => R.places[n.place]);
     const box = h('div.mp-reg', h('h3', {}, R.name, h('small', {}, R.season)));
     if (!any) { box.append(h('p.pencil.mp-blank', {}, 'Non ci sono ancora stata.')); return box; }
-    const sk = sketch(rid, { width, seen, next, here, onPick: pick, notes });
+    const sk = sketch(rid, { width, minWidth: phone ? 330 : 0, seen, next, where: ctx.study ? null : where, onPick: pick, notes });
+    box.dataset.region = rid;
     box.append(sk);
     if (notes.length) requestAnimationFrame(() => placeTags(sk));
     return box;
@@ -108,9 +126,14 @@ export function mappaPages(ctx) {
     Rr.replaceChildren(...[region('forest', wR), region('depths', wR), phone ? cap : null].filter(Boolean));
   };
   draw();
-  // where am I: from the world when it runs, else from the saved position
+  // where am I: from the world (its position when it runs, else the saved one); the page opens on my region
   if (!ctx.study && has('world.where')) {
-    Promise.resolve(call('world.where')).then((w) => { const p = placeOf(w?.near); if (p && ALL.includes(p)) { here = p; draw(); } }).catch(() => {});
+    Promise.resolve(call('world.where')).then((w) => {
+      if (!w?.map) return;
+      where = w; here = hereOf(w); draw();
+      const rid = regionOf(w);
+      if (phone && rid) requestAnimationFrame(() => [L, Rr].map((el) => el.querySelector(`.mp-reg[data-region="${rid}"]`)).find(Boolean)?.scrollIntoView({ block: 'start' }));
+    }).catch(() => {});
   }
   return { L: [L], R: [Rr], single: true };
 }

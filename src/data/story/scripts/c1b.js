@@ -31,7 +31,7 @@ export const C1B = {
       ], { flag: 'cart.cat', trust: { ginepra: 1 } }),
     ),
     ginepra('È Il Carro, guarda: uno che parte e non si volta indietro nemmeno se lo chiami. Dicono tutti che mi somiglia.'),
-    ginepra('Te lo ridò, giuro, ma prima voglio farti vedere una cosa. Stanotte faccio il bicchiere di Venere, sul davanzale dietro la canonica, e da sola non mi va.'),
+    ginepra('Te lo ridò, giuro, ma prima voglio farti vedere una cosa. Stanotte faccio il bicchiere di Venere, sul davanzale nel vicolo di sotto, e da sola non mi va.'),
     N('In fondo alla via, dalla parte della piazza, dondola la luce di una lanterna.'),
     ginepra('Quello è un conestabile, e a me mi conosce già. Io passo da dietro le case. Tu attraversa pure la piazza: prima o poi ti fermano lo stesso, e la prima volta è meglio togliersela subito.'),
     choice(
@@ -45,7 +45,7 @@ export const C1B = {
     IF({ power: 'cat' }, [cat('(Simpatica, la tua nuova amica: ti ha preso una carta e ti ha mandata dritta in bocca al conestabile, e ci ha messo meno di un minuto.)')]),
     flag('met.ginepra'),
     flag('ginepra.snatched'),
-    diary('Una certa Ginepra mi ha soffiato Il Carro da sotto il naso, ridendo. Mi aspetta stanotte dietro la canonica.'),
+    diary('Una certa Ginepra mi ha soffiato Il Carro da sotto il naso, ridendo. Mi aspetta stanotte nel vicolo di sotto.'),
     xp(5),
     step('c1.explore'),
   ],

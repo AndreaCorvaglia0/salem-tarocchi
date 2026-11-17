@@ -2,6 +2,7 @@
 export default {
   id: 'malva',
   name: 'Casa di Malva',
+  mapDoor: 'village.malva_door', // inside: on the grimoire's map she is at its door
   inside: true,
   ground: '_',
   start: 'door',
