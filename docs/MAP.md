@@ -44,7 +44,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1092 |
+| `src/core` | 11 | 1103 |
 | `src/data` | 7 | 741 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |

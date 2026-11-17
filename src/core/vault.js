@@ -15,14 +15,20 @@ const withTimeout = (p, ms, v = null) => Promise.race([Promise.resolve(p).catch(
 
 // ---- IndexedDB -------------------------------------------------------------------------------------
 let idbP = null;
+// The open is given 4 seconds: a browser whose database never answers (seen in headless Chrome after a
+// double load) must not keep the title waiting for ever. A timed-out open is forgotten, so a later call
+// tries again; the game goes on with the copy in localStorage meanwhile.
 const idb = () => (idbP ||= new Promise((res) => {
+  let done = false;
+  const end = (v) => { if (done) return; done = true; if (!v) idbP = null; res(v); };
+  setTimeout(() => end(null), 4000);
   try {
     const rq = globalThis.indexedDB?.open(NAME, 1);
-    if (!rq) return res(null);
+    if (!rq) return end(null);
     rq.onupgradeneeded = () => rq.result.createObjectStore(STORE);
-    rq.onsuccess = () => res(rq.result);
-    rq.onerror = rq.onblocked = () => res(null);
-  } catch { res(null); }
+    rq.onsuccess = () => end(rq.result);
+    rq.onerror = rq.onblocked = () => end(null);
+  } catch { end(null); }
 }));
 const idbGet = async (k) => { const d = await idb(); if (!d) return null; return new Promise((res) => { try { const rq = d.transaction(STORE).objectStore(STORE).get(k); rq.onsuccess = () => res(rq.result ?? null); rq.onerror = () => res(null); } catch { res(null); } }); };
 const idbPut = async (k, v) => { const d = await idb(); if (!d) return false; return new Promise((res) => { try { const tx = d.transaction(STORE, 'readwrite'); tx.objectStore(STORE).put(v, k); tx.oncomplete = () => res(true); tx.onerror = tx.onabort = () => res(false); } catch { res(false); } }); };

@@ -106,8 +106,10 @@ async function playRun(side, { stopStep = null } = {}) {
   // a piece of music is dropped half-loaded every time the place changes: that is not an error
   page.on('requestfailed', (r) => { if (!/\.(mp3|wav)(\?|$)/.test(r.url())) errors.push(`request failed: ${r.url()}`); });
   page.on('response', (r) => { if (r.status() >= 400) errors.push(`http ${r.status()}: ${r.url()}`); });
-  await page.goto(BASE, { waitUntil: 'domcontentloaded' });
-  await page.evaluate(() => localStorage.clear());
+  // clear the storage from a static file of the same origin, not from the game's page: leaving the game's page while
+  // its IndexedDB is opening makes the next load's open() hang in headless Chrome (the title then says "Cerco la tua partita…" forever)
+  await page.goto(`${BASE}cards/m00.webp`, { waitUntil: 'domcontentloaded' });
+  await page.evaluate(() => { localStorage.clear(); indexedDB.deleteDatabase('salem-tarocchi'); });
   await page.goto(`${BASE}?debug`, { waitUntil: 'domcontentloaded' });
 
   const t0 = Date.now();
@@ -142,7 +144,7 @@ async function playRun(side, { stopStep = null } = {}) {
   };
 
   let sig = '', sigAt = Date.now(), exams = 0, lastStep = '', stepTries = 0, did = {}, levels = [];
-  let stepSeen = '', stepAt = Date.now();
+  let stepSeen = '', stepAt = Date.now(), lastBsig = '', bsigAt = 0;
   while (true) {
     if (errors.length) await fail(`page errors:\n${errors.join('\n')}`);
     if (Date.now() - t0 > MAX_MS) await fail('too long');
@@ -154,6 +156,12 @@ async function playRun(side, { stopStep = null } = {}) {
     if (p.ended && p.kind === 'world') break;
     if (stopStep && p.step === stopStep && p.kind === 'world') { clearInterval(dog); return { page, browser, errors, shot }; }
     if (p.step !== stepSeen) { stepSeen = p.step; stepAt = Date.now(); } else if (Date.now() - stepAt > STEP_MS) await fail(`step ${p.step} did not move in ${STEP_MS / 60000} minutes`);
+
+    // the tap guard stays ON (new buttons ignore taps for 650 ms, holdTaps blocks 1.4-1.9 s): the bot waits like a person
+    const bsig = `${p.kind}|${p.step}|${p.text || ''}|${p.label || ''}|${(p.opts || p.buttons || []).map((o) => o.t || o.ok).join('/')}`;
+    if (bsig !== lastBsig) { lastBsig = bsig; bsigAt = Date.now(); }
+    const BTN = ['title', 'choice', 'question', 'foot', 'shop', 'levelup', 'ask-name', 'ask-birth', 'pad', 'found-words'];
+    if (BTN.includes(p.kind) && Date.now() - bsigAt < (p.kind === 'levelup' ? 2100 : 800)) { await sleep(100); continue; }
 
     switch (p.kind) {
       case 'levelup': { const lvl = /Livello (\d)/.exec(p.text)?.[1]; if (lvl && !levels.includes(lvl)) { levels.push(lvl); did.tries = {}; stepTries = 0; /* a new power, or the rank a gate asked for: try the step again */ say('level', lvl, 'xp', p.xp, 'step', p.step); } await shot('levelup'); await tap(p.at); break; }
@@ -168,7 +176,8 @@ async function playRun(side, { stopStep = null } = {}) {
       }
       case 'title': {
         await shot('title');
-        const b = p.buttons.find((x) => /Nuova/.test(x.t)) || p.buttons[0];
+        if (!p.buttons.length) { await sleep(300); break; } // "Cerco la tua partita…": the buttons are not there yet
+        const b = p.buttons.find((x) => /Nuova partita|Continua/.test(x.t)) || p.buttons[0];
         await tap(b);
         break;
       }
@@ -193,6 +202,7 @@ async function playRun(side, { stopStep = null } = {}) {
       }
       case 'tap':
         if (!p.ready) { await sleep(120); break; } // the cue is not there: a tap now would only finish the line
+        if (p.where === 'visit' && !did[`visit@${p.step}`]) { did[`visit@${p.step}`] = Date.now(); say('visit of the Reader at step', p.step); await shot(`visit-at-${p.step}`); }
         if (p.where === 'visit') {
           if (!did.visitOpen) { did.visitOpen = true; await shot('visit-1-opener'); }
           else if (p.turned && !did.visitCard) { did.visitCard = true; await shot('visit-2-card'); }
