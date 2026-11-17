@@ -28,15 +28,27 @@ missioni, a corredo, con due parole e senza spiegone; chi vuole legge l'album o 
 
 - Pietre: dove ha senso per l'elemento e il pianeta (acqua: al ruscello; terra/Saturno: cimitero, radici;
   fuoco: vicino alla fucina o al forno), poche e una sola per tipo nel mondo; le altre solo in regalo.
-- Figurine della sibilla: mai per terra. Le danno le persone, stanno in un libro, in un cassetto, al banco
-  dell'ambulante. Così spingono a entrare nei posti e a parlare.
+- Figurine della sibilla: anche per terra (Andrea: «si possono anche trovare a terra, certo»), come una carta
+  persa: tra le radici, sotto una panca, in un libro, in un cassetto; e le danno le persone e l'ambulante.
 - Ogni posto è nei dati del mondo con una condizione, e la mappa a matita non le segna (si scoprono).
 
-## Immagini
+## Immagini (cercate il 18 novembre)
 
-- Pietre: tavole di mineralogia antiche di pubblico dominio se si trovano buone (da cercare, una richiesta alla
-  volta); altrimenti disegnate dal codice. Sibilla: i file su Commons vanno ancora letti (licenza, qualità);
-  altrimenti a inchiostro nello stile della mappa.
+- **Sibilla: trovato il mazzo.** Yale, Beinecke Library, Cary Collection of Playing Cards, «Wahrsagekarten der
+  berühmten Kartenlegerin Lenormand», Ch. Didot, [1890?], 36 carte, cromolitografia, tutto digitalizzato.
+  Scheda: https://collections.library.yale.edu/catalog/10994633 (manifest IIIF `/manifests/10994633`).
+  Quattro fogli da nove carte, 4334×5121 px (ogni carta circa 1100×1700): scaricati in
+  `/home/claude/ext/sibilla/s2..s5.jpg`, guardato il primo: nitide, colorate, numerate, e ogni carta porta
+  **segni di pianeti e zodiaco**: si legano al cerchio del sapere. Testi in tedesco gotico (titolo e due versi):
+  restano come sapore, la pagina dell'album li traduce. Diritti: stampa anonima del 1890 circa, quindi pubblico
+  dominio; la scheda ha solo la formula generica di Yale («may be subject to copyright law…»), non una licenza
+  esplicita. Si usa con il credito alla Beinecke in CREDITS.md. Da fare: ritagliare le 36 carte.
+- **Pietre:** James Sowerby, *British Mineralogy* (1802–17) ed *Exotic Mineralogy* (1811–20): tavole incise e
+  colorate a mano, pubblico dominio; scansioni alla Biodiversity Heritage Library
+  (https://biodiversitylibrary.org/bibliography/63277), molte già ritagliate su pdimagearchive.org e
+  c82.net/mineralogy (lì ametista tav. 430, agata tav. 83). Da verificare pietra per pietra quali delle nostre 12
+  ci sono (lapislazzuli, ossidiana, pietra di luna, tormalina, occhio di tigre sono le incerte); per le
+  mancanti: H. Sowerby 1851 alla Wellcome (Public Domain Mark) o disegno dal codice.
 
 ## Che cosa NON fa questa fase
 
