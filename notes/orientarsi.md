@@ -28,3 +28,19 @@ Lo sfarzo va dosato (villaggio puritano: due edifici ricchi bastano). Vale sopra
    Andrea decide la direzione prima che si tocchi tutto.
 2. Poi il villaggio intero, il bosco e le cantine dove serve.
 3. Prova con lettori «ingenui» sulle schermate: «dov'è la biblioteca?», quanti la trovano.
+
+## La capanna cresce con lei (idea di Andrea, 17 novembre sera)
+
+Andrea: «due evoluzioni della nostra casa man mano che andiamo avanti: parte sbilenca ma sarebbe bello che
+migliorasse, oppure una seconda casa altrove in cui leggere». Scelta del capofila: **la stessa capanna che
+cresce**, in tre stadi, non una seconda casa.
+
+1. Sbilenca (l'inizio). 2. Rimessa a posto (a metà). 3. La casa di una strega (dopo il finale), eccentrica
+come quelle delle altre ma sua: l'insegna e il colore della porta dal suo seme, alla finestra le piante che
+coltiva davvero, accanto alla porta un oggetto vinto in una prova.
+
+Il «posto in cui leggere» diventa un angolo della capanna al terzo stadio: un tavolo suo dove i clienti
+vengono da lei (oggi è lei che va da loro). Non si dice a che cosa somiglia quel tavolo.
+
+Ogni stadio dipende da quello che ha (capitolo passato, grado, orto ricevuto, finale visto), mai dal passo
+corrente, e arriva con una piccola scena: chi è già avanti li riceve subito, uno dopo l'altro.
