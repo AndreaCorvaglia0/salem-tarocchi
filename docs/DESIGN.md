@@ -498,3 +498,41 @@ proprietà esoteriche e qualche consiglio su come coltivarle… sia salute che v
   in bottega e come doni della luna o premi delle prove; più avanti le pozioni.
 
 Dati: `data/herbs/base.js` (le 21 piante), `data/herbs/texts.js` (le pagine), `data/world/herbs.js` (dove sono).
+
+## L'orto (17 novembre): annaffiare come gesto di ogni giorno
+
+Andrea: «come attività giornaliera, nella schermata della carta del giorno fuori dal gioco, lei potesse
+innaffiare le piante (forse anche in base a quanto spesso, con dei consigli); ovviamente deve prima sbloccarlo
+nel gioco».
+
+- **Si sblocca nel gioco.** Dopo la scena di Ortica nel bosco e con almeno quattro piante nell'erbario, Ortica ha
+  «qualcosa per l'orto» (una secondaria, che arriva anche a chi è più avanti): quattro aiuole alla capanna e tre
+  piantine tra le erbe già notate.
+- **Dalla soglia.** Sul tavolo compare «L'orto», con quante piante hanno sete. Si apre senza entrare in partita.
+  È un'azione del giorno come le altre: fa crescere la luna.
+- **Annaffiare bene è sapere la pianta.** Ogni erba ha la sua sete vera: la lavanda e il rosmarino ogni tre o
+  quattro giorni, la menta quasi tutti i giorni. Bagnata al momento giusto cresce di un passo, e il gioco dice
+  perché, con il consiglio di coltivazione dell'erbario. Bagnata troppo presto non cresce («ha ancora i piedi
+  nell'acqua»); due volte di fila, per chi ama l'asciutto, perde un passo. Dimenticata a lungo appassisce di un
+  passo. Non muore mai: l'orto non punisce chi salta dei giorni.
+- **Il raccolto.** Arrivata in fondo si raccoglie: un mazzetto in dispensa (servirà alle pozioni), un po'
+  d'esperienza, e la pianta continua a dare.
+- **Semi.** Da Ortica i primi; in bottega quelli delle erbe già nell'erbario; ogni tanto tra i doni della luna.
+  Anche le velenose si coltivano, con i guanti.
+
+Dati: `data/garden.js` (sete e passi per erba), regole in `glue/garden.rules.js`, schermata `ui/garden.js`.
+
+### L'orto insegna davvero (integrazione di Andrea, stessa mattina)
+
+A lei le piante piacciono, ma fa fatica a farle crescere: non sa che terra usare, ogni quanto bagnare, quali
+vogliono luce. L'orto è quindi una piccola scuola di giardinaggio vero, calata nel gioco, per chi ne ha voglia.
+
+- **Tre cose da capire, come nella realtà:** la luce (ogni aiuola ha la sua: pieno sole, mezz'ombra, ombra), la
+  terra (leggera e sassosa che drena; da orto, ricca; fresca e umida) e l'acqua. Una pianta nel posto o nella
+  terra sbagliata cresce a fatica, e il gioco dice perché.
+- **Si bagna guardando la terra, non il calendario.** Prima di annaffiare si può «toccare la terra»: asciutta in
+  superficie, asciutta a un dito di profondità, ancora umida. È l'abitudine che serve davvero a casa.
+- **Le lezioni di Ortica.** Una specializzazione facoltativa: poche lezioni brevi (l'acqua, la luce, la terra e il
+  drenaggio, il vaso e la potatura, semina e talea), una alla volta, ciascuna apre o spiega un pezzo dell'orto e fa
+  crescere il legame con Ortica. Chi non le segue ha comunque l'orto e i consigli sotto le aiuole.
+- **Affidabile.** Ogni consiglio è giardinaggio vero, verificato; le fonti in `RESEARCH.md`.

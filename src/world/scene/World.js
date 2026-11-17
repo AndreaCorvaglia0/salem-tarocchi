@@ -27,6 +27,7 @@ import { Obstacles } from './obstacles.js';
 import { Fog } from './fog.js';
 import { Minors } from './minors.js';
 import { Herbs } from './herbs.js';
+import { GardenBeds } from './garden.js';
 import { Sense } from './sense.js';
 import { Stranger } from './stranger.js';
 import { guideRoute } from '../guidepath.js';
@@ -63,7 +64,7 @@ export class WorldScene extends Phaser.Scene {
     this.things = new Things(this, map, this.built);
     this.away = !!map.elsewhere; // a world of Altrove (glue/elsewhere.js): its own rule, no Salem life
     this.rule = makeRule(this, map); this.trinkets = new Trinkets(this, map);
-    this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.herbs = new Herbs(this, map); this.sense = new Sense(this, map);
+    this.fog = new Fog(this, map); this.minors = new Minors(this, map); this.herbs = new Herbs(this, map); this.garden = new GardenBeds(this, map); this.sense = new Sense(this, map);
     this.stranger = new Stranger(this); // someone who stops her in the street (glue/street.js)
     if (this.things.solidAt(sx, sy)) { const [fx, fy] = this.freeNear(sx, sy, true); this.player.tx = fx; this.player.ty = fy; this.player.place(); }
     this.things.refresh(true);

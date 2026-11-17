@@ -14,7 +14,8 @@ import { MOON, moonName, moonPath } from '../glue/threshold.rules.js';
 import { moonNow, touchMoon, giftToday, today, turnToday, noteToday, pairToday } from '../glue/threshold.js';
 import { canSelfRead } from '../glue/selfread.rules.js';
 import { openSelfRead } from './selfread.js';
-import { openDayCard } from './daycard.js';
+import { openDayCard, dayCardUrl } from './daycard.js';
+import { garden, gardenNote } from '../glue/garden.js';
 import { CODE_CSS } from './savecode.js';
 import { SERIF, HAND, GOLD, baseCss, rnd } from './paper.js';
 import { cardBack } from './art.js';
@@ -63,6 +64,7 @@ const CSS = `
 .tt-b.main{border-color:${GOLD};background:#2a2016d0;min-height:58px}
 .tt-b small{display:block;font:italic 14px/16px ${SERIF};color:#b9a98a;letter-spacing:0;margin-top:2px}
 .tt-row{display:flex;gap:9px}.tt-row .tt-b{flex:1;min-height:62px;font-size:18px;line-height:1.15;padding:4px 6px}
+.tt-row.three{gap:7px}.tt-row.three .tt-b{flex:1 1 0;min-width:0;font-size:17px;padding:4px 3px}.tt-row.three .tt-b small{font-size:13px;line-height:15px}
 .tt-foot{flex:none;display:flex;gap:18px;justify-content:center;margin:8px 0 calc(18px + env(safe-area-inset-bottom))}
 .tt-s{margin:2px 0 0;text-align:center;font:18px/22px ${HAND};color:#b9a98a;min-height:22px}
 .tt-l{border:0;background:none;color:#cdbf9f;font:17px ${SERIF};text-decoration:underline;text-underline-offset:4px;min-height:40px;cursor:pointer}
@@ -108,7 +110,7 @@ export function openTitle() {
       const t = today();
       cardEl.className = `tt-card ${t.turned ? 'face' : 'back'}`;
       cardEl.setAttribute('aria-label', t.turned ? `${t.name}: guarda la carta` : 'Gira la carta di oggi');
-      if (t.turned) cardEl.replaceChildren(h('img', { src: cardUrl(t.card), alt: t.name })); else cardEl.innerHTML = cardBack(104, 178);
+      if (t.turned) cardEl.replaceChildren(h('img', { src: dayCardUrl(t.card), alt: t.name })); else { cardEl.innerHTML = cardBack(104, 178); new Image().src = dayCardUrl(t.card); } // (loaded ahead, so it is there when she turns it)
       tapEl.textContent = t.turned ? '' : 'Gira la carta di oggi';
       if (!t.turned) { const n = noteToday(); slip.replaceChildren(...[giftBlock(), h('span.lb', {}, `Dal quaderno · ${WEEK[new Date().getDay()]}`), h('p', {}, n?.t || 'Stanotte il quaderno è rimasto chiuso.')].filter(Boolean)); return; }
       slip.replaceChildren(...[giftBlock(), h('span.lb', {}, `La carta di oggi · ${dateIt()}`), h('b', {}, t.name), h('p', {}, t.oggi)].filter(Boolean));
@@ -132,11 +134,12 @@ export function openTitle() {
       mode = 'menu';
       const saved = hasSave(), pair = saved ? pairToday() : [];
       const row = [saved && canSelfRead(state) ? b('Leggi le tue carte', () => aside(() => openSelfRead()), false, 'con il mazzo vero') : null,
-        pair.length ? b(pair.length > 1 ? 'Ripassa due carte' : 'Ripassa una carta', () => aside(() => call('review.open', { ids: pair, n: pair.length })), false, 'le più indietro, un minuto') : null].filter(Boolean);
+        pair.length ? b(pair.length > 1 ? 'Ripassa due carte' : 'Ripassa una carta', () => aside(() => call('review.open', { ids: pair, n: pair.length })), false, 'le più indietro, un minuto') : null,
+        saved && garden().unlocked ? b('L\'orto', () => aside(() => call('garden.open', { from: 'table' })), false, gardenNote()) : null].filter(Boolean);
       acts.replaceChildren(...[
         saved ? b('Continua', () => done('continue'), true, `${state.player?.name ? `${state.player.name} · ` : ''}${chapterName()} · ${titleOf()}`) : b('Nuova partita', () => done('new'), true),
         !saved && older ? b('Riprendi la partita di prima', async () => { if (await takeOlder()) done('continue'); }) : null,
-        row.length ? h('div.tt-row', row) : null].filter(Boolean));
+        row.length ? h(`div.tt-row${row.length > 2 ? '.three' : ''}`, row) : null].filter(Boolean));
       foot.replaceChildren(link('Grimorio', () => done('study')), link('Altro', more));
     };
     const more = () => {

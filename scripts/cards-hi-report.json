@@ -1,0 +1,1410 @@
+{
+ "m00": {
+  "status": "ok",
+  "file": "RWS Tarot 00 Fool.jpg",
+  "cost": 0.34,
+  "shift_max": 1.32,
+  "shift_mean": 0.51,
+  "patches": 39,
+  "box": [
+   41.0,
+   38.2,
+   938.5,
+   1530.2
+  ],
+  "src": [
+   960,
+   1610
+  ]
+ },
+ "m01": {
+  "status": "ok",
+  "file": "RWS Tarot 01 Magician.jpg",
+  "cost": 0.147,
+  "shift_max": 0.41,
+  "shift_mean": 0.2,
+  "patches": 40,
+  "box": [
+   17.7,
+   18.4,
+   938.9,
+   1581.9
+  ],
+  "src": [
+   960,
+   1664
+  ]
+ },
+ "m02": {
+  "status": "ok",
+  "file": "RWS Tarot 02 High Priestess.jpg",
+  "cost": 0.148,
+  "shift_max": 0.57,
+  "shift_mean": 0.22,
+  "patches": 44,
+  "box": [
+   8.9,
+   26.6,
+   943.9,
+   1570.5
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "m03": {
+  "status": "ok",
+  "file": "RWS Tarot 03 Empress.jpg",
+  "cost": 0.437,
+  "shift_max": 1.25,
+  "shift_mean": 0.51,
+  "patches": 43,
+  "box": [
+   16.8,
+   28.6,
+   942.9,
+   1571.9
+  ],
+  "src": [
+   960,
+   1641
+  ]
+ },
+ "m04": {
+  "status": "ok",
+  "file": "RWS Tarot 04 Emperor.jpg",
+  "cost": 0.164,
+  "shift_max": 0.35,
+  "shift_mean": 0.21,
+  "patches": 41,
+  "box": [
+   30.6,
+   36.8,
+   951.5,
+   1586.8
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "m05": {
+  "status": "ok",
+  "file": "RWS Tarot 05 Hierophant.jpg",
+  "cost": 0.307,
+  "shift_max": 0.49,
+  "shift_mean": 0.28,
+  "patches": 45,
+  "box": [
+   13.9,
+   33.5,
+   949.2,
+   1587.1
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "m06": {
+  "status": "ok",
+  "file": "RWS Tarot 06 Lovers.jpg",
+  "cost": 0.31,
+  "shift_max": 0.71,
+  "shift_mean": 0.32,
+  "patches": 43,
+  "box": [
+   24.1,
+   14.1,
+   947.2,
+   1571.2
+  ],
+  "src": [
+   960,
+   1643
+  ]
+ },
+ "m07": {
+  "status": "ok",
+  "file": "RWS Tarot 07 Chariot.jpg",
+  "cost": 0.247,
+  "shift_max": 0.53,
+  "shift_mean": 0.3,
+  "patches": 45,
+  "box": [
+   24.7,
+   27.3,
+   943.8,
+   1587.3
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "m08": {
+  "status": "ok",
+  "file": "RWS Tarot 08 Strength.jpg",
+  "cost": 0.064,
+  "shift_max": 0.33,
+  "shift_mean": 0.09,
+  "patches": 35,
+  "box": [
+   19.1,
+   19.8,
+   939.2,
+   1601.9
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "m09": {
+  "status": "ok",
+  "file": "RWS Tarot 09 Hermit.jpg",
+  "cost": 0.099,
+  "shift_max": 0.75,
+  "shift_mean": 0.14,
+  "patches": 35,
+  "box": [
+   22.1,
+   25.2,
+   946.9,
+   1576.1
+  ],
+  "src": [
+   960,
+   1641
+  ]
+ },
+ "m10": {
+  "status": "ok",
+  "file": "RWS Tarot 10 Wheel of Fortune.jpg",
+  "cost": 0.204,
+  "shift_max": 0.69,
+  "shift_mean": 0.25,
+  "patches": 44,
+  "box": [
+   25.0,
+   27.8,
+   957.2,
+   1598.0
+  ],
+  "src": [
+   960,
+   1670
+  ]
+ },
+ "m11": {
+  "status": "ok",
+  "file": "RWS Tarot 11 Justice.jpg",
+  "cost": 0.176,
+  "shift_max": 0.4,
+  "shift_mean": 0.21,
+  "patches": 32,
+  "box": [
+   18.0,
+   22.9,
+   945.2,
+   1589.3
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "m12": {
+  "status": "ok",
+  "file": "RWS Tarot 12 Hanged Man.jpg",
+  "cost": 0.198,
+  "shift_max": 0.58,
+  "shift_mean": 0.3,
+  "patches": 36,
+  "box": [
+   8.7,
+   29.9,
+   947.7,
+   1637.0
+  ],
+  "src": [
+   960,
+   1688
+  ]
+ },
+ "m13": {
+  "status": "ok",
+  "file": "RWS Tarot 13 Death.jpg",
+  "cost": 0.179,
+  "shift_max": 0.54,
+  "shift_mean": 0.21,
+  "patches": 45,
+  "box": [
+   18.9,
+   28.3,
+   932.7,
+   1596.1
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "m14": {
+  "status": "ok",
+  "file": "RWS Tarot 14 Temperance.jpg",
+  "cost": 0.106,
+  "shift_max": 0.24,
+  "shift_mean": 0.1,
+  "patches": 44,
+  "box": [
+   12.5,
+   22.7,
+   948.9,
+   1588.4
+  ],
+  "src": [
+   960,
+   1667
+  ]
+ },
+ "m15": {
+  "status": "ok",
+  "file": "RWS Tarot 15 Devil.jpg",
+  "cost": 0.139,
+  "shift_max": 0.59,
+  "shift_mean": 0.25,
+  "patches": 37,
+  "box": [
+   14.0,
+   14.6,
+   958.8,
+   1605.0
+  ],
+  "src": [
+   960,
+   1691
+  ]
+ },
+ "m16": {
+  "status": "ok",
+  "file": "RWS Tarot 16 Tower.jpg",
+  "cost": 0.143,
+  "shift_max": 0.43,
+  "shift_mean": 0.23,
+  "patches": 44,
+  "box": [
+   16.1,
+   29.8,
+   938.7,
+   1585.4
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "m17": {
+  "status": "ok",
+  "file": "RWS Tarot 17 Star.jpg",
+  "cost": 0.45,
+  "shift_max": 1.25,
+  "shift_mean": 0.58,
+  "shift_p90": 1.0,
+  "patches": 35,
+  "box": [
+   9.2,
+   11.1,
+   943.3,
+   1562.2
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "m18": {
+  "status": "ok",
+  "file": "RWS Tarot 18 Moon.jpg",
+  "cost": 0.149,
+  "shift_max": 0.49,
+  "shift_mean": 0.17,
+  "patches": 43,
+  "box": [
+   23.3,
+   18.8,
+   941.0,
+   1591.7
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "m19": {
+  "status": "ok",
+  "file": "RWS Tarot 19 Sun.jpg",
+  "cost": 0.181,
+  "shift_max": 0.38,
+  "shift_mean": 0.15,
+  "patches": 42,
+  "box": [
+   24.9,
+   30.6,
+   944.0,
+   1566.8
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "m20": {
+  "status": "ok",
+  "file": "RWS Tarot 20 Judgement.jpg",
+  "cost": 0.191,
+  "shift_max": 0.4,
+  "shift_mean": 0.19,
+  "patches": 43,
+  "box": [
+   17.6,
+   19.6,
+   950.3,
+   1590.4
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "m21": {
+  "status": "ok",
+  "file": "RWS Tarot 21 World.jpg",
+  "cost": 0.155,
+  "shift_max": 0.38,
+  "shift_mean": 0.21,
+  "patches": 44,
+  "box": [
+   20.8,
+   21.8,
+   950.1,
+   1586.6
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "w01": {
+  "status": "ok",
+  "file": "Wands01.jpg",
+  "cost": 0.079,
+  "shift_max": 0.31,
+  "shift_mean": 0.15,
+  "patches": 34,
+  "box": [
+   20.2,
+   15.6,
+   950.3,
+   1582.6
+  ],
+  "src": [
+   960,
+   1667
+  ]
+ },
+ "w02": {
+  "status": "ok",
+  "file": "Wands02.jpg",
+  "cost": 0.111,
+  "shift_max": 0.4,
+  "shift_mean": 0.16,
+  "patches": 37,
+  "box": [
+   30.5,
+   28.6,
+   945.4,
+   1582.2
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "w03": {
+  "status": "ok",
+  "file": "Wands03.jpg",
+  "cost": 0.202,
+  "shift_max": 0.56,
+  "shift_mean": 0.25,
+  "patches": 38,
+  "box": [
+   31.7,
+   35.1,
+   945.0,
+   1607.5
+  ],
+  "src": [
+   960,
+   1671
+  ]
+ },
+ "w04": {
+  "status": "ok",
+  "file": "Wands04.jpg",
+  "cost": 0.124,
+  "shift_max": 0.65,
+  "shift_mean": 0.22,
+  "patches": 42,
+  "box": [
+   21.0,
+   42.5,
+   933.5,
+   1606.0
+  ],
+  "src": [
+   960,
+   1664
+  ]
+ },
+ "w05": {
+  "status": "ok",
+  "file": "Wands05.jpg",
+  "cost": 0.202,
+  "shift_max": 0.53,
+  "shift_mean": 0.26,
+  "patches": 37,
+  "box": [
+   18.2,
+   12.9,
+   946.3,
+   1578.5
+  ],
+  "src": [
+   960,
+   1664
+  ]
+ },
+ "w06": {
+  "status": "ok",
+  "file": "Wands06.jpg",
+  "cost": 0.183,
+  "shift_max": 0.43,
+  "shift_mean": 0.23,
+  "patches": 40,
+  "box": [
+   26.7,
+   34.8,
+   953.3,
+   1603.4
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "w07": {
+  "status": "ok",
+  "file": "Wands07.jpg",
+  "cost": 0.212,
+  "shift_max": 0.78,
+  "shift_mean": 0.34,
+  "patches": 36,
+  "box": [
+   16.7,
+   23.8,
+   941.9,
+   1597.5
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "w08": {
+  "status": "ok",
+  "file": "Wands08.jpg",
+  "cost": 0.203,
+  "shift_max": 0.71,
+  "shift_mean": 0.28,
+  "patches": 40,
+  "box": [
+   24.3,
+   21.8,
+   944.8,
+   1595.2
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "w09": {
+  "status": "ok",
+  "file": "Wands09.jpg",
+  "cost": 0.213,
+  "shift_max": 2.69,
+  "shift_mean": 0.32,
+  "shift_p90": 0.42,
+  "patches": 44,
+  "box": [
+   31.2,
+   16.8,
+   954.3,
+   1574.6
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "w10": {
+  "status": "ok",
+  "file": "Wands10.jpg",
+  "cost": 0.137,
+  "shift_max": 0.45,
+  "shift_mean": 0.22,
+  "patches": 39,
+  "box": [
+   8.4,
+   34.9,
+   946.9,
+   1589.5
+  ],
+  "src": [
+   960,
+   1674
+  ]
+ },
+ "w11": {
+  "status": "ok",
+  "file": "Wands11.jpg",
+  "cost": 0.166,
+  "shift_max": 0.72,
+  "shift_mean": 0.24,
+  "patches": 37,
+  "box": [
+   21.2,
+   31.2,
+   951.6,
+   1604.4
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "w12": {
+  "status": "ok",
+  "file": "Wands12.jpg",
+  "cost": 0.237,
+  "shift_max": 0.8,
+  "shift_mean": 0.35,
+  "patches": 36,
+  "box": [
+   29.0,
+   27.8,
+   956.5,
+   1598.6
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "w13": {
+  "status": "ok",
+  "file": "Wands13.jpg",
+  "cost": 0.191,
+  "shift_max": 0.43,
+  "shift_mean": 0.24,
+  "patches": 45,
+  "box": [
+   21.8,
+   27.5,
+   947.5,
+   1578.9
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "w14": {
+  "status": "ok",
+  "file": "Wands14.jpg",
+  "cost": 0.246,
+  "shift_max": 0.77,
+  "shift_mean": 0.29,
+  "patches": 44,
+  "box": [
+   8.9,
+   23.2,
+   942.6,
+   1617.3
+  ],
+  "src": [
+   960,
+   1670
+  ]
+ },
+ "c01": {
+  "status": "ok",
+  "file": "Cups01.jpg",
+  "cost": 0.169,
+  "shift_max": 0.43,
+  "shift_mean": 0.17,
+  "patches": 37,
+  "box": [
+   25.5,
+   38.6,
+   945.5,
+   1607.5
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "c02": {
+  "status": "ok",
+  "file": "Cups02.jpg",
+  "cost": 0.1,
+  "shift_max": 0.47,
+  "shift_mean": 0.2,
+  "patches": 42,
+  "box": [
+   32.4,
+   23.4,
+   949.5,
+   1589.5
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "c03": {
+  "status": "ok",
+  "file": "Cups03.jpg",
+  "cost": 0.122,
+  "shift_max": 0.34,
+  "shift_mean": 0.14,
+  "patches": 36,
+  "box": [
+   16.9,
+   13.0,
+   939.1,
+   1570.7
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "c04": {
+  "status": "ok",
+  "file": "Cups04.jpg",
+  "cost": 0.285,
+  "shift_max": 0.9,
+  "shift_mean": 0.4,
+  "patches": 40,
+  "box": [
+   21.5,
+   28.0,
+   943.4,
+   1596.8
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "c05": {
+  "status": "ok",
+  "file": "Cups05.jpg",
+  "cost": 0.068,
+  "shift_max": 0.32,
+  "shift_mean": 0.16,
+  "patches": 27,
+  "box": [
+   18.5,
+   17.5,
+   926.2,
+   1581.0
+  ],
+  "src": [
+   960,
+   1644
+  ]
+ },
+ "c06": {
+  "status": "ok",
+  "file": "Cups06.jpg",
+  "cost": 0.196,
+  "shift_max": 0.58,
+  "shift_mean": 0.21,
+  "patches": 38,
+  "box": [
+   28.0,
+   10.8,
+   941.3,
+   1575.7
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "c07": {
+  "status": "ok",
+  "file": "Cups07.jpg",
+  "cost": 0.219,
+  "shift_max": 0.54,
+  "shift_mean": 0.26,
+  "patches": 38,
+  "box": [
+   39.1,
+   16.3,
+   948.3,
+   1566.2
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "c08": {
+  "status": "ok",
+  "file": "Cups08.jpg",
+  "cost": 0.134,
+  "shift_max": 0.39,
+  "shift_mean": 0.19,
+  "patches": 28,
+  "box": [
+   26.9,
+   56.6,
+   937.8,
+   1601.5
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "c09": {
+  "status": "ok",
+  "file": "Cups09.jpg",
+  "cost": 0.173,
+  "shift_max": 0.52,
+  "shift_mean": 0.23,
+  "patches": 41,
+  "box": [
+   25.5,
+   38.5,
+   934.8,
+   1589.1
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "c10": {
+  "status": "ok",
+  "file": "Cups10.jpg",
+  "cost": 0.134,
+  "shift_max": 0.38,
+  "shift_mean": 0.22,
+  "patches": 36,
+  "box": [
+   26.9,
+   26.4,
+   944.8,
+   1603.9
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "c11": {
+  "status": "ok",
+  "file": "Cups11.jpg",
+  "cost": 0.186,
+  "shift_max": 0.78,
+  "shift_mean": 0.3,
+  "patches": 38,
+  "box": [
+   20.0,
+   31.0,
+   942.8,
+   1600.4
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "c12": {
+  "status": "ok",
+  "file": "Cups12.jpg",
+  "cost": 0.315,
+  "shift_max": 0.79,
+  "shift_mean": 0.44,
+  "patches": 39,
+  "box": [
+   17.8,
+   25.5,
+   939.3,
+   1591.4
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "c13": {
+  "status": "ok",
+  "file": "Cups13.jpg",
+  "cost": 0.157,
+  "shift_max": 0.33,
+  "shift_mean": 0.14,
+  "patches": 38,
+  "box": [
+   25.2,
+   25.5,
+   948.4,
+   1575.7
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "c14": {
+  "status": "ok",
+  "file": "Cups14.jpg",
+  "cost": 0.121,
+  "shift_max": 0.42,
+  "shift_mean": 0.14,
+  "patches": 38,
+  "box": [
+   28.7,
+   18.6,
+   947.0,
+   1590.6
+  ],
+  "src": [
+   960,
+   1644
+  ]
+ },
+ "s01": {
+  "status": "ok",
+  "file": "Swords01.jpg",
+  "cost": 0.132,
+  "shift_max": 0.51,
+  "shift_mean": 0.2,
+  "patches": 38,
+  "box": [
+   18.5,
+   1.0,
+   954.6,
+   1574.7
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "s02": {
+  "status": "ok",
+  "file": "Swords02.jpg",
+  "cost": 0.156,
+  "shift_max": 0.67,
+  "shift_mean": 0.21,
+  "patches": 32,
+  "box": [
+   36.0,
+   37.5,
+   954.2,
+   1587.5
+  ],
+  "src": [
+   960,
+   1644
+  ]
+ },
+ "s03": {
+  "status": "ok",
+  "file": "Swords03.jpg",
+  "cost": 0.1,
+  "shift_max": 0.69,
+  "shift_mean": 0.23,
+  "patches": 36,
+  "box": [
+   31.3,
+   27.3,
+   951.7,
+   1611.7
+  ],
+  "src": [
+   960,
+   1671
+  ]
+ },
+ "s04": {
+  "status": "ok",
+  "file": "Swords04.jpg",
+  "cost": 0.162,
+  "shift_max": 0.56,
+  "shift_mean": 0.25,
+  "patches": 44,
+  "box": [
+   22.1,
+   24.4,
+   941.1,
+   1600.2
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "s05": {
+  "status": "ok",
+  "file": "Swords05.jpg",
+  "cost": 0.264,
+  "shift_max": 0.89,
+  "shift_mean": 0.39,
+  "patches": 44,
+  "box": [
+   30.0,
+   20.6,
+   951.0,
+   1591.9
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "s06": {
+  "status": "ok",
+  "file": "Swords06.jpg",
+  "cost": 0.145,
+  "shift_max": 0.65,
+  "shift_mean": 0.25,
+  "patches": 36,
+  "box": [
+   24.0,
+   57.0,
+   944.4,
+   1601.6
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "s07": {
+  "status": "ok",
+  "file": "Swords07.jpg",
+  "cost": 0.161,
+  "shift_max": 0.51,
+  "shift_mean": 0.23,
+  "patches": 31,
+  "box": [
+   17.4,
+   27.7,
+   939.5,
+   1590.0
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "s08": {
+  "status": "ok",
+  "file": "Swords08.jpg",
+  "cost": 0.164,
+  "shift_max": 0.45,
+  "shift_mean": 0.26,
+  "patches": 36,
+  "box": [
+   21.0,
+   13.3,
+   937.7,
+   1574.5
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "s09": {
+  "status": "ok",
+  "file": "Swords09.jpg",
+  "cost": 0.418,
+  "shift_max": 1.36,
+  "shift_mean": 0.54,
+  "patches": 40,
+  "box": [
+   20.0,
+   -0.0,
+   930.6,
+   1570.1
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "s10": {
+  "status": "ok",
+  "file": "Swords10.jpg",
+  "cost": 0.151,
+  "shift_max": 0.45,
+  "shift_mean": 0.23,
+  "patches": 34,
+  "box": [
+   9.9,
+   14.0,
+   943.9,
+   1566.8
+  ],
+  "src": [
+   960,
+   1665
+  ]
+ },
+ "s11": {
+  "status": "ok",
+  "file": "Swords11.jpg",
+  "cost": 0.357,
+  "shift_max": 2.04,
+  "shift_mean": 0.77,
+  "shift_p90": 1.38,
+  "patches": 39,
+  "box": [
+   24.1,
+   -0.0,
+   952.8,
+   1601.4
+  ],
+  "src": [
+   960,
+   1664
+  ]
+ },
+ "s12": {
+  "status": "ok",
+  "file": "Swords12.jpg",
+  "cost": 0.102,
+  "shift_max": 0.3,
+  "shift_mean": 0.15,
+  "patches": 43,
+  "box": [
+   27.0,
+   20.5,
+   952.9,
+   1606.7
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "s13": {
+  "status": "ok",
+  "file": "Swords13.jpg",
+  "cost": 0.106,
+  "shift_max": 0.35,
+  "shift_mean": 0.15,
+  "patches": 35,
+  "box": [
+   23.4,
+   25.8,
+   946.1,
+   1603.4
+  ],
+  "src": [
+   960,
+   1670
+  ]
+ },
+ "s14": {
+  "status": "ok",
+  "file": "Swords14.jpg",
+  "cost": 0.293,
+  "shift_max": 0.67,
+  "shift_mean": 0.37,
+  "patches": 42,
+  "box": [
+   32.5,
+   42.5,
+   946.1,
+   1595.3
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "p01": {
+  "status": "ok",
+  "file": "Pents01.jpg",
+  "cost": 0.26,
+  "shift_max": 0.91,
+  "shift_mean": 0.39,
+  "patches": 34,
+  "box": [
+   14.7,
+   41.9,
+   952.7,
+   1601.0
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "p02": {
+  "status": "ok",
+  "file": "Pents02.jpg",
+  "cost": 0.169,
+  "shift_max": 2.7,
+  "shift_mean": 0.3,
+  "shift_p90": 0.39,
+  "patches": 36,
+  "box": [
+   21.2,
+   37.0,
+   953.5,
+   1609.8
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "p03": {
+  "status": "ok",
+  "file": "Pents03.jpg",
+  "cost": 0.257,
+  "shift_max": 0.57,
+  "shift_mean": 0.26,
+  "patches": 42,
+  "box": [
+   31.0,
+   42.5,
+   942.1,
+   1595.7
+  ],
+  "src": [
+   960,
+   1649
+  ]
+ },
+ "p04": {
+  "status": "ok",
+  "file": "Pents04.jpg",
+  "cost": 0.142,
+  "shift_max": 0.43,
+  "shift_mean": 0.23,
+  "patches": 28,
+  "box": [
+   13.8,
+   23.9,
+   938.7,
+   1580.3
+  ],
+  "src": [
+   960,
+   1661
+  ]
+ },
+ "p05": {
+  "status": "ok",
+  "file": "Pents05.jpg",
+  "cost": 0.448,
+  "shift_max": 0.92,
+  "shift_mean": 0.46,
+  "patches": 44,
+  "box": [
+   23.7,
+   10.5,
+   957.3,
+   1562.1
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "p06": {
+  "status": "ok",
+  "file": "Pents06.jpg",
+  "cost": 0.269,
+  "shift_max": 0.71,
+  "shift_mean": 0.39,
+  "patches": 42,
+  "box": [
+   25.9,
+   32.9,
+   955.0,
+   1590.1
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "p07": {
+  "status": "ok",
+  "file": "Pents07.jpg",
+  "cost": 0.143,
+  "shift_max": 0.56,
+  "shift_mean": 0.26,
+  "patches": 37,
+  "box": [
+   35.4,
+   28.4,
+   944.6,
+   1592.3
+  ],
+  "src": [
+   960,
+   1654
+  ]
+ },
+ "p08": {
+  "status": "ok",
+  "file": "Pents08.jpg",
+  "cost": 0.374,
+  "shift_max": 1.11,
+  "shift_mean": 0.58,
+  "patches": 28,
+  "box": [
+   23.0,
+   31.1,
+   943.4,
+   1587.1
+  ],
+  "src": [
+   960,
+   1650
+  ]
+ },
+ "p09": {
+  "status": "ok",
+  "file": "Pents09.jpg",
+  "cost": 0.275,
+  "shift_max": 1.04,
+  "shift_mean": 0.39,
+  "patches": 40,
+  "box": [
+   28.1,
+   57.9,
+   949.3,
+   1607.3
+  ],
+  "src": [
+   960,
+   1664
+  ]
+ },
+ "p10": {
+  "status": "ok",
+  "file": "Pents10.jpg",
+  "cost": 0.147,
+  "shift_max": 0.48,
+  "shift_mean": 0.17,
+  "patches": 44,
+  "box": [
+   21.9,
+   19.8,
+   946.5,
+   1569.2
+  ],
+  "src": [
+   960,
+   1653
+  ]
+ },
+ "p11": {
+  "status": "ok",
+  "file": "Pents11.jpg",
+  "cost": 0.27,
+  "shift_max": 0.79,
+  "shift_mean": 0.36,
+  "patches": 34,
+  "box": [
+   17.6,
+   21.0,
+   937.4,
+   1590.2
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "p12": {
+  "status": "ok",
+  "file": "Pents12.jpg",
+  "cost": 0.126,
+  "shift_max": 0.33,
+  "shift_mean": 0.16,
+  "patches": 42,
+  "box": [
+   28.7,
+   13.1,
+   943.9,
+   1582.5
+  ],
+  "src": [
+   960,
+   1658
+  ]
+ },
+ "p13": {
+  "status": "ok",
+  "file": "Pents13.jpg",
+  "cost": 0.244,
+  "shift_max": 0.64,
+  "shift_mean": 0.25,
+  "patches": 39,
+  "box": [
+   22.0,
+   25.0,
+   952.7,
+   1592.3
+  ],
+  "src": [
+   960,
+   1662
+  ]
+ },
+ "p14": {
+  "status": "ok",
+  "file": "Pents14.jpg",
+  "cost": 0.337,
+  "shift_max": 0.74,
+  "shift_mean": 0.36,
+  "patches": 39,
+  "box": [
+   14.7,
+   46.4,
+   938.9,
+   1601.2
+  ],
+  "src": [
+   960,
+   1665
+  ]
+ }
+}

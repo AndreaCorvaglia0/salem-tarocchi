@@ -30,6 +30,9 @@ export const fresh = () => ({
   day: { date: null, card: null, turned: false, v: 0 }, // the card of the day (glue/threshold.rules.js)
   moon: { n: 0, last: null, cycles: 0 }, // the moon of the threshold: one slice a day she does something
   herbs: {}, // id -> { at }: the plants she has noticed (the herbarium)
+  garden: { unlocked: false, beds: [null, null, null, null] }, // the beds at the cottage (glue/garden.rules.js)
+  seeds: {}, // herb id -> seeds she owns
+  pantry: {}, // herb id -> bunches harvested (for the potions, later)
   daily: { looks: {}, notes: 0, noteDay: null }, // looks read per card; notes shown so far
   settings: { music: true, sfx: true },
   // the portrait (docs/DESIGN.md "Il ritratto"): five axes -6..6, positive pole first

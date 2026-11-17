@@ -89,6 +89,7 @@ export default {
     square: [18, 22, 'La piazza'],
     malva_door: [21, 38, 'Casa di Malva'],
     cottage_door: [4, 8, 'Il cottage'],
+    orto: [7, 7, "L'orto"], // the four beds by the cottage door, once Ortica has given them (glue/garden.js)
     stall: [4, 18, 'Il banco del merciaio'],
     market: [6, 19, 'Il mercato'],
     curtain: [12, 32, 'La tenda'],

@@ -59,6 +59,8 @@ export function reviewPair(cards = {}, now = Date.now()) {
 // The gift of a full moon: small things that exist already, never anything the story needs.
 export const GIFTS = [
   { treats: 1, coins: 4 }, { coins: 7 }, { treats: 2 }, { treats: 1, coins: 6 },
+  // a seed of a herb from her herbarium (glue/threshold.js picks it: garden.rules.js moonSeed), and a few coins
+  { seed: 1, coins: 2 },
 ];
 export const giftOf = (cycles) => GIFTS[(Math.max(1, cycles) - 1) % GIFTS.length];
 export const READER_LINES = [
@@ -70,4 +72,4 @@ export const READER_LINES = [
   'Sette spicchi, una luna. Anche le cose grandi si fanno una notte alla volta.',
 ];
 export const readerLine = (cycles) => READER_LINES[(Math.max(1, cycles) - 1) % READER_LINES.length];
-export const giftText = (g) => [g.treats ? (g.treats === 1 ? 'un manicaretto per Tartufo' : `${g.treats} manicaretti per Tartufo`) : null, g.coins ? `${g.coins} monete` : null].filter(Boolean).join(' e ');
+export const giftText = (g) => [g.seed ? (g.seedName ? `un seme di ${g.seedName}` : 'un seme per l\'orto') : null, g.treats ? (g.treats === 1 ? 'un manicaretto per Tartufo' : `${g.treats} manicaretti per Tartufo`) : null, g.coins ? `${g.coins} monete` : null].filter(Boolean).join(' e ');

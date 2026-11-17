@@ -5,6 +5,8 @@ import { todayKey, addCoins, addTreats } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { DAILY } from '../data/daily/cards.js';
 import { NOTES } from '../data/daily/notes.js';
+import { moonSeedGift } from './garden.js';
+import { HERB } from '../data/herbs/base.js';
 import { growMoon, moonShown, dayOf, noteOf, reviewPair, giftOf, giftText, readerLine } from './threshold.rules.js';
 
 const IDS = Object.keys(CARD).filter((id) => DAILY[id]);
@@ -18,7 +20,12 @@ export function touchMoon() {
   if (!r.grew) return null;
   state.moon = r.moon;
   let gift = null, line = null;
-  if (r.full) { const g = giftOf(r.moon.cycles); if (g.treats) addTreats(g.treats); if (g.coins) addCoins(g.coins); gift = giftText(g); line = readerLine(r.moon.cycles); state.moon.gift = { date: r.moon.last, gift, line }; }
+  if (r.full) {
+    let g = giftOf(r.moon.cycles);
+    // a seed for the garden (glue/garden.js): only once the garden is hers; otherwise a treat instead
+    if (g.seed) { const id = moonSeedGift(r.moon.last); g = id ? { ...g, seedName: HERB[id].name.toLowerCase() } : { treats: 1, coins: g.coins }; }
+    if (g.treats) addTreats(g.treats); if (g.coins) addCoins(g.coins); gift = giftText(g); line = readerLine(r.moon.cycles); state.moon.gift = { date: r.moon.last, gift, line };
+  }
   save();
   return { n: r.moon.n, full: r.full, gift, line };
 }

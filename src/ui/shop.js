@@ -13,6 +13,10 @@ import { TOOL_ART, purse, cardBack, treat } from './art.js';
 import { addTreats } from '../core/bonds.js';
 import { TOOLS, CARD_PRICE, shopRow, shopCards, canBuy } from './logic.js';
 import { onEscape } from './book.js';
+import { HERB, HERB_LIST } from '../data/herbs/base.js';
+import { seedsForSale, seedPrice } from '../glue/garden.rules.js';
+import { garden, buySeed } from '../glue/garden.js';
+import { plantCanvas } from './garden.js';
 
 const CSS = `
 .sp-w{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:radial-gradient(ellipse 80% 60% at 50% 30%,#2a1f22,#110c10 75%);color:#f1e7cf;font:16px system-ui,sans-serif;animation:gx-fade .2s}
@@ -37,6 +41,11 @@ const CSS = `
 .sp-card .sp-back{filter:drop-shadow(0 8px 14px #000c);transform:rotate(var(--r))}
 .sp-card .nm{font:21px/24px ${HAND};color:#f1e7cf}
 .sp-none{font:19px ${HAND};color:#b9ab90;text-align:center}
+.sp-seeds{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.sp-seeds .sp-tag .ln{min-height:0}
+.sp-seeds canvas{width:24px;height:42px;image-rendering:pixelated;image-rendering:crisp-edges}
+.sp-seeds .sp-buy{min-width:0;width:100%;padding:0 6px}
+.sp-poison{color:${RED};font-size:16px}
 .sp-say{min-height:30px;text-align:center;font:20px ${HAND};color:${GOLD};margin-top:12px}
 @media (max-width:719px){
   .sp-tools{grid-template-columns:1fr 1fr;gap:16px 12px}
@@ -78,9 +87,19 @@ export function openShop() {
         h('span.nm', {}, `${CARD[id]?.roman || ''} · ${CARD[id]?.name || id}`),
         h('button.sp-buy', { type: 'button', disabled: !canBuy(price), onclick: () => buyCard(id, price) }, `${price} monete`))))
         : h('p.sp-none', {}, 'Le carte di questo capitolo le ho già tutte.');
+      // seeds for the garden (glue/garden.js): one for each herb she has noticed, once the garden is hers
+      const risk = (id) => HERB[id]?.risk || null;
+      const forSale = garden().unlocked ? seedsForSale(state.herbs, HERB_LIST.map((p) => p.id)) : [];
+      const seedTags = forSale.length ? [h('p.sp-h', { style: { marginTop: '18px' } }, 'Semi per l\'orto'), h('div.sp-seeds', forSale.map((id, i) => {
+        const n = state.seeds?.[id] || 0, price = seedPrice(id, risk);
+        return h('div.sp-tag', { style: `--r:${[-1, 0.8, -0.4][i % 3]}deg` }, plantCanvas(id, 99), h('span.nm', {}, HERB[id].name),
+          risk(id) === 'velenosa' ? h('span.ln.sp-poison', {}, 'velenosa, con i guanti') : null,
+          h('span.own', {}, n ? `ne ho ${n}` : ''),
+          h('button.sp-buy', { type: 'button', disabled: !canBuy(price), onclick: () => buySeedOf(id, price) }, `${price} monete`));
+      }))] : [];
       main.replaceChildren(
         h('p.sp-hello', {}, '«Non chiedo da dove vengono le monete. Tu non chiedere da dove vengono queste.»', h('small', {}, 'il bottegaio')),
-        h('div.sp-tools', tools), h('div.sp-counter', h('p.sp-h', {}, 'Sotto il banco'), cards, say));
+        h('div.sp-tools', tools), ...seedTags, h('div.sp-counter', h('p.sp-h', {}, 'Sotto il banco'), cards, say));
     };
     const buyTool = (t) => {
       if (!canBuy(t.price)) return;
@@ -98,6 +117,14 @@ export function openShop() {
       addTreats(1);
       draw();
       say.textContent = 'Preso: un manicaretto per Tartufo.';
+    };
+    const buySeedOf = (id, price) => {
+      if (!canBuy(price)) return;
+      addCoins(-price);
+      snd('tap');
+      buySeed(id);
+      draw();
+      say.textContent = `Preso: un seme di ${HERB[id].name.toLowerCase()}.`;
     };
     const buyCard = async (id, price) => {
       if (!canBuy(price)) return;
