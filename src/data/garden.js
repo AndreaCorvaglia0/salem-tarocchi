@@ -43,10 +43,23 @@ export const SOILS = [
   { id: 'fresca', name: 'Terra fresca', line: 'Fresca, che resta umida' },
 ];
 export const SOIL = Object.fromEntries(SOILS.map((s) => [s.id, s]));
-// Ortica's lessons (a later optional chain): when state.garden.lessons[topic] is true, the line under a bed
-// that touches that topic is followed by this fuller explanation. Topics: acqua, luce, terra, vaso, semina.
+// Ortica's lessons (an optional chain: glue/garden.js, scenes in data/story/scripts/garden-lessons.js; sources:
+// notes/garden-lessons.md). In order, one a day at most. `text` is the line in the grimoire's list.
+const HUT = 'Mi aspetta dietro la sua capanna, nel bosco.';
+export const LESSONS = [
+  { key: 'acqua', title: 'L\'acqua', text: `L'acqua: Ortica vuole farmi vedere come bagna le sue erbe. ${HUT}` },
+  { key: 'luce', title: 'La luce', text: `La luce: Ortica ha due rosmarini da farmi vedere, uno fitto e uno tutto allungato. ${HUT}` },
+  { key: 'terra', title: 'La terra', text: `La terra: Ortica ha preparato un sacco di terriccio e un secchio di ghiaino. ${HUT}` },
+  { key: 'vaso', title: 'Il vaso', text: `Il vaso: Ortica deve cambiare vaso alla menta, e vuole che ci sia anch'io. ${HUT}` },
+  { key: 'semina', title: 'Semina e talea', text: `Semina e talea: Ortica semina la calendula, e vuole insegnarmi a fare una pianta da un rametto. ${HUT}` },
+];
+// When state.garden.lessons[topic] is true, the line under a bed that touches that topic is followed by this
+// fuller explanation (glue/garden.rules.js lessonNote). The screen shows acqua, luce and terra; vaso and semina
+// have no line under a bed yet.
 export const LESSON_NOTES = {
   acqua: 'Meglio bagnare a fondo e poi aspettare: le radici scendono a cercare l\'acqua, mentre con poca acqua tutti i giorni restano in superficie.',
-  luce: 'Le aromatiche del Mediterraneo vogliono almeno sei ore di sole diretto; con meno luce i fusti si allungano, diventano deboli e fanno meno profumo.',
-  terra: 'Una terra leggera si fa mescolando terriccio con sabbia grossa o ghiaino: l\'acqua passa e le radici non restano a mollo.',
+  luce: 'Le aromatiche del Mediterraneo vogliono più di sei ore di sole diretto; con meno luce i fusti si allungano, restano deboli e pallidi e fioriscono poco.',
+  terra: 'Una terra leggera si fa mescolando al terriccio un quarto di ghiaino o di sabbia grossa: l\'acqua passa e le radici non restano a mollo.',
+  vaso: 'Si rinvasa in primavera, in un vaso appena più largo: in uno troppo grande la terra senza radici resta bagnata a lungo. Il coccio asciuga prima della plastica.',
+  semina: 'I semi si coprono con un velo di terra non più spesso del seme, e la terra resta umida senza diventare fango. Le talee si fanno con getti senza fiori, in primavera o a fine estate.',
 };

@@ -2,6 +2,7 @@
 //   garden.open      the overlay (from the threshold with no world, or from the beds by the cottage door)
 //   garden.thirsty   the threshold's subtitle: how many beds to check (or thirsty, once checked today)
 //   garden.unlock    Ortica's gift: the beds and three seedlings (her scene `garden.ortica`)
+//   garden.lesson    the end of one of Ortica's five lessons (scenes `garden.lesson.<key>`): see below
 // The unlock is a side thing in the registry (core/extras.js): it becomes available, also to a player far
 // ahead, once she has met Ortica in the wood (chapter 2 on, past the step c2.ortica) and noticed at least
 // four herbs; the flag `garden.offer` records that, `garden.given` that the scene was played.
@@ -13,9 +14,11 @@ import { EXTRAS } from '../core/extras.js';
 import { todayKey, addXp, setFlag } from '../core/progress.js';
 import { SCRIPTS, CAST } from '../data/story/index.js';
 import { GARDEN_SCRIPTS } from '../data/story/scripts/garden.js';
+import { GARDEN_LESSON_SCRIPTS } from '../data/story/scripts/garden-lessons.js';
+import { LESSONS } from '../data/garden.js';
 import { HERB, HERB_LIST } from '../data/herbs/base.js';
 import { openGarden } from '../ui/garden.js';
-import { normGarden, normCounts, plant as plantBed, water as waterBed, settle, harvest as harvestBed, touch as touchBed, resoil, move, bedLight, summary, summaryText, readyCount, seedlings, moonSeed } from './garden.rules.js';
+import { normGarden, normCounts, plant as plantBed, water as waterBed, settle, harvest as harvestBed, touch as touchBed, resoil, move, bedLight, summary, summaryText, readyCount, seedlings, moonSeed, nextLesson, rareSeed, lessonFlag, lessonEntries } from './garden.rules.js';
 
 export const GARDEN_HERBS = 4; // herbs in the herbarium before Ortica offers the garden
 const ORDER = HERB_LIST.map((p) => p.id);
@@ -122,8 +125,48 @@ export function moonSeedGift(date = todayKey()) {
 }
 export const buySeed = (id) => { seeds(); state.seeds[id] = (state.seeds[id] || 0) + 1; save(); };
 
+// ---- Ortica's lessons (data/garden.js LESSONS; scenes: data/story/scripts/garden-lessons.js) -----------
+// A chain of five optional side things after `garden.ortica`. Flags: `garden.lesson.<key>.open` (she may take
+// it: set here, by what she HAS: the garden, something planted, the lesson before, a later day),
+// `garden.lesson.<key>` (taken), `garden.lesson.day` (the todayKey of the last one taken: one a day at most).
+const LESSON_DAY = 'garden.lesson.day';
+const NOTED = { acqua: 'sull\'acqua', luce: 'sulla luce', terra: 'sulla terra' }; // the notes the screen shows under a bed
+export function checkLessons(today = todayKey()) {
+  if (!state.started || !state.flags['garden.given']) return null;
+  const g = garden();
+  // a save where the two records disagree: the flag follows the garden, and the garden the flag
+  for (const { key } of LESSONS) {
+    if (state.flags[lessonFlag(key)] && !g.lessons[key]) g.lessons[key] = true;
+    else if (g.lessons[key] && !state.flags[lessonFlag(key)]) state.flags[lessonFlag(key)] = true;
+  }
+  const key = nextLesson(g, state.flags[LESSON_DAY], today);
+  if (key && !state.flags[`${lessonFlag(key)}.open`]) setFlag(`${lessonFlag(key)}.open`);
+  return key;
+}
+// the scene has been played to its end -> the rare seed's herb id after the last lesson, else null
+function finishLesson(key, today = todayKey()) {
+  const L = LESSONS.find((l) => l.key === key);
+  if (!L) return null;
+  const g = garden(), first = !g.lessons[key];
+  g.lessons[key] = true;
+  state.flags[LESSON_DAY] = today;
+  let seed = null;
+  if (first && key === LESSONS[LESSONS.length - 1].key) {
+    seed = rareSeed(state.seeds, g.beds, risk, ORDER);
+    state.seeds[seed] = (state.seeds[seed] || 0) + 1;
+  }
+  changed();
+  setFlag(lessonFlag(key));
+  if (has('hud.toast')) {
+    const note = NOTED[key] ? ` Sotto le aiuole dell'orto, da oggi, c'è una nota in più ${NOTED[key]}.` : '';
+    const gift = seed ? ` Tra i semi adesso ce n'è uno di ${HERB[seed].name.toLowerCase()}: è una pianta velenosa, da coltivare con i guanti e da non assaggiare mai.` : '';
+    call('hud.toast', `Lezione di Ortica: ${L.title}.${note}${gift}`);
+  }
+  return seed;
+}
+
 // ---- registration (at import, before the world starts) --------------------------------------------
-Object.assign(SCRIPTS, GARDEN_SCRIPTS);
+Object.assign(SCRIPTS, GARDEN_SCRIPTS, GARDEN_LESSON_SCRIPTS);
 if (!EXTRAS.some((e) => e.id === 'garden.ortica')) {
   EXTRAS.push({ id: 'garden.ortica', kind: 'errand', at: 'forest.ortica_hut', when: { flag: 'garden.offer' }, done: { flag: 'garden.given' },
     text: 'Ortica ha qualcosa per me, per fare un orto accanto alla mia capanna: devo passare da lei, nel bosco.' });
@@ -134,6 +177,15 @@ if (!CAST.includes(GARDEN_CAST)) {
   const chat = CAST.findIndex((e) => e.id === 'ortica' && e.script === 'ortica.chat');
   CAST.splice(chat >= 0 ? chat : CAST.length, 0, GARDEN_CAST);
 }
+// her five lessons: a chain after the gift, each link after the one before (core/extras.js shows one at a time);
+// Ortica gives the open one at her hut, before her everyday chat
+for (const { extra, cast } of lessonEntries()) {
+  if (!EXTRAS.some((e) => e.id === extra.id)) EXTRAS.push(extra);
+  if (!CAST.some((e) => e.script === cast.script)) {
+    const chat = CAST.findIndex((e) => e.id === 'ortica' && e.script === 'ortica.chat');
+    CAST.splice(chat >= 0 ? chat : CAST.length, 0, cast);
+  }
+}
 // the beds by the cottage door
 CAST.push({ id: 'garden.beds', kind: 'prop', at: 'village.orto', when: { flag: 'garden.given' }, script: 'garden.look', label: 'L\'orto', verb: 'Guarda' });
 
@@ -142,8 +194,14 @@ provide('garden.unlock', () => Promise.resolve(unlock()));
 provide('garden.thirsty', () => Promise.resolve(garden().unlocked ? gardenNote() : null));
 provide('garden.ready', () => Promise.resolve(readyCount(garden())));
 provide('garden.open', (o) => openGarden(o));
+provide('garden.lesson', (key) => Promise.resolve(finishLesson(key)));
 
 for (const e of ['herb', 'step', 'chapter']) on(e, () => checkOffer());
 checkOffer();
+// a lesson may open when something is planted, when one ends, on a new day (seen when she changes map)
+for (const e of ['garden', 'flag', 'step', 'chapter', 'map:enter']) on(e, () => checkLessons());
+checkLessons();
+// the phone left on overnight: a new day is seen when she comes back to the page
+globalThis.document?.addEventListener?.('visibilitychange', () => { if (!globalThis.document.hidden) checkLessons(); });
 // a game restored or begun later: check again when the world starts
-wrap('world.start', async (prev, ...a) => { checkOffer(); return prev?.(...a); });
+wrap('world.start', async (prev, ...a) => { checkOffer(); checkLessons(); return prev?.(...a); });

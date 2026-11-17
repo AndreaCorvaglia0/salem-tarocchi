@@ -15,13 +15,13 @@
 // the soil. A plant that likes it dry wants water when the soil is dry a finger deep; the others when the
 // top is dry. The soil changes the pace: a dry-lover in fresh soil stays wet twice as long, a thirsty plant
 // in light soil dries twice as fast. Days are local calendar days 'YYYY-MM-DD' (todayKey). Nothing dies.
-import { GARDEN, FIRST_SEEDLINGS, BEDS, BED_LIGHT, SOIL, LIGHT, LESSON_NOTES } from '../data/garden.js';
+import { GARDEN, FIRST_SEEDLINGS, BEDS, BED_LIGHT, SOIL, LIGHT, LESSON_NOTES, LESSONS as LESSON_LIST } from '../data/garden.js';
 
 export const NEGLECT = 3; // more than NEGLECT x the (soil-adjusted) interval without water: it wilts one step
 export const REGROW = 2; // after a harvest the plant goes back this many steps, and keeps giving
 export const HARVEST_XP = 4;
 export const SEED_PRICE = { herb: 5, poison: 9 };
-export const LESSONS = ['acqua', 'luce', 'terra', 'vaso', 'semina'];
+export const LESSONS = LESSON_LIST.map((l) => l.key); // 'acqua', 'luce', 'terra', 'vaso', 'semina'
 
 const dayNum = (key) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(key || '')); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) / 86400000 : null; };
 // whole days from a to b (local calendar days); null if either is missing
@@ -174,7 +174,7 @@ const ao = (id, f, m) => (male(id) ? m : f);
 export function lightWhy(id, light) {
   const P = GARDEN[id];
   if (!P || lightOk(id, light)) return null;
-  if (P.luce === 'sole') return light === 'ombra' ? 'Vuole pieno sole: qui all\'ombra fila e non fiorisce.' : 'Vuole pieno sole: a mezz\'ombra cresce lenta e fa meno profumo.';
+  if (P.luce === 'sole') return light === 'ombra' ? 'Vuole pieno sole: qui all\'ombra fila e non fiorisce.' : 'Vuole pieno sole: a mezz\'ombra cresce lenta e fiorisce poco.';
   return light === 'sole' ? 'Vuole mezz\'ombra: in pieno sole le foglie si scottano e la terra secca troppo.' : 'Vuole almeno un po\' di sole: in ombra piena cresce stenta.';
 }
 // what the soil does to it (null when it is its soil; a preference when the soil only suits it less)
@@ -208,6 +208,34 @@ export function lineFor(key, id, ctx = {}) {
   }
 }
 // the topic of Ortica's lessons a line belongs to, and its fuller note once she has taken that lesson
-// (state.garden.lessons[topic] = true; the chain "Le lezioni di Ortica" is not written yet)
+// (state.garden.lessons[topic] = true, set by the chain "Le lezioni di Ortica": glue/garden.js)
 const TOPIC = { good: 'acqua', early: 'acqua', drowned: 'acqua', wilted: 'acqua', slow: 'luce', light: 'luce', resoil: 'terra', soil: 'terra' };
 export const lessonNote = (key, lessons = {}) => { const t = TOPIC[key] || key; return lessons?.[t] ? LESSON_NOTES[t] || null : null; };
+
+// ---- Ortica's lessons (the chain) ---------------------------------------------------------------
+// The lesson she can take today, or null: the garden is hers and something is planted; the first undone
+// lesson in order; and, after the first, only on a later calendar day than the last one (`lastDay`, a todayKey;
+// missing = no lesson taken yet). One a day at most, so they never pile up.
+export function nextLesson(garden, lastDay, today) {
+  if (!garden?.unlocked || !(garden.beds || []).some((b) => b && GARDEN[b.herb])) return null;
+  const key = LESSONS.find((k) => !garden.lessons?.[k]);
+  if (!key) return null;
+  if (key !== LESSONS[0] && lastDay) { const d = daysBetween(lastDay, today); if (d != null && d < 1) return null; }
+  return key;
+}
+// The rare seed after the last lesson: the first poisonous plant of the herbarium she has no seed of and
+// does not grow; belladonna when she has them all.
+export function rareSeed(seeds, beds, risk, order) {
+  const owns = (id) => (seeds?.[id] || 0) > 0 || (beds || []).some((b) => b?.herb === id);
+  return order.find((id) => GARDEN[id] && risk(id) === 'velenosa' && !owns(id)) || 'belladonna';
+}
+// The chain as entries: -> [{ extra, cast }] in order. `extra` goes into the registry (core/extras.js: each after
+// the one before, the first after Ortica's gift), `cast` puts Ortica at her hut for the open lesson.
+export const lessonFlag = (key) => `garden.lesson.${key}`;
+export const lessonEntries = (list = LESSON_LIST) => list.map((l, n) => {
+  const id = lessonFlag(l.key), when = { flag: `${id}.open` }, done = { flag: id };
+  return {
+    extra: { id, kind: 'errand', at: 'forest.ortica_hut', when, done, after: [n ? lessonFlag(list[n - 1].key) : 'garden.ortica'], text: l.text },
+    cast: { id: 'ortica', kind: 'npc', who: 'ortica', at: 'forest.ortica_hut', when: [when, { not: done }], script: id, label: 'Ortica' },
+  };
+});
