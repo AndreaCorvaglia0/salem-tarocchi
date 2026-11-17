@@ -1,4 +1,4 @@
-// PROOF BOARD (not wired into the maps yet; see notes/buildings.md and harness/buildings.html).
+// The witches' houses (notes/buildings.md; proof board: harness/buildings.html).
 // The witches' houses, each eccentric in its own way and after who lives there (lore/retroscena):
 //   malvaHouse   Malva's, by the road in: a saltbox with a long crooked roof, herbs under the eaves;
 //   cottageHome  hers, at the edge of the wood, in three stages that grow with her (opts.stage 1..3),
@@ -8,6 +8,8 @@
 import { SEASONS, M, INK } from './palette.js';
 import { makeCanvas, hash, rect, px, line, ellipse } from './px.js';
 import { windowAt } from './houses.js';
+import { KINDS } from '../tiles.js';
+import { SYMBOL_OF_BLOCK as SYM } from '../../data/world/symbols.js';
 import { F, profileRoof, doorAt, vine, outline, smokeStack, hangSign } from './facades.js';
 
 const T = 16;
@@ -31,50 +33,49 @@ export function bundles(ctx, xs, yAt, S, cols = [M.herb[1], M.herb[2], M.herb[3]
 }
 
 // =====================================================================================
-// MALVA'S HOUSE, 5x4, door col 0 (as today). The midwife (malva-retroscena): a saltbox with its
-// gable to the road, the short steep slope over the door, the long one running down over a lean-to;
-// warm ochre daub between dark timbers (the only warm wall in the lower village); a crooked chimney
-// that always smokes; herbs drying under the long eave; ONE big window always lit, a red cloth in it
-// (the table where she reads); the note on the door («non bussare»); the broom with the green ribbon
-// by the garden gate (she has not flown for twenty years); a vine taking the corner.
+// MALVA'S HOUSE, 5x4, door col 0 (as today). The midwife (malva-retroscena): a New England saltbox seen from
+// its gable end, low and broad: a short steep slope over the door, the long one running down at the back
+// over a lean-to; warm ochre boards (the only warm wall in the lower village); a big crooked chimney in the
+// middle of the roof that always smokes; herbs drying under the long eave; ONE big window always lit, a red
+// cloth in it (the table where she reads); the note on the door («non bussare»); the broom with the green
+// ribbon by the garden gate (she has not flown for twenty years); a vine taking the corner.
 export function malvaHouse(b, season) {
-  const S = SEASONS[season], W = b.w * T, over = 32, H = b.h * T + over;
+  const S = SEASONS[season], W = b.w * T, over = KINDS.malva.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
-  const ax = 27, ay = 4, ly = H - 34, ry = H - 24, k = 11, split = 58; // apex, left eave, right eave, roof band, lean-to
+  const ax = 24, ay = 12, ly = H - 38, ry = H - 18, k = 9, split = 60; // apex, left eave, right eave, roof band, lean-to
   const top = (x) => (x <= ax ? Math.round(ly + ((ay - ly) * x) / ax) : Math.round(ay + ((ry - ay) * (x - ax)) / (W - 1 - ax)));
-  // the crooked chimney, behind the roof
-  const smoke = smokeStack(ctx, 38, 2, 18, S, 3, M.stone);
-  // walls: the gable (daub and timber), then the lean-to
+  // the big central chimney, crooked, behind the ridge
+  const smoke = smokeStack(ctx, ax - 1, 0, 18, S, 2, M.stone);
+  // walls: warm ochre clapboard under the whole roof, dark corner boards; the lean-to a shade darker
   for (let x = 1; x < W - 1; x++) for (let y = top(x) + k - 2; y < H; y++) {
-    let col = F.daub[(x * 7 + y * 3) % 11 === 0 ? 3 : (hash(x >> 1, y >> 1, 4) > 0.8 ? 1 : 2)];
-    if ([1, 2, 20, 21, split - 1, split].includes(x) || y === ly + 2 || y === ly + 3 || y >= H - 3) col = x === 1 || x === split - 1 ? M.wood[2] : M.wood[1]; // timbers
-    if (x > split && (y === ry + 4 || x === W - 3)) col = M.wood[1];
+    const r = y % 4, lean = x > split;
+    let col = r === 0 ? F.daub[0] : r === 1 ? F.daub[lean ? 2 : 3] : F.daub[lean ? 1 : 2];
+    if (x <= 2 || x === split || x === split + 1 || x >= W - 3) col = x === 1 || x === split ? M.wood[2] : M.wood[1];
+    if (y >= H - 3) col = M.wood[1];
     px(ctx, x, y, col);
   }
-  line(ctx, 22, ly + 2, ax, ay + 18, M.wood[1]); line(ctx, 22, ly + 1, ax, ay + 17, M.wood[2]); // braces in the gable
-  line(ctx, split - 2, ly + 2, ax + 4, ay + 20, M.wood[1]);
-  // a small attic window, dark
-  windowAt(ctx, ax - 3, ay + 20, 6, 7, 'dark', { snow: S.snow });
-  profileRoof(ctx, 0, W, top, (x) => k + (x > split ? 1 : 0), M.roof.plum, S, { seed: 7, moss: 0.06 });
+  // a small window up in the gable, under the short slope: dark
+  windowAt(ctx, ax - 10, ly - 4, 6, 7, 'dark', { snow: S.snow });
+  profileRoof(ctx, 0, W, top, (x) => k + (x > split ? 1 : 0), M.roof.plum, S, { seed: 7, moss: 0.06, snow: 0.5 });
   // herbs drying under the long eave
-  bundles(ctx, [42, 46, 50, 54, 62, 66, 70, 74], (x) => top(x) + k - 1, S, [M.herb[1], M.herb[3], '#b88935', M.herb[2], '#8f3d3c']);
+  bundles(ctx, [36, 40, 44, 48, 52, 63, 67, 71], (x) => top(x) + k - 1, S, [M.herb[1], M.herb[3], '#b88935', M.herb[2], '#8f3d3c']);
   // the big lit window, with the red tablecloth
-  const wx = 28, wy = H - 26;
-  windowAt(ctx, wx, wy, 16, 12, 'lit', { snow: S.snow });
-  rect(ctx, wx, wy + 9, 16, 3, '#8f3d3c'); rect(ctx, wx, wy + 9, 16, 1, '#b85a4a'); rect(ctx, wx + 8, wy, 1, 12, INK);
+  const wx = 30, wy = H - 27;
+  windowAt(ctx, wx, wy, 18, 13, 'lit', { snow: S.snow });
+  rect(ctx, wx, wy + 10, 18, 3, '#8f3d3c'); rect(ctx, wx, wy + 10, 18, 1, '#b85a4a'); rect(ctx, wx + 9, wy, 1, 13, INK);
   // the door: deep green, a white note on it, a hood over it
   doorAt(ctx, 3, H - 18, 11, 17, ['#132a1c', '#1d3a27', '#2c5236'], {});
   rect(ctx, 6, H - 14, 4, 3, F.cream); px(ctx, 7, H - 13, '#6b6050'); px(ctx, 8, H - 13, '#6b6050');
   rect(ctx, 1, H - 21, 15, 2, INK); rect(ctx, 2, H - 21, 13, 1, M.wood[3]); if (S.snow) rect(ctx, 1, H - 22, 15, 1, S.snow);
-  hangSign(ctx, 16, H - 22, 'mortar', 1, S);
-  // the lean-to: a low door to the garden, the broom with the green ribbon beside it
-  rect(ctx, 60, H - 14, 8, 13, INK); rect(ctx, 61, H - 13, 6, 12, M.wood[1]); rect(ctx, 63, H - 13, 1, 12, M.wood[0]);
+  // the lean-to: a low door to the garden
+  rect(ctx, 63, H - 13, 8, 12, INK); rect(ctx, 64, H - 12, 6, 11, M.wood[1]); rect(ctx, 66, H - 12, 1, 11, M.wood[0]);
   // overgrown: a vine up the corner, a low bush of herbs
-  vine(ctx, 2, H - 2, ly - 6, 3, F.ivy, 3); vine(ctx, split - 1, H - 2, H - 22, 8, F.ivy, 2);
-  for (let i = 0; i < 9; i++) { const x = 46 + i, hgt = 2 + Math.round(hash(i, 1, 6) * 4); rect(ctx, x, H - hgt - 1, 1, hgt, i % 2 ? M.herb[1] : M.herb[2]); if (i % 3 === 0) px(ctx, x, H - hgt - 2, M.herb[3]); }
+  vine(ctx, 2, H - 2, ly - 2, 3, F.ivy, 3); vine(ctx, split, H - 2, H - 18, 8, F.ivy, 2);
+  for (let i = 0; i < 9; i++) { const x = 50 + i, hgt = 2 + Math.round(hash(i, 1, 6) * 4); rect(ctx, x, H - hgt - 1, 1, hgt, i % 2 ? M.herb[1] : M.herb[2]); if (i % 3 === 0) px(ctx, x, H - hgt - 2, M.herb[3]); }
   outline(ctx, W, H);
-  broom(ctx, 71, H - 1, ['#1f6a3a', '#5fcf7a']);
-  return { canvas: c, over, windows: [{ x: wx + 8, y: wy + 6, lit: true, keep: true }], smoke };
+  hangSign(ctx, 15, H - 24, SYM.malva, 1, S);
+  broom(ctx, 74, H - 1, ['#1f6a3a', '#5fcf7a']);
+  return { canvas: c, over, windows: [{ x: wx + 9, y: wy + 6, lit: true, keep: true }], smoke };
 }
 
 // =====================================================================================
@@ -100,19 +101,26 @@ export const SUITS = {
 const PLANT = { // leaf, flower
   lavanda: ['#3f6a3f', '#a08ab8'], rosmarino: ['#2c4a30', '#9fb8d8'], salvia: ['#4f6f55', '#8fa88a'], calendula: ['#3f6a3f', '#d99a45'],
   camomilla: ['#3f6a3f', '#e8e0c0'], menta: ['#3f7a44', '#6fa860'], timo: ['#4a5e3a', '#c49ac0'], ortica: ['#2c4a30', '#5d8c4a'], verbena: ['#3f6a3f', '#8a6ad0'],
+  alloro: ['#2c4a30', '#3f6a3f'], melissa: ['#4f7f48', '#d8e0a0'], achillea: ['#4a5e3a', '#e8e0d0'], valeriana: ['#3f6a3f', '#e0b8c8'], artemisia: ['#6b7f6b', '#b0b8a0'],
+  assenzio: ['#7a8a7a', '#c8c890'], ruta: ['#4f6f55', '#d8c860'], belladonna: ['#2c4a30', '#5a3a6a'], aconito: ['#2c4a30', '#5a6ad0'], giusquiamo: ['#4a5e3a', '#c8b880'],
+  cicuta: ['#3f6a3f', '#f0f0e0'], stramonio: ['#2c4a30', '#f0e8f0'],
 };
 
 export function cottageHome(b, season) {
   const S = SEASONS[season], o = b.opts || {}, st = o.stage || 1, sl = o.slots || {};
-  const W = b.w * T, over = 32, H = b.h * T + over;
+  const W = b.w * T, over = KINDS.cottage.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
   const suit = st === 3 ? SUITS[sl.suit] || null : null;
   const wallTop = (x) => H - 28 + Math.round((x * 4) / W); // lower on the right: lopsided
-  const ridge = (x) => 13 + Math.round(Math.pow(x / W, 1.4) * 11) + (st === 1 ? Math.round(Math.sin((x / W) * Math.PI) * 2) : 0); // slumping to the right
+  // slumping to the right and sagging (1); set straight again, the ridge almost level (2, 3)
+  const ridge = (x) => (st === 1 ? 13 + Math.round(Math.pow(x / W, 1.4) * 11) + Math.round(Math.sin((x / W) * Math.PI) * 2) : 12 + Math.round((x / W) * 6));
   // chimney: leaning and cold / straight and smoking / a tall pot with a crescent
   let smoke = null;
   if (st === 1) smokeStack(ctx, 7, 6, 13, S, -2, M.stone);
-  else if (st === 2) smoke = smokeStack(ctx, 7, 6, 13, S, 0, M.stone);
+  else if (st === 2) { // rebuilt: taller, straight, a clay pot on top (the silhouette changes, not only the colour)
+    smoke = smokeStack(ctx, 7, 2, 17, S, 0, M.stone);
+    rect(ctx, 8, 0, 5, 2, INK); rect(ctx, 9, 0, 3, 1, '#8a4a30');
+  }
   else {
     smoke = smokeStack(ctx, 7, 2, 17, S, 0, M.stone); // taller, with a pot
     rect(ctx, 8, 0, 5, 2, INK); rect(ctx, 9, 0, 3, 1, '#8a4a30');
@@ -128,10 +136,10 @@ export function cottageHome(b, season) {
   } : st === 2 ? (x, y) => (x >= 13 && x < 30 && y >= 35 && y < 44 ? ((x + (y >> 1)) % 5 === 0 || y % 3 === 0 ? '#4a3428' : '#7a5640') : null) // the new shingles, still pale
     : (x, y) => { if (y < 33) return null; const cell = (Math.floor(x / 8) * 3 + Math.floor((y + 1) / 5)) % 7; const seam = x % 8 === 0 || y % 5 === 4; return seam ? null : cell === 1 ? M.roof.plum[1] : cell === 4 ? M.roof.moss[1] : cell === 6 && suit ? suit.pal[1] : null; }; // a patchwork kept on purpose, quieter
   profileRoof(ctx, 0, W, ridge, (x) => wallTop(x) - ridge(x) + 2, M.roof.brown, S, { after, moss: st === 1 ? 0.1 : 0, seed: 12, snow: 0.4 });
-  if (st === 3) { // a weathervane on the ridge: a black cat
+  if (st === 3) { // a weathervane on the ridge: a sitting black cat with its tail up, over an arrow
     const vx = 46, vy = ridge(46);
-    rect(ctx, vx, vy - 9, 1, 9, INK);
-    rect(ctx, vx - 4, vy - 12, 6, 3, INK); px(ctx, vx - 4, vy - 13, INK); px(ctx, vx - 2, vy - 13, INK); px(ctx, vx + 2, vy - 11, INK); px(ctx, vx + 3, vy - 12, INK); px(ctx, vx + 4, vy - 13, INK);
+    rect(ctx, vx, vy - 7, 1, 7, INK); line(ctx, vx - 5, vy - 5, vx + 5, vy - 5, INK); px(ctx, vx + 4, vy - 6, INK); px(ctx, vx + 4, vy - 4, INK); rect(ctx, vx - 6, vy - 6, 2, 3, INK);
+    ['#.#......', '###......', '###......', '.####....', '.#####..#', '.#####.#.', '.######..'].forEach((row, j) => [...row].forEach((ch, i) => { if (ch === '#') px(ctx, vx - 4 + i, vy - 14 + j, INK); }));
     px(ctx, vx - 3, vy - 12, '#e8d060');
   }
   // walls: a stone footing and weathered boards
@@ -168,10 +176,14 @@ export function cottageHome(b, season) {
   // apples drying on a string under the eave (luoghi/capanna: «mele messe a seccare»)
   for (let x = 4; x < 30; x += 3) { const y = wallTop(x) + 3 + ((x >> 1) % 2); px(ctx, x, y - 1, M.wood[1]); if (st > 1 || x % 2) px(ctx, x, y, x % 6 ? '#8f3d3c' : '#b85a3a'); }
   // the sign: her cat, from a bracket between window and door
-  hangSign(ctx, 31, wallTop(31) + 3, 'cat', -1, S, suit ? { board: suit.pal } : {});
+  hangSign(ctx, 33, wallTop(33) + 3, SYM.cottage, -1, S, suit ? { board: suit.pal } : {});
   if (st >= 2) { // a woodpile against the left foot, a lantern by the door
     for (let r = 0; r < 2; r++) for (let k = 0; k < 2; k++) { ellipse(ctx, 3 + k * 4, H - 3 - r * 4, 2, 2, INK); ellipse(ctx, 3 + k * 4, H - 3 - r * 4, 1, 1, M.wood[4]); }
-    if (st === 2) { rect(ctx, 47, H - 23, 1, 3, INK); rect(ctx, 45, H - 20, 5, 6, INK); rect(ctx, 46, H - 19, 3, 4, M.lit[1]); windows.push({ x: 47, y: H - 17, lit: true, keep: true, lamp: true }); }
+    if (st === 2) { // a lantern on an iron arm out of the wall by the door
+      line(ctx, 46, H - 26, 53, H - 26, INK); line(ctx, 46, H - 22, 50, H - 26, INK); rect(ctx, 52, H - 25, 1, 2, INK);
+      rect(ctx, 50, H - 23, 5, 7, INK); rect(ctx, 51, H - 22, 3, 5, M.lit[1]); px(ctx, 52, H - 21, M.lit[2]); rect(ctx, 49, H - 24, 7, 1, INK);
+      windows.push({ x: 52, y: H - 20, lit: true, keep: true, lamp: true });
+    }
   }
   outline(ctx, W, H);
   if (st === 3) {
@@ -214,7 +226,7 @@ export function cottageBeds(season, planted = 1) {
 // perch with the blackbird («è stato il merlo»); a bush swallowing the right half. The pointed hat
 // is not here: it fell in the mill-race (and the nail is inside).
 export function orticaHut(b, season) {
-  const S = SEASONS[season], ox = 12, W = b.w * T + ox * 2, over = 58, H = b.h * T + over;
+  const S = SEASONS[season], ox = KINDS.ortica.ox, W = b.w * T + ox * 2, over = KINDS.ortica.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
   const crown = S.crown;
   // the two trunks, leaning apart, grey and smooth like beech; roots flaring
@@ -281,6 +293,6 @@ export function orticaHut(b, season) {
   rect(ctx, bx - 2, by - 2, 5, 4, INK); rect(ctx, bx + 2, by - 1, 3, 2, INK); px(ctx, bx + 5, by - 1, INK); px(ctx, bx + 5, by, INK); // body and tail
   rect(ctx, bx - 3, by - 4, 3, 3, INK); px(ctx, bx - 4, by - 3, '#e89a2a'); px(ctx, bx - 5, by - 3, '#e89a2a'); px(ctx, bx - 2, by - 3, '#f0c060'); // head, beak, eye ring
   px(ctx, bx, by - 1, '#2a2a3a'); px(ctx, bx - 1, by + 2, '#e89a2a'); px(ctx, bx + 1, by + 2, '#e89a2a');
-  hangSign(ctx, ox + 3, H - 46, 'bird', 1, S);
+  hangSign(ctx, ox + 3, H - 46, SYM.ortica, 1, S);
   return { canvas: c, over, ox, windows: [{ x: rx, y: ry, lit: true, keep: true }], smoke: null };
 }

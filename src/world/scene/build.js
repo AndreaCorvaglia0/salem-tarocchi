@@ -14,7 +14,12 @@ import { makeLookTex } from './elsewhere.js';
 
 const T = 16, ADD = Phaser.BlendModes.ADD;
 
-export function buildMap(scene, map, season = map.season) {
+// the buildings where birds may sit on the ridge (scene/life.js)
+const PERCH = new Set(['house', 'malva', 'court', 'shop', 'meeting', 'mill', 'library']);
+const ARTS = new Map(); // texture key -> the painter's answer (windows, smoke, wheel, bell, sizes), the canvas dropped
+
+// home: the options of her cottage (world/home.js homeOpts(state)), or null
+export function buildMap(scene, map, season = map.season, home = null) {
   const lights = [], grass = [];
   const gk = `ground-${map.id}-${season}`;
   // a world of Altrove has its own look: the sky (its clouds are layers of its rule) or a page
@@ -68,10 +73,13 @@ export function buildMap(scene, map, season = map.season) {
   }
 
   // blocks: buildings, props, furniture
-  for (const b of map.blocks) {
-    const art = paintBlock(b, season);
-    const key = `blk-${map.id}-${b.letter}-${b.x}-${b.y}-${season}`;
-    if (!scene.textures.exists(key)) addTex(scene, key, art.canvas);
+  for (const b0 of map.blocks) {
+    // her cottage grows with her (world/home.js): its stage and slots come from her save each time the map is built
+    const b = b0.kind === 'cottage' && !map.inside && home ? { ...b0, opts: { ...b0.opts, ...home } } : b0;
+    const key = `blk-${map.id}-${b.letter}-${b.x}-${b.y}-${season}${b.opts.sig ? `-${b.opts.sig}` : ''}`;
+    // painted once per map, season (and stage): the texture and what the painter said about it are kept
+    let art = ARTS.get(key);
+    if (!art || !scene.textures.exists(key)) { art = paintBlock(b, season); if (!scene.textures.exists(key)) addTex(scene, key, art.canvas); art = { ...art, canvas: { width: art.canvas.width, height: art.canvas.height } }; ARTS.set(key, art); }
     const left = b.x * T - (art.ox || 0), bottom = (b.y + b.h) * T, top = bottom - art.canvas.height;
     if (!map.inside && !look && !['lamp', 'pillory', 'board', 'lantern', 'torch'].includes(b.kind) && b.w > 1) scene.add.image(left + (b.w * T) / 2 + 2, bottom - 2, 'fx-shadow').setScale((b.w * T) / 12, 1.6).setDepth(2);
     scene.add.image(left, bottom, key).setOrigin(0, 1).setDepth(bottom - 1);
@@ -83,8 +91,8 @@ export function buildMap(scene, map, season = map.season) {
     }
     if (art.smoke) smoke(scene, left + art.smoke[0], top + art.smoke[1], bottom);
     if (art.wheel) scene.add.sprite(left + art.wheel[0], top + art.wheel[1], 'mill-wheel').setDepth(bottom).play('mill-wheel');
-    if (b.kind === 'meeting') bells.push(scene.add.image(left + (b.w * T) / 2, top + 27, 'fx-bell').setOrigin(0.5, 0).setDepth(bottom + 1));
-    if (b.kind === 'house' && !map.inside) perches.push([left + 10 + hash(b.x, b.y, 3) * (b.w * T - 20), top + 14]);
+    if (art.bell) bells.push(scene.add.image(left + art.bell[0], top + art.bell[1], 'fx-bell').setOrigin(0.5, 0).setDepth(bottom + 1));
+    if (PERCH.has(b.kind) && !map.inside) perches.push([left + 10 + hash(b.x, b.y, 3) * (b.w * T - 20), top + 14]);
     const L = KINDS[b.kind]?.light;
     if (L) {
       const lx = left + (L.center ? (b.w * T) / 2 : L.x), ly = L.bottom != null ? bottom - L.bottom : b.y * T + L.y;

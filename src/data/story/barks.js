@@ -14,6 +14,16 @@
 // diaryFor: event or flag -> first-person diary line (the scripts already write the fork lines).
 
 export const BARKS = {
+  // home.2 / home.3: the first time she sees her cottage at a new stage (glue/home.js, world/home.js), once:
+  // Tartufo when she has him (`who: 'tartufo'`, his low voice), else her own thought (`who: 'tu'`)
+  'home.2': [
+    { who: 'tartufo', t: '(Da quando ci abiti tu il camino tira e dal tetto non entra più la neve. Per tre inverni ci ho dormito da solo, e non era la stessa cosa.)' },
+    { who: 'tu', t: 'Da quando ci abito io la capanna sta più dritta: il camino tira, e dal tetto non entra più la neve.' },
+  ],
+  'home.3': [
+    { who: 'tartufo', t: '(Adesso sì che sembra la casa di una strega, e chiunque passi lo capisce da lontano. Il gatto sul tetto, però, io l\'avrei fatto più somigliante.)' },
+    { who: 'tu', t: 'Guardo la capanna dalla strada e mi sembra la casa di una strega, di una strega che conosco bene.' },
+  ],
   tartufo: [
     { on: 'card', t: '(Ho le orecchie dritte, e non è per il vento. Qui vicino c\'è nascosta una carta.)' },
     { on: 'card', t: '(Sento odore di carta vecchia, e anche di topo. Tu cerca la carta, che al topo penso io.)' },

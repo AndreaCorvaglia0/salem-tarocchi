@@ -8,6 +8,7 @@ data (`src/data/story/`) is the truth of what the game does. These tools compare
 |---|---|---|
 | `npm run lore check` | `notes/tools.md` | yes (`tests/lore.test.mjs`: no errors) |
 | `npm run lore gen` | `lore/tratti/`, `lore/scelte/`, `lore/finali/` | yes (`gen --check`: up to date) |
+| `npm run lore sapere` | `src/data/sapere.js`, the tables of `lore/sapere/_il-cerchio.md` (from `lore/sapere/`) | yes (`tests/sapere.test.mjs`: in step, the circle closes) |
 | `npm run coverage -- --runs 1000` | `docs/COVERAGE.md` | a small run (`tests/coverage.test.mjs`) |
 | `npm run map` | `docs/MAP.md` | yes (`tests/map.test.mjs`) |
 
@@ -114,6 +115,12 @@ trial with two places and a person who changes with her affinity: `src/data/tria
    room or Altrove map needs `mapDoor: 'village.<door>'`. Positions, lanes and her mark are computed from the tiles
    (`src/ui/sketchmap.js`); `tests/map.sketch.test.mjs` fails until the new anchor, door or story target has a
    place, and checks that no two names overlap from 300 to 520 px.
+9. **Its slip on the map.** Every entry of the extras registry is a paper slip beside its place on the Mappa
+   page, with a card on tap (`src/ui/missions/`: `model.js` pure, `page.js` draws, `pins.js` places the slips,
+   `titles.js` the cards). A new entry needs a card in `TITLES` of `titles.js` (title, kind, who told her,
+   what she gets): `tests/missions.page.test.mjs` fails until it has one, and also when a new file pushes
+   entries into `EXTRAS` (add that file's ids to `registryIds()` in the test). Harness:
+   `harness/missions.html?s=1..6[&tall=1][&tap=<id>][&done=1]` (the real page in six hand-made states).
 
 ## The vault in a browser: `<site>/lore/`
 
@@ -141,6 +148,10 @@ or `chromium`). Start a server first: `npx vite` (or `npm run build && npx vite 
 
     node scripts/shot.mjs 'http://localhost:5173/?debug&skip=trial' /tmp/a.png --phone --until domcontentloaded --steps steps.mjs
 
+- The village and forest in the real game, building by building (districts, doors, seasons, her cottage's
+  three stages, the grimoire's maps): `harness/village.steps.mjs` (`OUT=<folder> ONLY=<names>`, the list of
+  shots at its top; it hides the labels and toasts so a naive reader cannot read the answer). New buildings
+  close up, before they go into a map: `harness/buildings.html` (the proof board, `harness/buildings.steps.mjs`).
 - `--phone`: 390 x 844, scale 2, touch. `--wait ms`: pause before the shot (default 1200).
 - `--until domcontentloaded`: the page never reaches network idle (the default), so without it the shot times out.
 - `--steps file.mjs`: `export default async (page) => {...}` runs before the shot and may take its own shots

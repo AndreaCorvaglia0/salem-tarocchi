@@ -4,17 +4,12 @@
 // grass, a burst of fire, and the signpost block (pixel arrows and symbols, no words).
 import { SEASONS, M, INK } from './palette.js';
 import { makeCanvas, hash, rect, px, line, ellipse, addTex, addSheet } from './px.js';
+import { GLYPHS } from '../../data/world/symbols.js';
 
 const T = 16;
 
-// small 5x5 symbols for the signposts
-const GLYPH = {
-  bottle: ['..#..', '.###.', '.#.#.', '#...#', '.###.'], bell: ['..#..', '.###.', '.###.', '#####', '..#..'],
-  house: ['..#..', '.###.', '#####', '.#.#.', '.###.'], scales: ['..#..', '#####', '#.#.#', '#.#.#', '..#..'],
-  coin: ['.###.', '#...#', '#.#.#', '#...#', '.###.'], hut: ['..#..', '.#.#.', '#...#', '.#.#.', '.###.'],
-  drop: ['..#..', '.###.', '##.##', '#####', '.###.'], wheel: ['#.#.#', '.###.', '##.##', '.###.', '#.#.#'],
-  tree: ['.###.', '#####', '.###.', '..#..', '..#..'], fire: ['..#..', '.##..', '.###.', '#####', '.###.'],
-};
+// small 5x5 symbols for the signposts: the same table as the hanging signs and the grimoire's map
+const GLYPH = GLYPHS;
 const ARROW = { left: ['..#', '.##', '###', '.##', '..#'], right: ['#..', '##.', '###', '##.', '#..'], up: ['..#..', '.###.', '#####'], down: ['#####', '.###.', '..#..'] };
 const draw = (ctx, pat, x, y, col) => pat.forEach((row, j) => [...row].forEach((c, i) => { if (c === '#') px(ctx, x + i, y + j, col); }));
 

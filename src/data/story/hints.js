@@ -19,14 +19,14 @@ export const HINTS = {
   map: "Nel grimorio c'è una mappa: il cerchio rosso segna il posto dove devi andare.",
   book: "Puoi riaprire il grimorio quando vuoi, toccando il libro in alto.",
   rank: "Per crescere leggi le carte ai clienti, ripassa quelle che hai e cercane di nuove: la barra in alto dice quanto manca.",
-  side: "Sulla mappa del grimorio è comparso un appunto a matita: è una traccia in più, da seguire se ti va.",
+  side: "Sulla mappa del grimorio è comparso un foglietto appuntato: è una cosa in più, da fare se ti va, e toccandolo la leggi.",
   fly: "Adesso sai volare: apri la mappa nel grimorio e tocca un posto all'aperto che hai già visto.",
-  lesson: "Nel grimorio, alla pagina della mappa, c'è una missione nuova: toccala per seguirla.",
+  lesson: "Nel grimorio, sulla mappa, c'è un foglietto nuovo: toccalo per leggerlo, e poi seguilo se ti va.",
   trade: "Tocca un tuo doppione e poi la carta di Ginepra che vuoi in cambio.",
   // the trials (shown by glue/trials.js when it asks for them)
   trial: "A ogni bivio pesca una carta: è lei a dirti quale strada prendere, e ogni errore si paga.",
   library: "Tocca uno dei primi argomenti dell'elenco per ripassarlo: ti servirà nella prossima prova.",
-  news: "Tra le missioni del grimorio c'è una prova nuova: toccala per sapere dove comincia.",
+  news: "Sulla mappa del grimorio c'è un foglietto nuovo: è una prova, toccalo per sapere dove comincia.",
   escape: "Tocca la strada per correre verso la luce: se ti fermi, chi ti insegue ti raggiunge.",
 };
 export const HINTS_KEYS = {

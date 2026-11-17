@@ -135,6 +135,17 @@ Ortica, il mulino, lo stagno, il cimitero, il bosco fondo), le cantine sotto il 
 torre della prigione, il pozzo, la palude). Le stagioni seguono i capitoli: inverno, primavera (il capitolo 2 copre primavera ed estate, e l'arresto è a fine estate), autunno,
 e un'alba chiara dopo il finale. Nell'erba alta e al buio si vede solo qualche passo.
 
+**Orientarsi guardando** (17 novembre, `notes/buildings.md`). Ogni edificio in cui si entra ha una sagoma sua e
+un'insegna appesa; lo stesso simbolo è sui cartelli agli incroci e sul disegnino della mappa del grimorio
+(mortaio: Malva; gatto: la capanna; merlo: Ortica; bilancia: il tribunale; libro: la biblioteca; campana: la
+casa delle riunioni; bottiglia: la bottega; ruota: il mulino). Tre quartieri si riconoscono dal terreno: la
+parte alta a lastre di pietra, il mercato con la paglia, la parte bassa a terra battuta con assi storte. Da
+lontano si vedono il campanile, il vecchio olmo della piazza e la ruota del mulino. Le case in cui non si entra
+sono semplici ma non uguali: una ricca (i Proctor), una in rovina (la casa della nonna di Edera), i panni stesi
+di Tabita, la legna, le finestre accese o buie. **La capanna cresce con lei**: sbilenca all'inizio, rimessa a
+posto quando ha l'orto, il capitolo 3 o il secondo titolo, la casa di una strega dopo il finale (con il suo
+seme, le sue piante, un premio vinto). Si ricava da quello che ha, ogni volta che la mappa si disegna.
+
 **Chi ti ferma.** Conestabili con la lanterna, che si possono evitare, e le Afflitte, che ti indicano
 col dito. Niente inquisitori. Camminando distratta, un Esame ogni due o tre minuti; stando attenta, quasi mai.
 

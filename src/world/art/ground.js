@@ -26,6 +26,13 @@ export function paintGround(map, season = map.season) {
     return t.ground;
   };
   const isWallish = (k) => k === 'wall' || k === 'void';
+  // districts (map.def.districts: [{ look: 'upper' | 'lower' | 'market', area: [x, y, w, h] }]): the same tiles,
+  // painted differently underfoot. Walking does not change. upper: the paths are dressed stone slabs, in rows;
+  // lower: the paths are packed earth with ruts and odd planks laid crooked over the mud; market: straw
+  // trodden into the ground and the path.
+  const DIST = new Array(map.W * map.H).fill(null);
+  for (const { look, area: [ax, ay, aw, ah] } of map.def.districts || []) for (let yy = ay; yy < ay + ah; yy++) for (let xx = ax; xx < ax + aw; xx++) if (xx >= 0 && yy >= 0 && xx < map.W && yy < map.H) DIST[yy * map.W + xx] = look;
+  const STRAW = ['#8f7a3e', '#b89a52', '#d9bf72'].map(C), EARTH = ['#2c2019', '#3b2b20', '#4d3929'].map(C), SLAB = M.stone.slice(1).map(C);
   const [canvas, ctx] = makeCanvas(W, H);
   const img = ctx.createImageData(W, H), out = img.data;
 
@@ -48,6 +55,10 @@ export function paintGround(map, season = map.season) {
       if (season === 'autumn' && hash(x >> 1, y >> 1, 8) > 0.97) col = lerp(col, C(['#8a4423', '#b5662e', '#6e6a40'][Math.floor(hash(x, y, 9) * 3)]), 0.7);
       if (season === 'spring' && k === 'ground' && hash(x >> 2, y >> 2, 91) > 0.993 && (x & 3) === 1 && (y & 3) === 1) col = C(SEASONS.spring.flower[Math.floor(hash(x, y, 5) * 3)]);
       if (k === 'soil' && ly % 4 === 0) col = lerp(col, P.soil[0], 0.6); // furrows
+      const look = DIST[ty * map.W + tx];
+      if (look === 'market' && k !== 'soil' && hash(x >> 1, y, 53) > 0.94 && (x & 1) === 0) col = lerp(col, STRAW[Math.floor(hash(x, y, 54) * 3)], 0.85); // straw in the snow, the grass
+      if (look === 'lower' && k === 'ground' && fbm(x * 0.04, y * 0.04, 61, 3) > 0.66) col = lerp(col, ramp(EARTH, 0.6), P.snow ? 0.35 : 0.3); // trodden mud
+      if (look === 'upper' && k === 'ground' && P.snow) col = lerp(col, ramp(P.ground, 0.8), 0.15); // the snow lies clean up there
     } else if (k === 'path') {
       col = ramp(P.path, Math.min(1, Math.max(0, 0.45 + (n - 0.5) * 0.8)));
       if (h > 0.985) col = ramp(P.path, 1); else if (h < 0.015) col = P.path[0];
@@ -58,6 +69,22 @@ export function paintGround(map, season = map.season) {
       }
       const rim = [[-1, 0], [1, 0], [0, -1], [0, 1]].some(([ex, ey]) => { const w = kindAt(Math.floor((x + ex) / T), Math.floor((y + ey) / T)); return w === 'ground' || w === 'tall'; });
       if (rim) col = lerp(col, ramp(P.ground, 0.25), 0.5);
+      const look = DIST[ty * map.W + tx];
+      if (look === 'upper') { // dressed slabs, 12x8, joints in rows: ordered, a little richer
+        const row = Math.floor(y / 8), off = row % 2 ? 6 : 0, joint = y % 8 === 0 || (x + off) % 12 === 0, v = hash(Math.floor((x + off) / 12), row, 17);
+        let st = joint ? SLAB[0] : ramp(SLAB, 0.35 + v * 0.4 + (y % 8 === 1 ? 0.12 : 0) + (n - 0.5) * 0.15);
+        if (P.snow) { const sn = fbm(x * 0.06, y * 0.06, 77, 3); if (joint) st = lerp(st, ramp(P.ground, 0.7), 0.75); else if (sn > 0.62) st = lerp(st, ramp(P.ground, 0.6), Math.min(0.8, (sn - 0.62) * 5)); }
+        const edge = [[-1, 0], [1, 0], [0, -1], [0, 1]].some(([ex, ey]) => { const w = kindAt(Math.floor((x + ex) / T), Math.floor((y + ey) / T)); return w === 'ground' || w === 'tall'; });
+        col = edge ? SLAB[0] : st;
+      } else if (look === 'lower') { // packed earth and ruts; here and there a plank laid crooked over the mud
+        col = lerp(col, ramp(EARTH, 0.3 + n * 0.6), P.snow ? 0.45 : 0.6);
+        if (Math.abs(((x + Math.round(noise(y * 0.08, tx, 5) * 6)) % 16) - 5) < 1 || Math.abs(((x + Math.round(noise(y * 0.08, tx, 6) * 6)) % 16) - 11) < 1) col = lerp(col, EARTH[0], 0.55); // ruts
+        if (hash(tx, ty, 41) > 0.62) { // a plank, tilted
+          const tilt = (hash(tx, ty, 42) - 0.5) * 0.5, py0 = 4 + hash(tx, ty, 43) * 6, d = ly - py0 - (lx - 8) * tilt;
+          if (d >= 0 && d < 5 && lx > 1 && lx < 15) col = ramp(M.wood.map(C), d < 1 ? 0.75 : d > 3.5 ? 0.05 : 0.45 + hash(x >> 2, ty, 3) * 0.2);
+          if (P.snow && d >= 0 && d < 1.2 && hash(x, y, 44) > 0.4) col = ramp(P.ground, 0.75);
+        }
+      } else if (look === 'market' && hash(x, y, 51) > 0.9) col = lerp(col, STRAW[Math.floor(hash(x, y, 52) * 3)], 0.8); // straw
     } else if (k === 'cobble') {
       // organic cobbles: the nearest of jittered points decides the stone, near a border is mortar
       const cs = 6, gx = Math.floor(x / cs), gy = Math.floor(y / cs);

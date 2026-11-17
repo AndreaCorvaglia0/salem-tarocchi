@@ -35,8 +35,13 @@ export const TILES = {
 //   solid: blocks walking (default true). light: { x, y, r, col } in px from the top left of
 //   the block, or a function of the options. Art lives in art/blocks*.js under the same name.
 export const KINDS = {
-  // buildings (doors are '+' tiles inside the bottom row)
-  house: {}, cottage: {}, meeting: {}, court: {}, shop: {}, hut: {}, mill: {},
+  // buildings (doors are '+' tiles inside the bottom row). over: px the picture rises above the footprint,
+  // ox: px it reaches past each side (the painters read them; tests/world.buildings.test.mjs checks that no
+  // herb spot or anchor ends up under a picture). Art: art/facades.js, art/witchhomes.js (notes/buildings.md)
+  // half: above its footprint only a tower, half px either side of the centre (the meetinghouse)
+  house: { over: 14 }, cottage: { over: 32 }, meeting: { over: 80, half: 15 }, court: { over: 22 }, shop: { over: 16 }, hut: { over: 14 },
+  mill: { over: 30, ox: 0, right: 20 }, malva: { over: 16 }, library: { over: 52 }, ortica: { over: 58, ox: 12 },
+  bigtree: { over: 72, ox: 24 }, // the big tree of the square: one solid tile, a crown high above
   // village props
   stall: {}, cart: {}, well: {}, lamp: { light: { x: 8, y: -11, r: 50, lamp: true } }, barrel: {}, crate: {},
   bench: {}, woodpile: {}, pillory: {}, board: {}, snowman: {}, hay: {}, trough: {},

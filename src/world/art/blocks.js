@@ -1,13 +1,19 @@
 // One entry point for every block's picture: buildings, outdoor props and furniture.
-import { house, cottage, shop, hut } from './houses.js';
-import { meeting, court, mill } from './civic.js';
+import { hut } from './houses.js';
+import { townHouse, courtHouse, libraryHouse, meetingHouse, blackShop, millHouse, bigTree } from './facades.js';
+import { malvaHouse, cottageHome, orticaHut } from './witchhomes.js';
 import { PROPS } from './props.js';
 import { INSIDE } from './inside.js';
 import { WILD } from './wild.js';
 import { MARKS } from './marks.js';
 import { ELSEWHERE } from './elsewhere.js';
 
-const PAINTERS = { house, cottage, shop, hut, meeting, court, mill, ...PROPS, ...INSIDE, ...WILD, ...MARKS, ...ELSEWHERE };
+// the buildings (notes/buildings.md): every one you can enter has its own shape and its sign; `house` is the
+// ordinary one in its variants (plain, rich, ruined). The older painters (houses.js, civic.js) stay for the
+// proof board.
+const PAINTERS = {
+  house: townHouse, cottage: cottageHome, malva: malvaHouse, library: libraryHouse, court: courtHouse, meeting: meetingHouse,
+  shop: blackShop, mill: millHouse, ortica: orticaHut, bigtree: bigTree, hut, ...PROPS, ...INSIDE, ...WILD, ...MARKS, ...ELSEWHERE };
 
 // -> { canvas, over, ox?, windows?, smoke?, wall? }
 export function paintBlock(b, season) {

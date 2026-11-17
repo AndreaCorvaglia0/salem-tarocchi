@@ -13,6 +13,7 @@ import { makeCat } from '../art/cat.js';
 import { makePerson, LOOKS } from '../art/people.js';
 import { buildMap } from './build.js';
 import { seasonFor, lightFor } from '../season.js';
+import { homeOpts } from '../home.js';
 import { Walker } from './walker.js';
 import { Things, toast } from './things.js';
 import { Patrol } from './patrol.js';
@@ -57,7 +58,8 @@ export class WorldScene extends Phaser.Scene {
     this.controls = this.registry.get('controls');
     makeFx(this); makeCat(this); makePerson(this, 'ch-tu', LOOKS.tu);
     this.season = seasonFor(map.id, state.chapter); this.light = lightFor(map.id, state.chapter);
-    this.built = buildMap(this, map, this.season);
+    this.home = homeOpts(state); // her cottage's stage and slots (world/home.js), read again on each build
+    this.built = buildMap(this, map, this.season, this.home);
     const [sx, sy] = this.freeNear(d.x, d.y);
     this.player = new Walker(this, 'ch-tu', sx, sy, d.dir || 'down');
     this.obstacles = new Obstacles(this, map); // before Things: it asks them what is solid
@@ -122,6 +124,8 @@ export class WorldScene extends Phaser.Scene {
     this.things.refresh(); this.patrols.forEach((p) => p.refresh()); this.trinkets?.refresh();
     // a new chapter changes the season: the map is drawn again, she stays where she is
     if (seasonFor(this.map.id, state.chapter) !== this.season || lightFor(this.map.id, state.chapter) !== this.light) this.reseason = true;
+    // her cottage changed stage (or a slot) while she is on its map: drawn again the same way
+    if (this.map.blocks.some((b) => b.kind === 'cottage') && homeOpts(state).sig !== this.home.sig) this.reseason = true;
   }
   canAct() { return !blocked() && !this.busy && !this.leaving; }
 

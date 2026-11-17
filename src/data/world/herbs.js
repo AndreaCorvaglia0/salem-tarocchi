@@ -21,13 +21,13 @@ export const HERB_SPOTS = [
   { id: 'achillea', map: 'village', x: 21, y: 42 },
   // the cottage
   { id: 'rosmarino', map: 'village', x: 6, y: 6 },
-  { id: 'timo', map: 'village', x: 3, y: 4 },
+  { id: 'timo', map: 'village', x: 8, y: 4 }, // clear of the cottage's roof
   { id: 'alloro', map: 'village', x: 7, y: 5 },
   // the fenced herb beds of the upper village
   { id: 'lavanda', map: 'village', x: 35, y: 5 },
   { id: 'salvia', map: 'village', x: 34, y: 6 },
   // by the forest gate
-  { id: 'artemisia', map: 'village', x: 18, y: 5 },
+  { id: 'artemisia', map: 'village', x: 16, y: 5 }, // clear of the bell tower
   { id: 'assenzio', map: 'village', x: 21, y: 6 },
   // the houses of the lower village
   { id: 'melissa', map: 'village', x: 10, y: 28 },
@@ -50,7 +50,7 @@ export const HERB_SPOTS = [
   // Ortica's hut and her herb patch
   { id: 'ortica', map: 'forest', x: 12, y: 20 },
   { id: 'valeriana', map: 'forest', x: 11, y: 19 },
-  { id: 'menta', map: 'forest', x: 9, y: 21 },
+  { id: 'menta', map: 'forest', x: 10, y: 21 }, // a tile right of the beech round Ortica's hut
   { id: 'melissa', map: 'forest', x: 5, y: 22 },
   { id: 'camomilla', map: 'forest', x: 4, y: 23 },
   { id: 'artemisia', map: 'forest', x: 2, y: 18 },

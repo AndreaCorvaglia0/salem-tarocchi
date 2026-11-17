@@ -39,7 +39,9 @@ export function parseMap(def) {
         if (at(nx, ny) === ch && !seen[ny * W + nx]) { seen[ny * W + nx] = 1; st.push([nx, ny]); }
       }
     }
-    const b = { letter: ch, kind: opts.kind, opts, x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, doors: [] };
+    // `blockOpts: { 'x,y': {...} }` adds options to the one block whose top left tile is x,y (two houses of one letter, one ruined)
+    const own = def.blockOpts?.[`${x0},${y0}`];
+    const b = { letter: ch, kind: opts.kind, opts: own ? { ...opts, ...own } : opts, x: x0, y: y0, w: x1 - x0 + 1, h: y1 - y0 + 1, doors: [] };
     for (let yy = y0; yy <= y1; yy++) for (let xx = x0; xx <= x1; xx++) if (at(xx, yy) === '+') b.doors.push([xx - x0, yy - y0]);
     let best = def.ground || null;
     if (!def.ground) {

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <base href="../" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <title>harness: missions</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #0b0d18; overflow: hidden; overscroll-behavior: none; touch-action: none; }
+      #game { position: fixed; inset: 0; background: repeating-linear-gradient(45deg, #121a2a 0 16px, #0f1624 16px 32px); }
+      #ui { position: fixed; inset: 0; pointer-events: none; z-index: 10; }
+      #ui > * { pointer-events: auto; }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="ui"></div>
+    <script type="module" src="/harness/missions.js"></script>
+  </body>
+</html>

@@ -223,7 +223,7 @@ fog, from the cell, during a script, or while a patrol has seen her;
 levels continue to 12 after the ending (Gran Maestra), each only widening the sixth sense
 (`senseRadius(level)`); tools are `bottle`, `incense`, `pendulum` (the sieve is gone); `yourSuit()` is
 derived from the traits; chapter gates need `{ level: 4 }` and `{ level: 7 }`; the story index may export
-`SIDE` (side missions shown as pencil notes on the grimoire map); Minor Arcana are found in tall grass by
+`SIDE` (side missions shown as paper slips pinned on the grimoire map, src/ui/missions/); Minor Arcana are found in tall grass by
 zone from chapter 1; `review.open` is a short mixed quiz. World obstacles: brambles (fire), roots and warded
 stones (move), thick fog where one loses the way (stun/air), dark (fire).
 

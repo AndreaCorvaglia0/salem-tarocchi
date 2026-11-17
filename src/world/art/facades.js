@@ -1,4 +1,4 @@
-// PROOF BOARD (not wired into the maps yet; see notes/buildings.md and harness/buildings.html).
+// The buildings with a personality (notes/buildings.md; proof board: harness/buildings.html).
 // Buildings with a personality: shared helpers (a roof that follows any silhouette, wall materials,
 // the hanging sign with its symbol, the ink outline) and the village ones: the court, the library,
 // the ordinary house in three variants (plain, rich, ruined).
@@ -6,6 +6,8 @@
 import { SEASONS, M, INK } from './palette.js';
 import { makeCanvas, hash, noise, rect, px, line, ellipse } from './px.js';
 import { windowAt } from './houses.js';
+import { GLYPHS, SIGN_GLYPHS, SYMBOL_OF_BLOCK as SYM } from '../../data/world/symbols.js';
+import { KINDS } from '../tiles.js';
 
 const T = 16;
 
@@ -28,43 +30,36 @@ export const F = {
   cream: '#f2ead2',
 };
 
-// ---------- symbols: 5x5, the same set as the signposts (marks.js GLYPH) plus the new ones
-export const GLYPHS = {
-  bottle: ['..#..', '.###.', '.#.#.', '#...#', '.###.'], bell: ['..#..', '.###.', '.###.', '#####', '..#..'],
-  house: ['..#..', '.###.', '#####', '.#.#.', '.###.'], scales: ['..#..', '#####', '#.#.#', '#.#.#', '..#..'],
-  hut: ['..#..', '.#.#.', '#...#', '.#.#.', '.###.'], wheel: ['#.#.#', '.###.', '##.##', '.###.', '#.#.#'],
-  // new
-  book: ['##.##', '#.#.#', '#.#.#', '#.#.#', '.#.#.'], // an open book
-  mortar: ['....#', '...#.', '#.#.#', '#####', '.###.'], // mortar and pestle: Malva's unguents
-  bird: ['.##..', '###.#', '.####', '..##.', '..#..'], // the blackbird, facing left
-  cat: ['#...#', '##.##', '#####', '#.#.#', '.###.'], // a cat's head: Tartufo, her cottage
-};
-export function glyph(ctx, sym, x, y, col) {
-  (GLYPHS[sym] || GLYPHS.house).forEach((row, j) => [...row].forEach((c, i) => { if (c === '#') px(ctx, x + i, y + j, col); }));
+// ---------- symbols: one table for signs, signposts and the grimoire's map (src/data/world/symbols.js)
+export { GLYPHS, SIGN_GLYPHS };
+// a symbol in pixels: the 7x7 sign pattern when big, else the 5x5 signpost one
+export function glyph(ctx, sym, x, y, col, big = false) {
+  const pat = (big && SIGN_GLYPHS[sym]) || GLYPHS[sym] || GLYPHS.house, off = big && !SIGN_GLYPHS[sym] ? 1 : 0;
+  pat.forEach((row, j) => [...row].forEach((c, i) => { if (c === '#') px(ctx, x + off + i, y + off + j, col); }));
 }
 
-// A hanging sign: an iron bracket out of the wall at (wx, wy) towards dir (+1 right, -1 left), a 9x9
-// board on two chains with the symbol in cream. Only buildings you can enter have one.
-export function hangSign(ctx, wx, wy, sym, dir, S, { board = M.wood, ribbons = null } = {}) {
-  const len = 10, x1 = wx + dir * len;
+// A hanging sign: an iron bracket out of the wall at (wx, wy) towards dir (+1 right, -1 left), an 11x11
+// board on two chains with the symbol (7x7) in cream. Only buildings you can enter have one.
+export function hangSign(ctx, wx, wy, sym, dir, S, { board = M.wood, ribbons = null, ink = F.cream } = {}) {
+  const len = 12, x1 = wx + dir * len;
   line(ctx, wx, wy, x1, wy, INK); line(ctx, wx, wy + 1, x1 - dir, wy + 1, M.metal[2]);
   line(ctx, wx, wy + 6, wx + dir * 5, wy + 1, INK); // the brace
   px(ctx, x1, wy - 1, INK); // curl at the tip
-  const by = wy + 4, left = dir > 0 ? x1 - 8 : x1; // the board hangs under the outer half of the bracket
-  px(ctx, left + 1, wy + 2, M.metal[1]); px(ctx, left + 1, wy + 3, M.metal[2]); px(ctx, left + 7, wy + 2, M.metal[1]); px(ctx, left + 7, wy + 3, M.metal[2]);
-  rect(ctx, left, by, 9, 9, INK); rect(ctx, left + 1, by + 1, 7, 7, board[1]); rect(ctx, left + 1, by + 1, 7, 1, board[3]);
-  glyph(ctx, sym, left + 2, by + 2, F.cream);
-  if (ribbons) ribbons.forEach((c, i) => { px(ctx, left + 2 + i * 2, by + 9, c); px(ctx, left + 2 + i * 2, by + 10 + (i % 2), c); });
-  if (S.snow) { rect(ctx, left, by, 9, 1, S.snow); line(ctx, wx, wy - 1, x1 - dir, wy - 1, S.snow); }
-  return [left + 4, by + 4];
+  const by = wy + 4, left = dir > 0 ? x1 - 10 : x1; // the board hangs under the outer part of the bracket
+  px(ctx, left + 1, wy + 2, M.metal[1]); px(ctx, left + 1, wy + 3, M.metal[2]); px(ctx, left + 9, wy + 2, M.metal[1]); px(ctx, left + 9, wy + 3, M.metal[2]);
+  rect(ctx, left, by, 11, 11, INK); rect(ctx, left + 1, by + 1, 9, 9, board[1]); rect(ctx, left + 1, by + 1, 9, 1, board[3] || board[2]);
+  glyph(ctx, sym, left + 2, by + 2, ink, true);
+  if (ribbons) ribbons.forEach((c, i) => { px(ctx, left + 3 + i * 2, by + 11, c); px(ctx, left + 3 + i * 2, by + 12 + (i % 2), c); });
+  if (S.snow) { rect(ctx, left, by, 11, 1, S.snow); line(ctx, wx, wy - 1, x1 - dir, wy - 1, S.snow); }
+  return [left + 5, by + 5];
 }
 
 // A sign hanging straight in front of the wall from a short rod (symmetrical facades: the court).
 export function frontSign(ctx, cx, y, sym, S, board = M.wood) {
-  rect(ctx, cx - 4, y, 9, 1, INK); px(ctx, cx - 3, y + 1, M.metal[2]); px(ctx, cx + 3, y + 1, M.metal[2]);
-  rect(ctx, cx - 4, y + 2, 9, 9, INK); rect(ctx, cx - 3, y + 3, 7, 7, board[1]); rect(ctx, cx - 3, y + 3, 7, 1, board[3]);
-  glyph(ctx, sym, cx - 2, y + 4, F.cream);
-  if (S.snow) rect(ctx, cx - 4, y + 2, 9, 1, S.snow);
+  rect(ctx, cx - 5, y, 11, 1, INK); px(ctx, cx - 4, y + 1, M.metal[2]); px(ctx, cx + 4, y + 1, M.metal[2]);
+  rect(ctx, cx - 5, y + 2, 11, 11, INK); rect(ctx, cx - 4, y + 3, 9, 9, board[1]); rect(ctx, cx - 4, y + 3, 9, 1, board[3]);
+  glyph(ctx, sym, cx - 3, y + 4, F.cream, true);
+  if (S.snow) rect(ctx, cx - 5, y + 2, 11, 1, S.snow);
 }
 
 // ---------- roofs and walls
@@ -159,25 +154,32 @@ export function smokeStack(ctx, x, y, h, S, lean = 0, pal = M.stone) { // a chim
 
 // =====================================================================================
 // THE COURT, 7x6, door col 3. Broad, severe, symmetrical: a plinth of steps, two floors of tall
-// windows in the town's only dressed pale stone, a cornice, a pediment with the scales cut in it,
-// a dark hipped roof behind. Two lanterns on posts by the steps. One window lit, up on the right:
-// the Judge's study above the cells, where he keeps a single candle (giudice-retroscena).
+// windows in the town's only dressed pale stone, a cornice, and a tall temple pediment with the scales cut
+// in it that rises over the low hipped roof, a stone urn on each corner and one on the apex: even as a black
+// shape it is the court (the triangle and the three points), not just the biggest box.
+// Two lanterns by the door. One window lit, up on the right: the Judge's study above the cells, where he
+// keeps a single candle (giudice-retroscena).
 export function courtHouse(b, season) {
-  const S = SEASONS[season], W = b.w * T, over = 30, H = b.h * T + over;
+  const S = SEASONS[season], W = b.w * T, over = KINDS.court.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
   const cx = W >> 1, fy = H - 64, base = H - 9; // facade top, top of the plinth
-  // hipped roof of dark slate behind the cornice: a trapezoid
-  const rTop = 14, rBot = fy;
-  profileRoof(ctx, 2, W - 2, (x) => { const inset = Math.max(Math.abs(x - cx) - (W / 2 - 14), 0); return rTop + Math.round(inset * 1.6); }, (x) => { const inset = Math.max(Math.abs(x - cx) - (W / 2 - 14), 0); return rBot - (rTop + Math.round(inset * 1.6)) + 2; }, M.roof.slate, S, { snow: 0.22, seed: 11 });
-  // the pediment over the middle bay, with the scales in relief
-  const pw = 34, ph = 22, py = fy - ph + 2;
-  for (let y = 0; y < ph; y++) { const w = Math.round((y / (ph - 1)) * pw); rect(ctx, cx - w, py + y, w * 2 + 1, 1, y < 2 ? F.ashlar[4] : F.ashlar[2 + (y % 5 === 0 ? 1 : 0)]); px(ctx, cx - w - 1, py + y, INK); px(ctx, cx + w + 1, py + y, INK); px(ctx, cx - w, py + y, F.ashlar[4]); }
-  if (S.snow) for (let y = 0; y < ph - 3; y++) { const w = Math.round((y / (ph - 1)) * pw); px(ctx, cx - w, py + y - 1, S.snow); px(ctx, cx + w, py + y - 1, S.snow); }
-  // scales relief, 11 px
-  const sy = py + 7;
-  rect(ctx, cx, sy, 1, 11, F.ashlar[0]); rect(ctx, cx - 6, sy + 2, 13, 1, F.ashlar[0]); rect(ctx, cx - 2, sy + 11, 5, 1, F.ashlar[0]);
-  for (const sx of [cx - 6, cx + 6]) { px(ctx, sx, sy + 3, F.ashlar[0]); px(ctx, sx - 1, sy + 4, F.ashlar[0]); px(ctx, sx + 1, sy + 4, F.ashlar[0]); rect(ctx, sx - 2, sy + 5, 5, 1, F.ashlar[0]); rect(ctx, sx - 1, sy + 6, 3, 1, F.ashlar[1]); }
-  px(ctx, cx, sy - 1, F.ashlar[4]);
+  // a low hipped roof of dark slate behind the cornice
+  const rTop = fy - 18, inset = (x) => Math.max(Math.abs(x + 0.5 - cx) - (W / 2 - 20), 0);
+  profileRoof(ctx, 4, W - 4, (x) => rTop + Math.round(inset(x) * 1.2), (x) => fy - (rTop + Math.round(inset(x) * 1.2)) + 2, M.roof.slate, S, { snow: 0.3, seed: 11 });
+  // the pediment over the whole front: a tall triangle of pale stone with a dark tympanum
+  const pw = W / 2 - 5, ph = 40, py = fy - ph + 1;
+  for (let y = 0; y < ph; y++) {
+    const w = Math.round((y / (ph - 1)) * pw);
+    rect(ctx, cx - w, py + y, w * 2 + 1, 1, F.ashlar[2]);
+    const iw = w - 5; if (y > 6 && iw > 0) rect(ctx, cx - iw, py + y, iw * 2 + 1, 1, y > ph - 4 ? F.ashlar[4] : F.ashlar[1]); // the tympanum, recessed
+    px(ctx, cx - w - 1, py + y, INK); px(ctx, cx + w + 1, py + y, INK); px(ctx, cx - w, py + y, F.ashlar[4]); px(ctx, cx - w + 1, py + y, F.ashlar[4]);
+    if (S.snow && y > 1) { px(ctx, cx - w, py + y - 1, S.snow); px(ctx, cx + w, py + y - 1, S.snow); }
+  }
+  // the scales, in relief, big: they read from the street
+  const sy = py + 15;
+  rect(ctx, cx, sy - 2, 1, 18, F.ashlar[4]); rect(ctx, cx - 10, sy + 1, 21, 2, F.ashlar[4]); rect(ctx, cx - 4, sy + 16, 9, 2, F.ashlar[4]);
+  for (const sx of [cx - 10, cx + 10]) { line(ctx, sx, sy + 3, sx - 3, sy + 9, F.ashlar[3]); line(ctx, sx, sy + 3, sx + 3, sy + 9, F.ashlar[3]); rect(ctx, sx - 4, sy + 9, 9, 2, F.ashlar[4]); rect(ctx, sx - 3, sy + 11, 7, 1, F.ashlar[3]); }
+  ellipse(ctx, cx, sy - 3, 1, 1, F.ashlar[4]);
   // the facade
   ashlar(ctx, 1, fy, W - 2, base - fy);
   rect(ctx, 0, fy - 1, W, 4, INK); rect(ctx, 1, fy, W - 2, 2, F.ashlar[4]); rect(ctx, 1, fy + 2, W - 2, 1, F.ashlar[1]); // cornice
@@ -210,8 +212,15 @@ export function courtHouse(b, season) {
     if (S.snow) rect(ctx, lx - 3, base - 30, 7, 1, S.snow);
     windows.push({ x: lx, y: base - 25, lit: true, keep: true, lamp: true });
   }
+  // stone urns: on both corners of the cornice and on the apex
+  const urn = (ux, uy) => { // uy: its foot
+    rect(ctx, ux - 3, uy - 2, 7, 2, F.ashlar[3]); rect(ctx, ux - 1, uy - 4, 3, 2, F.ashlar[2]);
+    ellipse(ctx, ux, uy - 7, 3, 3, F.ashlar[3]); px(ctx, ux - 1, uy - 8, F.ashlar[4]); rect(ctx, ux, uy - 12, 1, 2, F.ashlar[3]); px(ctx, ux, uy - 13, F.ashlar[4]);
+    if (S.snow) { rect(ctx, ux - 2, uy - 10, 5, 1, S.snow); rect(ctx, ux - 3, uy - 2, 7, 1, S.snow); }
+  };
+  urn(4, fy - 1); urn(W - 5, fy - 1); urn(cx, py + 1);
   outline(ctx, W, H);
-  frontSign(ctx, cx, dy - 2, 'scales', S, ['#1f1d24', '#2e2b34', '#3d3a44', '#57525d']);
+  frontSign(ctx, cx, dy - 2 - 13, SYM.court, S, ['#1f1d24', '#2e2b34', '#3d3a44', '#57525d']);
   return { canvas: c, over, windows, smoke: null };
 }
 
@@ -220,7 +229,7 @@ export function courtHouse(b, season) {
 // a steep gable, the walls hung with slates like fish scales; a lancet window lit high up (Edera's
 // books, waiting: «i nastri alle pagine per chi sale a ripassare»); a quill for a weathervane.
 export function libraryHouse(b, season) {
-  const S = SEASONS[season], W = b.w * T, over = 52, H = b.h * T + over;
+  const S = SEASONS[season], W = b.w * T, over = KINDS.library.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
   const cx = W >> 1, ey = 50, ay = 6, k = 8; // eave line, apex, roof band depth
   const top = (x) => Math.round(ay + (Math.abs(x + 0.5 - cx) / cx) * (ey - ay));
@@ -252,44 +261,51 @@ export function libraryHouse(b, season) {
   rect(ctx, dx - 2, H - 1, dw + 4, 1, M.stone[2]);
   // the weathervane: a quill
   rect(ctx, cx, 0, 1, ay + 1, INK); line(ctx, cx - 4, 2, cx + 4, 0, M.metal[3]); px(ctx, cx + 4, 1, M.metal[2]); px(ctx, cx - 4, 3, F.cream);
-  hangSign(ctx, dx - 1, H - 26, 'book', -1, S, { ribbons: ['#8f3d3c', '#3f8a4f', '#8a5ab0'] });
+  hangSign(ctx, dx - 1, H - 26, SYM.library, -1, S, { ribbons: ['#8f3d3c', '#3f8a4f', '#8a5ab0'] });
   outline(ctx, W, H);
   return { canvas: c, over, windows: [{ x: cx, y: ly + 12, lit: true, keep: true }], smoke: null };
 }
 
 // =====================================================================================
-// AN ORDINARY HOUSE, 5x4, not enterable: the village's base. Three variants for little cost:
-//   plain: today's dark clapboard, one window lit;
-//   rich: the Proctors' (famiglia-proctor-retroscena: a church family of the upper village): red-brown
-//         paint, cream trim, green shutters, a fanlight and a hood over the door, a brass knocker,
-//         two chimneys; nothing more (a Puritan village: restraint);
+// AN ORDINARY HOUSE, 5x4 (or any size), not enterable: the village's base. Three variants for little cost:
+//   plain: dark clapboard, today's house;
+//   rich: the Proctors' (famiglia-proctor-retroscena: a church family): red-brown paint, cream trim, green
+//         shutters, a fanlight and a hood over the door, a brass knocker, two chimneys; nothing more (a
+//         Puritan village: restraint);
 //   ruined: bleached boards with gaps, a roof with holes to the rafters, a boarded window, ivy.
+// Options (b.opts, as house() in houses.js): door (col of a painted door when the block has no '+'),
+// lit [1, 0] windows lit in turn, curtain (col of the curtained window: a card hides behind it), sill
+// (col of the window with a glass on the sill: a card on it), chimney, and small cheap differences:
+// extra: 'washing' (a line of washing under the eave) | 'woodpile' (logs against a corner) | 'barrel'.
 export function townHouse(b, season) {
-  const S = SEASONS[season], o = b.opts || {}, v = o.variant || 'plain', W = b.w * T, over = 14, H = b.h * T + over;
+  const S = SEASONS[season], o = b.opts || {}, v = o.variant || 'plain', W = b.w * T, over = KINDS.house.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
   const fh = 32, fy = H - fh, dc = b.doors?.[0]?.[0] ?? o.door ?? 2, dx = dc * T + 8;
   let smoke = null;
   const windows = [];
   if (v === 'rich') { smokeStack(ctx, 10, 2, 12, S, 0, M.stone); smoke = smokeStack(ctx, W - 16, 2, 12, S, 0, M.stone); }
-  else if (v === 'plain') smoke = smokeStack(ctx, W - 18, 2, 12, S);
+  else if (v === 'plain') { if (o.chimney !== false) smoke = smokeStack(ctx, (b.x || 0) % 2 ? 8 : W - 18, 2, 12, S); }
   else smokeStack(ctx, 12, 5, 8, S, -1, F.grey); // the ruin: a broken stack, no smoke
-  // roof: tidy slate (rich), brown (plain), holed and sagging (ruined)
+  // roof: tidy slate (rich), its own colour (plain), holed and sagging (ruined)
   const sag = (x) => (v === 'ruined' ? Math.round(Math.sin((x / W) * Math.PI) * 6) : 0); // the ridge has given way in the middle
   const holes = v === 'ruined' ? (x, y, d) => {
     const hole = (hx, hy, rw, rh) => Math.abs(x - hx) <= rw && Math.abs(d - hy) <= rh - (Math.abs(x - hx) === rw ? 1 : 0);
-    if (hole(54, 13, 6, 5) || hole(20, 20, 3, 3)) return (x % 4 === 1) ? M.wood[2] : (d % 6 === 3 ? M.wood[1] : '#0a0b12'); // rafters over the dark
+    if (hole(W - 26, 13, 6, 5) || hole(20, 20, 3, 3)) return (x % 4 === 1) ? M.wood[2] : (d % 6 === 3 ? M.wood[1] : '#0a0b12'); // rafters over the dark
     return null;
   } : null;
   const missing = v === 'ruined' ? (x, y, d) => (hash(x >> 2, d >> 1, 33) > 0.86 && d > 3 ? (d % 2 ? F.grey[0] : '#151417') : null) : null; // missing shingles (under the snow)
-  profileRoof(ctx, 0, W, (x) => 6 + sag(x), (x) => fy - 4 - sag(x), v === 'rich' ? M.roof.slate : v === 'ruined' ? ['#25221f', '#332e29', '#423a33'] : M.roof.brown, S, { after: holes, patch: missing, moss: v === 'ruined' ? 0.12 : 0, seed: v.length });
+  const pal = v === 'rich' ? M.roof.slate : v === 'ruined' ? ['#25221f', '#332e29', '#423a33'] : M.roof[o.roof] || M.roof.brown;
+  profileRoof(ctx, 0, W, (x) => 6 + sag(x), (x) => fy - 4 - sag(x), pal, S, { after: holes, patch: missing, moss: v === 'ruined' ? 0.12 : 0, seed: v.length + (b.x || 0) });
   // walls
   if (v === 'rich') clapboard(ctx, 1, fy + 1, W - 2, fh - 1, F.oxblood, { corner: F.trim[1] });
-  else if (v === 'ruined') clapboard(ctx, 1, fy + 1, W - 2, fh - 1, F.grey, { gaps: (x, y) => (x > 50 && x < 62 && y > 14 && y < 24 && hash(x >> 2, y >> 2, 3) > 0.3) || (x > 6 && x < 12 && y > 4 && y < 9) });
+  else if (v === 'ruined') clapboard(ctx, 1, fy + 1, W - 2, fh - 1, F.grey, { gaps: (x, y) => (x > W - 30 && x < W - 18 && y > 14 && y < 24 && hash(x >> 2, y >> 2, 3) > 0.3) || (x > 6 && x < 12 && y > 4 && y < 9) });
   else clapboard(ctx, 1, fy + 1, W - 2, fh - 1, M.clap);
   if (v === 'rich') { rect(ctx, 1, fy + 1, W - 2, 1, F.trim[2]); rect(ctx, 1, fy + 2, W - 2, 1, F.trim[0]); } // a cornice board
-  // windows
+  // windows: every column but the door's and the corners'; lit in turn (o.lit), the curtain and the sill kept
+  const lit = o.lit || [0, 1];
+  let wi = 0;
   for (let col = 0; col < b.w; col++) {
-    if (col === dc || col === 0 || col === b.w - 1) continue;
+    if (col === dc || (b.w >= 5 && (col === 0 || col === b.w - 1))) continue;
     const x = col * T + 4, y = fy + 8;
     if (v === 'ruined' && col === b.w - 2) { // boarded up
       rect(ctx, x - 1, y - 1, 10, 12, INK); rect(ctx, x, y, 8, 10, '#0a0b12');
@@ -297,9 +313,10 @@ export function townHouse(b, season) {
       px(ctx, x - 1, y + 2, M.metal[3]); px(ctx, x + 8, y + 8, M.metal[3]);
       continue;
     }
-    const lit = v === 'ruined' ? false : v === 'rich' ? true : col === 1;
-    windowAt(ctx, x, y, 8, 10, lit ? 'lit' : 'dark', { snow: S.snow });
-    if (lit) windows.push({ x: x + 4, y: y + 5, lit: true });
+    const state = o.curtain === col ? 'curtain' : v === 'ruined' ? 'dark' : v === 'rich' ? 'lit' : lit[wi % Math.max(1, lit.length)] ? 'lit' : 'dark';
+    wi++;
+    windowAt(ctx, x, y, 8, 10, state, { snow: S.snow, glass: o.sill === col });
+    if (state !== 'dark') windows.push({ x: x + 4, y: y + 5, lit: true, curtain: state === 'curtain' });
     if (v === 'rich') for (const sx of [x - 5, x + 9]) { rect(ctx, sx, y - 1, 4, 12, INK); rect(ctx, sx + 1, y, 2, 10, F.shutter[1]); px(ctx, sx + 1, y + 2, F.shutter[2]); px(ctx, sx + 1, y + 7, F.shutter[2]); rect(ctx, sx + 1, y + 5, 2, 1, F.shutter[0]); }
     if (v === 'rich') { rect(ctx, x - 1, y - 3, 10, 2, F.trim[1]); px(ctx, x - 1, y - 3, F.trim[2]); }
   }
@@ -319,5 +336,161 @@ export function townHouse(b, season) {
     doorAt(ctx, dx - 5, H - 16, 10, 15, M.wood);
   }
   outline(ctx, W, H);
+  // small differences, drawn over the outline (they stand in front of the wall)
+  if (o.extra === 'washing') { // a line under the eave, with sheets and a shirt
+    const y = fy + 3, x0 = 4, x1 = W - 5;
+    line(ctx, x0, y, x1, y, M.wood[3]);
+    [[8, 6, F.cream], [17, 4, '#8f8778'], [26, 7, '#b3aa98'], [W - 22, 5, '#6b2a2e'], [W - 14, 6, F.cream]].forEach(([x, h, col]) => { if (Math.abs(x - dx) < 8) return; rect(ctx, x - 1, y + 1, 6, h, INK); rect(ctx, x, y + 1, 4, h - 1, col); px(ctx, x, y, INK); px(ctx, x + 3, y, INK); if (S.snow) rect(ctx, x, y + 1, 4, 1, S.snow); });
+  }
+  if (o.extra === 'woodpile') { // logs stacked against the right corner
+    for (let r = 0; r < 3; r++) for (let k = 0; k < 3 - (r >> 1); k++) { const lx = W - 6 - k * 5 - (r % 2) * 2, ly = H - 3 - r * 4; ellipse(ctx, lx, ly, 2, 2, INK); ellipse(ctx, lx, ly, 1, 1, M.wood[4]); px(ctx, lx, ly, M.wood[2]); }
+    if (S.snow) rect(ctx, W - 18, H - 13, 14, 1, S.snow);
+  }
+  if (o.extra === 'barrel') { const bx = 3; rect(ctx, bx, H - 11, 8, 10, INK); rect(ctx, bx + 1, H - 10, 6, 9, M.wood[2]); rect(ctx, bx + 1, H - 8, 6, 1, M.metal[2]); rect(ctx, bx + 1, H - 4, 6, 1, M.metal[2]); if (S.snow) rect(ctx, bx + 1, H - 11, 6, 1, S.snow); }
   return { canvas: c, over, windows, smoke };
+}
+
+// =====================================================================================
+// THE MEETINGHOUSE, 7x5, door col 3: the landmark of the village. A plain pale clapboard hall with a square
+// tower in front of it, rising high over every roof: an open belfry with the bell (the scene hangs the
+// swinging bell sprite at `bell`), a cornice, a tall slate spire with a weathervane. The sign with the bell
+// hangs by the door. The tower is what she sees from the market, the square and the lane.
+export function meetingHouse(b, season) {
+  const S = SEASONS[season], W = b.w * T, over = KINDS.meeting.over, H = b.h * T + over;
+  const [c, ctx] = makeCanvas(W, H);
+  const fh = 36, fy = H - fh, cx = W >> 1, pal = ['#3d3b49', '#4f4d5c', '#615f70', '#73718a'];
+  // the hall's roof, side-on: a band of slate between the eave and the ridge
+  profileRoof(ctx, 0, W, () => fy - 34, () => 36, M.roof.slate, S, { seed: 3, snow: 0.6 });
+  clapboard(ctx, 1, fy + 1, W - 2, fh - 1, pal);
+  const windows = [];
+  for (const col of [0, 1, 5, 6].filter((c0) => c0 < b.w)) {
+    const x = col * T + 4, lit = col === 1;
+    windowAt(ctx, x, fy + 8, 8, 16, lit ? 'dim' : 'dark', { snow: S.snow });
+    rect(ctx, x - 1, fy + 5, 10, 2, pal[3]); // a plain pediment over each window
+    windows.push({ x: x + 4, y: fy + 15, lit });
+  }
+  // the tower: pale boards, from the ground to the belfry
+  const tw = 13, tt = 40; // half width, top of the tower's shaft
+  rect(ctx, cx - tw - 1, tt, tw * 2 + 3, H - tt, INK);
+  for (let y = tt + 1; y < H; y++) for (let x = cx - tw; x <= cx + tw; x++) px(ctx, x, y, x < cx - tw + 2 ? pal[3] : x > cx + tw - 2 ? pal[0] : y % 4 === 0 ? pal[0] : y % 4 === 1 ? pal[2] : pal[1]);
+  // the belfry: an open round arch, the dark inside, louvres below the bell
+  const ay = tt + 6;
+  rect(ctx, cx - 6, ay + 4, 13, 16, INK); ellipse(ctx, cx, ay + 4, 6, 5, INK);
+  rect(ctx, cx - 5, ay + 4, 11, 15, '#141726'); ellipse(ctx, cx, ay + 4, 5, 4, '#141726');
+  rect(ctx, cx - 5, ay + 15, 11, 1, pal[0]); rect(ctx, cx - 5, ay + 17, 11, 1, pal[0]); // the rail
+  rect(ctx, cx - tw - 2, ay + 22, tw * 2 + 5, 3, INK); rect(ctx, cx - tw - 1, ay + 22, tw * 2 + 3, 1, S.snow || pal[3]); // a ledge
+  // a round window lower on the tower, dark (a clock face would be too rich for them)
+  ellipse(ctx, cx, ay + 34, 4, 4, INK); ellipse(ctx, cx, ay + 34, 3, 3, M.dark[1]); rect(ctx, cx, ay + 31, 1, 7, INK); rect(ctx, cx - 3, ay + 34, 7, 1, INK);
+  // the cornice and the spire
+  rect(ctx, cx - tw - 3, tt - 3, tw * 2 + 7, 4, INK); rect(ctx, cx - tw - 2, tt - 2, tw * 2 + 5, 1, S.snow || pal[3]); rect(ctx, cx - tw - 2, tt - 1, tw * 2 + 5, 1, pal[2]);
+  const sp = tt - 3, top = 6;
+  for (let y = top; y < sp; y++) { const w = Math.round(((y - top + 1) / (sp - top)) * (tw - 2)); for (let x = cx - w; x <= cx + w; x++) px(ctx, x, y, x === cx - w || x === cx + w ? INK : x < cx ? M.roof.slate[2] : M.roof.slate[1]); if (S.snow && y % 4 === 0 && w > 1) px(ctx, cx - w + 1, y, S.snow); }
+  // the weathervane: a rod, a ball, an arrow
+  rect(ctx, cx, 0, 1, top + 1, INK); px(ctx, cx, 2, F.brass); line(ctx, cx - 4, 3, cx + 4, 3, INK); px(ctx, cx + 4, 2, INK); px(ctx, cx + 4, 4, INK); px(ctx, cx - 4, 2, INK);
+  // the door at the foot of the tower: double, under a hood
+  const dc = b.doors[0]?.[0] ?? 3, dx = dc * T + 8;
+  rect(ctx, dx - 8, H - 24, 17, 2, INK); rect(ctx, dx - 7, H - 24, 15, 1, S.snow || pal[3]);
+  doorAt(ctx, dx - 6, H - 21, 13, 20, M.wood, { knob: null });
+  rect(ctx, dx, H - 21, 1, 20, INK); px(ctx, dx - 2, H - 11, F.brass); px(ctx, dx + 2, H - 11, F.brass);
+  outline(ctx, W, H);
+  hangSign(ctx, cx + tw + 1, fy + 2, SYM.meeting, 1, S);
+  return { canvas: c, over, windows, smoke: null, bell: [cx, ay + 4] };
+}
+
+// =====================================================================================
+// THE SHOP, 5x4, door col 2: the only black house, with the black door; a small window of jars lit violet;
+// a bottle on the sign (the signposts point to it with the same bottle).
+export function blackShop(b, season) {
+  const S = SEASONS[season], W = b.w * T, over = KINDS.shop.over, H = b.h * T + over;
+  const [c, ctx] = makeCanvas(W, H);
+  const fh = 34, fy = H - fh;
+  // a steep plum roof, a little crooked at the ridge
+  profileRoof(ctx, 0, W, (x) => 6 + (x > W * 0.6 ? 1 : 0), () => fy - 4, M.roof.plum, S, { seed: 8 });
+  clapboard(ctx, 1, fy + 1, W - 2, fh - 1, ['#0c0c16', '#121220', '#191a2a', '#24263a']);
+  const dc = b.doors[0]?.[0] ?? 2, dx = dc * T + 8;
+  // the black door, with a violet knob, under a black hood
+  rect(ctx, dx - 8, H - 21, 17, 2, INK); if (S.snow) rect(ctx, dx - 7, H - 22, 15, 1, S.snow);
+  doorAt(ctx, dx - 6, H - 18, 12, 17, ['#030308', '#07070e', '#14152a'], { knob: '#a07ad8' });
+  // the window: jars and bottles on two shelves, lit violet
+  const wx = dc > 2 ? T + 1 : 3 * T + 1, wy = fy + 7;
+  rect(ctx, wx - 1, wy - 1, 14, 14, INK); rect(ctx, wx, wy, 12, 12, '#2a1f3d');
+  rect(ctx, wx, wy + 5, 12, 1, INK); rect(ctx, wx, wy + 11, 12, 1, INK);
+  ['#8f6ad1', '#4fd1a5', '#d98a4a', '#c8b0f0'].forEach((col, i) => { rect(ctx, wx + 1 + i * 3, wy + 2, 2, 3, col); px(ctx, wx + 1 + i * 3, wy + 1, INK); rect(ctx, wx + 2 + i * 3 - (i % 2), wy + 8, 2, 3, ['#4fd1a5', '#8f6ad1', '#c8b0f0', '#d98a4a'][i]); });
+  rect(ctx, wx - 2, wy + 13, 16, 2, M.wood[2]); if (S.snow) rect(ctx, wx - 2, wy + 13, 16, 1, S.snow);
+  // the other side: a shuttered window
+  const ox = dc > 2 ? 3 * T + 3 : T + 3;
+  rect(ctx, ox - 1, wy - 1, 11, 13, INK); rect(ctx, ox, wy, 4, 11, '#1a1a28'); rect(ctx, ox + 5, wy, 4, 11, '#1a1a28'); px(ctx, ox + 3, wy + 5, M.metal[3]);
+  outline(ctx, W, H);
+  hangSign(ctx, dx + 7, fy + 4, SYM.shop, 1, S, { board: ['#0c0c16', '#1b1b2c', '#2a2a40', '#3a3a52'], ink: '#c8b0f0' });
+  return { canvas: c, over, windows: [{ x: wx + 6, y: wy + 6, lit: true, violet: true }], smoke: null };
+}
+
+// =====================================================================================
+// THE MILL, 4x4 in the forest, on the brook: a tall timber mill on a stone footing, a hoist hood under the
+// ridge, and a big wheel on the water side (the scene turns it: `wheel` is its centre). The wheel is what
+// she sees from the crossing; the sign with the wheel hangs by the door.
+export function millHouse(b, season) {
+  const S = SEASONS[season], W = b.w * T + 20, over = KINDS.mill.over, H = b.h * T + over, BW = b.w * T;
+  const [c, ctx] = makeCanvas(W, H);
+  const fh = 46, fy = H - fh, cx = BW >> 1;
+  // a steep gable roof
+  const top = (x) => Math.round(8 + Math.abs(x + 0.5 - cx) * 0.95);
+  profileRoof(ctx, 0, BW, top, (x) => fy - top(x) + 3, M.roof.brown, S, { seed: 5, moss: 0.08 });
+  // the hoist hood: a little roof sticking out under the ridge, a beam with a rope
+  for (let y = 0; y < fy - 8; y++) for (let x = 1; x < BW - 1; x++) if (y >= top(x) + 10) px(ctx, x, y, x % 6 === 0 ? M.wood[1] : M.wood[2]);
+  rect(ctx, cx - 5, 20, 11, 10, INK); rect(ctx, cx - 4, 21, 9, 9, M.dark[0]); rect(ctx, cx - 1, 14, 3, 7, INK); rect(ctx, cx, 15, 1, 15, M.wood[3]);
+  // timber walls on a stone footing
+  for (let y = fy; y < H; y++) for (let x = 1; x < BW - 1; x++) {
+    const foot = y >= H - 12;
+    px(ctx, x, y, foot ? (((x + (y >> 2) * 3) % 7 === 0 || y % 4 === 0) ? M.stone[1] : M.stone[2]) : x % 6 === 0 ? M.wood[1] : M.wood[2 + ((y % 9 === 0) ? 1 : 0)]);
+  }
+  rect(ctx, 1, fy, BW - 2, 2, M.wood[3]);
+  // the door and two windows
+  doorAt(ctx, 22, H - 19, 14, 18, M.wood, { knob: null });
+  rect(ctx, 28, H - 19, 1, 18, INK);
+  windowAt(ctx, 7, fy + 8, 8, 9, 'dim', { snow: S.snow });
+  windowAt(ctx, BW - 15, fy + 8, 8, 9, 'dark', { snow: S.snow });
+  // sacks by the door
+  for (const [x, y] of [[40, H - 3], [46, H - 3], [43, H - 8]]) { ellipse(ctx, x, y, 3, 3, INK); ellipse(ctx, x, y, 2, 2, '#b3aa98'); px(ctx, x - 1, y - 1, '#d3cab6'); }
+  // the axle and its frame on the water side
+  rect(ctx, BW - 3, H - 30, 8, 4, M.metal[1]); rect(ctx, BW - 2, H - 29, 6, 1, M.metal[3]);
+  outline(ctx, W, H);
+  hangSign(ctx, 21, fy + 6, SYM.mill, -1, S);
+  return { canvas: c, over, windows: [{ x: 11, y: fy + 12, lit: true }], smoke: null, wheel: [BW + 3, H - 28] };
+}
+
+// =====================================================================================
+// THE BIG TREE OF THE SQUARE, 1x1 (the trunk is solid), its crown drawn far above and around: an old elm
+// seen from anywhere in the village. Bare and snowy in winter, in blossom in spring, red in autumn.
+export function bigTree(b, season) {
+  const S = SEASONS[season], ox = KINDS.bigtree.ox, W = T + ox * 2, over = KINDS.bigtree.over, H = T + over;
+  const [c, ctx] = makeCanvas(W, H);
+  const cx = W >> 1;
+  // roots and trunk
+  for (let y = 36; y < H; y++) {
+    const flare = y > H - 6 ? (y - (H - 6)) : 0, w = 4 + flare;
+    for (let x = cx - w; x <= cx + w; x++) px(ctx, x, y, x === cx - w || x === cx + w ? INK : x < cx - w + 2 ? S.bark[2] : x > cx + w - 2 ? S.bark[0] : hash(x, y >> 2, 4) > 0.85 ? S.bark[0] : S.bark[1]);
+  }
+  // the big limbs
+  const limbs = [[cx, 46, cx - 24, 22], [cx, 44, cx + 22, 18], [cx, 40, cx - 6, 10], [cx, 42, cx + 8, 12], [cx - 2, 52, cx - 28, 40], [cx + 2, 50, cx + 28, 36]];
+  for (const [x0, y0, x1, y1] of limbs) { line(ctx, x0 - 1, y0, x1 - 1, y1, INK); line(ctx, x0, y0, x1, y1, S.bark[2]); line(ctx, x0 + 1, y0, x1 + 1, y1, S.bark[1]); line(ctx, x0 + 2, y0, x1 + 2, y1, INK); }
+  if (S.crown) {
+    for (const [x, y, r] of [[cx - 16, 26, 13], [cx + 14, 22, 14], [cx, 15, 14], [cx - 24, 40, 10], [cx + 24, 36, 10], [cx - 6, 34, 12], [cx + 8, 36, 11]]) {
+      ellipse(ctx, x, y, r + 1, Math.round(r * 0.8) + 1, INK);
+      ellipse(ctx, x, y, r, Math.round(r * 0.8), S.crown[1]);
+      ellipse(ctx, x - 2, y - 2, r - 4, Math.round(r * 0.55), S.crown[2]);
+      ellipse(ctx, x - 4, y - 4, Math.max(2, r - 9), Math.max(1, Math.round(r * 0.3)), S.crown[3]);
+      for (let i = 0; i < r; i++) px(ctx, x - r + Math.floor(hash(i, x, 5) * r * 2), y - 2 + Math.floor(hash(i, y, 6) * r), S.crown[i % 5 === 0 && S.crown[4] ? 4 : 0]);
+    }
+  } else { // winter: a dense fan of bare twigs with snow along them
+    for (let i = 0; i < 46; i++) {
+      const a = Math.PI * (1.05 + hash(i, 1, 9) * 0.9), r0 = 10 + hash(i, 2, 9) * 14, r1 = r0 + 8 + hash(i, 3, 9) * 12;
+      const x0 = cx + Math.cos(a) * r0, y0 = 46 + Math.sin(a) * r0 * 1.1, x1 = cx + Math.cos(a) * r1, y1 = 46 + Math.sin(a) * r1 * 1.1;
+      line(ctx, x0, y0, x1, y1, S.bark[1]); line(ctx, x0, y0 + 1, x1, y1 + 1, INK);
+      if (S.snow && i % 2) { px(ctx, x1, y1 - 1, S.snow); px(ctx, (x0 + x1) / 2, (y0 + y1) / 2 - 1, S.snow); }
+    }
+  }
+  // a ring of stones round the foot
+  for (let i = 0; i < 9; i++) { const a = (i / 9) * Math.PI * 2, x = cx + Math.cos(a) * 9, y = H - 4 + Math.sin(a) * 3; ellipse(ctx, x, y, 2, 1, INK); px(ctx, x, y, M.stone[3]); if (S.snow) px(ctx, x, y - 1, S.snow); }
+  return { canvas: c, over, ox, windows: [], smoke: null };
 }

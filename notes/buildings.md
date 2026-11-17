@@ -1,8 +1,68 @@
-# Edifici con una personalità: la tavola di prova
+# Edifici con una personalità
 
-Da guardare sul telefono: `harness/buildings.html` (dev: `npx vite`, poi `/harness/buildings.html`).
-Schermate in `/home/claude/shots/buildings/`. Nel gioco non cambia ancora niente: l'arte nuova sta in
-`src/world/art/facades.js` e `src/world/art/witchhomes.js` e nessuna mappa la usa.
+**Stato (17 novembre, sera): nel gioco.** Il villaggio e il bosco usano l'arte nuova (`src/world/art/facades.js`,
+`src/world/art/witchhomes.js`, registrata in `art/blocks.js`). La tavola di prova resta per guardare un edificio
+da vicino: `harness/buildings.html` (dev: `npx vite`, poi `/harness/buildings.html`). Le schermate del gioco vero,
+prima e dopo, sono in `/home/claude/shots/village-new/{before,after}/` (`harness/village.steps.mjs`).
+
+## Che cosa c'è adesso, mappa per mappa
+
+**Villaggio** (`src/data/world/village.js`)
+- Casa di Malva `M` (`kind: 'malva'`), 5x4, porta (21,37) come prima: saltbox basso a tavole ocra, camino storto
+  al centro, insegna col mortaio. Più bassa della tavola di prova (sale 16 px, non 32) perché non sembri uno chalet.
+- La capanna `C` (`cottage`), 4x3, porta (4,7): tre stadi (sotto). Tolta la catasta `W` in (6,7): la disegna la
+  capanna dallo stadio 2. La casella (6,7) è diventata terreno.
+- Biblioteca `R` (`library`): da 5x4 a **3x4** (x 29-31, righe 4-7), porta (30,7) ferma; le colonne 28 e 32 delle
+  righe 4-7 sono diventate terreno calpestabile.
+- Tribunale `J` (`court`), 7x6, porta (32,18): frontone alto con la bilancia e tre urne di pietra (agli angoli e in
+  cima): anche nera, la sagoma dice «tribunale».
+- Casa delle riunioni `E` (`meeting`), 7x5, porta (18,14): torre col campanile e la guglia, alta 80 px sopra la
+  sala (la campana che oscilla è appesa nella cella). È il punto di riferimento principale.
+- Bottega `X` (`shop`): casa nera, porta nera, vetrina di vasi viola, **insegna con la bottiglia** (il compito
+  chiedeva l'insegna; la nota sulla «staffa vuota» non è stata seguita).
+- Case comuni (`house`, ora `townHouse`): V la sarta (tenda in col 1, finestra accesa), G **i Proctor** (`variant:
+  'rich'`, il davanzale col bicchiere in col 2 resta), A a sinistra **i panni stesi di Tabita** (`blockOpts '3,27'`),
+  A a destra **in rovina** (`blockOpts '29,27'`: la casa della nonna di Edera, vuota da quando hanno murato la sua
+  stanza, settant'anni fa: `lore/retroscena/salem-retroscena.md`), B tutta buia con la legna, F una finestra accesa e
+  un barile. I nascondigli (12,32) tenda e (24,32) davanzale sono intatti (test in `world.buildings.test.mjs`).
+- **Il vecchio olmo** `W` (`bigtree`) in piazza, (23,22): una casella solida, la chioma 3x4 sopra. Spoglio e
+  innevato d'inverno, fiorito in primavera, rosso d'autunno.
+- Tre quartieri (`districts`, solo il disegno del terreno): parte alta (righe 3-12) a lastre di pietra in file;
+  mercato (x 0-10, righe 13-25) paglia nella neve e sulla strada; parte bassa (righe 26-45) terra battuta, solchi,
+  assi storte sul fango.
+- Cartelli: `P` (12,13) ora gatto (su) e bilancia (destra); `D` invariato (bottiglia, campana).
+
+**Bosco** (`src/data/world/forest.js`)
+- Capanna di Ortica `O` (`kind: 'ortica'`), 4x3, ancora (7,22): fra i due tronchi del faggio. Tolti gli alberi
+  (8,16) (9,16) (5,17) (8,17) e la roccia (7,17) (diventati terreno o erba alta), la catasta `X` spostata da (9,19)
+  a (14,19).
+- Mulino `M` (`mill`): più alto, cappa del montacarichi, ruota grande 40x44 che gira (visibile dal bivio),
+  insegna con la ruota.
+- Cartello `G` del bivio: merlo (Ortica), goccia, ruota.
+
+**Cantine**: niente (non c'era niente di confuso legato agli edifici).
+
+**Erbe spostate di una casella**: timo (3,4) -> (8,4) (sotto il tetto della capanna), artemisia (18,5) -> (16,5)
+(sotto il campanile), menta del bosco (9,21) -> (10,21) (sotto il faggio di Ortica).
+
+## La capanna cresce: come è fatto
+
+`src/world/home.js`, puro, letto ogni volta che la mappa si disegna (`scene/World.js` -> `buildMap`): nessuna chiave
+nuova nel salvataggio. Stadio 2: `{ flag: 'garden.given' }` oppure `{ chapterMin: 3 }` oppure il secondo titolo
+(livello >= 4, come `{ title: 'fattucchiera' }` in `core/cond.js`). Stadio 3: `{ flag: 'ending.seen' }`. Caselle
+dello stadio 3: seme da `yourSuit()` (neutro finché i punteggi sono tutti zero), piante = erbe diverse nelle
+aiuole (`state.garden.beds`, fino a 4), premio = il primo che ha fra il nastro del cappello, la chiave della
+cantina grande, il lume cieco (flag `item.<nome>`). Se lo stadio cambia mentre è nel villaggio la scena si ridisegna
+come al cambio di stagione. La prima volta che la vede a uno stadio nuovo, una riga (`src/glue/home.js`, battute
+`home.2`/`home.3` in `data/story/barks.js`): Tartufo a voce bassa se c'è, altrimenti un suo pensiero; una volta
+sola (`state.world.once['home.<n>']`), e chi è già oltre sente solo l'ultima.
+
+Lo stadio 2 si distingue anche in sagoma: camino più alto e dritto col comignolo di coccio, colmo raddrizzato,
+lanterna su un braccio di ferro.
+
+---
+
+# La tavola di prova (com'era proposta)
 
 ## L'idea di ogni edificio
 

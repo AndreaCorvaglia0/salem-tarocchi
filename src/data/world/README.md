@@ -15,6 +15,8 @@ export default {
   start: 'arrival',         // anchor used when nothing else says where to stand
   rows: [ '....', ... ],    // the tiles, one string per row, all the same length
   key: { M: { kind: 'house', roof: 'plum' } },   // what each uppercase letter is
+  blockOpts: { '29,27': { variant: 'ruined' } }, // more options for one block of a letter (by its top left tile)
+  districts: [{ look: 'upper', area: [0, 3, 40, 10] }], // how the ground looks underfoot: 'upper' 'lower' 'market'
   anchors: { square: [18, 22, 'La piazza'] },    // named tiles: [x, y, label]
   doors: [{ at: 'malva_door', to: 'malva.door', when, refuse, look, seal }],
   gates: [{ at: [15, 27], when, refuse }],       // tiles shut until `when` holds
@@ -56,10 +58,13 @@ export default {
 Each connected group of the same letter is one block; its bounding box is its footprint and is
 solid (except `+` inside it, the building's door). Declare the letter in `key` with a `kind`:
 
-- buildings: `house` (`roof`: plum slate moss brown red; `lit: [1, 0]` windows lit in turn; `door`:
-  column of a painted door that does not open; `curtain`: column of the curtained window; `sill`:
-  column of the window with a glass on the sill; `chimney: true`; `sign: 'herb'`), `cottage`,
-  `meeting`, `court`, `shop`, `hut`, `mill`
+- buildings: `house`, the ordinary one (`variant`: 'plain' | 'rich' | 'ruined'; `roof`: plum slate moss brown
+  red; `lit: [1, 0]` windows lit in turn; `door`: column of a painted door that does not open; `curtain`:
+  column of the curtained window; `sill`: column of the window with a glass on the sill; `extra`: 'washing' |
+  'woodpile' | 'barrel'), and the ones with a sign: `malva`, `cottage` (her cottage: it grows, world/home.js),
+  `library`, `meeting`, `court`, `shop`, `ortica`, `mill`; `hut` (a plain hut); `bigtree` (the square's elm:
+  one solid tile, the crown above). Their art: `src/world/art/facades.js`, `witchhomes.js`; their signs' symbols:
+  `src/data/world/symbols.js` (docs/KIT.md, «Un edificio nuovo con l'insegna»)
 - outside: `stall` (`awning`: violet ochre red cream; `goods`: 'odd' | 'apples'), `cart`, `well`
   (`old: true`), `lamp`, `barrel`, `crate`, `bench`, `woodpile`, `pillory`, `board`, `hay`, `snowman`,
   `trough`, `campfire`, `lantern`, `stump`, `log`, `spring`, `cross` (boundary stone), `torch`,
@@ -96,7 +101,8 @@ Lamps, fires, candles, torches and hearths light the night by themselves.
   Spade `s` in the upper village, Bastoni `w` in the woods, Coppe `c` by the water). Nothing on the
   arrival road. Odds and cooldown: src/world/minors.js; numbers: `node --test tests/world.minors.test.mjs`.
 - Block `signpost`: `{ kind: 'signpost', arrows: [['left', 'bottle'], ['up', 'bell']] }`, one small board
-  per arrow (`left` `right` `up` `down`), symbols `bottle` (shop) `bell` (meetinghouse) `house` (cottage)
-  `scales` (court) `coin` (market) `hut` `drop` (water) `wheel` (mill) `tree` `fire`.
+  per arrow (`left` `right` `up` `down`), symbols `bottle` (shop) `bell` (meetinghouse) `cat` (her cottage)
+  `mortar` (Malva) `book` (library) `bird` (Ortica) `scales` (court) `coin` (market) `house` `hut` `drop` (water)
+  `wheel` (mill) `tree` `fire`. An arrow with a building's symbol must point towards it (tested).
 
 To check a map: `npm test`, then `harness/world.html?at=<map>.<anchor>` (see harness/world.js).

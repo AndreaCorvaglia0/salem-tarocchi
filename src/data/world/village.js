@@ -11,10 +11,10 @@ export default {
     'pppppppppppppppppppppppppppppppppppppppp',
     'pppppppppppppppppppppppppppppppppppppppp',
     'p.t..tppfffffffffff+fffffffffffftpp.t..p',
-    'p..................=........RRRRRffffffp',
-    'ppCCCC.............=........RRRRR=hhhhfp',
-    'ppCCCC.............=........RRRRR=hhhhfp',
-    'ppCC+CW............=........RR+RR=hhhhfp',
+    'p..................=.........RRR.ffffffp',
+    'ppCCCC.............=.........RRR.=hhhhfp',
+    'ppCCCC.............=.........RRR.=hhhhfp',
+    'ppCC+C.............=.........R+R.=hhhhfp',
     'pp..::::::::::::::::::::::::::::::hhhhfp',
     'pp.,,,,,,,,,,=,,,,,,,,,=,,,,,,,,,.fffffp',
     'pp.,,,,,,,,,.=.EEEEEEE.=,,,t,,,,,......p',
@@ -29,7 +29,7 @@ export default {
     ',,=========#######OO#################...',
     ',,Z========#######OO########............',
     ',,UU=KK==H=#################.ffffff.,,,,',
-    ',,=========#################......f.,,,,',
+    ',,=========############W####......f.,,,,',
     ',,=======N=#################......f.,,,.',
     ',,=========#L#############L#......ft,,.,',
     ',,,,,,,,,,.#################......f.,,,,',
@@ -56,9 +56,9 @@ export default {
   ],
   key: {
     C: { kind: 'cottage' },
-    W: { kind: 'woodpile' },
-    M: { kind: 'house', roof: 'plum', lit: [1, 1], chimney: true, sign: 'herb' }, // Malva's, by the road in
-    R: { kind: 'house', roof: 'slate', lit: [0, 1] },
+    W: { kind: 'bigtree' }, // the old elm of the square: seen from every street (a landmark)
+    M: { kind: 'malva' }, // Malva's saltbox, by the road in (sign: the mortar)
+    R: { kind: 'library' }, // tall and narrow, slate-hung, the lit lancet window (sign: the book)
     E: { kind: 'meeting' },
     J: { kind: 'court' },
     O: { kind: 'well' },
@@ -72,16 +72,29 @@ export default {
     K: { kind: 'cart' },
     H: { kind: 'hay' },
     N: { kind: 'bench' },
-    V: { kind: 'house', roof: 'slate', door: 3, curtain: 1, lit: [1, 0] },
-    G: { kind: 'house', roof: 'moss', door: 0, sill: 2, lit: [0, 1], chimney: true },
-    A: { kind: 'house', roof: 'brown', door: 2, lit: [0, 1] },
-    B: { kind: 'house', roof: 'slate', door: 4, lit: [0, 0] },
-    F: { kind: 'house', roof: 'moss', door: 2, lit: [0, 0] },
+    V: { kind: 'house', roof: 'slate', door: 3, curtain: 1, lit: [1, 0] }, // the seamstress: the curtain (a card behind it)
+    G: { kind: 'house', variant: 'rich', door: 0, sill: 2 }, // the Proctors' (famiglia-proctor-retroscena): the glass on the sill (a card on it)
+    A: { kind: 'house', roof: 'brown', door: 2, lit: [0, 1] }, // two: Tabita's washing (left), the ruin (right, blockOpts)
+    B: { kind: 'house', roof: 'slate', door: 4, lit: [0, 0], extra: 'woodpile' }, // asleep: every window dark
+    F: { kind: 'house', roof: 'moss', door: 2, lit: [1, 0], extra: 'barrel' },
     X: { kind: 'shop' },
     T: { kind: 'trough' }, // the washing trough of the upper village
     D: { kind: 'signpost', arrows: [['left', 'bottle'], ['up', 'bell']] }, // by Malva's: the shop, up to the square
-    P: { kind: 'signpost', arrows: [['up', 'house'], ['right', 'scales']] }, // the cottage, the court
+    P: { kind: 'signpost', arrows: [['up', 'cat'], ['right', 'scales']] }, // the cottage, the court (symbols: data/world/symbols.js)
   },
+  // two houses of one letter, made different (src/world/maps.js); the old elm is W
+  blockOpts: {
+    '3,27': { extra: 'washing' }, // Tabita's: her washing out under the eave
+    // the ruin: the house of Edera's grandmother, empty since the year her room under the court was walled up
+    // (lore/retroscena/salem-retroscena.md, «settant'anni fa»; the walled room: data/trials/side.js 'room')
+    '29,27': { variant: 'ruined' },
+  },
+  // how the ground looks underfoot (src/world/art/ground.js); the tiles and walking do not change
+  districts: [
+    { look: 'upper', area: [0, 3, 40, 10] }, // the upper village: stone slabs, ordered
+    { look: 'market', area: [0, 13, 11, 13] }, // the market: straw trodden in
+    { look: 'lower', area: [0, 26, 40, 20] }, // the lower village: packed earth, ruts, crooked planks
+  ],
   anchors: {
     arrival: [19, 44, 'La strada'], // the first minutes: a short straight road, the card, Malva's lit door
     upper: [27, 12, 'La parte alta'], // the trough between the meetinghouse and the court (an errand ends here)
@@ -114,11 +127,11 @@ export default {
   // Card hiding spots are not places of their own: they belong to the place they are in.
   map: {
     forest_gate: { label: 'il cancello del bosco', kind: 'gate' },
-    cottage_door: { label: 'la mia capanna', kind: 'hut' },
+    cottage_door: { label: 'la mia capanna', kind: 'cottage' },
     orto: { label: 'il mio orto', kind: 'garden', when: { flag: 'garden.given' } }, // once Ortica has given the beds
     library_door: { label: 'la biblioteca', kind: 'library' },
     upper: { label: 'la parte alta', kind: 'trough' },
-    meeting_door: { label: 'la casa delle riunioni', kind: 'church' },
+    meeting_door: { label: 'la casa delle riunioni', kind: 'church' }, // the bell tower
     court_door: { label: 'il tribunale', kind: 'court' },
     trapdoor: { label: 'la botola', kind: 'trap' },
     market: { label: 'il mercato', kind: 'stall' },
@@ -130,7 +143,7 @@ export default {
     curtain: { in: 'lane' }, // the seamstress's curtained window (a card behind it)
     venusglass: { in: 'lane' }, // the windowsill with a glass (a card on it)
     shop_door: { label: 'la bottega', kind: 'shop' },
-    malva_door: { label: 'casa di Malva', kind: 'house' },
+    malva_door: { label: 'casa di Malva', kind: 'malva' },
     garden: { in: 'malva_door' }, // Malva's own vegetable patch, beside her house (a card in it)
     arrival: { label: 'la strada', kind: 'road' },
     road_card: { in: 'arrival' }, // the first card, in the snow of the road

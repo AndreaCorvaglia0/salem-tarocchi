@@ -49,15 +49,22 @@ export function archArt(w) {
 
 export function makeWild(scene) {
   if (scene.textures.exists('mill-wheel')) return;
-  { // the mill wheel, 4 frames turning
-    const [c, ctx] = makeCanvas(26 * 4, 30);
+  { // the mill wheel, 4 frames turning: big (40x44), it is what she sees of the mill from the crossing
+    const FW = 40, FH = 44;
+    const [c, ctx] = makeCanvas(FW * 4, FH);
     for (let f = 0; f < 4; f++) {
-      const ox = f * 26, cx = ox + 13, cy = 15;
-      ellipse(ctx, cx, cy, 12, 14, INK); ellipse(ctx, cx, cy, 10, 12, M.wood[1]); ellipse(ctx, cx, cy, 7, 9, '#0c0a10');
-      for (let k = 0; k < 8; k++) { const a = (k / 8) * Math.PI * 2 + (f / 4) * (Math.PI / 4); line(ctx, cx, cy, Math.round(cx + Math.cos(a) * 11), Math.round(cy + Math.sin(a) * 13), k % 2 ? M.wood[3] : M.wood[2]); px(ctx, Math.round(cx + Math.cos(a) * 11), Math.round(cy + Math.sin(a) * 13), M.wood[4]); }
-      ellipse(ctx, cx, cy, 2, 2, M.metal[2]);
+      const ox = f * FW, cx = ox + 20, cy = 22, rx = 18, ry = 20;
+      ellipse(ctx, cx, cy, rx + 1, ry + 1, INK); ellipse(ctx, cx, cy, rx - 1, ry - 1, M.wood[1]); ellipse(ctx, cx, cy, rx - 4, ry - 4, '#0c0a10');
+      for (let k = 0; k < 12; k++) {
+        const a = (k / 12) * Math.PI * 2 + (f / 4) * (Math.PI / 6), ex = Math.round(cx + Math.cos(a) * (rx - 1)), ey = Math.round(cy + Math.sin(a) * (ry - 1));
+        if (k % 3 === 0) line(ctx, cx, cy, ex, ey, M.wood[2]); // spokes
+        // paddles sticking out of the rim
+        const px0 = Math.round(cx + Math.cos(a) * (rx + 1)), py0 = Math.round(cy + Math.sin(a) * (ry + 1));
+        line(ctx, ex, ey, px0, py0, INK); px(ctx, ex, ey, M.wood[4]);
+      }
+      ellipse(ctx, cx, cy, 3, 3, INK); ellipse(ctx, cx, cy, 2, 2, M.metal[2]);
     }
-    addSheet(scene, 'mill-wheel', c, 26, 30);
+    addSheet(scene, 'mill-wheel', c, FW, FH);
     if (!scene.anims.exists('mill-wheel')) scene.anims.create({ key: 'mill-wheel', frames: [0, 1, 2, 3].map((f) => ({ key: 'mill-wheel', frame: f })), frameRate: 5, repeat: -1 });
   }
   { const [c, ctx] = makeCanvas(9, 9); // the bell

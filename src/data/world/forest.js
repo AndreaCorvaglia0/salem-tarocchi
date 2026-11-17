@@ -25,10 +25,10 @@ export default {
     'p,,,,,,.rt..~~~~~..=tppt=ttt..~py=p.pp.p',
     'p,,,,,,,,,,~~~~~~~.=....=.ttb.~pp====.yp',
     'p,,,,p,t.p.~~~~~~~.=.tp.=..tpp~pppppyb.p',
-    'pt,,,,,.pp..~~~~~..=.b..=.bttt~pyy.bbpbp',
-    'p,,,,t,rt,,,,~~~...=.r..=.MMMM~....pp.tp',
+    'pt,,,,,.....~~~~~..=.b..=.bttt~pyy.bbpbp',
+    'p,,,,,,,,,,,,~~~...=.r..=.MMMM~....pp.tp',
     'p..,,....,,,,,,,,,.=tt..=.MMMM~.,,,,,,,p',
-    'pt.,,OOOOXhh...ttt.=....=.MMMM~p,,t,,,,p',
+    'pt.,,OOOO.hh..Xttt.=....=.MMMM~p,,t,,,,p',
     'p..,,OOOO.hh.ttr..t=..pt=.MMMM~.,,,t,,,p',
     'p..,,OOOO........p.=...t=U..t.~.,,,t,,,p',
     'p..P...======================._=,,,,,,,p',
@@ -53,16 +53,16 @@ export default {
   key: {
     F: { kind: 'campfire' },
     Q: { kind: 'log' },
-    O: { kind: 'hut' },
+    O: { kind: 'ortica' }, // her hut between the two trunks of one beech (sign: the blackbird); its crown is drawn over the tiles above
     P: { kind: 'cauldron' },
-    X: { kind: 'woodpile' },
+    X: { kind: 'woodpile' }, // moved off the hut (its beech crown is drawn there): beside her herb patch
     M: { kind: 'mill' },
     S: { kind: 'spring' },
     D: { kind: 'den' },
     L: { kind: 'lantern' },
     B: { kind: 'cross' },
     U: { kind: 'stump' },
-    G: { kind: 'signpost', arrows: [['left', 'hut'], ['up', 'drop'], ['right', 'wheel']] }, // the crossing: Ortica, the pond, the mill
+    G: { kind: 'signpost', arrows: [['left', 'bird'], ['up', 'drop'], ['right', 'wheel']] }, // the crossing: Ortica, the pond, the mill (symbols: data/world/symbols.js)
   },
   anchors: {
     entry: [19, 37, 'Il limite del bosco'],
@@ -82,7 +82,7 @@ export default {
   map: {
     entry: { label: 'il cancello', kind: 'gate' }, // the same gate as the village's «cancello del bosco»
     campfire: { label: 'il bivacco', kind: 'fire' },
-    ortica_hut: { label: 'la capanna di Ortica', kind: 'hut' },
+    ortica_hut: { label: 'la capanna di Ortica', kind: 'ortica' },
     grove: { label: "l'erba alta", kind: 'grass' },
     den: { label: 'la tana', kind: 'den' },
     pond: { label: 'lo stagno', kind: 'pond' },
