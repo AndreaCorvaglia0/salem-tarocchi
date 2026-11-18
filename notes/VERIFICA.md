@@ -228,6 +228,27 @@ sessione, non nella repo).
 - **Dubbi:** cercate e scartate: Popular Mineralogy (tavole III–V), Sowerby (occhio di gatto ≠ occhio di tigre;
   pitchstone ≠ ossidiana), Mawe 1815/1823, Blum 1834. Wikimedia ha risposto 429.
 
+## 11. Interessi: le pietre di Edera (missioni 1–3)
+
+- **Commit:** `8ac1bb4` (gh-pages 235f646).
+- **Cosa:** scena d'inizio nella nicchia (dopo le prime parole di Edera sulle pietre e almeno 3 pietre);
+  «La pietra della nonna» (cerca nelle cantine, lava al pozzo: il lapislazzuli); «Occhi chiusi» (sceglie una
+  pietra di coraggio per il conestabile; Edera presta l'occhio di tigre se lei non ne ha); il conestabile il
+  giorno dopo; «I cartellini» (scrive i nomi sotto le pietre in biblioteca). Grado 1 «In tasca»: una pietra di
+  coraggio o protezione in tasca, una volta al giorno, ritira la risposta sbagliata che farebbe perdere un esame
+  (non col Giudice).
+- **Verificato dal capofila:** test verdi (654) in copia pulita, pubblicato solo dopo `# fail 0`; resoconto
+  letto. Le schermate (35) le ha guardate solo l'agente.
+- **Dubbi:**
+  - Il grado 1 è più leggero del progetto per scelta dell'agente, con misure: con un secondo esame intero le
+    sconfitte col conestabile scendevano dal 13,8% all'1,5%; con la versione costruita al 5,9% (Afflitta 36,9% →
+    22,3%). Da confermare con Andrea.
+  - La scena del conestabile il giorno dopo riusa l'id `enc.guard`.
+  - Toccati file fuori dalle sue cartelle: `systems/exam.js` (gancio), `ui/collect.js`, due test condivisi.
+  - Canone proposto: il lapislazzuli al collo di Edera, il conestabile che parla nel sonno, lo scaffale delle
+    pietre in biblioteca, il raggio di luna nel pozzo vecchio.
+  - Fatto da aggiungere a RESEARCH: il manto blu della Sacerdotessa nel mazzo del 1909.
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
