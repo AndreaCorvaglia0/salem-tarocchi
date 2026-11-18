@@ -14,7 +14,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 2 | Promesse (BACKLOG 1.1–1.4) | **fatto, pubblicato** (main 7213183, gh-pages bdf2829). Debito: `progress.addTrust` dovrebbe chiamare `addBond` e `cond.js` leggere `bonds`, poi togliere la copia `trust` | schermate in `/home/claude/shots/promesse/` |
 | 3 | Collezioni: pietre e sibilla come l'erbario | agente in corso (interrotto dal riavvio del server, ripartito 18/11 7:28) | `notes/collezioni.md`; **le 36 carte della sibilla già ritagliate e controllate** in `/home/claude/ext/sibilla/cards/01..36.jpg` (ordine giusto, foglio di prova `contact.jpg`) |
 | 4 | Test dei lettori ingenui sul villaggio | **fatto** per Malva, biblioteca, bottega (correzione pubblicata: main 41ba213, gh-pages 1429248); quartieri da rifare con inquadratura migliore | `notes/village-test.md` |
-| 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | agente in corso (solo scrittura; interrotto e ripartito 18/11 7:28) | BACKLOG sezione 7 |
+| 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | **scritto**, in attesa delle risposte di Andrea (6 domande in fondo a `notes/libri/CONCETTO.md`) | BACKLOG sezione 7 |
 | 6 | Imparare meglio (BACKLOG 2.1–2.4) | da fare | |
 | 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | da fare, dopo 3 | |
 | 8 | Interessi da strega: pagina di progetto | da fare | BACKLOG sezione 6 |

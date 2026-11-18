@@ -87,12 +87,24 @@ sessione, non nella repo).
 - **Dubbi già noti:** diritti del mazzo di Yale (stampa anonima del 1890 circa, quindi pubblico dominio; la scheda
   ha solo la formula generica di Yale, non una licenza esplicita); quali pietre ha davvero Sowerby.
 
-## 6. Libri in biblioteca (in corso, solo scrittura)
+## 6. Libri in biblioteca (scritto, da approvare; niente codice)
 
-- **Cosa:** `notes/libri/CONCETTO.md` (a metà), `notes/libri/tre-libri.md` (da scrivere). Fonti antiche trovate dal
-  capofila: Durante *Herbario nuovo* 1585 (BHL), Leonardi *Speculum lapidum* 1502 (Dresda, Public Domain Mark),
-  Waite *Pictorial Key* 1911 (Wikisource).
-- **Dubbi:** nessuna scansione aperta e guardata dal capofila; da verificare libro per libro.
+- **Cosa:** `notes/libri/CONCETTO.md` (cos'è un libro, 13 libri in catalogo, come si guadagnano, che cosa
+  sbloccano, 6 domande per Andrea); `notes/libri/tre-libri.md` (erbario di Salvi 1641 su Durante 1585; storia dei
+  tarocchi «Il gioco e lo specchio»; libro dei sogni «Il dormiente» su Artemidoro), pagina per pagina.
+- **Verificato dal capofila:** letta la prima metà dell'erbario (buona voce, fonti con numero di pagina).
+- **Verificato dall'agente (resoconto, non ricontrollato):** scansioni Wellcome con marchio di pubblico dominio
+  (Durante 1585, Ortus sanitatis 1491, Cortese 1561, Della Porta 1588, Scot, Hypnerotomachia); Internet Archive
+  (Dolce 1565, Artemidoro 1547); Met 385140 (foglio di tarocchi c. 1500, pubblico dominio); testo di Josselyn.
+- **Non verificato:** BHL rifiutato (403), Gutenberg giù (503); Fludd, Agrippa, Leonardi, il mazzo De Lakenhal;
+  le figure da scegliere sulle scansioni (pietre nell'Ortus, minchiate, tavole dell'Hypnerotomachia).
+- **Dubbi:**
+  - Scritto a memoria dall'agente, da controllare: i quattro gradi di Galeno; che il tarocchino si giochi ancora
+    a Bologna.
+  - L'erbario ha una pagina sulla ruta con la nota a margine «Messa sulla soglia. Non è più entrato.»: la ruta è
+    un'erba del gioco, ma «Ruta» è anche un nome dei retroscena; va bene finché la pagina parla della pianta.
+  - Due libri «di fuori» datati dopo il 1692 (Waite, la storia dei tarocchi del 1913) arrivano dalla Lettrice: da
+    decidere con Andrea.
 
 ## Altro fatto in questa sessione (senza codice di gioco)
 
