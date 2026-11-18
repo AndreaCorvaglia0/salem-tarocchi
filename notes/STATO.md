@@ -17,7 +17,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | **scritto**, in attesa delle risposte di Andrea (6 domande in fondo a `notes/libri/CONCETTO.md`) | BACKLOG sezione 7 |
 | 6 | Imparare meglio (BACKLOG 2) | agente in corso (piano in `notes/imparare.md`) | |
 | 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | da fare, dopo 3 | |
-| 8 | Interessi da strega: pagina di progetto | agente in corso (solo scrittura: `notes/interessi/PROGETTO.md`) | BACKLOG sezione 6 |
+| 8 | Interessi da strega: pagina di progetto | **scritta**, in attesa delle 5 risposte di Andrea; prima fetta = erbe di Ortica, 3 missioni | BACKLOG sezione 6 |
 
 ## Regole del giro
 

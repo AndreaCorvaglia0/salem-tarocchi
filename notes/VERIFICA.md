@@ -119,6 +119,16 @@ sessione, non nella repo).
   - Due libri «di fuori» datati dopo il 1692 (Waite, la storia dei tarocchi del 1913) arrivano dalla Lettrice: da
     decidere con Andrea.
 
+## 7. Interessi da strega (scritto, da approvare; niente codice)
+
+- **Cosa:** `notes/interessi/PROGETTO.md`: quattro catene da sei missioni (Ortica erbe, Malva fumi e sacchetti,
+  Edera pietre, Ginepra sibilla e giochi), tre gradi di abilità con un uso nella storia, incroci che non
+  bloccano mai, prima fetta (erbe, tre missioni) con i file che servono. Canone nuovo segnato [p].
+- **Verificato dal capofila:** letto il resoconto, non tutta la pagina.
+- **Dubbi:** tre fatti reali della prima fetta non controllati (elencati nella pagina); le abilità delle pietre
+  («una pietra in tasca trasforma il primo esame fallito in un secondo tentativo») toccano l'equilibrio delle
+  prove: da misurare quando si costruisce.
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
