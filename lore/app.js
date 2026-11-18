@@ -2,11 +2,11 @@
 // with hash routes, so the back button works and a link can be shared:
 //   #/  home · #/n/<id> a note · #/t/<tipo> a list · #/grafo/<vista>[/<id>] a view of the graph (insegna, impara,
 //   storia, tutto) with a node selected · #/cerca/<q> search
-import { md, inline, esc } from './md.js?v=1795009325372';
-import { graphView } from './graph.js?v=1795009325372';
-import { layout } from './layout.js?v=1795009325372';
-import { phrase } from './linknames.js?v=1795009325372';
-import { trail } from './trail.js?v=1795009325372';
+import { md, inline, esc } from './md.js?v=1795009615653';
+import { graphView } from './graph.js?v=1795009615653';
+import { layout } from './layout.js?v=1795009615653';
+import { phrase } from './linknames.js?v=1795009615653';
+import { trail } from './trail.js?v=1795009615653';
 
 const app = document.getElementById('app');
 const FONTI = ['copione', 'deciso', 'proposto'];
@@ -342,9 +342,9 @@ function route() {
 
 async function start() {
   try {
-    const res = await fetch('./data.json?v=1795009325372');
+    const res = await fetch('./data.json?v=1795009615653');
     D = await res.json();
-    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795009325372')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
+    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795009615653')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
   } catch (e) {
     app.innerHTML = `<div class="page"><p class="warn">Non riesco a leggere il vault (${esc(e.message)}).</p></div>`;
     return;
