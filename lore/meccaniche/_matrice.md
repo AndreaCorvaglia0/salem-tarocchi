@@ -12,7 +12,7 @@ Generate dai campi `insegna` e `tecniche` delle meccaniche. Una colonna con tota
 | [[riprendere-le-carte-sequestrate]] | x | x |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[leggere-ai-clienti]] |  | x | x | x | x | x |  |  | x |  |  |  |  |  |
 | [[leggere-per-strada]] |  | x |  |  |  | x |  |  |  |  |  |  |  |  |
-| [[leggere-per-se]] |  |  |  | x |  |  |  | x |  |  |  |  |  |  |
+| [[leggere-per-se]] |  | x |  | x |  |  |  | x |  |  |  |  |  |  |
 | [[leggere-col-mazzo-vero]] |  |  |  | x |  |  |  | x |  |  |  |  |  |  |
 | [[girare-la-carta-di-oggi]] | x | x | x |  |  |  |  |  |  |  |  | x | x |  |
 | [[rispondere-a-memoria]] | x |  |  |  |  |  |  |  |  |  |  | x |  |  |
@@ -33,7 +33,8 @@ Generate dai campi `insegna` e `tecniche` delle meccaniche. Una colonna con tota
 | [[andare-altrove]] |  |  |  |  |  |  | x |  |  |  |  |  |  |  |
 | [[volare-con-la-scopa]] |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[stare-con-tartufo]] |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| **totale** | 8 | 11 | 5 | 3 | 1 | 2 | 4 | 2 | 5 | 3 | 3 | 3 | 1 | 3 |
+| [[raccogliere-pietre-e-figurine]] |  |  |  |  | x |  |  |  |  |  | x |  |  |  |
+| **totale** | 8 | 12 | 5 | 3 | 2 | 2 | 4 | 2 | 5 | 3 | 4 | 3 | 1 | 3 |
 
 Legenda:
 
@@ -63,17 +64,17 @@ Legenda:
 | [[riprendere-le-carte-sequestrate]] | x |  |  |  |  |  |  |  |  |  | x |  |  | x |
 | [[leggere-ai-clienti]] | x |  |  |  |  | x |  |  |  |  | x | x | x |  |
 | [[leggere-per-strada]] | x |  |  |  |  |  |  |  |  |  |  | x | x |  |
-| [[leggere-per-se]] |  |  |  |  |  |  |  |  | x |  |  | x |  |  |
+| [[leggere-per-se]] | x |  |  |  |  |  |  |  | x | x | x | x |  |  |
 | [[leggere-col-mazzo-vero]] | x |  |  |  |  |  |  |  |  |  |  | x |  |  |
-| [[girare-la-carta-di-oggi]] |  | x |  | x | x | x |  |  |  |  |  |  |  |  |
-| [[rispondere-a-memoria]] | x |  |  |  | x |  |  |  |  |  | x |  |  |  |
-| [[ripassare]] | x | x | x |  |  |  |  |  |  |  | x |  |  |  |
+| [[girare-la-carta-di-oggi]] | x | x |  | x | x | x |  |  |  |  |  |  |  |  |
+| [[rispondere-a-memoria]] | x | x |  |  | x |  |  |  |  |  | x |  |  |  |
+| [[ripassare]] | x | x | x |  |  |  |  |  | x |  | x |  |  |  |
 | [[far-crescere-la-luna]] |  | x |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[affrontare-le-prove]] |  |  |  |  |  |  |  |  |  | x | x | x | x | x |
 | [[studiare-in-biblioteca]] | x |  |  | x |  |  |  |  |  |  | x |  |  |  |
 | [[chiedere-alle-carte]] | x |  |  |  |  |  |  | x |  | x | x | x |  |  |
 | [[aprire-i-sigilli]] | x |  |  |  |  |  |  |  |  |  | x |  |  |  |
-| [[farsi-leggere-dalla-lettrice]] |  |  |  | x | x |  |  |  | x |  |  |  | x |  |
+| [[farsi-leggere-dalla-lettrice]] | x |  |  | x | x |  |  |  | x |  | x |  | x |  |
 | [[dire-cosa-pensa-degli-altri]] |  |  |  | x |  |  |  |  |  |  |  |  | x |  |
 | [[legarsi-alle-streghe]] |  |  |  |  |  |  |  | x |  |  |  |  | x |  |
 | [[raccogliere-le-erbe]] |  |  |  |  | x |  | x |  |  |  |  |  | x |  |
@@ -84,7 +85,8 @@ Legenda:
 | [[andare-altrove]] |  |  |  |  |  |  |  |  |  |  |  | x | x | x |
 | [[volare-con-la-scopa]] |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[stare-con-tartufo]] |  |  |  |  |  |  |  |  |  |  |  |  | x |  |
-| **totale** | 12 | 4 | 2 | 5 | 5 | 4 | 2 | 3 | 3 | 2 | 12 | 9 | 11 | 4 |
+| [[raccogliere-pietre-e-figurine]] |  |  |  |  | x |  | x |  |  |  |  |  |  |  |
+| **totale** | 15 | 5 | 2 | 5 | 6 | 4 | 3 | 3 | 4 | 3 | 14 | 9 | 11 | 4 |
 
 Legenda:
 

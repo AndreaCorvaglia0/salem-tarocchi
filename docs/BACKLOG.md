@@ -3,7 +3,7 @@
 Che cosa viene dopo, in ordine. Ogni voce: che cos'è, perché (quale obiettivo o lezione serve), la versione
 più piccola che vale la pena fare, la ragione nel mondo di Salem, da che cosa dipende, quanto costa
 (piccolo / medio / grande), come si verifica. Le idee non ancora scelte stanno in fondo.
-Aggiornato il 18 novembre 2026 (sezione 1 fatta). I perché generali sono in `docs/LEZIONI.md`.
+Aggiornato il 18 novembre 2026 (sezioni 1 e 2 fatte). I perché generali sono in `docs/LEZIONI.md`.
 
 ## In corso
 
@@ -40,16 +40,24 @@ e l'elemento), mai le parole della carta. Da fare dopo, nei file della guida: `p
 
 ## 2. Imparare meglio, con poco (da `notes/lore-design.md`)
 
-**2.1 Le sue tre parole tornano nel ripasso.** *Piccolo.* «Le tue parole erano: … Che carta è?». Copre
-«dire l'idea con parole sue». I dati sono già nel salvataggio.
+Fatta il 18 novembre (da provare sul telefono). Il piano, voce per voce: `notes/imparare.md`; schermate in
+`/home/claude/shots/imparare/`.
 
-**2.2 La carta di oggi entra nel ripasso.** *Piccolo.* La risposta a memoria aggiorna la carta; una volta su
-tre la carta di oggi è una scaduta.
+**2.1 Le sue tre parole tornano nel ripasso.** *Fatto.* «Le tue parole erano: … Che carta è?», tre nomi, poi
+la carta. Una per ripasso, solo se ha scritto parole che non dicono già il nome (`src/systems/review.rules.js`,
+`tests/review.words.test.mjs`).
 
-**2.3 «Prova tu prima» nella lettura per sé.** *Piccolo.* Sceglie l'idea di ogni carta prima di vedere il
-testo. È il passo verso il mazzo vero.
+**2.2 La carta di oggi entra nel ripasso.** *Fatto.* Se la carta è sua, «Senza guardare» conta come risposta
+del ripasso una volta al giorno (`state.dayAsked`); un giorno su tre la carta di oggi è una delle sue scadute
+(`dayOf` in `src/glue/threshold.rules.js`, `tests/threshold.test.mjs`). Non si vede niente di nuovo, per scelta.
 
-**2.4 La Lettrice chiede prima di raccontare.** *Piccolo.* «Ti ricordi che cosa ti avevo detto del Carro?»
+**2.3 «Prova tu prima» nella lettura per sé.** *Fatto.* «Prima di leggere: che idea porta questa carta?» per
+ogni carta, tre idee; «Leggo e basta» salta. Il diario tiene i tentativi (`tried`), la lettura dice quante ne
+aveva capite da sola (`tests/selfread.test.mjs`). Resta la doppia strada con `systems/free.js`.
+
+**2.4 La Lettrice chiede prima di raccontare.** *Fatto.* In ogni visita, prima di girare le carte nuove, una
+carta già raccontata (prima le scadute, poi la meno chiesta: `state.recalled`), tre idee, la sua risposta
+(`pickRecall` in `src/story/visit.plan.js`, `tests/story.visit.test.mjs`).
 
 ## 3. Modi nuovi di giocare (scelti il 17 novembre)
 

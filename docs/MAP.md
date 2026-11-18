@@ -44,8 +44,8 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1134 |
-| `src/data` | 12 | 1271 |
+| `src/core` | 11 | 1143 |
+| `src/data` | 13 | 1468 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |
 | `src/data/elsewhere` | 3 | 179 |
@@ -56,14 +56,14 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/data/story/scripts` | 13 | 2892 |
 | `src/data/trials` | 7 | 920 |
 | `src/data/world` | 17 | 1216 |
-| `src/glue` | 43 | 3015 |
+| `src/glue` | 45 | 3219 |
 | `src/reading` | 9 | 702 |
 | `src/sound` | 11 | 1014 |
-| `src/story` | 12 | 1071 |
+| `src/story` | 12 | 1136 |
 | `src/story/stage` | 14 | 1925 |
-| `src/systems` | 19 | 1554 |
+| `src/systems` | 20 | 1605 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 36 | 3966 |
+| `src/ui` | 37 | 4170 |
 | `src/ui/missions` | 5 | 542 |
 | `src/ui/rite` | 2 | 509 |
 | `src/world` | 19 | 1428 |
@@ -121,6 +121,7 @@ Provided by one file, sometimes wrapped by glue, called by name from anywhere.
 | `rite.state` | glue/rite |  | — |
 | `selfread.intro` | glue/selfread |  | ui/selfread |
 | `shop.open` | ui/index | glue/wire | — |
+| `sibyl.pairs` | glue/sibylpairs |  | — |
 | `sound.back` | glue/mood |  | glue/elsewhere, story/session, story/visit, systems/theme, ui/selfread, world/escape |
 | `sound.hold` | glue/mood |  | story/session, story/visit |
 | `sound.mood` | sound/index |  | glue/mood, glue/rite, story/session, story/visit, systems/theme, ui/rite/index … (+4) |
@@ -198,6 +199,7 @@ Every service that is called is provided.
 | `minor` | — | glue/wire |
 | `opened` | world/scene/obstacles | — |
 | `opinion` | glue/opinions | — |
+| `pairs` | glue/sibylpairs | — |
 | `patrol:seen` | world/scene/World | glue/fly, glue/traits, sound/index |
 | `power` | story/runner | glue/diary, glue/lessons, glue/wire |
 | `readings` | glue/selfread | — |
@@ -220,18 +222,18 @@ Every service that is called is provided.
 
 Touch these with care: many files depend on them.
 
-- `src/core/state.js` (77)
-- `src/core/dom.js` (66)
-- `src/core/services.js` (58)
-- `src/core/progress.js` (55)
-- `src/data/cards.base.js` (52)
-- `src/core/bus.js` (40)
+- `src/core/state.js` (78)
+- `src/core/dom.js` (67)
+- `src/core/services.js` (59)
+- `src/core/progress.js` (56)
+- `src/data/cards.base.js` (54)
+- `src/core/bus.js` (41)
 - `src/core/cond.js` (30)
-- `src/ui/paper.js` (26)
+- `src/ui/paper.js` (27)
 - `src/data/story/index.js` (25)
 - `src/world/art/px.js` (22)
 - `src/data/story/h.js` (21)
-- `src/core/fonts.js` (15)
+- `src/core/fonts.js` (16)
 - `src/world/art/palette.js` (15)
-- `src/data/cards.js` (13)
+- `src/data/cards.js` (14)
 - `src/world/maps.js` (12)

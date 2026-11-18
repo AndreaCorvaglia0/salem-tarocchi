@@ -10,6 +10,7 @@ import { buildQuestions } from './exam.rules.js';
 import { sheet } from '../data/cards.js';
 import { screen, btn, say, shuffle, pickOne, mood, moodBack } from './theme.js';
 import { cardFace, questionView } from './qview.js';
+import { wordsCard, wordsQuestion } from './review.rules.js';
 
 const CSS = `
 .sxv-card{display:flex;justify-content:center}
@@ -53,6 +54,10 @@ export async function review({ ids, n } = {}) {
   let pool = list.slice(0, 8);
   if (pool.length < 3 && !pool.includes('m00')) pool = [...pool, 'm00'];
   const qs = buildQuestions({ kind: 'judge', pool, told: state.told || {}, n: N, level: Math.max(1, state.chapter || 1), makeExam, makeQuestion });
+  // her own three words come back once (review.rules.js): in place of a question on the same card, or of the second
+  const wid = wordsCard(state.cards, list);
+  const wq = wid ? wordsQuestion(wid, state.cards) : null;
+  if (wq) { const at = qs.findIndex((q) => q.cardId === wid); qs.splice(at >= 0 ? at : Math.min(1, qs.length), at >= 0 || qs.length >= N ? 1 : 0, wq); }
   let knew = 0, seen = 0;
   const missed = [];
   for (let i = 0; i < qs.length && !stop; i++) {
@@ -66,6 +71,8 @@ export async function review({ ids, n } = {}) {
     if (k === null) break;
     const ok = !!q.options[k]?.ok;
     view.reveal(k);
+    // after her words, the card they belong to: picture, name and idea
+    if (q.kind === 'words') { const c = sheet(q.cardId); view.el.append(h('div.sxv-miss.sx-in', cardFace(q.cardId), h('div', h('b', c.name), c.core ? h('span', c.core) : null))); }
     seen++;
     if (q.cardId) answer(q.cardId, ok, q.star);
     if (ok) { knew++; addXp(XP_RIGHT, 'review'); } else if (q.cardId && !missed.includes(q.cardId)) missed.push(q.cardId);

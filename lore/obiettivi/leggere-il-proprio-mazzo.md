@@ -2,11 +2,11 @@
 tipo: obiettivo
 nome: "Leggere il proprio mazzo"
 sa_fare: "Pesca dal suo mazzo vero a casa, sceglie una stesa e legge le carte per sé, da sola."
-si_vede_da: "Non si verifica: la lettura per sé con le carte vere (src/ui/selfread.js) e quella dal grimorio (src/systems/free.js) non hanno punteggio, per scelta."
+si_vede_da: "In parte: nella lettura per sé (src/ui/selfread.js), anche con le carte vere pescate a casa, prima del testo lei sceglie l'idea di ogni carta; il diario tiene che cosa ha indovinato da sola (state.readings[].tried, src/glue/selfread.rules.js tryScore). Nessun punteggio che dia o tolga qualcosa, per scelta. La lettura dal grimorio (src/systems/free.js) ha solo il suo «Prova tu prima» senza conteggio."
 meccaniche:
   - "[[leggere-per-se]]"
   - "[[leggere-col-mazzo-vero]]"
-aperto: "Nessuna prova che lo sappia fare da sola. Si potrebbe chiederle l'idea di ogni carta prima di mostrare il testo, come fa già «Prova tu prima» in free.js."
+aperto: "Si verifica l'idea di ogni carta, non la lettura intera (che cosa vuol dire in quel posto, come si legano le carte) e non con parole sue. Nessuna schermata mostra ancora come va nel tempo."
 ---
 
 È l'obiettivo finale del regalo. Oggi il gioco le dà gli strumenti ma non guarda come se la cava.

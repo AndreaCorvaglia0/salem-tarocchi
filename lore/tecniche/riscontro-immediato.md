@@ -17,6 +17,8 @@ dove_la_usiamo:
   - "[[aprire-i-sigilli]]"
   - "[[curare-l-orto]]"
   - "[[imparare-da-ortica]]"
+  - "[[leggere-per-se]]"
+  - "[[farsi-leggere-dalla-lettrice]]"
 dove_manca: "Il riscontro dice quale era la risposta giusta, raramente perché quella scelta era sbagliata. Nella carta di oggi la domanda a memoria mostra il punto giusto ma non dice che cosa significa quel dettaglio."
 ---
 

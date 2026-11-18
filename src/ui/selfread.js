@@ -8,11 +8,11 @@ import { h, css, cardUrl, openOverlay } from '../core/dom.js';
 import { FONT } from '../core/fonts.js';
 import { call, has } from '../core/services.js';
 import { state } from '../core/state.js';
-import { ownedIds } from '../core/progress.js';
+import { ownedIds, answer } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { SPREADS } from '../data/spreads.js';
 import { TREE, walk, AMBITO_LABEL, FORMA_LABEL, hasVoice, voiceIds, drawCards, voice } from '../reading/index.js';
-import { spreadsFor, PICK_TABS, pickerCards, realCards, makeEntry, compose, dateIt } from '../glue/selfread.rules.js';
+import { spreadsFor, PICK_TABS, pickerCards, realCards, makeEntry, compose, dateIt, tryOptions, tryScore, tryLine } from '../glue/selfread.rules.js';
 import { snd } from './sfx.js';
 
 const CSS = `
@@ -76,6 +76,18 @@ const CSS = `
 .sr-glance{padding:8px 12px;border-radius:10px;background:#ffffff08;font-size:17px;font-style:italic}
 .sr-close{padding:10px 14px;border-left:3px solid var(--gold);font-size:19px;font-style:italic;color:#fff7e3}
 .sr-close+.sr-close{margin-top:-6px}
+.sr-try{display:flex;gap:12px;align-items:center}
+.sr-try .sr-fig{width:78px}.sr-try .sr-fig i{width:78px}
+.sr-try small.p{display:block;color:var(--dim);font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.sr-try b{display:block;font-weight:400;font-size:23px;line-height:1.15}
+.sr-try .n{color:var(--dim);font-size:15px}
+.sr-ask{margin:2px 0 0;font-size:21px;line-height:1.3;color:#fff7e3}
+.sr-opts{display:flex;flex-direction:column;gap:9px}
+.sr-o{min-height:56px;padding:8px 14px;border-radius:12px;border:2px solid var(--line);background:var(--panel);text-align:left;cursor:pointer;font-size:19px;line-height:1.25}
+.sr-o:disabled{cursor:default}
+.sr-o.ok{border-color:var(--gold);background:#3a2e12;color:#fff3c4}
+.sr-o.no{border-color:#8a5a52;background:#2a1b1e}
+.sr-good{flex:none !important;align-self:center;color:var(--gold);font-size:18px;font-style:italic;padding-right:4px}
 `;
 
 // ---- a screen of its own (the reading screens of src/systems are another area) -------------------------
@@ -213,6 +225,34 @@ function pickReal(scr, spread) {
   });
 }
 
+// «Prova tu prima» (docs/BACKLOG.md 2.3): before the text, she picks the idea of each card among three.
+// «Leggo e basta» skips the tries left in this reading. A try on a card she holds counts for its review, as in
+// a client reading. Resolves [true | false | null] per card.
+async function tryFirst(scr, entry, { pool, verso }) {
+  const N = entry.cards.length, tried = new Array(N).fill(null);
+  for (let i = 0; i < N; i++) {
+    const { card, rev, pos } = entry.cards[i];
+    const opts = tryOptions(entry, i, { pool, verso });
+    if (opts.length < 2) continue;
+    let pick;
+    const picked = new Promise((r) => { pick = r; });
+    const btns = opts.map((o, k) => h('button.sr-o', { type: 'button', onclick: () => { snd('tap'); pick(k); } }, o.text));
+    scr.body(
+      h('div.sr-try.sr-in', fig(card, rev), h('div', h('small.p', posLabel(entry.spread, pos)), h('b', CARD[card]?.name || card), N > 1 ? h('span.n', `${i + 1} di ${N}`) : null)),
+      h('p.sr-ask', 'Prima di leggere: che idea porta questa carta?'), h('div.sr-opts', btns));
+    scr.foot(B('Leggo e basta', () => pick(-1), 'ghost'));
+    const k = await picked;
+    if (k < 0) break;
+    const ok = !!opts[k].ok;
+    tried[i] = ok;
+    btns.forEach((b, j) => { b.disabled = true; if (opts[j].ok) b.classList.add('ok'); else if (j === k) b.classList.add('no'); });
+    snd(ok ? 'right' : 'wrong');
+    if (state.cards?.[card]?.found) answer(card, ok, 'meaning');
+    await new Promise((res) => scr.foot(ok ? h('span.sr-good', 'Sì, è questa.') : null, B('Avanti', res, 'go')));
+  }
+  return tried;
+}
+
 // ---- the whole flow ------------------------------------------------------------------------------------
 export function openSelfRead() {
   return new Promise((done) => {
@@ -241,10 +281,14 @@ export function openSelfRead() {
           stage = cards ? 4 : 2;
         }
       }
-      const entry = makeEntry({ at: new Date().toISOString(), who: 'me', question: { ambito: q.ambito, forma: q.forma, text: q.text }, spread, cards, real: how === 'real' });
+      const draft = { at: new Date().toISOString(), who: 'me', question: { ambito: q.ambito, forma: q.forma, text: q.text }, spread, cards, real: how === 'real' };
+      const verso = !!(state.flags?.['lesson.reversed'] || state.lessons?.reversed);
+      const tried = await guard(tryFirst(scr, makeEntry(draft), { pool: ownedIds().filter((id) => hasVoice(id)), verso }));
+      const entry = makeEntry({ ...draft, tried });
+      const line = tryLine(tryScore(entry.tried));
       const note = h('textarea.sr-field', { rows: 2, maxLength: 600, placeholder: 'Una nota mia', 'aria-label': 'Una nota mia' });
       const after = has('rite.after') ? call('rite.after') : null; // the line after the rite, once a day
-      scr.body(themeBox(entry.question, 'me', entry.real), readingNodes(entry), after?.nodeType ? after : null, h('p.sr-lab', { style: { marginTop: '8px' } }, 'Una nota mia'), note);
+      scr.body(themeBox(entry.question, 'me', entry.real), line ? h('p.sr-lab.sr-in', line) : null, readingNodes(entry), after?.nodeType ? after : null, h('p.sr-lab', { style: { marginTop: '8px' } }, 'Una nota mia'), note);
       scr.foot(B('Tieni nel diario', async () => {
         entry.note = note.value.trim().slice(0, 600);
         await call('readings.keep', entry);
@@ -262,7 +306,8 @@ export function readingScreen(entry) {
     const end = async (v) => { if (v !== 'deleted' && note.value.trim() !== (entry.note || '')) { await call('readings.note', entry.at, note.value.trim()); entry.note = note.value.trim(); } scr.close(); done(v); };
     const scr = screen(dateIt(entry.at), () => end('closed'));
     note = h('textarea.sr-field', { rows: 2, maxLength: 600, value: entry.note || '', placeholder: 'Una nota mia', 'aria-label': 'Una nota mia' });
-    scr.body(themeBox(entry.question, entry.who, entry.real), readingNodes(entry), h('p.sr-lab', { style: { marginTop: '8px' } }, 'Una nota mia'), note);
+    const line = tryLine(tryScore(entry.tried));
+    scr.body(themeBox(entry.question, entry.who, entry.real), line ? h('p.sr-lab', line) : null, readingNodes(entry), h('p.sr-lab', { style: { marginTop: '8px' } }, 'Una nota mia'), note);
     const feet = () => scr.foot(B('Cancella', () => scr.foot(B('No, la tengo', feet, 'ghost'), B('Sì, la cancello', async () => { await call('readings.delete', entry.at); end('deleted'); })), 'ghost'), B('Chiudi', () => end('closed'), 'go'));
     feet();
   });

@@ -8,7 +8,8 @@ dove_la_usiamo:
   - "[[trovare-una-carta]]"
   - "[[leggere-per-se]]"
   - "[[farsi-leggere-dalla-lettrice]]"
-dove_manca: "Le tre parole e il dettaglio si generano una volta sola. Tutte le altre domande del gioco sono a scelta: lei non produce mai più niente di suo sulle carte."
+  - "[[ripassare]]"
+dove_manca: "Le tre parole e il dettaglio si generano una volta sola; le parole tornano nel ripasso come indizio, il dettaglio no. Tutte le altre domande del gioco sono a scelta: lei non produce mai più niente di suo sulle carte."
 ---
 
 Il dettaglio toccato e le tre parole quando trova una carta sono il punto più forte: la Lettrice poi parte proprio da lì.

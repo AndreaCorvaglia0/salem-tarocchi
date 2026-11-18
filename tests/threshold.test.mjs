@@ -45,3 +45,52 @@ test('the short review takes the two cards due longest, never one she does not h
   assert.deepEqual(reviewPair({}, now), []);
 });
 test('gifts are small and always say what they are', () => { for (let c = 1; c <= 9; c++) { const g = giftOf(c); assert.ok((g.treats || 0) + (g.coins || 0) > 0); assert.ok(giftText(g).length > 5); } });
+
+// BACKLOG 2.2: the card of the day enters the review
+import { dayAnswer, countsToday, FROM_DUE } from '../src/glue/threshold.rules.js';
+import { setState, state as S } from '../src/core/state.js';
+import { answer, hasCard, isDue } from '../src/core/progress.js';
+
+test('one day in three the card of the day is one of her due cards; with none due, the same card as before', () => {
+  const ids = ['m00', 'm01', 'm02', 'm03', 'm04', 'c05', 's10', 'w03', 'p07', 'm17'];
+  const due = ['m03', 'c05'];
+  let fromDue = 0; const N = 600;
+  for (let i = 0; i < N; i++) {
+    const date = new Date(Date.UTC(2026, 0, 1) + i * 86400000).toISOString().slice(0, 10);
+    const plain = dayOf(null, date, ids, 'Anna'), withDue = dayOf(null, date, ids, 'Anna', due);
+    assert.deepEqual(dayOf(null, date, ids, 'Anna', []), plain); // nothing due: nothing changes
+    assert.equal(withDue.v, plain.v);
+    if (withDue.card !== plain.card) { fromDue++; assert.ok(due.includes(withDue.card)); }
+    assert.deepEqual(dayOf(withDue, date, ids, 'Anna', ['m00']), withDue); // the same all day
+  }
+  const share = fromDue / N; // about 1/3 (less the days the plain card was already that due one)
+  assert.ok(share > 0.22 && share < 0.42, `share ${share}`);
+  assert.equal(FROM_DUE, 3);
+  // a due card the day cannot show (no daily page) is never picked
+  for (let d = 1; d <= 28; d++) assert.ok(ids.includes(dayOf(null, `2026-03-${String(d).padStart(2, '0')}`, ids, 'x', ['zz']).card));
+});
+
+test('«Senza guardare» counts as a review answer once a day, only on a card she holds', () => {
+  assert.equal(countsToday(null, '2026-11-18', true), true);
+  assert.equal(countsToday('2026-11-18', '2026-11-18', true), false);
+  assert.equal(countsToday('2026-11-17', '2026-11-18', false), false);
+  setState({ started: true, cards: { m03: { found: true, stars: 0, right: 0, wrong: 0, words: ['', '', ''], due: Date.now() - 1000, interval: 0 } } });
+  assert.equal(S.dayAsked, null); // the default
+  const deps = { holds: hasCard, answer };
+  assert.equal(isDue('m03'), true);
+  assert.equal(dayAnswer(S, '2026-11-18', 'm03', true, deps), true);
+  assert.equal(isDue('m03'), false); assert.equal(S.cards.m03.right, 1); assert.equal(S.cards.m03.stars, 1);
+  assert.equal(dayAnswer(S, '2026-11-18', 'm03', false, deps), false); // reopened: does not count twice
+  assert.equal(S.cards.m03.wrong, 0);
+  assert.equal(dayAnswer(S, '2026-11-19', 'm04', true, deps), false); // not hers
+  assert.equal(S.dayAsked, '2026-11-18');
+  assert.equal(dayAnswer(S, '2026-11-19', 'm03', false, deps), true); // the next day a wrong answer sends it back
+  assert.equal(isDue('m03'), true); assert.equal(S.cards.m03.wrong, 1);
+});
+
+test('an old save without the new keys loads with their defaults', () => {
+  setState({ started: true, cards: {}, daily: { looks: {}, notes: 3, noteDay: '2026-11-01' } });
+  assert.equal(S.dayAsked, null); assert.deepEqual(S.recalled, {});
+  setState({ started: true, dayAsked: 7, recalled: [1] });
+  assert.equal(S.dayAsked, null); assert.deepEqual(S.recalled, {});
+});

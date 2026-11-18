@@ -75,6 +75,9 @@ export const fresh = () => ({
   oracle: {},
   oracleFrom: {},
   albumSeen: {},
+  // the Reader asks about a card she told before, once a visit (story/visit.plan.js pickRecall): card id -> times asked
+  recalled: {},
+  dayAsked: null, // the day «Senza guardare» of the card of the day last counted as a review answer (glue/threshold.js)
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
@@ -114,6 +117,9 @@ export const migrate = (s) => {
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job
   if (s.flags) delete s.flags['sight.far'];
   for (const k of ['stones', 'oracle', 'oracleFrom', 'albumSeen']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {}; // the albums (glue/collect.js)
+  // learning better (docs/BACKLOG.md 2): the Reader's recall questions, the day the card of the day last counted for the review
+  if (typeof s.recalled !== 'object' || !s.recalled || Array.isArray(s.recalled)) s.recalled = {};
+  if (typeof s.dayAsked !== 'string') s.dayAsked = null;
   return s;
 };
 

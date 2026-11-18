@@ -2,7 +2,8 @@
 // the new cards face down on the table; she opens with an observation, turns them one at a time and
 // tells them (from the detail she chose, to what the card says, to her own three words), asks one
 // question that moves a trait, and closes. Composition: visit.plan.js. Captions: tableui.js.
-// Order: opener, thread, the cards (detail, tell, words, the one question), ritual, closer; each of
+// Order: opener, thread, the question on a card told before (recall), the cards (detail, tell, words, the one
+// question), ritual, closer; each of
 // the four remarks may carry `then` nodes, run with the session runner.
 //   playVisit({ force }) -> boolean (played)
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
@@ -10,7 +11,7 @@ import { emit } from '../core/bus.js';
 import { state, save } from '../core/state.js';
 import { call } from '../core/services.js';
 import { test, fill } from '../core/cond.js';
-import { foundIds, tellCard, addTrait, addXp, snapshot } from '../core/progress.js';
+import { foundIds, tellCard, addTrait, addXp, snapshot, answer } from '../core/progress.js';
 import * as V from '../data/story/visits.js';
 import { sheet } from '../data/cards.js';
 import { createStage } from './stage/index.js';
@@ -59,6 +60,18 @@ export async function playVisit({ force = false } = {}) {
     await remark(plan.thread);
     for (const c of plan.cards) { scene.table.show(c.id); await sleep(reduced ? 0 : 320); }
     await sleep(reduced ? 0 : 900);
+    // before telling the new cards she asks about one she told before (visit.plan.js pickRecall, BACKLOG 2.4):
+    // a review answer on that card; her reply is the feedback
+    if (plan.recall) {
+      const r = plan.recall;
+      await say(r.q, { ask: true });
+      const k = await T.choose(r.a.map((o) => o.t));
+      const ok = !!r.a[k]?.ok;
+      answer(r.id, ok, 'meaning');
+      if (!state.recalled || typeof state.recalled !== 'object') state.recalled = {};
+      state.recalled[r.id] = (Number(state.recalled[r.id]) || 0) + 1; save();
+      for (const line of ok ? [r.right] : r.wrong) await say(line);
+    }
     for (let i = 0; i < plan.cards.length; i++) {
       const c = plan.cards[i];
       scene.table.highlight(i);

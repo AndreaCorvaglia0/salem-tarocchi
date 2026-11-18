@@ -1,13 +1,13 @@
 // The threshold in play (rules: threshold.rules.js; the screen: ui/title.js): the moon, the card of the day
 // with its sentence and its looks, the note from the notebook, the short review.
 import { state, save } from '../core/state.js';
-import { todayKey, addCoins, addTreats } from '../core/progress.js';
+import { todayKey, addCoins, addTreats, dueIds, hasCard, answer } from '../core/progress.js';
 import { CARD } from '../data/cards.base.js';
 import { DAILY } from '../data/daily/cards.js';
 import { NOTES } from '../data/daily/notes.js';
 import { moonSeedGift } from './garden.js';
 import { HERB } from '../data/herbs/base.js';
-import { growMoon, moonShown, dayOf, noteOf, reviewPair, giftOf, giftText, readerLine } from './threshold.rules.js';
+import { growMoon, moonShown, dayOf, noteOf, reviewPair, giftOf, giftText, readerLine, dayAnswer } from './threshold.rules.js';
 
 const IDS = Object.keys(CARD).filter((id) => DAILY[id]);
 const daily = () => (state.daily && typeof state.daily === 'object' ? state.daily : (state.daily = { looks: {}, notes: 0, noteDay: null }));
@@ -34,7 +34,7 @@ export const giftToday = () => (state.moon?.gift?.date === todayKey() ? state.mo
 
 // The card of the day: { card, turned, name, oggi, look: { k, t } | null }
 export function today() {
-  const d = dayOf(state.day, todayKey(), IDS, seed());
+  const d = dayOf(state.day, todayKey(), IDS, seed(), dueIds());
   if (state.day?.date !== d.date || state.day?.card !== d.card) { state.day = d; save(); }
   const e = DAILY[d.card] || {}, looks = e.sguardi || [];
   const seen = Number(daily().looks?.[d.card]) || 0;
@@ -50,6 +50,13 @@ export function turnToday() {
   L[t.card] = (Number(L[t.card]) || 0) + 1;
   save();
   return today();
+}
+// Her answer to «Senza guardare» (ui/daycard.js): a review answer on the card, if it is hers, once a day
+// (the first answer counts; reopening the card she may answer again for herself). -> true when it counted
+export function answerToday(ok) {
+  const done = dayAnswer(state, todayKey(), today().card, ok, { holds: hasCard, answer });
+  if (done) save();
+  return done;
 }
 // The note of the day (one more is counted the first time each day)
 export function noteToday() {

@@ -7,6 +7,7 @@ fonte: "docs/RESEARCH.md, Tecniche di apprendimento"
 dove_la_usiamo:
   - "[[affrontare-le-prove]]"
   - "[[chiedere-alle-carte]]"
+  - "[[leggere-per-se]]"
 dove_manca: "«Ricordamela» nelle letture non costa niente; dal 18 novembre però non mostra più le parole della carta, solo un indizio (dove l'ha trovata, due cose da guardare nel disegno; per le Minori il posto del numero nella fila e l'elemento del seme). Potrebbe ancora aprirsi solo dopo un primo tentativo (serve toccare src/systems/consult.js)."
 ---
 

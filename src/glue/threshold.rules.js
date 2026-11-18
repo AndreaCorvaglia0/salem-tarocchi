@@ -29,11 +29,26 @@ export function moonPath(n, r = 36, cx = 37, cy = 37) {
 }
 
 // The card of the day: the one already drawn today (the cottage bed draws it too), else one of all the
-// cards, the same all day for the same player. -> { date, card, turned, v }
-export function dayOf(day, today, ids, seed = '') {
+// cards, the same all day for the same player. One day in three (from the date) it is one of her cards due
+// for review (`due`), so the daily gesture is also a spaced review (docs/BACKLOG.md 2.2); with nothing due,
+// the card is the one it always was. -> { date, card, turned, v }
+export const FROM_DUE = 3; // one day in FROM_DUE
+export function dayOf(day, today, ids, seed = '', due = []) {
   if (day?.date === today && day.card && ids.includes(day.card)) return { date: today, card: day.card, turned: !!day.turned, v: day.v === 1 ? 1 : 0 };
   const x = hash(`${today}|${seed}`);
-  return { date: today, card: ids[x % ids.length], turned: false, v: (x >>> 8) % 2 };
+  const late = (Array.isArray(due) ? due : []).filter((id) => ids.includes(id)).sort();
+  const card = late.length && (x >>> 20) % FROM_DUE === 0 ? late[(x >>> 4) % late.length] : ids[x % ids.length];
+  return { date: today, card, turned: false, v: (x >>> 8) % 2 };
+}
+// The question «Senza guardare» counts as a review answer once a day, and only on a card she holds.
+export const countsToday = (asked, today, holds) => !!holds && asked !== today;
+// The answer itself, on the state `s` (state.dayAsked): `answer(id, ok, kind)` and `holds(id)` come from
+// core/progress.js. -> true when it counted.
+export function dayAnswer(s, today, card, ok, { holds, answer }) {
+  if (!countsToday(s.dayAsked, today, holds(card))) return false;
+  s.dayAsked = today;
+  answer(card, !!ok, 'image');
+  return true;
 }
 
 // The note of the day: now and then one written for this weekday or this month, else the next of a fixed

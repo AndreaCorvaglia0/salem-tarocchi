@@ -2,7 +2,7 @@
 // which spreads she can lay, the picker of real cards, the saved shape, the cap, and the composition of a
 // reading from its saved cards with a fixed seed (so a reading reopened from the diary says the same words).
 // Screens: ui/selfread.js, ui/readings.js. Wiring: glue/selfread.js. Tests: tests/selfread.test.mjs.
-import { makeQuestion, plan, say, seeded, AMBITI, FORME } from '../reading/index.js';
+import { makeQuestion, plan, say, seeded, recall, voiceIds, AMBITI, FORME } from '../reading/index.js';
 import { CARD, MAJORS, MINORS, SUITS } from '../data/cards.base.js';
 import { SPREADS } from '../data/spreads.js';
 
@@ -43,10 +43,38 @@ export function compose(e) {
   return say(p, { rng: seeded(seedOf(e)), opening: 'never' });
 }
 
+// ---- «Prova tu prima» (docs/BACKLOG.md 2.3) -------------------------------------------------------------
+// Before the reading shows its text, she picks the idea of each card among three: its essenza (that side,
+// upright or reversed) and those of other cards, from her voiced cards (`pool`), from all voiced ones when too
+// few; never those of the other cards laid in the same reading. `verso`: the same card turned the other way may be offered (once reversed cards are taught).
+// -> [{ text, ok, card, rev }] (three, one ok)
+export function tryOptions(e, i, { pool = [], verso = false, rng = Math.random } = {}) {
+  const p = plan(makeQuestion({ ambito: e.question.ambito, forma: e.question.forma }), e.spread, e.cards);
+  // never the idea of another card of this reading: it would come back as the answer a moment later
+  const away = new Set(e.cards.map((c) => c.card));
+  const a = recall(p, i, { rng, pool: pool.filter((id) => !away.has(id)), verso });
+  return a.length >= 3 ? a : recall(p, i, { rng, pool: voiceIds().filter((id) => !away.has(id)), verso });
+}
+// What she got right before reading: tried = [true | false | null] per card. -> { right, of } (of: cards tried)
+export const tryScore = (tried) => {
+  const t = Array.isArray(tried) ? tried.filter((x) => x === true || x === false) : [];
+  return { right: t.filter(Boolean).length, of: t.length };
+};
+// The line over the reading, after at least one try.
+const NUM = ['zero', 'una', 'due', 'tre', 'quattro', 'cinque', 'sei', 'sette', 'otto', 'nove', 'dieci'];
+const nw = (n) => NUM[n] || String(n);
+export const tryLine = ({ right, of }) => {
+  if (!of) return null;
+  if (of === 1) return right ? 'Prima di leggere l\'avevi già capita da sola.' : 'Prima di leggere avevi provato: ecco che cosa dice.';
+  if (right === of) return `Prima di leggere le avevi già capite tutte e ${nw(of)} da sola.`;
+  return right ? `Prima di leggere ne avevi capite ${nw(right)} su ${nw(of)} da sola.` : `Prima di leggere avevi provato con ${nw(of)} carte: ecco che cosa dicono.`;
+};
+
 // ---- the saved shape -----------------------------------------------------------------------------------
 // { at (ISO), who: 'me' | client name, question: { ambito, forma, text? }, spread, cards: [{ pos, card, rev }],
-//   closing, note, real }. Throws when the question, spread or cards are not valid.
-export function makeEntry({ at = new Date().toISOString(), who = 'me', question, spread, cards, note = '', real = false }) {
+//   closing, note, real, tried? }. tried: what she picked before reading («Prova tu prima»), true / false / null
+//   (skipped) per card, kept only when she tried at least one. Throws when the question, spread or cards are not valid.
+export function makeEntry({ at = new Date().toISOString(), who = 'me', question, spread, cards, note = '', real = false, tried = null }) {
   if (!SPREADS[spread]) throw new Error(`makeEntry: unknown spread "${spread}"`);
   if (!AMBITI.includes(question?.ambito) || !FORME.includes(question?.forma)) throw new Error('makeEntry: bad question');
   const n = SPREADS[spread].positions.length;
@@ -61,6 +89,7 @@ export function makeEntry({ at = new Date().toISOString(), who = 'me', question,
   };
   const r = compose(e);
   e.closing = r.closing || r.advice || '';
+  if (Array.isArray(tried) && tryScore(tried).of) e.tried = e.cards.map((_, i) => (tried[i] === true || tried[i] === false ? tried[i] : null));
   return e;
 }
 // Newest first, at most `cap`. `at` identifies an entry (reopen, note, delete): a clash moves it on by 1 ms.

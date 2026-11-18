@@ -8,7 +8,7 @@ import { snd } from './sfx.js';
 import { CARD } from '../data/cards.base.js';
 import { sheet } from '../data/cards.js';
 import { VISUAL } from '../data/daily/visual.js';
-import { today } from '../glue/threshold.js';
+import { today, answerToday } from '../glue/threshold.js';
 import { SERIF, HAND, GOLD } from './paper.js';
 import { cardBack } from './art.js';
 
@@ -136,6 +136,7 @@ export function openDayCard({ flip = false } = {}) {
       const build = () => {
         const btns = ask.a.map((a, i) => h('button', { type: 'button', onclick: () => {
           if (answered) return; answered = true; snd(i === ask.ok ? 'card' : 'tap');
+          answerToday(i === ask.ok); // a review answer on her card, once a day (glue/threshold.js)
           btns.forEach((b, j) => { b.disabled = true; b.classList.add(j === ask.ok ? (i === ask.ok ? 'yes' : 'was') : 'no'); });
           pg.querySelector('h3').textContent = i === ask.ok ? 'Giusto: guarda' : 'Guarda com\'era';
           pose({ at: ask.at }); label();

@@ -17,7 +17,10 @@ dove_la_usiamo:
   - "[[chiedere-alle-carte]]"
   - "[[aprire-i-sigilli]]"
   - "[[imparare-da-ortica]]"
-dove_manca: "La Lettrice racconta e non chiede mai di ricordare una carta già raccontata. Le tre parole sue non tornano come domanda. La lettura per sé mostra subito il testo, senza un «prova tu prima»."
+  - "[[girare-la-carta-di-oggi]]"
+  - "[[leggere-per-se]]"
+  - "[[farsi-leggere-dalla-lettrice]]"
+dove_manca: "Il richiamo libero (dire la cosa senza opzioni) non c'è: anche le domande nuove del 18 novembre (le sue parole nel ripasso, «Prova tu prima» per sé, la Lettrice che chiede) sono a scelta tra tre."
 ---
 
 È la tecnica più usata del gioco, quasi sempre come scelta tra tre o quattro risposte. Il richiamo libero (dire la cosa senza opzioni) non c'è.

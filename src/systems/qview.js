@@ -4,9 +4,12 @@
 import { h, css, cardUrl } from '../core/dom.js';
 import { CARD } from '../data/cards.base.js';
 import { hasTitle } from '../data/questions.js';
+import { FONT } from '../core/fonts.js';
 
 const CSS = `
 .sxq-prompt{margin:0;font-size:22px;line-height:1.3;color:#fff7e3}
+/* her own words, in her hand (the review's words question: review.rules.js) */
+.sxq-words{margin:2px 0;padding:10px 14px;border-left:3px solid var(--gold);background:#ffffff08;border-radius:0 10px 10px 0;font:30px/1.2 ${FONT.hand};color:#f3dfa6;text-align:center}
 .sx-card{position:relative;overflow:hidden}
 /* a deliberate-looking ribbon over the printed title, bottom 11% of the picture; it lifts after the answer */
 .sxq-cover{position:absolute;left:0;right:0;bottom:0;height:11%;display:grid;place-items:center;background:linear-gradient(#3a1626,#1b0a14);border-top:2px solid #c9a24a;box-shadow:0 -3px 8px #0008;transition:transform .55s ease,opacity .55s ease}
@@ -66,7 +69,8 @@ export function questionView(q, { onPick, hidden = [] } = {}) {
     return b;
   });
   const el = h('div.sxq', { style: { display: 'flex', flexDirection: 'column', gap: '12px' } },
-    h('p.sxq-prompt', q.prompt), media(q.show), h(imgs ? 'div.sxq-imgs' : 'div.sxq-opts', buttons));
+    h('p.sxq-prompt', q.prompt), q.words?.length ? h('p.sxq-words', q.words.join(' · ')) : null, q.after ? h('p.sxq-prompt', q.after) : null,
+    media(q.show), h(imgs ? 'div.sxq-imgs' : 'div.sxq-opts', buttons));
   return {
     el, buttons,
     lock() { for (const b of buttons) b.disabled = true; },

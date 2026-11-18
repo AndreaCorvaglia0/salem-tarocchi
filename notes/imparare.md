@@ -34,7 +34,7 @@ la domanda sul disegno è un richiamo vero (`pratica-di-recupero.md`). Serve [[r
 cui `aperto` dice proprio che la risposta della carta di oggi non entra nel ripasso.
 **Codice.** `dayOf` in `src/glue/threshold.rules.js` riceve le carte scadute e, un giorno su tre (dal
 seme della data), sceglie tra quelle. `src/glue/threshold.js` le passa e offre `answerToday(ok)`, che chiama
-`answer(id, ok, 'image')` se la carta è sua e non l'ha già fatto oggi (`state.daily.askedDay`, chiave
+`answer(id, ok, 'image')` se la carta è sua e non l'ha già fatto oggi (`state.dayAsked`, chiave
 nuova). `src/ui/daycard.js` la chiama al tocco della risposta.
 **Come lo vede un test.** `tests/threshold.test.mjs`: su molte date, circa un giorno su tre la carta viene
 dalle scadute, e senza scadute la carta è la stessa di prima; `answerToday` sposta la scadenza una volta
@@ -50,7 +50,8 @@ lettura intera come oggi, con una riga in testa: «Prima di leggere ne avevi ind
 (`difficolta-desiderabile.md`: provare prima di sapere aiuta se la risposta arriva subito dopo;
 `pratica-di-recupero.md`; `trasferimento-con-la-pratica.md`). Serve [[leggere-il-proprio-mazzo]], che oggi
 «non si verifica»: d'ora in poi il diario tiene quante ne ha lette da sola.
-**Codice.** `src/glue/selfread.rules.js`: `tryOptions` (le tre idee, dal motore: `recall`) e `tryScore`;
+**Codice.** `src/glue/selfread.rules.js`: `tryOptions` (le tre idee, dal motore: `recall`; mai l'idea di un'altra carta della stessa lettura, che
+sarebbe la risposta un attimo dopo) e `tryScore`;
 `makeEntry` accetta `tried` ([true, false, null…], tenuto solo se c'è almeno un tentativo).
 `src/ui/selfread.js`: il passo nuovo tra le carte e la lettura. La risposta conta per il ripasso delle
 carte che possiede (`answer(id, ok, 'meaning')`, come nelle letture ai clienti).
@@ -61,8 +62,10 @@ carta in quel verso; `tried` salvato e contato; una lettura senza tentativi ha l
 
 **Che cosa vede.** In una visita, dopo l'apertura e prima di girare le carte nuove: «Prima di girarle,
 dimmi una cosa: ti ricordi che cosa ti avevo detto del Carro?» e tre frasi tra virgolette. Poi lei
-risponde: «Sì, è proprio quello che ti avevo detto…» oppure «No, quella è di un'altra carta. Del Carro ti
-avevo detto: «…»». Una sola domanda per visita, e solo su una carta che la Lettrice le ha già raccontato.
+risponde: «Sì, è proprio quello che ti avevo detto. Mi fa piacere che ti sia rimasto.» oppure, in due righe,
+«No, questa è l'idea di un'altra carta, ma all'inizio succede di confonderle.» / «Del Carro ti avevo detto, in
+poche parole: «Vinci tenendo insieme ciò che tira in direzioni opposte.»» (l'idea è la riga breve della
+scheda, non le parole esatte di quella sera: per questo «in poche parole»). Una sola domanda per visita, e solo su una carta che la Lettrice le ha già raccontato.
 **Perché aiuta.** Richiamo dentro la scena più amata (`pratica-di-recupero.md`, `storia-ed-emozione.md`),
 con il riscontro della voce che gliel'aveva detto (`riscontro-immediato.md`). Serve
 [[dire-l-idea-della-carta]] dal lato di [[farsi-leggere-dalla-lettrice]], il cui `aperto` dice che la
@@ -73,3 +76,10 @@ tre frasi (l'idea della carta e due di altre carte, mai le confondibili) e le du
 `src/story/visit.js` la fa dire e chiama `answer(id, ok, 'meaning')`.
 **Come lo vede un test.** `tests/story.visit.test.mjs`: nessuna domanda senza carte raccontate; mai una
 carta della visita; una sola frase giusta, senza il nome; a parità la carta chiesta meno; le scadute prima.
+
+## Dopo la costruzione (18 novembre)
+
+Fatto tutto come sopra, con tre correzioni nate dalle schermate: le idee delle altre carte della stessa
+lettura non fanno da alternative in «Prova tu prima»; la risposta sbagliata della Lettrice è in due righe
+(una sola non stava nella didascalia); la chiave della carta di oggi è `state.dayAsked` (in cima al salvataggio,
+così in `state.js` si aggiungono solo righe). Schermate: `/home/claude/shots/imparare/`.

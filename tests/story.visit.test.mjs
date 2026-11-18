@@ -88,3 +88,62 @@ test('random play: every question of the Reader comes out (the Fool has none to 
   assert.deepEqual(never.filter((k) => /m0[4]|m1[15-9]|m2[01]/.test(k)), [], 'the nine of the backlog');
   assert.ok(never.length <= 3, `at most the rarest ones missing in 120 runs: ${never.join(', ')}`);
 });
+
+// BACKLOG 2.4: the Reader asks before telling
+import { pickRecall, ofCard, RECALL } from '../src/story/visit.plan.js';
+import { sheet } from '../src/data/cards.js';
+import { CARD } from '../src/data/cards.base.js';
+import { leaks } from '../src/data/questions.js';
+
+const NOW = 1_800_000_000_000;
+const held = (due = NOW + 1e9, extra = {}) => ({ found: true, stars: 2, at: 0, due, words: ['', '', ''], ...extra });
+
+test('recall: nothing without a told card; never a card on the table, a confiscated or a lost one', () => {
+  assert.equal(pickRecall({ cards: { m01: held() }, told: {} }, [], { sheetOf: sheet, now: NOW }), null);
+  const s = { cards: { m01: held(), m02: held(NOW, { confiscated: true }), m03: held() }, told: { m01: true, m02: true, m04: true } };
+  assert.equal(pickRecall(s, ['m01'], { sheetOf: sheet, now: NOW }), null); // m01 on the table, m02 taken, m04 not hers
+  assert.equal(pickRecall(s, [], { sheetOf: sheet, now: NOW }).id, 'm01');
+});
+
+test('recall: due first, then the one asked least, then the one due longest', () => {
+  const s = { visits: 2, cards: { m01: held(), m07: held(NOW - 10), m09: held(NOW - 5000) }, told: { m01: true, m07: true, m09: true }, recalled: {} };
+  assert.equal(pickRecall(s, [], { sheetOf: sheet, now: NOW }).id, 'm09');
+  s.recalled = { m09: 2 };
+  assert.equal(pickRecall(s, [], { sheetOf: sheet, now: NOW }).id, 'm07');
+  s.cards.m07.due = NOW + 1; s.cards.m09.due = NOW + 1; s.recalled = { m09: 1, m07: 1 };
+  assert.equal(pickRecall(s, [], { sheetOf: sheet, now: NOW }).id, 'm01');
+});
+
+test('recall: the question names the card, the three ideas do not; one right; never a confusable', () => {
+  for (const id of ['m00', 'm02', 'm06', 'm08', 'm10', 'm12', 'm18', 'm21']) {
+    for (let v = 0; v < 4; v++) {
+      const s = { visits: v, cards: { [id]: held(NOW) }, told: { [id]: true }, recalled: {} };
+      const r = pickRecall(s, [], { sheetOf: sheet, now: NOW });
+      assert.equal(r.id, id);
+      assert.ok(r.q.includes(ofCard(CARD[id].name)), r.q);
+      assert.equal(r.a.length, 3);
+      assert.equal(r.a.filter((o) => o.ok).length, 1);
+      assert.equal(r.a.find((o) => o.ok).t, sheet(id).core);
+      for (const o of r.a) assert.ok(!leaks(o.t, id), o.t);
+      for (const o of r.a.filter((x) => !x.ok)) {
+        const other = Object.keys(CARD).find((k) => sheet(k).core === o.t);
+        assert.ok(!(sheet(id).confusables || []).includes(other), `${id}: ${other}`);
+      }
+      assert.ok(RECALL.right.includes(r.right));
+      assert.equal(r.wrong.length, 2);
+      assert.ok(r.wrong[1].includes(sheet(id).core) && !/\{/.test(r.wrong.join(' ')));
+      for (const line of [r.q, r.right, ...r.wrong]) assert.ok(line.split(/\s+/).length <= 32, line); // a caption, not a page
+    }
+  }
+  assert.equal(ofCard('Il Carro'), 'del Carro'); assert.equal(ofCard("L'Eremita"), "dell'Eremita"); assert.equal(ofCard('Gli Amanti'), 'degli Amanti');
+});
+
+test('recall in the plan: the ideas of other told cards come first; no sheets, no recall', () => {
+  const s = { visits: 0, cards: { m01: card(1), m02: card(2), m05: held(NOW), m07: held(), m09: held() }, told: { m05: true, m07: true, m09: true } };
+  const p = planVisit({ state: s, talk, openers, closers, test: cond, sheetOf: sheet, now: NOW });
+  assert.equal(p.recall.id, 'm05');
+  const others = p.recall.a.filter((o) => !o.ok).map((o) => o.t);
+  assert.ok(others.every((t) => [sheet('m07').core, sheet('m09').core].includes(t)), others.join(' | '));
+  // without sheets (the old tests' plans): no recall, nothing else changes
+  assert.equal(planVisit({ state: s, talk, openers, closers, test: cond }).recall, null);
+});

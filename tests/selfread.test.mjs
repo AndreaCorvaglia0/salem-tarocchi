@@ -124,3 +124,41 @@ test('glue: a reading for me pays a little xp once a day, never coins; client re
   assert.equal(await call('selfread.intro'), false);
   assert.equal(await call('selfread.intro'), true);
 });
+
+// BACKLOG 2.3: «Prova tu prima» in the reading for herself
+import { tryOptions, tryScore, tryLine } from '../src/glue/selfread.rules.js';
+import { voice } from '../src/reading/index.js';
+
+test('«Prova tu prima»: three ideas, one right, the essenza of that card on that side', () => {
+  const e = makeEntry({ question: { ambito: 'amore', forma: 'andra' }, spread: 'ppf', cards: cards3 });
+  for (let r = 0; r < 20; r++) {
+    let x = r * 7919; const rng = () => ((x = (x * 16807 + 11) % 2147483647) / 2147483647);
+    for (let i = 0; i < 3; i++) {
+      const o = tryOptions(e, i, { pool: ['m01', 'm02', 'c05', 'm19'], rng });
+      assert.equal(o.length, 3);
+      assert.equal(o.filter((a) => a.ok).length, 1);
+      const { card, rev } = cards3[i];
+      assert.equal(o.find((a) => a.ok).text, voice(card)[rev ? 'rev' : 'up'].essenza);
+      assert.equal(new Set(o.map((a) => a.text)).size, 3);
+      // the other cards of this reading never lend their idea (it would be the answer a moment later)
+      for (const a of o.filter((x) => !x.ok)) assert.ok(!cards3.some((c) => c.card === a.card), a.card);
+    }
+  }
+  // a tiny pool: the other ideas come from every voiced card
+  assert.equal(tryOptions(e, 0, { pool: ['m01'] }).length, 3);
+});
+
+test('«Prova tu prima»: what she tried is kept and counted; a reading without tries keeps the old shape', () => {
+  const e = makeEntry({ question: { ambito: 'se', forma: 'quadro' }, spread: 'ppf', cards: cards3, tried: [true, false, undefined] });
+  assert.deepEqual(e.tried, [true, false, null]);
+  assert.deepEqual(tryScore(e.tried), { right: 1, of: 2 });
+  assert.equal(tryLine(tryScore(e.tried)), 'Prima di leggere ne avevi capite una su due da sola.');
+  assert.equal(tryLine(tryScore([true, true, true])), 'Prima di leggere le avevi già capite tutte e tre da sola.');
+  assert.equal(tryLine(tryScore([false])), 'Prima di leggere avevi provato: ecco che cosa dice.');
+  for (const t of [null, [], [null, null, null]]) {
+    const plain = makeEntry({ question: { ambito: 'se', forma: 'quadro' }, spread: 'ppf', cards: cards3, tried: t });
+    assert.equal('tried' in plain, false);
+  }
+  assert.deepEqual(tryScore(undefined), { right: 0, of: 0 }); // an old entry
+  assert.equal(tryLine(tryScore(undefined)), null);
+});

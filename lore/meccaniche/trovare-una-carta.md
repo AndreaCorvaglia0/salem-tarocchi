@@ -27,7 +27,7 @@ ragione_nel_gioco: "È una strega che impara: le carte sono sparse per Salem, og
 premio: "10 punti esperienza per un Maggiore, 2 per un Minore (XP in src/core/progress.js). La carta entra nel grimorio."
 rischio: "Nessuno. Le tre parole si possono saltare con «Salta»."
 tratti: "Nessuno direttamente; le deviazioni per cercarla muovono «esplora» (src/glue/traits.rules.js)."
-aperto: "Le tre parole e il dettaglio non tornano mai come domanda."
+aperto: "Le tre parole tornano nel ripasso come indizio per il nome; il dettaglio toccato non torna ancora come domanda."
 ---
 
 È un piccolo rito di venti secondi: prima guardare, poi dire qualcosa di suo, poi sentire il libro. Quello che lei sceglie qui (il dettaglio, le parole) viene salvato nella carta e riusato dalla Lettrice.

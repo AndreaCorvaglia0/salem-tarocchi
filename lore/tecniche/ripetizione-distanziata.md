@@ -9,7 +9,8 @@ dove_la_usiamo:
   - "[[ripassare]]"
   - "[[far-crescere-la-luna]]"
   - "[[curare-l-orto]]"
-dove_manca: "La carta di oggi è scelta a caso tra le 78 e la sua domanda a memoria non aggiorna il ripasso. Ogni tanto la soglia potrebbe proporre come carta di oggi una carta scaduta."
+  - "[[rispondere-a-memoria]]"
+dove_manca: "Due giorni su tre la carta di oggi è ancora a caso tra le 78 (un giorno su tre è una scaduta, e la sua domanda a memoria aggiorna il ripasso). Gli intervalli non guardano quanto è stata difficile la risposta."
 ---
 
 Il ripasso mette davanti le carte scadute (src/core/progress.js INTERVALS, dueIds). Un errore rimette la carta a domani.
