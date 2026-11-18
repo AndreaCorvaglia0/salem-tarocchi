@@ -249,6 +249,34 @@ sessione, non nella repo).
     pietre in biblioteca, il raggio di luna nel pozzo vecchio.
   - Fatto da aggiungere a RESEARCH: il manto blu della Sacerdotessa nel mazzo del 1909.
 
+## 12. Manifesto e riordino del vault (18 novembre, pomeriggio)
+
+- **Commit:** manifesto `20a2da8` (+ legge 11 in `…`), zone `dd63c35`, leggi e due facce `96e59c6`, visore `950dee6`,
+  corso `0795a8c`. Piano: `notes/lore-grafo-PIANO.md`; specifiche del capofila: `notes/vault/V2..V4-spec.md`.
+- **Cosa:** `docs/MANIFESTO.md` (le due facce, il giro, undici leggi, l'unità di crescita in sei voci); vault in
+  tre zone; undici schede legge; ogni principio/tecnica/ricetta con la sua legge; 39 meccaniche con motivo,
+  effetto, dinamica; 8 tecniche, 1 principio, 7 meccaniche, 19 concetti nuovi; posti dei concetti controllati
+  da test; visore con quattro viste.
+- **Verificato dal capofila:** ogni passo testato in copia pulita prima di pubblicare (654 → 665 → 674 → 687);
+  `src/data/sapere.js` invariato nel contenuto; lette tutte le 39 coppie motivo/effetto, le undici righe delle
+  leggi, le righe dei 19 concetti nuovi (sono le frasi del gioco), la tabella dei posti; guardate le schermate
+  del visore.
+- **Non verificato:** le schede nuove lette per intero solo a campione (2 su 16 del metodo); il visore su un
+  telefono vero.
+- **Dubbi:**
+  - Le classificazioni (legge di ogni scheda, dinamica e leggi di ogni meccanica, nucleo/contorno, famiglie degli
+    obiettivi) sono del capofila, fatte leggendo le righe di riassunto: da rivedere con Andrea.
+  - La legge 11 è stata aggiunta dal capofila dopo l'approvazione del manifesto: da confermare.
+  - Fonti nuove del manifesto lette in abstract o riassunti (segnato in `docs/RESEARCH.md`); le cifre di Sailer e
+    Homner e di Kulik vengono da riassunti di terzi.
+  - `_sei-voci` nella prima versione deduce motivo/uso/ritorno passando dagli obiettivi: troppo largo, dà dei
+    «sì» falsi; il passo V4 lo corregge con `concetti` sulle meccaniche.
+  - `figura-cavaliere`: il gioco dice Cavaliere (la specifica diceva Cavallo).
+  - Erbe: il posto è «il luogo più vicino entro 6 caselle»: più erbe finiscono in `casa-di-malva`; la ruta cade
+    sulla regione (villaggio).
+  - La musica dell'aria durante la lettura contro `niente-dettagli-estranei`: da decidere con Andrea.
+  - Il visore al primo giro mostra grappoli di palline, non la struttura: secondo giro in corso.
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
