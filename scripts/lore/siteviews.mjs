@@ -29,6 +29,16 @@ const WORDS = ['Nessuna legge', 'Una legge', 'Due leggi', 'Tre leggi', 'Quattro 
 const r1 = (v) => Math.round(v * 10) / 10;
 const cut = (t, n) => (t.length > n ? `${t.slice(0, n - 1)}…` : t);
 const human = (s) => String(s).replace(/-/g, ' ');
+// «Dire l'idea della carta» -> «Dire\nidea carta»: the first word, then the last meaningful ones (two lines of 11 characters at most)
+const FILLER = new Set(['a', 'i', 'il', 'lo', 'la', 'le', 'gli', 'l', 'un', 'una', 'uno', 'di', 'del', 'della', 'dei', 'delle', 'nel', 'nella', 'in', 'con', 'per', 'suo', 'sua', 'proprio', 'propria', 'e']);
+export function shortName(name) {
+  const w = String(name).replace(/[’']/g, ' ').split(/\s+/).filter(Boolean);
+  if (w.length <= 1) return w[0] || '';
+  const rest = w.slice(1).filter((x) => !FILLER.has(x.toLowerCase()));
+  const tail = rest.length ? rest : w.slice(1);
+  const two = tail.slice(-2).join(' ');
+  return `${w[0]}\n${two.length <= 11 ? two : tail[tail.length - 1]}`;
+}
 
 // n circles of radius rs in rings around a circle of radius hubR: offsets and the radius of the whole cluster
 export function ringPack(hubR, rs, n, gap = 2.5) {
@@ -96,7 +106,7 @@ export function buildViews(ctx) {
   }
 
   // placed: Map(index -> { x, y, r, label?, ldy?, lw?, always? }); caps; caption
-  function finish(def, set, pairs, { placed, caps, caption, restFn }) {
+  function finish(def, set, pairs, { placed, caps, caption, restFn, flat }) {
     const ids = [...placed.keys()];
     const loose = [...set].filter((i) => !placed.has(i));
     const loc = new Map(ids.map((g, k) => [g, k]));
@@ -110,18 +120,18 @@ export function buildViews(ctx) {
     for (const e of edges) {
       const a = e[0], b = e[1];
       if (!loc.has(a) || !loc.has(b) || a === b) continue;
-      if (restFn ? !restFn(a, b) : !restSet.has(fname(e))) continue;
+      if (restFn ? !restFn(a, b, fname(e)) : !restSet.has(fname(e))) continue;
       const la = loc.get(a), lb = loc.get(b), k = la < lb ? `${la},${lb}` : `${lb},${la}`;
       if (!seen.has(k)) { seen.add(k); rest.push([la, lb]); }
     }
     const lbl = {}, always = [];
-    ids.forEach((g, k) => { const p = placed.get(g); if (p.label) lbl[k] = { t: p.label, dy: r1(p.ldy ?? 0), lw: p.lw || 0 }; if (p.always) always.push(k); });
+    ids.forEach((g, k) => { const p = placed.get(g); if (p.label) lbl[k] = { t: p.label, dy: r1(p.ldy ?? 0), lw: p.lw || 0, ...(p.up ? { up: 1 } : {}) }; if (p.always) always.push(k); });
     const count = {};
     for (const g of ids) count[tipoOf(g)] = (count[tipoOf(g)] || 0) + 1;
     const lo = {};
     for (const g of loose) lo[tipoOf(g)] = (lo[tipoOf(g)] || 0) + 1;
     return {
-      id: def.id, short: def.short, label: def.label, caption, ids,
+      id: def.id, short: def.short, label: def.label, caption, ids, ...(flat ? { flat: 1 } : {}),
       pos: ids.flatMap((g) => [Math.round(placed.get(g).x - cx), Math.round(placed.get(g).y - cy)]),
       r: ids.map((g) => r1(placed.get(g).r)), loose, rest, lbl, always,
       caps: caps.map(([x, y, t, kind]) => [Math.round(x - cx), Math.round(y - cy), t, kind]),
@@ -130,7 +140,7 @@ export function buildViews(ctx) {
   }
 
   // ----- «Perché insegna»: eleven clusters, one per law; below, the mechanics grouped by dinamica
-  function insegna({ linked, deg }) {
+  function insegna({ linked, deg }, { W: Wd = W, perLaw = 4, perMech = 5 } = {}) {
     const placed = new Map(), caps = [];
     const laws = [...linked].filter((i) => tipoOf(i) === 'legge').sort((a, b) => (nodeAt(a).fm?.numero ?? 99) - (nodeAt(b).fm?.numero ?? 99) || (nodeAt(a).id < nodeAt(b).id ? -1 : 1));
     const lawOf = new Map(); // principio / tecnica / ricetta -> its main law (the field `legge`)
@@ -148,14 +158,14 @@ export function buildViews(ctx) {
       g.R = Math.max(g.pack.R, g.hubR);
     }
     const top = 16;
-    const f = flow(groups.map((g) => ({ w: Math.max(2 * g.R, 86), h: 2 * g.R + 26 })), W, { gapX: 6, gapY: 6, per: 4 });
-    caps.push([W / 2, 0, laws.length ? `${(WORDS[laws.length] || `${laws.length} leggi`).toUpperCase()}, E CIÒ CHE NE DISCENDE` : 'PRINCIPI, TECNICHE, RICETTE', 'title']);
+    const f = flow(groups.map((g) => ({ w: Math.max(2 * g.R, 86), h: 2 * g.R + 26 })), Wd, { gapX: 6, gapY: 6, per: perLaw });
+    caps.push([Wd / 2, 0, laws.length ? `${(WORDS[laws.length] || `${laws.length} leggi`).toUpperCase()}, E CIÒ CHE NE DISCENDE` : 'PRINCIPI, TECNICHE, RICETTE', 'title']);
     groups.forEach((g, k) => {
       const c = f.at[k], cx = c.x, cy = top + c.rowTop + c.rowH / 2 - 13;
       const rowR = (c.rowH - 26) / 2;
       if (g.law != null) {
         const n = nodeAt(g.law);
-        placed.set(g.law, { x: cx, y: cy, r: g.hubR, always: true, label: `${n.fm?.numero ?? ''}${n.fm?.numero != null ? ' · ' : ''}${cut(n.fm?.nome || n.title, 22)}`, ldy: rowR + 3, lw: 84 });
+        placed.set(g.law, { x: cx, y: cy, r: g.hubR, always: true, label: `${n.fm?.numero ?? ''}${n.fm?.numero != null ? ' · ' : ''}${cut(n.fm?.nome || n.title, 18)}`, ldy: rowR + 3, lw: 80 });
       }
       g.sats.forEach((m, j) => placed.set(m, { x: cx + g.pack.pts[j][0], y: cy + g.pack.pts[j][1], r: satR(m) }));
     });
@@ -174,8 +184,8 @@ export function buildViews(ctx) {
       d.w = Math.max(40, d.cols * d.s); d.h = d.rows * d.s + 14;
     }
     const gy = top + f.height + 34;
-    caps.push([W / 2, gy - 16, 'QUELLO CHE LEI FA', 'title']);
-    const fm = flow(dins.map((d) => ({ w: Math.max(d.w, 56), h: d.h })), W, { gapX: 8, gapY: 8, per: 5 });
+    caps.push([Wd / 2, gy - 16, 'QUELLO CHE LEI FA', 'title']);
+    const fm = flow(dins.map((d) => ({ w: Math.max(d.w, 56), h: d.h })), Wd, { gapX: 8, gapY: 8, per: perMech });
     dins.forEach((d, k) => {
       const c = fm.at[k], x0 = c.x - (d.cols * d.s) / 2, y0 = gy + c.rowTop;
       d.ms.forEach((m, j) => placed.set(m, { x: x0 + (j % d.cols) * d.s + d.s / 2, y: y0 + Math.floor(j / d.cols) * d.s + d.s / 2, r: mr(m) }));
@@ -203,7 +213,7 @@ export function buildViews(ctx) {
     }
     const big = clusters.filter((c) => c.nucleo).sort((a, b) => b.d - a.d);
     const side = clusters.filter((c) => !c.nucleo).sort((a, b) => b.d - a.d);
-    const OB_TOP = 14, FAM_TOP = 104;
+    const OB_A = 50, OB_DY = 38, FAM_TOP = 166; // two staggered rows of objectives: the nucleo labels go above the upper row and below the lower one
     const spot = new Map(); // cluster -> centre
     const label = (c, cx, cy) => ({ label: c.hub == null ? 'Senza famiglia' : nodeAt(c.hub).title, ldy: c.R + 2, lw: 92 });
     // centre column: the nucleo families, two to a row when they fit
@@ -226,14 +236,15 @@ export function buildViews(ctx) {
     const mx = (o) => { const xs = edges.filter((e) => e[0] === o && hubX.has(e[1])).map((e) => hubX.get(e[1])); return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : W / 2; };
     obj.sort((a, b) => mx(a) - mx(b) || (nodeAt(a).id < nodeAt(b).id ? -1 : 1));
     const orad = (o) => { const p = nodeAt(o).fm?.peso; return p === 'nucleo' ? 8.5 : p === 'contorno' ? 5.5 : Math.min(8, 4 + 0.8 * Math.sqrt(deg.get(o) || 1)); };
-    const perRow = Math.min(7, Math.max(1, obj.length)), rowsN = Math.ceil(obj.length / perRow);
     caps.push([W / 2, 0, 'OBIETTIVI: CHE COSA LEI SA FARE', 'title']);
+    // one zigzag row: the even ones high, the odd ones low; a nucleo objective has a short two-line label, above when
+    // high and below when low, so two neighbouring labels never share a line
+    const nO = obj.length, stepO = (W - 80) / Math.max(1, nO - 1);
     obj.forEach((o, k) => {
-      const row = Math.floor(k / perRow), inRow = Math.min(perRow, obj.length - row * perRow), j = k % perRow;
-      const step = (W - 40) / perRow, x = W / 2 - ((inRow - 1) * step) / 2 + j * step;
-      placed.set(o, { x, y: OB_TOP + 8 + row * 30, r: orad(o), ...(nodeAt(o).fm?.peso === 'nucleo' ? { always: false } : {}) });
+      const nuc = nodeAt(o).fm?.peso === 'nucleo', up = k % 2 === 0;
+      placed.set(o, { x: W / 2 - ((nO - 1) * stepO) / 2 + k * stepO, y: OB_A + (up ? 0 : OB_DY), r: orad(o), ...(nuc ? { label: shortName(nodeAt(o).fm?.nome || nodeAt(o).title), lw: 56, always: true, up, ldy: up ? 0 : orad(o) + 3 } : {}) });
     });
-    caps.push([W / 2, FAM_TOP - 34 + 6 - 2, 'FAMIGLIE DI CONCETTI', 'title']);
+    caps.push([W / 2, FAM_TOP - 30, 'FAMIGLIE DI CONCETTI', 'title']);
     // luoghi: only those a concept `sta_in`, in a row at the bottom, ordered by where their concepts are
     const luoghi = [...linked].filter((i) => tipoOf(i) === 'luogo');
     let bottomY = bandBottom;
@@ -253,9 +264,10 @@ export function buildViews(ctx) {
     if (pers.length) {
       const px = (l) => { const xs = edges.filter((e) => e[1] === l && placed.has(e[0])).map((e) => placed.get(e[0]).x); return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : W / 2; };
       pers.sort((a, b) => px(a) - px(b) || (nodeAt(a).id < nodeAt(b).id ? -1 : 1));
-      const y0 = bottomY + 34, step = Math.min(44, (W - 60) / Math.max(1, pers.length - 1));
+      const y0 = bottomY + 34, step = Math.min(60, (W - 70) / Math.max(1, pers.length - 1)), lowRow = step < 62; // a crowded row alternates its labels high and low
       caps.push([W / 2, y0 - 18, 'CHI INSEGNA O DÀ', 'title']);
-      pers.forEach((pe, k) => placed.set(pe, { x: W / 2 - ((pers.length - 1) * step) / 2 + k * step, y: y0, r: 7, label: nodeAt(pe).title, ldy: 10, lw: 56, always: true }));
+      if (lowRow) caps.push([W / 2, y0 + 58, '', 'pad']); // room for the low labels when fitting
+      pers.forEach((pe, k) => placed.set(pe, { x: W / 2 - ((pers.length - 1) * step) / 2 + k * step, y: y0, r: 7, label: nodeAt(pe).title, ldy: lowRow && k % 2 ? 36 : 10, lw: lowRow ? 54 : 62, always: true }));
     }
     return { placed, caps, caption: 'In alto, che cosa lei sa fare; in mezzo, le famiglie di concetti (le più grandi sono il nucleo); in basso, i luoghi dove li si trova e le persone da cui si imparano.' };
   }
@@ -306,28 +318,29 @@ export function buildViews(ctx) {
     const set = new Set(members(def)), pairs = viewPairs(set), deg = degOf(pairs);
     const linkedAll = new Set([...set].filter((i) => deg.get(i)));
     const part = (d) => { const s = new Set(members(d)); const pr = viewPairs(s), dg = degOf(pr); return { s, deg: dg, linked: new Set([...s].filter((i) => dg.get(i))) }; };
-    const A = insegna(part(VIEWS[0])), B = impara(part(VIEWS[1])), C = storia(VIEWS[2], part(VIEWS[2]));
+    const A = insegna(part(VIEWS[0]), { W: 520, perLaw: 6, perMech: 8 }), B = impara(part(VIEWS[1])), C = storia(VIEWS[2], part(VIEWS[2]));
     const placed = new Map(), caps = [];
     const bbox = (pl) => { let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity; for (const p of pl.values()) { x0 = Math.min(x0, p.x - p.r); x1 = Math.max(x1, p.x + p.r); y0 = Math.min(y0, p.y - p.r); y1 = Math.max(y1, p.y + p.r); } return { x0, x1, y0, y1 }; };
+    // the method zone is laid out 520 wide (six law clusters to a row) and squeezed to the phone's width, so it is short
     const zones = [
-      { id: 'metodo', title: 'METODO: COME SI INSEGNA', R: A, keep: (g) => tipoOf(g) !== 'x', k: 0.8 },
-      { id: 'corso', title: 'CORSO: CHE COSA SI IMPARA', R: B, keep: (g) => tipoOf(g) !== 'luogo' && tipoOf(g) !== 'persona', k: 0.8 },
-      { id: 'storia', title: 'STORIA: DOVE E CON CHI', R: C, keep: () => true, k: 0.75 },
+      { id: 'metodo', title: 'METODO: COME SI INSEGNA', R: A, keep: () => true, fit: 344 },
+      { id: 'corso', title: 'CORSO: CHE COSA SI IMPARA', R: B, keep: (g) => tipoOf(g) !== 'luogo' && tipoOf(g) !== 'persona', kx: 1, ky: 0.68, kr: 0.6 },
+      { id: 'storia', title: 'STORIA: DOVE E CON CHI', R: C, keep: () => true, kx: 0.96, ky: 0.66, kr: 0.58 },
     ];
     let y = 0;
     for (const z of zones) {
       const pl = new Map([...z.R.placed].filter(([g]) => z.keep(g)));
-      const b = bbox(pl), w = (b.x1 - b.x0) * z.k, ox = W / 2 - (((b.x0 + b.x1) / 2) * z.k);
+      const b = bbox(pl);
+      if (z.fit) { z.kx = z.ky = Math.min(1, z.fit / Math.max(1, b.x1 - b.x0)); z.kr = z.kx * 0.9; }
       caps.push([W / 2, y + 6, z.title, 'title']);
       const top = y + 26;
       for (const [g, p] of pl) {
         if (!linkedAll.has(g)) continue;
-        placed.set(g, { x: (p.x - (b.x0 + b.x1) / 2) * z.k * 1.25 + W / 2, y: (p.y - b.y0) * z.k + top, r: Math.max(2.2, p.r * z.k * 0.85), ...(tipoOf(g) === 'legge' ? { label: `Legge ${nodeAt(g).fm?.numero ?? ''}` } : {}) });
+        placed.set(g, { x: (p.x - (b.x0 + b.x1) / 2) * z.kx + W / 2, y: (p.y - b.y0) * z.ky + top, r: Math.max(2.2, p.r * z.kr), ...(tipoOf(g) === 'legge' ? { label: `Legge ${nodeAt(g).fm?.numero ?? ''}` } : {}) });
       }
-      y = top + (b.y1 - b.y0) * z.k + 26;
-      z.w = w;
+      y = top + (b.y1 - b.y0) * z.ky + 26;
     }
-    const restFn = (a, b) => zoneOf(tipoOf(a)) !== zoneOf(tipoOf(b));
-    return finish(def, set, pairs, { placed, caps, restFn, caption: 'Le tre zone una sotto l’altra. Le linee sono i ponti: quello che lei fa insegna un obiettivo, un concetto sta in un luogo, una ricetta passa da una persona.' });
+    const restFn = (a, b, f) => f !== 'tocca' && zoneOf(tipoOf(a)) !== zoneOf(tipoOf(b)); // `tocca` (a meccanica touches a family) is never drawn at rest
+    return finish(def, set, pairs, { placed, caps, restFn, flat: true, caption: 'Le tre zone una sotto l’altra. Le linee sono i ponti: quello che lei fa insegna un obiettivo, un concetto sta in un luogo, una ricetta passa da una persona.' });
   }
 }

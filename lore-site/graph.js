@@ -14,14 +14,15 @@ const INK = '#2a2134';
 // ([x, y, text, 'title' | 'group'] drawn on the picture: titles always, groups once zoomed in), and per node
 // label (text), ldy (label top, in layout units below the centre), lw (wrap width in px) and always (the label
 // is drawn before the others at any zoom).
-export function graphView(host, { nodes, edges, onOpen, onSelect = null, center = -1, labels = 'auto', typeLabel = () => '', rest = null, caps = [] }) {
+export function graphView(host, { nodes, edges, onOpen, onSelect = null, center = -1, labels = 'auto', typeLabel = () => '', rest = null, caps = [], flat = false }) {
   host.classList.add('gv');
   host.innerHTML = `<canvas></canvas><div class="gv-zoom"><button class="btn sq" data-z="in" aria-label="Avvicina">+</button><button class="btn sq" data-z="out" aria-label="Allontana">−</button><button class="btn sq" data-z="fit" aria-label="Tutto il grafo">⤢</button></div><div class="gv-info" hidden></div>`;
   const cv = host.querySelector('canvas'), g = cv.getContext('2d'), info = host.querySelector('.gv-info');
   const nb = nodes.map(() => []);
   edges.forEach(([a, b]) => { nb[a].push(b); nb[b].push(a); });
   const byR = nodes.map((n, i) => i).sort((a, b) => nodes[b].r - nodes[a].r || (nodes[a].id < nodes[b].id ? -1 : 1));
-  const restList = rest || edges, restB = restList.map(([a, b]) => { const d = Math.hypot(nodes[a].x - nodes[b].x, nodes[a].y - nodes[b].y); return d < 70 ? 0 : d < 180 ? 1 : 2; });
+  // two levels at rest: the short spokes of a cluster (readable) and the long links (a whisper); `flat` keeps one middle level
+  const restList = rest || edges, restB = restList.map(([a, b]) => { const d = Math.hypot(nodes[a].x - nodes[b].x, nodes[a].y - nodes[b].y); return flat ? 1 : d < 70 ? 0 : 1; });
   const widths = new Map(), always = nodes.map((n, i) => i).filter((i) => nodes[i].always);
   let vis = nodes.map(() => true), sel = -1, bottom = onSelect ? 8 : 50, s0 = 0, s = 1, tx = 0, ty = 0, W = 0, H = 0, dpr = 1, dirty = true, raf = 0, alive = true;
 
@@ -52,6 +53,9 @@ export function graphView(host, { nodes, edges, onOpen, onSelect = null, center 
   };
 
   const rad = (n) => { const z = s / (s0 || s); return Math.max(2.6, n.r * (s0 || s) * Math.pow(z, 0.65)); }; // true to scale at the first fit, growing slower than the zoom
+  // keep a text of width w, centred on x, inside the canvas (4px of margin)
+  // (the zoom buttons take the top right corner: 50px there)
+  const inside = (x, w, y = 999) => { const r = onSelect && y < 132 ? 50 : 4; return w + 4 + r >= W ? W / 2 : Math.max(w / 2 + 4, Math.min(W - w / 2 - r, x)); };
   const draw = () => {
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.clearRect(0, 0, W, H);
@@ -59,10 +63,11 @@ export function graphView(host, { nodes, edges, onOpen, onSelect = null, center 
     // edges: faint, and the selected node's in ink
     g.lineWidth = 1;
     // at rest only the `rest` links, the long ones fainter; with a selection they all step back
-    const alphas = rest ? [0.55, 0.34, 0.2] : [edges.length > 500 ? 0.1 : edges.length > 250 ? 0.13 : 0.17];
-    g.lineWidth = rest ? 1.1 : 1;
+    const alphas = rest ? [0.6, flat ? 0.16 : 0.075] : [edges.length > 500 ? 0.1 : edges.length > 250 ? 0.13 : 0.17];
+    const widths2 = rest ? [1.2, flat ? 0.9 : 0.6] : [1];
     for (let bk = 0; bk < alphas.length; bk++) {
-      g.strokeStyle = sel >= 0 ? `rgba(42,33,52,${rest ? 0.08 : 0.05})` : `rgba(42,33,52,${alphas[bk]})`;
+      g.lineWidth = widths2[bk];
+      g.strokeStyle = sel >= 0 ? `rgba(42,33,52,${rest ? (bk ? 0.035 : 0.08) : 0.05})` : `rgba(42,33,52,${alphas[bk]})`;
       g.beginPath();
       for (let k = 0; k < restList.length; k++) {
         if (rest && restB[k] !== bk) continue;
@@ -92,9 +97,9 @@ export function graphView(host, { nodes, edges, onOpen, onSelect = null, center 
     g.textAlign = 'center'; g.textBaseline = 'middle';
     for (const [cx, cy, text, kind] of caps) {
       const x = cx * s + tx, y = cy * s + ty;
-      if (x < -200 || y < -20 || x > W + 200 || y > H + 20) continue;
-      if (kind === 'group') { if (s / (s0 || 1) < 1.5) continue; g.font = 'italic 600 11px system-ui, sans-serif'; g.fillStyle = 'rgba(42,33,52,.7)'; g.fillText(text, x, y); }
-      else { g.font = '700 10.5px system-ui, sans-serif'; g.fillStyle = 'rgba(106,98,86,.95)'; if ('letterSpacing' in g) g.letterSpacing = '1.2px'; g.fillText(text, x, y); if ('letterSpacing' in g) g.letterSpacing = '0px'; }
+      if (kind === 'pad' || x < -200 || y < -20 || x > W + 200 || y > H + 20) continue; // 'pad': only room for the fit
+      if (kind === 'group') { if (s / (s0 || 1) < 1.5) continue; g.font = 'italic 600 11px system-ui, sans-serif'; g.fillStyle = 'rgba(42,33,52,.7)'; g.fillText(text, inside(x, g.measureText(text).width, y), y); }
+      else { g.font = '700 10.5px system-ui, sans-serif'; g.fillStyle = 'rgba(106,98,86,.95)'; if ('letterSpacing' in g) g.letterSpacing = '1.2px'; g.fillText(text, inside(x, g.measureText(text).width, y), y); if ('letterSpacing' in g) g.letterSpacing = '0px'; }
     }
     g.textBaseline = 'top';
     // labels: the selection and its neighbours first, then (zoomed in, or a small graph) the others by size;
@@ -110,12 +115,14 @@ export function graphView(host, { nodes, edges, onOpen, onSelect = null, center 
     for (const i of order) {
       if (done.has(i) || !vis[i]) continue;
       done.add(i);
-      const n = nodes[i], x = n.x * s + tx, y = n.y * s + ty + (n.ldy != null ? n.ldy * s : rad(n) * (i === sel ? 1.4 : 1) + 3);
-      if (x < -80 || y < -20 || x > W + 80 || y > H + 20) continue;
+      const n = nodes[i], x0 = n.x * s + tx;
+      let y = n.y * s + ty + (n.ldy != null ? n.ldy * s : rad(n) * (i === sel ? 1.4 : 1) + 3);
+      if (x0 < -80 || y < -20 || x0 > W + 80 || y > H + 20) continue;
       const raw = n.label || n.title;
       g.font = n.lw ? '700 11px system-ui, sans-serif' : '600 13px system-ui, sans-serif';
       let lines = [raw.length > 26 && !n.lw ? `${raw.slice(0, 25)}…` : raw];
-      if (n.lw) { // wrap to lw pixels, two lines at most
+      if (n.lw && raw.includes('\n')) lines = raw.split('\n').slice(0, 2);
+      else if (n.lw) { // wrap to lw pixels, two lines at most
         const words = raw.split(' '), out = [''];
         for (const wd of words) { const t2 = out[out.length - 1] ? `${out[out.length - 1]} ${wd}` : wd; if (out[out.length - 1] && g.measureText(t2).width > n.lw && out.length < 2) out.push(wd); else out[out.length - 1] = t2; }
         lines = out;
@@ -123,8 +130,10 @@ export function graphView(host, { nodes, edges, onOpen, onSelect = null, center 
       const lh = n.lw ? 13 : 16;
       let w = 0;
       for (const t of lines) { const key = `${g.font}|${t}`; let m = widths.get(key); if (m == null) { m = g.measureText(t).width; widths.set(key, m); } w = Math.max(w, m); }
+      if (n.up) y = n.y * s + ty - rad(n) - 3 - lh * lines.length; // above the circle
+      const x = inside(x0, w, y);
       const bx = [x - w / 2 - 2, y - 1, x + w / 2 + 2, y + lh * lines.length + 1];
-      if (i !== sel && boxes.some((o) => bx[0] < o[2] && bx[2] > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue;
+      if (i !== sel && boxes.some((o) => bx[0] + 4 < o[2] && bx[2] - 4 > o[0] && bx[1] < o[3] && bx[3] > o[1])) continue;
       boxes.push(bx);
       lines.forEach((t, li) => { g.lineWidth = 3.5; g.strokeStyle = 'rgba(248,240,220,.92)'; g.strokeText(t, x, y + li * lh); g.fillStyle = i === sel ? '#a3372a' : INK; g.fillText(t, x, y + li * lh); });
     }

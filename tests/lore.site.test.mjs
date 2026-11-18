@@ -6,9 +6,9 @@ import { loadVault, vaultOf, docOf, linksIn } from '../scripts/lore/vault.mjs';
 import { buildSite, siteFiles, graphColors, SPLIT_AT, VIEWS, ZONES, resetLayoutCache } from '../scripts/lore/site.mjs';
 import { md } from '../lore-site/md.js';
 import { layout, spread } from '../lore-site/layout.js';
-import { phrase, LINKS } from '../lore-site/linknames.js';
+import { phrase, LINKS, groupLinks } from '../lore-site/linknames.js';
 import { trail } from '../lore-site/trail.js';
-import { ringPack } from '../scripts/lore/siteviews.mjs';
+import { ringPack, shortName } from '../scripts/lore/siteviews.mjs';
 import { lorePlugin } from '../vite.config.js';
 
 const vault = loadVault();
@@ -332,7 +332,8 @@ test('«perché c’è»: a breadcrumb for a meccanica and a concetto, nothing f
   assert.ok(tc.some((l) => /^Obiettivo: /.test(l)), tc.join('|'));
   assert.ok(tc.some((l) => /sta in: /.test(l) && /famiglia: /.test(l)));
   const lg = trail(data.notes.findIndex((n) => n.tipo === 'legge'), ctx);
-  assert.match(lg[0], /si traduce in/);
+  assert.match(lg[0], /^Legge \d+ · .+: ne discendono /);
+  assert.equal(lg.length, 1, 'one line');
   const lu = trail(data.notes.findIndex((n) => n.tipo === 'luogo' && adj[data.notes.indexOf(n)].some((e) => !e.out && data.fields[e.f] === 'sta_in')), ctx);
   assert.match(lu[0], /^Qui si trovano: /);
   assert.deepEqual(trail(ix('ortica'), ctx), [], 'a person has no path to a law');
@@ -352,4 +353,69 @@ test('the new phrases and the size guard', () => {
   assert.equal(phrase('si_impara_da', 'in'), 'insegna');
   assert.equal(data.hubs.find((h) => h.id === 'famiglia:storia')?.title ?? 'Storia · 1', 'Storia · 1');
   assert.ok(JSON.stringify(data.views).length < 60000);
+});
+
+// ---------- third pass: polish ----------
+test('a legge card: one line with the four counts, the meccaniche listed first', () => {
+  const adj = adjOf(data), ix = (id) => data.notes.findIndex((n) => n.id === id);
+  const l = data.notes.findIndex((n) => n.tipo === 'legge' && n.fm?.numero === 5);
+  const line = trail(l, { nodeAt: nodeOf, adj, fields: data.fields });
+  assert.equal(line.length, 1);
+  assert.match(line[0], /ne discendono \d+ principi, \d+ tecniche, \d+ ricette e \d+ meccaniche$/);
+  const gs = groupLinks(l, { adj, fields: data.fields, nodeAt: nodeOf });
+  assert.equal(gs[0].h, 'nel gioco');
+  assert.ok(gs[0].items.every((o) => nodeOf(o).tipo === 'meccanica'));
+  assert.ok(gs.slice(1).every((g) => g.items.every((o) => nodeOf(o).tipo !== 'meccanica')));
+  void ix;
+});
+
+test('without dove_la_usiamo and meccaniche the cards still carry the reverse phrases; ambito and concetti are read', () => {
+  const d = small([
+    ['metodo/leggi/l1.md', 'tipo: legge\nnome: "L1"\nambito: generale'],
+    ['metodo/tecniche/t1.md', 'tipo: tecnica\nnome: "T1"\nambito: generale\nlegge: "[[l1]]"'],
+    ['metodo/meccaniche/m1.md', 'tipo: meccanica\nnome: "M1"\nambito: salem\nleggi:\n  - "[[l1]]"\ntecniche:\n  - "[[t1]]"\ninsegna:\n  - "[[o1]]"\nconcetti:\n  - arcano\n  - seme'],
+    ['corso/obiettivi/o1.md', 'tipo: obiettivo\nnome: "O1"\nconcetti:\n  - arcano'],
+    ['corso/concetti/c1.md', 'tipo: concetto\nnome: "C1"\nfamiglia: arcano\npeso: nucleo'],
+    ['corso/concetti/c2.md', 'tipo: concetto\nnome: "C2"\nfamiglia: seme\npeso: contorno'],
+  ]);
+  const ix = (id) => d.notes.findIndex((n) => n.id === id), N = d.notes.length, adj = adjOf(d), nodeAt = (i) => (i < N ? d.notes[i] : d.hubs[i - N]);
+  const heads = (id) => groupLinks(ix(id), { adj, fields: d.fields, nodeAt }).map((g) => g.h);
+  assert.ok(heads('t1').includes('la usa'), heads('t1').join('|'));
+  assert.ok(heads('o1').includes('lo insegna'), heads('o1').join('|'));
+  assert.equal(d.notes[ix('m1')].fm.ambito, 'salem');
+  // concetti on a meccanica: «tocca» / «la tocca», to the family hubs
+  const link = (a, b, f) => d.edges.some(([x, y, g]) => x === a && y === b && d.fields[g] === f);
+  assert.ok(link(ix('m1'), N, 'tocca') && link(ix('m1'), N + 1, 'tocca'));
+  assert.deepEqual(groupLinks(ix('m1'), { adj, fields: d.fields, nodeAt }).find((g) => g.h === 'tocca').items, [N, N + 1]);
+  assert.ok(groupLinks(N, { adj, fields: d.fields, nodeAt }).some((g) => g.h === 'la tocca' && g.items.includes(ix('m1'))));
+  // never drawn at rest, in any view
+  for (const v of d.views) for (const [a, b] of v.rest) assert.ok(!(v.ids[a] === ix('m1') && v.ids[b] >= N) && !(v.ids[b] === ix('m1') && v.ids[a] >= N), `${v.id} draws a tocca link at rest`);
+  // and without the old fields nothing breaks
+  assert.ok(d.views.every((v) => v.pos.every(Number.isFinite)));
+});
+
+test('rest links have two levels: the long ones are a whisper; labels can be moved above; short names', () => {
+  assert.equal(shortName("Dire l'idea della carta"), 'Dire\nidea carta');
+  assert.equal(shortName('Capire i Minori'), 'Capire\nMinori');
+  assert.equal(shortName('Unire le carte in un discorso'), 'Unire\ndiscorso');
+  assert.equal(shortName('Riconoscere'), 'Riconoscere');
+  assert.equal(view('tutto').flat, 1);
+  const v = view('impara');
+  // every nucleo objective has a two-line label, always shown, alternately above and below, none overlapping its neighbours' side
+  const nuc = v.ids.filter((i) => nodeOf(i).tipo === 'obiettivo' && nodeOf(i).fm?.peso === 'nucleo');
+  assert.ok(nuc.length >= 5);
+  for (const i of nuc) { const k = v.ids.indexOf(i), l = v.lbl[k]; assert.ok(l && l.t.includes('\n') && l.lw, `${nodeOf(i).id} has a short label`); assert.ok(v.always.includes(k)); assert.equal(!!l.up, at(v, i)[1] === Math.min(...v.ids.filter((j) => nodeOf(j).tipo === 'obiettivo').map((j) => at(v, j)[1])), 'high ones label above, low ones below'); }
+  const obY = v.ids.filter((i) => nodeOf(i).tipo === 'obiettivo').map((i) => at(v, i)[1]);
+  assert.equal(new Set(obY).size, 2, 'two staggered rows');
+  // the people row stays inside the picture: labels fit between 0 and 360 around each person
+  const pe = v.ids.filter((i) => nodeOf(i).tipo === 'persona').map((i) => at(v, i)[0]);
+  assert.ok(Math.min(...pe) >= -170 && Math.max(...pe) <= 170);
+});
+
+test('Tutto is short enough to fill a phone: wider than tall by far less than before', () => {
+  const t = view('tutto');
+  let y0 = Infinity, y1 = -Infinity, x0 = Infinity, x1 = -Infinity;
+  for (let k = 0; k < t.ids.length; k++) { y0 = Math.min(y0, t.pos[2 * k + 1]); y1 = Math.max(y1, t.pos[2 * k + 1]); x0 = Math.min(x0, t.pos[2 * k]); x1 = Math.max(x1, t.pos[2 * k]); }
+  assert.ok(x1 - x0 > 300 && x1 - x0 <= 380, `width ${x1 - x0}`);
+  assert.ok(y1 - y0 < 1000, `height ${y1 - y0}`);
 });

@@ -123,6 +123,12 @@ export function buildSite(vault = loadVault(), { colors = null } = {}) {
     for (const f of n.fm.concetti) { const h = hubOf.get(String(f).trim().toLowerCase()); if (h) addEdge(idx.get(n.id), h.index, 'riguarda'); }
   }
 
+  // a meccanica names the families of concepts it touches (plain strings, field `concetti`): linked to the hub as «tocca»,
+  // never drawn at rest (the views leave the link out of their rest set)
+  for (const n of notes) if (n.tipo === 'meccanica' && Array.isArray(n.fm?.concetti)) {
+    for (const f of n.fm.concetti) { const h = hubOf.get(String(f).trim().toLowerCase()); if (h) addEdge(idx.get(n.id), h.index, 'tocca'); }
+  }
+
   // ---- the views: a layout each, with that view's nodes and the links among them only
   const nodeAt = (i) => (i < notes.length ? notes[i] : hubs[i - notes.length]);
   const vkey = JSON.stringify([edges, fields, notes.map((n) => [n.id, n.tipo, n.title, n.fm?.numero, n.fm?.dinamica, n.fm?.peso, n.fm?.famiglia, n.fm?.nome]), hubs.map((h) => [h.id, h.members])]);
