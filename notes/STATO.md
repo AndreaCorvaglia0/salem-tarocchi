@@ -23,6 +23,17 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 11 | Pietre: immagini | **fatto, pubblicato** (main 809e9a6, gh-pages 5b8154a): eliotropio da Kurr 1859, sei pietre dipinte al computer |
 | 12 | Interessi: pietre di Edera, missioni 1–3 + grado 1 | **fatto, pubblicato** (main 8ac1bb4, gh-pages 235f646). Da fare: missioni 4–6 (nella 6 il nome vero) |
 
+## Da dove ripartire (scritto il 18/11 alle 10:55, token quasi finiti)
+
+Tutto è committato e pubblicato fino a main 8ac1bb4 / gh-pages 235f646; nessun agente in corso.
+Ordine proposto, a pezzi piccoli e paralleli (due agenti, cartelle separate):
+1. Interessi: prima fetta di Malva (fumi e sacchetti, 3 missioni), riusando la macchina di Ortica/Edera.
+2. Interessi: Edera missioni 4–6 (nella 6 il nome vero, deciso da Andrea).
+3. Ortica missioni 4–6; poi Ginepra (il banco dell'ambulante con un nome: deciso).
+4. I due libri della Lettrice (Court de Gébelin 1781; Waite 1911, scansione da trovare).
+5. Debiti piccoli (sotto).
+Prima di tutto: far rileggere `notes/VERIFICA.md` (revisione con Fable chiesta da Andrea).
+
 ## Dopo la coda (in attesa di Andrea)
 
 - Ascolto alla cieca del rito: codici da decodificare con `node scripts/audio/ascolto-decode.mjs`.

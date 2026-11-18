@@ -561,3 +561,10 @@ alla volta. Nel gioco le erbe guariscono e il fumo pulisce, detti come li dice l
 - **Non verificato qui:** un uso storico della melissa o della calendula a Salem nel 1692; l'infuso di melissa per
   un bambino con la febbre e un'erba che guarisce mescolata al fieno di una mucca sono detti come li direbbe la tradizione,
   senza fonte letta.
+
+## La Sacerdotessa in blu (18 novembre)
+
+Nel mazzo di Pamela Colman Smith (1909) la Sacerdotessa ha un manto azzurro che le scende fino ai piedi e
+diventa acqua; Waite, *The Pictorial Key to the Tarot* (1911), la lega alla Luna (la falce ai suoi piedi).
+Usato nella missione di Edera «La pietra della nonna» (il blu del lapislazzuli). Da ricontrollare sulla scansione
+della carta in `public/` quando si rilegge.
