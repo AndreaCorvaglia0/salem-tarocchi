@@ -17,12 +17,12 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | **scritto**, in attesa delle risposte di Andrea (6 domande in fondo a `notes/libri/CONCETTO.md`) | BACKLOG sezione 7 |
 | 6 | Imparare meglio (BACKLOG 2) | **fatto, pubblicato** (main 95eec8b, gh-pages 500d95e) | |
 | 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | **fatto, pubblicato** (main 610b172, gh-pages 334528b) | |
-| 8 | Interessi da strega: pagina di progetto | **scritta**, in attesa delle 5 risposte di Andrea; prima fetta = erbe di Ortica, 3 missioni | BACKLOG sezione 6 |
+| 8 | Interessi da strega: pagina di progetto | **approvata** (`lore/decisioni/decisioni-2026-11-18.md`) |
+| 9 | Interessi: prima fetta (Ortica, erbe, tre missioni) | agente in corso |
+| 10 | Libri: scaffale in biblioteca, primi libri | agente in corso | BACKLOG sezione 6 |
 
 ## Dopo la coda (in attesa di Andrea)
 
-- Libri: 6 risposte (fondo di `notes/libri/CONCETTO.md`), poi costruzione dello scaffale.
-- Interessi: 5 risposte (fondo di `notes/interessi/PROGETTO.md`), poi prima fetta (Ortica, tre missioni).
 - Ascolto alla cieca del rito: codici da decodificare con `node scripts/audio/ascolto-decode.mjs`.
 - Debiti piccoli: `addTrust`→`addBond` e `cond.js` su `bonds`; pietre disegnate da sostituire con tavole;
   opzioni sbagliate nelle letture ai clienti prese dalla stessa stesa; quartiere basso da rifotografare.
