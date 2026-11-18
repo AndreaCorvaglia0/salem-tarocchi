@@ -1,6 +1,6 @@
 # Prova dei lettori ingenui: orientarsi guardando (17 novembre)
 
-**Stato: NON fatta.** L'agente che ha portato gli edifici nel gioco non aveva lo strumento per lanciare altri agenti
+**Stato: primo giro fatto il 18 novembre (domande 1 e 3), fallito su due punti; correzione in corso, poi si rifà.** L'agente che ha portato gli edifici nel gioco non aveva lo strumento per lanciare altri agenti
 (nessun «Agent» fra i suoi strumenti), e non ha voluto aggirarlo lanciando a mano un altro Claude dalla riga di
 comando. Le schermate e le domande sono pronte qui sotto: la prova la lancia il capofila (modello «haiku», uno o
 due alla volta, ognuno vede UNA sola schermata e niente altro), e scrive le risposte in questo file.
@@ -44,3 +44,14 @@ Proctor), si cambia quello che li confonde e si rifà la prova solo su quelli.
 - Mappa del grimorio: ogni edificio con insegna ha accanto una tavoletta col simbolo. Sul telefono il disegnino è
   piccolo (circa 22 px): il simbolo si riconosce a fatica; da guardare sul telefono vero.
 - Quartieri: la parte alta a lastre e la parte bassa con le assi si vedono; la paglia del mercato è discreta.
+
+## Risultati, primo giro (18 novembre, haiku, una schermata ciascuno)
+
+- **Domanda 3, `door-malva.png`: fallita.** «Non lo so con certezza» quale sia la casa della strega; le due case
+  (Malva e Proctor) «facili da confondere: entrambe in legno, porta verde, finestre gialle accese; si distinguono
+  solo per il tetto e l'insegna». Il lettore prende la figura col cappello (la giocatrice) come indizio di strega.
+- **Domanda 1, `door-library.png`: metà.** Il tribunale si riconosce subito dalla bilancia. La biblioteca **non
+  si trova**: nessun libro visibile, insegna troppo piccola; la torre stretta d'ardesia viene presa per la casa
+  di una strega (per il gatto e la figura davanti, che sono la giocatrice).
+- Correzione affidata a un agente (casa di Malva eccentrica e diversa dai Proctor; biblioteca con libri e
+  insegna leggibile); poi si rifanno le domande 1 e 3 con lettori nuovi, e le altre nove.
