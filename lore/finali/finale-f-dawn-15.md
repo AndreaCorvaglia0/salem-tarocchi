@@ -1,15 +1,15 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.dawn: Con te non si capisce mai se stai per abbracciarm…"
+nome: "f.dawn: E adesso voliamo pure. Con te non c'è mai una cos…"
 dove: "end.js#f.dawn"
-condizione: "torn tono"
+condizione: "trait rischio >= 3"
 si_guadagna:
-  - { serve: "torn tono", dove: "[[tratto-tono]]" }
+  - { serve: "trait rischio >= 3", dove: "[[tratto-rischio]]" }
 ---
 
 Una variante del finale in `f.dawn` (end.js).
 
-- se torn tono: Con te non si capisce mai se stai per abbracciarmi o per mordermi. Non cambiare, eh: è il…
+- se trait rischio >= 3: E adesso voliamo pure. Con te non c'è mai una cosa che si possa fare da ferme, ed è per q…
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

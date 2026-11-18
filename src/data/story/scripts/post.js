@@ -58,10 +58,10 @@ export const POST = {
   'enc.hale': [
     N('Al banco del mercato c\'è Comare Hale, quella delle candele. Quando ti riconosce esce da dietro il banco e ti mette in mano un pacchetto legato con lo spago, senza dire una parola.'),
     choice(
-      o('«Non dovevate disturbarvi, davvero.»', { parola: -1 }, [
+      o('«Non dovevate disturbarvi, davvero.»', { tono: 1 }, [
         N('«Invece dovevo, e come.» Lo dice piano, guardandoti bene in faccia, e poi torna dietro il banco come se non fosse successo niente.'),
       ], { tag: tg('m03', 'c') }),
-      o('Le sorrido, e non dico niente nemmeno io.', { guida: 1 }, [
+      o('Le sorrido, e non dico niente nemmeno io.', { parola: -1 }, [
         N('Ti sorride anche lei. Ha ancora le mani che tremano un poco, e le nasconde sotto il grembiule.'),
       ], { tag: tg('m14', 'c') }),
     ),
@@ -107,7 +107,7 @@ export const POST = {
         N('«È quello che diceva mio nonno, parola per parola. Tu sei sicura di non essere di qui?»'),
       ]),
       // special: she has seen the wheel from above
-      sp('broom', [{ power: 'broom' }, { flag: 'lesson.fly' }], '«Dall\'alto l\'ho guardata bene: gira al contrario davvero.»', { tono: 1 }, [
+      sp('broom', [{ power: 'broom' }, { flag: 'lesson.fly' }], '«Dall\'alto l\'ho guardata bene: gira al contrario davvero.»', { guida: -1, esplora: -1 }, [
         N('«Dall\'alto l\'hai guardata?» Guarda il cielo, poi la scopa, poi di nuovo te. «Allora siamo in due a saperlo, e l\'altra è una strega. A mia moglie lo racconto stasera, e vediamo chi è che beve.»'),
       ]),
     ),
@@ -118,10 +118,10 @@ export const POST = {
   'enc.guard': [
     cop('Eh, chi va là? Non stavo dormendo, sia chiaro: stavo pensando con gli occhi chiusi, che si pensa meglio.'),
     choice(
-      o('«Sono il fantasma del pozzo. Torna a dormire.»', { rischio: 1 }, [
+      o('«Sono il fantasma del pozzo. Torna a dormire.»', { rischio: 1, tono: -1 }, [
         cop('Ah, buonasera, signor fantasma. Io non ho visto niente e non ho sentito niente, e se me lo chiedono giuro che ero sveglio.'),
       ], { flag: 'guard.ghost', tag: tg('m18', 'c') }),
-      o('«Continuate pure a pensare. Io passo, e non disturbo.»', { rischio: -1 }, [
+      o('«Continuate pure a pensare. Io passo, e non disturbo.»', { rischio: -1, parola: -1 }, [
         cop('La ringrazio, signorina. Pensare stanca molto, sa, e non tutti lo capiscono. Lei mi sembra una persona comprensiva.'),
       ], { tag: tg('m00', 'w') }),
       // special: the air of the Swords, used kindly
@@ -187,6 +187,10 @@ export const POST = {
       [ginepra('Lo sai che non sono finite? Oltre alle ventidue ce ne sono altre cinquantasei, più piccole, nascoste nell\'erba alta. I Bastoni stanno nel bosco e le Coppe lungo l\'acqua.'),
         ginepra('Le Spade invece sono nella parte alta del villaggio e i Denari al mercato. Facciamo a gara a chi ne trova di più? I doppioni ce li scambiamo, così nessuna resta indietro.'),
         flag('post.met')]),
+    // affinity (BACKLOG 1.2): Ginepra sees herself in a bold, kind girl who follows her heart
+    IF({ affinity: { ginepra: 2 } },
+      [ginepra('Con te non mi tocca fare la coraggiosa per forza, lo sai? Cioè, la faccio lo stesso, ma per divertimento.')],
+      [ginepra('Tu ci pensi sempre prima di saltare, eh? Io prima salto e poi ci penso, e una delle due prima o poi avrà ragione.')]),
     IF({ torn: 'tono' }, [ginepra('Con te non si capisce mai se stai per abbracciarmi o per mordermi. Non cambiare, eh: è il motivo per cui non mi annoio.')]),
     choice(
       o('Facciamo a gara, e stavolta arrivo prima io.', null, [

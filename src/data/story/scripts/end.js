@@ -41,7 +41,7 @@ export const END = {
     judge('Le farò alcune domande sulle carte che le hanno trovato addosso. Una ragazza istruita le conosce e ne parla senza turbarsi; una ragazza che esita, invece, ha dentro qualcosa che esita al posto suo.'),
     judge('Mi sembra un metodo semplice, e anche giusto. Quando vuole, cominciamo.'),
     choice(
-      o('«Sono pronta: chiedete pure.»', { guida: -1 }, [
+      o('«Sono pronta: chiedete pure.»', { guida: -1, esplora: -1 }, [
         judge('Nessuno è mai davvero pronto, signorina, glielo dico per esperienza. Ma la buona volontà la apprezzo sempre.'),
       ], { tag: tg('m11', 's') }),
       o('Prima di rispondere guardo Ginepra, e non lui.', { guida: 1 }, [
@@ -77,7 +77,7 @@ export const END = {
       N('In quel momento dal fondo dell\'aula parte un calamaio. Dalla terza fila si alza una voce che non smette più, e tutte le candele si spengono insieme, come se qualcuno ci avesse soffiato sopra con garbo.'),
       malva('Fuori, voi due, fuori! Dalla porta piccola! E guai a chi si ferma a ringraziare!'),
       choice(
-        o('Prendo Ginepra per mano e corro.', { rischio: 1 }, [
+        o('Prendo Ginepra per mano e corro.', { rischio: 1, esplora: -1 }, [
           N('La trovi al buio dalla risata, che non riesce a tenere. Correte tra i banchi rovesciati tenendovi per mano, e la porta piccola è già aperta.'),
         ]),
         o('Prima mi volto a guardare l\'aula, un momento solo.', { esplora: 1 }, [
@@ -130,11 +130,15 @@ export const END = {
         ginepra('Aspetta, ma allora Malva vola? Ah ah, questa me la devi raccontare tutta, appena siamo in aria e non può sentirci.'),
       ], { trust: { ginepra: 1 } }),
       // special: the cat shows her where the feet go
-      sp('tartufo', { tartufo: 3 }, 'Guarda Tartufo, che ti fa vedere dove si mettono i piedi.', { tono: 1 }, [
+      sp('tartufo', { tartufo: 3 }, 'Guarda Tartufo, che ti fa vedere dove si mettono i piedi.', { esplora: -1 }, [
         N('Tartufo salta sul manico della scopa di Ginepra, lo percorre fino in fondo con la coda dritta e torna indietro, senza guardare giù nemmeno una volta.'),
         cat('(Si sta così, col peso in mezzo e lo sguardo avanti. Con lei però non ci salgo, l\'ho detto e lo ripeto: io la lezione la faccio da terra.)'),
       ]),
     ),
+    IF({ affinity: { ginepra: 2 } }, [
+      N('Prima di staccarsi da terra Ginepra allunga la mano e stringe la tua, forte, come si fa prima di saltare un fosso.'),
+      ginepra('Partiamo al tre, anzi al due, che al tre io non ci arrivo mai.'),
+    ]),
     IF({ flag: 'jail.keys' }, [ginepra('E il tuo gatto che arriva con le chiavi in bocca, come un cane da caccia! Non glielo dico in faccia perché si offende, ma è stato il più bravo di tutti.')]),
     IF({ flag: 'jail.hinges' }, [ginepra('E quella grata aperta dai cardini me la sogno ancora. Me lo insegni davvero, vero? L\'avevi promesso, cioè, l\'avevo chiesto io, che è quasi uguale.')]),
     IF({ flag: 'jail.ortica' }, [ginepra('E le chiavi calate con un filo d\'erba! Ortica dice che il nodo era perfetto. Non lo era, ma ha tenuto, e a lei non lo dirò mai.')]),
@@ -190,6 +194,7 @@ export const END = {
     IF({ trust: ['malva', '>=', 2] },
       [malva('Io ti ringrazio. Ecco, l\'ho detto, e che nessuno me lo faccia ripetere.'), N('Subito dopo Malva tocca il ferro della pentola, tre volte, e guarda male chiunque sorrida.')],
       [malva('Io non ringrazio, lo sai. Però la legna per l\'inverno te l\'ho già fatta spaccare, ed è accatastata dietro la capanna.')]),
+    IF({ affinity: { malva: 2 } }, [malva('E quella capanna, d\'inverno, la tengo calda anche se non ci sei. Lo dico così, nel caso ti venisse voglia di tornarci.')]),
     IF({ steady: 'parola' }, [
       IF({ trait: ['parola', '>=', 3] },
         [malva('E continua a dire le cose in faccia, mi raccomando. In questo paese siamo rimaste in poche.')],
@@ -198,10 +203,15 @@ export const END = {
     IF({ trust: ['ortica', '>=', 2] },
       [ortica('La tua storia la racconto a tutto il bosco, e ogni volta mi viene un po\' più lunga. Nell\'ultima versione c\'è anche un drago, ma ci sta bene, non stona.')],
       [ortica('La tua storia la racconto lo stesso, sai, anche se in una versione corta. Senza il drago, per intenderci.')]),
+    IF({ affinity: { ortica: 2 } }, [N('Ortica ti fa posto sul tronco accanto a sé, e per tutta la sera, quando parli tu, non ti interrompe nemmeno una volta. Malva se ne accorge e alza un sopracciglio.')]),
     IF([{ steady: 'esplora' }, { trait: ['esplora', '>=', 3] }], [ortica('E dimmi che continuerai a girare e a guardare tutto, perché ho ancora un sacco di posti da farti vedere, e i più belli non stanno su nessuna mappa.')]),
     IF({ trust: ['edera', '>=', 2] },
       [edera('Ho scritto il tuo nome sulla prima pagina del mio libro, per non perderlo più: Rosalba. No, aspetta, ho scritto bene: {name}.')],
       [edera('Che bella serata. E tu chi sei, cara? Ah, sì, certo: la ragazza delle carte. Hai la mano ferma, questo me lo ricordo.')]),
+    IF({ affinity: { edera: 2 } }, [
+      N('Edera ti posa in mano un nastro, uno di quelli che mette tra le pagine dei libri, e ti chiude le dita sopra.'),
+      edera('Per segnare dove sei arrivata, cara. Io i segni li perdo, tu no.'),
+    ]),
     IF([{ steady: 'tono' }, { trait: ['tono', '>=', 3] }], [edera('Sei rimasta gentile fino alla fine, anche con chi non lo era con te. È la cosa più difficile, e non c\'è carta che la insegni.')]),
     IF({ flag: 'cat.fed' },
       [cat('A proposito del pane della prima sera: non che mi interessi, ma non ne hai più offerto. Lo dico così, per la cronaca.')],

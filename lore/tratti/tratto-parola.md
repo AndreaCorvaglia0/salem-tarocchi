@@ -5,14 +5,16 @@ nome: "Il tratto parola"
 cosa: "Un asse del ritratto (core/progress.js AXES): schietta (+) o accorta (-), da -6 a 6."
 stabilisce:
   - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-3]]" }
+  - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-3]]" }
   - { dove: "c1.js#c1.malva", n: 1, scelta: "[[c1-c1-malva-1]]" }
   - { dove: "c1.js#c1.malva", n: -1, scelta: "[[c1-c1-malva-1]]" }
   - { dove: "c1.js#c1.malva", n: 1, scelta: "[[c1-c1-malva-3]]" }
   - { dove: "c1.js#c1.malva", n: -1, scelta: "[[c1-c1-malva-3]]" }
-  - { dove: "c1.js#c1.shop", n: 1, scelta: "[[c1-c1-shop-1]]" }
+  - { dove: "c1.js#c1.read", n: -1, scelta: "[[c1-c1-read-2]]" }
   - { dove: "c1.js#c1.deliver", n: 1, scelta: "[[c1-c1-deliver-2]]" }
   - { dove: "c1b.js#c1.exam1", n: 1, scelta: "[[c1b-c1-exam1-1]]" }
   - { dove: "c1b.js#c1.exam1", n: -1, scelta: "[[c1b-c1-exam1-1]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-3]]" }
   - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
   - { dove: "c1b.js#c1.square", n: -1, scelta: "[[c1b-c1-square-1]]" }
   - { dove: "c1b.js#c1.square", n: -1, scelta: "[[c1b-c1-square-1]]" }
@@ -20,18 +22,24 @@ stabilisce:
   - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-1]]" }
   - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-2]]" }
   - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-2]]" }
+  - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-2]]" }
   - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-1]]" }
   - { dove: "c2.js#c2.mill", n: -1, scelta: "[[c2-c2-mill-3]]" }
   - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-3]]" }
   - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-2]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-2]]" }
   - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-2]]" }
   - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-3]]" }
   - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-2]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-2]]" }
   - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-3]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-1]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-2]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-2]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-4]]" }
+  - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-2]]" }
   - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
   - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-3]]" }
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
@@ -39,11 +47,13 @@ stabilisce:
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
   - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
+  - { dove: "post.js#enc.guard", n: -1, scelta: "[[post-enc-guard-1]]" }
   - { dove: "trials.js#trial.cellars.door", n: -1, scelta: "[[trials-trial-cellars-door-1]]" }
   - { dove: "trials.js#trial.vigil.door", n: 1, scelta: "[[trials-trial-vigil-door-1]]" }
   - { dove: "trials.js#trial.kettle.door", n: 1, scelta: "[[trials-trial-kettle-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: 1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: -1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-1]]" }
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-3]]" }
   - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-3]]" }
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-4]]" }
@@ -142,6 +152,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): schietta (+) o accorta (-), da -6 a 6.
 
-Lo muovono 79 punti dei copioni e lo leggono 54 condizioni.
+Lo muovono 89 punti dei copioni e lo leggono 54 condizioni.
 
-Verso schietta: 49 punti; verso accorta: 30 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso schietta: 49 punti; verso accorta: 40 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

@@ -1,16 +1,16 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.last: E dimmi che continuerai a girare e a guardare tut…"
+nome: "f.last: La tua storia la racconto a tutto il bosco, e ogn…"
 dove: "end.js#f.last"
-condizione: "steady esplora e trait esplora >= 3"
+condizione: "trust ortica >= 2"
 si_guadagna:
-  - { serve: "steady esplora", dove: "[[tratto-esplora]]" }
-  - { serve: "trait esplora >= 3", dove: "[[tratto-esplora]]" }
+  - { serve: "trust ortica >= 2", dove: "[[tratto-legame-ortica]]" }
 ---
 
 Una variante del finale in `f.last` (end.js).
 
-- se steady esplora e trait esplora >= 3: E dimmi che continuerai a girare e a guardare tutto, perché ho ancora un sacco di posti d…
+- se trust ortica >= 2: La tua storia la racconto a tutto il bosco, e ogni volta mi viene un po' più lunga. Nell'…
+- altrimenti: La tua storia la racconto lo stesso, sai, anche se in una versione corta. Senza il drago,…
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

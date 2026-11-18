@@ -88,8 +88,8 @@ export function createPlayer(M) {
     if (rich) { state.pop = 40; state.tartufo = 40; for (const w of Object.keys(state.trust)) state.trust[w] = 2; state.flags['lesson.fly'] = true; }
     let current = null; // the options of the choice about to be asked
     const exam = () => { stat('exams'); const ok = rand() < 0.6; stat(ok ? 'examsPassed' : 'examsFailed'); if (!ok) stat('jailed'); return ok; };
-    const visit = async () => {
-      const plan = planVisit({ state, talk: V.TALK, openers: V.OPENERS, thread: V.THREAD, rituals: V.RITUALS, closers: V.CLOSERS, test: cond, force: false });
+    const visit = async (o = {}) => {
+      const plan = planVisit({ state, talk: V.TALK, openers: V.OPENERS, thread: V.THREAD, rituals: V.RITUALS, closers: V.CLOSERS, test: cond, force: !!o?.force });
       if (!plan) return null;
       for (const [list, key] of [['OPENERS', 'openers'], ['THREAD', 'thread'], ['RITUALS', 'rituals'], ['CLOSERS', 'closers']]) {
         const e = V[list].find((x) => x && cond(x.when));
@@ -129,7 +129,7 @@ export function createPlayer(M) {
       if (name === 'exam.start') return { passed: exam() };
       if (name === 'reading.open') stat('readings');
       if (name === 'story.session') { await runner.exec(I.sessions[arg]); snapshot(); return null; }
-      if (name === 'story.visit') return visit();
+      if (name === 'story.visit') return visit(arg);
       return null;
     };
     const ui = { say() {}, cinema() {}, moment() {}, sleep() {}, end() {}, choose: (texts) => pick(texts.length) };
@@ -164,6 +164,8 @@ export function createPlayer(M) {
     }
     // after the end: what waits by the campfire and at the table
     if (state.flags['ending.seen']) for (const c of CAST) if (I.scripts[c.script] && !c.script.startsWith('client.') && c.at !== STEPS.find((x) => x.id === 'post.minors').at && atoms4(c.when) && cond(c.when) && !(c.once && once.has(c.id))) { if (c.once) once.add(c.id); await runScene(c.script); }
+    // and a few nights at the cottage bed (the Reader tells the cards still untold in her sleep: props.js)
+    if (state.flags['ending.seen'] && I.scripts['prop.bed']) for (let night = 0; night < 4; night++) await runScene('prop.bed');
     return {
       shown, scenes, warnings, ended: !!state.flags['ending.seen'],
       end: { traits: { ...state.traits }, trust: { ...state.trust }, card: yourCard(), suit: yourSuit(), flags: { ...state.flags } },

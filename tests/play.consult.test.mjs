@@ -5,6 +5,9 @@ import { CLIENTS, REACTIONS } from '../src/data/story/clients.js';
 import { AMBITI, FORME, makeQuestion, hasVoice, voiceIds, plan, recall, alternatives, verdictChoices, seeded } from '../src/reading/index.js';
 import { SPREADS } from '../src/data/spreads.js';
 import { OPENINGS } from '../src/data/reading/frames.js';
+import { CARD, MAJORS } from '../src/data/cards.base.js';
+import { sheet } from '../src/data/cards.js';
+import { SEMI, NUMERI, FIGURE } from '../src/data/reading/grid.js';
 
 test('every client has valid tags, and makeQuestion takes them', () => {
   for (const c of CLIENTS) {
@@ -73,12 +76,29 @@ test('tone gives tono +1 or -1; the blunt line comes first', () => {
   assert.ok(REACTIONS.blunt.includes(r[0]) && REACTIONS.doubtful.includes(r[1]));
 });
 
-test('help note: Majors give three words and says; Minors number x suit', () => {
-  const m = helpNote('m13');
-  assert.equal(m.kind, 'major'); assert.equal(m.words.length, 3); assert.ok(m.says.length > 10);
-  assert.equal(helpNote('c05').line, 'Cinque: qualcosa si rompe · Coppe: il cuore');
-  assert.equal(helpNote('w01').line, 'Asso: comincia qualcosa · Bastoni: la volontà');
-  assert.equal(helpNote('p13').line, 'Regina: chi custodisce · Denari: le cose concrete');
+test('help note «Ricordamela»: a cue to remember, never the words of the card (BACKLOG 1.4)', () => {
+  const m = helpNote('m05');
+  assert.equal(m.kind, 'major');
+  assert.deepEqual(m.words, ['Trovata: la casa delle riunioni, la Bibbia']); // where she found it
+  assert.match(m.says, /^Guarda la triplice corona\./);
+  assert.deepEqual(helpNote('m19').words, ['Al cancello del bosco, all\'alba']); // a card from the story
+  assert.deepEqual(helpNote('m15').words, ['Trovata: le cantine'], 'Le catene would say the card');
+  // no Major's note holds its words, its keywords or what it says
+  for (const { id } of MAJORS) {
+    const n = helpNote(id), s = sheet(id), text = `${n.words.join(' ')} ${n.says}`.toLowerCase();
+    assert.ok(n.says.length > 10, id);
+    for (const w of [...(s.words || []), ...(s.keywords || [])]) assert.ok(!text.includes(String(w).toLowerCase()), `${id}: «${w}» in the note`);
+    assert.ok(!text.includes(String(s.says || '').toLowerCase().slice(0, 30)), id);
+  }
+  // Minors: the place in the row and the element, not the idea of the number or of the suit
+  assert.equal(helpNote('c05').line, 'Cinque: viene dopo il Quattro («sosta») · Coppe: l\'acqua');
+  assert.equal(helpNote('w01').line, 'Asso: il primo della fila · Bastoni: il fuoco');
+  assert.equal(helpNote('p13').line, 'Regina: viene dopo il Cavaliere («chi va») · Denari: la terra');
+  for (const id of ['c05', 'w09', 's03', 'p13', 'c14']) {
+    const c = CARD[id], line = helpNote(id).line;
+    assert.ok(!line.includes(SEMI[c.suit].dove), `${id}: the suit's meaning`);
+    assert.ok(!line.includes((c.n <= 10 ? NUMERI[c.n] : FIGURE[c.n]).parola), `${id}: the number's word`);
+  }
 });
 
 test('plain position labels', () => {

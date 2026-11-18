@@ -112,7 +112,7 @@ export const SESSIONS = {
         R("Dalla finestra vedi che in casa c'è una persona che piange. Entri lo stesso, o torni indietro senza farti sentire?"),
         choice(
           O("Entro lo stesso.", { rischio: 1 }, [R("Entri anche quando sarebbe più comodo non farlo. Me lo segno, perché mi piace.")], { flag: 's0.enter' }),
-          O("Torno indietro.", { tono: 1 }, [R("Lasci in pace chi vuole restare solo. È una gentilezza, oppure è prudenza: non l'ho ancora capito.")], { flag: 's0.back' }),
+          O("Torno indietro.", { tono: 1, rischio: -1 }, [R("Lasci in pace chi vuole restare solo. È una gentilezza, oppure è prudenza: non l'ho ancora capito.")], { flag: 's0.back' }),
         ),
       ], { flag: 's0.window' }),
     ),
@@ -154,7 +154,7 @@ export const SESSIONS = {
     { symbol: 'coin' }, // smoke: what is worth something
     R("Mettiamo che tu abbia una sera tutta per te, senza niente da fare per forza. La passi con qualcuno, oppure te la tieni per te?"),
     choice(
-      O("La passo con qualcuno.", { tono: 1 }, [
+      O("La passo con qualcuno.", { parola: 1 }, [
         R("Con qualcuno, quindi. Allora quello che conta, per te, passa dalle persone."),
         R("E questo qualcuno com'è? Uno che ti fa ridere, o uno che ti dice le cose come stanno anche quando non ti piacciono?"),
         choice(
@@ -172,7 +172,7 @@ export const SESSIONS = {
             R("Preferisci una verità scomoda a una serata facile. Lo dicono in molte; vediamo se vale anche quando la verità riguarda te."),
             R("Facciamo la prova. Se un'amica ti chiede un parere su una cosa che ha fatto male, tu glielo dici tutto?"),
             choice(
-              O("Sì, glielo dico tutto.", { parola: 1 }, [R("Addirittura tutto: sei coerente, e spero per lei che tu sappia anche scegliere il momento.")]),
+              O("Sì, glielo dico tutto.", { parola: 1, tono: -1 }, [R("Addirittura tutto: sei coerente, e spero per lei che tu sappia anche scegliere il momento.")]),
               O("Glielo dico, ma con garbo.", { tono: 1 }, [R("Quindi la verità la dai a piccole dosi. Va bene, anche se a volte una dose piccola non basta.")]),
             ),
           ]),
@@ -250,7 +250,7 @@ export const SESSIONS = {
             R("E se poi scopri che era soltanto un gatto, ridi oppure te la prendi con te stessa?"),
             choice(
               O("Rido.", { tono: 1 }, [R("Meno male, perché chi sa ridere di uno spavento se lo porta dietro molto meno.")]),
-              O("Me la prendo un po'.", { tono: -1 }, [R("Con te stessa sei severa, lo sospettavo. Tienilo a mente: un gatto resta un gatto, anche se ti ha fatta saltare.")]),
+              O("Me la prendo con me stessa, un poco.", { tono: -1 }, [R("Con te stessa sei severa, lo sospettavo. Tienilo a mente: un gatto resta un gatto, anche se ti ha fatta saltare.")]),
             ),
           ]),
           O("Allungo il passo.", { rischio: -1 }, [
@@ -268,7 +268,7 @@ export const SESSIONS = {
         R("Il silenzio, allora. Quello che temi non sta in strada: sta in quello che ti immagini mentre non succede niente."),
         R("Pensa a un silenzio che ti pesa. È quello di una persona che non ti risponde, o quello di una casa dove non c'è nessuno?"),
         choice(
-          O("Una persona che non mi risponde.", { tono: 1 }, [
+          O("Una persona che non mi risponde.", { guida: 1 }, [
             ...leaf('fear', 'il silenzio di qualcuno', 'm06', 'c'),
             R("Il silenzio di qualcuno, dunque. Vuol dire che agli altri tieni parecchio, forse più di quanto fai vedere."),
             R("E quando qualcuno tace così, tu che cosa fai? Glielo chiedi, che cos'ha, oppure aspetti che parli?"),
@@ -354,7 +354,7 @@ export const SESSIONS = {
             R("In compagnia, quindi. Il posto nuovo ti interessa, ma mi pare che ti interessi di più con chi lo guardi."),
             R("E tra voi due, la strada chi la decide?"),
             choice(
-              O("La decido io.", { rischio: 1 }, [R("Me l'aspettavo, e spero che chi ti accompagna abbia buone gambe.")]),
+              O("La decido io.", { rischio: 1, tono: -1 }, [R("Me l'aspettavo, e spero che chi ti accompagna abbia buone gambe.")]),
               O("La decidiamo insieme.", { tono: 1 }, [R("La decidete insieme, dunque. È più lento, lo sai, ma si litiga meno all'arrivo.")]),
             ),
           ]),

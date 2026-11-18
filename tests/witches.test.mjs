@@ -38,8 +38,31 @@ test('an old save carries trust into the bond', () => {
   assert.deepEqual(state.bonds, { malva: 3, ortica: 0, edera: 0, ginepra: 2 });
   assert.equal(bondOf('malva'), 2); assert.equal(bondOf('ginepra'), 2);
   setState({ trust: { malva: 3 }, bonds: { malva: 1 } });
-  assert.equal(state.bonds.malva, 1, 'a stored bond is kept');
+  assert.equal(state.bonds.malva, 3, 'the larger of the two is kept: nothing she built is lost');
   assert.deepEqual(carryTrust({ trust: { edera: 2 } }).bonds, { malva: 0, ortica: 0, edera: 2, ginepra: 0 });
+});
+
+// BACKLOG 1.4: one number. The bond is the truth; state.trust is its copy for the readers that say `trust`.
+test('trust and bond: one number, old saves keep the larger', () => {
+  setState({ trust: { malva: 2, ortica: 5, edera: 0, ginepra: 1 }, bonds: { malva: 4, ortica: 3, ginepra: 1 } });
+  assert.deepEqual(state.bonds, { malva: 4, ortica: 5, edera: 0, ginepra: 1 });
+  assert.deepEqual(state.trust, state.bonds, 'trust is a copy of the bond after loading');
+  assert.equal(cond({ trust: ['malva', '>=', 4] }), true, 'the story reads the bond through trust');
+  // a save from before the bonds: trust becomes the bond
+  setState({ trust: { malva: 3, ortica: 7, edera: 1, ginepra: 0 } });
+  assert.deepEqual(state.bonds, { malva: 3, ortica: 7, edera: 1, ginepra: 0 });
+  // a save above the top of the bond (old trust could grow without limit) keeps it, also after a change
+  setState({ trust: { ginepra: BOND_MAX + 1 } });
+  addBond('ginepra', -1); assert.equal(state.bonds.ginepra, BOND_MAX);
+  setState({ trust: { ginepra: BOND_MAX + 2 } });
+  addBond('ginepra', 1); assert.equal(state.bonds.ginepra, BOND_MAX + 2, 'never pushed down by a gain');
+  // every change of the bond moves the copy; the story's trust (progress.addTrust, then glue/witches.js)
+  // moves the copy first, and addBond counts it once
+  setState({});
+  addBond('edera', 2, 'trial'); assert.equal(state.trust.edera, 2);
+  state.trust.malva += 1; addBond('malva', 1, 'trust'); // what addTrust + the glue do
+  assert.equal(state.bonds.malva, 1); assert.equal(state.trust.malva, 1);
+  addBond('malva', -5); assert.equal(state.trust.malva, 0, 'never below 0, and the copy follows');
 });
 
 test('addBond: levels, clamps, events', () => {

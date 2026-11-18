@@ -41,3 +41,13 @@ test('coverage: the page renders', async () => {
   assert.match(text, /## What random play cannot reach by construction/);
   assert.match(text, /### Ending variants/);
 });
+
+// BACKLOG 1.1: «il seme che ti somiglia» must not lean. Random answers give each suit between 15% and 35%
+// (it was Coppe two times out of three, because the gentle answers were twice the sharp ones).
+test('coverage: random play gives each of the four suits between 15% and 35%', async () => {
+  const r = await measure({ runs: 600, seed: 1, model: await loadStory() });
+  for (const s of ['c', 's', 'w', 'p']) {
+    const pct = (100 * (r.suits.get(s) || 0)) / r.runs;
+    assert.ok(pct >= 15 && pct <= 35, `suit ${s}: ${pct.toFixed(1)}%`);
+  }
+});

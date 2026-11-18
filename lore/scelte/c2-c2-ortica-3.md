@@ -7,10 +7,10 @@ fatto: "[[arrivo-da-ortica]]"
 classe: "stabilisce"
 opzioni:
   - { t: "Io ti sto ascoltando, e non mi annoio per niente.", imposta: "tono +1, fiducia ortica +1, punto m01, seme c" }
-  - { t: "Forse ti ascolterebbero di più, se ogni tanto ti fermassi.", imposta: "tono -1, punto m09, seme p" }
+  - { t: "Allora fermati un momento, che voglio sentire la fine almen…", imposta: "tono -1, punto m09, seme p" }
 ---
 
 Scelta 3 della scena `c2.ortica` (c2.js).
 
 1. «Io ti sto ascoltando, e non mi annoio per niente.»: tono +1, fiducia ortica +1, punto m01, seme c.
-2. «Forse ti ascolterebbero di più, se ogni tanto ti fermassi.»: tono -1, punto m09, seme p.
+2. «Allora fermati un momento, che voglio sentire la fine almen…»: tono -1, punto m09, seme p.

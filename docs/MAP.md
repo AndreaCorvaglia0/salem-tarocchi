@@ -44,7 +44,7 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1109 |
+| `src/core` | 11 | 1126 |
 | `src/data` | 9 | 992 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |
@@ -53,19 +53,19 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/data/reading` | 5 | 758 |
 | `src/data/reading/voices` | 81 | 6645 |
 | `src/data/story` | 12 | 2034 |
-| `src/data/story/scripts` | 13 | 2848 |
+| `src/data/story/scripts` | 13 | 2892 |
 | `src/data/trials` | 7 | 920 |
 | `src/data/world` | 16 | 1185 |
 | `src/glue` | 41 | 2843 |
 | `src/reading` | 9 | 702 |
 | `src/sound` | 11 | 1013 |
-| `src/story` | 12 | 1067 |
+| `src/story` | 12 | 1071 |
 | `src/story/stage` | 14 | 1925 |
-| `src/systems` | 19 | 1529 |
+| `src/systems` | 19 | 1554 |
 | `src/trials` | 3 | 471 |
 | `src/ui` | 35 | 3765 |
 | `src/ui/missions` | 5 | 542 |
-| `src/ui/rite` | 2 | 504 |
+| `src/ui/rite` | 2 | 509 |
 | `src/world` | 19 | 1428 |
 | `src/world/art` | 19 | 3232 |
 | `src/world/scene` | 20 | 2114 |

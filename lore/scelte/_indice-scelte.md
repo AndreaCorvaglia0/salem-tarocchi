@@ -13,9 +13,7 @@ _generato da scripts/lore.mjs, non modificare a mano_
 
 ## Tratti mossi e mai messi alla prova
 
-- [[tratto-affinita-malva]] (280 punti): nessuna condizione la legge; la mostra ui/witches.js
-- [[tratto-affinita-edera]] (255 punti): nessuna condizione la legge; la mostra ui/witches.js
-- [[tratto-affinita-ginepra]] (280 punti): nessuna condizione la legge; la mostra ui/witches.js
+Nessuno.
 
 ## Tratti messi alla prova ma mossi in meno di tre posti
 

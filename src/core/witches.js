@@ -2,8 +2,10 @@
 // affinità e legame, due assi diversi"):
 //   affinity  how much the witch sees herself in her: from who she is (the five traits, her card). Computed,
 //             never stored: it moves only when her character moves. 0..4.
-//   bond      what they built together: state.bonds[witch] points, levels 0..4. Old saves start from the
-//             trust they had (core/state.js migrate); story trust keeps feeding it (glue/witches.js).
+//   bond      what they built together: state.bonds[witch] points, levels 0..4. It is the only number:
+//             state.trust is a copy of it, rewritten by addBond and by core/state.js migrate, for the readers
+//             that still say `trust` (core/cond.js, core/progress.js trusts). Story trust (progress.addTrust)
+//             reaches the bond through glue/witches.js, which then puts the copy back in line.
 // The two together give one attitude: pari (affine and bound), prova (affine, not bound), brontola (bound,
 // not affine), fredda (neither). Pure on a state; addBond is the only writer.
 import { state, save } from './state.js';
@@ -43,10 +45,15 @@ export const BOND_AT = [0, 1, 2, 4, 6];
 export const bondLevel = (points) => { let l = 0; for (let i = 0; i < BOND_AT.length; i++) if ((Number(points) || 0) >= BOND_AT[i]) l = i; return l; };
 export const bondOf = (witch, s = state) => bondLevel(s.bonds?.[witch]);
 
-// Old saves: a bond missing for a witch starts from the trust she had (never below 0). Pure on s.
+// Old saves: the bond keeps the larger of bond and trust (never below 0), and trust becomes its copy. Pure on s.
 export function carryTrust(s) {
   if (!s.bonds || typeof s.bonds !== 'object' || Array.isArray(s.bonds)) s.bonds = {};
-  for (const w of WITCHES) if (!Number.isFinite(s.bonds[w])) s.bonds[w] = Math.max(0, Math.round(Number(s.trust?.[w]) || 0));
+  if (!s.trust || typeof s.trust !== 'object' || Array.isArray(s.trust)) s.trust = {};
+  for (const w of WITCHES) {
+    const b = Number.isFinite(s.bonds[w]) ? s.bonds[w] : 0;
+    s.bonds[w] = Math.max(0, Math.round(b), Math.round(Number(s.trust[w]) || 0));
+    s.trust[w] = s.bonds[w];
+  }
   return s;
 }
 
@@ -64,9 +71,12 @@ export const BOND_MAX = BOND_AT[BOND_AT.length - 1] + 4;
 export function addBond(witch, n, why = '') {
   n = Math.round(Number(n) || 0);
   if (!WITCHES.includes(witch) || !n) return 0;
+  // the story's trust has just moved its copy (progress.addTrust): the bond, not the copy, is what counts
+  if (state.trust && Number.isFinite(state.bonds?.[witch])) state.trust[witch] = state.bonds[witch];
   carryTrust(state);
-  const before = bondLevel(state.bonds[witch]);
-  state.bonds[witch] = Math.max(0, Math.min(BOND_MAX, state.bonds[witch] + n));
+  const before = bondLevel(state.bonds[witch]), cur = state.bonds[witch];
+  state.bonds[witch] = Math.max(0, Math.min(Math.max(BOND_MAX, cur), cur + n)); // an old save above the top keeps it
+  state.trust[witch] = state.bonds[witch];
   const after = bondLevel(state.bonds[witch]);
   emit('bond', { who: witch, n, why, value: state.bonds[witch], level: after });
   if (after !== before) emit(after > before ? 'bond:up' : 'bond:down', { who: witch, level: after });

@@ -1,15 +1,15 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.dawn: E poi gli hai detto la tua carta in faccia, davan…"
+nome: "f.dawn: E il carceriere che ti dà la chiave senza una par…"
 dove: "end.js#f.dawn"
-condizione: "flag court.card"
+condizione: "flag jail.jailer"
 si_guadagna:
-  - { serve: "flag court.card", dove: "c3.js#c3.court [[c3-c3-court-1]]" }
+  - { serve: "flag jail.jailer", dove: "c3.js#c3.jail [[c3-c3-jail-2]]" }
 ---
 
 Una variante del finale in `f.dawn` (end.js).
 
-- se flag court.card: E poi gli hai detto la tua carta in faccia, davanti a tutta l'aula! Io la mia non la so n…
+- se flag jail.jailer: E il carceriere che ti dà la chiave senza una parola. Sua moglie adesso dice a tutti che …
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

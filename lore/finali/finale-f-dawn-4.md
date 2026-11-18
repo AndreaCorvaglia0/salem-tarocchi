@@ -1,15 +1,15 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.dawn: E il tuo gatto che arriva con le chiavi in bocca,…"
+nome: "f.dawn: Prima di staccarsi da terra Ginepra allunga la ma…"
 dove: "end.js#f.dawn"
-condizione: "flag jail.keys"
+condizione: "affinity ginepra 2"
 si_guadagna:
-  - { serve: "flag jail.keys", dove: "c3.js#c3.jail [[c3-c3-jail-2]]" }
+  - { serve: "affinity ginepra 2", dove: "[[tratto-affinita-ginepra]]" }
 ---
 
 Una variante del finale in `f.dawn` (end.js).
 
-- se flag jail.keys: E il tuo gatto che arriva con le chiavi in bocca, come un cane da caccia! Non glielo dico…
+- se affinity ginepra 2: Prima di staccarsi da terra Ginepra allunga la mano e stringe la tua, forte, come si fa p…
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

@@ -44,7 +44,7 @@ export const C0 = {
       o('Ma tu parli! I gatti non parlano!', { parola: 1 }, [
         cat('I gatti parlano eccome. È che di solito non trovano nessuno con cui valga la pena, e io stasera ho fatto un\'eccezione. Gradirei però che non strillassi.'),
       ], { flag: 'cat.shout', tag: tg('m18', 'c') }),
-      o('Buonasera, Tartufo: io mi chiamo {name}.', { tono: 1 }, [
+      o('Buonasera, Tartufo: io mi chiamo {name}.', { tono: 1, parola: -1 }, [
         cat('Piacere mio, {name}: vedo che ti hanno insegnato l\'educazione, ed è già più di quanto mi aspettassi da una che arriva a piedi con questo tempo.'),
       ], { tag: tg('m00', 'w') }),
     ),

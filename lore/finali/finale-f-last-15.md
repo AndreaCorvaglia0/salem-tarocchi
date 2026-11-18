@@ -1,16 +1,16 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.last: A proposito del pane della prima sera: non che mi…"
+nome: "f.last: Ho scritto il tuo nome sulla prima pagina del mio…"
 dove: "end.js#f.last"
-condizione: "flag cat.fed"
+condizione: "trust edera >= 2"
 si_guadagna:
-  - { serve: "flag cat.fed", dove: "c1.js#c1.cottage [[c1-c1-cottage-2]]" }
+  - { serve: "trust edera >= 2", dove: "[[tratto-legame-edera]]" }
 ---
 
 Una variante del finale in `f.last` (end.js).
 
-- se flag cat.fed: A proposito del pane della prima sera: non che mi interessi, ma non ne hai più offerto. L…
-- altrimenti: Io non dico niente. Va bene, una cosa la dico: sono fiero di te. E adesso dimentichiamoce…
+- se trust edera >= 2: Ho scritto il tuo nome sulla prima pagina del mio libro, per non perderlo più: Rosalba. N…
+- altrimenti: Che bella serata. E tu chi sei, cara? Ah, sì, certo: la ragazza delle carte. Hai la mano …
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

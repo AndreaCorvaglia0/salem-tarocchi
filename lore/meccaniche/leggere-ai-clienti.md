@@ -34,7 +34,7 @@ ragione_nel_gioco: "È il suo mestiere e il suo pane: la gente di Salem ha doman
 premio: "Punti: 6, più 5 per risposta giusta in proporzione (xpFor in src/systems/reading.rules.js). Monete: paga intera se la risposta finale è giusta e gli errori non superano un terzo, altrimenti metà (payOf). Popolarità: +2 senza errori, +1 con pochi, +1 la prima volta che un cliente torna (popForReading in src/core/bonds.js)."
 rischio: "Metà paga e niente popolarità se sbaglia troppo. Un errore rimette la carta a domani nel ripasso."
 tratti: "Le risposte ai visitatori da mandare via muovono un tratto (src/glue/clients.js). Il tono della risposta è stato tolto."
-aperto: "Il tono (con garbo o senza giri di parole) di READING.md non c'è più. L'aiuto «Ricordamela» mostra le parole della carta prima della risposta e non costa niente. Quando non tutte le carte hanno una voce si usa ancora il vecchio motore (src/systems/reading.js)."
+aperto: "Il tono (con garbo o senza giri di parole) di READING.md non c'è più. L'aiuto «Ricordamela» non costa niente e dal 18 novembre dà un indizio, non le parole della carta (src/systems/consult.rules.js helpNote). Quando non tutte le carte hanno una voce si usa ancora il vecchio motore (src/systems/reading.js)."
 ---
 
 Le letture usano solo le carte che lei ha, e i Minori solo dopo la loro lezione. Con la popolarità arrivano clienti migliori e, a volte, un secondo visitatore che aspetta fuori.

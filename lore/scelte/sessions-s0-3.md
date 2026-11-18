@@ -7,10 +7,10 @@ fatto: "[[prima-seduta]]"
 classe: "stabilisce"
 opzioni:
   - { t: "Entro lo stesso.", imposta: "flag s0.enter, rischio +1" }
-  - { t: "Torno indietro.", imposta: "flag s0.back, tono +1" }
+  - { t: "Torno indietro.", imposta: "flag s0.back, tono +1, rischio -1" }
 ---
 
 Scelta 3 della scena `s0` (sessions.js).
 
 1. «Entro lo stesso.»: flag s0.enter, rischio +1.
-2. «Torno indietro.»: flag s0.back, tono +1.
+2. «Torno indietro.»: flag s0.back, tono +1, rischio -1.

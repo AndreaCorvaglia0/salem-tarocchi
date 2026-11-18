@@ -15,20 +15,20 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
 
 ## Scenes
 
-115 scenes, 69 played at least once, 46 never.
+118 scenes, 78 played at least once, 40 never.
 
-- not reached by the player: worth a look: `visits.js#talk.m00`, `visits.js#talk.m04`, `visits.js#talk.m11`, `visits.js#talk.m15`, `visits.js#talk.m16`, `visits.js#talk.m17`, `visits.js#talk.m18`, `visits.js#talk.m19`, `visits.js#talk.m20`, `visits.js#talk.m21`
+- not reached by the player: worth a look: `hat.js#trial.hat.door`, `hat.js#trial.hat.wait`, `hat.js#trial.hat.after`, `visits.js#talk.m00`
 - set off by the world (getting lost in the fog), not by the CAST: `c2.js#fog.lost`
-- set off by the world (the tall grass, the fog, swapping duplicates), not by the CAST: `post.js#minor.first`, `post.js#minor.dup`
+- the garden is opened by glue/garden.js on days of play: `garden-lessons.js#garden.lesson.acqua`, `garden-lessons.js#garden.lesson.luce`, `garden-lessons.js#garden.lesson.terra`, `garden-lessons.js#garden.lesson.vaso`, `garden-lessons.js#garden.lesson.semina`, `garden.js#garden.ortica`, `garden.js#garden.look`
 - the lessons are offered by glue/lessons.js (flags `*.offered`), which the player does not run: `lessons.js#fly.offer`, `lessons.js#fly.lesson`, `lessons.js#minors.1.offer`, `lessons.js#minors.1.lesson`, `lessons.js#minors.2.offer`, `lessons.js#minors.2.lesson`, `lessons.js#minors.3.offer`, `lessons.js#minors.3.lesson`, `lessons.js#minors.4.offer`, `lessons.js#minors.4.lesson`, `lessons.js#minors.5.offer`, `lessons.js#minors.5.lesson`, `lessons.js#reversed.offer`, `lessons.js#reversed.lesson`
+- set off by the world (the tall grass, the fog, swapping duplicates), not by the CAST: `post.js#minor.first`, `post.js#minor.dup`
 - the trials themselves (src/trials) are not played, so the doors that wait on an earlier trial's outcome (`trial.<id>.*`), a lesson or the days never open: `trials.js#trial.fog.door`, `trials.js#trial.cellars.door`, `trials.js#trial.well.door`, `trials.js#trial.kettle.door`, `trials.js#trial.grave.door`, `trials.js#trial.room.door`, `trials.js#trial.dare.door`
-- the garden is opened by glue/garden.js on days of play: `garden.js#garden.ortica`, `garden.js#garden.look`, `garden-lessons.js#garden.lesson.acqua`, `garden-lessons.js#garden.lesson.luce`, `garden-lessons.js#garden.lesson.terra`, `garden-lessons.js#garden.lesson.vaso`, `garden-lessons.js#garden.lesson.semina`
 - the clients' readings are not played (reading.open does nothing here): `clients.js#client.c1`, `clients.js#client.c2`, `clients.js#client.c3`, `clients.js#client.free`
 - the opinions are asked from the grimoire (glue/opinions.js), not from the story: `opinions.js#malva.later`
 
 ## Units in the scenes that were played
 
-1312 units: 757 common, 90 rare (under 1% of the runs), 465 never shown.
+1348 units: 887 common, 33 rare (under 1% of the runs), 428 never shown.
 
 ### Never shown
 
@@ -108,7 +108,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
 - `sessions.js#s0` (2)
   - else of hasBirth true
   - else of hasBirth true
-- `sessions.js#s1` (43)
+- `sessions.js#s1` (37)
   - «Da quando sei arrivata vai dove devi andare e bas…» (if trait esplora <= -3)
   - «La prima sera avevi una carta sola, e adesso ne h…» (if sempre)
   - «In piazza, l'altra sera, c'eri anche tu. Di quell…» (if sempre)
@@ -123,12 +123,6 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Il perché è presto detto: da allora ascolti di pi…» (if trend guida >= 2)
   - «Il perché è presto detto: da allora ragioni di pi…» (if trend guida <= -2)
   - «Il perché non è una cosa sola: sono tante piccole…» (if sempre)
-  - «Di te, finora, ho visto soprattutto questo: vai d…» (if trait esplora <= -6)
-  - «Di te, finora, ho visto soprattutto questo: hai l…» (if trait tono <= -6)
-  - «Di te, finora, ho visto soprattutto questo: vai d…» (if trait esplora <= -5)
-  - «Di te, finora, ho visto soprattutto questo: hai l…» (if trait tono <= -5)
-  - «Di te, finora, ho visto soprattutto questo: vai d…» (if trait esplora <= -4)
-  - «Di te, finora, ho visto soprattutto questo: vai d…» (if trait esplora <= -3)
   - «Il Matto è la carta di chi parte volentieri e gua…» (if yourCard m00)
   - «Il Mago è la carta di chi ha la parola pronta e u…» (if yourCard m01)
   - «La Sacerdotessa è la carta di chi sente molto e d…» (if yourCard m02)
@@ -152,7 +146,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20)
   - «Il Mondo è la carta di chi ha voluto vedere tutto…» (if yourCard m21)
   - else of hasBirth true
-- `sessions.js#s2` (47)
+- `sessions.js#s2` (39)
   - «So che hai imparato a lasciare i conestabili imba…» (if stat stuns >= 1)
   - «Da quando sai fare luce sei entrata nel buio {sta…» (if stat fires >= 5)
   - «Hai letto le carte a {stat:readings} persone, orm…» (if stat readings >= 6)
@@ -169,14 +163,6 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Il perché è presto detto: da allora ascolti di pi…» (if trend guida >= 2)
   - «Il perché è presto detto: da allora ragioni di pi…» (if trend guida <= -2)
   - «Il perché non è una cosa sola: sono tante piccole…» (if sempre)
-  - «In questo tempo, più di tutto, ho visto che pesi …» (if trait parola <= -6)
-  - «In questo tempo, più di tutto, ho visto che hai l…» (if trait tono <= -6)
-  - «In questo tempo, più di tutto, ho visto che vai d…» (if trait esplora <= -5)
-  - «In questo tempo, più di tutto, ho visto che pesi …» (if trait parola <= -5)
-  - «In questo tempo, più di tutto, ho visto che hai l…» (if trait tono <= -5)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait rischio >= 4)
-  - «In questo tempo, più di tutto, ho visto che hai l…» (if trait tono <= -3)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida >= 3)
   - «Il Matto è la carta di chi parte volentieri e gua…» (if yourCard m00)
   - «Il Mago è la carta di chi ha la parola pronta e u…» (if yourCard m01)
   - «La Sacerdotessa è la carta di chi sente molto e d…» (if yourCard m02)
@@ -200,7 +186,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20)
   - «Il Mondo è la carta di chi ha voluto vedere tutto…» (if yourCard m21)
   - else of hasBirth true
-- `sessions.js#s3` (41)
+- `sessions.js#s3` (30)
   - «Hai letto le carte a {stat:readings} persone. Sta…» (if stat readings >= 12)
   - «In tutto hai tenuto testa ai conestabili {stat:ex…» (if stat examsPassed >= 8)
   - «Hai aperto {stat:locks} serrature con le sole ris…» (if stat locks >= 5)
@@ -208,17 +194,6 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Alla Stella, quando l'hai trovata, hai dato tre p…» (if has m17)
   - «Hai {majors} carte, ormai, e il mazzo è quasi int…» (if sempre)
   - «La prima sera ti ho chiesto che cosa fai davanti …» (if sempre)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono <= -6)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora <= -5)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono <= -5)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora <= -4)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono <= -4)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora <= -3)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono <= -3)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio >= 3)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio <= -3)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida >= 3)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida <= -3)
   - «Il Matto è la carta di chi parte volentieri e gua…» (if yourCard m00)
   - «Il Mago è la carta di chi ha la parola pronta e u…» (if yourCard m01)
   - «La Sacerdotessa è la carta di chi sente molto e d…» (if yourCard m02)
@@ -242,17 +217,10 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20)
   - «Il Mondo è la carta di chi ha voluto vedere tutto…» (if yourCard m21)
   - else of hasBirth true
-- `visits.js#openers` (17)
-  - «L'altra volta ti perdevi volentieri per strada. I…» (if turned esplora e trait esplora < 0)
+- `visits.js#openers` (10)
   - «Fino all'altra volta pesavi ogni parola. In quest…» (if turned parola e trait parola > 0)
   - «L'altra volta dicevi tutto quello che ti passava …» (if turned parola e trait parola < 0)
   - «Mi dicono che l'altra notte un conestabile è rima…» (if notFlag rd.stun e stat stuns >= 1)
-  - «Mi hanno raccontato che in piazza ti sei chinata …» (if notFlag rd.candles e flag b1.candles)
-  - «In piazza sei rimasta zitta, ma mi dicono che hai…» (if notFlag rd.watched e flag b1.watched)
-  - «Dal deposito del tribunale è sparito un mazzo che…» (if notFlag rd.bray e flag depot.bray)
-  - «Quel gatto ti viene dietro anche quando non hai n…» (if notFlag rd.tartufo e tartufo 3)
-  - «Il tuo nome ormai gira per Salem, e arriva anche …» (if notFlag rd.pop e pop 2)
-  - «Edera si fida di te, anche se il tuo nome continu…» (if notFlag rd.edera e trust edera >= 2)
   - «Hai già letto le carte a {stat:readings} persone,…» (if notFlag rd.readings e stat readings >= 5)
   - «Ho saputo che hai aperto {stat:locks} serrature s…» (if notFlag rd.locks e stat locks >= 3)
   - «Da quando sai fare luce, nel buio ci entri senza …» (if notFlag rd.fires e stat fires >= 3)
@@ -260,8 +228,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Bentornata: ti porti addosso l'odore del bosco, e…» (if chapter 2)
   - «Bentornata: vieni dal buio delle cantine, e vedo …» (if chapter 3)
   - «Siediti, perché ho visto che hai qualcosa di nuov…» (if sempre)
-- `visits.js#thread` (8)
-  - «La prima sera mi hai detto che davanti a una port…» (if notFlag rd.door e chapterMax 1 e flag s0.window e trait esp…)
+- `visits.js#thread` (7)
   - «Mi avevi anche detto che in una casa entri pure q…» (if notFlag rd.door2 e chapterMax 1 e flag s0.enter e stat exam…)
   - «Mi avevi anche detto che in una casa entri pure q…» (if notFlag rd.door2 e chapterMax 1 e flag s0.enter)
   - «Mi avevi anche detto che lasci in pace chi vuole …» (if notFlag rd.door2 e chapterMax 1 e flag s0.back e stat readi…)
@@ -269,10 +236,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Mi avevi anche detto che davanti a una porta che …» (if notFlag rd.door2 e chapterMax 1 e flag s0.wait)
   - «Mi avevi anche detto che dove non ti aprono non i…» (if notFlag rd.door2 e chapterMax 1 e flag s0.leave)
   - «L'altra volta mi hai detto che un rumore che non …» (if notFlag rd.fear e chapter 3 e flag leaf.fear.m18 e stat fir…)
-- `visits.js#rituals` (11)
-  - «Tra le tue carte ci sono già tre angeli: quello d…» (if notFlag rd.three.angels e has m06 e has m14 e has m20)
-  - «Metti vicini Gli Amanti e Il Diavolo e guardali b…» (if notFlag rd.pair.m06m15 e has m06 e has m15)
-  - «Hai La Sacerdotessa e La Luna, e in tutte e due c…» (if notFlag rd.pair.m02m18 e has m02 e has m18)
+- `visits.js#rituals` (8)
   - «La Temperanza e La Stella versano tutte e due del…» (if notFlag rd.pair.m14m17 e has m14 e has m17)
   - «L'Eremita e L'Appeso sono i due solitari del mazz…» (if notFlag rd.pair.m09m12 e has m09 e has m12)
   - «La Sacerdotessa e La Giustizia siedono tutte e du…» (if notFlag rd.pair.m02m11 e has m02 e has m11)
@@ -281,7 +245,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «La Sacerdotessa e Il Papa siedono tutti e due tra…» (if notFlag rd.pair.m02m05 e has m02 e has m05)
   - «L'Imperatore e Il Papa sono i due che comandano, …» (if notFlag rd.pair.m04m05 e has m04 e has m05)
   - «Il Matto e Il Mago sono le prime due carte, e con…» (if notFlag rd.pair.m00m01 e has m00 e has m01)
-- `visits.js#closers` (245)
+- `visits.js#closers` (244)
   - «Il Matto è la carta di chi parte volentieri e gua…» (if yourCard m00)
   - «Il Mago è la carta di chi ha la parola pronta e u…» (if yourCard m01)
   - «La Sacerdotessa è la carta di chi sente molto e d…» (if yourCard m02)
@@ -525,114 +489,49 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
   - «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20)
   - «Il Mondo è la carta di chi ha voluto vedere tutto…» (if yourCard m21)
   - «Te ne vai, e io resto dell'idea dell'altra volta:…» (if notFlag rd.same.1b e verdict same e chapterMax 1)
-  - «Per stanotte ci fermiamo qui. Per me resti {lastV…» (if verdict same)
   - «Per stanotte ci fermiamo qui. Le carte che ti ho …» (if sempre)
 
 ### Rare (under 1%)
 
-- `c1b.js#c1.square` (1)
-  - if flag b1.watched: 5 runs (0.50%)
-- `c2.js#c2.ortica` (2)
-  - if flag b1.watched: 5 runs (0.50%)
-  - if trait esplora <= -3: 1 runs (0.10%)
-- `c3.js#c3.edera` (1)
-  - if trait tono <= -3: 2 runs (0.20%)
-- `end.js#c3.trial` (4)
-  - if trait tono <= -3: 1 runs (0.10%)
-  - if flag b1.watched: 5 runs (0.50%)
-  - option ««Cominciamo pure, e dopo, se avanza tempo, mi rac…» (if trait tono <= -3): 1 runs (0.10%)
+- `end.js#c3.trial` (1)
   - option ««I suoi conestabili me ne hanno già fatte tante, …» (if stat examsPassed >= 5 e stat examsFailed == 0): 6 runs (0.60%)
-- `end.js#f.dawn` (1)
-  - if flag trial.candles: 1 runs (0.10%)
-- `end.js#f.last` (2)
-  - else of trust ortica >= 2: 8 runs (0.80%)
-  - if trait esplora <= -3: 6 runs (0.60%)
-- `sessions.js#s1` (17)
-  - «Al primo conestabile hai raccontato che eri solta…» (if flag lied.constable): 2 runs (0.20%)
-  - «All'Imperatrice, quando l'hai trovata, hai dato t…» (if has m03): 1 runs (0.10%)
-  - «Di te, finora, ho visto soprattutto questo: pesi …» (if trait parola <= -6): 1 runs (0.10%)
+- `end.js#f.last` (1)
+  - else of trust ortica >= 2: 9 runs (0.90%)
+- `sessions.js#s1` (8)
+  - «Da quando sei arrivata hai guardato dietro ogni a…» (if trait esplora >= 3): 5 runs (0.50%)
+  - «Al primo conestabile hai raccontato che eri solta…» (if flag lied.constable): 5 runs (0.50%)
+  - «All'Imperatrice, quando l'hai trovata, hai dato t…» (if has m03): 5 runs (0.50%)
+  - «Di te, finora, ho visto soprattutto questo: vai d…» (if trait esplora <= -6): 1 runs (0.10%)
+  - «Di te, finora, ho visto soprattutto questo: hai l…» (if trait tono <= -6): 3 runs (0.30%)
   - «Di te, finora, ho visto soprattutto questo: quand…» (if trait guida >= 6): 8 runs (0.80%)
-  - «Di te, finora, ho visto soprattutto questo: pesi …» (if trait parola <= -5): 1 runs (0.10%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait rischio >= 5): 6 runs (0.60%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait guida >= 5): 9 runs (0.90%)
-  - «Di te, finora, ho visto soprattutto questo: pesi …» (if trait parola <= -4): 2 runs (0.20%)
-  - «Di te, finora, ho visto soprattutto questo: hai l…» (if trait tono <= -4): 1 runs (0.10%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait rischio >= 4): 3 runs (0.30%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait guida >= 4): 5 runs (0.50%)
-  - «Di te, finora, ho visto soprattutto questo: pesi …» (if trait parola <= -3): 4 runs (0.40%)
-  - «Di te, finora, ho visto soprattutto questo: hai l…» (if trait tono <= -3): 1 runs (0.10%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait rischio >= 3): 2 runs (0.20%)
-  - «Di te, finora, ho visto soprattutto questo: prima…» (if trait rischio <= -3): 7 runs (0.70%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait guida >= 3): 2 runs (0.20%)
-  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait guida <= -3): 4 runs (0.40%)
-- `sessions.js#s2` (18)
-  - «In questo tempo, più di tutto, ho visto che vai d…» (if trait esplora <= -6): 1 runs (0.10%)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait rischio >= 5): 7 runs (0.70%)
-  - «In questo tempo, più di tutto, ho visto che prima…» (if trait rischio <= -5): 9 runs (0.90%)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida <= -5): 9 runs (0.90%)
-  - «In questo tempo, più di tutto, ho visto che vai d…» (if trait esplora <= -4): 1 runs (0.10%)
-  - «In questo tempo, più di tutto, ho visto che pesi …» (if trait parola <= -4): 2 runs (0.20%)
-  - «In questo tempo, più di tutto, ho visto che hai l…» (if trait tono <= -4): 1 runs (0.10%)
-  - «In questo tempo, più di tutto, ho visto che prima…» (if trait rischio <= -4): 5 runs (0.50%)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida >= 4): 3 runs (0.30%)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida <= -4): 1 runs (0.10%)
-  - «In questo tempo, più di tutto, ho visto che ti fe…» (if trait esplora >= 3): 9 runs (0.90%)
-  - «In questo tempo, più di tutto, ho visto che vai d…» (if trait esplora <= -3): 1 runs (0.10%)
-  - «In questo tempo, più di tutto, ho visto che dici …» (if trait parola >= 3): 9 runs (0.90%)
-  - «In questo tempo, più di tutto, ho visto che pesi …» (if trait parola <= -3): 3 runs (0.30%)
-  - «In questo tempo, più di tutto, ho visto che hai m…» (if trait tono >= 3): 5 runs (0.50%)
+  - «Di te, finora, ho visto soprattutto questo: vai d…» (if trait esplora <= -5): 2 runs (0.20%)
+  - «Di te, finora, ho visto soprattutto questo: quand…» (if trait guida >= 3): 6 runs (0.60%)
+- `sessions.js#s2` (5)
+  - «In questo tempo, più di tutto, ho visto che hai m…» (if trait tono >= 3): 7 runs (0.70%)
+  - «In questo tempo, più di tutto, ho visto che hai l…» (if trait tono <= -3): 8 runs (0.80%)
   - «In questo tempo, più di tutto, ho visto che quand…» (if trait rischio >= 3): 3 runs (0.30%)
-  - «In questo tempo, più di tutto, ho visto che prima…» (if trait rischio <= -3): 3 runs (0.30%)
-  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida <= -3): 1 runs (0.10%)
-- `sessions.js#s3` (18)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora <= -6): 1 runs (0.10%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola <= -6): 2 runs (0.20%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio <= -6): 8 runs (0.80%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola <= -5): 2 runs (0.20%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio >= 5): 8 runs (0.80%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio <= -5): 6 runs (0.60%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida <= -5): 7 runs (0.70%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora >= 4): 9 runs (0.90%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola <= -4): 1 runs (0.10%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio >= 4): 2 runs (0.20%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio <= -4): 1 runs (0.10%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida >= 4): 1 runs (0.10%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida <= -4): 5 runs (0.50%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora >= 3): 3 runs (0.30%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola >= 3): 6 runs (0.60%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola <= -3): 1 runs (0.10%)
-  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono >= 3): 1 runs (0.10%)
-  - «Di te ho visto un po' di tutto e niente che preva…» (if sempre): 3 runs (0.30%)
-- `sessions.js#s4` (6)
-  - «Il Carro è la carta di chi punta dritto alla meta…» (if yourCard m07): 5 runs (0.50%)
-  - «La Ruota della Fortuna è la carta di chi gioca la…» (if yourCard m10): 1 runs (0.10%)
-  - «Non badare al nome: La Morte è la carta di chi pa…» (if yourCard m13): 3 runs (0.30%)
-  - «Non offenderti: Il Diavolo è la carta di chi ha d…» (if yourCard m15): 2 runs (0.20%)
-  - «Non spaventarti: La Torre è la carta di chi dice …» (if yourCard m16): 5 runs (0.50%)
-  - «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20): 3 runs (0.30%)
-- `visits.js#openers` (17)
-  - «L'altra volta avevi la risposta pronta, e un po' …» (if turned tono e trait tono > 0): 7 runs (0.70%)
-  - «L'altra volta eri tutta gentilezza. In questi gio…» (if turned tono e trait tono < 0): 6 runs (0.60%)
-  - «Sei una che rischia, ma non dice mai una parola d…» (if notFlag rd.pair.bold-quiet e trait rischio >= 3 e trait par…): 3 runs (0.30%)
-  - «Pungi, e intanto senti tutto. Ho idea che le spin…» (if notFlag rd.pair.sharp-heart e trait tono <= -3 e trait guid…): 4 runs (0.40%)
-  - «Sei venuta dritta anche stavolta, senza guardarti…» (if notFlag rd.st.esplora- e steady esplora e trait esplora <= …): 3 runs (0.30%)
-  - «Continui a pesare le parole prima di dirle, con m…» (if notFlag rd.st.parola- e steady parola e trait parola <= -3): 3 runs (0.30%)
-  - «Hai ancora la lingua affilata, ho notato. Va bene…» (if notFlag rd.st.tono- e steady tono e trait tono <= -3): 1 runs (0.10%)
-  - «Continui a preferire la strada rischiosa a quella…» (if notFlag rd.st.rischio+ e steady rischio e trait rischio >= 3): 7 runs (0.70%)
-  - «Continui a muoverti con prudenza, e finora i fatt…» (if notFlag rd.st.rischio- e steady rischio e trait rischio <= …): 2 runs (0.20%)
-  - «Decidi ancora col cuore, ho notato. Le carte con …» (if notFlag rd.st.guida+ e steady guida e trait guida >= 3): 5 runs (0.50%)
-  - «Continui a ragionare su tutto prima di decidere. …» (if notFlag rd.st.guida- e steady guida e trait guida <= -3): 1 runs (0.10%)
-  - «Hai riportato a Ortica quattro monete che potevi …» (if notFlag rd.honest e flag mill.honest): 3 runs (0.30%)
-  - «Ho saputo che alla lavandaia hai lasciato le sue …» (if notFlag rd.tabita e flag tabita.owes): 9 runs (0.90%)
-  - «Ho saputo che Malva ha cominciato a fidarsi di te…» (if notFlag rd.malva e trust malva >= 2): 1 runs (0.10%)
-  - «Ortica parla bene di te. Lei parla di tutti, è ve…» (if notFlag rd.ortica e trust ortica >= 2): 1 runs (0.10%)
+  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida >= 3): 1 runs (0.10%)
+  - «In questo tempo, più di tutto, ho visto che quand…» (if trait guida <= -3): 2 runs (0.20%)
+- `sessions.js#s3` (14)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola <= -4): 8 runs (0.80%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio >= 4): 8 runs (0.80%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio <= -4): 9 runs (0.90%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida >= 4): 7 runs (0.70%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida <= -4): 9 runs (0.90%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait esplora <= -3): 9 runs (0.90%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola >= 3): 9 runs (0.90%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait parola <= -3): 9 runs (0.90%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono >= 3): 8 runs (0.80%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait tono <= -3): 4 runs (0.40%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio >= 3): 5 runs (0.50%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait rischio <= -3): 5 runs (0.50%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida >= 3): 3 runs (0.30%)
+  - «Dopo tutte queste sere, la cosa che di te vedo me…» (if trait guida <= -3): 2 runs (0.20%)
+- `visits.js#openers` (4)
+  - «Il tuo nome ormai gira per Salem, e arriva anche …» (if notFlag rd.pop e pop 2): 3 runs (0.30%)
+  - «Edera si fida di te, anche se il tuo nome continu…» (if notFlag rd.edera e trust edera >= 2): 1 runs (0.10%)
   - «Ai conestabili ormai rispondi senza scomporti: te…» (if notFlag rd.passed e stat examsPassed >= 4): 1 runs (0.10%)
-  - «Bentornata: hai le scarpe bagnate di neve e qualc…» (if chapterMax 1): 7 runs (0.70%)
-- `visits.js#thread` (1)
-  - «La prima sera mi hai detto che davanti a una port…» (if notFlag rd.door e chapterMax 1 e flag s0.knock e trait espl…): 1 runs (0.10%)
-- `visits.js#talk.m02` (2)
-  - option «Sì, di solito mi fido.»: 3 runs (0.30%)
-  - option «No, mi serve una prova.»: 3 runs (0.30%)
+  - «Bentornata: hai le scarpe bagnate di neve e qualc…» (if chapterMax 1): 4 runs (0.40%)
 
 ## At the end
 
@@ -640,23 +539,23 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
 
 | Trait | -6 | -5 | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| esplora | 1 | 0 | 3 | 2 | 7 | 31 | 30 | 55 | 76 | 98 | 151 | 167 | 379 |
-| parola | 3 | 3 | 4 | 14 | 16 | 33 | 46 | 69 | 77 | 117 | 150 | 171 | 297 |
-| tono | 0 | 1 | 0 | 0 | 4 | 6 | 14 | 31 | 47 | 65 | 97 | 157 | 578 |
-| rischio | 21 | 36 | 75 | 70 | 82 | 102 | 94 | 91 | 99 | 79 | 62 | 70 | 119 |
-| guida | 34 | 53 | 60 | 58 | 95 | 86 | 91 | 90 | 114 | 86 | 74 | 76 | 83 |
+| esplora | 38 | 59 | 75 | 73 | 96 | 113 | 98 | 88 | 95 | 74 | 52 | 80 | 59 |
+| parola | 40 | 51 | 61 | 64 | 70 | 95 | 93 | 83 | 98 | 80 | 79 | 86 | 100 |
+| tono | 23 | 54 | 84 | 70 | 77 | 86 | 91 | 76 | 89 | 91 | 76 | 63 | 120 |
+| rischio | 47 | 53 | 80 | 77 | 94 | 93 | 88 | 88 | 81 | 73 | 66 | 72 | 88 |
+| guida | 63 | 61 | 58 | 102 | 93 | 86 | 100 | 74 | 95 | 71 | 67 | 64 | 66 |
 
 ### Trust with the witches (value: runs)
 
-- malva: 0: 40, 1: 153, 2: 266, 3: 271, 4: 180, 5: 79, 6: 11
-- ortica: 1: 8, 2: 77, 3: 176, 4: 258, 5: 232, 6: 168, 7: 69, 8: 12
-- edera: 0: 17, 1: 64, 2: 154, 3: 228, 4: 200, 5: 164, 6: 129, 7: 38, 8: 6
-- ginepra: 0: 2, 1: 12, 2: 24, 3: 73, 4: 145, 5: 164, 6: 179, 7: 180, 8: 135, 9: 55, 10: 28, 11: 3
+- malva: 0: 41, 1: 151, 2: 263, 3: 278, 4: 176, 5: 80, 6: 11
+- ortica: 1: 9, 2: 81, 3: 179, 4: 270, 5: 227, 6: 157, 7: 67, 8: 10
+- edera: 0: 17, 1: 66, 2: 153, 3: 225, 4: 200, 5: 165, 6: 129, 7: 37, 8: 8
+- ginepra: 0: 2, 1: 12, 2: 33, 3: 77, 4: 152, 5: 156, 6: 189, 7: 177, 8: 124, 9: 51, 10: 23, 11: 4
 
 ### Her card and her suit
 
-- card: m17 21.1%, m19 20.0%, m01 17.8%, m00 14.3%, m03 10.4%, m08 4.0%, m06 3.6%, m14 3.0%, m18 1.7%, m21 1.3%, m09 0.90%, m11 0.90%, m05 0.40%, m02 0.20%, m07 0.20%, m16 0.10%, m12 0.10%
-- suit: c 66.8%, s 28.6%, w 3.4%, p 1.2%
+- card: m11 10.1%, m07 8.3%, m14 8.3%, m00 8.2%, m03 5.9%, m19 5.6%, m09 5.6%, m02 5.4%, m04 5.3%, m18 4.9%, m06 4.6%, m01 4.5%, m16 3.5%, m05 3.3%, m08 3.2%, m10 2.8%, m13 2.6%, m17 2.5%, m20 1.6%, m15 1.5%, m12 1.5%, m21 0.80%
+- suit: c 32.7%, s 28.0%, w 21.8%, p 17.5%
 
 ### Ending variants
 
@@ -664,107 +563,111 @@ The conditional pieces of the trial, the dawn, the campfire and the last session
 
 | Where | Variant | Runs |
 |---|---|---:|
-| end.js#c3.trial | if stat jailed >= 2 | 94.7% |
-| end.js#c3.trial | else of stat jailed >= 2 | 5.3% |
-| end.js#c3.trial | if stat jailed >= 1 | 4.7% |
-| end.js#c3.trial | if flag b1.spoke | 49.3% |
-| end.js#c3.trial | else of flag b1.spoke | 50.7% |
-| end.js#c3.trial | if flag b2.went | 48.8% |
-| end.js#c3.trial | if trait tono <= -3 | 0.10% |
-| end.js#c3.trial | if trait tono >= 3 | 86.0% |
-| end.js#c3.trial | if trait parola >= 3 | 70.2% |
-| end.js#c3.trial | if trait parola <= -3 | 2.4% |
-| end.js#c3.trial | if flag coven.watch.malva | 50.4% |
-| end.js#c3.trial | else of flag coven.watch.malva | 49.6% |
-| end.js#c3.trial | if trust malva >= 2 | 40.4% |
-| end.js#c3.trial | if trust ortica >= 2 | 99.1% |
-| end.js#c3.trial | if flag coven.watch.edera | 49.6% |
-| end.js#c3.trial | else of flag coven.watch.edera | 50.4% |
-| end.js#c3.trial | if trust edera >= 2 | 45.3% |
-| end.js#c3.trial | if flag coven.cat.in | 51.0% |
-| end.js#c3.trial | if flag coven.cat.out | 49.0% |
+| end.js#c3.trial | if stat jailed >= 2 | 94.8% |
+| end.js#c3.trial | else of stat jailed >= 2 | 5.2% |
+| end.js#c3.trial | if stat jailed >= 1 | 4.6% |
+| end.js#c3.trial | if flag b1.spoke | 45.2% |
+| end.js#c3.trial | else of flag b1.spoke | 54.8% |
+| end.js#c3.trial | if flag b2.went | 48.5% |
+| end.js#c3.trial | if trait tono <= -3 | 29.4% |
+| end.js#c3.trial | if trait tono >= 3 | 25.0% |
+| end.js#c3.trial | if trait parola >= 3 | 28.6% |
+| end.js#c3.trial | if trait parola <= -3 | 24.2% |
+| end.js#c3.trial | if flag coven.watch.malva | 50.6% |
+| end.js#c3.trial | else of flag coven.watch.malva | 49.4% |
+| end.js#c3.trial | if trust malva >= 2 | 40.2% |
+| end.js#c3.trial | if trust ortica >= 2 | 99.0% |
+| end.js#c3.trial | if flag coven.watch.edera | 49.4% |
+| end.js#c3.trial | else of flag coven.watch.edera | 50.6% |
+| end.js#c3.trial | if trust edera >= 2 | 45.5% |
+| end.js#c3.trial | if flag coven.cat.in | 51.2% |
+| end.js#c3.trial | if flag coven.cat.out | 48.8% |
 | end.js#c3.trial | if flag court.cook | 0.0% |
-| end.js#c3.trial | if flag depot.bray | 21.3% |
-| end.js#c3.trial | if flag b1.watched | 0.50% |
-| end.js#c3.trial | option ««Cominciamo pure, e dopo, se avanza tempo, mi rac…» (if trait tono <= -3) | 0.10% |
+| end.js#c3.trial | if flag depot.bray | 21.1% |
+| end.js#c3.trial | if flag b1.watched | 7.1% |
+| end.js#c3.trial | option ««Cominciamo pure, e dopo, se avanza tempo, mi rac…» (if trait tono <= -3) | 29.4% |
 | end.js#c3.trial | option ««I suoi conestabili me ne hanno già fatte tante, …» (if stat examsPassed >= 5 e stat examsFailed == 0) | 0.60% |
-| end.js#c3.trial | if flag exam.passed | 57.9% |
-| end.js#c3.trial | else of flag exam.passed | 42.1% |
-| end.js#c3.trial | if flag trial.won | 57.9% |
-| end.js#c3.trial | else of flag trial.won | 42.1% |
-| end.js#f.dawn | if flag coven.ortica.brooms | 34.2% |
-| end.js#f.dawn | else of flag coven.ortica.brooms | 65.8% |
+| end.js#c3.trial | if flag exam.passed | 57.6% |
+| end.js#c3.trial | else of flag exam.passed | 42.4% |
+| end.js#c3.trial | if flag trial.won | 57.6% |
+| end.js#c3.trial | else of flag trial.won | 42.4% |
+| end.js#f.dawn | if flag coven.ortica.brooms | 34.8% |
+| end.js#f.dawn | else of flag coven.ortica.brooms | 65.2% |
 | end.js#f.dawn | option «Ti dico quello che Malva ha detto a me: tienila b…» (if flag lesson.fly) | 50.0% |
 | end.js#f.dawn | option «Guarda Tartufo, che ti fa vedere dove si mettono …» (if tartufo 3) | 50.0% |
+| end.js#f.dawn | if affinity ginepra 2 | 15.6% |
 | end.js#f.dawn | if flag jail.keys | 5.2% |
 | end.js#f.dawn | if flag jail.hinges | 4.9% |
 | end.js#f.dawn | if flag jail.ortica | 4.3% |
-| end.js#f.dawn | if flag jail.jailer | 3.9% |
-| end.js#f.dawn | if flag court.card | 17.6% |
-| end.js#f.dawn | if flag trial.candles | 0.10% |
-| end.js#f.dawn | if flag fire.carriage | 50.6% |
-| end.js#f.dawn | if flag fire.promised | 64.6% |
+| end.js#f.dawn | if flag jail.jailer | 4.0% |
+| end.js#f.dawn | if flag court.card | 18.3% |
+| end.js#f.dawn | if flag trial.candles | 10.3% |
+| end.js#f.dawn | if flag fire.carriage | 50.5% |
+| end.js#f.dawn | if flag fire.promised | 64.4% |
 | end.js#f.dawn | if flag venus.looked | 50.1% |
-| end.js#f.dawn | if flag b3.stealth | 48.6% |
-| end.js#f.dawn | else of flag b3.stealth | 51.4% |
-| end.js#f.dawn | if trait rischio >= 3 | 30.2% |
-| end.js#f.dawn | if torn tono | 8.7% |
+| end.js#f.dawn | if flag b3.stealth | 48.8% |
+| end.js#f.dawn | else of flag b3.stealth | 51.2% |
+| end.js#f.dawn | if trait rischio >= 3 | 26.8% |
+| end.js#f.dawn | if torn tono | 26.5% |
 | end.js#f.dawn | if power cat | 100.0% |
-| end.js#f.last | if flag b1.candles | 3.7% |
+| end.js#f.last | if flag b1.candles | 2.6% |
 | end.js#f.last | if flag court.cook | 0.0% |
 | end.js#f.last | if flag tabita.owes | 47.6% |
-| end.js#f.last | if flag b1.spoke | 49.3% |
-| end.js#f.last | else of flag b1.spoke | 50.7% |
-| end.js#f.last | if flag b2.went | 48.8% |
-| end.js#f.last | else of flag b2.went | 51.2% |
-| end.js#f.last | if flag b3.stealth | 48.6% |
-| end.js#f.last | else of flag b3.stealth | 51.4% |
-| end.js#f.last | if flag trial.won | 57.9% |
-| end.js#f.last | else of flag trial.won | 42.1% |
-| end.js#f.last | if trust malva >= 2 | 80.7% |
-| end.js#f.last | else of trust malva >= 2 | 19.3% |
-| end.js#f.last | if steady parola | 71.6% |
-| end.js#f.last | if trait parola >= 3 | 68.6% |
-| end.js#f.last | else of trait parola >= 3 | 3.0% |
-| end.js#f.last | if trust ortica >= 2 | 99.2% |
-| end.js#f.last | else of trust ortica >= 2 | 0.80% |
-| end.js#f.last | if steady esplora e trait esplora >= 3 | 75.5% |
-| end.js#f.last | if trust edera >= 2 | 91.9% |
-| end.js#f.last | else of trust edera >= 2 | 8.1% |
-| end.js#f.last | if steady tono e trait tono >= 3 | 86.5% |
+| end.js#f.last | if flag b1.spoke | 45.2% |
+| end.js#f.last | else of flag b1.spoke | 54.8% |
+| end.js#f.last | if flag b2.went | 48.5% |
+| end.js#f.last | else of flag b2.went | 51.5% |
+| end.js#f.last | if flag b3.stealth | 48.8% |
+| end.js#f.last | else of flag b3.stealth | 51.2% |
+| end.js#f.last | if flag trial.won | 57.6% |
+| end.js#f.last | else of flag trial.won | 42.4% |
+| end.js#f.last | if trust malva >= 2 | 80.8% |
+| end.js#f.last | else of trust malva >= 2 | 19.2% |
+| end.js#f.last | if affinity malva 2 | 16.7% |
+| end.js#f.last | if steady parola | 54.8% |
+| end.js#f.last | if trait parola >= 3 | 29.4% |
+| end.js#f.last | else of trait parola >= 3 | 25.4% |
+| end.js#f.last | if trust ortica >= 2 | 99.1% |
+| end.js#f.last | else of trust ortica >= 2 | 0.90% |
+| end.js#f.last | if affinity ortica 2 | 19.7% |
+| end.js#f.last | if steady esplora e trait esplora >= 3 | 22.8% |
+| end.js#f.last | if trust edera >= 2 | 91.7% |
+| end.js#f.last | else of trust edera >= 2 | 8.3% |
+| end.js#f.last | if affinity edera 2 | 17.1% |
+| end.js#f.last | if steady tono e trait tono >= 3 | 27.4% |
 | end.js#f.last | if flag cat.fed | 53.7% |
 | end.js#f.last | else of flag cat.fed | 46.3% |
-| end.js#f.last | if trait esplora >= 3 | 79.5% |
-| end.js#f.last | if trait esplora <= -3 | 0.60% |
+| end.js#f.last | if trait esplora >= 3 | 26.6% |
+| end.js#f.last | if trait esplora <= -3 | 26.0% |
 | end.js#f.last | option «Prima ringrazio le maestre, una per una, anche se…» (if trust malva >= 2 e trust ortica >= 2 e trust edera >= 2) | 74.8% |
 | sessions.js#s4 | if flag s0.window | 58.1% |
 | sessions.js#s4 | else of flag s0.window | 41.9% |
 | sessions.js#s4 | if flag s0.believes | 49.8% |
 | sessions.js#s4 | else of flag s0.believes | 50.2% |
-| sessions.js#s4 | if verdict changed | 9.9% |
-| sessions.js#s4 | else of verdict changed | 90.1% |
-| sessions.js#s4 | «Il Matto è la carta di chi parte volentieri e gua…» (if yourCard m00) | 23.1% |
-| sessions.js#s4 | «Il Mago è la carta di chi ha la parola pronta e u…» (if yourCard m01) | 32.8% |
-| sessions.js#s4 | «La Sacerdotessa è la carta di chi sente molto e d…» (if yourCard m02) | 1.0% |
-| sessions.js#s4 | «L'Imperatrice è la carta di chi ha modi gentili e…» (if yourCard m03) | 19.0% |
-| sessions.js#s4 | «L'Imperatore è la carta di chi ragiona e va dritt…» (if yourCard m04) | 1.4% |
-| sessions.js#s4 | «Il Papa è la carta di chi preferisce la strada si…» (if yourCard m05) | 1.4% |
-| sessions.js#s4 | «Gli Amanti sono la carta di chi sceglie col cuore…» (if yourCard m06) | 9.2% |
-| sessions.js#s4 | «Il Carro è la carta di chi punta dritto alla meta…» (if yourCard m07) | 0.50% |
-| sessions.js#s4 | «La Forza è la carta di chi ha coraggio e ha anche…» (if yourCard m08) | 7.8% |
-| sessions.js#s4 | «L'Eremita è la carta di chi guarda molto e parla …» (if yourCard m09) | 3.9% |
-| sessions.js#s4 | «La Ruota della Fortuna è la carta di chi gioca la…» (if yourCard m10) | 0.10% |
-| sessions.js#s4 | «La Giustizia è la carta di chi ragiona con lucidi…» (if yourCard m11) | 4.5% |
-| sessions.js#s4 | «L'Appeso è la carta di chi non ha nessuna fretta …» (if yourCard m12) | 9.3% |
-| sessions.js#s4 | «Non badare al nome: La Morte è la carta di chi pa…» (if yourCard m13) | 0.30% |
-| sessions.js#s4 | «La Temperanza è la carta di chi ha misura in tutt…» (if yourCard m14) | 11.0% |
-| sessions.js#s4 | «Non offenderti: Il Diavolo è la carta di chi ha d…» (if yourCard m15) | 0.20% |
-| sessions.js#s4 | «Non spaventarti: La Torre è la carta di chi dice …» (if yourCard m16) | 0.50% |
-| sessions.js#s4 | «La Stella è la carta di chi è gentile e guarda il…» (if yourCard m17) | 39.1% |
-| sessions.js#s4 | «La Luna è la carta di chi dà retta a quello che s…» (if yourCard m18) | 5.9% |
-| sessions.js#s4 | «Il Sole è la carta di chi dice le cose chiare e l…» (if yourCard m19) | 29.4% |
-| sessions.js#s4 | «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20) | 0.30% |
-| sessions.js#s4 | «Il Mondo è la carta di chi ha voluto vedere tutto…» (if yourCard m21) | 8.6% |
-| sessions.js#s4 | if yourCardIsBirth true | 3.0% |
-| sessions.js#s4 | else of yourCardIsBirth true | 97.0% |
-| sessions.js#s4 | if hasBirth true | 97.0% |
+| sessions.js#s4 | if verdict changed | 11.1% |
+| sessions.js#s4 | else of verdict changed | 88.9% |
+| sessions.js#s4 | «Il Matto è la carta di chi parte volentieri e gua…» (if yourCard m00) | 14.7% |
+| sessions.js#s4 | «Il Mago è la carta di chi ha la parola pronta e u…» (if yourCard m01) | 11.1% |
+| sessions.js#s4 | «La Sacerdotessa è la carta di chi sente molto e d…» (if yourCard m02) | 11.9% |
+| sessions.js#s4 | «L'Imperatrice è la carta di chi ha modi gentili e…» (if yourCard m03) | 9.2% |
+| sessions.js#s4 | «L'Imperatore è la carta di chi ragiona e va dritt…» (if yourCard m04) | 11.6% |
+| sessions.js#s4 | «Il Papa è la carta di chi preferisce la strada si…» (if yourCard m05) | 8.4% |
+| sessions.js#s4 | «Gli Amanti sono la carta di chi sceglie col cuore…» (if yourCard m06) | 8.1% |
+| sessions.js#s4 | «Il Carro è la carta di chi punta dritto alla meta…» (if yourCard m07) | 12.0% |
+| sessions.js#s4 | «La Forza è la carta di chi ha coraggio e ha anche…» (if yourCard m08) | 5.5% |
+| sessions.js#s4 | «L'Eremita è la carta di chi guarda molto e parla …» (if yourCard m09) | 16.3% |
+| sessions.js#s4 | «La Ruota della Fortuna è la carta di chi gioca la…» (if yourCard m10) | 6.0% |
+| sessions.js#s4 | «La Giustizia è la carta di chi ragiona con lucidi…» (if yourCard m11) | 20.2% |
+| sessions.js#s4 | «L'Appeso è la carta di chi non ha nessuna fretta …» (if yourCard m12) | 16.4% |
+| sessions.js#s4 | «Non badare al nome: La Morte è la carta di chi pa…» (if yourCard m13) | 7.3% |
+| sessions.js#s4 | «La Temperanza è la carta di chi ha misura in tutt…» (if yourCard m14) | 20.4% |
+| sessions.js#s4 | «Non offenderti: Il Diavolo è la carta di chi ha d…» (if yourCard m15) | 5.2% |
+| sessions.js#s4 | «Non spaventarti: La Torre è la carta di chi dice …» (if yourCard m16) | 6.7% |
+| sessions.js#s4 | «La Stella è la carta di chi è gentile e guarda il…» (if yourCard m17) | 7.9% |
+| sessions.js#s4 | «La Luna è la carta di chi dà retta a quello che s…» (if yourCard m18) | 13.7% |
+| sessions.js#s4 | «Il Sole è la carta di chi dice le cose chiare e l…» (if yourCard m19) | 8.2% |
+| sessions.js#s4 | «Il Giudizio è la carta di chi, quando sente una c…» (if yourCard m20) | 1.5% |
+| sessions.js#s4 | «Il Mondo è la carta di chi ha voluto vedere tutto…» (if yourCard m21) | 8.7% |
+| sessions.js#s4 | if yourCardIsBirth true | 6.6% |
+| sessions.js#s4 | else of yourCardIsBirth true | 93.4% |
+| sessions.js#s4 | if hasBirth true | 93.4% |

@@ -3,7 +3,7 @@
 Che cosa viene dopo, in ordine. Ogni voce: che cos'è, perché (quale obiettivo o lezione serve), la versione
 più piccola che vale la pena fare, la ragione nel mondo di Salem, da che cosa dipende, quanto costa
 (piccolo / medio / grande), come si verifica. Le idee non ancora scelte stanno in fondo.
-Aggiornato il 17 novembre 2026 sera. I perché generali sono in `docs/LEZIONI.md`.
+Aggiornato il 18 novembre 2026 (sezione 1 fatta). I perché generali sono in `docs/LEZIONI.md`.
 
 ## In corso
 
@@ -13,19 +13,30 @@ Aggiornato il 17 novembre 2026 sera. I perché generali sono in `docs/LEZIONI.md
 
 ## 1. Mantenere le promesse che il gioco fa già (prima di aggiungere altro)
 
-**1.1 Il carattere non pende più.** *Medio, scrittura.*
-Le risposte scritte pendono (gentile 57 / pungente 26; curiosa 48 / dritta 19) e il seme finale esce Coppe
-due volte su tre. Riscrivere le scelte dove un polo è la versione antipatica dell'altro: ogni opzione deve
-essere bella da scegliere. Si verifica con `npm run coverage` (i quattro semi tra il 15% e il 35% a caso).
+Fatta il 18 novembre (da provare sul telefono). Le scelte: `lore/decisioni/proposte-2026-11-18-promesse.md`.
 
-**1.2 L'affinità con le streghe conta.** *Medio, scrittura.*
-Oggi la legge solo la storia del mulino. Per ogni strega due o tre battute o gesti che cambiano con
-l'affinità, presi dai retroscena. Si verifica con `lore/tratti/` (ogni affinità letta in almeno tre scene).
+**1.1 Il carattere non pende più.** *Fatto.* Riscritte le risposte dove un polo era la versione antipatica
+dell'altro, e ritoccati i tratti segnati male. Punti scritti: gentile 57 / pungente 26 → 51 / 40; curiosa
+50 / dritta 20 → 51 / 35; schietta 49 / accorta 30 → 49 / 40. Il seme a caso (`npm run coverage`, 1000
+partite): prima Coppe 66,8%, Spade 28,6%, Bastoni 3,4%, Denari 1,2%; dopo tutti tra il 17% e il 33%.
+Lo tiene un test (`tests/coverage.test.mjs`). Restano gentili molte risposte delle prove (`trials.js`),
+che il giro a caso non gioca.
 
-**1.3 Le nove domande della Lettrice che non escono mai.** *Piccolo.* Capire perché (forse le visite nel
-capitolo 3) e sistemare.
+**1.2 L'affinità con le streghe conta.** *Fatto.* Ogni strega ha da due a quattro righe o gesti che cambiano
+con l'affinità, in tre scene (`lore/tratti/tratto-affinita-*.md`). Le chiacchiere ripetibili (Malva al
+capitolo 1, Ortica, Edera, Ginepra dopo la fine) ne hanno una, così arrivano anche a chi è già avanti.
 
-**1.4 Fiducia e legame: un numero solo. «Ricordamela» non mostra più la risposta.** *Piccolo.*
+**1.3 Le nove domande della Lettrice che non escono mai.** *Fatto.* Erano L'Imperatore e La Giustizia
+(nella stessa visita di un'altra carta con la domanda sullo stesso asse, perdevano sempre) e le sette della
+terza fila (dopo il consiglio non c'erano più visite). Ora i pari si sciolgono in modo diverso da una
+partita all'altra, e dopo la fine la Lettrice torna nel sonno, al letto della capanna, finché ogni carta è
+raccontata. Test in `tests/story.visit.test.mjs`.
+
+**1.4 Fiducia e legame: un numero solo. «Ricordamela» non mostra più la risposta.** *Fatto.* Il legame è
+il numero vero; la fiducia ne è una copia, e un salvataggio vecchio tiene il più grande dei due.
+«Ricordamela» dà un indizio (dove l'ha trovata, che cosa guardare nel disegno; per le Minori il numero prima
+e l'elemento), mai le parole della carta. Da fare dopo, nei file della guida: `progress.addTrust` che chiama
+`addBond` e `cond.js` che legge il legame, così la copia si toglie.
 
 ## 2. Imparare meglio, con poco (da `notes/lore-design.md`)
 

@@ -5,14 +5,16 @@ nome: "Affinità con edera"
 cosa: "Quanto edera si riconosce in lei (core/witches.js AFFINITY): accorta, curiosa, testa, più la sua carta. Calcolata dai tratti, mai salvata."
 stabilisce:
   - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-3]]" }
+  - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-3]]" }
   - { dove: "c1.js#c1.malva", n: -1, scelta: "[[c1-c1-malva-1]]" }
   - { dove: "c1.js#c1.malva", n: 1, scelta: "[[c1-c1-malva-1]]" }
   - { dove: "c1.js#c1.malva", n: -1, scelta: "[[c1-c1-malva-3]]" }
   - { dove: "c1.js#c1.malva", n: 1, scelta: "[[c1-c1-malva-3]]" }
-  - { dove: "c1.js#c1.shop", n: -1, scelta: "[[c1-c1-shop-1]]" }
+  - { dove: "c1.js#c1.read", n: 1, scelta: "[[c1-c1-read-2]]" }
   - { dove: "c1.js#c1.deliver", n: -1, scelta: "[[c1-c1-deliver-2]]" }
   - { dove: "c1b.js#c1.exam1", n: -1, scelta: "[[c1b-c1-exam1-1]]" }
   - { dove: "c1b.js#c1.exam1", n: 1, scelta: "[[c1b-c1-exam1-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-3]]" }
   - { dove: "c1b.js#c1.square", n: -1, scelta: "[[c1b-c1-square-1]]" }
   - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
   - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
@@ -20,18 +22,24 @@ stabilisce:
   - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-1]]" }
   - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-2]]" }
   - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-2]]" }
+  - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-2]]" }
   - { dove: "c2.js#c2.mill", n: -1, scelta: "[[c2-c2-mill-1]]" }
   - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-3]]" }
   - { dove: "c2.js#c2.mill", n: -1, scelta: "[[c2-c2-mill-3]]" }
   - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-2]]" }
+  - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-2]]" }
   - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-2]]" }
   - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-2]]" }
+  - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-3]]" }
   - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-2]]" }
+  - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-2]]" }
   - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-3]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-1]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-2]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-2]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-4]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
+  - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
   - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-2]]" }
   - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-3]]" }
   - { dove: "c3.js#c3.court", n: -1, scelta: "[[c3-c3-court-1]]" }
@@ -39,11 +47,13 @@ stabilisce:
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-1]]" }
   - { dove: "post.js#enc.hale", n: 1, scelta: "[[post-enc-hale-1]]" }
+  - { dove: "post.js#enc.guard", n: 1, scelta: "[[post-enc-guard-1]]" }
   - { dove: "trials.js#trial.cellars.door", n: 1, scelta: "[[trials-trial-cellars-door-1]]" }
   - { dove: "trials.js#trial.vigil.door", n: -1, scelta: "[[trials-trial-vigil-door-1]]" }
   - { dove: "trials.js#trial.kettle.door", n: -1, scelta: "[[trials-trial-kettle-door-1]]" }
   - { dove: "trials.js#trial.grave.door", n: -1, scelta: "[[trials-trial-grave-door-1]]" }
   - { dove: "trials.js#trial.room.door", n: 1, scelta: "[[trials-trial-room-door-1]]" }
+  - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-1]]" }
   - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-3]]" }
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-3]]" }
   - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-4]]" }
@@ -83,6 +93,7 @@ stabilisce:
   - { dove: "opinions.js#PEOPLE_OP[9].domanda.a[2]", n: -1 }
   - { dove: "opinions.js#READER.events[1].a[2]", n: -1 }
   - { dove: "opinions.js#READER.events[3].a[1]", n: -1 }
+  - { dove: "c1.js#c1.shop", n: -1, scelta: "[[c1-c1-shop-1]]" }
   - { dove: "c1.js#c1.shop", n: 1, scelta: "[[c1-c1-shop-1]]" }
   - { dove: "c1.js#c1.shop", n: 1, scelta: "[[c1-c1-shop-2]]" }
   - { dove: "c1.js#c1.shop", n: -1, scelta: "[[c1-c1-shop-2]]" }
@@ -90,7 +101,10 @@ stabilisce:
   - { dove: "c1.js#c1.back", n: 1, scelta: "[[c1-c1-back-2]]" }
   - { dove: "c1.js#c1.deliver", n: -1, scelta: "[[c1-c1-deliver-1]]" }
   - { dove: "c1.js#c1.deliver", n: 1, scelta: "[[c1-c1-deliver-1]]" }
+  - { dove: "c1.js#c1.cottage", n: -1, scelta: "[[c1-c1-cottage-1]]" }
+  - { dove: "c1.js#c1.grimoire", n: -1, scelta: "[[c1-c1-grimoire-1]]" }
   - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-1]]" }
+  - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-2]]" }
   - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-1]]" }
   - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-3]]" }
   - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
@@ -99,14 +113,22 @@ stabilisce:
   - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-1]]" }
   - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-4]]" }
   - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-4]]" }
+  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-2]]" }
+  - { dove: "c2.js#c2.mill", n: -1, scelta: "[[c2-c2-mill-2]]" }
   - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-1]]" }
   - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-2]]" }
+  - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-4]]" }
   - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-2]]" }
   - { dove: "c2.js#c2.plan", n: 1, scelta: "[[c2-c2-plan-2]]" }
   - { dove: "c2.js#c2.plan", n: 1, scelta: "[[c2-c2-plan-3]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-4]]" }
+  - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-1]]" }
   - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-2]]" }
   - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-1]]" }
+  - { dove: "c3.js#c3.trapdoor", n: -1, scelta: "[[c3-c3-trapdoor-2]]" }
   - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-3]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-4]]" }
+  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-5]]" }
   - { dove: "c3.js#c3.edera", n: 1, scelta: "[[c3-c3-edera-5]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-1]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-1]]" }
@@ -114,7 +136,10 @@ stabilisce:
   - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-1]]" }
   - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-2]]" }
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
+  - { dove: "end.js#c3.trial", n: -1, scelta: "[[end-c3-trial-1]]" }
+  - { dove: "end.js#c3.trial", n: -1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
+  - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-1]]" }
   - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
@@ -123,6 +148,7 @@ stabilisce:
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.gravedigger", n: 1, scelta: "[[post-enc-gravedigger-1]]" }
   - { dove: "post.js#enc.miller", n: 1, scelta: "[[post-enc-miller-1]]" }
+  - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
   - { dove: "trials.js#trial.night.door", n: 1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.night.door", n: -1, scelta: "[[trials-trial-night-door-1]]" }
   - { dove: "trials.js#trial.cellars.door", n: 1, scelta: "[[trials-trial-cellars-door-1]]" }
@@ -167,11 +193,11 @@ stabilisce:
   - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-1]]" }
   - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-2]]" }
   - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
   - { dove: "c1b.js#c1.gate", n: -1, scelta: "[[c1b-c1-gate-1]]" }
   - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
   - { dove: "c2.js#c2.ortica", n: -1, scelta: "[[c2-c2-ortica-2]]" }
   - { dove: "c2.js#c2.mill", n: -1, scelta: "[[c2-c2-mill-1]]" }
-  - { dove: "c2.js#c2.mill", n: -1, scelta: "[[c2-c2-mill-2]]" }
   - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-2]]" }
   - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-3]]" }
   - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-4]]" }
@@ -197,7 +223,7 @@ stabilisce:
   - { dove: "end.js#f.last", n: -1, scelta: "[[end-f-last-2]]" }
   - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "post.js#enc.washer", n: 1, scelta: "[[post-enc-washer-1]]" }
-  - { dove: "post.js#enc.hale", n: -1, scelta: "[[post-enc-hale-1]]" }
+  - { dove: "post.js#enc.miller", n: 1, scelta: "[[post-enc-miller-1]]" }
   - { dove: "post.js#enc.miller", n: 1, scelta: "[[post-enc-miller-1]]" }
   - { dove: "post.js#minor.first", n: -1, scelta: "[[post-minor-first-1]]" }
   - { dove: "post.js#minor.first", n: 1, scelta: "[[post-minor-first-1]]" }
@@ -218,6 +244,7 @@ stabilisce:
   - { dove: "sessions.js#s1", n: -1, scelta: "[[sessions-s1-7]]" }
   - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-1]]" }
   - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-1]]" }
+  - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-5]]" }
   - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-7]]" }
   - { dove: "sessions.js#s3", n: -1, scelta: "[[sessions-s3-2]]" }
   - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-5]]" }
@@ -259,11 +286,14 @@ stabilisce:
   - { dove: "opinions.js#READER.events[6].a[2]", n: 1 }
   - { dove: "opinions.js#READER.events[7].a[0]", n: 1 }
   - { dove: "opinions.js#READER.events[7].a[1]", n: -1 }
-mette_alla_prova: []
+mette_alla_prova:
+  - { dove: "c3.js#c3.edera", condizione: "affinity edera 2" }
+  - { dove: "c3.js#edera.chat", condizione: "affinity edera 2" }
+  - { dove: "end.js#f.last", condizione: "affinity edera 2" }
 ---
 
 Quanto edera si riconosce in lei (core/witches.js AFFINITY): accorta, curiosa, testa, più la sua carta. Calcolata dai tratti, mai salvata.
 
-Lo muovono 255 punti dei copioni e lo leggono 0 condizioni.
+Lo muovono 282 punti dei copioni e lo leggono 3 condizioni.
 
 Qui `n` è il verso rispetto all'affinità: +1 avvicina, -1 allontana. La mostra il codice: ui/witches.js.

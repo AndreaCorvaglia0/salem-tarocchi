@@ -1,7 +1,7 @@
 // Props and people that only open a system: the shop counter, the court deposit, the cottage bed
 // (card of the day), and the people who wait in a scene. The work is done by services called with
 // { do: 'call' } (src/glue/).
-import { N, cat, cop, IF, open } from '../h.js';
+import { N, cat, cop, IF, open, visit } from '../h.js';
 
 export const PROPS = {
   'prop.shop': [open('shop.open')],
@@ -20,5 +20,10 @@ export const PROPS = {
       IF({ trait: ['rischio', '<=', -3] }, [cat('Tu sei una che controlla due volte il chiavistello, l\'ho notato. Per stanotte puoi stare tranquilla: di guardia ci sono io.')]),
     ]),
     open('day.draw'),
+    // after the ending the story has no more visits of the Reader: the cards still untold (the third row,
+    // mostly) come to her in her sleep, three at a time (docs/BACKLOG.md 1.3).
+    // `force`: even one card is enough (Il Mondo comes last, alone); with none the visit plays nothing, and the
+    // bed stays the card of the day.
+    IF({ chapterMin: 4 }, [{ ...visit, force: true }]),
   ],
 };

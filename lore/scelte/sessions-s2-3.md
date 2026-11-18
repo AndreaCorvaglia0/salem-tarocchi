@@ -7,10 +7,10 @@ fatto: "[[seduta-delle-paure]]"
 classe: "stabilisce"
 opzioni:
   - { t: "Rido.", imposta: "tono +1" }
-  - { t: "Me la prendo un po'.", imposta: "tono -1" }
+  - { t: "Me la prendo con me stessa, un poco.", imposta: "tono -1" }
 ---
 
 Scelta 3 della scena `s2` (sessions.js).
 
 1. «Rido.»: tono +1.
-2. «Me la prendo un po'.»: tono -1.
+2. «Me la prendo con me stessa, un poco.»: tono -1.

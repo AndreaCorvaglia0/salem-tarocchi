@@ -5,6 +5,7 @@ import { makeQuestion, hasVoice } from '../reading/index.js';
 import { CARD } from '../data/cards.base.js';
 import { sheet } from '../data/cards.js';
 import { SEMI, NUMERI, FIGURE } from '../data/reading/grid.js';
+import { DEFS } from '../data/world/index.js';
 
 // Which cards a client reading can use. owned: ids she owns; given: what the story prepared per position
 // ('fan' | 'number' | 'top' | id | null each, or undefined); n: positions of the spread.
@@ -34,16 +35,40 @@ export function questionOf(client) {
 const PLAIN = { ppf: { past: 'Passato', present: 'Presente', future: 'Futuro' } };
 export const posLabel = (spread, i) => (spread.positions.length === 1 ? 'La carta' : PLAIN[spread.id]?.[spread.positions[i].id] || spread.positions[i].label);
 
-// What she knows of a card, for the «Ricordamela» note.
-// Major: { kind: 'major', name, words: [3], says }. Minor: { kind: 'minor', name, line: 'Cinque: qualcosa si rompe · Coppe: il cuore' }.
+// The «Ricordamela» note: a cue to remember the card, never its words (lore/principi/la-domanda-non-mostra-la-
+// risposta.md; docs/BACKLOG.md 1.4). The note opens before she answers, so it must not hold the answer.
+// Major: { kind: 'major', name, words: [where she found it, one line], says: two things to look at in the
+//   picture, as questions }. Minor: { kind: 'minor', name, line: where the number sits in the row and the
+//   element of the suit } ('Cinque: viene dopo il quattro, la sosta · Coppe: l'acqua').
+// The shape is the one consult.js already draws (words joined by ' · ', then says; or the line).
 const NUM_NAME = { 1: 'Asso', 2: 'Due', 3: 'Tre', 4: 'Quattro', 5: 'Cinque', 6: 'Sei', 7: 'Sette', 8: 'Otto', 9: 'Nove', 10: 'Dieci' };
+const ANCHORS = Object.fromEntries(DEFS.flatMap((d) => Object.entries(d.anchors || {}).map(([k, v]) => [`${d.id}.${k}`, [d.name, v[2]]])));
+// the cards she does not find on the map: where she had them, in the story
+const STORY_PLACE = { m00: 'Dalla Lettrice, la prima sera', m19: 'Al cancello del bosco, all\'alba', m20: 'Sul banco del Giudice', m21: 'Dalla Lettrice, l\'ultima sera' };
+const low = (t) => String(t || '').charAt(0).toLowerCase() + String(t || '').slice(1);
+const ELEMENT = { fuoco: 'il fuoco', acqua: 'l\'acqua', aria: 'l\'aria', terra: 'la terra' };
+const stems = (ws) => (ws || []).map((w) => String(w).toLowerCase().slice(0, 5)).filter((w) => w.length >= 4);
 export function helpNote(id) {
   const c = CARD[id];
   if (!c) return null;
-  if (c.arcana === 'major') { const s = sheet(id); return { kind: 'major', name: c.name, words: (s.words || []).slice(0, 3), says: s.says || s.core || '' }; }
+  if (c.arcana === 'major') {
+    const s = sheet(id), bad = stems([...(s.words || []), ...(s.keywords || [])]);
+    const clean = (d) => !bad.some((w) => `${d.label} ${d.note}`.toLowerCase().includes(w));
+    const look = (s.details || []).filter((d) => d?.label && d?.note && clean(d)).slice(0, 2);
+    const says = look.map((d, i) => `${i ? 'Poi guarda' : 'Guarda'} ${d.label}. ${d.note}`).join(' ') || 'Guarda la figura con calma, un pezzo alla volta.';
+    // where she had it: one line in her hand ('Trovata: il bosco, la lanterna'); a spot named like the card's
+    // own keyword (Le catene, for Il Diavolo) keeps only the place
+    const [place, spot] = ANCHORS[c.spot] || [];
+    const okSpot = spot && !bad.some((b) => spot.toLowerCase().includes(b));
+    const where = STORY_PLACE[id] || (place ? `Trovata: ${low(place)}${okSpot ? `, ${low(spot)}` : ''}` : '');
+    return { kind: 'major', name: c.name, words: where ? [where] : [], says };
+  }
   const suit = SEMI[c.suit];
-  const what = c.n <= 10 ? `${NUM_NAME[c.n]}: ${NUMERI[c.n].idea.split(':')[0]}` : `${FIGURE[c.n].nome}: ${FIGURE[c.n].parola}`;
-  return { kind: 'minor', name: c.name, line: `${what} · ${suit.nome}: ${suit.dove}` };
+  const art = (w) => (/^[aeiou]/i.test(w) ? `l'${w}` : w === 'Regina' ? `la ${w}` : `il ${w}`);
+  const prev = c.n <= 10 ? [NUM_NAME[c.n - 1], NUMERI[c.n - 1]?.parola] : [FIGURE[c.n - 1]?.nome, FIGURE[c.n - 1]?.parola];
+  const own = c.n <= 10 ? NUM_NAME[c.n] : FIGURE[c.n].nome;
+  const what = c.n === 1 ? 'Asso: il primo della fila' : c.n === 11 ? 'Fante: la prima delle figure' : `${own}: viene dopo ${art(prev[0])} («${prev[1]}»)`;
+  return { kind: 'minor', name: c.name, line: `${what} · ${suit.nome}: ${ELEMENT[suit.elemento] || suit.elemento}` };
 }
 
 // Good reading: the final level right (or a single card, where there is no final question) and wrong answers

@@ -6,11 +6,11 @@ dove: "sessions.js#s1"
 fatto: "[[seduta-dei-valori]]"
 classe: "stabilisce"
 opzioni:
-  - { t: "Sì, glielo dico tutto.", imposta: "parola +1" }
+  - { t: "Sì, glielo dico tutto.", imposta: "parola +1, tono -1" }
   - { t: "Glielo dico, ma con garbo.", imposta: "tono +1" }
 ---
 
 Scelta 4 della scena `s1` (sessions.js).
 
-1. «Sì, glielo dico tutto.»: parola +1.
+1. «Sì, glielo dico tutto.»: parola +1, tono -1.
 2. «Glielo dico, ma con garbo.»: tono +1.

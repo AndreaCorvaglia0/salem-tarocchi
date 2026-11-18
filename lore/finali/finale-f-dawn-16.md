@@ -1,15 +1,15 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.dawn: Io viaggio in braccio a te, come sempre, e non co…"
+nome: "f.dawn: Con te non si capisce mai se stai per abbracciarm…"
 dove: "end.js#f.dawn"
-condizione: "power cat"
+condizione: "torn tono"
 si_guadagna:
-  - { serve: "power cat", dove: "c0.js#p.road, i livelli (core/progress.js LEVEL_GIFTS)" }
+  - { serve: "torn tono", dove: "[[tratto-tono]]" }
 ---
 
 Una variante del finale in `f.dawn` (end.js).
 
-- se power cat: Io viaggio in braccio a te, come sempre, e non con quella lì. Su questo non si discute.
+- se torn tono: Con te non si capisce mai se stai per abbracciarmi o per mordermi. Non cambiare, eh: è il…
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

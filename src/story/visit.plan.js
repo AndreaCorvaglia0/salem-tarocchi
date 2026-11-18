@@ -19,17 +19,21 @@ const axesOf = (ask) => [...new Set((ask?.a || []).flatMap((o) => Object.keys(o?
 const explored = (s, k) => (s.hits?.[k]?.plus || 0) + (s.hits?.[k]?.minus || 0);
 const validAsk = (ask) => !!ask && typeof ask.q === 'string' && Array.isArray(ask.a) && ask.a.filter((o) => o && o.t).length >= 2;
 
+// Ties (two cards on the same axis, as Il Carro and L'Imperatore, L'Eremita and La Giustizia) used to go to the
+// oldest card every time, so the other question was never asked (docs/BACKLOG.md 1.3). Now a tie is broken by
+// how many answers she has given so far (all her trait hits): it changes from one game to the next.
+const spin = (s) => AXES.reduce((a, k) => a + explored(s, k), 0);
 export function pickAsk(s, ids, talk) {
   const withAsk = ids.filter((id) => validAsk(talk?.[id]?.ask));
   if (!withAsk.length) return null;
-  let best = null, bestN = Infinity;
+  let tied = [], bestN = Infinity;
   for (const id of withAsk) {
     const axes = axesOf(talk[id].ask);
     if (!axes.length) continue;
     const n = Math.min(...axes.map((k) => explored(s, k)));
-    if (n < bestN) { bestN = n; best = id; }
+    if (n < bestN) { bestN = n; tied = [id]; } else if (n === bestN) tied.push(id);
   }
-  return best || withAsk[0];
+  return tied.length ? tied[spin(s) % tied.length] : withAsk[0];
 }
 
 const first = (list, test) => {

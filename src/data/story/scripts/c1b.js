@@ -35,7 +35,7 @@ export const C1B = {
     N('In fondo alla via, dalla parte della piazza, dondola la luce di una lanterna.'),
     ginepra('Quello è un conestabile, e a me mi conosce già. Io passo da dietro le case. Tu attraversa pure la piazza: prima o poi ti fermano lo stesso, e la prima volta è meglio togliersela subito.'),
     choice(
-      o('Allora attraverso la piazza in mezzo, a testa alta.', { rischio: 1 }, [
+      o('Allora attraverso la piazza in mezzo, a testa alta.', { rischio: 1, esplora: -1 }, [
         ginepra('Ecco, brava, fatti vedere! Io la prima volta ho fatto il giro largo e mi hanno presa lo stesso, quindi tanto vale andarci incontro.'),
       ], { flag: 'square.front' }),
       o('Io passo lungo il muro della chiesa, dove c\'è ombra.', { rischio: -1 }, [
@@ -86,7 +86,7 @@ export const C1B = {
         o('«Buonanotte, conestabile, e buona guardia.»', { tono: 1 }, [
           cop('Buona guardia, dice. In vent\'anni di ronde non me l\'aveva mai augurato nessuno, e non so ancora se devo insospettirmi.'),
         ]),
-        o('Me ne vado senza voltarmi, e senza una parola.', { tono: -1 }, [
+        o('«La prossima volta, conestabile, fermate qualcuno con una faccia più colpevole.»', { tono: -1 }, [
           N('Senti la lanterna che ti segue per una decina di passi, come un dito puntato tra le scapole. Poi la luce torna indietro, e la piazza è di nuovo buia.'),
         ]),
       ),
@@ -135,7 +135,7 @@ export const C1B = {
       o('Dammi il bicchiere, che lo butto via io.', { guida: 1 }, [
         ginepra('Sì, buttalo tu, per favore, e lontano, oltre la siepe. Io quel bicchiere non lo tocco più nemmeno con i guanti.'),
       ], { trust: { ginepra: 1 }, tag: tg('m14', 'c') }),
-      o('È il bianco di un uovo, Ginepra, e nient\'altro.', { guida: -1 }, [
+      o('È il bianco di un uovo, Ginepra, e nient\'altro.', { guida: -1, tono: -1 }, [
         ginepra('Hai ragione, è un uovo. Un uovo che ha fatto una bara. Me lo ripeto finché ci credo, e tu intanto parlami d\'altro.'),
       ], { tag: tg('m01', 's') }),
       // special answers: two other ways to get rid of that shape
@@ -143,7 +143,7 @@ export const C1B = {
         N('Tartufo salta sul davanzale, annusa il bicchiere e lo spinge oltre il bordo con una zampa sola, guardandoti negli occhi mentre lo fa. Nella neve resta soltanto una macchia chiara.'),
         ginepra('Ah ah, l\'ha fatto apposta, hai visto come ti guardava? Meglio lui di noi due: un gatto nero che rovescia una bara porta bene per forza, o almeno io ho deciso così.'),
       ], { trust: { ginepra: 1 } }),
-      sp('magic', { power: 'fire' }, 'Ci passo sopra la fiammella, finché quella forma si scioglie.', { tono: 1 }, [
+      sp('magic', { power: 'fire' }, 'Ci passo sopra la fiammella, finché quella forma si scioglie.', { rischio: 1, guida: -1 }, [
         N('Apri la mano sopra il bicchiere, e la fiammella scalda l\'acqua finché l\'albume si rapprende in un grumo bianco, che non somiglia più a niente.'),
         ginepra('Adesso è un uovo cotto male, e di un uovo cotto male non ha mai avuto paura nessuno. Me lo insegni, quel fuoco lì? Ortica dice che a me verrà tardi, perché non sto mai ferma.'),
       ], { trust: { ginepra: 1 } }),
@@ -158,7 +158,7 @@ export const C1B = {
     IF({ lacks: 'm06' }, [ginepra('Ce n\'è un\'altra infilata dietro il vaso, qui sul davanzale. Sono Gli Amanti, e te la lascio volentieri: stanotte di sapere chi sposo non ho più nessuna voglia.')]),
     ginepra('Domani all\'imbrunire in piazza ci sarà gente, per via delle ragazze che gridano. Io ci vado, anche se so che non dovrei. Vieni anche tu?'),
     choice(
-      o('Vengo, ma restiamo in fondo, vicino al portico.', { rischio: -1 }, [
+      o('Vengo, ma restiamo in fondo, vicino al portico.', { rischio: -1, parola: -1 }, [
         ginepra('In fondo, vicino al portico, dove si vede tutto e non ti vede nessuno. Ah ah, sei qui da due giorni e ragioni già come una di Salem.'),
       ]),
       o('Vengo, e voglio vedere bene chi è che grida.', { esplora: 1 }, [
@@ -313,6 +313,13 @@ export const C1B = {
         [malva('Cosa c\'è, hai fame? Il pane è nella madia. Prendilo da te e non stare lì a ringraziare.')])]),
     IF({ trait: ['tono', '<=', -3] }, [malva('Ho sentito come rispondi alla gente, e non dico che sbagli. Solo, la lingua tienila affilata per chi se lo merita.')]),
     IF({ trait: ['tono', '>=', 3] }, [malva('Mi dicono che sei gentile con tutti. Va bene, ma non esserlo anche con chi ti fruga nella borsa.')]),
+    // affinity (BACKLOG 1.2): Malva sees herself in a gentle, careful girl who follows her heart
+    IF({ affinity: { malva: 2 } }, [
+      N('Mentre parli, Malva ti prende una mano, la gira verso il fuoco e ci passa sopra un velo del suo unguento, senza chiederti il permesso.'),
+      malva('Le mani vanno tenute buone, anche le tue. Tu poi hai quelle giuste: ferme, e non troppo svelte.'),
+    ], [
+      malva('Tu hai la testa svelta, e la lingua pure. Va bene, ma prima di aprire una porta guarda chi c\'è dietro, che a Salem conviene.'),
+    ]),
     IF({ level: 4 }, [malva('Guarda chi c\'è, la fattucchiera. Una volta entravi in punta di piedi, e adesso ti siedi senza aspettare che te lo dica io. Va bene così.')]),
     choice(
       o('Mi ripeti come si legge una carta sola?', null, [

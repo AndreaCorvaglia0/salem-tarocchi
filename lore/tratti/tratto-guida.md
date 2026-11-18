@@ -18,11 +18,11 @@ stabilisce:
   - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-1]]" }
   - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
   - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-2]]" }
+  - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-2]]" }
   - { dove: "c1b.js#c1.gate", n: 1, scelta: "[[c1b-c1-gate-1]]" }
   - { dove: "c1b.js#c1.gate", n: -1, scelta: "[[c1b-c1-gate-1]]" }
   - { dove: "c2.js#c2.ortica", n: 1, scelta: "[[c2-c2-ortica-2]]" }
   - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-1]]" }
-  - { dove: "c2.js#c2.mill", n: 1, scelta: "[[c2-c2-mill-2]]" }
   - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-2]]" }
   - { dove: "c2.js#c2.fire", n: 1, scelta: "[[c2-c2-fire-3]]" }
   - { dove: "c2.js#c2.fire", n: -1, scelta: "[[c2-c2-fire-4]]" }
@@ -48,7 +48,7 @@ stabilisce:
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
   - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
-  - { dove: "post.js#enc.hale", n: 1, scelta: "[[post-enc-hale-1]]" }
+  - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
   - { dove: "post.js#enc.miller", n: -1, scelta: "[[post-enc-miller-1]]" }
   - { dove: "post.js#minor.first", n: 1, scelta: "[[post-minor-first-1]]" }
   - { dove: "post.js#minor.first", n: -1, scelta: "[[post-minor-first-1]]" }
@@ -69,6 +69,7 @@ stabilisce:
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-7]]" }
   - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-1]]" }
   - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-1]]" }
+  - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-5]]" }
   - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-7]]" }
   - { dove: "sessions.js#s3", n: 1, scelta: "[[sessions-s3-2]]" }
   - { dove: "sessions.js#s3", n: -1, scelta: "[[sessions-s3-5]]" }
@@ -162,6 +163,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): cuore (+) o testa (-), da -6 a 6.
 
-Lo muovono 106 punti dei copioni e lo leggono 47 condizioni.
+Lo muovono 107 punti dei copioni e lo leggono 47 condizioni.
 
-Verso cuore: 55 punti; verso testa: 51 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso cuore: 54 punti; verso testa: 53 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

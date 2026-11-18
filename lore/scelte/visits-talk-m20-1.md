@@ -7,10 +7,10 @@ fatto: ""
 classe: "stabilisce"
 opzioni:
   - { t: "Perdono in fretta.", imposta: "tono +1" }
-  - { t: "Me lo ricordo a lungo.", imposta: "tono -1" }
+  - { t: "Me lo ricordo a lungo, e non per cattiveria.", imposta: "tono -1" }
 ---
 
 Scelta 1 della scena `talk.m20` (visits.js).
 
 1. «Perdono in fretta.»: tono +1.
-2. «Me lo ricordo a lungo.»: tono -1.
+2. «Me lo ricordo a lungo, e non per cattiveria.»: tono -1.

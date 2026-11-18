@@ -6,11 +6,11 @@ dove: "sessions.js#s3"
 fatto: "[[seduta-dei-sogni]]"
 classe: "stabilisce"
 opzioni:
-  - { t: "La decido io.", imposta: "rischio +1" }
+  - { t: "La decido io.", imposta: "rischio +1, tono -1" }
   - { t: "La decidiamo insieme.", imposta: "tono +1" }
 ---
 
 Scelta 4 della scena `s3` (sessions.js).
 
-1. «La decido io.»: rischio +1.
+1. «La decido io.»: rischio +1, tono -1.
 2. «La decidiamo insieme.»: tono +1.

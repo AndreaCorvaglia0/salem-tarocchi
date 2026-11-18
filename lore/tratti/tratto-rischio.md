@@ -6,6 +6,7 @@ cosa: "Un asse del ritratto (core/progress.js AXES): audace (+) o prudente (-), 
 stabilisce:
   - { dove: "c0.js#p.road", n: 1, scelta: "[[c0-p-road-1]]" }
   - { dove: "c0.js#p.road", n: -1, scelta: "[[c0-p-road-1]]" }
+  - { dove: "c1.js#c1.malva", n: -1, scelta: "[[c1-c1-malva-3]]" }
   - { dove: "c1.js#c1.read", n: -1, scelta: "[[c1-c1-read-2]]" }
   - { dove: "c1.js#c1.read", n: 1, scelta: "[[c1-c1-read-2]]" }
   - { dove: "c1.js#c1.grimoire", n: 1, scelta: "[[c1-c1-grimoire-1]]" }
@@ -15,6 +16,7 @@ stabilisce:
   - { dove: "c1b.js#c1.cart", n: 1, scelta: "[[c1b-c1-cart-2]]" }
   - { dove: "c1b.js#c1.cart", n: -1, scelta: "[[c1b-c1-cart-2]]" }
   - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-1]]" }
+  - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
   - { dove: "c1b.js#c1.venus", n: 1, scelta: "[[c1b-c1-venus-2]]" }
   - { dove: "c1b.js#c1.venus", n: -1, scelta: "[[c1b-c1-venus-3]]" }
   - { dove: "c1b.js#c1.square", n: 1, scelta: "[[c1b-c1-square-1]]" }
@@ -30,18 +32,19 @@ stabilisce:
   - { dove: "c2.js#c2.plan", n: 1, scelta: "[[c2-c2-plan-1]]" }
   - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-3]]" }
   - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-1]]" }
+  - { dove: "c2.js#c2.plan", n: -1, scelta: "[[c2-c2-plan-4]]" }
   - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-1]]" }
   - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-1]]" }
   - { dove: "c2.js#c2.arrest", n: 1, scelta: "[[c2-c2-arrest-2]]" }
   - { dove: "c2.js#c2.arrest", n: -1, scelta: "[[c2-c2-arrest-2]]" }
   - { dove: "c3.js#c3.trapdoor", n: 1, scelta: "[[c3-c3-trapdoor-1]]" }
-  - { dove: "c3.js#c3.edera", n: -1, scelta: "[[c3-c3-edera-4]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-2]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-2]]" }
   - { dove: "c3.js#c3.coven", n: -1, scelta: "[[c3-c3-coven-5]]" }
   - { dove: "c3.js#c3.coven", n: 1, scelta: "[[c3-c3-coven-5]]" }
   - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-2]]" }
   - { dove: "c3.js#c3.jail", n: 1, scelta: "[[c3-c3-jail-3]]" }
+  - { dove: "c3.js#c3.jail", n: -1, scelta: "[[c3-c3-jail-3]]" }
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "c3.js#c3.court", n: 1, scelta: "[[c3-c3-court-1]]" }
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-1]]" }
@@ -64,6 +67,7 @@ stabilisce:
   - { dove: "trials.js#trial.dare.door", n: -1, scelta: "[[trials-trial-dare-door-1]]" }
   - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-2]]" }
   - { dove: "sessions.js#s0", n: 1, scelta: "[[sessions-s0-3]]" }
+  - { dove: "sessions.js#s0", n: -1, scelta: "[[sessions-s0-3]]" }
   - { dove: "sessions.js#s1", n: 1, scelta: "[[sessions-s1-5]]" }
   - { dove: "sessions.js#s2", n: 1, scelta: "[[sessions-s2-2]]" }
   - { dove: "sessions.js#s2", n: -1, scelta: "[[sessions-s2-2]]" }
@@ -161,6 +165,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): audace (+) o prudente (-), da -6 a 6.
 
-Lo muovono 91 punti dei copioni e lo leggono 61 condizioni.
+Lo muovono 95 punti dei copioni e lo leggono 61 condizioni.
 
-Verso audace: 52 punti; verso prudente: 39 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso audace: 53 punti; verso prudente: 42 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

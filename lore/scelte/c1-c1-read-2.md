@@ -6,11 +6,11 @@ dove: "c1.js#c1.read"
 fatto: "[[prima-lettura-per-malva]]"
 classe: "stabilisce"
 opzioni:
-  - { t: "E se a una cliente dico una cosa sbagliata?", imposta: "rischio -1, punto m00, seme c" }
+  - { t: "E se a una cliente dico una cosa sbagliata?", imposta: "rischio -1, parola -1, punto m00, seme c" }
   - { t: "Mi aspettavo che fosse più difficile.", imposta: "rischio +1, punto m07, seme w" }
 ---
 
 Scelta 2 della scena `c1.read` (c1.js).
 
-1. «E se a una cliente dico una cosa sbagliata?»: rischio -1, punto m00, seme c.
+1. «E se a una cliente dico una cosa sbagliata?»: rischio -1, parola -1, punto m00, seme c.
 2. «Mi aspettavo che fosse più difficile.»: rischio +1, punto m07, seme w.

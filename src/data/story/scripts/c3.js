@@ -26,6 +26,9 @@ export const C3 = {
       malva('Ti è venuta anche l\'aria, lo vedo da come ti si muove il mantello. È la magia delle Spade: basta un soffio, e un conestabile per un po\' non sa più dove stava andando.'),
       malva('Una volta ti avrei mandata a comprarmi l\'incenso. Adesso sei tu che dovresti dire a me cosa serve, e la cosa non mi dispiace quanto pensavo.'),
       IF({ flag: 'malva.cheeky' }, [malva('Tieniti forte alla scala con quelle mani delicate, che i pioli sono bagnati.')]),
+      IF({ affinity: { malva: 2 } },
+        [N('Prima che tu scenda, Malva ti sistema il colletto del mantello con due colpi secchi, come si fa con i bambini che escono col freddo, e poi guarda da un\'altra parte.')],
+        [malva('E non guardarmi così, che la benedizione non te la do. Le cose fatte bene non hanno bisogno di parole.')]),
       malva('Ginepra è una sciocca, e lo dico con tutto il bene che le voglio. Però si è fatta avanti per un\'altra, e una così a quel signore del tribunale non la lascio.'),
       IF({ flag: 'b2.stayed' }, [malva('So anche che tu al deposito non ci sei voluta andare. Hai fatto bene, e non pensare nemmeno per un momento che sia colpa tua.')]),
       IF({ flag: 'b2.went' }, [malva('So anche che al deposito c\'eri pure tu. Non ti dico niente, perché alla tua età ci sarei andata anch\'io.')]),
@@ -75,7 +78,7 @@ export const C3 = {
         o('Dimmi almeno come sta, se lo sai.', { guida: 1 }, [
           malva('Canta, mi dicono, e stona. Finché canta vuol dire che sta bene, e tu pensa ad arrivare da lei tutta intera.'),
         ]),
-        o('Allora torno a studiare, stanotte stessa.', { guida: -1 }, [
+        o('Allora torno a studiare, stanotte stessa.', { guida: -1, esplora: -1 }, [
           malva('Stanotte dormi, perché a studiare con gli occhi chiusi non ha mai imparato niente nessuno. Da domani, però, sì.'),
         ]),
       )]),
@@ -96,12 +99,13 @@ export const C3 = {
         edera('Vieni avanti, cara. Sei salita dal pozzo, lo sento dal muschio che hai addosso: è la strada lunga, ed è quella che avrei preso io. Tu devi essere la ragazza di Malva: Rosalba, mi pare.'),
       ], { flag: 'edera.well' }),
     ),
+    IF({ affinity: { edera: 2 } }, [N('Edera ti guarda a lungo, con la testa un po\' piegata, come si guarda una carta che si conosce bene e di cui non viene il nome.')]),
     IF({ flag: 'trapdoor.light' }, [edera('Ti ho vista arrivare da lontano, con quella fiammella sul palmo. Quaggiù una luce che cammina da sola non si vedeva da anni, e mi ha fatto piacere.')]),
     choice(
-      o('Veramente mi chiamo {name}.', { parola: 1 }, [
+      o('Veramente mi chiamo {name}.', { parola: 1, tono: -1 }, [
         edera('{name}, ma certo, perdonami. È un bel nome, e lo dimenticherò prima di sera. Con le carte non mi succede mai, ed è una fortuna, perché sono le carte che ci servono.'),
       ], { tag: tg('m00', 'w') }),
-      o('Rosalba va benissimo.', { tono: 1 }, [
+      o('Rosalba va benissimo.', { tono: 1, parola: -1 }, [
         edera('Sei gentile a non correggermi. Lo so che non ti chiami così, l\'ho capito da come hai sorriso; ma lasciami Rosalba ancora per un poco, che mi ci sono affezionata.'),
       ], { trust: { edera: 1 }, flag: 'edera.rosalba', tag: tg('m02', 'c') }),
     ),
@@ -129,7 +133,7 @@ export const C3 = {
       o('Quando le trovo te le porto a vedere, una per una.', { tono: 1 }, [
         edera('Davvero lo faresti? Sono vent\'anni che non vedo la Stella da vicino. Portami quella per prima, cara, e io ti preparo qualcosa da portare via.'),
       ], { flag: 'edera.promise' }),
-      o('Le cerco io: dimmi soltanto da quale cominciare.', { rischio: -1 }, [
+      o('Le cerco io: dimmi soltanto da quale cominciare.', { esplora: -1, tono: -1 }, [
         edera('Dalla Stella, che è la più vicina e la meno pericolosa: il pozzo vecchio è proprio qui sotto. Il Diavolo lascialo per ultimo, perché ha tutta la pazienza che a te manca.'),
       ]),
     ),
@@ -141,7 +145,7 @@ export const C3 = {
       o('Lo ripeterò volentieri, tutte le volte che serve.', { tono: 1 }, [
         edera('Sei una brava ragazza. C\'è un\'altra, tra noi tre, che quando dimentico qualcosa me lo fa notare ad alta voce. Non ti dico chi è, anche perché in questo momento non me lo ricordo.'),
       ], { trust: { edera: 1 }, tag: tg('m02', 'c') }),
-      o('Io i nomi me li scrivo. Potrei scriverli anche per te.', { guida: -1 }, [
+      o('Io i nomi me li scrivo. Potrei scriverli anche per te.', { guida: -1, esplora: -1 }, [
         edera('Che idea pratica. Tu scrivi i nomi e io ti detto le carte, e alla fine avremo fatto un libro in due. Purché ti ricordi tu dove l\'hai messo, perché in questo non posso aiutarti.'),
       ], { tag: tg('m09', 'p') }),
       // special: her birth sign, something Edera does not forget
@@ -177,7 +181,7 @@ export const C3 = {
         o('Edera, dimmi cos\'altro ricordi di lui: può servirmi.', { esplora: 1 }, [
           edera('Che prima di soffiare su una candela sorrideva sempre, come per scusarsi. Lo fa ancora adesso, con le persone. Vedi che quando serve me le ricordo, le cose?'),
         ], { trust: { edera: 1 }, tag: tg('m02', 's') }),
-        o('Edera, delle candele parliamo dopo. Adesso serve altro.', { esplora: -1 }, [
+        o('Edera, delle candele parliamo dopo. Adesso serve altro.', { esplora: -1, tono: -1 }, [
           edera('Hai ragione, cara. È che i particolari inutili sono quelli che mi restano meglio in testa, e a una certa età ci si affeziona a quello che resta.'),
         ], { tag: tg('m07', 'w') }),
         // special: she has slept in those cells
@@ -286,7 +290,7 @@ export const C3 = {
     IF({ flag: 'fire.promised' }, [ginepra('Al fuoco avevi detto «subito». Non è stato proprio subito, ma qui dentro il tempo passa strano, quindi vale lo stesso.')]),
     IF({ flag: 'fire.joked' }, [ginepra('Avevi detto che dipendeva da quanto ero stata scema. Si vede che sono stata scema abbastanza.')]),
     choice(
-      o('Parla piano, che adesso provo ad aprire.', { guida: -1 }, [
+      o('Parla piano, che adesso provo ad aprire.', { guida: -1, parola: -1 }, [
         N('La serratura è vecchia quanto la grata. Cede al terzo tentativo, con un cigolio così lungo che vi guardate tutte e due senza respirare.'),
       ], { tag: tg('m01', 'w') }),
       o('Prima dimmi come stai.', { guida: 1 }, [
@@ -304,7 +308,7 @@ export const C3 = {
         cat('(La guardia dorme con la bocca aperta, e le chiavi stavano appese sopra la sua testa. Non ringraziarmi adesso, che i conti li facciamo a casa.)'),
         xp(5),
       ], { flag: 'jail.keys' }),
-      sp('witch', [{ flag: 'coven.ortica.talk' }, { trust: ['ortica', '>=', 2] }], 'Fischio piano verso la scala, come mi ha insegnato Ortica.', { tono: 1 }, [
+      sp('witch', [{ flag: 'coven.ortica.talk' }, { trust: ['ortica', '>=', 2] }], 'Fischio piano verso la scala, come mi ha insegnato Ortica.', { parola: -1 }, [
         N('Dall\'alto arriva la voce di Ortica, che chiede a una guardia di farle vedere com\'è fatto un mazzo di chiavi. Un momento dopo l\'anello scende dalla grata dell\'aria, legato a un filo d\'erba.'),
         ginepra('Quella è Ortica, la riconosco dal nodo, che li fa tutti storti! Ah ah, apri, svelta, prima che ricominci a raccontare e si dimentichi di noi.'),
         xp(5),
@@ -322,7 +326,7 @@ export const C3 = {
       o('Mi metto davanti a Ginepra, tra lei e la scala.', { rischio: 1 }, [
         judge('Che gesto generoso, signorina. Lo terrò presente domattina, anche se non le prometto che andrà a suo favore.'),
       ]),
-      o('«Buonasera a voi, signor Giudice.»', { parola: -1 }, [
+      o('«Buonasera a voi, signor Giudice.»', { parola: -1, rischio: -1 }, [
         judge('Vede che tra persone educate ci si intende subito, perfino in una cantina? Mi fa piacere, perché domani avremo molto da dirci.'),
       ]),
     ),
@@ -396,6 +400,10 @@ export const C3 = {
       tool('incense', 1), trust('edera', 1), flag('edera.star'),
     ]),
     IF({ flag: 'edera.sign' }, [edera('Del tuo nome non sono sicura, ma del segno sì: sei nata sotto il segno {sign}. Vedi che una cosa di te l\'ho tenuta?')]),
+    // affinity (BACKLOG 1.2): Edera sees herself in a careful, curious girl who reasons
+    IF({ affinity: { edera: 2 } },
+      [edera('Tu guardi prima di chiedere, e chiedi prima di toccare. Io facevo così, quando avevo le gambe buone e tutte le gallerie ancora da imparare.')],
+      [edera('Vai sempre un poco di fretta, cara. Quaggiù le carte non scappano: stanno ferme da prima di me, e aspettano chi si siede.')]),
     IF(KIND, [edera('Mi fa sempre piacere quando scendi, cara. Sei una delle poche persone che mi parla come si parla a una signora, e non a una vecchia.')]),
     choice(
       o('Mi ripeti le posizioni della croce?', null, [

@@ -266,7 +266,7 @@ export const TALK = {
     "Per questa carta avevi scritto: {words:m20}. Le prendo come una risposta; io ci aggiungo «risveglio», che è la parola della tromba.",
     "Quando qualcuno ti ha fatto un torto e poi ti chiede scusa, tu perdoni in fretta o te lo ricordi a lungo?",
     A("Perdono in fretta.", { tono: 1 }, "Allora ti alzi leggera, come quelli della carta. Controlla soltanto di non perdonare prima ancora che l'altro abbia capito."),
-    A("Me lo ricordo a lungo.", { tono: -1 }, "Hai buona memoria, e non è un difetto. La carta ti direbbe che i conti vanno fatti, appunto, per poterli chiudere.")),
+    A("Me lo ricordo a lungo, e non per cattiveria.", { tono: -1 }, "Hai buona memoria, e non è un difetto. La carta ti direbbe che i conti vanno fatti, appunto, per poterli chiudere.")),
   m21: card(
     "Il Mondo è l'ultima carta. Una figura danza dentro una corona di alloro, e ai quattro angoli la guardano un angelo, un'aquila, un toro e un leone. In una lettura dice che un giro si è chiuso e che ogni cosa ha trovato il suo posto: puoi festeggiare, e poi ricominciare.",
     {

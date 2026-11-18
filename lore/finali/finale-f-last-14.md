@@ -1,16 +1,16 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.last: Sei rimasta gentile fino alla fine, anche con chi…"
+nome: "f.last: E dimmi che continuerai a girare e a guardare tut…"
 dove: "end.js#f.last"
-condizione: "steady tono e trait tono >= 3"
+condizione: "steady esplora e trait esplora >= 3"
 si_guadagna:
-  - { serve: "steady tono", dove: "[[tratto-tono]]" }
-  - { serve: "trait tono >= 3", dove: "[[tratto-tono]]" }
+  - { serve: "steady esplora", dove: "[[tratto-esplora]]" }
+  - { serve: "trait esplora >= 3", dove: "[[tratto-esplora]]" }
 ---
 
 Una variante del finale in `f.last` (end.js).
 
-- se steady tono e trait tono >= 3: Sei rimasta gentile fino alla fine, anche con chi non lo era con te. È la cosa più diffic…
+- se steady esplora e trait esplora >= 3: E dimmi che continuerai a girare e a guardare tutto, perché ho ancora un sacco di posti d…
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

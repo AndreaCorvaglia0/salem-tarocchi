@@ -33,7 +33,7 @@ export const C2 = {
       o('Malva dice che hai qualcosa da insegnarmi.', { esplora: -1 }, [
         ortica('Dritta al punto, eh? Si vede che ti ha tirata su Malva, anche se soltanto per un inverno. Va bene, cominciamo subito, e le chiacchiere le facciamo dopo.'),
       ], { tag: tg('m01', 's') }),
-      o('Parli sempre così tanto, o lo fai per me?', { parola: 1 }, [
+      o('Parli sempre così tanto, o lo fai per me?', { parola: 1, tono: -1 }, [
         ortica('Sempre, anche quando dormo! Il gufo qui sopra ha cambiato albero due volte. Però mi piace che tu me l\'abbia chiesto in faccia, perché di solito la gente lo pensa e annuisce.'),
       ], { trust: { ortica: 1 }, tag: tg('m00', 'w') }),
       // special: one who looks at everything asks about the roof first
@@ -44,10 +44,10 @@ export const C2 = {
     ),
     ortica('Prima però dimmi una cosa tu, che ormai sei una fattucchiera e in paese ci hai passato l\'inverno. La Hale, secondo te, c\'entrava qualcosa con quegli spilli?'),
     choice(
-      o('No. Era una vecchia con una cesta di candele, e basta.', { parola: 1 }, [
+      o('No. Era una vecchia con una cesta di candele, e basta.', { parola: 1, tono: -1 }, [
         ortica('Lo penso anch\'io, e mi fa piacere sentirlo da una che c\'era. Io lo dico da mesi, ma io dico tante di quelle cose che ormai non mi contano più.'),
       ]),
-      o('Non lo so. Io ho visto soltanto una ragazza che tremava davvero.', { guida: 1 }, [
+      o('Non lo so. Io ho visto soltanto una ragazza che tremava davvero.', { guida: 1, parola: -1 }, [
         ortica('Ecco, questa è una risposta da fattucchiera: hai guardato anche l\'altra. Quella ragazza trema sul serio, e nessuno in paese si domanda di che cosa.'),
       ]),
       // special: she answers with what the people at her table say
@@ -75,7 +75,7 @@ export const C2 = {
       o('Io ti sto ascoltando, e non mi annoio per niente.', { tono: 1 }, [
         ortica('Davvero? Si vede, sai, hai la faccia di una che ascolta. Allora un giorno ti racconto del mugnaio, ma ci vuole un pomeriggio intero e bisogna portarsi da mangiare.'),
       ], { trust: { ortica: 1 }, tag: tg('m01', 'c') }),
-      o('Forse ti ascolterebbero di più, se ogni tanto ti fermassi.', { tono: -1 }, [
+      o('Allora fermati un momento, che voglio sentire la fine almeno di una storia.', { tono: -1 }, [
         ortica('Fermarmi, proprio io! L\'ho fatto una volta, anni fa, e c\'è stato un tale silenzio che mi sono spaventata da sola. Però hai ragione, e te lo dico subito, prima di dimenticarmelo.'),
       ], { tag: tg('m09', 'p') }),
     ),
@@ -114,7 +114,7 @@ export const C2 = {
       o('«Avete ragione voi: gira proprio al contrario.»', { tono: 1 }, [
         N('«Lo vedi che lo dicevo io?» Per festeggiare ti offre un sorso dalla fiaschetta, e dall\'odore capisci che è meglio non sapere cosa c\'è dentro.'),
       ], { tag: tg('m10', 'w') }),
-      o('«Mi sa che ha ragione vostra moglie.»', { parola: 1 }, [
+      o('«Mi sa che ha ragione vostra moglie, e che la fiaschetta gira più della ruota.»', { parola: 1, tono: -1 }, [
         N('«Anche tu, adesso?» Sospira, guarda la ruota ancora un momento e poi posa la fiaschetta sul muretto.'),
       ], { tag: tg('m11', 's') }),
       // special: she has read for enough people to read for a wheel
@@ -126,10 +126,10 @@ export const C2 = {
     N('«Per il disturbo ti racconto una cosa. Giù allo stagno c\'è un salice dove da ragazzi ci appendevamo per i piedi, a guardare il mondo capovolto. Su un ramo è rimasta una carta, con uno appeso proprio così.»'),
     N('«Ha la faccia tranquilla, quello lì, come uno che ha smesso di agitarsi e aspetta di capire. Da sotto in su le cose sembrano diverse, e qualche volta più chiare.»'),
     choice(
-      o('«E voi ci siete più tornato, a quel salice?»', { guida: 1 }, [
+      o('«E voi ci siete più tornato, a quel salice?»', { esplora: 1 }, [
         N('«Una volta sola, l\'anno che è morto mio padre. Mi sono appeso come da ragazzo, e il mondo capovolto mi è sembrato più sensato di quello dritto. Poi mi è girata la testa.»'),
       ]),
-      o('«Allora ci passo oggi stesso, prima che faccia buio.»', { rischio: 1 }, [
+      o('«Allora ci passo oggi stesso, prima che faccia buio.»', { rischio: 1, esplora: -1 }, [
         N('«Passaci, ma tieniti ai rami bassi, che quelli alti sono marci. Te lo dice uno che lo sa per esperienza, e che da allora zoppica quando cambia il tempo.»'),
       ]),
     ),
@@ -156,7 +156,7 @@ export const C2 = {
       N('Ginepra è già al bivacco, seduta su un tronco, con un mucchio di rami davanti e un acciarino in mano che non ne vuole sapere.'),
       ginepra('Meno male che sei arrivata. Sono qui da un\'ora e ho fatto soltanto fumo, e nemmeno tanto. Tu lo sai accendere, vero? Tu sai sempre fare tutto.'),
       choice(
-        o('Lascia fare a me, ci metto un momento.', { esplora: -1 }, [
+        o('Lascia fare a me, che a guardarti si fa giorno.', { esplora: -1, tono: -1 }, [
           N('Apri la mano sopra i rami, e la fiammella che hai imparato a tenere sul palmo scende tra i rametti più sottili. Ginepra batte le mani da sola in mezzo al bosco.'),
         ], { tag: tg('m08', 'w') }),
         o('Ti faccio vedere come si fa, così la prossima volta lo accendi tu.', { tono: 1 }, [
@@ -164,6 +164,9 @@ export const C2 = {
         ], { flag: 'fire.taught', trust: { ginepra: 1 }, tag: tg('m14', 'c') }),
       ),
       cinema(['Il fuoco adesso scalda davvero. Ginepra resta sul tronco e tu ti siedi per terra, con le ginocchia tra le braccia, e per un po\' nessuna delle due dice niente.'], 'forest.campfire'),
+      IF({ affinity: { ginepra: 2 } },
+        [N('Dopo un po\' Ginepra scende dal tronco e si siede per terra accanto a te, così vicina che le spalle si toccano. Per una che non sta mai ferma, è quasi una dichiarazione.')],
+        [ginepra('Io resto quassù sul tronco, che per terra c\'è l\'umido. Tu però non allontanarti, eh, che il bosco di notte fa dei rumori strani.')]),
       IF({ level: 7 }, [ginepra('Ortica dice che ormai sei una strega fatta e che dovrei darti del voi. Ah ah, non ci penso nemmeno.')]),
       IF({ flag: 'venus.card' }, [ginepra('Tu quella notte hai messo Gli Amanti sul davanzale, te lo ricordi? Da allora ho deciso che prima si chiede alle carte, e alle uova soltanto dopo.')]),
       IF({ flag: 'mill.honest' }, [ginepra('Ortica racconta a tutto il bosco che le hai riportato le monete del mugnaio. Io me le sarei tenute, sia chiaro, e poi me ne sarei vergognata per una settimana.')]),
@@ -172,10 +175,10 @@ export const C2 = {
       N('Sfila una carta dal guanto, gira la carta sul ginocchio e la guarda a lungo. È La Ruota della Fortuna.'),
       ginepra('Allora, vediamo un po\'. Qui c\'è una ruota, quindi vuol dire che farai un viaggio, e lo farai in carrozza. Sarà una carrozza rossa, con le tendine.'),
       choice(
-        o('Veramente la Ruota parla di una cosa che gira e cambia.', { parola: 1 }, [
+        o('Veramente la Ruota parla di una cosa che gira e cambia.', { parola: 1, tono: -1 }, [
           ginepra('Ah, una cosa che gira e cambia. Sì, in effetti è più da Ortica. Però la carrozza era bella, ammettilo, e io ci avevo già messo dentro i cuscini.'),
         ], { tag: tg('m10', 's') }),
-        o('Vai avanti, voglio sapere dove va questa carrozza.', { guida: 1 }, [
+        o('Vai avanti, voglio sapere dove va questa carrozza.', { guida: 1, parola: -1 }, [
           ginepra('Va lontano, dove non ci conosce nessuno, e dentro ci siamo noi due che ce ne andiamo da Salem. Ah ah, è una bella lettura, no? Sarà anche sbagliata, ma è bella.'),
         ], { flag: 'fire.carriage', trust: { ginepra: 1 }, tag: tg('m14', 'c') }),
         // special: the three words she wrote for the Wheel
@@ -190,7 +193,7 @@ export const C2 = {
         o('Sì. Verrei subito, senza pensarci.', { guida: 1, rischio: 1 }, [
           ginepra('Lo sapevo, io. Cioè, lo speravo, che per me è la stessa cosa. Non te lo faccio giurare, perché a te credo anche senza.'),
         ], { flag: 'fire.promised', trust: { ginepra: 1 }, tag: tg('m07', 'w') }),
-        o('Dipende da quanto sei stata scema per farti prendere.', { tono: -1 }, [
+        o('Dipende da quanto sei stata scema per farti prendere. La predica, comunque, te la farei per strada.', { tono: -1 }, [
           ginepra('Moltissimo, te lo dico già adesso. Sarò stata scema come non mai, ah ah. E tu verrai lo stesso, perché brontoli ma poi vieni.'),
         ], { flag: 'fire.joked', tag: tg('m00', 'w') }),
         // special: she has slept in those cells, and knows what is missing there
@@ -202,7 +205,7 @@ export const C2 = {
       IF(CAREFUL, [ginepra('Tu prima di fare un passo guardi dove metti il piede, l\'ho capito. Va bene così: una delle due deve pur arrivare intera.')]),
       ginepra('C\'è un\'altra cosa. A ottobre i conestabili mi hanno preso il mazzo, tutto intero, ed è chiuso nel deposito del tribunale insieme a quelli delle altre. Io lo rivoglio, e so da dove si entra.'),
       choice(
-        o('Prima di tutto dimmi da dove si entra.', { guida: -1 }, [
+        o('Prima di tutto dimmi da dove si entra.', { guida: -1, esplora: -1 }, [
           ginepra('Dalla porta laterale, quella della legna, che ha il chiavistello rotto da quando c\'era il vecchio custode. Vedi che almeno questo l\'ho studiato?'),
         ]),
         o('Ginepra, è un mazzo di carte. Ne vale la pena?', { rischio: -1 }, [
@@ -279,12 +282,12 @@ export const C2 = {
         o('Non vengo, Ginepra. È troppo pericoloso, anche per te.', { rischio: -1 }, [
           ginepra('Va bene così. No, davvero, va bene, non fare quella faccia. Vado da sola e faccio in un momento: sono veloce, lo sai, me l\'hai visto prendere Il Carro.'),
           choice(
-            o('Allora resto qui fuori, e ti faccio il palo.', { tono: 1 }, [
+            o('Allora resto qui fuori, e ti faccio il palo.', { rischio: -1 }, [
               N('Resti nell\'angolo della porta e conti fino a cento, poi ricominci. Alla terza volta, dietro una finestra, si accende una lanterna, e tu fischi più forte che puoi.'),
               N('Ginepra sbuca dalla porta di dietro con qualcosa stretto al petto e ti fa segno di sparire. Vi dividete di corsa, e dalla parte del tribunale comincia a suonare una campana.'),
               diary('Ginepra è entrata nel deposito del tribunale da sola. Io sono rimasta fuori a fare il palo, e quando ho fischiato ha suonato una campana.'),
             ], { flag: 'plan.lookout' }),
-            o('Torno verso casa: qui davanti la faccio soltanto scoprire.', { guida: -1 }, [
+            o('Torno verso casa: qui davanti la faccio soltanto scoprire.', { guida: -1, esplora: -1 }, [
               N('La guardi infilarsi nella porta laterale e sparire. Aspetti un poco, poi ti avvii verso casa, perché restare lì davanti è il modo più sicuro di farla scoprire.'),
               N('Sei a metà strada quando, dalla parte del tribunale, comincia a suonare una campana.'),
               diary('Ginepra è entrata nel deposito del tribunale da sola. Io sono tornata indietro, e poi ha suonato una campana.'),
@@ -309,7 +312,7 @@ export const C2 = {
       'Sono tre conestabili, fermi davanti alla porta. Quello in mezzo tiene in mano un foglio chiuso con un sigillo rosso.',
     ], 'village.cottage_door'),
     choice(
-      o('Vado dritta alla porta: è casa mia.', { rischio: 1 }, [
+      o('Vado dritta alla porta: è casa mia.', { rischio: 1, esplora: -1 }, [
         N('Cammini verso le lanterne senza rallentare. I tre si voltano insieme, e quello col foglio ti guarda arrivare come si guarda una che ha risparmiato loro la fatica di cercarla.'),
       ], { flag: 'arrest.front' }),
       o('Mi fermo dietro la legnaia, a guardare.', { rischio: -1 }, [
@@ -360,7 +363,7 @@ export const C2 = {
       o('Grido il suo nome, più forte che posso.', { guida: 1 }, [
         N('Lei si volta, ti cerca nel buio e ti fa l\'occhiolino. Poi la strada gira, e le lanterne se la portano dietro le case.'),
       ], { tag: tg('m07', 'w') }),
-      o('Stringo i pugni e resto zitta, come mi ha chiesto.', { guida: -1 }, [
+      o('Stringo i pugni e resto zitta, come mi ha chiesto.', { guida: -1, parola: -1 }, [
         IF({ power: 'cat' },
           [cat('(Hai fatto bene, anche se lo so che ti costa. Adesso serve la testa; per gridare ci sarà tempo quando l\'avremo tirata fuori.)')],
           [T('Mi costa più di quanto pensassi. Ma adesso mi serve la testa: per gridare ci sarà tempo quando l\'avrò tirata fuori.')]),
@@ -391,6 +394,13 @@ export const C2 = {
     IF([{ power: 'broom' }, { flag: 'lesson.fly' }, { notFlag: 'ortica.broom' }], [
       ortica('Ti ho vista passare sopra i faggi a cavallo della scopa! Io la mia non la uso più da quando ho perso il cappello sopra il mulino, ma tu vai, vai: dall\'alto il bosco è tutto un altro pettegolezzo.'),
       flag('ortica.broom'),
+    ]),
+    // affinity (BACKLOG 1.2): Ortica sees herself in a bold, frank girl who reasons
+    IF({ affinity: { ortica: 2 } }, [
+      N('Ortica comincia a raccontarti del merlo, si ferma a metà della frase e ti guarda.'),
+      ortica('No, adesso parla tu, che con te le cose si possono dire dritte e non si rompe niente. Mi piace, mi ricorda una che conoscevo da giovane.'),
+    ], [
+      ortica('Tu ascolti con la faccia, lo sai? Mentre parlo ti si vede pensare. Io invece penso dopo, quando ormai ho già detto tutto.'),
     ]),
     IF(CURIOUS, [ortica('Mi dicono che non c\'è sentiero del bosco dove tu non abbia messo il naso. Mi sembra di rivedere me a vent\'anni, soltanto più silenziosa.')]),
     choice(

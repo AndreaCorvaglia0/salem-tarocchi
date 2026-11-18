@@ -1,15 +1,15 @@
 ---
 # generato da scripts/lore.mjs, non modificare a mano
 tipo: "finale"
-nome: "f.dawn: E quella bara nel bicchiere si sbagliava, hai vis…"
+nome: "f.dawn: Al fuoco avevi detto che saresti venuta subito. C…"
 dove: "end.js#f.dawn"
-condizione: "flag venus.looked"
+condizione: "flag fire.promised"
 si_guadagna:
-  - { serve: "flag venus.looked", dove: "c1b.js#c1.venus [[c1b-c1-venus-1]]" }
+  - { serve: "flag fire.promised", dove: "c2.js#c2.fire [[c2-c2-fire-3]]" }
 ---
 
 Una variante del finale in `f.dawn` (end.js).
 
-- se flag venus.looked: E quella bara nel bicchiere si sbagliava, hai visto? Non mi fiderò mai più di un uovo.
+- se flag fire.promised: Al fuoco avevi detto che saresti venuta subito. Ci hai messo un po', ma sei venuta, e ade…
 
 Si legge all'indietro: ogni voce di `si_guadagna` dice dove la condizione si conquista.

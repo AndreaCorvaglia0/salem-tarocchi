@@ -12,7 +12,7 @@ in_salem:
   - "[[rispondere-a-memoria]]"
   - "[[riprendere-le-carte-sequestrate]]"
 si_controlla_con: "tests/cards.questions.test.mjs (le domande sul nome e sul dettaglio coprono il titolo; le risposte sul significato non contengono il nome della carta)"
-rischi: "Quasi tutto è a scelta tra tre o quattro risposte: è riconoscere, non ricordare da sola. L'aiuto «Ricordamela» nelle letture mostra le parole della carta prima della scelta e non costa niente (src/systems/consult.js)."
+rischi: "Quasi tutto è a scelta tra tre o quattro risposte: è riconoscere, non ricordare da sola. L'aiuto «Ricordamela» nelle letture non costa niente; dal 18 novembre dà un indizio per ricordare (il posto, il disegno), non le parole della carta (src/systems/consult.rules.js helpNote)."
 fonte: "DESIGN.md, Le regole 5; RESEARCH.md, Tecniche di apprendimento (Roediger e Karpicke 2006; Hays, Kornell e Bjork)"
 ---
 

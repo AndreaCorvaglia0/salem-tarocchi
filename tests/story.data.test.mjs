@@ -292,6 +292,8 @@ test('the Reader visits twice inside each chapter; the long sessions close the c
   for (const [k, v] of Object.entries(SCRIPTS)) {
     const ch = (k.match(/^(?:client\.)?c([123])\b/) || [])[1];
     const n = [...walk(v, k)].filter(([x]) => x.do === 'visit').length;
+    // the bed after the ending (BACKLOG 1.3): the cards still untold come in her sleep; tests/story.visit.test.mjs
+    if (k === 'prop.bed') { assert.ok(n === 1 && SCRIPTS[k].some((x) => x.if?.chapterMin === 4), 'prop.bed: one visit, after the ending only'); continue; }
     if (n) { assert.ok(ch, `${k}: a visit outside the chapters`); per[ch] += n; }
   }
   assert.deepEqual(per, { 1: 2, 2: 2, 3: 2 });

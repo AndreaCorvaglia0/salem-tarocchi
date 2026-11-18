@@ -55,3 +55,36 @@ test('thread and rituals: first that holds, with its nodes', () => {
   const p = planVisit({ state: s, talk, openers, thread: [{ when: { never: 1 }, t: 'no' }, { when: true, t: 'TH', then }], rituals: [{ when: { never: 1 }, t: 'R' }], closers, test: cond });
   assert.deepEqual(p.thread, { t: 'TH', then }); assert.equal(p.ritual, null);
 });
+
+// BACKLOG 1.3: nine questions were never asked. Two cards on the same axis in one visit (Il Carro and
+// L'Imperatore, L'Eremita and La Giustizia) always gave the question to the older one; and after the coven
+// the story had no more visits, so the third row was never told. Ties now turn with her answers, and after
+// the ending the bed brings the Reader back (props.js#prop.bed) until every card is told.
+test('a tie between two cards on the same axis does not always go to the older one', () => {
+  const t = { m07: { ask: { q: 'Q7', a: [{ t: 'a', trait: { esplora: 1 } }, { t: 'b', trait: { esplora: -1 } }] } },
+    m04: { ask: { q: 'Q4', a: [{ t: 'a', trait: { esplora: 1 } }, { t: 'b', trait: { esplora: -1 } }] } } };
+  const pick = (n) => pickAsk({ hits: { esplora: { plus: 2, minus: 0 }, tono: { plus: n, minus: 0 } } }, ['m07', 'm04'], t);
+  assert.deepEqual(new Set([0, 1, 2, 3].map(pick)), new Set(['m07', 'm04']));
+  assert.equal(pick(5), pick(5), 'the same state gives the same card');
+});
+
+test('after the ending the bed brings a visit, even for one card left', async () => {
+  const { PROPS } = await import('../src/data/story/scripts/props.js');
+  const visits = JSON.stringify(PROPS['prop.bed']).match(/"do":"visit"[^}]*/g) || [];
+  assert.deepEqual(visits, ['"do":"visit","force":true']);
+  const node = PROPS['prop.bed'].find((n) => n.if && JSON.stringify(n).includes('"visit"'));
+  assert.deepEqual(node.if, { chapterMin: 4 }, 'never before the ending: the story\'s own visits keep their cards');
+  // one card left (Il Mondo, given in the last session): forced, it is told
+  const s = { cards: { m21: card(1) }, told: {} };
+  assert.deepEqual(planVisit({ state: s, talk, openers, closers, test: cond, force: true }).cards.map((c) => c.id), ['m21']);
+});
+
+test('random play: every question of the Reader comes out (the Fool has none to ask)', async () => {
+  const { loadStory } = await import('../scripts/lore/story.mjs');
+  const { measure } = await import('../scripts/coverage.mjs');
+  const r = await measure({ runs: 120, seed: 1, model: await loadStory() });
+  const asked = new Set(r.sceneUnits.filter((u) => u.n > 0).map((u) => u.key));
+  const never = Array.from({ length: 21 }, (_, i) => `visits.js#talk.m${String(i + 1).padStart(2, '0')}`).filter((k) => !asked.has(k));
+  assert.deepEqual(never.filter((k) => /m0[4]|m1[15-9]|m2[01]/.test(k)), [], 'the nine of the backlog');
+  assert.ok(never.length <= 3, `at most the rarest ones missing in 120 runs: ${never.join(', ')}`);
+});

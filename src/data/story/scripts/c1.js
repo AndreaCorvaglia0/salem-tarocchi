@@ -29,7 +29,7 @@ export const C1 = {
       o('Va bene, la legna la spacco io. Dove tieni l\'ascia?', { tono: 1 }, [
         malva('È dietro la porta, e il ceppo è in cortile. Non ti ringrazio, perché ringraziare porta male, ma domattina ti faccio trovare il latte caldo.'),
       ], { flag: 'malva.wood', trust: { malva: 1 }, tag: tg('m03', 'p') }),
-      o('Con l\'ascia non valgo molto: ho le mani delicate.', { tono: -1 }, [
+      o('Io ho le mani delicate: l\'ascia la lascio a chi ha già i calli.', { tono: -1 }, [
         malva('Le mani delicate durano una settimana, poi vengono i calli e non ci pensi più. A me sono venuti a dodici anni, e sono ancora qui.'),
       ], { flag: 'malva.cheeky', tag: tg('m01', 'w') }),
     ),
@@ -38,7 +38,7 @@ export const C1 = {
       o('La tiro fuori e la poso sul tavolo, a faccia in su.', { parola: 1 }, [
         malva('La posi lì come si posa il pane, senza tante cerimonie. Meglio così, perché le cerimonie io le lascio volentieri al pastore.'),
       ]),
-      o('Gliela mostro, ma senza lasciarla andare.', { parola: -1 }, [
+      o('Gliela mostro, ma senza lasciarla andare.', { parola: -1, rischio: -1 }, [
         malva('Non la molli nemmeno per farmela vedere, eh? Fai bene, perché a Salem una carta lasciata in giro cambia padrona prima di sera.'),
       ]),
     ),
@@ -73,7 +73,7 @@ export const C1 = {
     teach('single'),
     lesson('single'),
     choice(
-      o('E se a una cliente dico una cosa sbagliata?', { rischio: -1 }, [
+      o('E se a una cliente dico una cosa sbagliata?', { rischio: -1, parola: -1 }, [
         malva('Capiterà, e più di una volta. L\'importante è che esca con una cosa da fare e non con una paura in più, perché di paure a Salem ne abbiamo già abbastanza.'),
       ], { tag: tg('m00', 'c') }),
       o('Mi aspettavo che fosse più difficile.', { rischio: 1 }, [
@@ -102,7 +102,7 @@ export const C1 = {
     N('La bottega è stretta e piena fino al soffitto di barattoli, mazzi d\'erbe e bottiglie tappate con la cera. Dietro il banco c\'è un uomo magro, che ti guarda arrivare senza smettere di pulire un bicchiere.'),
     keeper('Tu sei la ragazza nuova di Malva. Lo so perché qui dentro non entra nessuno che io non conosca, e te non ti conosco. Cosa vuole da me la levatrice, stavolta?'),
     choice(
-      o('Mi manda a comprare dell\'incenso. Ho le monete contate.', { parola: 1 }, [
+      o('Mi manda a comprare dell\'incenso. Ho le monete contate.', { esplora: -1 }, [
         keeper('Incenso per Malva, si capisce: ne brucia più lei per le partorienti che il pastore per i santi. Fanno dieci monete, e non faccio credito nemmeno a lei.'),
       ]),
       o('Prima vorrei capire cosa si vende, qui dentro.', { esplora: 1 }, [
@@ -139,7 +139,7 @@ export const C1 = {
       o('E poi ti sei trovata bene, qui a Salem?', { esplora: 1 }, [
         malva('Mi sono trovata da fare, che è meglio. Chiedersi se si sta bene o male è roba da gente che ha tempo, e io ho avuto trecento bambini da far nascere.'),
       ]),
-      o('Almeno a me le monete le hai date tu.', { tono: -1 }, [
+      o('Allora a me è andata meglio: le monete me le hai date tu.', { tono: -1 }, [
         malva('Appunto, e non farci l\'abitudine. È stata l\'ultima volta che pago qualcuno per sentirmi dire una cosa che sapevo già.'),
       ]),
     ),
@@ -179,7 +179,7 @@ export const C1 = {
     ),
     N('«Quella donna mi ha fatto nascere sei figli senza volere un grazie, e adesso mi manda pure l\'unguento a casa.»'),
     choice(
-      o('«Malva dice che il suo bucato lo fate voi da vent\'anni.»', { parola: 1 }, [
+      o('«Malva dice che il suo bucato lo fate voi da vent\'anni. Spero almeno che vi paghi in unguento.»', { parola: 1, tono: -1 }, [
         N('«Da ventuno, se è per questo, e non le ho mai fatto pagare un fazzoletto. Tra noi due funziona così: lei non ringrazia e io non presento il conto.»'),
       ]),
       o('«Vi fanno molto male, le mani?»', { tono: 1 }, [
@@ -212,7 +212,7 @@ export const C1 = {
       o('È piccola e storta, ma mi piace già.', { guida: 1 }, [
         T('Appendo il mantello al chiodo dietro la porta, e mi sembra di averlo sempre appeso lì.'),
       ], { tag: tg('m03', 'c') }),
-      o('Ci sarà da lavorare, a cominciare dal tetto.', { guida: -1 }, [
+      o('Ci sarà da lavorare, a cominciare dal tetto.', { guida: -1, esplora: -1 }, [
         T('Conto tre macchie di umido sul soffitto e decido che domani, con la luce, comincio da quella sopra il letto.'),
       ], { tag: tg('m04', 'p') }),
     ),
@@ -222,7 +222,7 @@ export const C1 = {
         cat('Pane, a un gatto. Lo accetto soltanto per non offenderti.'),
         N('Lo mangia tutto, briciole comprese, e poi si lecca i baffi guardando da un\'altra parte.'),
       ], { flag: 'cat.fed', tag: tg('m14', 'c') }),
-      o('Lo lascio in pace: ha l\'aria di uno che non chiede niente.', { guida: -1 }, [
+      o('Lo lascio in pace: un gatto con quell\'aria il pane non lo chiede, lo prende.', { guida: -1, tono: -1 }, [
         cat('Brava, vedo che hai capito con chi hai a che fare. Il pane che hai in borsa me lo prendo da solo più tardi, quando dormi.'),
       ], { flag: 'cat.proud', tag: tg('m08', 'w') }),
     ),
@@ -240,7 +240,7 @@ export const C1 = {
     cat('Hai una bella calligrafia, per una con le dita gelate. Io non so leggere, ma le figure le capisco, e quel ragazzo col fagotto in prima pagina ha qualcosa di tuo.'),
     N('Qualcuno bussa alla porta. Sono tre colpi leggeri, come fa chi spera di non essere sentito dai vicini.'),
     choice(
-      o('Vado ad aprire subito.', { rischio: 1 }, [
+      o('Vado ad aprire subito.', { rischio: 1, esplora: -1 }, [
         N('Apri mentre la mano è ancora alzata per il quarto colpo. Sulla soglia c\'è una donna con uno scialle nero, che fa un passo indietro come se non si aspettasse di essere sentita.'),
         IF({ flag: 's0.knock' }, [T('Alla Lettrice ho detto che davanti a una porta chiusa busso. Stasera hanno bussato alla mia, e ho aperto con la stessa fretta che vorrei dagli altri.')]),
         cat('(Hai aperto prima che finisse di bussare, e l\'hai spaventata tu. Per una volta le parti si sono invertite, e non mi dispiace.)'),

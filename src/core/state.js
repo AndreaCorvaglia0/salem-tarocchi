@@ -93,8 +93,15 @@ export const migrate = (s) => {
   if (!Array.isArray(s.readings)) s.readings = [];
   for (const k of ['bonds', 'trials', 'studied', 'studiedXp']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {};
   if (typeof s.trialSense !== 'string') s.trialSense = null;
-  // the bond with a witch starts from the trust she had (core/witches.js carryTrust: same rule)
-  for (const w of ['malva', 'ortica', 'edera', 'ginepra']) if (!Number.isFinite(s.bonds[w])) s.bonds[w] = Math.max(0, Math.round(Number(s.trust?.[w]) || 0));
+  // One number per witch: the bond (state.bonds) is the truth, state.trust is only its copy for the readers
+  // that still say `trust` (core/cond.js, core/progress.js). An old save keeps the larger of the two, so
+  // nothing she built is lost (core/witches.js carryTrust: same rule).
+  if (typeof s.trust !== 'object' || !s.trust || Array.isArray(s.trust)) s.trust = {};
+  for (const w of ['malva', 'ortica', 'edera', 'ginepra']) {
+    const b = Number.isFinite(s.bonds[w]) ? s.bonds[w] : 0, t = Math.round(Number(s.trust[w]) || 0);
+    s.bonds[w] = Math.max(0, Math.round(b), t);
+    s.trust[w] = s.bonds[w];
+  }
   // the old power table: seals and the far sight are gone (sealed things open with a question)
   if (s.powers) for (const k of ['seals', 'sense2', 'light2']) delete s.powers[k];
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job
