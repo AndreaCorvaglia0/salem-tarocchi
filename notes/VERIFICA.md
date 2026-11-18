@@ -212,6 +212,22 @@ sessione, non nella repo).
   - L'anno 1888 del facsimile dell'Hypnerotomachia nei crediti è scritto a memoria.
   - Il Voynich arrivato a Salem nel 1692 è invenzione dichiarata nella pagina della verità.
 
+## 10. Immagini delle pietre
+
+- **Commit:** `809e9a6` (gh-pages 5b8154a).
+- **Cosa:** eliotropio da J. G. Kurr, *The Mineral Kingdom*, 1859, tav. III (Internet Archive, copia Smithsonian,
+  pubblico dominio secondo BHL); sei pietre (quarzo giallo, pietra di luna, occhio di tigre, ossidiana, quarzo
+  rosa, pietra forata) dipinte al computer su carta (`scripts/stones-paint.py`, `stones-holed.py`), didascalia
+  «Disegnata da me, sul modello delle tavole antiche.»; campo `drawn: true` in `src/data/stones.js`.
+- **Verificato dal capofila:** foglio delle 12 immagini guardato; coerenti come album, ma le dipinte sono
+  chiaramente un'altra mano (più lisce e lucide delle tavole).
+- **Errore di processo del capofila:** pubblicato con **un test fallito** nella copia pulita: `collect.js`
+  chiama il servizio `stones.pocket` che arriva con l'interesse di Edera (non ancora unito). Il richiamo è
+  protetto da `has()`, quindi nel gioco non si rompe niente; il test statico fallisce finché Edera non viene
+  unito. Regola aggiunta in `notes/STATO.md`.
+- **Dubbi:** cercate e scartate: Popular Mineralogy (tavole III–V), Sowerby (occhio di gatto ≠ occhio di tigre;
+  pitchstone ≠ ossidiana), Mawe 1815/1823, Blum 1834. Wikimedia ha risposto 429.
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere

@@ -20,7 +20,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 8 | Interessi da strega: pagina di progetto | **approvata** (`lore/decisioni/decisioni-2026-11-18.md`) |
 | 9 | Interessi: prima fetta (Ortica, erbe, tre missioni) | **fatto, pubblicato** (main 6c4861e) |
 | 10 | Libri: scaffale in biblioteca, primi cinque libri | **fatto, pubblicato** (main 0ee9952, gh-pages 0ef7d33). Mancano: i due libri della Lettrice (Court de Gébelin 1781, Waite 1911: scansione di Waite non trovata), gli altri del catalogo | BACKLOG sezione 6 |
-| 11 | Pietre: tavole antiche al posto delle 7 disegnate | agente in corso |
+| 11 | Pietre: immagini | **fatto, pubblicato** (main 809e9a6, gh-pages 5b8154a): eliotropio da Kurr 1859, sei pietre dipinte al computer |
 | 12 | Interessi: pietre di Edera, missioni 1–3 (la 6, il nome vero, dopo) | agente in corso |
 
 ## Dopo la coda (in attesa di Andrea)
@@ -31,6 +31,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 
 ## Regole del giro
 
+- Pubblicare solo se nella copia pulita i test danno `# fail 0` (controllarlo con `grep -q '^# fail 0'`, non solo stamparlo: il 18/11 un test fallito non ha fermato la pubblicazione).
 - Pubblicare solo da una copia pulita di main (`git worktree add /home/claude/wt HEAD`, link a node_modules,
   `npm test`, `sh scripts/deploy.sh` dalla copia), così i file a metà di un agente non vanno online.
 - Al massimo due agenti insieme, cartelle separate; il capofila guarda le schermate, testa, committa, pubblica.
