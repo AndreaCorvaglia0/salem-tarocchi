@@ -77,15 +77,28 @@ sessione, non nella repo).
 - **Dubbi:** quartiere ricco/povero ancora ambiguo (l'inquadratura mescola i quartieri); le finestre calde di
   Malva e Proctor di notte si somigliano ancora un poco.
 
-## 5. Collezioni: pietre e sibilla (in corso)
+## 5. Collezioni: pietre e sibilla
 
-- **Progetto:** `notes/collezioni.md`. Immagini sibilla: Yale, Beinecke, «Wahrsagekarten… Lenormand», Didot,
-  c. 1890 (https://collections.library.yale.edu/catalog/10994633); 36 carte ritagliate dal capofila e
-  controllate in ordine (`/home/claude/ext/sibilla/cards/`).
-- **Stato:** agente interrotto dal riavvio del server dopo ~43 minuti, ripartito alle 7:28. Niente ancora
-  committato.
-- **Dubbi già noti:** diritti del mazzo di Yale (stampa anonima del 1890 circa, quindi pubblico dominio; la scheda
-  ha solo la formula generica di Yale, non una licenza esplicita); quali pietre ha davvero Sowerby.
+- **Commit:** `7a28077` (gh-pages c3bf1a1). Progetto: `notes/collezioni.md` (sezione «Fatto»).
+- **Cosa:** album «Pietre» (12) e «Sibilla» (36) nel grimorio; oggetti per terra con un riflesso tenue entro 3
+  caselle; il ritrovamento non apre pagine (vola nel grimorio, una riga); prime parole di Edera e Ginepra alla
+  prossima chiacchierata libera; regali in gruppetti che fanno una frase (bottegaio, becchino, Ortica, Edera,
+  Ginepra, Tartufo); erbario: pagina automatica solo per la prima erba. Dati `src/data/{stones,sibyl,gifts}.js`,
+  `src/data/world/finds.js`; logica `src/glue/collect*.js`; UI `src/ui/collect.js`; mondo `src/world/*/finds.js`.
+- **Verificato dal capofila:** test verdi (597); sei schermate (album, pagina di pietra, pagina della sibilla);
+  conteggi: 7 pietre per terra + 5 in regalo = 12; 19 figurine per terra + 17 in regalo = 36.
+- **Non verificato:** telefono vero, il suono `pick`; le altre 18 schermate le ha guardate solo l'agente.
+- **Dubbi:**
+  - Le traduzioni dei versi tedeschi sulle carte sono dell'agente: da far controllare a chi legge il tedesco
+    gotico. Carta 33: l'ultima parola del titolo è illeggibile (la pagina lo dice).
+  - Sette pietre sono disegnate dal codice e stanno male accanto alle tavole antiche (l'ossidiana è un blocco
+    di pixel): da rifare o da trovare in altre tavole. James Sowerby non raggiungibile (BHL 403, c82 scaduto).
+  - Diritti del mazzo di Yale: stampa anonima c. 1890, quindi pubblico dominio; la scheda non dà una licenza
+    esplicita.
+  - Le prime parole di Edera arrivano solo quando lei la incontra (capitolo 3): chi trova una pietra prima non
+    ha spiegazioni per un po'. Scelta dell'agente, ragionevole.
+  - Nessuna voce in `core/extras.js`: un test dice che un salvataggio finito raggiunge tutti i 48 oggetti.
+  - La pagina della pietra dice «Nessuna tavola antica: l'ho disegnata io.»: è lei che parla; da vedere se suona.
 
 ## 6. Libri in biblioteca (scritto, da approvare; niente codice)
 
