@@ -33,49 +33,109 @@ export function bundles(ctx, xs, yAt, S, cols = [M.herb[1], M.herb[2], M.herb[3]
 }
 
 // =====================================================================================
-// MALVA'S HOUSE, 5x4, door col 0 (as today). The midwife (malva-retroscena): a New England saltbox seen from
-// its gable end, low and broad: a short steep slope over the door, the long one running down at the back
-// over a lean-to; warm ochre boards (the only warm wall in the lower village); a big crooked chimney in the
-// middle of the roof that always smokes; herbs drying under the long eave; ONE big window always lit, a red
-// cloth in it (the table where she reads); the note on the door («non bussare»); the broom with the green
+// MALVA'S HOUSE, 5x4, door col 0 (as today). The midwife and herb-witch (malva-retroscena), and it must say
+// so at a glance, at night, in the snow, next to the proper Proctor house (pale boards, slate, shutters):
+// a crooked saltbox whose ridge sags and kinks, mossy plum shingles, a tin crescent on the apex; a tall
+// stone chimney bent like a finger that always breathes soft green smoke (build.js tints it); warm ochre
+// daub between crooked dark timbers; a round gable window lit violet; ONE big window always lit, with
+// coloured bottles on the sill (red, green, amber, violet: her remedies); a round-topped door painted deep
+// purple with a pale crescent; a garlic braid by it; big bundles of herbs drying under the long eave; a
+// cauldron on three legs by the door, its brew glowing green; the mortar sign; the broom with the green
 // ribbon by the garden gate (she has not flown for twenty years); a vine taking the corner.
+const BOTTLES = [['#5a1418', '#c8383a', '#ff9a8a'], ['#16461f', '#3fbf5f', '#b8f5b0'], ['#5a3608', '#e0962a', '#ffe0a0'], ['#2e1650', '#9a62e0', '#e0c8ff']];
+const PURPLE = ['#24102f', '#3a1a4c', '#5a2c74'];
 export function malvaHouse(b, season) {
   const S = SEASONS[season], W = b.w * T, over = KINDS.malva.over, H = b.h * T + over;
   const [c, ctx] = makeCanvas(W, H);
-  const ax = 24, ay = 12, ly = H - 38, ry = H - 18, k = 9, split = 60; // apex, left eave, right eave, roof band, lean-to
-  const top = (x) => (x <= ax ? Math.round(ly + ((ay - ly) * x) / ax) : Math.round(ay + ((ry - ay) * (x - ax)) / (W - 1 - ax)));
-  // the big central chimney, crooked, behind the ridge
-  const smoke = smokeStack(ctx, ax - 1, 0, 18, S, 2, M.stone);
-  // walls: warm ochre clapboard under the whole roof, dark corner boards; the lean-to a shade darker
-  for (let x = 1; x < W - 1; x++) for (let y = top(x) + k - 2; y < H; y++) {
-    const r = y % 4, lean = x > split;
-    let col = r === 0 ? F.daub[0] : r === 1 ? F.daub[lean ? 2 : 3] : F.daub[lean ? 1 : 2];
-    if (x <= 2 || x === split || x === split + 1 || x >= W - 3) col = x === 1 || x === split ? M.wood[2] : M.wood[1];
-    if (y >= H - 3) col = M.wood[1];
-    px(ctx, x, y, col);
+  const ax = 22, ay = 12, ly = H - 38, ry = H - 18, k = 9, split = 60; // apex, left eave, right eave, roof band, lean-to
+  // a crooked roof line: the short slope bellies in, the long one sags and has a kink where the lean-to begins
+  const top = (x) => {
+    if (x <= ax) { const t = x / ax; return Math.round(ly + (ay - ly) * t + Math.sin(t * Math.PI) * 2); }
+    const t = (x - ax) / (W - 1 - ax);
+    return Math.round(ay + (ry - ay) * t + Math.sin(t * Math.PI) * 6 + (x > split ? 2 : 0));
+  };
+  // the tall crooked chimney, bent like a finger, on the long slope (drawn first: the roof covers its foot)
+  const chx = 42, chTop = 3, chFoot = top(chx) + 4, bend = (y) => (y < chTop + 9 ? 5 : y < chTop + 18 ? 3 : y < chTop + 26 ? 1 : 0); // it steps over as it rises
+  for (let y = chTop; y < chFoot; y++) {
+    const x0 = chx + bend(y);
+    rect(ctx, x0 - 1, y, 8, 1, INK);
+    for (let x = x0; x < x0 + 6; x++) px(ctx, x, y, (y % 3 === 0 || (x + (((y / 3) | 0) % 2) * 2) % 4 === 0) ? M.stone[2] : x === x0 ? M.stone[4] : M.stone[3]);
   }
-  // a small window up in the gable, under the short slope: dark
-  windowAt(ctx, ax - 10, ly - 4, 6, 7, 'dark', { snow: S.snow });
-  profileRoof(ctx, 0, W, top, (x) => k + (x > split ? 1 : 0), M.roof.plum, S, { seed: 7, moss: 0.06, snow: 0.5 });
-  // herbs drying under the long eave
-  bundles(ctx, [36, 40, 44, 48, 52, 63, 67, 71], (x) => top(x) + k - 1, S, [M.herb[1], M.herb[3], '#b88935', M.herb[2], '#8f3d3c']);
-  // the big lit window, with the red tablecloth
-  const wx = 30, wy = H - 27;
-  windowAt(ctx, wx, wy, 18, 13, 'lit', { snow: S.snow });
-  rect(ctx, wx, wy + 10, 18, 3, '#8f3d3c'); rect(ctx, wx, wy + 10, 18, 1, '#b85a4a'); rect(ctx, wx + 9, wy, 1, 13, INK);
-  // the door: deep green, a white note on it, a hood over it
-  doorAt(ctx, 3, H - 18, 11, 17, ['#132a1c', '#1d3a27', '#2c5236'], {});
-  rect(ctx, 6, H - 14, 4, 3, F.cream); px(ctx, 7, H - 13, '#6b6050'); px(ctx, 8, H - 13, '#6b6050');
-  rect(ctx, 1, H - 21, 15, 2, INK); rect(ctx, 2, H - 21, 13, 1, M.wood[3]); if (S.snow) rect(ctx, 1, H - 22, 15, 1, S.snow);
+  const tx = chx + bend(chTop);
+  rect(ctx, tx - 1, chTop - 3, 8, 4, INK); rect(ctx, tx, chTop - 3, 6, 3, '#8a4a30'); rect(ctx, tx, chTop - 3, 6, 1, S.snow || '#b06a44'); // a clay pot on top
+  const smoke = [tx + 3, chTop - 4];
+  // walls: warm ochre daub under the whole roof; the lean-to a shade darker
+  for (let x = 1; x < W - 1; x++) for (let y = top(x) + k - 2; y < H; y++) {
+    const lean = x > split, r = (y + (x >> 3)) % 5;
+    px(ctx, x, y, r === 0 ? F.daub[1] : lean ? F.daub[2] : hash(x >> 2, y >> 2, 3) > 0.8 ? F.daub[2] : F.daub[3]);
+  }
+  // crooked dark timbers: corner posts, a sill beam, a wobbly rail, braces
+  const beam = (x0, y0, x1, y1) => { line(ctx, x0, y0, x1, y1, M.wood[1]); line(ctx, x0 + 1, y0, x1 + 1, y1, M.wood[0]); };
+  for (const x of [1, split, W - 3]) beam(x, top(x) + k - 2, x + (x === split ? 1 : 0), H - 1);
+  for (let x = 1; x < W - 1; x++) { const y = H - 31 + Math.round(Math.sin(x * 0.11) * 1.5); if (y > top(x) + k - 1) { px(ctx, x, y, M.wood[1]); px(ctx, x, y + 1, M.wood[0]); } }
+  rect(ctx, 1, H - 3, W - 2, 2, M.wood[1]);
+  beam(18, H - 30, 28, H - 4); beam(55, H - 30, 52, H - 4); beam(W - 4, top(W - 4) + k, split + 3, H - 20);
+  // the round gable window, lit violet, under the short slope
+  const gx = ax - 8, gy = ly - 6;
+  ellipse(ctx, gx, gy, 5, 5, INK); ellipse(ctx, gx, gy, 4, 4, '#4a2a6a'); ellipse(ctx, gx, gy, 3, 3, '#a07ad8'); px(ctx, gx - 1, gy - 1, '#e0c8ff'); rect(ctx, gx, gy - 4, 1, 9, INK); rect(ctx, gx - 4, gy, 9, 1, INK);
+  profileRoof(ctx, 0, W, top, (x) => k + (x > split ? 1 : 0), M.roof.plum, S, {
+    seed: 7, moss: 0.16, snow: 0.45,
+    after: (x, y, d) => (d === 2 && x % 9 === 4 ? M.roof.moss[2] : null), // tufts of moss show through the snow
+  });
+  // big bundles of herbs drying under the long eave: tied at the top, spreading at the bottom
+  const herbCols = [[M.herb[2], M.herb[1], '#c8b0e0'], ['#7a6a9a', '#4a3a68', '#c8a0e8'], [M.herb[2], M.herb[0], '#e8d070'], ['#b88935', '#6b4a1d', '#e8c060'], [M.herb[3], M.herb[1], '#f0e8d0']];
+  [27, 33, 38, 48, 53, 65, 71].forEach((x, i) => {
+    const y = top(x) + k - 1, len = 9 + (i % 3) * 2, [lt, dk, fl] = herbCols[i % herbCols.length];
+    rect(ctx, x, y, 1, 2, M.wood[3]); rect(ctx, x - 1, y + 2, 3, 1, '#8f3d3c'); // the string, a red tie
+    for (let j = 0; j < len; j++) { // stems at the top, leaves spreading and hanging down, ragged at the end
+      const w = j < 2 ? 0 : j < 4 ? 1 : j < len - 3 ? 2 : 3;
+      for (let dx = -w; dx <= w; dx++) {
+        if (j === len - 1 && hash(x + dx, j, 7) > 0.5) continue;
+        px(ctx, x + dx, y + 3 + j, j < 2 ? M.herb[0] : hash(x + dx, j, 3) > 0.55 ? lt : dk);
+      }
+      if (j > 3 && hash(x, j, 11) > 0.6) px(ctx, x + (j % 2 ? w : -w), y + 3 + j, fl); // a flower head
+    }
+    if (S.snow) px(ctx, x, y - 1, S.snow);
+  });
+  // the big lit window, its sill crowded with bottles of every colour
+  const wx = 31, wy = H - 28, ww = 19, wh = 14;
+  windowAt(ctx, wx, wy, ww, wh, 'lit', { snow: S.snow });
+  rect(ctx, wx, wy + wh - 1, ww, 1, M.wood[1]);
+  [[1, 7], [5, 9], [9, 6], [13, 8], [16, 6]].forEach(([dx, h], i) => {
+    const [dk, mid, hi] = BOTTLES[i % BOTTLES.length], bx = wx + dx, by = wy + wh - 1 - h;
+    rect(ctx, bx, by + 3, 3, h - 3, mid); rect(ctx, bx + 1, by, 1, 3, dk); px(ctx, bx + 1, by - 1, M.wood[2]); // body, neck, cork
+    px(ctx, bx, by + 4, hi); rect(ctx, bx + 2, by + 4, 1, h - 4, dk);
+  });
+  // the door: round-topped, deep purple, a pale crescent painted on it; a hood over it
+  doorAt(ctx, 3, H - 19, 11, 18, PURPLE, { arch: true, knob: F.brass });
+  for (const [x, y] of [[9, -15], [8, -16], [7, -16], [6, -15], [6, -14], [6, -13], [7, -12], [8, -12], [9, -13]]) px(ctx, x, H + y, '#e8d890');
+  px(ctx, 7, H - 15, '#e8d890'); px(ctx, 7, H - 13, '#e8d890');
+  rect(ctx, 1, H - 22, 15, 2, INK); rect(ctx, 2, H - 22, 13, 1, M.wood[3]); if (S.snow) rect(ctx, 1, H - 23, 15, 1, S.snow);
   // the lean-to: a low door to the garden
   rect(ctx, 63, H - 13, 8, 12, INK); rect(ctx, 64, H - 12, 6, 11, M.wood[1]); rect(ctx, 66, H - 12, 1, 11, M.wood[0]);
   // overgrown: a vine up the corner, a low bush of herbs
   vine(ctx, 2, H - 2, ly - 2, 3, F.ivy, 3); vine(ctx, split, H - 2, H - 18, 8, F.ivy, 2);
-  for (let i = 0; i < 9; i++) { const x = 50 + i, hgt = 2 + Math.round(hash(i, 1, 6) * 4); rect(ctx, x, H - hgt - 1, 1, hgt, i % 2 ? M.herb[1] : M.herb[2]); if (i % 3 === 0) px(ctx, x, H - hgt - 2, M.herb[3]); }
   outline(ctx, W, H);
-  hangSign(ctx, 15, H - 24, SYM.malva, 1, S);
+  // drawn over the outline (they stand in front of the wall)
+  // a tin crescent on the apex, on a short rod
+  rect(ctx, ax, ay - 4, 1, 5, INK);
+  ['..###', '.##..', '##...', '##...', '##...', '.##..', '..###'].forEach((row, j) => [...row].forEach((ch, i) => { if (ch === '#') { px(ctx, ax - 2 + i, ay - 11 + j, '#f0e0a0'); } }));
+  ['..###', '.##..', '##...', '##...', '##...', '.##..', '..###'].forEach((row, j) => [...row].forEach((ch, i) => { if (ch === '#' && (i === 0 || row[i - 1] !== '#')) px(ctx, ax - 3 + i, ay - 11 + j, INK); }));
+  // a garlic braid hanging by the door
+  rect(ctx, 16, H - 28, 1, 14, M.wood[3]);
+  for (let j = 0; j < 4; j++) { const y = H - 25 + j * 4, x = 16 + (j % 2 ? 1 : -1); ellipse(ctx, x, y, 2, 2, INK); ellipse(ctx, x, y, 1, 1, '#ece4d0'); px(ctx, x, y - 2, '#ece4d0'); px(ctx, x + 1, y + 1, '#b8ae98'); px(ctx, x, y, '#d8b8c8'); }
+  hangSign(ctx, 18, H - 36, SYM.malva, 1, S, { board: ['#2a1238', '#3a1a4c', '#5a2c74', '#7a4a98'] });
+  // the cauldron on three legs, the brew glowing green
+  const kx = 25, ky = H - 6;
+  rect(ctx, kx - 4, ky + 2, 1, 4, INK); rect(ctx, kx + 4, ky + 2, 1, 4, INK); rect(ctx, kx, ky + 3, 1, 3, INK);
+  ellipse(ctx, kx, ky, 6, 4, INK); ellipse(ctx, kx, ky, 5, 3, '#1c1a24'); px(ctx, kx - 3, ky + 1, '#3a3848');
+  rect(ctx, kx - 6, ky - 4, 13, 2, INK); rect(ctx, kx - 5, ky - 4, 11, 1, '#5fe08a'); px(ctx, kx - 2, ky - 4, '#d0ffd8'); px(ctx, kx + 2, ky - 4, '#2fa85a');
+  px(ctx, kx - 1, ky - 6, '#8ff0a8'); px(ctx, kx + 2, ky - 7, '#8ff0a8'); px(ctx, kx, ky - 9, '#5fe08a'); // bubbles rising
   broom(ctx, 74, H - 1, ['#1f6a3a', '#5fcf7a']);
-  return { canvas: c, over, windows: [{ x: wx + 9, y: wy + 6, lit: true, keep: true }], smoke };
+  return {
+    canvas: c, over, smoke, smokeTint: 0x8ff0a8,
+    windows: [{ x: wx + 9, y: wy + 6, lit: true, keep: true }, { x: gx, y: gy, lit: true, keep: true, violet: true }, { x: kx, y: ky - 5, lit: true, keep: true, green: true }],
+  };
 }
 
 // =====================================================================================

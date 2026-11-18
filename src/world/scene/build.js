@@ -86,10 +86,11 @@ export function buildMap(scene, map, season = map.season, home = null) {
     for (const w of art.windows) {
       if (!w.lit) continue;
       const wx = left + w.x, wy = top + w.y;
-      const glow = scene.add.image(wx, wy, w.violet ? 'fx-glow-violet' : 'fx-glow').setScale(0.8).setBlendMode(ADD).setDepth(bottom).setAlpha(0.75);
+      const glow = scene.add.image(wx, wy, w.violet ? 'fx-glow-violet' : w.green ? 'fx-glow-cool' : 'fx-glow').setScale(0.8).setBlendMode(ADD).setDepth(bottom).setAlpha(0.75);
+      if (w.green) glow.setTint(0x8fe0a0); // a witch's brew, not a candle
       lights.push({ x: wx, y: wy + 6, r: w.curtain ? 22 : 30, window: true, glow, keep: !!w.keep || b.kind !== 'house' });
     }
-    if (art.smoke) smoke(scene, left + art.smoke[0], top + art.smoke[1], bottom);
+    if (art.smoke) smoke(scene, left + art.smoke[0], top + art.smoke[1], bottom, art.smokeTint);
     if (art.wheel) scene.add.sprite(left + art.wheel[0], top + art.wheel[1], 'mill-wheel').setDepth(bottom).play('mill-wheel');
     if (art.bell) bells.push(scene.add.image(left + art.bell[0], top + art.bell[1], 'fx-bell').setOrigin(0.5, 0).setDepth(bottom + 1));
     if (PERCH.has(b.kind) && !map.inside) perches.push([left + 10 + hash(b.x, b.y, 3) * (b.w * T - 20), top + 14]);
@@ -139,9 +140,11 @@ export function buildMap(scene, map, season = map.season, home = null) {
   return { lights, grass, gates, chests, bells, perches };
 }
 
-function smoke(scene, x, y, depth) {
+// tint: a coloured smoke (a witch's chimney: art.smokeTint), else the grey of every hearth
+function smoke(scene, x, y, depth, tint = null) {
   scene.time.addEvent({ delay: 700, loop: true, callback: () => {
-    const p = scene.add.image(x, y, 'fx-smoke').setDepth(depth + 3).setAlpha(0.5);
+    const p = scene.add.image(x, y, 'fx-smoke').setDepth(depth + 3).setAlpha(tint ? 0.75 : 0.5);
+    if (tint) p.setTintFill(tint);
     scene.tweens.add({ targets: p, y: y - 22, x: x + 6 + Math.random() * 6, alpha: 0, scale: 2.2, duration: 2600, onComplete: () => p.destroy() });
   } });
 }
