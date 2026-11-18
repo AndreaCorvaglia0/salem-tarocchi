@@ -37,6 +37,7 @@ export const LINKS = {
   si_impara_da: ['si impara da', 'insegna'],
   famiglia: ['della famiglia', 'ne fanno parte'],
   riguarda: ['riguarda', '{lo} riguarda'],
+  tocca: ['tocca', 'la tocca'], // a meccanica -> a family of concepts (the field `concetti` of a meccanica)
   testo: ['cita', '{lo} cita'],
 };
 const FEMININE = new Set(['legge', 'tecnica', 'ricetta', 'meccanica', 'decisione', 'famiglia']);
@@ -48,4 +49,31 @@ export function phrase(field, dir, tipo = '') {
   const e = LINKS[field];
   const t = e ? e[dir === 'out' ? 0 : 1] : dir === 'out' ? human(field) : `${human(field)} (da)`;
   return t.replace('{lo}', pron(tipo));
+}
+
+// What the card of node `i` lists: its neighbours grouped under the name of the link, each once (under the first
+// link that names it), the ones it holds first, then the ones that point to it. A link that the vault no longer
+// writes on this side (dove_la_usiamo, meccaniche) is still there as the other side's: a tecnica lists the
+// meccaniche that use it through `tecniche` («la usa»), an obiettivo those that teach it through `insegna`.
+// A legge lists the meccaniche first («nel gioco»), then what it becomes in the method.
+//   groupLinks(i, { adj, fields, nodeAt, accept }) -> [{ h, items: [index] }]
+const BELOW_LAW = { meccanica: 0, principio: 1, tecnica: 2, ricetta: 3 };
+export function groupLinks(i, { adj, fields, nodeAt, accept = () => true }) {
+  const tipo = nodeAt(i).tipo, groups = new Map(), shown = new Set([i]);
+  for (const dir of ['out', 'in']) {
+    for (const e of adj[i]) {
+      if (e.out !== (dir === 'out') || shown.has(e.o) || !accept(e.o)) continue;
+      shown.add(e.o);
+      const f = fields[e.f];
+      let h = phrase(f, dir, tipo);
+      if (tipo === 'legge' && dir === 'in' && (f === 'legge' || f === 'leggi')) h = nodeAt(e.o).tipo === 'meccanica' ? 'nel gioco' : 'si traduce in';
+      const key = `${dir}:${h}`;
+      if (!groups.has(key)) groups.set(key, { key, h, items: [] });
+      groups.get(key).items.push(e.o);
+    }
+  }
+  const out = [...groups.values()];
+  if (tipo === 'legge') out.sort((a, b) => Number(b.h === 'nel gioco') - Number(a.h === 'nel gioco'));
+  for (const g of out) if (tipo === 'legge') g.items.sort((a, b) => (BELOW_LAW[nodeAt(a).tipo] ?? 9) - (BELOW_LAW[nodeAt(b).tipo] ?? 9));
+  return out;
 }

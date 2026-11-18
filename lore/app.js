@@ -2,11 +2,11 @@
 // with hash routes, so the back button works and a link can be shared:
 //   #/  home · #/n/<id> a note · #/t/<tipo> a list · #/grafo/<vista>[/<id>] a view of the graph (insegna, impara,
 //   storia, tutto) with a node selected · #/cerca/<q> search
-import { md, inline, esc } from './md.js?v=1795009615653';
-import { graphView } from './graph.js?v=1795009615653';
-import { layout } from './layout.js?v=1795009615653';
-import { phrase } from './linknames.js?v=1795009615653';
-import { trail } from './trail.js?v=1795009615653';
+import { md, inline, esc } from './md.js?v=1795010021162';
+import { graphView } from './graph.js?v=1795010021162';
+import { layout } from './layout.js?v=1795010021162';
+import { phrase, groupLinks } from './linknames.js?v=1795010021162';
+import { trail } from './trail.js?v=1795010021162';
 
 const app = document.getElementById('app');
 const FONTI = ['copione', 'deciso', 'proposto'];
@@ -24,6 +24,8 @@ const colorOf = (tipo) => T.get(tipo)?.color || '#8a8173';
 const labelOf = (tipo) => T.get(tipo)?.label || tipo;
 const one = (tipo) => ({ persona: 'persona', retroscena: 'retroscena', luogo: 'luogo', fatto: 'fatto', meccanica: 'meccanica', obiettivo: 'obiettivo', tecnica: 'tecnica', principio: 'principio', legge: 'legge', ricetta: 'ricetta', concetto: 'concetto', tratto: 'tratto', scelta: 'scelta', finale: 'finale', decisione: 'decisione', indice: 'indice' }[tipo] || tipo);
 const chip = (tipo, big = false) => `<a class="chip${big ? ' big' : ''}" href="#/t/${tipo}" style="--c:${colorOf(tipo)}"><span class="dot"></span>${esc(big ? labelOf(tipo) : one(tipo))}</a>`;
+const AMBITI = { generale: 'generale', salem: 'Salem' };
+const ambito = (n) => (AMBITI[n.fm?.ambito] ? `<span class="ambito a-${n.fm.ambito}" title="ambito">${AMBITI[n.fm.ambito]}</span>` : '');
 const badge = (f) => (FONTI.includes(f) ? `<span class="fonte f-${f}" title="fonte">${f}</span>` : '');
 const link = (id, alias) => {
   const n = byId.get(id);
@@ -75,7 +77,7 @@ function fmCard(n) {
   if (!n.fm) return '';
   const out = [];
   for (const [k, v] of Object.entries(n.fm)) {
-    if (k === 'tipo' || k === 'nome' || empty(v)) continue;
+    if (k === 'tipo' || k === 'nome' || k === 'ambito' || empty(v)) continue; // `ambito` is a tag under the title
     if (k === 'fonte' && FONTI.includes(v)) continue; // shown as a badge under the title
     out.push(`<div class="f${HIDDEN_FIELDS.includes(k) ? ' secret' : ''}"><div class="fk">${label(k)}${HIDDEN_FIELDS.includes(k) ? ` ${HIDDEN_MARK}` : ''}</div>${CODE_FIELDS.includes(k) && (typeof v === 'string' || typeof v === 'number') && !/\[\[/.test(v) ? codeValue(v) : value(v)}</div>`);
   }
@@ -166,7 +168,7 @@ function notePage(id) {
   const back = [...groups].sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0]));
   app.innerHTML = `<div class="page note">
 <article class="main">
-<div class="meta">${chip(n.tipo)} ${badge(n.fonte)} ${n.hidden ? HIDDEN_MARK : ''}${n.generated ? '<span class="gen">generata dai copioni</span>' : ''}</div>
+<div class="meta">${chip(n.tipo)} ${ambito(n)} ${badge(n.fonte)} ${n.hidden ? HIDDEN_MARK : ''}${n.generated ? '<span class="gen">generata dai copioni</span>' : ''}</div>
 <h1 class="title">${esc(n.title)}</h1>
 <p class="path">lore/${esc(n.folder ? `${n.folder}/` : '')}${esc(n.id)}.md</p>
 ${n.errors.length ? `<div class="warn">La testa di questa nota non si legge bene:<br>${n.errors.map(esc).join('<br>')}</div>` : ''}
@@ -234,7 +236,7 @@ function graphPage(arg) {
 <p class="vcap"><b>${esc(view.label)}.</b> ${esc(view.caption)}</p>
 <div class="legend" role="group" aria-label="Tipi nella vista">${view.legend.map((t) => `<button class="lchip${off.has(t.tipo) ? '' : ' on'}${t.count ? '' : ' none'}" data-t="${t.tipo}" style="--c:${gcolor(t.tipo)}" aria-pressed="${!off.has(t.tipo)}"><span class="dot"></span>${esc(glabel(t.tipo))} <small>${t.count}</small></button>`).join('')}${view.loose.length ? `<button class="loose" type="button">${view.loose.length} senza legami</button>` : ''}</div>
 <div class="gwrap"></div><div class="lpanel" hidden></div><div class="gcard" hidden></div></div>`;
-  const nodes = view.ids.map((g, k) => { const n = gnode(g), l = view.lbl[k]; return { id: n.id, title: n.title, tipo: n.tipo, color: gcolor(n.tipo), x: view.pos[2 * k], y: view.pos[2 * k + 1], r: view.r[k], g, ...(l ? { label: l.t, ldy: l.dy, lw: l.lw } : {}), always: view.always.includes(k) }; });
+  const nodes = view.ids.map((g, k) => { const n = gnode(g), l = view.lbl[k]; return { id: n.id, title: n.title, tipo: n.tipo, color: gcolor(n.tipo), x: view.pos[2 * k], y: view.pos[2 * k + 1], r: view.r[k], g, ...(l ? { label: l.t, ldy: l.dy, lw: l.lw, up: !!l.up } : {}), always: view.always.includes(k) }; });
   const seen = new Set(), edges = [];
   for (const [a, b] of D.edges) {
     if (!loc.has(a) || !loc.has(b)) continue;
@@ -247,33 +249,23 @@ function graphPage(arg) {
   const outOk = (o) => gtypes.has(gnode(o).tipo) && !String(gnode(o).id).startsWith('_'); // linked, but not drawn in this view: a link to its page
   let cur = -1;
   const showCard = (i) => {
-    cur = i;
-    if (i < 0) { card.hidden = true; current.setBottom(8); setHash(''); return; }
+    if (i >= 0) cur = i;
+    if (i < 0) { const had = cur >= 0; cur = -1; card.hidden = true; current.setBottom(8); setHash(''); if (had) current.fit(); return; } // closing the card gives the whole screen back to the graph
     const n = gnode(nodes[i].g), me = nodes[i].g, tipo = n.tipo;
-    const groups = new Map(), shown = new Set([me]);
-    const take = (dir) => {
-      for (const e of adj[me]) {
-        if (e.out !== (dir === 'out') || shown.has(e.o) || !(loc.has(e.o) ? !off.has(gnode(e.o).tipo) : outOk(e.o))) continue;
-        shown.add(e.o);
-        const h = phrase(D.fields[e.f], dir, tipo), key = `${dir}:${h}`;
-        if (!groups.has(key)) groups.set(key, { h, items: [] });
-        groups.get(key).items.push(e.o);
-      }
-    };
-    take('out'); take('in'); // each neighbour once, under the first link that names it
+    const groups = groupLinks(me, { adj, fields: D.fields, nodeAt: gnode, accept: (o) => (loc.has(o) ? !off.has(gnode(o).tipo) : outOk(o)) });
     const LIM = 8;
     const chipOf = (o) => { const m = gnode(o); if (!loc.has(o)) return `<a class="nb ext" href="${href(m.id)}" style="--c:${gcolor(m.tipo)}">${esc(m.title)} ›</a>`; return `<button class="nb" data-i="${loc.get(o)}" style="--c:${gcolor(m.tipo)}"><span class="dot"></span>${esc(m.title)}</button>`; };
     card.hidden = false; lp.hidden = true;
-    card.innerHTML = `<div class="ch"><span class="dot" style="background:${gcolor(tipo)}"></span><div class="ct"><small>${esc(gone(tipo))}</small><b>${esc(n.title)}</b></div><button class="cx" aria-label="Chiudi">×</button></div>
+    card.innerHTML = `<div class="ch"><span class="dot" style="background:${gcolor(tipo)}"></span><div class="ct"><small>${esc(gone(tipo))} ${ambito(n)}</small><b>${esc(n.title)}</b></div><button class="cx" aria-label="Chiudi">×</button></div>
 ${n.sub ? `<p class="cs">${esc(n.sub)}</p>` : ''}
 ${trail(me, { nodeAt: gnode, adj, fields: D.fields }).map((t) => `<p class="tr">${esc(t)}</p>`).join('')}
-<div class="cg">${[...groups].map(([key, gr]) => { const all = expanded.has(`${me}|${key}`), list = all ? gr.items : gr.items.slice(0, LIM); return `<div class="g"><div class="gh">${esc(gr.h)} <small>${gr.items.length}</small></div><div class="nbs">${list.map((o) => chipOf(o)).join('')}${gr.items.length > list.length ? `<button class="nb more" data-k="${esc(key)}">altri ${gr.items.length - list.length}…</button>` : ''}</div></div>`; }).join('') || '<p class="hint small">Nessun vicino visibile in questa vista.</p>'}</div>
+<div class="cg">${groups.map((gr) => { const key = gr.key; const all = expanded.has(`${me}|${key}`), list = all ? gr.items : gr.items.slice(0, LIM); return `<div class="g"><div class="gh">${esc(gr.h)} <small>${gr.items.length}</small></div><div class="nbs">${list.map((o) => chipOf(o)).join('')}${gr.items.length > list.length ? `<button class="nb more" data-k="${esc(key)}">altri ${gr.items.length - list.length}…</button>` : ''}</div></div>`; }).join('') || '<p class="hint small">Nessun vicino visibile in questa vista.</p>'}</div>
 ${n.tipo === 'famiglia' ? '' : `<a class="cgo" href="${href(n.id)}">Apri la scheda ›</a>`}`;
     card.scrollTop = 0;
     current.setBottom(card.offsetHeight + 12);
     setHash(n.id);
   };
-  current = graphView(wrap, { nodes, edges, onOpen: go, typeLabel: gone, onSelect: showCard, rest: view.rest, caps: view.caps });
+  current = graphView(wrap, { nodes, edges, onOpen: go, typeLabel: gone, onSelect: showCard, rest: view.rest, caps: view.caps, flat: !!view.flat });
   const reselect = () => { const i = nodeId ? loc.get(gi(nodeId)) : undefined; if (i != null) { current.select(i); current.fit(); } }; // fit again with the card in place: all of the graph stays above it
   const apply = () => { current.setVisible((n) => !off.has(n.tipo)); };
   apply();
@@ -342,9 +334,9 @@ function route() {
 
 async function start() {
   try {
-    const res = await fetch('./data.json?v=1795009615653');
+    const res = await fetch('./data.json?v=1795010021162');
     D = await res.json();
-    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795009615653')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
+    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795010021162')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
   } catch (e) {
     app.innerHTML = `<div class="page"><p class="warn">Non riesco a leggere il vault (${esc(e.message)}).</p></div>`;
     return;

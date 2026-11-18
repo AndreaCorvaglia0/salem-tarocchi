@@ -201,3 +201,8 @@ body.full { overflow: hidden; }
 .gv-zoom .btn { width: 38px; height: 38px; font-size: 20px; }
 .gv-zoom { right: 4px; top: 4px; gap: 4px; }
 .vcap { font-size: 12px; }
+
+/* the `ambito` of a method card: where the rule applies */
+.ambito { display: inline-block; margin-left: 4px; padding: 0 7px; border-radius: 9px; font: 600 11px/18px var(--sans); letter-spacing: .02em; text-transform: none; color: #fff; background: #6a6256; vertical-align: 1px; }
+.ambito.a-salem { background: var(--red); }
+.ambito.a-generale { background: #2f6f6a; }

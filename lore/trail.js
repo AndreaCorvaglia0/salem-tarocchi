@@ -20,7 +20,7 @@ export function trail(i, { nodeAt, adj, fields }) {
     else if (!laws.length) return [];
   } else if (t === 'principio' || t === 'tecnica' || t === 'ricetta') {
     const laws = lawsOf(i);
-    const mech = adj[i].filter((e) => ['serve', 'tecniche', 'dove_la_usiamo', 'in_salem'].includes(fields[e.f]) && nodeAt(e.o).tipo === 'meccanica').map((e) => e.o).filter((x, k, a) => a.indexOf(x) === k);
+    const mech = adj[i].filter((e) => ['serve', 'tecniche', 'in_salem'].includes(fields[e.f]) && nodeAt(e.o).tipo === 'meccanica').map((e) => e.o).filter((x, k, a) => a.indexOf(x) === k);
     if (!laws.length) return [];
     lines.push(`${law(laws[0])} → ${name(i)}`);
     if (mech.length) lines.push(`${name(i)} → in Salem: ${list(mech)}`);
@@ -29,9 +29,8 @@ export function trail(i, { nodeAt, adj, fields }) {
     for (const e of adj[i]) if (!e.out && ['legge', 'leggi'].includes(fields[e.f])) { const k = nodeAt(e.o).tipo; (cnt[k] ||= new Set()).add(e.o); }
     const pl = { principio: ['principio', 'principi'], tecnica: ['tecnica', 'tecniche'], ricetta: ['ricetta', 'ricette'], meccanica: ['meccanica', 'meccaniche'] };
     const part = (ks) => ks.filter((k) => cnt[k]).map((k) => `${cnt[k].size} ${pl[k][cnt[k].size === 1 ? 0 : 1]}`).join(', ');
-    const a = part(['principio', 'tecnica', 'ricetta']), b = part(['meccanica']);
-    if (a) lines.push(`${law(i)} → si traduce in ${a}`);
-    if (b) lines.push(`${a ? '→ ' : `${law(i)} → `}nel gioco: ${b}`);
+    const all = part(['principio', 'tecnica', 'ricetta', 'meccanica']).replace(/, (?=[^,]*$)/, ' e ');
+    if (all) lines.push(`${law(i)}: ne discendono ${all}`);
   } else if (t === 'obiettivo') {
     const mech = via(i, ['insegna'], false, 'meccanica'), fam = via(i, ['riguarda'], true, 'famiglia');
     const laws = mech.length ? lawsOf(mech[0]) : [];
