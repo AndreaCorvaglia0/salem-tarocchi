@@ -167,6 +167,31 @@ sessione, non nella repo).
   («una pietra in tasca trasforma il primo esame fallito in un secondo tentativo») toccano l'equilibrio delle
   prove: da misurare quando si costruisce.
 
+## 8. Interessi, prima fetta: le erbe di Ortica
+
+- **Commit:** `6c4861e`. Decisioni: `lore/decisioni/decisioni-2026-11-18.md`.
+- **Cosa:** scena d'inizio da Ortica (quando l'orto è suo e ha un mazzetto fresco); missioni «A testa in giù»
+  (trave), «Le scale del mulino» (mortaio: calendula e melissa), «Il fumo di Malva» (mazzo di salvia), una al
+  giorno; il mugnaio in piazza col bastone nuovo; dispensa fresche/secche nell'orto; grado 1: opzione «[Le mie
+  erbe]» nei rifiuti sulle malattie, con il cliente che torna a ringraziare; la salvia del rito diventa «la tua
+  salvia». File: `src/data/interests/`, `src/glue/interests*.js`, `src/ui/interests/`,
+  `src/data/story/scripts/interests.ortica.js`; chiavi `pantryDry`, `interests`; cond `interest`, `interestRested`.
+- **Verificato dal capofila:** test verdi (632); quattro schermate (trave, mortaio, salvia, cliente malato);
+  costruito da copia pulita.
+- **Non verificato:** passeggiata intera nel mondo fino alla capanna; il cliente che torna (solo test); gesto a
+  cerchio col dito (solo tocchi); telefono vero.
+- **Dubbi:**
+  - Il riquadro d'aiuto «Quando hai finito di leggere, tocca lo schermo…» (z-index 95) copre la cima delle
+    schermate del trave e del mortaio (z-index 60), visto in una schermata: da controllare se capita anche giocando.
+  - I mazzetti seccano in un giorno (nella realtà 2–4 settimane): nessuna riga dice la durata.
+  - Il mazzo di salvia legato stretto da bruciare è un uso moderno contestato: qui è solo per portarlo, Malva
+    sbriciola le foglie sulla brace.
+  - La salvia regalo dopo quattro riti arriva ancora anche a chi sta facendo il ramo: prima il regalo, poi «tua».
+  - Canone proposto: la schiena di Ortica, il mugnaio tre giorni in cima alle scale, la storia «della volpe e
+    del parroco», la segatura dell'incenso.
+  - L'opzione col rimedio compare solo se ha un'erba che guarisce già secca; senza, niente prestito (diverso dalla
+    regola «la strega presta sempre», che vale per le missioni).
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
