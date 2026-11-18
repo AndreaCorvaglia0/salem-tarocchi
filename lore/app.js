@@ -1,16 +1,19 @@
 // The lore viewer: reads data.json once (built from lore/ by scripts/lore/site.mjs) and shows the vault
 // with hash routes, so the back button works and a link can be shared:
-//   #/  home · #/n/<id> a note · #/t/<tipo> a list · #/grafo[/<id>] the whole graph · #/cerca/<q> search
-import { md, inline, esc } from './md.js?v=1795006864226';
-import { graphView } from './graph.js?v=1795006864226';
-import { layout } from './layout.js?v=1795006864226';
+//   #/  home · #/n/<id> a note · #/t/<tipo> a list · #/grafo/<vista>[/<id>] a view of the graph (insegna, impara,
+//   storia, tutto) with a node selected · #/cerca/<q> search
+import { md, inline, esc } from './md.js?v=1795008400588';
+import { graphView } from './graph.js?v=1795008400588';
+import { layout } from './layout.js?v=1795008400588';
+import { phrase } from './linknames.js?v=1795008400588';
 
 const app = document.getElementById('app');
 const FONTI = ['copione', 'deciso', 'proposto'];
 const HIDDEN_FIELDS = ['non_affiora', 'non_direbbe_mai'];
 const HIDDEN_MARK = '<span class="hid" title="Canone nascosto: serve a chi scrive, non compare nel gioco">nascosto: non si dice nel gioco</span>';
 let D = null, byId = new Map(), T = new Map(), hay = new Map(), deg = new Map();
-let graphOn = null; // the types shown in the full graph (kept while the page is open)
+const hidden = new Map(); // per view: the types hidden by the legend (kept while the page is open)
+let adj = []; // per graph node (notes, then the family hubs): its links { o: other, f: field, out }
 let current = null; // the graph view on screen, destroyed on the next render
 
 // ---------- small helpers ----------
@@ -89,7 +92,9 @@ function home(q = '') {
 <div class="search"><input id="q" type="search" placeholder="Cerca nel vault: titoli e testo" value="${esc(q)}" autocomplete="off" enterkeyhint="search" aria-label="Cerca"></div>
 <div id="res"></div>
 <div id="home"${q ? ' hidden' : ''}>
-<section class="types">${D.types.map((t) => `<a class="tchip" href="#/t/${t.tipo}" style="--c:${t.color}"><span class="dot"></span><span>${esc(t.label)}</span><b>${t.count}</b></a>`).join('')}<a class="tchip graph" href="#/grafo"><span>Grafo di tutto</span><b>›</b></a></section>
+<section class="doors">${D.zones.map((z) => `<a class="door" href="#/grafo/${z.view}" style="--c:${colorOf(z.types[0])}"><span class="dn">${esc(z.label)}</span><span class="dc">${z.types.filter((t) => T.has(t)).map((t) => `<span class="dk"><i style="background:${colorOf(t)}"></i>${esc(labelOf(t))} <b>${T.get(t).count}</b></span>`).join('')}</span><span class="dg">Guarda il grafo ›</span></a>`).join('')}</section>
+<h2 class="grp lst">Tutte le liste</h2>
+<section class="types">${D.types.map((t) => `<a class="tchip" href="#/t/${t.tipo}" style="--c:${t.color}"><span class="dot"></span><span>${esc(t.label)}</span><b>${t.count}</b></a>`).join('')}<a class="tchip graph" href="#/grafo/tutto"><span>Grafo di tutto</span><b>›</b></a></section>
 ${start ? `<article class="body">${md(start.body, link)}</article>` : ''}
 </div></div>`;
   const input = app.querySelector('#q'), res = app.querySelector('#res'), hm = app.querySelector('#home');
@@ -168,7 +173,7 @@ ${fmCard(n)}
 ${body.trim() ? `<section class="body">${md(body, link)}</section>` : ''}
 ${back.length ? `<section class="back"><h2>Collegato da <small>${n.back.length}</small></h2>${back.map(([t, ns]) => `<h3>${chip(t)} <small>${ns.length}</small></h3><div class="list compact">${ns.map((b) => noteRow(b, '', false)).join('')}</div>`).join('')}</section>` : ''}
 </article>
-<aside class="side"><h2>Vicini <small>${new Set([...n.links, ...n.back]).size}</small></h2><div class="hops" role="group"><button class="btn on" data-h="1">1 passo</button><button class="btn" data-h="2">2 passi</button><a class="btn" href="#/grafo/${encodeURIComponent(n.id)}">Nel grafo</a></div><p class="hint small" id="lgn"></p><div class="local"></div></aside>
+<aside class="side"><h2>Vicini <small>${new Set([...n.links, ...n.back]).size}</small></h2><div class="hops" role="group"><button class="btn on" data-h="1">1 passo</button><button class="btn" data-h="2">2 passi</button>${viewOf(n.tipo) ? `<a class="btn" href="#/grafo/${viewOf(n.tipo)}/${encodeURIComponent(n.id)}">Nel grafo</a>` : ''}</div><p class="hint small" id="lgn"></p><div class="local"></div></aside>
 </div>`;
   const host = app.querySelector('.local'), btns = [...app.querySelectorAll('.hops button')];
   const draw = (hops) => {
@@ -205,28 +210,103 @@ function neighbourhood(id, hops) {
   return { ids, cut, graph: { nodes, edges } };
 }
 
-function graphPage(focus) {
-  graphOn ??= new Set(D.types.filter((t) => t.graph).map((t) => t.tipo));
-  const f = focus && byId.get(focus);
-  if (f) graphOn.add(f.tipo);
-  app.innerHTML = `<div class="gpage"><div class="legend" role="group" aria-label="Tipi nel grafo">${D.types.map((t) => `<button class="lchip${graphOn.has(t.tipo) ? ' on' : ''}" data-t="${t.tipo}" style="--c:${t.color}" aria-pressed="${graphOn.has(t.tipo)}"><span class="dot"></span>${esc(t.label)} <small>${t.count}</small></button>`).join('')}</div><div class="gwrap"></div></div>`;
-  // the layout is wider than tall: on a phone held upright, turn it a quarter so it fills the screen
-  const xs = D.notes.map((n) => n.x), ys = D.notes.map((n) => n.y);
-  const turn = innerHeight > innerWidth && Math.max(...xs) - Math.min(...xs) > Math.max(...ys) - Math.min(...ys);
-  const nodes = D.notes.map((n) => ({ id: n.id, title: n.title, tipo: n.tipo, color: colorOf(n.tipo), x: turn ? -n.y : n.x, y: turn ? n.x : n.y, r: 3 + Math.min(8, Math.sqrt(deg.get(n.id) || 0)) }));
-  current = graphView(app.querySelector('.gwrap'), { nodes, edges: D.edges, onOpen: go, typeLabel: one });
-  const apply = () => current.setVisible((n) => graphOn.has(n.tipo));
+const viewOf = (tipo) => D.views.find((v) => v.id !== 'tutto' && v.legend.some((l) => l.tipo === tipo && l.count))?.id;
+const FAMILY_COLOR = () => D.hubs[0]?.color || '#14532d';
+// a node of the graph by its index: a note, or a family hub (not a file, only here)
+const gnode = (i) => (i < D.notes.length ? D.notes[i] : D.hubs[i - D.notes.length]);
+const gcolor = (tipo) => (tipo === 'famiglia' ? FAMILY_COLOR() : colorOf(tipo));
+const glabel = (tipo) => (tipo === 'famiglia' ? 'Famiglie' : labelOf(tipo));
+const gone = (tipo) => (tipo === 'famiglia' ? 'famiglia' : one(tipo));
+
+function graphPage(arg) {
+  const [first, ...more] = arg.split('/');
+  let view = D.views.find((v) => v.id === first), nodeId = more.join('/') || '';
+  if (!view) { // an old link: #/grafo/<note>
+    const f = byId.get(first);
+    view = (f && D.views.find((v) => v.id === viewOf(f.tipo))) || D.views[D.views.length - 1];
+    nodeId = f ? first : '';
+  }
+  const off = hidden.get(view.id) || hidden.set(view.id, new Set()).get(view.id);
+  const loc = new Map(view.ids.map((g, k) => [g, k]));
+  const gi = (id) => (id.startsWith('famiglia:') ? D.notes.length + D.hubs.findIndex((h) => h.id === id) : D.notes.findIndex((n) => n.id === id));
+  app.innerHTML = `<div class="gpage"><div class="views" role="group" aria-label="Viste">${D.views.map((v) => `<button class="vbtn${v.id === view.id ? ' on' : ''}" data-v="${v.id}">${esc(v.label)}</button>`).join('')}</div>
+<div class="legend" role="group" aria-label="Tipi nella vista">${view.legend.map((t) => `<button class="lchip${off.has(t.tipo) ? '' : ' on'}${t.count ? '' : ' none'}" data-t="${t.tipo}" style="--c:${gcolor(t.tipo)}" aria-pressed="${!off.has(t.tipo)}"><span class="dot"></span>${esc(glabel(t.tipo))} <small>${t.count}</small></button>`).join('')}</div>
+<button class="loose" hidden></button><div class="gwrap"></div><div class="lpanel" hidden></div><div class="gcard" hidden></div></div>`;
+  const nodes = view.ids.map((g, k) => { const n = gnode(g); return { id: n.id, title: n.title, tipo: n.tipo, color: gcolor(n.tipo), x: view.pos[2 * k], y: view.pos[2 * k + 1], r: view.r[k], g }; });
+  const seen = new Set(), edges = [];
+  for (const [a, b] of D.edges) {
+    if (!loc.has(a) || !loc.has(b)) continue;
+    const la = loc.get(a), lb = loc.get(b), k = la < lb ? `${la},${lb}` : `${lb},${la}`;
+    if (!seen.has(k)) { seen.add(k); edges.push([la, lb]); }
+  }
+  const card = app.querySelector('.gcard'), wrap = app.querySelector('.gwrap'), lp = app.querySelector('.lpanel'), lbtn = app.querySelector('.loose');
+  const setHash = (id) => history.replaceState(null, '', `#/grafo/${view.id}${id ? `/${encodeURIComponent(id)}` : ''}`);
+  const expanded = new Set();
+  let cur = -1;
+  const showCard = (i) => {
+    cur = i;
+    if (i < 0) { card.hidden = true; current.setBottom(8); setHash(''); lbtn.hidden = !view.loose.length; return; }
+    const n = gnode(nodes[i].g), me = nodes[i].g, tipo = n.tipo;
+    const groups = new Map(), shown = new Set([me]);
+    const take = (dir) => {
+      for (const e of adj[me]) {
+        if (e.out !== (dir === 'out') || shown.has(e.o) || !loc.has(e.o) || off.has(gnode(e.o).tipo)) continue;
+        shown.add(e.o);
+        const h = phrase(D.fields[e.f], dir, tipo), key = `${dir}:${h}`;
+        if (!groups.has(key)) groups.set(key, { h, items: [] });
+        groups.get(key).items.push(e.o);
+      }
+    };
+    take('out'); take('in'); // each neighbour once, under the first link that names it
+    const LIM = 8;
+    const chipOf = (o) => { const m = gnode(o); return `<button class="nb" data-i="${loc.get(o)}" style="--c:${gcolor(m.tipo)}"><span class="dot"></span>${esc(m.title)}</button>`; };
+    card.hidden = false; lbtn.hidden = true; lp.hidden = true;
+    card.innerHTML = `<div class="ch"><span class="dot" style="background:${gcolor(tipo)}"></span><div class="ct"><small>${esc(gone(tipo))}</small><b>${esc(n.title)}</b></div><button class="cx" aria-label="Chiudi">×</button></div>
+${n.sub ? `<p class="cs">${esc(n.sub)}</p>` : ''}
+<div class="cg">${[...groups].map(([key, gr]) => { const all = expanded.has(`${me}|${key}`), list = all ? gr.items : gr.items.slice(0, LIM); return `<div class="g"><div class="gh">${esc(gr.h)} <small>${gr.items.length}</small></div><div class="nbs">${list.map((o) => chipOf(o)).join('')}${gr.items.length > list.length ? `<button class="nb more" data-k="${esc(key)}">altri ${gr.items.length - list.length}…</button>` : ''}</div></div>`; }).join('') || '<p class="hint small">Nessun vicino visibile in questa vista.</p>'}</div>
+${n.tipo === 'famiglia' ? '' : `<a class="cgo" href="${href(n.id)}">Apri la scheda ›</a>`}`;
+    card.scrollTop = 0;
+    current.setBottom(card.offsetHeight + 12);
+    setHash(n.id);
+  };
+  current = graphView(wrap, { nodes, edges, onOpen: go, typeLabel: gone, onSelect: showCard });
+  const reselect = () => { const i = nodeId ? loc.get(gi(nodeId)) : undefined; if (i != null) current.select(i); };
+  const apply = () => { current.setVisible((n) => !off.has(n.tipo)); };
   apply();
-  if (f) current.focus(D.notes.indexOf(f));
-  else current.fit();
+  current.fit();
+  reselect();
+  if (view.loose.length) {
+    lbtn.hidden = !card.hidden; lbtn.textContent = `${view.loose.length} senza legami in questa vista`;
+    lbtn.onclick = () => {
+      lp.hidden = !lp.hidden;
+      lp.innerHTML = `<div class="lph"><b>Senza legami in questa vista</b><button class="cx" aria-label="Chiudi">×</button></div><div class="list compact">${view.loose.map((g) => gnode(g)).sort(byTitle).map((n) => noteRow(n, '', false)).join('')}</div>`;
+    };
+  }
+  lp.addEventListener('click', (e) => { if (e.target.closest('.cx')) lp.hidden = true; });
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('.cx')) { current.select(-1); return; }
+    const nb = e.target.closest('.nb');
+    if (!nb) return;
+    if (nb.classList.contains('more')) { expanded.add(`${nodes[cur].g}|${nb.dataset.k}`); showCard(cur); return; }
+    current.select(Number(nb.dataset.i)); // the selection moves
+  });
   app.querySelector('.legend').addEventListener('click', (e) => {
     const b = e.target.closest('.lchip');
     if (!b) return;
     const t = b.dataset.t;
-    if (graphOn.has(t)) graphOn.delete(t); else graphOn.add(t);
-    b.classList.toggle('on', graphOn.has(t)); b.setAttribute('aria-pressed', String(graphOn.has(t)));
+    if (off.has(t)) off.delete(t); else off.add(t);
+    b.classList.toggle('on', !off.has(t)); b.setAttribute('aria-pressed', String(!off.has(t)));
     apply();
   });
+  app.querySelector('.views').addEventListener('click', (e) => {
+    const b = e.target.closest('.vbtn');
+    if (!b || b.dataset.v === view.id) return;
+    current?.destroy(); current = null;
+    history.replaceState(null, '', `#/grafo/${b.dataset.v}`);
+    lastHash = location.hash;
+    graphPage(b.dataset.v);
+  });
+  app.querySelector('.vbtn.on')?.scrollIntoView({ inline: 'center', block: 'nearest' });
 }
 
 function notFound(id) {
@@ -259,16 +339,22 @@ function route() {
 
 async function start() {
   try {
-    const res = await fetch('./data.json?v=1795006864226');
+    const res = await fetch('./data.json?v=1795008400588');
     D = await res.json();
-    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795006864226')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
+    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795008400588')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
   } catch (e) {
     app.innerHTML = `<div class="page"><p class="warn">Non riesco a leggere il vault (${esc(e.message)}).</p></div>`;
     return;
   }
   byId = new Map(D.notes.map((n) => [n.id, n]));
   T = new Map(D.types.map((t) => [t.tipo, t]));
-  for (const [a, b] of D.edges) { const x = D.notes[a].id, y = D.notes[b].id; deg.set(x, (deg.get(x) || 0) + 1); deg.set(y, (deg.get(y) || 0) + 1); }
+  adj = Array.from({ length: D.notes.length + D.hubs.length }, () => []);
+  const pairSeen = new Set();
+  for (const [a, b, f] of D.edges) {
+    adj[a].push({ o: b, f, out: true }); adj[b].push({ o: a, f, out: false });
+    const k = a < b ? `${a},${b}` : `${b},${a}`;
+    if (a < D.notes.length && b < D.notes.length && !pairSeen.has(k)) { pairSeen.add(k); const x = D.notes[a].id, y = D.notes[b].id; deg.set(x, (deg.get(x) || 0) + 1); deg.set(y, (deg.get(y) || 0) + 1); }
+  }
   for (const n of D.notes) {
     const raw = [n.sub, ...strings({ ...n.fm, tipo: null }).map(plain), plain(n.body).replace(/[#*_`|>]+/g, ' ')].join(' · ').replace(/\s+/g, ' ');
     hay.set(n.id, { title: fold(n.title), raw, text: fold(raw) });
