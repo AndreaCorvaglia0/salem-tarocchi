@@ -43,3 +43,26 @@ export function dinamichePage(V, header) {
   }
   return `${L.join('\n').trimEnd()}\n`;
 }
+
+// lore/metodo/meccaniche/_matrice.md: mechanics × objectives and mechanics × techniques, from the `insegna` and
+// `tecniche` fields of the mechanics (the only place where those links are written). An empty column is a hole.
+export function matricePage(V, header) {
+  const byName = (a, b) => a.name.localeCompare(b.name);
+  const mecc = V.ofTipo('meccanica').slice().sort(byName);
+  const grid = (title, cols, field, letter) => {
+    const L = [`## ${title}`, '', `| Meccanica | ${cols.map((_, i) => `${letter}${i + 1}`).join(' | ')} | tot |`, `|---|${cols.map(() => ':-:').join('|')}|:-:|`];
+    const tot = cols.map(() => 0);
+    for (const m of mecc) {
+      const has = new Set(list(m.data[field]));
+      const row = cols.map((c, i) => (has.has(c.name) ? (tot[i] += 1, 'x') : ''));
+      L.push(`| [[${m.name}]] | ${row.join(' | ')} | ${row.filter(Boolean).length} |`);
+    }
+    L.push(`| **totale** | ${tot.map((n) => (n ? n : '**0**')).join(' | ')} | |`, '', ...cols.map((c, i) => `- ${letter}${i + 1}: [[${c.name}]]${tot[i] ? '' : ' (nessuna meccanica: un buco)'}`), '');
+    return L;
+  };
+  const L = ['# Matrici', '', header, '',
+    'Dai campi `insegna` e `tecniche` delle meccaniche. Una colonna con totale 0 è un buco: un obiettivo che nessuna meccanica insegna, una tecnica che nessuna meccanica usa.', '',
+    ...grid('Meccaniche × obiettivi', V.ofTipo('obiettivo').slice().sort(byName), 'insegna', 'O'),
+    ...grid('Meccaniche × tecniche', V.ofTipo('tecnica').slice().sort(byName), 'tecniche', 'T')];
+  return `${L.join('\n').trimEnd()}\n`;
+}
