@@ -32,8 +32,13 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | V2 | Undici schede `legge`; `legge` su principi/tecniche/ricette; due facce e `dinamica` sulle meccaniche; 8 tecniche, 1 principio, 7 meccaniche nuove; `_dinamiche` | **fatto** (main 96e59c6; 665 test in copia pulita; da pubblicare insieme al visore) |
 | V3 | Il corso: `peso`, 19 concetti del nucleo che mancavano, `concetti` sugli obiettivi, posti dei concetti con test, `_sei-voci` | **fatto, pubblicato** (main 0795a8c, gh-pages b08f355; 687 test) |
 | V4 | Un verso solo; `ambito`; `concetti` sulle meccaniche; `_sei-voci` più vera; `_matrice` generata | **fatto, pubblicato** (main 6f4392f + matrice; 702 test). Resta: 41 schede generali su 80 parlano ancora di Salem (elenco in `lore.mjs check`) |
-| V5 | «Perché c'è» e legami di struttura nel visore | **fatto** nel secondo giro (main 0f3d867); terzo giro di rifinitura in corso |
+| V5 | «Perché c'è», legami di struttura, rifinitura del visore | **fatto, pubblicato** (main 5f11403, gh-pages 2d8f001; 706 test). Deboli: «Tutto» stretta sul telefono; con la scheda aperta il disegno è piccolo |
 | V6 | Prova: copiare il metodo generale in Mnemopolis | da fare (chiedere ad Andrea prima di toccare la repo di Mnemopolis) |
+
+**Riordino del vault: chiuso fino a V5 (18/11, pomeriggio).** Resta V6 (prova su Mnemopolis: serve il via di
+Andrea) e, quando si fa, la riscrittura delle 41 schede generali che parlano ancora di Salem. In attesa di
+Andrea: conferma della legge 11; la musica dell'aria durante la lettura; i buchi di `lore/corso/_sei-voci.md`
+(stese e segni senza corpo né motivo, pietre senza ritorno) come idee di gioco.
 
 ## Da dove ripartire (scritto il 18/11 alle 10:55, token quasi finiti)
 

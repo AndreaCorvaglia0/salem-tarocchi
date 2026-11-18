@@ -277,6 +277,23 @@ sessione, non nella repo).
   - La musica dell'aria durante la lettura contro `niente-dettagli-estranei`: da decidere con Andrea.
   - Il visore al primo giro mostra grappoli di palline, non la struttura: secondo giro in corso.
 
+## 13. Riordino del vault, chiusura (V4, V5)
+
+- **Commit:** `6f4392f` (un verso solo, ambito, concetti sulle meccaniche), matrice generata, kit, visore `0f3d867`
+  e `5f11403` (gh-pages 2d8f001).
+- **Verificato dal capofila:** ogni pubblicazione dopo test verdi in copia pulita (702, poi 706); con uno script
+  proprio, confrontando con il commit precedente, che togliendo `dove_la_usiamo` e `meccaniche` non si è perso
+  nessun legame (zero); `sapere.js` invariato; guardate le schermate dei tre giri del visore.
+- **Non verificato:** il visore su un telefono vero; le correzioni dell'agente ai `concetti` di nove meccaniche
+  (dice di averle lette dal codice: non ricontrollate); `scegliere-nella-storia = arcano` è una proposta non
+  verificata scena per scena.
+- **Dubbi:**
+  - Esami e ripasso dichiarano otto famiglie (anche pianeti, segni, posizioni): vero secondo il codice, ma rende
+    «uso» e «ritorno» facili da avere per il contorno.
+  - 41 schede generali su 80 parlano ancora di Salem: il metodo non è ancora pronto da copiare in Mnemopolis.
+  - Nel visore: «Tutto» è una colonna stretta sul telefono; con la scheda aperta il disegno resta piccolo; i nomi
+    delle leggi sono tagliati a 18 caratteri.
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
