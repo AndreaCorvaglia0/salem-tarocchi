@@ -42,3 +42,19 @@ Domanda di Andrea: i contenuti dei nodi e le connessioni sembrano poco sensati. 
 - Nel grafo di Obsidian e del visore: nascondere per default `scelte/`, `finali/`, `tratti/` (filtro), o
   raggrupparli in un nodo indice.
 - Aggiungere al controllo (`lore.mjs check`) due avvisi: scheda sotto 40 parole; scheda senza link entranti.
+
+## Prima la domanda giusta: a che cosa serve, e a chi (Andrea, 10:56)
+
+| Chi lo usa | Per fare che cosa | Che cosa gli serve dal grafo | Oggi |
+|---|---|---|---|
+| Andrea, per sviluppare la storia | capire chi è chi, che cosa sa, che cosa è successo, dove; trovare spunti | schede leggibili di persone e luoghi; legami persona–persona, persona–fatto–luogo; i retroscena accanto | **scarso**: schede vuote, retroscena staccati |
+| Agenti che scrivono scene e missioni | non contraddire il canone, sapere che cosa lei può sapere | fatti con fonte e condizione; chi sa che cosa; controlli automatici | **buono a metà**: fatti e controlli ci sono, persone e luoghi no |
+| Il gioco | dati che diventano gioco (il sapere → `sapere.js`) | completezza e coerenza del cerchio | **buono**: c'è il test del cerchio |
+| Mnemopolis / generatore di storie | riusare metodo e schema | metodo legato a principi, meccaniche, obiettivi | **medio**: meccaniche ben legate, metodo isolato |
+
+Conclusione: il grafo non è uno solo. Servono tre **viste** dello stesso vault, ognuna con il suo filtro:
+**la storia** (persone, luoghi, fatti, retroscena, decisioni), **il gioco che insegna** (obiettivi, meccaniche,
+tecniche, principi, metodo), **il sapere** (il cerchio). Scelte, finali e tratti restano fuori dal disegno:
+sono tabelle per i test. La misura di qualità cambia per vista: nella storia conta che ogni persona abbia una
+scheda piena e legami con altre persone e fatti; nel gioco che ogni obiettivo sia servito da una meccanica;
+nel sapere che il cerchio si chiuda.
