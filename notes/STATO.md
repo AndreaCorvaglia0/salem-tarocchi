@@ -31,8 +31,8 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | V1b | Visore: quattro viste con disposizione propria, legami con il nome, nodi famiglia, porte delle zone | **fatto, pubblicato** (main 950dee6, gh-pages f3c8bab). Secondo giro in corso: «Perché insegna» ordinato per legge, solo i legami di struttura a riposo, tre fasce in «Che cosa si impara», «Perché c'è» nella scheda (assorbe V5) |
 | V2 | Undici schede `legge`; `legge` su principi/tecniche/ricette; due facce e `dinamica` sulle meccaniche; 8 tecniche, 1 principio, 7 meccaniche nuove; `_dinamiche` | **fatto** (main 96e59c6; 665 test in copia pulita; da pubblicare insieme al visore) |
 | V3 | Il corso: `peso`, 19 concetti del nucleo che mancavano, `concetti` sugli obiettivi, posti dei concetti con test, `_sei-voci` | **fatto, pubblicato** (main 0795a8c, gh-pages b08f355; 687 test) |
-| V4 | Un verso solo; `ambito`; `concetti` sulle meccaniche e sei voci più vere (specifica: `notes/vault/V4-spec.md`) | agente in corso |
-| V5 | «Perché c'è» e legami di struttura nel visore | dentro il secondo giro del visore (in corso) |
+| V4 | Un verso solo; `ambito`; `concetti` sulle meccaniche; `_sei-voci` più vera; `_matrice` generata | **fatto, pubblicato** (main 6f4392f + matrice; 702 test). Resta: 41 schede generali su 80 parlano ancora di Salem (elenco in `lore.mjs check`) |
+| V5 | «Perché c'è» e legami di struttura nel visore | **fatto** nel secondo giro (main 0f3d867); terzo giro di rifinitura in corso |
 | V6 | Prova: copiare il metodo generale in Mnemopolis | da fare (chiedere ad Andrea prima di toccare la repo di Mnemopolis) |
 
 ## Da dove ripartire (scritto il 18/11 alle 10:55, token quasi finiti)

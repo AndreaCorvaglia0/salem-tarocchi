@@ -24,6 +24,38 @@ controlli (strumenti).
 Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `docs/WRITING.md`, e le schede
 `lore/metodo/ricette/storie-in-piu-nel-registro.md`, `lore/metodo/ricette/ogni-riga-ha-una-fonte.md`, `lore/metodo/ricette/il-salvataggio-sopravvive.md`.
 
+## Com'è fatto il vault: tre zone, una catena
+
+Il vault (`lore/`) ha tre zone, che sono la legge 10 del manifesto:
+
+| Zona | Dentro | Risponde a |
+|---|---|---|
+| `lore/metodo/` | leggi, principi, tecniche, ricette, meccaniche | perché e come si insegna |
+| `lore/corso/` | obiettivi, concetti (nucleo e contorno) | che cosa si impara |
+| `lore/storia/` | persone, luoghi, fatti, retroscena, decisioni; `generati/` | dove, con chi, che cosa succede |
+
+Tra le zone passa una catena sola, e ogni legame è scritto una volta, dal lato che lo conosce:
+
+    legge → principio / tecnica / ricetta → meccanica → obiettivo → famiglia di concetti → concetto → luogo
+
+Si guarda nel visore (`<sito>/lore/`, quattro viste) e si controlla con tre pagine generate:
+`lore/metodo/meccaniche/_dinamiche.md` (ogni dinamica con le meccaniche e le loro due facce),
+`lore/metodo/meccaniche/_matrice.md` (meccaniche × obiettivi e × tecniche) e `lore/corso/_sei-voci.md` (per ogni
+famiglia di concetti: nucleo, corpo, posto, motivo, uso, ritorno, e i buchi).
+
+**Aggiungere un concetto.** Una scheda in `lore/corso/concetti/` con `famiglia`, `peso` (nucleo o contorno),
+`in_breve` (la riga da sapere) e il suo posto (`sta_in`, o `arriva_da`, `la_da`, `si_impara_da`). Poi
+`node scripts/lore.mjs gen` e si guarda `_sei-voci`: un concetto è «dentro» quando ha le sei voci. Se la
+famiglia è nuova, un obiettivo deve nominarla in `concetti`.
+
+**Aggiungere una meccanica.** Una scheda in `lore/metodo/meccaniche/` con le due facce (`motivo`: perché lei lo
+fa, nel gioco; `effetto`: che cosa fa per l'apprendimento), la `dinamica`, le `leggi`, i `concetti` che tocca
+(anche nessuno: è onesto), e i campi di sempre (`serve`, `insegna`, `tecniche`, `dove`). Il controllo rifiuta
+una meccanica senza una delle due facce.
+
+**Generale o di Salem.** Ogni scheda del metodo dichiara l'`ambito`. Quelle `generale` sono le sole che si
+portano in Mnemopolis; il controllo conta quante parlano ancora di Salem fuori dai campi fatti per questo.
+
 ## Regole che valgono per tutti e tre
 
 - Qualcuno sta già giocando. Il pezzo dipende da quello che lei **ha** (un flag, una carta, un potere, una
