@@ -20,6 +20,8 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 8 | Interessi da strega: pagina di progetto | **approvata** (`lore/decisioni/decisioni-2026-11-18.md`) |
 | 9 | Interessi: prima fetta (Ortica, erbe, tre missioni) | **fatto, pubblicato** (main 6c4861e) |
 | 10 | Libri: scaffale in biblioteca, primi cinque libri | **fatto, pubblicato** (main 0ee9952, gh-pages 0ef7d33). Mancano: i due libri della Lettrice (Court de Gébelin 1781, Waite 1911: scansione di Waite non trovata), gli altri del catalogo | BACKLOG sezione 6 |
+| 11 | Pietre: tavole antiche al posto delle 7 disegnate | agente in corso |
+| 12 | Interessi: pietre di Edera, missioni 1–3 (la 6, il nome vero, dopo) | agente in corso |
 
 ## Dopo la coda (in attesa di Andrea)
 
