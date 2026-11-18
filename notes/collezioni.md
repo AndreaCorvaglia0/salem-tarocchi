@@ -6,7 +6,7 @@ missioni, a corredo, con due parole e senza spiegone; chi vuole legge l'album o 
 
 ## Che cosa si vede
 
-- **Tre album nel grimorio**: erbario (23, c'è), pietre (12, da `lore/sapere/pietra-*`), sibilla (**tutte e 36** le
+- **Tre album nel grimorio**: erbario (23, c'è), pietre (12, da `lore/corso/concetti/pietra-*`), sibilla (**tutte e 36** le
   figurine, deciso da Andrea: «non limitare gli oracoli»; ognuna con pagina, due o tre parole chiave e un donatore
   o un posto; vedi BACKLOG 3.0). Caselle numerate vuote per quelle mancanti.
 - **Trovare non ferma il gioco.** Si tocca, la figurina vola verso l'icona del grimorio, un suono piccolo, una
@@ -20,7 +20,7 @@ missioni, a corredo, con due parole e senza spiegone; chi vuole legge l'album o 
 - **In regalo, a corredo.** Una missione può dare anche una pietra o una figurina quando ha senso per chi la dà
   (Edera una pietra, il becchino l'ossidiana, il marinaio l'ancora). Chi la dà dice una riga, due parole in
   croce prese dal «si dice» del sapere, a modo suo. Il biglietto della missione non lo annuncia mai
-  (`lore/principi/vede-solo-quello-che-sa.md`).
+  (`lore/metodo/principi/vede-solo-quello-che-sa.md`).
 - **Chi vuole approfondisce**: la pagina dell'album (che cos'è, che cosa si dice, a che cosa si lega nel
   cerchio), e più avanti le missioni degli interessi (BACKLOG 6).
 

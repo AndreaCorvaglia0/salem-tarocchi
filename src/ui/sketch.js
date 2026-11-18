@@ -62,7 +62,7 @@ export function sketch(regionId, { width = 320, minWidth = 330, seen = () => fal
     if (on) {
       const b = Lay.labels[id];
       shown.push(b);
-      const anon = !!(unnamed && unnamed(id)); // seen from outside, name not known yet: a pencil «?» (lore/principi/vede-solo-quello-che-sa.md)
+      const anon = !!(unnamed && unnamed(id)); // seen from outside, name not known yet: a pencil «?» (lore/metodo/principi/vede-solo-quello-che-sa.md)
       wrap.append(h(anon ? 'span.sk-lab.sk-anon' : 'span.sk-lab', { style: { left: `${(b.l + b.r) / 2}px`, top: `${b.t}px` } }, anon ? '?' : b.lines.join('\n')));
       if (onPick) wrap.append(h('button.sk-hit', { type: 'button', 'aria-label': anon ? 'Un posto che non conosco' : p.label, style: { left: `${x}px`, top: `${y}px` }, onclick: (e) => onPick(id, p, e.currentTarget) }));
     }

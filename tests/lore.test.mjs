@@ -73,13 +73,13 @@ const rules = (r) => r.errors.map((e) => e.rule);
 
 test('rules: missing tipo, missing fields, wrong folder, bad and duplicate names, broken links', async () => {
   const V = mini({
-    'fatti/senza-tipo.md': '---\nnome: "x"\n---\n',
-    'fatti/a-meta.md': '---\ntipo: "fatto"\nnome: "x"\n---\n',
-    'luoghi/fuori-posto.md': fatto(),
-    'fatti/Città.md': fatto(),
-    'fatti/doppio.md': fatto(), 'luoghi/doppio.md': '---\ntipo: "luogo"\nnome: "x"\nid: ""\ncosa_e: ""\nchi_ci_vive: []\natmosfera: ""\nsi_apre_con: ""\naperto:\n---\n',
-    'fatti/link.md': fatto({ conseguenze: ['"[[non-esiste]]"'] }),
-    'fatti/_indice-fatti.md': 'Un indice senza testa: [[link]].\n',
+    'storia/fatti/senza-tipo.md': '---\nnome: "x"\n---\n',
+    'storia/fatti/a-meta.md': '---\ntipo: "fatto"\nnome: "x"\n---\n',
+    'storia/luoghi/fuori-posto.md': fatto(),
+    'storia/fatti/Città.md': fatto(),
+    'storia/fatti/doppio.md': fatto(), 'storia/luoghi/doppio.md': '---\ntipo: "luogo"\nnome: "x"\nid: ""\ncosa_e: ""\nchi_ci_vive: []\natmosfera: ""\nsi_apre_con: ""\naperto:\n---\n',
+    'storia/fatti/link.md': fatto({ conseguenze: ['"[[non-esiste]]"'] }),
+    'storia/fatti/_indice-fatti.md': 'Un indice senza testa: [[link]].\n',
   });
   const r = check(V, await story());
   const by = (f) => r.errors.filter((e) => e.file.includes(f)).map((e) => e.rule);
@@ -93,10 +93,10 @@ test('rules: missing tipo, missing fields, wrong folder, bad and duplicate names
 });
 test('rules: flags, steps and sessions named by a fatto must exist; persona ids must be the code\'s', async () => {
   const V = mini({
-    'fatti/buono.md': fatto({ flag: '"step c1.malva → c1.read; flag malva.wood / malva.cheeky; session s1"' }),
-    'fatti/cattivo.md': fatto({ flag: '"step c9.nowhere; flag no.such.flag; session s9; cast nobody"' }),
-    'persone/vera.md': persona({ id: '"malva"' }),
-    'persone/inventata.md': persona({ id: '"zia.rosa"' }),
+    'storia/fatti/buono.md': fatto({ flag: '"step c1.malva → c1.read; flag malva.wood / malva.cheeky; session s1"' }),
+    'storia/fatti/cattivo.md': fatto({ flag: '"step c9.nowhere; flag no.such.flag; session s9; cast nobody"' }),
+    'storia/persone/vera.md': persona({ id: '"malva"' }),
+    'storia/persone/inventata.md': persona({ id: '"zia.rosa"' }),
   });
   const r = check(V, await story());
   assert.deepEqual(r.errors.filter((e) => e.file.includes('buono') || e.file.includes('vera')), []);
@@ -107,8 +107,8 @@ test('rules: meccaniche serve principi, obiettivi have meccaniche or say what is
   const mecc = (serve) => fm({ tipo: '"meccanica"', nome: '"m"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve, insegna: '[]', tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '' });
   const ob = (m, a) => fm({ tipo: '"obiettivo"', nome: '"o"', sa_fare: '""', si_vede_da: '""', meccaniche: m, aperto: a });
   const pr = fm({ tipo: '"principio"', nome: '"p"', in_breve: '""', perche: '""', fonte: '""', si_rompe_se: '""' });
-  const V = mini({ 'principi/p-uno.md': pr, 'principi/p-due.md': pr, 'meccaniche/m-ok.md': mecc(['"[[p-uno]]"']), 'meccaniche/m-vuota.md': mecc('[]'),
-    'obiettivi/o-ok.md': ob('[]', ['"manca tutto"']), 'obiettivi/o-vuoto.md': ob('[]', '') });
+  const V = mini({ 'metodo/principi/p-uno.md': pr, 'metodo/principi/p-due.md': pr, 'metodo/meccaniche/m-ok.md': mecc(['"[[p-uno]]"']), 'metodo/meccaniche/m-vuota.md': mecc('[]'),
+    'corso/obiettivi/o-ok.md': ob('[]', ['"manca tutto"']), 'corso/obiettivi/o-vuoto.md': ob('[]', '') });
   const r = check(V, await story());
   assert.deepEqual(rules(r).sort(), ['meccanica.serve', 'obiettivo']);
   assert.ok(r.warnings.some((w) => w.rule === 'principio' && w.file.includes('p-due')));
@@ -116,22 +116,22 @@ test('rules: meccaniche serve principi, obiettivi have meccaniche or say what is
 test('continuity: knowing a fact from a scene that plays before it is an error; after it, or guarded, is fine', async () => {
   const arrest = fatto({ nome: '"arresto"', flag: '"step c2.home; flag arrest.front / arrest.hid, ginepra.taken"', scena: '"c2.js#c2.arrest"' });
   const make = (da, come) => mini({
-    'fatti/arresto.md': arrest,
-    'fatti/prima.md': fatto({ scena: '"c1.js#c1.malva"' }),
-    'fatti/dopo.md': fatto({ scena: '"c3.js#c3.edera"' }),
-    'persone/chi.md': persona({ sa: [`{ fatto: "[[arresto]]", da: "[[${da}]]", come: "${come}" }`] }),
+    'storia/fatti/arresto.md': arrest,
+    'storia/fatti/prima.md': fatto({ scena: '"c1.js#c1.malva"' }),
+    'storia/fatti/dopo.md': fatto({ scena: '"c3.js#c3.edera"' }),
+    'storia/persone/chi.md': persona({ sa: [`{ fatto: "[[arresto]]", da: "[[${da}]]", come: "${come}" }`] }),
   });
   const S1 = await story();
   assert.equal(continuity(make('prima', ''), S1).violations.length, 1, 'Malva\'s welcome plays long before the arrest');
   assert.equal(continuity(make('dopo', ''), S1).violations.length, 0, 'Edera\'s nook comes after the arrest');
   assert.equal(continuity(make('arresto', ''), S1).violations.length, 0, 'the fact\'s own scene');
   // chi_lo_sa with a scene written in `come`
-  const V = mini({ 'fatti/arresto.md': fatto({ nome: '"arresto"', flag: '"step c2.home; flag ginepra.taken"', scena: '"c2.js#c2.arrest"', chi_lo_sa: ['{ chi: "[[chi]]", come: "lo dice (c1.js#c1.read)." }'] }), 'persone/chi.md': persona() });
+  const V = mini({ 'storia/fatti/arresto.md': fatto({ nome: '"arresto"', flag: '"step c2.home; flag ginepra.taken"', scena: '"c2.js#c2.arrest"', chi_lo_sa: ['{ chi: "[[chi]]", come: "lo dice (c1.js#c1.read)." }'] }), 'storia/persone/chi.md': persona() });
   assert.equal(continuity(V, S1).violations.length, 1);
 });
 
 // ---- the generated pages ------------------------------------------------------------------------------
-test('lore gen: lore/tratti, lore/scelte, lore/finali are up to date (run `node scripts/lore.mjs gen`)', async () => {
+test('lore gen: lore/storia/generati/tratti, lore/storia/generati/scelte, lore/storia/generati/finali are up to date (run `node scripts/lore.mjs gen`)', async () => {
   const pages = generate(await story(), loadVault());
   assert.ok(pages.size > 100);
   const diff = diffGenerated(pages);
@@ -140,7 +140,7 @@ test('lore gen: lore/tratti, lore/scelte, lore/finali are up to date (run `node 
 test('lore gen: every choice of the scripts, sessions and visits has a page with a class', async () => {
   const S1 = await story();
   const pages = generate(S1, loadVault());
-  const scelte = [...pages.keys()].filter((k) => k.startsWith('scelte/') && !k.includes('_indice'));
+  const scelte = [...pages.keys()].filter((k) => k.startsWith('storia/generati/scelte/') && !k.includes('_indice'));
   assert.equal(scelte.length, S1.choices.length);
   for (const k of scelte) {
     const r = parse(pages.get(k));

@@ -1,7 +1,7 @@
 // A SMALL SIDE STORY with the miller and Ortica: «Il cappello in soffitta» (notes/retroscena.md, e, seed 3).
 // The miller gives her a flour sack for Ortica and does not say what is inside; at the hut it is the pointed
 // hat Ortica lost over the mill twenty-eight years ago. Nobody tells why she stopped flying: it shows in two
-// hands passed twice over the same thing, and in Ortica falling silent (lore/retroscena: mugnaio, ortica).
+// hands passed twice over the same thing, and in Ortica falling silent (lore/storia/retroscena: mugnaio, ortica).
 // Format: src/trials/run.js. The opening at the mill, the door at the hut, what Ortica does afterwards (a line
 // that reads her affinity) and the miller later are in data/story/scripts/hat.js.
 // Cards it teaches: Due di Coppe, Otto di Coppe, Cavaliere di Coppe (Ortica pulls each, upright). The three

@@ -22,16 +22,16 @@ test('every file of the vault is a note, with a type, a title and a place in the
   }
   assert.equal(data.home, 'inizio');
   assert.equal(data.types.reduce((s, t) => s + t.count, 0), data.notes.length);
-  for (const t of ['persona', 'retroscena', 'fatto', 'meccanica', 'tratto', 'scelta', 'finale']) assert.ok(byId.size && data.types.find((x) => x.tipo === t), t);
+  for (const t of ['persona', 'retroscena', 'fatto', 'meccanica', 'tratto', 'scelta', 'finale', 'ricetta', 'concetto']) assert.ok(byId.size && data.types.find((x) => x.tipo === t), t);
   assert.equal(byId.get('ortica').title, 'Ortica');
   assert.equal(byId.get('ortica-retroscena').title, 'Ortica: retroscena');
   assert.equal(byId.get('ortica-retroscena').hidden, true);
 });
 
 test('the colours come from the Obsidian graph settings; choices and endings start hidden', () => {
-  const c = graphColors('{"colorGroups":[{"query":"path:persone/","color":{"a":1,"rgb":14711391}}]}');
-  assert.equal(c.persone, '#e07a5f');
-  assert.equal(data.types.find((t) => t.tipo === 'persona').color, '#e07a5f');
+  const c = graphColors('{"colorGroups":[{"query":"path:storia/persone/","color":{"a":1,"rgb":14711391}}]}');
+  assert.equal(c['storia/persone'], '#e07a5f');
+  assert.equal(data.types.find((t) => t.tipo === 'persona').color, '#f59e0b');
   assert.equal(data.types.find((t) => t.tipo === 'scelta').graph, false);
   assert.equal(data.types.find((t) => t.tipo === 'finale').graph, false);
   assert.equal(data.types.find((t) => t.tipo === 'fatto').graph, true);
@@ -62,7 +62,7 @@ test('backlinks are exactly the links seen from the other side, and the edges ar
 test('the data stays one file while it is small, and splits the bodies when it is not', () => {
   assert.ok(!data.bodies || site.bodies, 'bodies flagged but not produced');
   if (!data.bodies) assert.ok(JSON.stringify(data).length <= SPLIT_AT);
-  const big = vaultOf([docOf('persone/a.md', `---\ntipo: persona\nnome: "A"\n---\n${'parola '.repeat(260000)} [[b]]`), docOf('luoghi/b.md', '---\ntipo: luogo\nnome: "B"\n---\nqui')]);
+  const big = vaultOf([docOf('storia/persone/a.md', `---\ntipo: persona\nnome: "A"\n---\n${'parola '.repeat(260000)} [[b]]`), docOf('storia/luoghi/b.md', '---\ntipo: luogo\nnome: "B"\n---\nqui')]);
   const r = buildSite(big, { colors: {} });
   assert.equal(r.data.bodies, true);
   assert.ok(r.bodies.a.length > 1e6 && !('body' in r.data.notes[0]));

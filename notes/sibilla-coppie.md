@@ -46,7 +46,7 @@ di `src/core/state.js` (solo le mie righe). Un salvataggio vecchio parte da zero
 - Dati: `src/data/sibylpairs.js` (pezzi delle 36 figurine, domande, coppie a mano, righe di Ginepra).
 - Regole pure: `src/glue/sibylpairs.rules.js`; colla: `src/glue/sibylpairs.js` (servizio `sibyl.pairs`).
 - Schermata: `src/ui/sibylpairs.js`; il tasto e le tacche in `src/ui/collect.js`.
-- Test: `tests/sibylpairs.test.mjs`. Vault: `lore/meccaniche/giocare-a-coppie-con-la-sibilla.md` (proposto).
+- Test: `tests/sibylpairs.test.mjs`. Vault: `lore/metodo/meccaniche/giocare-a-coppie-con-la-sibilla.md` (proposto).
 
 ## Non in questa fase
 

@@ -22,5 +22,5 @@ all'inizio sono nascosti: si accendono dai filtri.
 ## Tre giri che valgono la pena
 
 1. Apri [[ortica]], poi il suo retroscena, poi [[cappello-in-soffitta]]: si vede come una storia nascosta diventa una scena.
-2. Apri un tratto in `tratti/` (per esempio il tono): tutte le scelte che lo muovono e chi lo legge.
+2. Apri un tratto in `storia/generati/tratti/` (per esempio il tono): tutte le scelte che lo muovono e chi lo legge.
 3. Apri [[_matrice]]: quali meccaniche servono quali obiettivi, e dove ci sono buchi.

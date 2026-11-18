@@ -1,11 +1,11 @@
-// SHE SEES ONLY WHAT SHE KNOWS (lore/principi/vede-solo-quello-che-sa.md; docs/LEZIONI.md 34).
+// SHE SEES ONLY WHAT SHE KNOWS (lore/metodo/principi/vede-solo-quello-che-sa.md; docs/LEZIONI.md 34).
 // The guard against spoilers: everything the grimoire's map says about the world is what she has seen or
 // been told, with a condition (src/core/cond.js) where it depends on that.
 //   - the cards of the optional things (src/ui/missions/titles.js): no reward field, no reward or spoiler
 //     word, presentiments few and different
 //   - her notes on the places (src/data/world/notes.js): three states for every place on the sketches,
 //     valid conditions naming flags, steps, trials and cards that exist, short lines, old saves quiet
-//   - both: no proper name that the scripts never say (a name known only to lore/retroscena is a backstory)
+//   - both: no proper name that the scripts never say (a name known only to lore/storia/retroscena is a backstory)
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -29,10 +29,10 @@ const SRC = files('src').filter((f) => !GUARDED.some((g) => f.endsWith(g))).map(
 const SAID = files(join('src', 'data')).filter((f) => !GUARDED.some((g) => f.endsWith(g))).map((f) => readFileSync(f, 'utf8')).join('\n');
 
 // names in the backstory that the scripts never say: they must never reach her
-const RETRO = files(join('lore', 'retroscena'), '.md').map((f) => readFileSync(f, 'utf8')).join('\n');
+const RETRO = files(join('lore', 'storia', 'retroscena'), '.md').map((f) => readFileSync(f, 'utf8')).join('\n');
 const capWords = (text) => [...String(text).matchAll(/(?<![.!?«]\s|^)(?<=[\s'’(]|^)([A-ZÀ-Ý][a-zà-ÿ]{2,})/gm)].map((m) => m[1]);
 // plus, by hand, the backstory names that the game uses for something else (in the scripts «Ruta» is only a
-// herb; in lore/retroscena she is a person, and nothing she has seen tells her so)
+// herb; in lore/storia/retroscena she is a person, and nothing she has seen tells her so)
 const BACKSTORY_ONLY = [...new Set([...capWords(RETRO).filter((w) => !SAID.includes(w)), 'Ruta'])];
 
 // every text the map can show
@@ -101,7 +101,7 @@ test('every place on the sketches has her three states: blank, «?» and a line,
 test('no name from the backstory: every proper name the map says is said somewhere in the scripts', () => {
   assert.ok(BACKSTORY_ONLY.length > 0, 'the backstory has names the scripts never say (if not, the guard is empty)');
   for (const [id, text] of [...cardTexts, ...noteTexts]) {
-    for (const w of BACKSTORY_ONLY) assert.doesNotMatch(text, new RegExp(`\\b${w}\\b`), `${id}: «${w}» exists only in lore/retroscena`);
+    for (const w of BACKSTORY_ONLY) assert.doesNotMatch(text, new RegExp(`\\b${w}\\b`), `${id}: «${w}» exists only in lore/storia/retroscena`);
     for (const w of capWords(text)) assert.ok(SAID.includes(w), `${id}: «${w}» is never said in the scripts («${text}»)`);
   }
 });
@@ -148,7 +148,7 @@ test('the albums: valid conditions, no backstory name, and the mission cards nev
     ...Object.entries(FIRST).flatMap(([k, f]) => [...f.lines, ...(f.given || [])].map((t) => [k, t])),
     ...STONE_LIST.flatMap((s) => [s.com, s.dice, s.storia].map((t) => [s.id, t])),
     ...SIBYL_LIST.flatMap((c) => [c.it.title, ...c.it.verse].map((t) => [c.id, t]))].filter(([, t]) => t);
-  for (const [id, text] of texts) for (const w of BACKSTORY_ONLY) assert.doesNotMatch(text, new RegExp(`\\b${w}\\b`), `${id}: «${w}» exists only in lore/retroscena`);
+  for (const [id, text] of texts) for (const w of BACKSTORY_ONLY) assert.doesNotMatch(text, new RegExp(`\\b${w}\\b`), `${id}: «${w}» exists only in lore/storia/retroscena`);
   // the cards of the optional things say nothing of stones or figures to be given
   // (Edera's interest is about stones she works with for others, and none of its missions gives her one: its cards
   // may say «pietra», never the name of a stone, nor figures)

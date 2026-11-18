@@ -9,27 +9,40 @@ leggono. Un file per cosa. In testa i dati (YAML), sotto poche righe di testo. I
 `fonte: proposto` (plausibile, non ancora confermato: non è canone finché Andrea non lo decide).
 Niente viene inventato in silenzio: quello che manca va in `aperto:`.
 
+## Tre zone
+
+Le cartelle sono raccolte in tre zone, che rispondono a tre domande:
+
+- **`metodo/`**: come si insegna. Leggi, principi, tecniche, ricette (le schede di metodo, generali o di Salem) e meccaniche.
+- **`corso/`**: che cosa si impara. Obiettivi e concetti (il cerchio di erbe, fumi, pietre e tarocchi).
+- **`storia/`**: dove e con chi. Persone, luoghi, fatti, retroscena, decisioni; in `storia/generati/` le scelte, i finali e i tratti scritti dagli strumenti.
+
+Restano in cima al vault solo questo file, `inizio.md` e `.obsidian/`. I collegamenti non cambiano: sono per nome, senza cartella.
+
+Un tipo nuovo, `legge`, vive in `metodo/leggi/` (campi: `nome`, `in_breve`, `perche`, `si_rompe_se`). Le schede si scriveranno dopo: la cartella ha per ora solo l'indice, e il controllo accetta un tipo senza schede.
+
 ## Cartelle e campi
 
 | Cartella | `tipo` | Campi in testa |
 |---|---|---|
-| `persone/` | `persona` | `nome`, `id` (quello del codice), `ruolo`, `vuole`, `teme`, `nasconde`, `voce` (come parla: 3-5 tratti osservabili, con un esempio dal copione), `tic`, `incontro` (flag o passo in cui la si incontra), `arco` (lista di `[[fatti]]` in ordine), `legami` (lista di `{ con: "[[x]]", prova: "...", fonte }`), `sa` (lista di `{ fatto: "[[x]]", da: "[[scena o fatto]]" }`), `luoghi`, `carte` (le carte legate a lei), `aperto` |
-| `luoghi/` | `luogo` | `nome`, `id` (mappa), `cosa_e`, `chi_ci_vive`, `atmosfera`, `si_apre_con`, `aperto` |
-| `fatti/` | `fatto` | `nome`, `flag` (il flag o il passo del codice, se c'è), `capitolo`, `quando` (ordine: numero), `scena` (file e id del copione), `chi_c_e`, `chi_lo_sa`, `conseguenze` (lista di `[[fatti]]`), `rami` (se dipende da una scelta), `aperto` |
-| `principi/` | `principio` | `nome`, `in_breve`, `perche`, `fonte` (sezione di DESIGN.md o parole di Andrea), `si_rompe_se` |
-| `meccaniche/` | `meccanica` | `nome`, `fonte` (da dove viene la meccanica), `dove` (file del codice), `cosa_fa_la_giocatrice`, `serve` (lista di `[[principi]]`), `insegna` (lista di `[[obiettivi]]`), `tecniche` (lista di `[[tecniche]]`), `ragione_nel_gioco` (perché nel mondo di Salem ha senso farlo), `premio`, `rischio`, `tratti` (del ritratto che muove), `aperto` |
-| `tecniche/` | `tecnica` | `nome`, `in_breve`, `come_funziona` (2-3 righe, con una fonte in RESEARCH.md se è un'affermazione sull'apprendimento), `fonte`, `dove_la_usiamo` (lista di `[[meccaniche]]`), `dove_manca` |
-| `obiettivi/` | `obiettivo` | `nome`, `sa_fare` (cosa sa fare lei alla fine, osservabile), `si_vede_da` (come il gioco lo verifica), `meccaniche`, `aperto` |
-| `tratti/` | `tratto` | generato: `nome`, `cosa` (che cosa misura), `stabilisce` (lista di `{ dove, n, scelta }`: chi lo muove), `mette_alla_prova` (lista di `{ dove, condizione }`: chi lo legge) |
-| `scelte/` | `scelta` | generato: `nome`, `dove` (file e scena), `fatto` (il `[[fatto]]` della scena, se c'è), `classe` (`stabilisce`, `mette_alla_prova`, `entrambe`, `colore`), `opzioni` (lista di `{ t, quando, imposta }`) |
-| `finali/` | `finale` | generato: `nome`, `dove`, `condizione`, `si_guadagna` (lista di `{ serve, dove }`) |
-| `metodo/` | `metodo` | `nome`, `famiglia` (imparare, variare, personalizzare, scrivere, far-crescere), `ambito` (generale, salem), `problema`, `soluzione`, `in_salem` (lista di `[[...]]`), `si_controlla_con`, `rischi`, `fonte` |
-| `retroscena/` | `retroscena` | `persona`, `fonte` (proposto finché Andrea non lo legge, poi deciso), `in_breve`, `vuole`, `teme` (non mostrato nel gioco: serve a dare profondità alle battute; campi facoltativi, nei retroscena lunghi: `ferita`, `non_direbbe_mai`, `bugia_che_si_racconta`, `cosa_pensa` (lista `{ di, cosa }`), `ipotesi` (lista `{ su, cosa, perche }`), `sente_tartufo`, `affiora`, `non_affiora`, `sostiene` (lista `{ dove, cosa }`: le righe dei copioni che il retroscena spiega), `corregge` (lista `{ contraddizione, come, cambia }`)) |
-| `decisioni/` | `decisione` | `nome`, `fonte` |
-| `sapere/` | `sapere` | il cerchio di erbe, fumi, pietre e tarocchi ([[_il-cerchio]]): `nome`, `famiglia` (elemento, pianeta, intenzione, segno; seme, arcano, erba, fumo, pietra), `elemento`, `pianeta`, `intenzioni` (lista di `[[intenzione-...]]`), `in_breve` (una riga da ricordare, detta come la dice la tradizione), `si_dice`, `da_dove_viene`, `consenso` (per ogni legame: alto, medio, basso, oppure nostro quando la scelta è del gioco), `varianti`, `nel_gioco`, `fonte` (nomi brevi delle fonti, spiegati in RESEARCH.md, «Il cerchio»; campi facoltativi: colore, id, rischio, segno, seme, arcano, erba, giorno, metallo, carta, segni) |
+| `storia/persone/` | `persona` | `nome`, `id` (quello del codice), `ruolo`, `vuole`, `teme`, `nasconde`, `voce` (come parla: 3-5 tratti osservabili, con un esempio dal copione), `tic`, `incontro` (flag o passo in cui la si incontra), `arco` (lista di `[[fatti]]` in ordine), `legami` (lista di `{ con: "[[x]]", prova: "...", fonte }`), `sa` (lista di `{ fatto: "[[x]]", da: "[[scena o fatto]]" }`), `luoghi`, `carte` (le carte legate a lei), `aperto` |
+| `storia/luoghi/` | `luogo` | `nome`, `id` (mappa), `cosa_e`, `chi_ci_vive`, `atmosfera`, `si_apre_con`, `aperto` |
+| `storia/fatti/` | `fatto` | `nome`, `flag` (il flag o il passo del codice, se c'è), `capitolo`, `quando` (ordine: numero), `scena` (file e id del copione), `chi_c_e`, `chi_lo_sa`, `conseguenze` (lista di `[[fatti]]`), `rami` (se dipende da una scelta), `aperto` |
+| `metodo/leggi/` | `legge` | `nome`, `in_breve`, `perche`, `si_rompe_se` |
+| `metodo/principi/` | `principio` | `nome`, `in_breve`, `perche`, `fonte` (sezione di DESIGN.md o parole di Andrea), `si_rompe_se` |
+| `metodo/meccaniche/` | `meccanica` | `nome`, `fonte` (da dove viene la meccanica), `dove` (file del codice), `cosa_fa_la_giocatrice`, `serve` (lista di `[[principi]]`), `insegna` (lista di `[[obiettivi]]`), `tecniche` (lista di `[[tecniche]]`), `ragione_nel_gioco` (perché nel mondo di Salem ha senso farlo), `premio`, `rischio`, `tratti` (del ritratto che muove), `aperto` |
+| `metodo/tecniche/` | `tecnica` | `nome`, `in_breve`, `come_funziona` (2-3 righe, con una fonte in RESEARCH.md se è un'affermazione sull'apprendimento), `fonte`, `dove_la_usiamo` (lista di `[[meccaniche]]`), `dove_manca` |
+| `corso/obiettivi/` | `obiettivo` | `nome`, `sa_fare` (cosa sa fare lei alla fine, osservabile), `si_vede_da` (come il gioco lo verifica), `meccaniche`, `aperto` |
+| `storia/generati/tratti/` | `tratto` | generato: `nome`, `cosa` (che cosa misura), `stabilisce` (lista di `{ dove, n, scelta }`: chi lo muove), `mette_alla_prova` (lista di `{ dove, condizione }`: chi lo legge) |
+| `storia/generati/scelte/` | `scelta` | generato: `nome`, `dove` (file e scena), `fatto` (il `[[fatto]]` della scena, se c'è), `classe` (`stabilisce`, `mette_alla_prova`, `entrambe`, `colore`), `opzioni` (lista di `{ t, quando, imposta }`) |
+| `storia/generati/finali/` | `finale` | generato: `nome`, `dove`, `condizione`, `si_guadagna` (lista di `{ serve, dove }`) |
+| `metodo/ricette/` | `ricetta` | `nome`, `famiglia` (imparare, variare, personalizzare, scrivere, far-crescere), `ambito` (generale, salem), `problema`, `soluzione`, `in_salem` (lista di `[[...]]`), `si_controlla_con`, `rischi`, `fonte` |
+| `storia/retroscena/` | `retroscena` | `persona`, `fonte` (proposto finché Andrea non lo legge, poi deciso), `in_breve`, `vuole`, `teme` (non mostrato nel gioco: serve a dare profondità alle battute; campi facoltativi, nei retroscena lunghi: `ferita`, `non_direbbe_mai`, `bugia_che_si_racconta`, `cosa_pensa` (lista `{ di, cosa }`), `ipotesi` (lista `{ su, cosa, perche }`), `sente_tartufo`, `affiora`, `non_affiora`, `sostiene` (lista `{ dove, cosa }`: le righe dei copioni che il retroscena spiega), `corregge` (lista `{ contraddizione, come, cambia }`)) |
+| `storia/decisioni/` | `decisione` | `nome`, `fonte` |
+| `corso/concetti/` | `concetto` | il cerchio di erbe, fumi, pietre e tarocchi ([[_il-cerchio]]): `nome`, `famiglia` (elemento, pianeta, intenzione, segno; seme, arcano, erba, fumo, pietra), `elemento`, `pianeta`, `intenzioni` (lista di `[[intenzione-...]]`), `in_breve` (una riga da ricordare, detta come la dice la tradizione), `si_dice`, `da_dove_viene`, `consenso` (per ogni legame: alto, medio, basso, oppure nostro quando la scelta è del gioco), `varianti`, `nel_gioco`, `fonte` (nomi brevi delle fonti, spiegati in RESEARCH.md, «Il cerchio»; campi facoltativi: colore, id, rischio, segno, seme, arcano, erba, giorno, metallo, carta, segni) |
 
-Le pagine che cominciano con `_` sono indici: possono non avere la testa. Le cartelle `tratti/`, `scelte/`
-e `finali/` sono scritte da `node scripts/lore.mjs gen` a partire dai copioni: non si modificano a mano
+Le pagine che cominciano con `_` sono indici: possono non avere la testa. Le cartelle `storia/generati/tratti/`, `storia/generati/scelte/`
+e `storia/generati/finali/` sono scritte da `node scripts/lore.mjs gen` a partire dai copioni: non si modificano a mano
 (docs/TOOLS.md). `node scripts/lore.mjs check` controlla tutta la cartella.
 
 Sotto la testa: un paragrafo che una persona legge volentieri, poi, se serve, `## Note`.

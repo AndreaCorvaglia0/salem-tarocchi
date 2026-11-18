@@ -1,6 +1,6 @@
 // The two new albums of the grimoire, next to the herbarium (notes/collezioni.md): «Pietre» and the figures of
 // the peddler's sibyl. Numbered empty slots for what she has not got; a slot says «nuova» until its page is
-// opened. Each page shows only what she has (lore/principi/vede-solo-quello-che-sa.md).
+// opened. Each page shows only what she has (lore/metodo/principi/vede-solo-quello-che-sa.md).
 //   stonePages(ctx), sibylPages(ctx)   the ribbons' pages (ui/grimoire.js)
 //   showStone(id), showSibyl(n)        one page, opened from the album
 //   flyToBook({ src, from })           the little picture flying into the grimoire button (glue/collect.js)

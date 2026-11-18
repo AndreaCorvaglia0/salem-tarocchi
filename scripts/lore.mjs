@@ -1,9 +1,9 @@
 // The lore tools (docs/TOOLS.md): the vault in lore/ kept consistent with itself and with the story data.
 //   node scripts/lore.mjs check         the linter: errors exit 1; errors and warnings go to notes/tools.md
-//   node scripts/lore.mjs gen           write lore/tratti/, lore/scelte/, lore/finali/ from the story data
+//   node scripts/lore.mjs gen           write lore/storia/generati/tratti/, lore/storia/generati/scelte/, lore/storia/generati/finali/ from the story data
 //   node scripts/lore.mjs gen --check   exit 1 when those folders are out of date (used by the tests)
-//   node scripts/lore.mjs sapere        write src/data/sapere.js and the tables of lore/sapere/_il-cerchio.md
-//   node scripts/lore.mjs sapere --check  exit 1 when either is out of step with lore/sapere/
+//   node scripts/lore.mjs sapere        write src/data/sapere.js and the tables of lore/corso/concetti/_il-cerchio.md
+//   node scripts/lore.mjs sapere --check  exit 1 when either is out of step with lore/corso/concetti/
 // The pieces live in scripts/lore/: frontmatter.mjs (the reader), story.mjs (the story walked once),
 // vault.mjs (the vault on disk), check.mjs (the rules), gen.mjs (the generated pages).
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, unlinkSync } from 'node:fs';
@@ -17,7 +17,7 @@ import { readSapere, sapereSource, withTables, circle } from './lore/sapere.mjs'
 
 const NOTES = join(ROOT, 'notes', 'tools.md');
 export const SAPERE_JS = join(ROOT, 'src', 'data', 'sapere.js');
-export const CIRCLE_MD = join(LORE, 'sapere', '_il-cerchio.md');
+export const CIRCLE_MD = join(LORE, 'corso', 'concetti', '_il-cerchio.md');
 
 // what `sapere` would write: [[path, text]]
 export function sapereOutputs(vault = loadVault()) {
@@ -101,7 +101,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     const stale = files.filter(([p, t]) => !existsSync(p) || readFileSync(p, 'utf8') !== t);
     const { empty } = circle(data);
     if (rest.includes('--check')) {
-      if (stale.length) { console.error(`out of step with lore/sapere/: ${stale.map(([p]) => p).join(', ')}: run \`node scripts/lore.mjs sapere\``); process.exit(1); }
+      if (stale.length) { console.error(`out of step with lore/corso/concetti/: ${stale.map(([p]) => p).join(', ')}: run \`node scripts/lore.mjs sapere\``); process.exit(1); }
       console.log('sapere is in step with the vault');
     } else {
       for (const [p, t] of files) writeFileSync(p, t);

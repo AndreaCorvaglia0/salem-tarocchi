@@ -559,7 +559,7 @@ A **unit** is a piece of a scene that shows only sometimes: a branch of an `IF` 
 
 ### Ending variants
 
-The conditional pieces of the trial, the dawn, the campfire and the last session (lore/finali/ has where each is earned).
+The conditional pieces of the trial, the dawn, the campfire and the last session (lore/storia/generati/finali/ has where each is earned).
 
 | Where | Variant | Runs |
 |---|---|---:|

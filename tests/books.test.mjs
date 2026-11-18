@@ -173,11 +173,11 @@ test('the mission cards never announce a book; no name from the backstory in the
   }
   const files = (dir, ext) => readdirSync(dir).flatMap((f) => { const p = join(dir, f); return statSync(p).isDirectory() ? files(p, ext) : p.endsWith(ext) ? [p] : []; });
   const capWords = (text) => [...String(text).matchAll(/(?<![.!?«]\s|^)(?<=[\s'’(]|^)([A-ZÀ-Ý][a-zà-ÿ]{2,})/gm)].map((m) => m[1]);
-  const retro = files(join('lore', 'retroscena'), '.md').map((f) => readFileSync(f, 'utf8')).join('\n');
+  const retro = files(join('lore', 'storia', 'retroscena'), '.md').map((f) => readFileSync(f, 'utf8')).join('\n');
   const said = files(join('src', 'data'), '.js').filter((f) => !f.includes(join('data', 'books'))).map((f) => readFileSync(f, 'utf8')).join('\n');
   const only = [...new Set([...capWords(retro).filter((w) => !said.includes(w)), 'Ruta'])];
   const shown = BOOK_LIST.flatMap((b) => [...b.pages.flatMap((p) => [p.text, p.note?.t]), b.truth.text]).filter(Boolean).join('\n');
-  for (const w of only) assert.doesNotMatch(shown, new RegExp(`\\b${w}\\b`), `«${w}» exists only in lore/retroscena`);
+  for (const w of only) assert.doesNotMatch(shown, new RegExp(`\\b${w}\\b`), `«${w}» exists only in lore/storia/retroscena`);
 });
 
 test('old saves: the new keys get their defaults, and nothing they had is lost', () => {

@@ -155,10 +155,10 @@ Il letto d'ambiente durante tutto il rito e la lettura: `fire` a 0,35 (0,25 nell
 | Mirra | ambra scura `#8a5a3c`, pesante, prima ristagna in basso poi sale tutta insieme | rosso cupo, 40%; sull'ultima schermata sale al 60% | lento, minore, legato, grave, che si schiarisce alla fine: da cercare tra i brani scuri di MacLeod (non `elegie`, che è la musica degli Esami) |
 
 Le candidate sono provvisorie: per ogni fumo se ne raccolgono molte, si misurano col codice (tempo, modo, altezza media, intensità) e
-tra le due o tre che restano scelgono Andrea e lei alla cieca, come dice `lore/metodo/progettare-per-i-sensi-senza-averli.md`. Le cinque
+tra le due o tre che restano scelgono Andrea e lei alla cieca, come dice `lore/metodo/ricette/progettare-per-i-sensi-senza-averli.md`. Le cinque
 musiche devono avere lo stesso volume integrato (−24 LUFS come le altre) perché la stanza resti la stessa.
 Nota sui fumi: rispetto a `BACKLOG` 3.5 il grano d'incenso diventa l'apertura (è quello che la storia le fa già comprare), e per le
-domande su di sé entra l'artemisia (tradizione divinatoria, già nell'erbario); `lore/sapere/` deciderà se tenerlo.
+domande su di sé entra l'artemisia (tradizione divinatoria, già nell'erbario); `lore/corso/concetti/` deciderà se tenerlo.
 
 ## 9. Che cosa dà in gioco, e che cosa non toglie mai
 

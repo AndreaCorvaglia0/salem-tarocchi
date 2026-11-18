@@ -21,13 +21,13 @@ const SOURCES = [...FIND_SPOTS, ...GIFTS];
 test('twelve stones, one page each, tied to the vault and with a picture', () => {
   assert.equal(STONE_LIST.length, 12);
   const vault = Object.values(SAPERE).filter((e) => e.famiglia === 'pietra').map((e) => e.id).sort();
-  assert.deepEqual(STONE_LIST.map((s) => s.sapere).sort(), vault, 'the twelve stones of lore/sapere/pietra-*.md');
+  assert.deepEqual(STONE_LIST.map((s) => s.sapere).sort(), vault, 'the twelve stones of lore/corso/concetti/pietra-*.md');
   for (const s of STONE_LIST) {
     for (const k of ['name', 'find', 'com', 'dice', 'storia']) assert.ok(typeof s[k] === 'string' && s[k].length > 3, `${s.id}.${k}`);
     assert.ok(words(s.dice) >= 10 && words(s.dice) <= 45, `${s.id}: what is said, ${words(s.dice)} words`);
     assert.ok(words(s.com) <= 35 && words(s.storia) <= 40, `${s.id}: short pages`);
     assert.ok(words(s.find) <= 4 && s.find.endsWith('.'), `${s.id}: the find line is a few words («${s.find}»)`);
-    assert.doesNotMatch(`${s.com} ${s.dice} ${s.storia}`, /consiglio medico|non sostituisce|attenzione:/i, `${s.id}: no disclaimers (lore/principi/erbe-come-storia.md)`);
+    assert.doesNotMatch(`${s.com} ${s.dice} ${s.storia}`, /consiglio medico|non sostituisce|attenzione:/i, `${s.id}: no disclaimers (lore/metodo/principi/erbe-come-storia.md)`);
     assert.ok(s.plate ? !s.drawn : s.drawn === true, `${s.id}: either an old plate or drawn: true`);
     const f = `public/stones/${s.id}.webp`;
     assert.ok(existsSync(f), `${f} missing`);

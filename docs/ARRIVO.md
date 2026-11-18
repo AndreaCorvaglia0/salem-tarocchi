@@ -39,7 +39,7 @@ respirare, e di dire che cosa vede prima di leggere che cosa «vuol dire».
 **Il tronco: le carte.** Come oggi: trovarle, capirle, usarle per rispondere a qualcuno.
 
 **I perni** (pochi, sempre gli stessi): quattro elementi, sette pianeti, otto intenzioni. Tutto ciò che si
-impara si aggancia a questi, così una cosa imparata ne illumina altre (`lore/sapere/`).
+impara si aggancia a questi, così una cosa imparata ne illumina altre (`lore/corso/concetti/`).
 
 **I rami: gli interessi**, ognuno presso una strega, ognuno una catena di piccole missioni facoltative:
 - *Erbe e orto* (Ortica): coltivare, riconoscere, seccare.
@@ -113,5 +113,5 @@ Dopo la tappa 4 ci si ferma e si guarda: se il cerchio si sente, si va avanti; s
 - Sa leggere tre carte del suo mazzo senza il telefono.
 - Sa dire perché ha messo la lavanda in un sacchetto per il sonno, senza averlo «studiato».
 - Dopo qualche lettura, sentire il motivo d'apertura le fa abbassare le spalle.
-- I numeri: nessun obiettivo scoperto in `lore/meccaniche/_matrice.md`; ogni perno con una voce per famiglia.
+- I numeri: nessun obiettivo scoperto in `lore/metodo/meccaniche/_matrice.md`; ogni perno con una voce per famiglia.
 - E, per Mnemopolis: ogni tappa ha lasciato nel kit una scheda riusabile.

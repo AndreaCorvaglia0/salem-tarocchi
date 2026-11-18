@@ -1,6 +1,6 @@
 # Il kit: buchi trovati (17 novembre)
 
-Scritto mentre preparavo `lore/metodo/`, `docs/KIT.md` e `docs/MNEMOPOLIS.md`. Tre elenchi: cose che il gioco
+Scritto mentre preparavo `lore/metodo/ricette/`, `docs/KIT.md` e `docs/MNEMOPOLIS.md`. Tre elenchi: cose che il gioco
 fa e che nessuna scheda spiega; regole di Andrea che non stanno scritte nella repo; punti in cui il vault,
 DESIGN.md e il codice non dicono la stessa cosa.
 

@@ -14,7 +14,7 @@ sessione, non nella repo).
 ## 1. Regola «lei vede solo quello che sa»
 
 - **Commit:** regola scritta; biglietti e note dei luoghi in `602c0df`.
-- **Cosa:** principio `lore/principi/vede-solo-quello-che-sa.md`; righe in `AGENTS.md`, `docs/KIT.md`; lezione 34 in
+- **Cosa:** principio `lore/metodo/principi/vede-solo-quello-che-sa.md`; righe in `AGENTS.md`, `docs/KIT.md`; lezione 34 in
   `docs/LEZIONI.md`. Biglietti delle missioni senza premi (`src/ui/missions/titles.js`), tipo solo se lei lo sa,
   7 presentimenti; note dei luoghi `src/data/world/notes.js` + `src/ui/placenotes.js`, «?» sulla mappa
   (`src/ui/sketch.js`, opzione `unnamed`); test `tests/knows-only.test.mjs`.
@@ -52,7 +52,7 @@ sessione, non nella repo).
 
 ## 3. Mantenere le promesse (BACKLOG 1)
 
-- **Commit:** `7213183` (gh-pages bdf2829). Decisioni: `lore/decisioni/proposte-2026-11-18-promesse.md`.
+- **Commit:** `7213183` (gh-pages bdf2829). Decisioni: `lore/storia/decisioni/proposte-2026-11-18-promesse.md`.
 - **Cosa:** 11 risposte riscritte e circa 40 cambi di peso dei tratti (semi a caso 33/28/22/18, prima Coppe
   67%); 14 battute nuove che dipendono dall'affinità con le streghe; le nove domande della Lettrice ora escono
   (visita in sogno dopo il finale); fiducia = copia del legame; «Ricordamela» senza la risposta.
@@ -169,7 +169,7 @@ sessione, non nella repo).
 
 ## 8. Interessi, prima fetta: le erbe di Ortica
 
-- **Commit:** `6c4861e`. Decisioni: `lore/decisioni/decisioni-2026-11-18.md`.
+- **Commit:** `6c4861e`. Decisioni: `lore/storia/decisioni/decisioni-2026-11-18.md`.
 - **Cosa:** scena d'inizio da Ortica (quando l'orto è suo e ha un mazzetto fresco); missioni «A testa in giù»
   (trave), «Le scale del mulino» (mortaio: calendula e melissa), «Il fumo di Malva» (mazzo di salvia), una al
   giorno; il mugnaio in piazza col bastone nuovo; dispensa fresche/secche nell'orto; grado 1: opzione «[Le mie
@@ -252,6 +252,6 @@ sessione, non nella repo).
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
-  (`lore/sapere/`, 106 schede); documento di progetto riscritto (quindicesima versione).
+  (`lore/corso/concetti/`, 106 schede); documento di progetto riscritto (quindicesima versione).
 - **Dubbio sul sapere:** le 106 schede non sono state rilette una per una dal capofila; il test controlla che il
   cerchio si chiuda, non che ogni «si dice» sia esatto.

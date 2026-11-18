@@ -8,7 +8,7 @@
 // popularity level (glue/bonds.js); `who` speaks it, `level` is the level it announces.
 // tartufo.treat / tartufo.pat / tartufo.found: toasts when she gives him a treat, pats him with empty
 // hands, or he finds a treat while they explore (he never speaks: his thoughts, in parentheses).
-// Who hears Tartufo (lore/retroscena/tartufo-retroscena.md): a line in parentheses is a low voice, only for her.
+// Who hears Tartufo (lore/storia/retroscena/tartufo-retroscena.md): a line in parentheses is a low voice, only for her.
 // A line without parentheses is his full voice: the three teachers hear it and, when he wants, Ginepra; never
 // the village, the constables or the Judge.
 // diaryFor: event or flag -> first-person diary line (the scripts already write the fork lines).

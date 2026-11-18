@@ -6,7 +6,7 @@
 //   keys   two or three traditional meanings (sources: docs/RESEARCH.md, «La sibilla»)
 //   de     the title and the two lines printed on the card, as read from the scan; `it` is our Italian rendering.
 //          Where a word could not be read for sure the title says less (`unsure`).
-//   sign   the zodiac sign printed in the card's corner (a sign of lore/sapere/segno-*.md); `planet` the planet
+//   sign   the zodiac sign printed in the card's corner (a sign of lore/corso/concetti/segno-*.md); `planet` the planet
 //          printed under it, only where the glyph is one of the seven planets and could be read reliably
 //          (the deck repeats twelve sign-and-planet pairs; the aspects and the unclear glyphs are left out).
 const C = (n, name, keys, de, it, sign, planet = null, unsure = false) => ({ n, id: `s${String(n).padStart(2, '0')}`, name, keys, de, it, sign, planet, unsure });

@@ -6,7 +6,7 @@
 //   `int.edera.ready`, set here from what she HAS, so a save far ahead gets it too);
 // - three missions in the registry (core/extras.js, kind 'interest'): a chain, one offered at a time, each on a
 //   later day than the last mission of this interest; never a key. Missions 4-6 are not written yet (the sixth
-//   is the one where Edera calls her by her real name: lore/decisioni/decisioni-2026-11-18.md);
+//   is the one where Edera calls her by her real name: lore/storia/decisioni/decisioni-2026-11-18.md);
 // - the screens are services the scenes call: interests.cellar, interests.courage, interests.labels;
 //   interests.giveBack is the constable giving her stone back the day after;
 // - level 1 («In tasca»): one stone in her pocket from its album page (service stones.pocket, asked by

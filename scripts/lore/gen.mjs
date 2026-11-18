@@ -1,10 +1,10 @@
-// The generated part of the vault (docs/TOOLS.md, "lore gen"): lore/tratti/, lore/scelte/, lore/finali/,
+// The generated part of the vault (docs/TOOLS.md, "lore gen"): lore/storia/generati/tratti/, lore/storia/generati/scelte/, lore/storia/generati/finali/,
 // written from the story data, never invented. gen(story, vault) -> Map(relative path -> text).
 import { AXES, WITCHES, atoms, readsOf, condText, slug, short } from './story.mjs';
 import { parseSceneRefs } from './check.mjs';
 
 export const HEADER = '# generato da scripts/lore.mjs, non modificare a mano';
-export const GEN_DIRS = ['tratti', 'scelte', 'finali'];
+export const GEN_DIRS = ['storia/generati/tratti', 'storia/generati/scelte', 'storia/generati/finali'];
 const AFFINITY = {
   malva: [['tono', 1], ['rischio', -1], ['guida', 1]],
   ortica: [['rischio', 1], ['parola', 1], ['guida', -1]],
@@ -50,7 +50,7 @@ const setText = (s) => {
 
 export function generate(S, V) {
   const out = new Map();
-  // file#scene -> fatto name (the scena field of lore/fatti)
+  // file#scene -> fatto name (the scena field of lore/storia/fatti)
   const factOf = new Map();
   for (const f of V.ofTipo('fatto')) for (const r of parseSceneRefs(f.data.scena)) {
     const k = `${r.file.replace(/^.*\//, '')}#${r.id}`;
@@ -99,7 +99,7 @@ export function generate(S, V) {
     choiceRows.push({ c, name, classe, opts, f });
     const opzioni = opts.map(({ o, sets: ss }) => ({ t: short(o.t, 60), quando: o.when != null ? condText(o.when) : undefined, imposta: ss.map(setText).join(', ') || '-' }));
     const lines = opts.map(({ o, sets: ss, tests: tt }, i) => `${i + 1}. «${short(o.t, 60)}»${o.when != null ? ` (solo se ${condText(o.when)})` : ''}: ${ss.map(setText).join(', ') || 'niente'}${tt && o.when == null ? '; quello che segue dipende dallo stato' : ''}.`);
-    out.set(`scelte/${name}.md`, page({
+    out.set(`storia/generati/scelte/${name}.md`, page({
       tipo: 'scelta', nome: `Scelta ${c.n} di ${c.scene}`, dove: `${c.file}#${c.scene}`, fatto: f ? `[[${f}]]` : '', classe, opzioni,
     }, `Scelta ${c.n} della scena \`${c.scene}\` (${c.file})${c.conds.length ? `, dentro un ramo: ${c.conds.map(condText).join(' e ')}` : ''}.\n\n${lines.join('\n')}`));
   }
@@ -117,7 +117,7 @@ export function generate(S, V) {
   const writeTrait = (id, nome, cosa, setters, readers, note) => {
     const st = setters.map(setItem), mp = uniq(readers.map(readItem), (x) => `${x.dove}|${x.condizione}`);
     traitInfo.push({ id, nome, set: setters.length, read: mp.length, setPlaces: new Set(setters.map((s) => `${s.file}#${s.scene}`)).size });
-    out.set(`tratti/tratto-${id}.md`, page({ tipo: 'tratto', nome, cosa, stabilisce: st, mette_alla_prova: mp },
+    out.set(`storia/generati/tratti/tratto-${id}.md`, page({ tipo: 'tratto', nome, cosa, stabilisce: st, mette_alla_prova: mp },
       `${cosa}\n\nLo muovono ${setters.length} punti dei copioni e lo leggono ${mp.length} condizioni.${note ? `\n\n${note}` : ''}`));
   };
   const traitSets = (ax) => S.sets.filter((s) => s.kind === 'trait' && s.key === ax);
@@ -186,7 +186,7 @@ export function generate(S, V) {
     else { rami = [`osservazione: ${short(b.t, 90)}`]; nome = `${b.scene}: ${short(b.t, 50)}`; }
     const si = earn(b.cond);
     finalRows.push({ name, b, si, cond: condText(b.cond) });
-    out.set(`finali/${name}.md`, page({ tipo: 'finale', nome, dove: `${b.file}#${b.scene}`, condizione: condText(b.cond), si_guadagna: si },
+    out.set(`storia/generati/finali/${name}.md`, page({ tipo: 'finale', nome, dove: `${b.file}#${b.scene}`, condizione: condText(b.cond), si_guadagna: si },
       `Una variante del finale in \`${b.scene}\` (${b.file}).\n\n${rami.map((r) => `- ${r}`).join('\n')}\n\nSi legge all'indietro: ogni voce di \`si_guadagna\` dice dove la condizione si conquista.`));
   }
   // the final portrait and the suit (story/portrait.js): one page each, from data/portrait.js
@@ -197,20 +197,20 @@ export function generate(S, V) {
     const name = `finale-ritratto-${ax}`;
     const cond = { trait: [ax, '>=', 3] };
     finalRows.push({ name, b: { file: 'story/portrait.js', scene: 'portraitLines' }, si: [{ serve: `${ax} >= 3, <= -3, in mezzo, o diviso (torn)`, dove: `[[tratto-${ax}]]` }], cond: `${ax}: >= 3 / <= -3 / in mezzo / torn` });
-    out.set(`finali/${name}.md`, page({ tipo: 'finale', nome: `Il ritratto finale: ${ax}`, dove: 'story/portrait.js#portraitLines', condizione: condText(cond).replace('>= 3', '>= 3 / <= -3 / in mezzo / torn'), si_guadagna: [{ serve: ax, dove: `[[tratto-${ax}]]` }] },
+    out.set(`storia/generati/finali/${name}.md`, page({ tipo: 'finale', nome: `Il ritratto finale: ${ax}`, dove: 'story/portrait.js#portraitLines', condizione: condText(cond).replace('>= 3', '>= 3 / <= -3 / in mezzo / torn'), si_guadagna: [{ serve: ax, dove: `[[tratto-${ax}]]` }] },
       `La riga del ritratto finale per l'asse ${ax} (data/portrait.js PORTRAIT.${ax}).\n\n${['plus', 'minus', 'mid', 'torn'].filter((k) => p[k]).map((k) => `- ${k}: ${short(p[k], 90)}`).join('\n')}`));
   }
   if (P.SEEDS) {
     const W = { c: 'coppe: cuore (guida +) e gentile (tono +)', s: 'spade: testa (guida -) e schietta (parola +)', w: 'bastoni: audace (rischio +) e dritta (esplora -)', p: 'denari: prudente (rischio -) e accorta (parola -)' };
     finalRows.push({ name: 'finale-seme', b: { file: 'story/portrait.js', scene: 'portraitLines' }, si: [{ serve: 'il seme più forte', dove: 'i tratti; poi i punti di seme delle scelte' }], cond: 'yourSuit()' });
-    out.set('finali/finale-seme.md', page({ tipo: 'finale', nome: 'Il suo seme, nel ritratto finale', dove: 'story/portrait.js#portraitLines', condizione: 'yourSuit() (core/progress.js SUIT_OF_TRAITS)',
+    out.set('storia/generati/finali/finale-seme.md', page({ tipo: 'finale', nome: 'Il suo seme, nel ritratto finale', dove: 'story/portrait.js#portraitLines', condizione: 'yourSuit() (core/progress.js SUIT_OF_TRAITS)',
       si_guadagna: Object.entries(W).map(([k, t]) => ({ serve: `seme ${k}`, dove: t })) },
     `L'ultima riga del ritratto è il seme (data/portrait.js SEEDS): vince il seme i cui due poli sono più marcati; i punti di seme delle scelte (\`tag\`) contano un decimo, l'elemento del segno rompe la parità.\n\n${Object.keys(P.SEEDS).map((k) => `- ${k}: ${short(typeof P.SEEDS[k] === 'string' ? P.SEEDS[k] : P.SEEDS[k].t, 90)}`).join('\n')}`));
   }
   if (Array.isArray(P.PAIRS)) {
     const si = uniq(P.PAIRS.flatMap((e) => earn(e.when)), (x) => `${x.serve}|${x.dove}`);
     finalRows.push({ name: 'finale-coppie', b: { file: 'story/portrait.js', scene: 'portraitLines' }, si, cond: 'le prime due PAIRS che valgono' });
-    out.set('finali/finale-coppie.md', page({ tipo: 'finale', nome: 'Le coppie di tratti nel ritratto finale', dove: 'story/portrait.js#portraitLines', condizione: 'le prime due PAIRS che valgono', si_guadagna: si },
+    out.set('storia/generati/finali/finale-coppie.md', page({ tipo: 'finale', nome: 'Le coppie di tratti nel ritratto finale', dove: 'story/portrait.js#portraitLines', condizione: 'le prime due PAIRS che valgono', si_guadagna: si },
       `Dopo gli assi, il ritratto dice le prime due coppie di tratti che valgono (data/portrait.js PAIRS).\n\n${P.PAIRS.map((e) => `- ${condText(e.when)}: ${short(e.t, 80)}`).join('\n')}`));
   }
   // the table, readable backwards
@@ -220,7 +220,7 @@ export function generate(S, V) {
     const si = r.si.slice(0, 3).map((x) => `${x.serve}: ${x.dove}`).join('; ') + (r.si.length > 3 ? `; … (+${r.si.length - 3})` : '');
     T.push(`| [[${r.name}]] | ${r.b.file}#${r.b.scene} | ${r.cond.replace(/\|/g, '/')} | ${si.replace(/\|/g, '/')} |`);
   }
-  out.set('finali/_tabella-finali.md', `${T.join('\n')}\n`);
+  out.set('storia/generati/finali/_tabella-finali.md', `${T.join('\n')}\n`);
 
   // ---- the index of the choices -----------------------------------------------------------------------
   const counts = {};
@@ -240,7 +240,7 @@ export function generate(S, V) {
     '## Flag letti e mai impostati', '', ...(neverSet.length ? neverSet.map((f) => `- \`${f}\``) : ['Nessuno.']), '',
     '## Tutte le scelte', '', '| Scelta | Classe | Fatto |', '|---|---|---|',
     ...choiceRows.map((r) => `| [[${r.name}]] | ${r.classe} | ${r.f ? `[[${r.f}]]` : ''} |`)];
-  out.set('scelte/_indice-scelte.md', `${I.join('\n')}\n`);
+  out.set('storia/generati/scelte/_indice-scelte.md', `${I.join('\n')}\n`);
   out.summary = { choices: choiceRows.length, counts, neverRead, neverSet, setNotTested: setNotTested.map((t) => t.id), testedThin: testedThin.map((t) => `${t.id} (${t.setPlaces})`), finals: finalRows.length, traits: traitInfo.length };
   return out;
 }

@@ -86,7 +86,7 @@ export default {
   blockOpts: {
     '3,27': { extra: 'washing' }, // Tabita's: her washing out under the eave
     // the ruin: the house of Edera's grandmother, empty since the year her room under the court was walled up
-    // (lore/retroscena/salem-retroscena.md, «settant'anni fa»; the walled room: data/trials/side.js 'room')
+    // (lore/storia/retroscena/salem-retroscena.md, «settant'anni fa»; the walled room: data/trials/side.js 'room')
     '29,27': { variant: 'ruined' },
   },
   // how the ground looks underfoot (src/world/art/ground.js); the tiles and walking do not change

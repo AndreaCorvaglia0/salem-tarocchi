@@ -13,7 +13,7 @@ Aggiornato il 18 novembre 2026 (sezioni 1 e 2 fatte). I perché generali sono in
 
 ## 1. Mantenere le promesse che il gioco fa già (prima di aggiungere altro)
 
-Fatta il 18 novembre (da provare sul telefono). Le scelte: `lore/decisioni/proposte-2026-11-18-promesse.md`.
+Fatta il 18 novembre (da provare sul telefono). Le scelte: `lore/storia/decisioni/proposte-2026-11-18-promesse.md`.
 
 **1.1 Il carattere non pende più.** *Fatto.* Riscritte le risposte dove un polo era la versione antipatica
 dell'altro, e ritoccati i tratti segnati male. Punti scritti: gentile 57 / pungente 26 → 51 / 40; curiosa
@@ -23,7 +23,7 @@ Lo tiene un test (`tests/coverage.test.mjs`). Restano gentili molte risposte del
 che il giro a caso non gioca.
 
 **1.2 L'affinità con le streghe conta.** *Fatto.* Ogni strega ha da due a quattro righe o gesti che cambiano
-con l'affinità, in tre scene (`lore/tratti/tratto-affinita-*.md`). Le chiacchiere ripetibili (Malva al
+con l'affinità, in tre scene (`lore/storia/generati/tratti/tratto-affinita-*.md`). Le chiacchiere ripetibili (Malva al
 capitolo 1, Ortica, Edera, Ginepra dopo la fine) ne hanno una, così arrivano anche a chi è già avanti.
 
 **1.3 Le nove domande della Lettrice che non escono mai.** *Fatto.* Erano L'Imperatore e La Giustizia
@@ -150,7 +150,7 @@ minore = scuro), e contano l'altezza, il timbro e il legato. La calma, per esemp
 tempo lento, suoni gravi, legato, timbro scuro e modo maggiore. Quindi ogni fumo ha una ricetta musicale, non
 «un brano che ci sembra adatto».
 
-| Come le suona la domanda | Fumo (da confermare con `lore/sapere/`) | La sensazione | La ricetta per scegliere la musica |
+| Come le suona la domanda | Fumo (da confermare con `lore/corso/concetti/`) | La sensazione | La ricetta per scegliere la musica |
 |---|---|---|---|
 | per aprire, sempre | artemisia e incenso | attenzione, soglia | **sempre lo stesso** breve motivo: è il segnale del rito |
 | amore | rosa, lavanda | tenerezza | lento, maggiore, legato, timbro caldo (violoncello, piano morbido), suoni medi |
@@ -186,7 +186,7 @@ brace, un soffio) fanno il resto.
 
 *Verifica.* Nessuno strumento ascolta: decide l'orecchio di Andrea e di lei, con una paginetta di ascolto alla
 cieca (cinque musiche senza etichetta: «a quale fumo la daresti?»). Per colore e forma del fumo, lettori
-ingenui a scelta forzata. Metodo in `lore/metodo/progettare-per-i-sensi-senza-averli.md`.
+ingenui a scelta forzata. Metodo in `lore/metodo/ricette/progettare-per-i-sensi-senza-averli.md`.
 
 *Rischi.* Un passo in più prima di ogni lettura: pochi secondi, e dopo le prime volte si può abbreviare («il
 solito»), ma il respiro resta. Cinque musiche diverse devono sembrare la stessa stanza. Lo specchio non deve
@@ -209,7 +209,7 @@ luogo appartiene.
 
 ## 6. Gli interessi da strega (idea di Andrea, 17 novembre sera)
 
-**Prima viene la base di conoscenza** (`lore/sapere/`, in costruzione): un cerchio piccolo e chiuso in cui
+**Prima viene la base di conoscenza** (`lore/corso/concetti/`, in costruzione): un cerchio piccolo e chiuso in cui
 erbe, fumi, pietre e tarocchi si tengono attraverso pochi perni (quattro elementi, sette pianeti, otto
 intenzioni). Affidabile quanto basta su «quello che si dice in giro», semplice quanto basta per impararlo.
 Senza la base, niente di quanto segue si progetta.
@@ -248,7 +248,7 @@ sulle scene che esistono; (3) il primo interesse completo come prova (erbe e ort
 **L'idea.** Finti libri che si sfogliano nella biblioteca di Edera, con belle figure e poche notizie
 interessanti; i libri si guadagnano in giro (un regalo, un baule, il banco dell'ambulante, il premio di una
 missione) e vanno a riempire gli scaffali. La funzione è nozionistica: il posto di quello che sappiamo e che
-il gioco non fa dire a nessuno (la base di conoscenza `lore/sapere`, la storia delle carte in `RESEARCH.md`).
+il gioco non fa dire a nessuno (la base di conoscenza `lore/corso/concetti`, la storia delle carte in `RESEARCH.md`).
 
 **Perché ci sta.** (1) La biblioteca c'è ed è quasi vuota di cose da fare. (2) Chiude il discorso «senza
 spiegone»: i personaggi dicono due parole, l'album dice l'essenziale, il libro è per chi vuole di più. (3) È

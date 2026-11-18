@@ -23,7 +23,7 @@ prima e dopo, sono in `/home/claude/shots/village-new/{before,after}/` (`harness
 - Case comuni (`house`, ora `townHouse`): V la sarta (tenda in col 1, finestra accesa), G **i Proctor** (`variant:
   'rich'`, il davanzale col bicchiere in col 2 resta), A a sinistra **i panni stesi di Tabita** (`blockOpts '3,27'`),
   A a destra **in rovina** (`blockOpts '29,27'`: la casa della nonna di Edera, vuota da quando hanno murato la sua
-  stanza, settant'anni fa: `lore/retroscena/salem-retroscena.md`), B tutta buia con la legna, F una finestra accesa e
+  stanza, settant'anni fa: `lore/storia/retroscena/salem-retroscena.md`), B tutta buia con la legna, F una finestra accesa e
   un barile. I nascondigli (12,32) tenda e (24,32) davanzale sono intatti (test in `world.buildings.test.mjs`).
 - **Il vecchio olmo** `W` (`bigtree`) in piazza, (23,22): una casella solida, la chioma 3x4 sopra. Spoglio e
   innevato d'inverno, fiorito in primavera, rosso d'autunno.

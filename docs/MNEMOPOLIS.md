@@ -5,7 +5,7 @@ Confronto fatto il 17 novembre 2026 leggendo il README, AGENTS.md e docs/ di Mne
 ROADMAP, WORLD). Non ho letto tutto il codice del motore di Mnemopolis: dove una cosa potrebbe già esserci,
 lo scrivo.
 
-Le schede citate sono in `lore/metodo/`.
+Le schede citate sono in `lore/metodo/ricette/`.
 
 ## Le idee, una per riga
 

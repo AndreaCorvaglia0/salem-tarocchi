@@ -12,7 +12,7 @@ Il perché di tutto questo, con gli errori corretti e le trovate, è in `docs/LE
 
 | Prodotto | Che cosa è | Dove |
 |---|---|---|
-| **Il metodo** | Come si impara, come si varia, come si personalizza, come si scrive, come cresce il progetto. Le regole, le tecniche con le loro fonti, e le schede che dicono come le abbiamo messe in pratica | `lore/principi`, `lore/tecniche`, `lore/metodo` (indice: `lore/metodo/_indice-metodo.md`) |
+| **Il metodo** | Come si impara, come si varia, come si personalizza, come si scrive, come cresce il progetto. Le regole, le tecniche con le loro fonti, e le schede che dicono come le abbiamo messe in pratica | `lore/metodo/principi`, `lore/metodo/tecniche`, `lore/metodo` (indice: `lore/metodo/ricette/_indice-metodo.md`) |
 | **Lo schema** | I tipi di contenuto e i loro campi: persona, luogo, fatto, principio, meccanica, tecnica, obiettivo | `lore/README.md`; le istanze nelle cartelle di `lore/` |
 | **Gli strumenti** | Che cosa controlla il vault e il gioco, e che cosa dice quello che manca | `docs/TOOLS.md`, `docs/TRIALS.md`, `scripts/`, `tests/` |
 
@@ -22,7 +22,7 @@ nuovo nasce nel vault (schema), segue le schede (metodo), poi diventa dati in `s
 controlli (strumenti).
 
 Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `docs/WRITING.md`, e le schede
-`lore/metodo/storie-in-piu-nel-registro.md`, `lore/metodo/ogni-riga-ha-una-fonte.md`, `lore/metodo/il-salvataggio-sopravvive.md`.
+`lore/metodo/ricette/storie-in-piu-nel-registro.md`, `lore/metodo/ricette/ogni-riga-ha-una-fonte.md`, `lore/metodo/ricette/il-salvataggio-sopravvive.md`.
 
 ## Regole che valgono per tutti e tre
 
@@ -31,13 +31,13 @@ Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `doc
   valore in `fresh()` di `src/core/state.js`.
 - **Lei vede solo quello che sa.** Ogni riga mostrata (biglietti, note dei luoghi, persone, diario) risponde a
   «come lo sa, lei?»: l'ha visto, gliel'hanno detto, o è un presentimento vago. Mai il premio, il contenuto o
-  qualcosa preso da `lore/retroscena`. Quello che non sa è un «?» con una riga misteriosa; quello che sa sono
-  appunti brevi, non il solo nome. Principio: `lore/principi/vede-solo-quello-che-sa.md`.
+  qualcosa preso da `lore/storia/retroscena`. Quello che non sa è un «?» con una riga misteriosa; quello che sa sono
+  appunti brevi, non il solo nome. Principio: `lore/metodo/principi/vede-solo-quello-che-sa.md`.
 - Niente si inventa in silenzio: nel vault ogni riga nuova è `fonte: proposto` finché Andrea non dice sì.
 - Il testo segue `docs/WRITING.md`. Lo si legge ad alta voce prima di consegnare.
 - Si dice che cosa è stato verificato e che cosa no. Nessuno strumento prova un telefono vero o ascolta l'audio.
 - Il genere di lei: nelle storie scritte a mano, principale e secondarie, le si parla al femminile; restano senza
-  genere solo i testi che si riusano (frasi delle carte, opinioni). Deciso in `lore/decisioni/`, punto 8.
+  genere solo i testi che si riusano (frasi delle carte, opinioni). Deciso in `lore/storia/decisioni/`, punto 8.
 
 ## I comandi che dicono che cosa manca
 
@@ -45,7 +45,7 @@ Prima di cominciare, leggere: `AGENTS.md`, `docs/MAP.md`, `docs/DESIGN.md`, `doc
 |---|---|
 | `npm test` | Tutti i test: dati della storia, mondo, prove, registro, salvataggi vecchi |
 | `node scripts/lore.mjs check` | Il vault: campi, collegamenti, coerenza con i copioni (dettagli in `docs/TOOLS.md`) |
-| `node scripts/lore.mjs gen` | Riscrive `lore/tratti`, `lore/scelte`, `lore/finali` dai dati della storia |
+| `node scripts/lore.mjs gen` | Riscrive `lore/storia/generati/tratti`, `lore/storia/generati/scelte`, `lore/storia/generati/finali` dai dati della storia |
 | `node scripts/prose.mjs` | I difetti meccanici del testo (raffiche di frasi corte, frasi di una parola) |
 | `node scripts/map.mjs --check` | Se `docs/MAP.md` è da riscrivere (un servizio nuovo, un evento nuovo) |
 | `node scripts/shot.mjs <url> <out.png> --phone --until domcontentloaded --steps <file.mjs>` | Una schermata da telefono (390 x 844); tutto in `docs/TOOLS.md`, «Looking at it» |
@@ -60,14 +60,14 @@ solo dialogo, è un **copione** con una voce in `CAST` e un fatto (`docs/TOOLS.m
 completo, una prova in due posti con una persona che cambia con l'affinità: `src/data/trials/hat.js` e
 `src/data/story/scripts/hat.js` («Il cappello in soffitta»). Le regole scritte delle prove: `docs/TRIALS.md`.
 
-1. **Nel vault.** Prima di scrivere, leggere il retroscena di ogni persona coinvolta (`lore/retroscena/`) e
-   `lore/decisioni/`: quello che sta in `non_affiora` e `non_direbbe_mai` non si dice mai, affiora in un gesto
-   o in una battuta di lato. Scrivere `lore/fatti/<nome>.md` (tipo `fatto`, `fonte: proposto`: chi c'è, chi lo
+1. **Nel vault.** Prima di scrivere, leggere il retroscena di ogni persona coinvolta (`lore/storia/retroscena/`) e
+   `lore/storia/decisioni/`: quello che sta in `non_affiora` e `non_direbbe_mai` non si dice mai, affiora in un gesto
+   o in una battuta di lato. Scrivere `lore/storia/fatti/<nome>.md` (tipo `fatto`, `fonte: proposto`: chi c'è, chi lo
    sa, conseguenze, `aperto`). Alle persone coinvolte si aggiunge una riga in `aperto` che lo cita; entra
-   nell'`arco` solo quando Andrea lo conferma. Se c'è un posto nuovo, `lore/luoghi/<nome>.md`.
-2. **Decidere il perché.** Quale obiettivo di `lore/obiettivi` allena, quale meccanica usa (di solito
-   `lore/meccaniche/affrontare-le-prove.md` e `lore/meccaniche/chiedere-alle-carte.md`), che cosa si vince e che
-   cosa si perde (`lore/metodo/posta-vera-ma-recuperabile.md`). Una riga per ciascuno, prima del testo. Per
+   nell'`arco` solo quando Andrea lo conferma. Se c'è un posto nuovo, `lore/storia/luoghi/<nome>.md`.
+2. **Decidere il perché.** Quale obiettivo di `lore/corso/obiettivi` allena, quale meccanica usa (di solito
+   `lore/metodo/meccaniche/affrontare-le-prove.md` e `lore/metodo/meccaniche/chiedere-alle-carte.md`), che cosa si vince e che
+   cosa si perde (`lore/metodo/ricette/posta-vera-ma-recuperabile.md`). Una riga per ciascuno, prima del testo. Per
    insegnare carte precise: una strega le tira davanti a lei (`witchDraw`), poi un bivio chiede la loro idea;
    nel ventaglio ci sono solo le carte che lei conosce.
 3. **Decidere quando arriva.** Un `when` su quello che lei ha (`{ majorsMin: 8 }`, `{ power: 'cat' }`, un flag,
@@ -101,10 +101,10 @@ completo, una prova in due posti con una persona che cambia con l'affinità: `sr
 
 ## 2. Aggiungere una persona
 
-Modello: `lore/persone/malva.md` per il vault; il mugnaio e il bottegaio per una persona del villaggio.
+Modello: `lore/storia/persone/malva.md` per il vault; il mugnaio e il bottegaio per una persona del villaggio.
 
-1. **Nel vault.** `lore/persone/<id>.md` con tutti i campi di `lore/README.md`. Il più importante è `voce`:
-   da tre a cinque abitudini che si vedono, ognuna con un esempio (`lore/metodo/voci-da-abitudini.md`). `vuole`, `teme`,
+1. **Nel vault.** `lore/storia/persone/<id>.md` con tutti i campi di `lore/README.md`. Il più importante è `voce`:
+   da tre a cinque abitudini che si vedono, ognuna con un esempio (`lore/metodo/ricette/voci-da-abitudini.md`). `vuole`, `teme`,
    `nasconde` all'inizio sono quasi tutti `proposto` o in `aperto`.
 2. **Decidere quanto conta.** Una persona che parla con il suo nome ha bisogno di più pezzi. Una che compare
    una volta può parlare attraverso la narrazione, come il mugnaio (`src/data/story/scripts/c2.js`).
@@ -131,7 +131,7 @@ Modello: `lore/persone/malva.md` per il vault; il mugnaio e il bottegaio per una
 Modello: `src/data/elsewhere/book.js` (Dentro un libro) e `clouds.js` (Sulle nuvole); le note in
 `notes/elsewhere.md`.
 
-1. **Nel vault.** `lore/luoghi/<nome>.md` (come `sulle-nuvole` e `dentro-un-libro`) e un fatto per il viaggio
+1. **Nel vault.** `lore/storia/luoghi/<nome>.md` (come `sulle-nuvole` e `dentro-un-libro`) e un fatto per il viaggio
    (come `viaggio-nel-libro`). In una frase: la regola del mondo («in un libro si cammina solo sulle righe
    scritte») e l'espediente per arrivarci (un libro, una pozione, un incubo).
 2. **Decidere la regola.** Se il mondo riusa una regola che c'è (cadere, camminare sulle righe) basta scrivere
@@ -180,7 +180,7 @@ cambia con `districts` (solo l'aspetto, non dove si cammina).
 **Le cose in più sulla mappa.** Ogni voce del registro (`src/core/extras.js`: una prova, una lezione, un
 mondo, una missione) compare come un foglietto appuntato accanto al suo posto, e toccandolo si apre la sua
 scheda. La scheda si scrive a mano in `TITLES` di `src/ui/missions/titles.js`: `T(titolo, tipo, chi me
-l'ha detto, che cosa le hanno detto, { later, hunch })`. Vale `lore/principi/vede-solo-quello-che-sa.md`:
+l'ha detto, che cosa le hanno detto, { later, hunch })`. Vale `lore/metodo/principi/vede-solo-quello-che-sa.md`:
 il titolo evoca e non svela; il tipo è `null` (foglietto neutro) se lei non sa ancora che cosa sia; il testo
 è solo quello che ha sentito, con parole sue; `later` cambia il testo dopo una scena; `hunch` è un
 presentimento vago, facoltativo e raro. Mai premi né contenuto: `tests/knows-only.test.mjs` lo controlla.

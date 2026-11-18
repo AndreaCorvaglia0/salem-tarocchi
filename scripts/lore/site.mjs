@@ -17,8 +17,8 @@ export const GRAPH_OFF = ['scelta', 'finale', 'indice']; // types hidden in the 
 export const TYPES = [
   ['persona', 'Persone'], ['retroscena', 'Retroscena'], ['luogo', 'Luoghi'], ['fatto', 'Fatti'],
   ['meccanica', 'Meccaniche'], ['obiettivo', 'Obiettivi'], ['tecnica', 'Tecniche'], ['principio', 'Principi'],
-  ['metodo', 'Metodo'], ['tratto', 'Tratti'], ['scelta', 'Scelte'], ['finale', 'Finali'],
-  ['decisione', 'Decisioni'], ['sapere', 'Sapere'], ['indice', 'Indici'],
+  ['legge', 'Leggi'], ['ricetta', 'Ricette'], ['tratto', 'Tratti'], ['scelta', 'Scelte'], ['finale', 'Finali'],
+  ['decisione', 'Decisioni'], ['concetto', 'Concetti'], ['indice', 'Indici'],
 ];
 const INDEX_COLOR = '#8a8173';
 
@@ -27,7 +27,7 @@ export function graphColors(text) {
   const out = {};
   try {
     for (const g of JSON.parse(text).colorGroups || []) {
-      const m = /path:([a-z-]+)\//.exec(g.query || '');
+      const m = /path:([a-z-]+(?:\/[a-z-]+)*)\//.exec(g.query || '');
       if (m) out[m[1]] = `#${(g.color?.rgb ?? 0).toString(16).padStart(6, '0')}`;
     }
   } catch { /* no colours: every type gets the index grey */ }

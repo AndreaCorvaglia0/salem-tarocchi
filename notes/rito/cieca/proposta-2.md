@@ -94,7 +94,7 @@ Ambiti → frase: amore «le domande d'amore», lavoro «il lavoro e il denaro»
 
 Succede in tre modi, nessuno è un quiz:
 1. **Con la mano:** ogni fumo ha un posto e un segno fissi; la scia diventa il segno dell'elemento a ogni accensione. Dopo una decina di riti la mano sa che la rosa sta in giù.
-2. **Con la parola:** il nome e la parola compaiono a ogni passaggio. Dal decimo rito arrivano dopo 1,2 s di sosta: chi lo sa lo dice prima di vederlo (`lore/metodo/tirar-fuori-prima-di-vedere.md`).
+2. **Con la parola:** il nome e la parola compaiono a ogni passaggio. Dal decimo rito arrivano dopo 1,2 s di sosta: chi lo sa lo dice prima di vederlo (`lore/metodo/ricette/tirar-fuori-prima-di-vedere.md`).
 3. **Con la tradizione dopo:** la riga dello specchio accosta il suo fumo a quello di Malva per quell'ambito. Così anche i fumi che lei non sceglie mai passano sotto gli occhi.
 
 Stima, non misurata: dopo **6–8 letture** sa dire «la mirra è per lasciar andare» per i fumi che usa; per quelli che non usa conta la riga di Malva, e ci vorrà di più. Se non succede ce ne accorgiamo (§12). Ambito → fumo di tradizione (provvisorio, `docs/BACKLOG.md` 3.5): amore rosa, casa salvia, lavoro alloro, se olibano, altri mirra.

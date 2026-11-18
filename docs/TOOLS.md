@@ -7,8 +7,8 @@ data (`src/data/story/`) is the truth of what the game does. These tools compare
 | Command | Writes | Run by `npm test` |
 |---|---|---|
 | `npm run lore check` | `notes/tools.md` | yes (`tests/lore.test.mjs`: no errors) |
-| `npm run lore gen` | `lore/tratti/`, `lore/scelte/`, `lore/finali/` | yes (`gen --check`: up to date) |
-| `npm run lore sapere` | `src/data/sapere.js`, the tables of `lore/sapere/_il-cerchio.md` (from `lore/sapere/`) | yes (`tests/sapere.test.mjs`: in step, the circle closes) |
+| `npm run lore gen` | `lore/storia/generati/tratti/`, `lore/storia/generati/scelte/`, `lore/storia/generati/finali/` | yes (`gen --check`: up to date) |
+| `npm run lore sapere` | `src/data/sapere.js`, the tables of `lore/corso/concetti/_il-cerchio.md` (from `lore/corso/concetti/`) | yes (`tests/sapere.test.mjs`: in step, the circle closes) |
 | `npm run coverage -- --runs 1000` | `docs/COVERAGE.md` | a small run (`tests/coverage.test.mjs`) |
 | `npm run map` | `docs/MAP.md` | yes (`tests/map.test.mjs`) |
 
@@ -24,10 +24,10 @@ and the README table: those are the contract.
   `lore/README.md` (backticked names outside parentheses), so adding a row there adds a type. Pages whose
   name starts with `_` are indices: no frontmatter needed. A `tipo` with no README row is a warning.
 - a `[[link]]` that resolves to no file; a file name that is not lowercase-hyphen-ascii, or not unique.
-- in `lore/fatti`, the `flag` field: names after `step`, `flag`, `session`, `cast` that do not exist
+- in `lore/storia/fatti`, the `flag` field: names after `step`, `flag`, `session`, `cast` that do not exist
   (a step of STEPS; a flag that something sets or reads, in the data or in the code; a session; a CAST id).
   Clauses with another keyword are not checked (their count is in `notes/tools.md`).
-- in `lore/persone`, an `id` that is not a speaker, a CAST id, a client or a script id.
+- in `lore/storia/persone`, an `id` that is not a speaker, a CAST id, a client or a script id.
 - a `meccanica` with no `serve`; an `obiettivo` with no `meccaniche` and an empty `aperto`.
 - **continuity**: a claim "P knows fact F from scene S" (`sa: { fatto, da }` in persone, where `da` is a
   fatto whose `scena` names the scenes; or `chi_lo_sa: { chi, come }` in fatti, where `come` names a
@@ -49,14 +49,14 @@ named in a fatto's `scena` that is not in that file; a principio no meccanica se
 Written from the story data, never invented; first line `# generato da scripts/lore.mjs, non modificare a
 mano`. `npm test` fails when they are out of date, or when a page is left that is no longer generated:
 after changing a script, a session, a visit or a fatto's `scena`, run `npm run lore gen`.
-- `tratti/tratto-<id>.md`: the five axes, affinity and bond for each witch, popularity, Tartufo: every place
+- `storia/generati/tratti/tratto-<id>.md`: the five axes, affinity and bond for each witch, popularity, Tartufo: every place
   that moves it (`stabilisce`, with the choice) and every condition that reads it (`mette_alla_prova`).
-- `scelte/<file>-<scene>-<n>.md`: every choice of the scripts, sessions and visits: options (60 chars),
+- `storia/generati/scelte/<file>-<scene>-<n>.md`: every choice of the scripts, sessions and visits: options (60 chars),
   what each sets, its class: `stabilisce` (sets something read somewhere: a read flag, a trait, trust, a
   card or suit point), `mette_alla_prova` (an option has `when`, or what follows tests the state),
   `entrambe`, `colore`. Linked to the fatto of the scene. `_indice-scelte.md`: counts, traits never
   tested, traits tested but moved in fewer than 3 scenes, flags set and never read, flags read and never set.
-- `finali/`: one page per conditional piece of the trial, the dawn, the campfire, the last session, plus
+- `storia/generati/finali/`: one page per conditional piece of the trial, the dawn, the campfire, the last session, plus
   the final portrait (one per axis, the pairs, the suit), each with `si_guadagna`: where every condition is
   earned. `_tabella-finali.md` reads the endings backwards.
 
@@ -97,7 +97,7 @@ trial with two places and a person who changes with her affinity: `src/data/tria
    and `lore check` with no list to edit. A scene exported by two files (merged into another map, like `hat.js`
    into `TRIAL_SCRIPTS` at the end of `trials.js`) is listed once, under the file that defines it: write that
    file in the fatto's `scena` (`hat.js#trial.hat.door`).
-2. **The fatto.** `lore/fatti/<name>.md` with `flag: "cast <id>; flag a / b"` and `scena: "<file>.js#<scene>"`;
+2. **The fatto.** `lore/storia/fatti/<name>.md` with `flag: "cast <id>; flag a / b"` and `scena: "<file>.js#<scene>"`;
    list who knows it in `chi_lo_sa`, with the `file.js#scene` where they learn it in `come`. `fonte: proposto`
    until Andrea says yes; the persons get a line in `aperto`, not in `arco` (`lore/README.md`).
 3. **Conditions** are the keys of `src/core/cond.js` (syntax in the comment at its top; the list `COND_KEYS`
@@ -186,7 +186,7 @@ or `chromium`). Start a server first: `npx vite` (or `npm run build && npx vite 
 ## Adding a person
 
 1. Lines with `say('<id>', ...)` in the scripts, and a CAST entry with `who: '<id>'` if she stands somewhere.
-2. `lore/persone/<name>.md` with `id: "<id>"`, the fields of the README table, `sa` for what she knows
+2. `lore/storia/persone/<name>.md` with `id: "<id>"`, the fields of the README table, `sa` for what she knows
    (`da` must be a fatto whose scene plays after the fact). `lore check` refuses an id the code lacks and a
    knowledge that comes before its fact.
 

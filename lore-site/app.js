@@ -18,7 +18,7 @@ const fold = (s) => String(s ?? '').toLowerCase().replace(/[^\x00-\x7f]/g, (c) =
 const href = (id) => `#/n/${encodeURIComponent(id)}`;
 const colorOf = (tipo) => T.get(tipo)?.color || '#8a8173';
 const labelOf = (tipo) => T.get(tipo)?.label || tipo;
-const one = (tipo) => ({ persona: 'persona', retroscena: 'retroscena', luogo: 'luogo', fatto: 'fatto', meccanica: 'meccanica', obiettivo: 'obiettivo', tecnica: 'tecnica', principio: 'principio', metodo: 'metodo', tratto: 'tratto', scelta: 'scelta', finale: 'finale', decisione: 'decisione', indice: 'indice' }[tipo] || tipo);
+const one = (tipo) => ({ persona: 'persona', retroscena: 'retroscena', luogo: 'luogo', fatto: 'fatto', meccanica: 'meccanica', obiettivo: 'obiettivo', tecnica: 'tecnica', principio: 'principio', legge: 'legge', ricetta: 'ricetta', concetto: 'concetto', tratto: 'tratto', scelta: 'scelta', finale: 'finale', decisione: 'decisione', indice: 'indice' }[tipo] || tipo);
 const chip = (tipo, big = false) => `<a class="chip${big ? ' big' : ''}" href="#/t/${tipo}" style="--c:${colorOf(tipo)}"><span class="dot"></span>${esc(big ? labelOf(tipo) : one(tipo))}</a>`;
 const badge = (f) => (FONTI.includes(f) ? `<span class="fonte f-${f}" title="fonte">${f}</span>` : '');
 const link = (id, alias) => {

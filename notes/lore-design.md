@@ -1,6 +1,6 @@
 # Lore, metà design: cosa ne esce
 
-Il vault: `lore/principi` (16), `lore/meccaniche` (27, più `_matrice`), `lore/tecniche` (14), `lore/obiettivi` (14).
+Il vault: `lore/metodo/principi` (16), `lore/metodo/meccaniche` (27, più `_matrice`), `lore/metodo/tecniche` (14), `lore/corso/obiettivi` (14).
 Fonti delle tecniche in `docs/RESEARCH.md`, «Tecniche di apprendimento».
 
 ## a) Obiettivi che nessuna meccanica verifica

@@ -1,7 +1,7 @@
-// The stones of the grimoire (notes/collezioni.md): the twelve of lore/sapere/pietra-*.md, which is where
+// The stones of the grimoire (notes/collezioni.md): the twelve of lore/corso/concetti/pietra-*.md, which is where
 // planet, element and intentions come from (src/data/sapere.js, generated from the vault). The page text is
 // written from each card's «si dice» and «da dove viene», in the convinced voice of the game: here stones do
-// heal and protect, said as tradition says it (lore/principi/erbe-come-storia.md).
+// heal and protect, said as tradition says it (lore/metodo/principi/erbe-come-storia.md).
 // `plate`: an old engraving in public/stones/<id>.webp (docs/CREDITS.md), or null. `drawn: true`: no plate, our own
 // painted picture in the plates' style, also public/stones/<id>.webp (made with a script, see CREDITS). The small
 // pixel stone of the world (src/world/art/finds.js paintStone) stays, from `look`. `find`: the one short line at the bottom when she picks it up.

@@ -6,7 +6,7 @@
 //   interests.bundle  the dried sage tied tight (hers if she has it: int.ortica.3.own) -> flag int.ortica.3.tied
 //   interests.step    a mission done: its flag, today's date, and (3) the sage of the rite marked «tua»
 // {mazzetto} is filled by the glue from her pantry («questa lavanda è tua», «questo timo è tuo»).
-// She is spoken to as a woman (lore/decisioni, point 8). Nobody explains the game: Ortica talks about her beam,
+// She is spoken to as a woman (lore/storia/decisioni, point 8). Nobody explains the game: Ortica talks about her beam,
 // the miller's knees and Malva's incense, and what is learnt comes out of the gestures.
 import { N, T, ortica, malva, choice, o, xp, diary, open, goto, flag } from '../h.js';
 

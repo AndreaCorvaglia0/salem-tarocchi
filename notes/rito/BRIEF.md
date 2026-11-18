@@ -26,9 +26,9 @@ Si sfrutta anche la convinzione: un rito fa effetto perché lo si compie.
 - Niente risposta sbagliata sull'intuizione; nessuno spiega il gioco (lo fa la schermata); testo secondo
   `docs/WRITING.md`; a lei ci si rivolge al femminile; mai assillante; niente avvertenze.
 - I sensi: musica vera scelta con ricette (`docs/BACKLOG.md` 3.5, `docs/RESEARCH.md`), strati d'ambiente,
-  colore e movimento del fumo, luce. Nessuno di noi sente: vedi `lore/metodo/progettare-per-i-sensi-senza-averli.md`.
+  colore e movimento del fumo, luce. Nessuno di noi sente: vedi `lore/metodo/ricette/progettare-per-i-sensi-senza-averli.md`.
 - I fumi e a che cosa servono: usare quelli di `docs/BACKLOG.md` 3.5 (provvisori; la base di conoscenza
-  `lore/sapere/` è in costruzione e li confermerà). Al massimo cinque più quello d'apertura.
+  `lore/corso/concetti/` è in costruzione e li confermerà). Al massimo cinque più quello d'apertura.
 - Deve poter insegnare, se possibile, «quale incenso quando», senza trasformare l'intuizione in un quiz.
 - Si deve poter costruire con ciò che c'è: DOM sopra il mondo, canvas, audio a file con dissolvenze
   (`src/sound/tracks.js`, `beds.js`), stato salvato con valori di default.

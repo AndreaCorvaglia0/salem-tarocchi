@@ -28,7 +28,7 @@ export function readTable(text) {
   for (const line of String(text).split('\n')) {
     const cells = line.split('|').map((c) => c.trim());
     if (cells.length < 4) continue;
-    const folder = /^`([a-z-]+)\/`$/.exec(cells[1]);
+    const folder = /^`([a-z-]+(?:\/[a-z-]+)*)\/`$/.exec(cells[1]);
     const tipo = /^`([a-z-]+)`$/.exec(cells[2]);
     if (!folder || !tipo) continue;
     let s = cells[3], prev;
@@ -45,7 +45,7 @@ export function docOf(rel, text) {
   const r = parse(text);
   const name = basename(rel, '.md');
   return {
-    path: join(LORE, rel), rel, name, folder: rel.includes('/') ? rel.split('/')[0] : '', index: name.startsWith('_'),
+    path: join(LORE, rel), rel, name, folder: rel.includes('/') ? rel.slice(0, rel.lastIndexOf('/')) : '', zone: rel.includes('/') ? rel.split('/')[0] : '', index: name.startsWith('_'),
     data: r.data, body: r.body, errors: r.errors, text,
     links: [...new Set([...linksIn(deepStrings(r.data || {}).join('\n')), ...linksIn(r.body)])],
     generated: /generato da scripts\/lore\.mjs/.test(String(text).split('\n').slice(0, 3).join('\n')),

@@ -259,7 +259,7 @@ test('the scenes: lines that fit, no tokens, never her real name; each mission e
   assert.match(texts('int.edera.1').join(' '), /cani che abbaiano alla luna/);
   assert.match(texts('int.edera.2').join(' '), /cartellini/);
   assert.match(texts('int.edera.2').join(' '), /In tasca, però, non al collo/);
-  // the lapis: Venus, the truth, the Priestess's blue (lore/sapere/pietra-lapislazzuli.md)
+  // the lapis: Venus, the truth, the Priestess's blue (lore/corso/concetti/pietra-lapislazzuli.md)
   assert.equal(SAPERE['pietra-lapislazzuli'].pianeta, 'pianeta-venere');
   assert.match(texts('int.edera.1').join(' '), /Venere/);
   assert.match(texts('int.edera.1').join(' '), /Sacerdotessa/);

@@ -1,6 +1,6 @@
 # Retroscena: che cosa c'è e che cosa devi scegliere
 
-I fogli stanno in `lore/retroscena/` (35, tutti `fonte: proposto`). Niente di questo si dice nel gioco: serve a scrivere le battute. Nessun copione è stato toccato.
+I fogli stanno in `lore/storia/retroscena/` (35, tutti `fonte: proposto`). Niente di questo si dice nel gioco: serve a scrivere le battute. Nessun copione è stato toccato.
 
 Non hanno un foglio: la Lettrice e la protagonista (canone). Nessun personaggio ha un'ipotesi sulla Lettrice, perché nessuno la conosce.
 

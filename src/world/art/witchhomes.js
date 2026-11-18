@@ -1,5 +1,5 @@
 // The witches' houses (notes/buildings.md; proof board: harness/buildings.html).
-// The witches' houses, each eccentric in its own way and after who lives there (lore/retroscena):
+// The witches' houses, each eccentric in its own way and after who lives there (lore/storia/retroscena):
 //   malvaHouse   Malva's, by the road in: a saltbox with a long crooked roof, herbs under the eaves;
 //   cottageHome  hers, at the edge of the wood, in three stages that grow with her (opts.stage 1..3),
 //                with three slots the game can fill from her save (opts.slots: suit, plants, prize);

@@ -1,7 +1,7 @@
 # Imparare meglio, con poco (BACKLOG sezione 2)
 
 Quattro ritocchi piccoli, nell'ordine del BACKLOG. Ognuno serve un obiettivo che oggi nessuna meccanica
-verifica (il campo `aperto` degli obiettivi e `lore/meccaniche/_matrice.md`). Regole per tutti: mai la
+verifica (il campo `aperto` degli obiettivi e `lore/metodo/meccaniche/_matrice.md`). Regole per tutti: mai la
 risposta prima del tentativo (`la-domanda-non-mostra-la-risposta`), mai un passo in più che pesi
 (`mai-assillare`), schermate corte su 390 px, salvataggi vecchi che funzionano.
 
@@ -12,7 +12,7 @@ con la sua calligrafia, le tre parole che lei ha scritto quando l'ha trovata («
 «Che carta è?» e tre nomi. Dopo la risposta compare la carta piccola con il nome e l'idea. Una domanda così
 per ripasso al massimo, e solo per una carta di cui ha scritto almeno una parola che non contiene già il
 nome (se ha scritto «matto» per Il Matto, quella carta non si chiede così).
-**Perché aiuta.** Le parole le ha generate lei (`lore/tecniche/effetto-generazione.md`: oggi si generano
+**Perché aiuta.** Le parole le ha generate lei (`lore/metodo/tecniche/effetto-generazione.md`: oggi si generano
 una volta e non tornano) e qui diventano l'indizio per un richiamo (`pratica-di-recupero.md`). Serve
 [[dire-l-idea-della-carta]]: se le sue parole la riportano alla carta, l'idea l'aveva detta con parole sue.
 **Codice.** `src/systems/review.rules.js` (nuovo, puro): `wordsCard` sceglie la carta (prima le scadute) e

@@ -64,7 +64,7 @@ export function dueAsk({ s, who, list, after }) {
 export const markAsk = (s, id, who) => { once(s)[askKey(id, who)] = true; };
 
 // The shelf: one place per book of the catalogue. What she has shows its spine; a missing one is only a
-// mark in the dust, with no title, author or giver (lore/principi/vede-solo-quello-che-sa.md).
+// mark in the dust, with no title, author or giver (lore/metodo/principi/vede-solo-quello-che-sa.md).
 export const shelfSlots = (s, list, earn) => list.map((b) => (hasBook(s, b.id, earn)
   ? { id: b.id, have: true, spine: b.spine, from: b.from, leather: b.leather, nuovo: isNewBook(s, b.id), read: readBook(s, b.id) }
   : { have: false }));

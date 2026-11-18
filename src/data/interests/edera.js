@@ -2,11 +2,11 @@
 // Words and choices only; the rules are in src/glue/interests.edera.rules.js, the wiring in
 // src/glue/interests.edera.js, the scenes in src/data/story/scripts/interests.edera.js, the screens in
 // src/ui/interests/cellar.js and stones.js. A mission done is the flag `int.edera.<n>`, as for Ortica.
-// What a stone is for comes from the circle (src/data/sapere.js, lore/sapere/pietra-*.md): the right stone for
+// What a stone is for comes from the circle (src/data/sapere.js, lore/corso/concetti/pietra-*.md): the right stone for
 // the constable is any stone of «coraggio» there, never a list written here. In the game stones do protect and
-// give courage, said as tradition says (lore/principi/erbe-come-storia.md).
+// give courage, said as tradition says (lore/metodo/principi/erbe-come-storia.md).
 // Missions 4-6 are not written yet: the sixth is where Edera calls her once by her real name instead of
-// Rosalba (lore/decisioni/decisioni-2026-11-18.md, interessi 2).
+// Rosalba (lore/storia/decisioni/decisioni-2026-11-18.md, interessi 2).
 
 // the three missions, in order: where the scene plays, and the registry text (the grimoire's next step)
 export const EDERA_MISSIONS = [

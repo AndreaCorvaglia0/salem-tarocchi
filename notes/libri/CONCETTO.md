@@ -23,7 +23,7 @@ righe sotto. Non è un manuale: è il racconto di una persona che sapeva una cos
   posto dove passa un po' di storia senza dirla, e dove la tradizione litiga con sé stessa. Si vedono come una
   scrittura a mano inclinata, più chiara, nel margine della figura. Al massimo una per pagina, metà delle pagine
   senza. Regola: una nota può far sentire che dietro c'è qualcosa, mai dirlo (`vede-solo-quello-che-sa`;
-  `lore/retroscena` non è una fonte).
+  `lore/storia/retroscena` non è una fonte).
 - **Il colophon** (ultima pagina, fuori dalla finzione, voce dell'interfaccia come i crediti): «Questo libro e il
   suo autore sono inventati. Le figure vengono da… (anno, biblioteca); le notizie da… ». È il modo onesto di
   tenere insieme invenzione e verità, e non costa niente alla magia: è il retro della copertina.

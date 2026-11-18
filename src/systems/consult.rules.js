@@ -35,7 +35,7 @@ export function questionOf(client) {
 const PLAIN = { ppf: { past: 'Passato', present: 'Presente', future: 'Futuro' } };
 export const posLabel = (spread, i) => (spread.positions.length === 1 ? 'La carta' : PLAIN[spread.id]?.[spread.positions[i].id] || spread.positions[i].label);
 
-// The «Ricordamela» note: a cue to remember the card, never its words (lore/principi/la-domanda-non-mostra-la-
+// The «Ricordamela» note: a cue to remember the card, never its words (lore/metodo/principi/la-domanda-non-mostra-la-
 // risposta.md; docs/BACKLOG.md 1.4). The note opens before she answers, so it must not hold the answer.
 // Major: { kind: 'major', name, words: [where she found it, one line], says: two things to look at in the
 //   picture, as questions }. Minor: { kind: 'minor', name, line: where the number sits in the row and the

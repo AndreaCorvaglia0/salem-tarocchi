@@ -1,6 +1,6 @@
 // The missions on the grimoire's map (src/ui/missions/, notes/missions-design.md): the pure parts.
 // The drift guard: every entry of the extras registry needs a card in src/ui/missions/titles.js.
-// What a card may SAY is guarded by tests/knows-only.test.mjs (lore/principi/vede-solo-quello-che-sa.md).
+// What a card may SAY is guarded by tests/knows-only.test.mjs (lore/metodo/principi/vede-solo-quello-che-sa.md).
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync } from 'node:fs';

@@ -32,7 +32,7 @@ None.
 
 ### fatto.scena (1)
 
-- `fatti/cappello-in-soffitta.md`: scene "trials/hat.js#hat" not found in hat.js
+- `storia/fatti/cappello-in-soffitta.md`: scene "trials/hat.js#hat" not found in hat.js
 
 ### tipo (1)
 

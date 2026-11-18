@@ -1,6 +1,6 @@
 {
  "collapse-filter": false,
- "search": "-path:scelte -path:finali",
+ "search": "-path:storia/generati",
  "showTags": false,
  "showAttachments": false,
  "hideUnresolved": true,
@@ -8,101 +8,108 @@
  "collapse-color-groups": false,
  "colorGroups": [
   {
-   "query": "path:persone/",
+   "query": "path:metodo/leggi/",
    "color": {
     "a": 1,
-    "rgb": 14711391
+    "rgb": 5972406
    }
   },
   {
-   "query": "path:retroscena/",
+   "query": "path:metodo/principi/",
    "color": {
     "a": 1,
-    "rgb": 11883338
+    "rgb": 10980346
    }
   },
   {
-   "query": "path:luoghi/",
+   "query": "path:metodo/tecniche/",
    "color": {
     "a": 1,
-    "rgb": 8499866
+    "rgb": 6514417
    }
   },
   {
-   "query": "path:fatti/",
+   "query": "path:metodo/ricette/",
    "color": {
     "a": 1,
-    "rgb": 15912079
+    "rgb": 3900150
    }
   },
   {
-   "query": "path:scelte/",
+   "query": "path:metodo/meccaniche/",
    "color": {
     "a": 1,
-    "rgb": 11051678
+    "rgb": 8246268
    }
   },
   {
-   "query": "path:finali/",
+   "query": "path:corso/obiettivi/",
    "color": {
     "a": 1,
-    "rgb": 13934615
+    "rgb": 1013358
    }
   },
   {
-   "query": "path:tratti/",
+   "query": "path:corso/concetti/",
    "color": {
     "a": 1,
-    "rgb": 13073919
+    "rgb": 4906624
    }
   },
   {
-   "query": "path:meccaniche/",
+   "query": "path:storia/persone/",
    "color": {
     "a": 1,
-    "rgb": 5155038
+    "rgb": 16096779
    }
   },
   {
-   "query": "path:obiettivi/",
+   "query": "path:storia/luoghi/",
    "color": {
     "a": 1,
-    "rgb": 5689313
+    "rgb": 15357964
    }
   },
   {
-   "query": "path:tecniche/",
+   "query": "path:storia/fatti/",
    "color": {
     "a": 1,
-    "rgb": 6610911
+    "rgb": 14427686
    }
   },
   {
-   "query": "path:principi/",
+   "query": "path:storia/retroscena/",
    "color": {
     "a": 1,
-    "rgb": 4020864
+    "rgb": 9584654
    }
   },
   {
-   "query": "path:metodo/",
+   "query": "path:storia/decisioni/",
    "color": {
     "a": 1,
-    "rgb": 10182117
+    "rgb": 16569165
    }
   },
   {
-   "query": "path:decisioni/",
+   "query": "path:storia/generati/scelte/",
    "color": {
     "a": 1,
-    "rgb": 16777215
+    "rgb": 14067578
    }
   },
   {
-   "query": "path:sapere/",
+   "query": "path:storia/generati/finali/",
    "color": {
     "a": 1,
-    "rgb": 6986062
+    "rgb": 15237722
+   }
+  },
+  {
+   "query": "path:storia/generati/tratti/",
+   "color": {
+    "a": 1,
+    "rgb": 12730636
    }
   }
  ],

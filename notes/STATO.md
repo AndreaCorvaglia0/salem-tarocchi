@@ -17,7 +17,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | **scritto**, in attesa delle risposte di Andrea (6 domande in fondo a `notes/libri/CONCETTO.md`) | BACKLOG sezione 7 |
 | 6 | Imparare meglio (BACKLOG 2) | **fatto, pubblicato** (main 95eec8b, gh-pages 500d95e) | |
 | 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | **fatto, pubblicato** (main 610b172, gh-pages 334528b) | |
-| 8 | Interessi da strega: pagina di progetto | **approvata** (`lore/decisioni/decisioni-2026-11-18.md`) |
+| 8 | Interessi da strega: pagina di progetto | **approvata** (`lore/storia/decisioni/decisioni-2026-11-18.md`) |
 | 9 | Interessi: prima fetta (Ortica, erbe, tre missioni) | **fatto, pubblicato** (main 6c4861e) |
 | 10 | Libri: scaffale in biblioteca, primi cinque libri | **fatto, pubblicato** (main 0ee9952, gh-pages 0ef7d33). Mancano: i due libri della Lettrice (Court de Gébelin 1781, Waite 1911: scansione di Waite non trovata), gli altri del catalogo | BACKLOG sezione 6 |
 | 11 | Pietre: immagini | **fatto, pubblicato** (main 809e9a6, gh-pages 5b8154a): eliotropio da Kurr 1859, sei pietre dipinte al computer |

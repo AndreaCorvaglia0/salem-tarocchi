@@ -13,7 +13,7 @@ che facciano orientare. E: **le streghe hanno case più eccentriche.**
    mercato. Anche il selciato cambia.
 4. Due o tre riferimenti visibili da lontano (campanile, ruota del mulino, un grande albero in piazza).
 5. Le case in cui non si entra restano semplici ma non identiche (una diroccata, una ricca, panni stesi).
-6. **Le case delle streghe sono eccentriche**, ognuna a modo suo e secondo chi è (vedi `lore/retroscena/`):
+6. **Le case delle streghe sono eccentriche**, ognuna a modo suo e secondo chi è (vedi `lore/storia/retroscena/`):
    Malva (levatrice, erbe appese, la finestra accesa, la scopa col nastro verde al cancello), Ortica (capanna
    nel bosco, il merlo, il chiodo dietro la porta), Edera (sotto il tribunale, libri, candele), la capanna
    della protagonista. Devono riconoscersi a colpo d'occhio e non somigliare alle case del villaggio.

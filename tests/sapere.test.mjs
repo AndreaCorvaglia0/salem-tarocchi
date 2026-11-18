@@ -1,4 +1,4 @@
-// The circle of knowledge (lore/sapere/, scripts/lore/sapere.mjs, src/data/sapere.js): every leaf hangs on hubs
+// The circle of knowledge (lore/corso/concetti/, scripts/lore/sapere.mjs, src/data/sapere.js): every leaf hangs on hubs
 // that exist; every hub has a leaf in each of the four groups (the circle closes); the herbs and the Majors agree
 // with the game's data (or the difference is listed below); no two leaves of a group are the same on every hub;
 // the data file and the tables of the one page are in step with the vault.
@@ -132,7 +132,7 @@ test('the Majors and the suits agree with the deck (Golden Dawn, src/data/cards.
 });
 
 test('words: no exclamation marks, no new-age words, no doses for the poisonous plants', () => {
-  for (const d of vault.ofTipo('sapere')) {
+  for (const d of vault.ofTipo('concetto')) {
     const text = [d.data.in_breve, d.data.si_dice, d.data.da_dove_viene, ...(d.data.varianti || []), d.body].join(' ');
     assert.ok(!text.includes('!'), `${d.name} has an exclamation mark`);
     assert.ok(!/energi|vibrazion|universo/i.test(text), `${d.name} uses a banned word`);

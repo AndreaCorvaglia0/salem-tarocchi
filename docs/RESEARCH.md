@@ -294,7 +294,7 @@ Sources (short names used below):
 
 ## Tecniche di apprendimento (17 novembre)
 
-Le affermazioni usate in `lore/tecniche/`. Controllate il 17 novembre 2026 sulla pagina indicata (abstract o
+Le affermazioni usate in `lore/metodo/tecniche/`. Controllate il 17 novembre 2026 sulla pagina indicata (abstract o
 riassunto dell'autore). PubMed ha chiesto un controllo anti-robot dopo due pagine: non è stato aggirato, si sono
 usate le copie degli autori. Una pagina (Hattie e Timperley 2007) è chiusa ai robot: al suo posto la meta-analisi
 del 2020 dello stesso gruppo.
@@ -419,15 +419,15 @@ Per `docs/BACKLOG.md` 3.5. Letto nei risultati di ricerca, non per intero.
   sul timbro). Sono tendenze della maggioranza, non regole; e riguardano l'abbinamento, non il far «sentire» un
   odore. `src/sound/moods.js` risulta importato da `engine.js` e `index.js`: in uso, da provare per questo scopo.
 
-### Progettare per i sensi (metodo, `lore/metodo/progettare-per-i-sensi-senza-averli.md`)
+### Progettare per i sensi (metodo, `lore/metodo/ricette/progettare-per-i-sensi-senza-averli.md`)
 
 Che cosa si può misurare al posto dell'orecchio: tempo, modo, altezza media, intensità e distanza tra varianti
 sul suono reso; scelta forzata dei lettori artificiali sulle immagini. Che cosa no: se è bello, se emoziona.
 
 ## Il cerchio: erbe, fumi, pietre, tarocchi (17 novembre 2026)
 
-Il vault `lore/sapere/` (una pagina per elemento, pianeta, intenzione, segno, seme, arcano, erba, fumo, pietra; la
-pagina unica è `lore/sapere/_il-cerchio.md`). Dati: `src/data/sapere.js`, generato da `node scripts/lore.mjs sapere`;
+Il vault `lore/corso/concetti/` (una pagina per elemento, pianeta, intenzione, segno, seme, arcano, erba, fumo, pietra; la
+pagina unica è `lore/corso/concetti/_il-cerchio.md`). Dati: `src/data/sapere.js`, generato da `node scripts/lore.mjs sapere`;
 test: `tests/sapere.test.mjs`. Le sigle qui sotto sono quelle del campo `fonte` di ogni pagina.
 
 ### Regola di scelta

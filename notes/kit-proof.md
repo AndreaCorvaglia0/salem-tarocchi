@@ -16,11 +16,11 @@ cosa non ho verificato.
    esistono solo lì); se è solo dialogo, è un copione con una voce in CAST e una voce nel registro, come dice
    TOOLS.md. `SIDE` serve solo per una carta nascosta.»
 
-2. **Il canone nascosto non è nominato.** Il §1 non dice di leggere `lore/retroscena/` né
-   `lore/decisioni/`, né che cosa vogliono dire `non_affiora` e `non_direbbe_mai`. Trovato: me l'ha detto il
+2. **Il canone nascosto non è nominato.** Il §1 non dice di leggere `lore/storia/retroscena/` né
+   `lore/storia/decisioni/`, né che cosa vogliono dire `non_affiora` e `non_direbbe_mai`. Trovato: me l'ha detto il
    compito; i campi sono spiegati solo in `lore/README.md` (riga `retroscena`, senza `affiora`/`non_affiora`).
    Da aggiungere a KIT.md §1, passo 1: «Prima di scrivere leggere il retroscena di ogni persona coinvolta e
-   `lore/decisioni/`. Quello che sta in `non_affiora` e `non_direbbe_mai` non si dice mai: affiora in un gesto
+   `lore/storia/decisioni/`. Quello che sta in `non_affiora` e `non_direbbe_mai` non si dice mai: affiora in un gesto
    o in una battuta di lato.» E in `lore/README.md`, riga retroscena: i campi `affiora`, `non_affiora`,
    `non_direbbe_mai`, `sostiene`, `corregge`.
 
@@ -63,7 +63,7 @@ cosa non ho verificato.
 7. **Le carte decidono solo dentro una prova.** Il servizio `trial.ask` esiste, ma un copione non può
    leggerne il risultato (`{ do: 'call' }` in `src/story/runner.js` lo butta via), e i passi di una prova non
    hanno condizioni (`src/trials/run.js`). Quindi la riga che legge l'affinità sta nella scena della porta,
-   dopo `trial.start`. Da aggiungere a `lore/meccaniche/chiedere-alle-carte.md` e al passo 4: «Una prova non ha
+   dopo `trial.start`. Da aggiungere a `lore/metodo/meccaniche/chiedere-alle-carte.md` e al passo 4: «Una prova non ha
    `if`: quello che cambia per tratti, affinità o legame si scrive nella scena intorno, prima o dopo
    `trial.start`.»
 
@@ -95,7 +95,7 @@ cosa non ho verificato.
     fallire `story.data.test.mjs`, manca nel suo elenco `COND_KEYS`.» E in `tests/story.reader.test.mjs` c'è
     una seconda copia dello stesso elenco.
 
-11. **Il genere.** `lore/metodo/non-dare-un-genere.md` dice che la storia principale parla a lei al femminile;
+11. **Il genere.** `lore/metodo/ricette/non-dare-un-genere.md` dice che la storia principale parla a lei al femminile;
     le prove secondarie lo fanno («figliola», «sono tornata»); il compito chiedeva di evitarlo dove il gioco lo
     evita. Non è scritto quale regola valga per una storia secondaria. Ho scritto tutto senza genere per lei
     (le frasi del mugnaio e di Ortica e il diario). Da aggiungere a KIT.md, «Regole che valgono per tutti e
@@ -132,8 +132,8 @@ cosa non ho verificato.
   anello della catena (dopo `trial.dare`), con `when` su quello che lei ha: il mugnaio incontrato
   (`side.m12`), la scopa e la lezione di volo, la scommessa di Ginepra vinta.
 - Le scene in `src/data/story/scripts/hat.js`, unite a `TRIAL_SCRIPTS` in fondo a `trials.js` (due righe).
-- Il fatto `lore/fatti/cappello-in-soffitta.md` (`fonte: proposto`), una riga in `aperto` di
-  `lore/persone/mugnaio.md` e `lore/persone/ortica.md`. Nessun retroscena toccato.
+- Il fatto `lore/storia/fatti/cappello-in-soffitta.md` (`fonte: proposto`), una riga in `aperto` di
+  `lore/storia/persone/mugnaio.md` e `lore/storia/persone/ortica.md`. Nessun retroscena toccato.
 - Test: `tests/trials.content.test.mjs` (elenchi, catena, `poolsOf('hat')`, il salvataggio dopo il finale con
   mugnaio e scopa), `tests/story.data.test.mjs` (`affinity`, `bond`, `attitude` in `COND_KEYS`).
 

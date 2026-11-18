@@ -8,7 +8,7 @@
 //   interests.step     a mission done: its flag and today's date (shared with Ortica's)
 //   interests.giveBack the constable gives her stone back (when it was hers)
 // Edera calls her «cara», or Rosalba if she let her (flag edera.rosalba); never by her real name here: that is
-// kept for the sixth mission (lore/decisioni/decisioni-2026-11-18.md, interessi 2), not written yet.
+// kept for the sixth mission (lore/storia/decisioni/decisioni-2026-11-18.md, interessi 2), not written yet.
 // Nobody explains the game: what a stone is for comes out of Edera's choices and the constable's night.
 import { N, T, edera, cop, choice, o, xp, diary, open, goto, flag, IF } from '../h.js';
 

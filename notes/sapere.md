@@ -1,6 +1,6 @@
 # Il cerchio: erbe, fumi, pietre, tarocchi
 
-Vault: `lore/sapere/` (104 pagine + `_il-cerchio.md`, la pagina unica, e `_indice-sapere.md`).
+Vault: `lore/corso/concetti/` (104 pagine + `_il-cerchio.md`, la pagina unica, e `_indice-sapere.md`).
 Dati: `src/data/sapere.js` (`node scripts/lore.mjs sapere`). Test: `tests/sapere.test.mjs`. Fonti: RESEARCH.md, «Il cerchio».
 Le scelte qui sotto sono **proposte**: le confermi tu.
 

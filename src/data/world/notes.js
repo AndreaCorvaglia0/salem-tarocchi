@@ -1,12 +1,12 @@
 // HER notes on the places of the grimoire's map (src/ui/mappa.js shows them when she taps a place).
-// The rule (lore/principi/vede-solo-quello-che-sa.md): a place shows only what she has seen or been told.
+// The rule (lore/metodo/principi/vede-solo-quello-che-sa.md): a place shows only what she has seen or been told.
 // Three states:
 //   never seen         blank, as the map already does (sketch.js draws nothing there)
 //   seen, not known    `unknown`: one plain line in her voice, about what anyone sees or hears from outside;
 //                      the heading is «?» unless the name is plain to see (`named`: a street, the square)
 //   known              the notes whose condition holds (keys of src/core/cond.js), in the order she learns
 //                      them; the caption shows the last three
-// Sources: lore/luoghi (what a place is), lore/fatti (what happened where), the scripts. NEVER lore/retroscena
+// Sources: lore/storia/luoghi (what a place is), lore/storia/fatti (what happened where), the scripts. NEVER lore/storia/retroscena
 // or the hidden fields (`non_affiora`, `nasconde`). tests/knows-only.test.mjs checks conditions, lengths and
 // that every proper name in a note appears in the scripts.
 // A note is first person, as she would jot it, under 70 characters. Notes about a rumoured card are on the

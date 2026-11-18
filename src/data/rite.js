@@ -107,7 +107,7 @@ export const TEXT = {
 };
 
 // The first rite of all, at Malva's hearth: one short scene that hands the rite down
-// (lore/retroscena/malva-retroscena.md: Ruta, «la levatrice di allora», sent her to buy incense the first evening).
+// (lore/storia/retroscena/malva-retroscena.md: Ruta, «la levatrice di allora», sent her to buy incense the first evening).
 export const MALVA_SCENE = [
   { who: null, t: "Malva getta un grano d'incenso sulla brace e aspetta che il fumo salga dritto, prima di aprire bocca." },
   { who: 'Malva', t: 'Prima di guardare dentro una persona si bussa, come a una porta. La levatrice di allora me lo insegnò la prima sera, mandandomi a comprare l\'incenso con i soldi suoi.' },

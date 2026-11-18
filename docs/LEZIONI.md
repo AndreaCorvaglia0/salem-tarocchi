@@ -3,14 +3,14 @@
 Le cose capite facendo «Le carte di Salem»: gli errori corretti e le trovate. Serve a non rifarli e a portare
 il meglio in Mnemopolis. Ogni voce: **la lezione**, *che cosa è successo*, e la regola che ne esce.
 Si aggiorna ogni volta che un riscontro di chi gioca ci fa cambiare qualcosa. Le schede operative stanno in
-`lore/metodo/`; qui c'è il perché.
+`lore/metodo/ricette/`; qui c'è il perché.
 
 ## A. Imparare
 
 **1. I concetti diventano importanti se servono.**
 *Una carta studiata per sé si dimentica; una carta che decide cosa rispondere a un cliente, o quale porta
 aprire, resta.* Regola: ogni concetto deve avere almeno un momento del gioco in cui serve per fare qualcosa.
-Lo strumento `lore/meccaniche/_matrice.md` mostra gli obiettivi che nessuna meccanica usa.
+Lo strumento `lore/metodo/meccaniche/_matrice.md` mostra gli obiettivi che nessuna meccanica usa.
 
 **2. Prima l'apprendimento attivo, poi la memoria.**
 Attivo vuol dire: metafore, domande che fanno guardare la stessa cosa da punti diversi, toccare e scegliere,

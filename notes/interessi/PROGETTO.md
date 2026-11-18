@@ -1,7 +1,7 @@
 # Gli interessi da strega (pagina di progetto)
 
 18 novembre 2026. Da approvare prima del codice. Fonti: BACKLOG 6 (e 3.0, 3.4, 7), `docs/ARRIVO.md`,
-`notes/collezioni.md`, `notes/rito/PROGETTO.md`, `notes/libri/CONCETTO.md`, `lore/sapere/_il-cerchio.md`, le persone.
+`notes/collezioni.md`, `notes/rito/PROGETTO.md`, `notes/libri/CONCETTO.md`, `lore/corso/concetti/_il-cerchio.md`, le persone.
 **Tutto è proposto.** Dove una riga aggiunge canone (un fatto di una persona, una cosa che cambia nel mondo) è
 segnata **[p]**: nel vault diventa `fonte: proposto` finché Andrea non dice sì.
 

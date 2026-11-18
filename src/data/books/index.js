@@ -1,7 +1,7 @@
-// The books of Edera's library (notes/libri/CONCETTO.md; decisions of 18 Nov in lore/decisioni/): real books
+// The books of Edera's library (notes/libri/CONCETTO.md; decisions of 18 Nov in lore/storia/decisioni/): real books
 // on the cover (real title, author, year, the title page of a real scan), our own words inside, and a last
 // page «Che cosa è vero». One file per book; the shelf shows them in BOOK_LIST order, with a mark in the dust
-// where one is still missing (never its title: lore/principi/vede-solo-quello-che-sa.md).
+// where one is still missing (never its title: lore/metodo/principi/vede-solo-quello-che-sa.md).
 //
 // A book: { id, spine, title, author, place, year, leather, from, voice?, shuffle?, pages, truth }
 //   pages   [{ img, alt, text, tall?, note?: { by: 'edera'|'ortica'|'ignota'|'antica', t } }]  (6-10 pages)

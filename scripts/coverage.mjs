@@ -101,7 +101,7 @@ export function render(R) {
   for (const [w, m] of Object.entries(R.trust)) L.push(`- ${w}: ${[...m].sort((a, b) => a[0] - b[0]).map(([v, n]) => `${v}: ${n}`).join(', ')}`);
   L.push('', '### Her card and her suit', '', `- card: ${[...R.cards].sort((a, b) => b[1] - a[1]).map(([c, n]) => `${c} ${pct(n)}`).join(', ')}`,
     `- suit: ${[...R.suits].sort((a, b) => b[1] - a[1]).map(([c, n]) => `${c} ${pct(n)}`).join(', ')}`);
-  L.push('', '### Ending variants', '', 'The conditional pieces of the trial, the dawn, the campfire and the last session (lore/finali/ has where each is earned).', '',
+  L.push('', '### Ending variants', '', 'The conditional pieces of the trial, the dawn, the campfire and the last session (lore/storia/generati/finali/ has where each is earned).', '',
     '| Where | Variant | Runs |', '|---|---|---:|');
   const ENDING = (u) => (u.file === 'end.js' && ['c3.trial', 'f.dawn', 'f.last'].includes(u.scene)) || (u.file === 'sessions.js' && u.scene === 's4');
   for (const u of units.filter(ENDING).filter((x) => x.kind !== 'option' || x.cond != null)) L.push(`| ${u.file}#${u.scene} | ${desc(u).replace(/\|/g, '/')} | ${pct(u.n)} |`);
