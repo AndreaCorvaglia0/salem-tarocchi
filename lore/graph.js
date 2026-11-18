@@ -4,7 +4,7 @@
 //   nodes: [{ id, title, color, x, y, r, tipo }], edges: [[i, j]]; g.setVisible(fn), g.select(i), g.fit(), g.destroy()
 // Labels are drawn only for the selected node and its neighbours, or for everyone once zoomed in enough
 // that they do not pile up (labels: 'auto' | 'all').
-import { esc } from './md.js?v=1794959188525';
+import { esc } from './md.js?v=1794960361716';
 
 const INK = '#2a2134';
 
