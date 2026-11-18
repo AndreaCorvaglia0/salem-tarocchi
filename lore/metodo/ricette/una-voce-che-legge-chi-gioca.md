@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Una voce che legge chi gioca"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: generale
 problema: "Il ritratto calcolato è invisibile se nessuno lo racconta, e un racconto finto («ti conosco») suona vuoto."

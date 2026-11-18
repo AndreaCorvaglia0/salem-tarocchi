@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Chiedere alle carte"
+dinamica: "decisioni"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-e-lei-a-decidere]]"
+motivo: "Sono a un bivio e non so che strada prendere: chiedo a una carta che ho studiato, come le streghe."
+effetto: "Per scegliere devo usare quello che la carta significa (segno, idea o regola): trasferimento; poi vedo che cosa diceva."
 fonte: "copione"
 dove:
   - "src/trials/ask.js"

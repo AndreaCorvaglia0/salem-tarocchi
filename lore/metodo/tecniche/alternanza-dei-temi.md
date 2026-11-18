@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Alternanza dei temi"
+legge: "[[legge-da-molti-lati]]"
 in_breve: "Mescolare carte e tipi di domanda diversi, invece di farli a blocchi."
 come_funziona: "Alternare categorie diverse aiuta a distinguerle. Funziona molto con le immagini (quadri di pittori diversi: Kornell e Bjork 2008; Brunmair e Richter 2019, g 0,67 per i quadri) e poco o al contrario con liste di parole. Chi studia crede che il blocco funzioni meglio, e sbaglia. Dunlosky e altri 2013: utilità moderata."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

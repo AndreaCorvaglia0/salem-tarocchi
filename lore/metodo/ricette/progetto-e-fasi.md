@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Prima una pagina di progetto, poi fasi con un tema solo"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: far-crescere
 ambito: generale
 problema: "Il codice scritto prima di aver deciso che cosa serve va rifatto; una fase con tre temi non finisce mai con qualcosa da provare."

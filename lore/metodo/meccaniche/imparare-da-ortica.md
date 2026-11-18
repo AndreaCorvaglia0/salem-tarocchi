@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Imparare l'orto da Ortica"
+dinamica: "interessi"
+leggi:
+  - "[[legge-si-vede-e-si-tocca]]"
+  - "[[legge-si-entra-piano]]"
+motivo: "Ortica non sopporta di vedere annegare una salvia: mi mostra come si fa, e poi tocca al mio orto."
+effetto: "Un esempio concreto, una domanda con tre gesti, poi un compito vero per il mio orto: recupero e trasferimento."
 fonte: "copione"
 dove:
   - "src/data/story/scripts/garden-lessons.js"

@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Che cosa pensa degli altri dice chi è"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: generale
 problema: "Chiedere direttamente «chi sei?» mette a disagio e dà risposte di maniera."

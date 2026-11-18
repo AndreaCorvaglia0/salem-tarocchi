@@ -1,6 +1,8 @@
 ---
 tipo: ricetta
 nome: "I dati personali sono facoltativi e restano vicino a lei"
+legge: "[[legge-e-lei-a-decidere]]"
+anche: "[[legge-chiaro-vero-curato]]"
 famiglia: personalizzare
 ambito: generale
 problema: "La data di nascita rende il gioco suo, ma è un dato personale: chi non vuole darlo non deve perdere niente."

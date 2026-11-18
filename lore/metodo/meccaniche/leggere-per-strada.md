@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Leggere per strada"
+dinamica: "letture"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Qualcuno che ho aiutato mi riconosce per strada e mi chiede sottovoce una carta sola."
+effetto: "Una lettura breve, fuori programma, per chi mi conosce già: uso la carta in un caso vero."
 fonte: "copione"
 dove:
   - "src/glue/street.js"

@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Non dare un genere a chi non si conosce"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: scrivere
 ambito: generale
 problema: "Una frase come «ti senti sola» esclude chi legge e non è una donna, e suona sbagliata."

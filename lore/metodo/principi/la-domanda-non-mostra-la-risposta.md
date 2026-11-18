@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Una domanda non mostra la sua risposta"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Quando il gioco chiede qualcosa, la risposta non è visibile sullo schermo."
 perche: "Se la risposta si vede, lei non la cerca nella memoria, e quindi non impara."
 fonte: "DESIGN.md, Le regole 5; parole di Andrea"

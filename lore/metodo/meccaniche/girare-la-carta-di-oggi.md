@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Girare la carta di oggi"
+dinamica: "gesti-del-giorno"
+leggi:
+  - "[[legge-poco-ogni-giorno]]"
+  - "[[legge-si-vede-e-si-tocca]]"
+motivo: "Ogni mattina una strega guarda una carta: voglio vedere che cosa dice della mia giornata."
+effetto: "Un minuto e uno sguardo nuovo sulla carta ogni volta; la domanda a memoria è un ripasso travestito (ripetizione distanziata)."
 fonte: "copione"
 dove:
   - "src/ui/daycard.js"

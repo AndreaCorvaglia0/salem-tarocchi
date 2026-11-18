@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Due poli, e nessuno è quello giusto"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: generale
 problema: "Un punteggio di bontà fa sentire giudicata chi gioca, e la spinge a rispondere come crede che il gioco voglia."

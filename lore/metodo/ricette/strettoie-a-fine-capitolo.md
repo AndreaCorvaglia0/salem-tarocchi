@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Strettoie alla fine dei capitoli"
+legge: "[[legge-strati-indipendenti]]"
 famiglia: variare
 ambito: generale
 problema: "Se ogni scelta apre una strada sua, la storia si allarga senza fine e non si riesce più a scriverla bene."

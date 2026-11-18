@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Leggere i libri dello scaffale"
+dinamica: "libri"
+leggi:
+  - "[[legge-poche-cose-verificate]]"
+  - "[[legge-sempre-un-motivo]]"
+motivo: "Vedo un dorso e un posto vuoto nella polvere: voglio sapere che libro c'era e che cosa dice."
+effetto: "Contorno facoltativo, vero e legato al nucleo: una figura grande e poche righe (doppia codifica), senza nessuna interrogazione."
 fonte: "proposto"
 dove:
   - "src/data/books/"
@@ -20,6 +26,8 @@ insegna:
   - "[[conoscere-pianeti-e-segni]]"
 tecniche:
   - "[[doppia-codifica]]"
+  - "[[curiosita]]"
+  - "[[niente-dettagli-estranei]]"
 ragione_nel_gioco: "Il posto di quello che sappiamo e che nessun personaggio dice: com'era fatto un erbario del 1585, come si leggevano i sogni, il cerchio dei pianeti di Agrippa, lo scettico che spiegava i trucchi dei giocolieri. Libri veri in copertina, parole nostre dentro, e l'ultima pagina onesta."
 premio: "Nessun punto. Un libro letto fino in fondo lascia una cosa piccola: una nota su un luogo (Agrippa, Artemidoro) o una battuta in più alla prossima chiacchierata con Ortica o con Edera (Durante, Scot, il libro illeggibile)."
 rischio: "Nessuno."

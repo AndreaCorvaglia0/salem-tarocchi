@@ -1,6 +1,6 @@
 # Principi
 
-La filosofia del gioco in 16 regole. Ognuna dice come una cosa nuova la romperebbe (`si_rompe_se`).
+La filosofia del gioco in 18 regole. Ognuna dice come una cosa nuova la romperebbe (`si_rompe_se`) e da quale legge pende (`legge`, [[_indice-leggi]]).
 
 - [[il-testo-e-la-chiave]] — Il testo si pensa prima di tutto: naturale, chiaro alla prima lettura, concreto.
 - [[i-personaggi-non-spiegano]] — Nessun personaggio dice una regola del gioco; le indicazioni pratiche le dà l'interfaccia, a parte.
@@ -19,3 +19,4 @@ La filosofia del gioco in 16 regole. Ognuna dice come una cosa nuova la rompereb
 - [[sempre-chiaro-cosa-fare]] — Si capisce sempre che cosa fare e che cosa viene dopo; si impara una cosa alla volta, usandola.
 - [[le-carte-servono-a-muoversi]] — Le carte si ricordano perché servono nella storia: aprono sigilli, salvano dagli Esami, indicano la strada ai bivi.
 - [[vede-solo-quello-che-sa]] — Ogni schermata mostra solo quello che lei ha visto o le hanno detto: mai il premio, il contenuto o i retroscena; l'ignoto è un «?» misterioso.
+- [[un-mondo-da-ricordare]] — L'ambientazione è fatta per essere ricordata: zone riconoscibili, punti di riferimento, una mappa che coincide col mondo, e ogni concetto ha un posto.

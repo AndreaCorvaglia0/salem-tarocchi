@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Raccogliere pietre e figurine della sibilla"
+dinamica: "trovare"
+leggi:
+  - "[[legge-sempre-un-motivo]]"
+  - "[[legge-il-mondo-e-la-memoria]]"
+motivo: "Qualcosa luccica per terra: voglio riempire gli album e vedere che cosa manca."
+effetto: "Ogni pietra o figurina ha il posto dove l'ho trovata, e le caselle vuote mostrano cosa manca: esposizione ai concetti."
 fonte: "proposto"
 dove:
   - "src/glue/collect.js"
@@ -23,6 +29,9 @@ insegna:
 tecniche:
   - "[[doppia-codifica]]"
   - "[[loci-e-immagini-vivide]]"
+  - "[[curiosita]]"
+  - "[[mappa-dei-concetti]]"
+  - "[[elementi-di-gioco]]"
 ragione_nel_gioco: "Un album di figurine fa girare la mappa; le pietre si appendono al cerchio del sapere (pianeta, elemento, intenzioni) e le figurine regalate a coppie sono il primo assaggio della lettura a due, senza spiegarla."
 premio: "2 punti a ritrovamento o regalo. La prima pietra e la prima figurina: Edera e Ginepra ne dicono qualcosa, una volta, alla prima chiacchierata libera."
 rischio: "Nessuno."

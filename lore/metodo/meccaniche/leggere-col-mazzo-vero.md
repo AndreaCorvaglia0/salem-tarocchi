@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Leggere col mazzo vero dal grimorio"
+dinamica: "letture"
+leggi:
+  - "[[legge-poche-cose-verificate]]"
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Ho il mio mazzo sul tavolo di casa e voglio leggerlo, con qualcuno che mi accompagna posizione per posizione."
+effetto: "È il trasferimento più lungo, dal gioco al mazzo vero; con «Prova tu prima» provo io prima del testo."
 fonte: "copione"
 dove:
   - "src/systems/free.js"

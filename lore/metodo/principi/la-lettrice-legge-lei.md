@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "La Lettrice legge lei"
+legge: "[[legge-e-lei-a-decidere]]"
 in_breve: "La Lettrice racconta le carte, ma soprattutto legge lei: il ritratto nasce dalle sue risposte e dal suo modo di giocare."
 perche: "È quello che fa sentire il gioco fatto su di lei, e il finale ne dipende."
 fonte: "DESIGN.md, Il ritratto; La Lettrice; WRITING.md, La Lettrice"

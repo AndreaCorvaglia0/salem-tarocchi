@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Andare altrove"
+dinamica: "missioni"
+leggi:
+  - "[[legge-sempre-un-motivo]]"
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Un libro o una pozione mi portano fuori da Salem, in un posto con regole sue: voglio scoprire cosa succede."
+effetto: "Le carte servono in un mondo nuovo con regole diverse: trasferimento dentro una storia, con la posta di cadere."
 fonte: "copione"
 dove:
   - "src/glue/elsewhere.js"

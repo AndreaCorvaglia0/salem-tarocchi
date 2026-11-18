@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "I personaggi non spiegano il gioco"
+legge: "[[legge-da-molti-lati]]"
 in_breve: "Nessun personaggio dice una regola del gioco; le indicazioni pratiche le dà l'interfaccia, a parte."
 perche: "Una regola in bocca a un personaggio rompe la finzione e suona come un manuale."
 fonte: "DESIGN.md, Le regole 2; WRITING.md, regole 6 e 7"

@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Ogni riga del canone dice da dove viene"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: scrivere
 ambito: generale
 problema: "Chi scrive una scena nuova inventa un dettaglio plausibile, e dopo un mese nessuno sa più se è canone o fantasia."

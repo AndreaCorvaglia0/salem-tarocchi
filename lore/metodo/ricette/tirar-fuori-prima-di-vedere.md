@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Prima si prova a ricordare, poi si vede"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 famiglia: imparare
 ambito: generale
 problema: "Se la risposta è sullo schermo, o arriva prima del tentativo, lei la riconosce e non la cerca nella memoria."

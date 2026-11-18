@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Riprendere le carte sequestrate"
+dinamica: "esami-e-prove"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Il tribunale mi ha preso una carta e la rivoglio: il custode la ridà solo a chi la conosce."
+effetto: "Una domanda proprio su quella carta, con una posta vera: pratica di recupero su quello che mi manca."
 fonte: "copione"
 dove:
   - "src/systems/recover.js"

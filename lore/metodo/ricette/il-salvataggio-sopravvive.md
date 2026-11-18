@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Il salvataggio sopravvive a ogni versione"
+legge: "[[legge-strati-indipendenti]]"
 famiglia: far-crescere
 ambito: generale
 problema: "Qualcuno sta già giocando: una versione nuova che rompe il salvataggio le fa perdere la partita."

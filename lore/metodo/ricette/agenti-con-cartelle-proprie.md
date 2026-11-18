@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Agenti economici, ognuno nella sua cartella"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: far-crescere
 ambito: generale
 problema: "Più agenti che toccano gli stessi file si pestano i piedi; un agente solo che fa tutto costa di più e sbaglia di più."

@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Le istruzioni stanno fuori dalla storia"
+legge: "[[legge-da-molti-lati]]"
 famiglia: scrivere
 ambito: generale
 problema: "Una regola del gioco in bocca a un personaggio rompe la finzione e suona come un manuale."

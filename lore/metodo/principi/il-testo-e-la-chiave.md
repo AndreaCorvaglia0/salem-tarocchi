@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Il testo è la chiave"
+legge: "[[legge-chiaro-vero-curato]]"
 in_breve: "Il testo si pensa prima di tutto: naturale, chiaro alla prima lettura, concreto."
 perche: "Lei gioca leggendo: se una frase inciampa, si perde la scena intera."
 fonte: "DESIGN.md, Le regole 1; WRITING.md; parole di Andrea"

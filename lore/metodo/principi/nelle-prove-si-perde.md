@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Nelle prove si perde davvero"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Nelle prove e negli Esami si può perdere qualcosa: monete, un oggetto, la fiducia di una strega, a volte una carta."
 perche: "Senza un rischio vero le scelte non pesano e sapere le carte non conta."
 fonte: "DESIGN.md, Le prove; La logica del gioco, ridefinita"

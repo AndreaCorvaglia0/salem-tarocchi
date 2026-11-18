@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Volare con la scopa"
+dinamica: "gradi-e-zone"
+leggi:
+  - "[[legge-si-entra-piano]]"
+  - "[[legge-il-mondo-e-la-memoria]]"
+motivo: "Ho la scopa: voglio arrivare ai posti già visti senza camminare."
+effetto: "Un premio di competenza: volo solo dove sono già stata, e la mappa mi ricorda dov'è ogni posto."
 fonte: "copione"
 dove:
   - "src/glue/fly.js"

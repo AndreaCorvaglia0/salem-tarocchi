@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Mai assillare"
+legge: "[[legge-poco-ogni-giorno]]"
 in_breve: "Niente notifiche, niente serie che si spezzano, niente premi che crescono solo se torni ogni giorno."
 perche: "È un regalo da aprire per piacere, non un dovere: saltare un giorno non deve far male."
 fonte: "DESIGN.md, La soglia; L'orto («Non muore mai»)"

@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Dire che cosa pensa degli altri"
+dinamica: "personaggi"
+leggi:
+  - "[[legge-e-lei-a-decidere]]"
+motivo: "A Salem tutti parlano di tutti, e mi chiedono che cosa penso di lei o di lui."
+effetto: "Dire un'opinione mia lega la storia a me (riferimento a sé); le note restano nel grimorio."
 fonte: "copione"
 dove:
   - "src/glue/opinions.js"
@@ -16,6 +21,7 @@ insegna: []
 tecniche:
   - "[[storia-ed-emozione]]"
   - "[[elaborazione-e-autospiegazione]]"
+  - "[[riferimento-a-se]]"
 ragione_nel_gioco: "A Salem tutti parlano di tutti, e quello che lei pensa degli altri dice qualcosa di lei."
 premio: "Un tratto si muove; a volte il legame con chi ha chiesto sale di 1, o Tartufo di 1."
 rischio: "Nessuno: non c'è una risposta giusta."

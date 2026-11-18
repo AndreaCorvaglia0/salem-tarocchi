@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Spendere in bottega"
+dinamica: "gradi-e-zone"
+leggi:
+  - "[[legge-si-entra-piano]]"
+  - "[[legge-sempre-un-motivo]]"
+motivo: "Ho le monete delle letture e in bottega c'è quello che mi serve: incenso, pendolo, semi, carte."
+effetto: "Non insegna da solo: è un premio che serve nelle prove e dà un valore allo studio (competenza)."
 fonte: "copione"
 dove:
   - "src/ui/shop.js"
@@ -12,7 +18,8 @@ serve:
   - "[[le-carte-servono-a-muoversi]]"
   - "[[pochi-concetti-legati]]"
 insegna: []
-tecniche: []
+tecniche:
+  - "[[elementi-di-gioco]]"
 ragione_nel_gioco: "Le monete vengono dalle letture: è il giro del mestiere. Gli strumenti sono pratiche vere del tempo, come la bottiglia della strega."
 premio: "La bottiglia: per tre minuti nessuno la ferma. L'incenso: meno 30 di sospetto in un Esame. Il pendolo: toglie una risposta sbagliata."
 rischio: "Le monete si perdono nelle prove."

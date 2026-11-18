@@ -1,6 +1,8 @@
 ---
 tipo: ricetta
 nome: "Un obiettivo diventa un gesto con un motivo nel mondo"
+legge: "[[legge-sempre-un-motivo]]"
+anche: "[[legge-poche-cose-verificate]]"
 famiglia: imparare
 ambito: generale
 problema: "Un esercizio fatto per il voto si fa una volta e si dimentica; dentro un gioco sembra un compito."

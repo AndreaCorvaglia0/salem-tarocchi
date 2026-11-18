@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Effetto generazione"
+legge: "[[legge-da-molti-lati]]"
 in_breve: "Produrre da sé una parola o un'idea, invece di leggerla."
 come_funziona: "Quello che si genera si ricorda meglio di quello che si legge (Bertsch e altri 2007, 86 studi: d 0,40), e l'effetto cresce dopo più di un giorno."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

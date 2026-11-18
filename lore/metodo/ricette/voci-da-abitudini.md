@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Una voce nasce da abitudini che si vedono"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: scrivere
 ambito: generale
 problema: "Un personaggio descritto con aggettivi («brusca», «saggia») finisce per parlare come tutti gli altri."

@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Giocare a coppie con la sibilla"
+dinamica: "parole-sue"
+leggi:
+  - "[[legge-da-molti-lati]]"
+  - "[[legge-si-vede-e-si-tocca]]"
+motivo: "Ho due figurine e una domanda di tutti i giorni: voglio capire che cosa dicono insieme."
+effetto: "Unire due immagini in un senso mio è generazione, senza risposta sbagliata: il gradino prima di leggere con tre carte."
 fonte: "proposto"
 dove:
   - "src/ui/sibylpairs.js"

@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Un tetto al ritmo"
+legge: "[[legge-poco-ogni-giorno]]"
 famiglia: variare
 ambito: generale
 problema: "Una cosa bella che arriva troppo spesso diventa rumore, e poi fastidio."

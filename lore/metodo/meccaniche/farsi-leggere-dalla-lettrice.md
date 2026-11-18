@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Farsi leggere dalla Lettrice"
+dinamica: "personaggi"
+leggi:
+  - "[[legge-e-lei-a-decidere]]"
+  - "[[legge-da-molti-lati]]"
+motivo: "La Lettrice racconta le mie carte partendo da quello che ho toccato e detto io: voglio sapere che cosa vede."
+effetto: "Prima richiamo quello che mi aveva detto, poi la lettura riparte dalle mie parole: generazione, racconto e riscontro."
 fonte: "copione"
 dove:
   - "src/story/visit.js"
@@ -26,6 +32,7 @@ tecniche:
   - "[[doppia-codifica]]"
   - "[[pratica-di-recupero]]"
   - "[[riscontro-immediato]]"
+  - "[[riferimento-a-se]]"
 ragione_nel_gioco: "La Lettrice è la voce fuori dal gioco, e legge lei. Ogni tratto di strada finisce al suo tavolo."
 premio: "Ogni carta raccontata prende la seconda stella (+5 punti) e da allora può essere chiesta per significato. Una visita vale 10 punti. La risposta alla domanda della Lettrice conta per il ripasso di quella carta."
 rischio: "Nessuno."

@@ -1,6 +1,14 @@
 ---
 tipo: meccanica
 nome: "Trovare una carta"
+dinamica: "laboratorio"
+leggi:
+  - "[[legge-si-vede-e-si-tocca]]"
+  - "[[legge-da-molti-lati]]"
+  - "[[legge-il-mondo-e-la-memoria]]"
+  - "[[legge-sempre-un-motivo]]"
+motivo: "Una carta è nascosta da qualche parte a Salem: voglio trovarla e vedere che cosa mi dice."
+effetto: "Guardo il dettaglio e scrivo tre parole mie (generazione); il posto fa da àncora (loci): la carta prende un luogo."
 fonte: "copione"
 dove:
   - "src/ui/found.js"
@@ -23,6 +31,7 @@ tecniche:
   - "[[doppia-codifica]]"
   - "[[loci-e-immagini-vivide]]"
   - "[[elaborazione-e-autospiegazione]]"
+  - "[[niente-dettagli-estranei]]"
 ragione_nel_gioco: "È una strega che impara: le carte sono sparse per Salem, ognuna in un posto preciso, e si guadagnano trovandole. Il suo sguardo sul dettaglio è quello da cui la Lettrice partirà per raccontargliela."
 premio: "10 punti esperienza per un Maggiore, 2 per un Minore (XP in src/core/progress.js). La carta entra nel grimorio."
 rischio: "Nessuno. Le tre parole si possono saltare con «Salta»."

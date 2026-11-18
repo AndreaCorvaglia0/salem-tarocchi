@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Una scelta che qualcuno ricorda, più tardi"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: variare
 ambito: generale
 problema: "Una scelta che cambia subito una risposta e poi sparisce sembra finta."

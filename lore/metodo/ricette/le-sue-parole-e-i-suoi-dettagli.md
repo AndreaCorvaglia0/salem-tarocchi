@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Le sue parole e il suo dettaglio"
+legge: "[[legge-da-molti-lati]]"
 famiglia: imparare
 ambito: generale
 problema: "Quello che si legge si dimentica più in fretta di quello che si produce da sé."

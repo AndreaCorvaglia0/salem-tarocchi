@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Quello che si insegna è vero, e si sa da dove viene"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: imparare
 ambito: generale
 problema: "Un errore imparato giocando resta in testa; una promessa dell'interfaccia che il codice non mantiene toglie fiducia."

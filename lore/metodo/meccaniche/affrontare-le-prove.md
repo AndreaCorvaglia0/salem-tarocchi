@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Affrontare le prove"
+dinamica: "esami-e-prove"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-poche-cose-verificate]]"
+motivo: "Ho una notte difficile davanti e non voglio perdere niente: a ogni bivio devo scegliere la strada giusta."
+effetto: "Uso le carte in una situazione nuova (trasferimento), con una posta vera: sbagliare costa, e il riscontro spiega perché."
 fonte: "copione"
 dove:
   - "src/trials/run.js"

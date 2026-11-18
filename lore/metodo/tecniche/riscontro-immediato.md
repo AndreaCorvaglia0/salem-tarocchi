@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Riscontro immediato"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Dire subito se era giusto, e perché."
 come_funziona: "Il riscontro aiuta in media in modo medio (Wisniewski, Zierer e Hattie 2020: d 0,48), molto di più quando porta informazione sul compito e sul procedimento, poco quando è solo premio o castigo."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Leggere per sé"
+dinamica: "letture"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-e-lei-a-decidere]]"
+motivo: "Voglio sapere che cosa mi dicono le mie carte oggi, e il diario tiene quello che mi hanno detto."
+effetto: "Prima di leggere provo io a dire l'idea di ogni carta (generazione); poi la lettura parla di me."
 fonte: "copione"
 dove:
   - "src/ui/selfread.js"
@@ -22,6 +28,7 @@ tecniche:
   - "[[pratica-di-recupero]]"
   - "[[difficolta-desiderabile]]"
   - "[[riscontro-immediato]]"
+  - "[[riferimento-a-se]]"
 ragione_nel_gioco: "Una strega legge anche per sé. La prima volta la Lettrice le dice qualche parola; il diario tiene quello che le carte le hanno detto."
 premio: "5 punti, solo per la prima lettura di ogni giorno. Niente monete, niente popolarità. Un tentativo su una carta che possiede conta per il suo ripasso, come nelle letture ai clienti."
 rischio: "Nessuno: i tentativi si contano solo per lei (state.readings[].tried), non danno né tolgono niente."

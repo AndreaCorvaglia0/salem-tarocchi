@@ -1,6 +1,8 @@
 ---
 tipo: ricetta
 nome: "Un ramo da approfondire, per chi ne ha voglia"
+legge: "[[legge-poche-cose-verificate]]"
+anche: "[[legge-e-lei-a-decidere]]"
 famiglia: variare
 ambito: generale
 problema: "Un argomento in più, come le piante, interessa una giocatrice e annoia un'altra; se è obbligatorio appesantisce la storia."

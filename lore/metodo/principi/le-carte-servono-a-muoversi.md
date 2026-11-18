@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Le carte servono a muoversi"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Le carte si ricordano perché servono nella storia: aprono sigilli, salvano dagli Esami, indicano la strada ai bivi."
 perche: "Una cosa che serve si ricorda meglio di una che si studia e basta."
 fonte: "DESIGN.md, La logica del gioco, ridefinita («le carte si ricordino perché servono per muoversi nella storia»)"

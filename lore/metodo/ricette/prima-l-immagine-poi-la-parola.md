@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Prima l'immagine, poi la parola"
+legge: "[[legge-si-vede-e-si-tocca]]"
 famiglia: imparare
 ambito: generale
 problema: "Una definizione letta prima di aver guardato resta una parola senza appiglio."

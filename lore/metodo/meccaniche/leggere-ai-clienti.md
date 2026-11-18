@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Leggere ai clienti"
+dinamica: "letture"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Una cliente aspetta una risposta e paga chi legge bene: se leggo bene, il mio nome gira."
+effetto: "Richiamo l'idea di ogni carta e unisco più carte per una domanda vera: pratica di recupero e trasferimento."
 fonte: "copione"
 dove:
   - "src/systems/reading.js"

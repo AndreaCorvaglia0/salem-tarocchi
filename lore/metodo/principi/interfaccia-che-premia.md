@@ -1,6 +1,8 @@
 ---
 tipo: principio
 nome: "Un'interfaccia che premia"
+legge: "[[legge-si-vede-e-si-tocca]]"
+anche: "[[legge-chiaro-vero-curato]]"
 in_breve: "L'interfaccia è fluida e moderna, e ogni gesto riuscito si vede: la carta si gira, il sigillo cede, la stella si accende."
 perche: "Il gesto che riesce è già un piccolo premio, e fa venire voglia di tornare."
 fonte: "parole di Andrea"

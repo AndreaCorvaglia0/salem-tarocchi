@@ -1,6 +1,8 @@
 ---
 tipo: principio
 nome: "Sempre chiaro cosa fare"
+legge: "[[legge-chiaro-vero-curato]]"
+anche: "[[legge-si-entra-piano]]"
 in_breve: "Si capisce sempre che cosa fare e che cosa viene dopo; si impara una cosa alla volta, usandola."
 perche: "Lei ha poca esperienza di giochi: se si perde, smette."
 fonte: "DESIGN.md, Le regole 4; L'inizio guidato"

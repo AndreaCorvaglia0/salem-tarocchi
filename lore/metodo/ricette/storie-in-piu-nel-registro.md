@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Le storie in più sono voci di un registro, e arrivano anche a chi è avanti"
+legge: "[[legge-strati-indipendenti]]"
 famiglia: variare
 ambito: generale
 problema: "Chi sta già giocando non vedrebbe mai un pezzo nuovo legato a un passo che ha già superato; dieci pezzi nuovi insieme la sommergerebbero."

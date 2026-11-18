@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "La sua carta e il suo seme"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: salem
 problema: "Cinque numeri non dicono niente a chi gioca: serve un'immagine in cui riconoscersi."

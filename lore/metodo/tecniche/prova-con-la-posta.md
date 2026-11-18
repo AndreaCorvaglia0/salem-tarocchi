@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Prova con la posta"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Una domanda che conta: se sbagli, perdi qualcosa nel gioco."
 come_funziona: "Mettersi alla prova sembra proteggere il ricordo anche sotto uno stress breve (Smith, Floerke e Thomas 2016). Con troppa pressione durante la prova, però, il vantaggio del recupero si riduce (Hinze e Rapp 2014). Tutti e due letti in un riassunto, non nell'articolo: da prendere con prudenza."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

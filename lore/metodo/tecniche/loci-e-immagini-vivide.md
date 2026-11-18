@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Luoghi e immagini vivide"
+legge: "[[legge-il-mondo-e-la-memoria]]"
 in_breve: "Legare ogni cosa da ricordare a un posto preciso o a un'immagine forte."
 come_funziona: "Il metodo dei loci aiuta molto a ricordare liste in ordine subito dopo (revisione del 2025, d 0,88 contro la ripetizione), ma la qualità delle prove è bassa e sui tempi lunghi se ne sa poco. Il «keyword mnemonic» ha utilità bassa in Dunlosky e altri 2013."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

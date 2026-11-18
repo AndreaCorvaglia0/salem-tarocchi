@@ -104,10 +104,11 @@ test('rules: flags, steps and sessions named by a fatto must exist; persona ids 
   assert.deepEqual(r.errors.filter((e) => e.file.includes('inventata')).map((e) => e.rule), ['persona.id']);
 });
 test('rules: meccaniche serve principi, obiettivi have meccaniche or say what is open', async () => {
-  const mecc = (serve) => fm({ tipo: '"meccanica"', nome: '"m"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve, insegna: '[]', tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '' });
+  const mecc = (serve) => fm({ tipo: '"meccanica"', nome: '"m"', dinamica: '"trovare"', leggi: ['"[[legge-x]]"'], motivo: '"perché sì"', effetto: '"effetto"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve, insegna: '[]', tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '' });
   const ob = (m, a) => fm({ tipo: '"obiettivo"', nome: '"o"', sa_fare: '""', si_vede_da: '""', meccaniche: m, aperto: a });
-  const pr = fm({ tipo: '"principio"', nome: '"p"', in_breve: '""', perche: '""', fonte: '""', si_rompe_se: '""' });
-  const V = mini({ 'metodo/principi/p-uno.md': pr, 'metodo/principi/p-due.md': pr, 'metodo/meccaniche/m-ok.md': mecc(['"[[p-uno]]"']), 'metodo/meccaniche/m-vuota.md': mecc('[]'),
+  const pr = fm({ tipo: '"principio"', nome: '"p"', legge: '"[[legge-x]]"', in_breve: '""', perche: '""', fonte: '""', si_rompe_se: '""' });
+  const legge = fm({ tipo: '"legge"', nome: '"x"', numero: 1, gruppo: '"come"', in_breve: '""', perche: '""', si_rompe_se: '""', lezioni: '""', fonte: '"deciso"' });
+  const V = mini({ 'metodo/leggi/legge-x.md': legge, 'metodo/principi/p-uno.md': pr, 'metodo/principi/p-due.md': pr, 'metodo/meccaniche/m-ok.md': mecc(['"[[p-uno]]"']), 'metodo/meccaniche/m-vuota.md': mecc('[]'),
     'corso/obiettivi/o-ok.md': ob('[]', ['"manca tutto"']), 'corso/obiettivi/o-vuoto.md': ob('[]', '') });
   const r = check(V, await story());
   assert.deepEqual(rules(r).sort(), ['meccanica.serve', 'obiettivo']);

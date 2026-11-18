@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Una guardia sui tocchi, e momenti che non si saltano"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: far-crescere
 ambito: generale
 problema: "Sul telefono un tocco di troppo fa perdere una battuta o sceglie una risposta che lei non voleva."

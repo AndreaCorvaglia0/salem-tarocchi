@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Progettare per i sensi senza averli"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: far-crescere
 ambito: generale
 problema: "Chi costruisce il gioco è un modello: non sente la musica, non annusa, non prova il tempo di un gesto. Ma deve far provare a una persona una sensazione precisa (un rito, un profumo reso con suono e colore)."

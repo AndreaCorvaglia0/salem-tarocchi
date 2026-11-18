@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Si nomina solo quello che è chiaro"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: generale
 problema: "Un gioco che commenta ogni scossa sembra un oroscopo; uno che sbaglia su di lei perde credito."

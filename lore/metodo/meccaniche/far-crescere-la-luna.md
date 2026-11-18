@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Far crescere la luna"
+dinamica: "gesti-del-giorno"
+leggi:
+  - "[[legge-poco-ogni-giorno]]"
+motivo: "Voglio vedere la luna crescere fino a sette spicchi e prendermi il dono piccolo di Salem."
+effetto: "Basta una cosa al giorno, anche non di fila: costanza senza colpa, come la ripetizione distanziata."
 fonte: "copione"
 dove:
   - "src/glue/threshold.js"
@@ -13,6 +18,7 @@ serve:
 insegna: []
 tecniche:
   - "[[ripetizione-distanziata]]"
+  - "[[elementi-di-gioco]]"
 ragione_nel_gioco: "La luna è il tempo delle streghe; i doni sono cose di Salem."
 premio: "A luna piena, a turno: manicaretti per Tartufo, da 2 a 7 monete, a volte un seme per l'orto (GIFTS in src/glue/threshold.rules.js). I doni non aprono mai la storia."
 rischio: "Nessuno: saltare un giorno non toglie niente."

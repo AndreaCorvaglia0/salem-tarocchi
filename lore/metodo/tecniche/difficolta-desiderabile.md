@@ -1,6 +1,8 @@
 ---
 tipo: tecnica
 nome: "Difficoltà desiderabile"
+legge: "[[legge-si-entra-piano]]"
+anche: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Rendere lo studio un po' più faticoso, purché si possa farcela."
 come_funziona: "Spaziare, alternare, mettersi alla prova e generare rendono l'apprendimento più lento ma più duraturo; una difficoltà resta utile solo se chi impara ha le basi per affrontarla (Bjork e Bjork 2011). Provare a rispondere prima di sapere aiuta, se la risposta arriva subito dopo (Hays, Kornell e Bjork)."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

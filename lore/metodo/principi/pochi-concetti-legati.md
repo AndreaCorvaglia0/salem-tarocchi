@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Pochi concetti, legati tra loro"
+legge: "[[legge-poche-cose-verificate]]"
 in_breve: "Pochi concetti, legati tra loro; prima di aggiungere si guarda se una cosa che c'è già può farlo."
 perche: "Ogni numero o sistema in più è una cosa in più da capire, per chi gioca poco ai videogiochi."
 fonte: "DESIGN.md, Le regole 8 e 9; Cinque idee, e come si tengono"

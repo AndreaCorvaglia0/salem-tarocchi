@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Dire che cosa è stato verificato, e come"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: far-crescere
 ambito: generale
 problema: "«Funziona» detto senza prove nasconde quello che nessuno ha guardato: il telefono vero, l'audio, una persona che non conosce il gioco."

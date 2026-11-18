@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Elaborazione e autospiegazione"
+legge: "[[legge-da-molti-lati]]"
 in_breve: "Chiedersi perché una cosa è così, e spiegarla a sé stessi."
 come_funziona: "Spiegarsi il perché aiuta a capire e ricordare: Dunlosky e altri 2013 danno utilità moderata; Bisra e altri 2018 (64 studi) trovano un effetto medio, g 0,55, più forte dell'ascoltare la spiegazione di un altro. La forma a scelta multipla sembra la meno efficace."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

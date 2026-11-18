@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Una scena concreta, non una massima"
+legge: "[[legge-chiaro-vero-curato]]"
 famiglia: scrivere
 ambito: generale
 problema: "Le frasi corte a effetto («Sette spicchi, una luna.») suonano finte e costringono chi legge a ricostruire i legami da sola."

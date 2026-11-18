@@ -1,6 +1,13 @@
 ---
 tipo: meccanica
 nome: "Ripassare"
+dinamica: "ripasso"
+leggi:
+  - "[[legge-poche-cose-verificate]]"
+  - "[[legge-poco-ogni-giorno]]"
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Tartufo mi fa le domande dal davanzale, e prima di una notte difficile mi serve ricordare."
+effetto: "Pratica di recupero sulle carte scadute, con domande miste (alternanza): insiste su quello che non regge."
 fonte: "copione"
 dove:
   - "src/systems/review.js"

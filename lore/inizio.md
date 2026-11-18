@@ -15,7 +15,7 @@ all'inizio sono nascosti: si accendono dai filtri.
 - **Chi sono davvero (nascosto):** [[le-tre-maestre-retroscena]] · [[salem-retroscena]] · [[malva-retroscena]] · [[ortica-retroscena]] · [[edera-retroscena]] · [[ginepra-retroscena]] · [[giudice-retroscena]] · [[tartufo-retroscena]]
 - **Cosa è deciso:** [[decisioni-2026-11-17]]
 - **Scelte e finali:** [[_indice-scelte]] · [[_tabella-finali]]
-- **Come si impara:** [[_indice-obiettivi]] · [[_indice-tecniche]] · [[_indice-meccaniche]] · [[_matrice]]
+- **Come si impara:** [[_indice-leggi]] · [[_indice-obiettivi]] · [[_indice-tecniche]] · [[_indice-meccaniche]] · [[_dinamiche]] · [[_matrice]]
 - **Filosofia e metodo:** [[_indice-principi]] · [[_indice-metodo]]
 - **Erbe, fumi, pietre, tarocchi:** [[_il-cerchio]] · [[_indice-sapere]]
 

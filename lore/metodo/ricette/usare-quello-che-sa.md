@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Usare quello che sa in un caso nuovo"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 famiglia: imparare
 ambito: generale
 problema: "Saper rispondere a una domanda su una carta non vuol dire saperla leggere per qualcuno."

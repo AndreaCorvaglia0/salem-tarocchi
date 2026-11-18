@@ -1,6 +1,13 @@
 ---
 tipo: meccanica
 nome: "Scegliere le pietre con Edera (l'interesse da strega)"
+dinamica: "interessi"
+leggi:
+  - "[[legge-si-vede-e-si-tocca]]"
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-e-lei-a-decidere]]"
+motivo: "Edera ha perso la pietra della nonna e ricorda il colore ma non il nome: mi chiede una mano."
+effetto: "Riconosco le pietre dall'aspetto e scrivo i cartellini: esempi concreti e azione, con il riscontro il giorno dopo."
 fonte: "proposto"
 dove:
   - "src/glue/interests.edera.js"
@@ -25,6 +32,7 @@ tecniche:
   - "[[trasferimento-con-la-pratica]]"
   - "[[riscontro-immediato]]"
   - "[[doppia-codifica]]"
+  - "[[effetto-dell-azione]]"
 ragione_nel_gioco: "Edera ha perso la pietra della nonna, il conestabile del pozzo ha paura dei cani che abbaiano alla luna, e delle sue pietre Edera ricorda il colore ma non il nome: c'è sempre qualcuno che chiede."
 premio: "Ogni missione: 5 punti e legame con Edera +1. Dopo la seconda, il primo gradino («In tasca»): dall'album tiene in tasca una pietra; se è di coraggio o di protezione, una volta al giorno l'errore che le farebbe perdere un Esame si annulla e la domanda dopo è su un'altra carta («Il conestabile esita.»)."
 rischio: "Nessuno nelle missioni: una pietra sbagliata viene spiegata da Edera con quello a cui serve, e si sceglie di nuovo. Gli Esami restano rischiosi: la pietra toglie un solo errore, una volta al giorno, mai davanti al Giudice."

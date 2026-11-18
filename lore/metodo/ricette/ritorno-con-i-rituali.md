@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Tornare con un piccolo rito di ogni giorno"
+legge: "[[legge-poco-ogni-giorno]]"
 famiglia: imparare
 ambito: generale
 problema: "Il ripasso a distanza di giorni funziona solo se lei torna, e un gioco che costringe a tornare diventa un dovere."

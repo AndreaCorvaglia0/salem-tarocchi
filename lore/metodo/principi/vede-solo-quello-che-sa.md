@@ -1,6 +1,8 @@
 ---
 tipo: principio
 nome: "Lei vede solo quello che sa"
+legge: "[[legge-sempre-un-motivo]]"
+anche: "[[legge-si-entra-piano]]"
 in_breve: "Ogni schermata mostra quello che lei ha visto o le hanno detto: mai il premio, il contenuto o i retroscena. Quello che non sa è un «?» o una riga misteriosa, mai un vuoto e mai una spiegazione."
 perche: "Andrea, 18 novembre: sulla mappa «posso vedere quello che già so sulla missione e che mi hanno detto. Qualche presentimento vago. Ma mai il premio o il contenuto. Al massimo un titolo evocativo». Sapere prima che cosa si vince o che cosa succede toglie la scoperta; non sapere niente di un posto toglie la voglia di andarci."
 fonte: "Deciso da Andrea il 18 novembre 2026"

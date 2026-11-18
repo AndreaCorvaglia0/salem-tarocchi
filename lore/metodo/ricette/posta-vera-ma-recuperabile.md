@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Una posta vera, ma che si può riprendere"
+legge: "[[legge-il-concetto-e-una-chiave]]"
 famiglia: imparare
 ambito: salem
 problema: "Senza rischio le scelte non pesano e sapere le carte non conta; con un rischio troppo duro lei smette di giocare."

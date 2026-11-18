@@ -1,6 +1,7 @@
 ---
 tipo: tecnica
 nome: "Storia ed emozione"
+legge: "[[legge-il-mondo-e-la-memoria]]"
 in_breve: "Mettere quello che si impara dentro una storia, con persone e conseguenze."
 come_funziona: "I testi narrativi si ricordano e si capiscono meglio di quelli espositivi (Mar e altri 2021: g 0,55; per la memoria 0,72). L'emozione aiuta l'attenzione e il consolidamento, ma lo stress forte o lungo fa male (Tyng e altri 2017)."
 fonte: "docs/RESEARCH.md, Tecniche di apprendimento"

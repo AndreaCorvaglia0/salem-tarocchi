@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Niente tocchi per sbaglio"
+legge: "[[legge-chiaro-vero-curato]]"
 in_breve: "I tasti nuovi ignorano i tocchi per un attimo, e i momenti da leggere non si saltano per sbaglio."
 perche: "Sul telefono un tocco di troppo fa perdere una battuta o sceglie una risposta che lei non voleva."
 fonte: "DESIGN.md, Le regole 3; MAP.md, regola 2; parole di Andrea"

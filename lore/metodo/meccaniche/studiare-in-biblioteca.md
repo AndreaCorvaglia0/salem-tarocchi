@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Studiare in biblioteca"
+dinamica: "ripasso"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-poche-cose-verificate]]"
+motivo: "Prima di una prova pericolosa voglio sapere che cosa «sente» la strega, e sfoglio il libro."
+effetto: "Ripasso mirato prima di una notte difficile: pagine brevi con due domande (recupero e autospiegazione) per quella notte."
 fonte: "copione"
 dove:
   - "src/ui/library.js"

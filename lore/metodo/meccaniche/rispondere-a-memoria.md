@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Rispondere a memoria sul disegno"
+dinamica: "gesti-del-giorno"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-poco-ogni-giorno]]"
+motivo: "La carta si copre e mi chiedono che cosa c'era nel disegno: voglio vedere se l'ho guardata bene."
+effetto: "Richiamo l'immagine prima della parola (doppia codifica), poi la carta si scopre e vedo subito se ricordavo giusto."
 fonte: "copione"
 dove:
   - "src/ui/daycard.js"

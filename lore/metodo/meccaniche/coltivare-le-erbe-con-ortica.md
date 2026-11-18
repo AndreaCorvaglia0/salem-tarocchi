@@ -1,6 +1,13 @@
 ---
 tipo: meccanica
 nome: "Coltivare le erbe con Ortica (l'interesse da strega)"
+dinamica: "interessi"
+leggi:
+  - "[[legge-si-vede-e-si-tocca]]"
+  - "[[legge-il-concetto-e-una-chiave]]"
+  - "[[legge-e-lei-a-decidere]]"
+motivo: "Ortica, il mugnaio e Malva mi chiedono una mano con le erbe, e il giorno dopo vedo cosa è cambiato."
+effetto: "Le mani fanno il sapere: dove appendere, quali erbe pestare (azione, esempi concreti), con riscontro il giorno dopo."
 fonte: "proposto"
 dove:
   - "src/glue/interests.js"
@@ -23,6 +30,7 @@ tecniche:
   - "[[trasferimento-con-la-pratica]]"
   - "[[riscontro-immediato]]"
   - "[[esempi-concreti]]"
+  - "[[effetto-dell-azione]]"
 ragione_nel_gioco: "Ortica ha la schiena a pezzi e il trave vuoto, il mugnaio non scende le scale, Malva compra un incenso con la segatura: c'è sempre qualcuno che chiede."
 premio: "Ogni missione: 5 punti e legame con Ortica +1. Le missioni secche diventano mazzetti secchi nella dispensa. Dopo la seconda, il primo gradino («Le mani»): a chi bussa per una malattia può dare un'erba che guarisce, e quello torna a dire com'è andata (+1 popolarità). Dopo la terza, la salvia del rito è «tua»."
 rischio: "Nessuno: una scelta sbagliata viene spiegata con quello che succederebbe, e si rifà."

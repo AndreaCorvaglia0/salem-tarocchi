@@ -1,6 +1,8 @@
 ---
 tipo: ricetta
 nome: "Il finale si progetta per primo"
+legge: "[[legge-e-lei-a-decidere]]"
+anche: "[[legge-strati-indipendenti]]"
 famiglia: variare
 ambito: generale
 problema: "Un finale scritto per ultimo non trova nel salvataggio le cose che gli servono."

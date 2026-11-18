@@ -1,6 +1,13 @@
 ---
 tipo: meccanica
 nome: "Raccogliere le erbe nell'erbario"
+dinamica: "trovare"
+leggi:
+  - "[[legge-sempre-un-motivo]]"
+  - "[[legge-il-mondo-e-la-memoria]]"
+  - "[[legge-si-vede-e-si-tocca]]"
+motivo: "Un'erba è lì vicino a una casa: voglio sapere che pianta è e che cosa se ne dice."
+effetto: "La pianta prende un posto, un nome e una tavola botanica: il concetto prende un luogo (loci, doppia codifica)."
 fonte: "copione"
 dove:
   - "src/glue/herbs.js"

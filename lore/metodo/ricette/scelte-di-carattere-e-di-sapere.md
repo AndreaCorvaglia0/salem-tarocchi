@@ -1,6 +1,8 @@
 ---
 tipo: ricetta
 nome: "Scelte che dicono chi è, scelte che provano che cosa sa"
+legge: "[[legge-e-lei-a-decidere]]"
+anche: "[[legge-il-concetto-e-una-chiave]]"
 famiglia: variare
 ambito: generale
 problema: "Se una domanda sul carattere ha una risposta giusta, lei risponde per vincere e il ritratto mente. Se una domanda sul sapere muove il carattere, un errore diventa un giudizio."

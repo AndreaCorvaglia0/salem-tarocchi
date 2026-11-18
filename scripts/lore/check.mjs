@@ -4,6 +4,7 @@
 // Warnings are things worth a look that may be fine (a flag without a fatto, a principle nobody serves).
 import { linkTarget, linksIn } from './vault.mjs';
 import { atoms, readsOf } from './story.mjs';
+import { DINAMICA_IDS } from './dinamiche.mjs';
 
 const NAME_RE = /^_?[a-z0-9]+(-[a-z0-9]+)*$/;
 const empty = (v) => v == null || v === '' || (Array.isArray(v) && v.filter((x) => x != null && x !== '').length === 0);
@@ -138,6 +139,48 @@ export function check(V, S) {
     if (empty(d.data.meccaniche) && empty(d.data.aperto)) E('obiettivo', d.rel, 'an obiettivo needs at least one meccanica, or says what is missing in `aperto`');
   }
   for (const d of V.ofTipo('principio')) if (!served.has(d.name)) W('principio', d.rel, 'no meccanica serves this principio');
+
+  // ---- 7. the laws and the two faces (lore/metodo/leggi/, docs/MANIFESTO.md) -----------------------------
+  // Every principio, tecnica and ricetta hangs from a law (`legge`, and optionally `anche`); every meccanica has a
+  // dynamic, its laws, and its two faces: `motivo` (why she does it, in the game) and `effetto` (what it does for
+  // learning). A missing field is already an error of rule `fields` (the README table); here a field that is
+  // there but empty, or that points nowhere, or is not a law.
+  const laws = new Set(V.ofTipo('legge').map((d) => d.name));
+  const lawOf = (d, field, v) => {
+    const name = linkTarget(v);
+    if (!name) { E('legge', d.rel, `\`${field}\` must be a link to a legge, like [[legge-il-concetto-e-una-chiave]]`); return null; }
+    if (!laws.has(name)) { E('legge', d.rel, `[[${name}]] in \`${field}\` is not a legge (lore/metodo/leggi/)`); return null; }
+    return name;
+  };
+  const byLaw = new Map([...laws].map((l) => [l, []]));
+  for (const tipo of ['principio', 'tecnica', 'ricetta']) {
+    for (const d of V.ofTipo(tipo)) {
+      if ('legge' in d.data) { const l = lawOf(d, 'legge', d.data.legge); if (l) byLaw.get(l).push(d); }
+      if (!empty(d.data.anche)) { const l = lawOf(d, 'anche', d.data.anche); if (l) byLaw.get(l).push(d); }
+    }
+  }
+  const seenFace = { motivo: new Map(), effetto: new Map() };
+  for (const d of V.ofTipo('meccanica')) {
+    if ('dinamica' in d.data && !DINAMICA_IDS.includes(d.data.dinamica)) E('meccanica.dinamica', d.rel, `dinamica "${d.data.dinamica}" is not one of the seventeen of the manifesto (scripts/lore/dinamiche.mjs)`);
+    if ('leggi' in d.data) {
+      const ls = (Array.isArray(d.data.leggi) ? d.data.leggi : [d.data.leggi]).filter((x) => !empty(x));
+      if (!ls.length) E('meccanica.leggi', d.rel, 'a meccanica must name at least one legge (`leggi`)');
+      for (const x of ls) lawOf(d, 'leggi', x);
+    }
+    for (const f of ['motivo', 'effetto']) {
+      if (!(f in d.data)) continue;
+      if (empty(d.data[f])) { E(`meccanica.${f}`, d.rel, `a meccanica needs its \`${f}\`: one line, in the words of this mechanic`); continue; }
+      const words = String(d.data[f]).trim().split(/\s+/).length;
+      if (words > 20) W(`meccanica.${f}`, d.rel, `\`${f}\` has ${words} words (at most 20)`);
+      const key = String(d.data[f]).trim().toLowerCase();
+      if (seenFace[f].has(key)) W(`meccanica.${f}`, d.rel, `same \`${f}\` as [[${seenFace[f].get(key)}]]: say what this mechanic does`);
+      else seenFace[f].set(key, d.name);
+    }
+  }
+  // a law that no technique rests on is worth a look; 10 and 11 are about how the game is built, not about learning
+  const NO_TECNICA_OK = new Set(['legge-strati-indipendenti', 'legge-chiaro-vero-curato']);
+  for (const [l, ds] of byLaw) if (!NO_TECNICA_OK.has(l) && !ds.some((d) => d.data.tipo === 'tecnica')) W('legge', `metodo/leggi/${l}.md`, 'no tecnica rests on this legge');
+  stats.leggi = Object.fromEntries([...byLaw].map(([l, ds]) => [l, ds.length]));
 
   return { errors, warnings, stats };
 }

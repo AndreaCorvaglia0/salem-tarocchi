@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Che cosa non si adatta mai a chi gioca"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: generale
 problema: "Personalizzare tutto porta a giudicare la persona, a fare diagnosi, o a cambiare la verità secondo chi ascolta."

@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Alla fine, il suo mazzo"
+legge: "[[legge-poche-cose-verificate]]"
 in_breve: "Alla fine lei sa leggere il suo mazzo vero, a casa, senza il gioco."
 perche: "È lo scopo del regalo: il gioco è la strada per arrivarci."
 fonte: "parole di Andrea; DESIGN.md, Finale («Adesso leggi tu. Per te.»)"

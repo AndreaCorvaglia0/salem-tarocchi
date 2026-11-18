@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Superare l'Esame"
+dinamica: "esami-e-prove"
+leggi:
+  - "[[legge-poche-cose-verificate]]"
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "Un conestabile mi ferma e la barra del sospetto sale: non voglio essere scoperta."
+effetto: "Verifico il nucleo sotto una posta vera, con domande miste e riscontro a ogni risposta: recupero con la posta."
 fonte: "copione"
 dove:
   - "src/systems/exam.js"

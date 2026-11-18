@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Le persone reagiscono a chi è"
+legge: "[[legge-e-lei-a-decidere]]"
 famiglia: personalizzare
 ambito: generale
 problema: "Se tutti la trattano allo stesso modo, il ritratto resta un numero nascosto."

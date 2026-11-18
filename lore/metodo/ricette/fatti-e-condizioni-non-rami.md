@@ -1,6 +1,7 @@
 ---
 tipo: ricetta
 nome: "Fatti e condizioni, non rami"
+legge: "[[legge-strati-indipendenti]]"
 famiglia: variare
 ambito: generale
 problema: "Una storia a rami raddoppia il lavoro a ogni scelta, e dopo tre scelte nessuno la controlla più."

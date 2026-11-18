@@ -1,6 +1,6 @@
 # Meccaniche
 
-Le 29 cose che lei fa davvero nel gioco. Il campo più importante è `ragione_nel_gioco`: perché, a Salem, ha un motivo per farlo. Le tabelle incrociate sono in [[_matrice]].
+Le 39 cose che lei fa davvero nel gioco. Il campo più importante è `ragione_nel_gioco`: perché, a Salem, ha un motivo per farlo. Le tabelle incrociate sono in [[_matrice]]; per dinamica, con motivo ed effetto di ognuna, in [[_dinamiche]]. Ogni meccanica ha due facce, il motivo (perché lei lo fa) e l'effetto (che cosa fa per l'apprendimento), e pende da una o più leggi ([[_indice-leggi]]).
 
 - [[trovare-una-carta]] — Gira per Salem e trova una carta nascosta, o un Minore nell'erba alta.
 - [[seguire-le-lezioni]] — Ascolta una maestra in una scena breve.
@@ -31,3 +31,13 @@ Le 29 cose che lei fa davvero nel gioco. Il campo più importante è `ragione_ne
 - [[andare-altrove]] — Con un espediente da streghe (un libro della biblioteca, una pozione) esce da Salem in un piccolo mondo con una regola sua: sulle nuvole si può cadere, in un libro si cammina solo sulle righe scritte.
 - [[volare-con-la-scopa]] — Al livello 6 arriva la scopa.
 - [[stare-con-tartufo]] — Il gatto nero arriva al livello 2.
+- [[accendere-il-fumo]] — Prima di una lettura per sé o per un cliente si apre uno strato a tutto schermo: lei tiene la brace un secondo per bussare, sente il gong, respira a mano libera mentre il fumo si schiarisce, poi fa scorrere il pollice sotto cinque braci e lo lascia su una: la brace si accende, il fumo prende il colore e il modo di quell'aria, e la musica dell'aria resta per tutta la lettura.
+- [[annotare-i-luoghi]] — Toccando sulla mappa un posto già visto, legge le sue note su quel posto, scritte in prima persona come appunti.
+- [[coltivare-le-erbe-con-ortica]] — Aiuta Ortica con le mani: appende i suoi mazzetti al trave e sceglie dove (all'ombra e all'aria), sceglie due erbe su quattro e le pesta per l'unguento del mugnaio, lega la salvia secca per Malva.
+- [[leggere-i-libri]] — Nella biblioteca, allo scaffale a sinistra della finestra («Sfoglia»), o dal nastro «Libri»
+- [[orientarsi-con-la-mappa]] — Dal nastro «Mappa»
+- [[scegliere-le-pietre-con-edera]] — Aiuta Edera con le mani: cerca nelle cantine il lapislazzuli di sua nonna (sei posti, Edera ne ricorda tre e sbaglia ogni volta) e lo lava al pozzo vecchio; sceglie tra le sue pietre quella che dà coraggio al conestabile del pozzo; scrive i cartellini sotto le pietre di Edera, in biblioteca, riconoscendole dall'aspetto.
+- [[scegliere-nella-storia]] — Nei copioni, nelle sedute e nelle visite il gioco le chiede che cosa fa o che cosa dice.
+- [[seguire-una-missione]] — Ogni cosa in più di cui qualcuno le ha parlato (una carta, una lezione, una prova, l'orto, Altrove, una storia) è un foglietto appuntato accanto al suo posto sulla mappa; la storia principale è un foglietto con la stella.
+- [[sfogliare-gli-album]] — Nel grimorio ha gli album delle cose trovate: l'erbario, le pietre e le figurine della sibilla.
+- [[vedere-crescere-la-capanna]] — La sua capanna nel villaggio cambia sagoma in tre stadi: sbilenca all'inizio; rimessa a posto quando ha l'orto, o è arrivata al capitolo 3, o ha il secondo titolo; la casa di una strega dopo il finale.

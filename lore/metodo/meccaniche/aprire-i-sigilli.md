@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Aprire i sigilli"
+dinamica: "esami-e-prove"
+leggi:
+  - "[[legge-il-concetto-e-una-chiave]]"
+motivo: "C'è un baule chiuso o una porta sigillata, e voglio sapere che cosa c'è dietro."
+effetto: "Una domanda sola su una carta, e subito il risultato: pratica di recupero con riscontro immediato. Se sbaglio, resta chiuso."
 fonte: "copione"
 dove:
   - "src/systems/lock.js"

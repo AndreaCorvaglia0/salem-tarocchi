@@ -1,6 +1,12 @@
 ---
 tipo: meccanica
 nome: "Curare l'orto"
+dinamica: "gesti-del-giorno"
+leggi:
+  - "[[legge-poco-ogni-giorno]]"
+  - "[[legge-si-vede-e-si-tocca]]"
+motivo: "Le mie aiuole hanno sete e voglio che le piante crescano, così ho erbe per le pozioni."
+effetto: "Tocco la terra prima di annaffiare e il gioco dice perché (riscontro); tornare ogni giorno è ripetizione distanziata."
 fonte: "copione"
 dove:
   - "src/glue/garden.js"
@@ -19,6 +25,7 @@ tecniche:
   - "[[trasferimento-con-la-pratica]]"
   - "[[riscontro-immediato]]"
   - "[[ripetizione-distanziata]]"
+  - "[[effetto-dell-azione]]"
 ragione_nel_gioco: "Le erbe servono alle pozioni, e Ortica le ha regalato le aiuole e le prime piantine."
 premio: "Bagnata al momento giusto cresce di un passo, e il gioco dice perché. Il raccolto dà un mazzetto in dispensa e 4 punti. Fa crescere la luna."
 rischio: "Troppo presto non cresce; due volte di fila, per chi ama l'asciutto, perde un passo; dimenticata a lungo appassisce di un passo. Non muore mai."

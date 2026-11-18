@@ -1,6 +1,8 @@
 ---
 tipo: ricetta
 nome: "Dalla mano tenuta al mazzo vero"
+legge: "[[legge-si-entra-piano]]"
+anche: "[[legge-poche-cose-verificate]]"
 famiglia: imparare
 ambito: generale
 problema: "Un gioco che aiuta sempre insegna a scegliere tra tre risposte, non a leggere da sola."

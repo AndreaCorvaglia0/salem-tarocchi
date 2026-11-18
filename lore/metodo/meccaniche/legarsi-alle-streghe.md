@@ -1,6 +1,11 @@
 ---
 tipo: meccanica
 nome: "Legarsi alle streghe"
+dinamica: "personaggi"
+leggi:
+  - "[[legge-e-lei-a-decidere]]"
+motivo: "Sono le mie maestre e la mia amica: voglio che si fidino di me, perché al processo servirà."
+effetto: "Vedo come le mie scelte mi avvicinano a ognuna: la storia si lega a come sono io (riferimento a sé)."
 fonte: "copione"
 dove:
   - "src/core/witches.js"
@@ -15,6 +20,8 @@ insegna: []
 tecniche:
   - "[[storia-ed-emozione]]"
   - "[[metafora-e-analogia]]"
+  - "[[riferimento-a-se]]"
+  - "[[autonomia-competenza-legami]]"
 ragione_nel_gioco: "Sono le sue maestre e la sua amica. Con chi si fida di lei, al processo, c'è aiuto."
 premio: "Al processo, se si fidano: Edera toglie una risposta, Ortica fa saltare una domanda, Malva perdona un errore. Le scene possono cambiare con l'atteggiamento (attitude in src/core/cond.js)."
 rischio: "Una prova fallita con una strega toglie legame."
