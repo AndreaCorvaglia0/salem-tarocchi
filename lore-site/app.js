@@ -6,6 +6,7 @@ import { md, inline, esc } from './md.js';
 import { graphView } from './graph.js';
 import { layout } from './layout.js';
 import { phrase } from './linknames.js';
+import { trail } from './trail.js';
 
 const app = document.getElementById('app');
 const FONTI = ['copione', 'deciso', 'proposto'];
@@ -229,28 +230,30 @@ function graphPage(arg) {
   const off = hidden.get(view.id) || hidden.set(view.id, new Set()).get(view.id);
   const loc = new Map(view.ids.map((g, k) => [g, k]));
   const gi = (id) => (id.startsWith('famiglia:') ? D.notes.length + D.hubs.findIndex((h) => h.id === id) : D.notes.findIndex((n) => n.id === id));
-  app.innerHTML = `<div class="gpage"><div class="views" role="group" aria-label="Viste">${D.views.map((v) => `<button class="vbtn${v.id === view.id ? ' on' : ''}" data-v="${v.id}">${esc(v.label)}</button>`).join('')}</div>
-<div class="legend" role="group" aria-label="Tipi nella vista">${view.legend.map((t) => `<button class="lchip${off.has(t.tipo) ? '' : ' on'}${t.count ? '' : ' none'}" data-t="${t.tipo}" style="--c:${gcolor(t.tipo)}" aria-pressed="${!off.has(t.tipo)}"><span class="dot"></span>${esc(glabel(t.tipo))} <small>${t.count}</small></button>`).join('')}</div>
-<button class="loose" hidden></button><div class="gwrap"></div><div class="lpanel" hidden></div><div class="gcard" hidden></div></div>`;
-  const nodes = view.ids.map((g, k) => { const n = gnode(g); return { id: n.id, title: n.title, tipo: n.tipo, color: gcolor(n.tipo), x: view.pos[2 * k], y: view.pos[2 * k + 1], r: view.r[k], g }; });
+  app.innerHTML = `<div class="gpage"><div class="views" role="group" aria-label="Viste">${D.views.map((v) => `<button class="vbtn${v.id === view.id ? ' on' : ''}" data-v="${v.id}">${esc(v.short)}</button>`).join('')}</div>
+<p class="vcap"><b>${esc(view.label)}.</b> ${esc(view.caption)}</p>
+<div class="legend" role="group" aria-label="Tipi nella vista">${view.legend.map((t) => `<button class="lchip${off.has(t.tipo) ? '' : ' on'}${t.count ? '' : ' none'}" data-t="${t.tipo}" style="--c:${gcolor(t.tipo)}" aria-pressed="${!off.has(t.tipo)}"><span class="dot"></span>${esc(glabel(t.tipo))} <small>${t.count}</small></button>`).join('')}${view.loose.length ? `<button class="loose" type="button">${view.loose.length} senza legami</button>` : ''}</div>
+<div class="gwrap"></div><div class="lpanel" hidden></div><div class="gcard" hidden></div></div>`;
+  const nodes = view.ids.map((g, k) => { const n = gnode(g), l = view.lbl[k]; return { id: n.id, title: n.title, tipo: n.tipo, color: gcolor(n.tipo), x: view.pos[2 * k], y: view.pos[2 * k + 1], r: view.r[k], g, ...(l ? { label: l.t, ldy: l.dy, lw: l.lw } : {}), always: view.always.includes(k) }; });
   const seen = new Set(), edges = [];
   for (const [a, b] of D.edges) {
     if (!loc.has(a) || !loc.has(b)) continue;
     const la = loc.get(a), lb = loc.get(b), k = la < lb ? `${la},${lb}` : `${lb},${la}`;
     if (!seen.has(k)) { seen.add(k); edges.push([la, lb]); }
   }
-  const card = app.querySelector('.gcard'), wrap = app.querySelector('.gwrap'), lp = app.querySelector('.lpanel'), lbtn = app.querySelector('.loose');
+  const card = app.querySelector('.gcard'), wrap = app.querySelector('.gwrap'), lp = app.querySelector('.lpanel'), lbtn = app.querySelector('.loose') || document.createElement('button');
   const setHash = (id) => history.replaceState(null, '', `#/grafo/${view.id}${id ? `/${encodeURIComponent(id)}` : ''}`);
-  const expanded = new Set();
+  const expanded = new Set(), gtypes = new Set(D.views[D.views.length - 1].legend.map((l) => l.tipo));
+  const outOk = (o) => gtypes.has(gnode(o).tipo) && !String(gnode(o).id).startsWith('_'); // linked, but not drawn in this view: a link to its page
   let cur = -1;
   const showCard = (i) => {
     cur = i;
-    if (i < 0) { card.hidden = true; current.setBottom(8); setHash(''); lbtn.hidden = !view.loose.length; return; }
+    if (i < 0) { card.hidden = true; current.setBottom(8); setHash(''); return; }
     const n = gnode(nodes[i].g), me = nodes[i].g, tipo = n.tipo;
     const groups = new Map(), shown = new Set([me]);
     const take = (dir) => {
       for (const e of adj[me]) {
-        if (e.out !== (dir === 'out') || shown.has(e.o) || !loc.has(e.o) || off.has(gnode(e.o).tipo)) continue;
+        if (e.out !== (dir === 'out') || shown.has(e.o) || !(loc.has(e.o) ? !off.has(gnode(e.o).tipo) : outOk(e.o))) continue;
         shown.add(e.o);
         const h = phrase(D.fields[e.f], dir, tipo), key = `${dir}:${h}`;
         if (!groups.has(key)) groups.set(key, { h, items: [] });
@@ -259,24 +262,24 @@ function graphPage(arg) {
     };
     take('out'); take('in'); // each neighbour once, under the first link that names it
     const LIM = 8;
-    const chipOf = (o) => { const m = gnode(o); return `<button class="nb" data-i="${loc.get(o)}" style="--c:${gcolor(m.tipo)}"><span class="dot"></span>${esc(m.title)}</button>`; };
-    card.hidden = false; lbtn.hidden = true; lp.hidden = true;
+    const chipOf = (o) => { const m = gnode(o); if (!loc.has(o)) return `<a class="nb ext" href="${href(m.id)}" style="--c:${gcolor(m.tipo)}">${esc(m.title)} ›</a>`; return `<button class="nb" data-i="${loc.get(o)}" style="--c:${gcolor(m.tipo)}"><span class="dot"></span>${esc(m.title)}</button>`; };
+    card.hidden = false; lp.hidden = true;
     card.innerHTML = `<div class="ch"><span class="dot" style="background:${gcolor(tipo)}"></span><div class="ct"><small>${esc(gone(tipo))}</small><b>${esc(n.title)}</b></div><button class="cx" aria-label="Chiudi">×</button></div>
 ${n.sub ? `<p class="cs">${esc(n.sub)}</p>` : ''}
+${trail(me, { nodeAt: gnode, adj, fields: D.fields }).map((t) => `<p class="tr">${esc(t)}</p>`).join('')}
 <div class="cg">${[...groups].map(([key, gr]) => { const all = expanded.has(`${me}|${key}`), list = all ? gr.items : gr.items.slice(0, LIM); return `<div class="g"><div class="gh">${esc(gr.h)} <small>${gr.items.length}</small></div><div class="nbs">${list.map((o) => chipOf(o)).join('')}${gr.items.length > list.length ? `<button class="nb more" data-k="${esc(key)}">altri ${gr.items.length - list.length}…</button>` : ''}</div></div>`; }).join('') || '<p class="hint small">Nessun vicino visibile in questa vista.</p>'}</div>
 ${n.tipo === 'famiglia' ? '' : `<a class="cgo" href="${href(n.id)}">Apri la scheda ›</a>`}`;
     card.scrollTop = 0;
     current.setBottom(card.offsetHeight + 12);
     setHash(n.id);
   };
-  current = graphView(wrap, { nodes, edges, onOpen: go, typeLabel: gone, onSelect: showCard });
-  const reselect = () => { const i = nodeId ? loc.get(gi(nodeId)) : undefined; if (i != null) current.select(i); };
+  current = graphView(wrap, { nodes, edges, onOpen: go, typeLabel: gone, onSelect: showCard, rest: view.rest, caps: view.caps });
+  const reselect = () => { const i = nodeId ? loc.get(gi(nodeId)) : undefined; if (i != null) { current.select(i); current.fit(); } }; // fit again with the card in place: all of the graph stays above it
   const apply = () => { current.setVisible((n) => !off.has(n.tipo)); };
   apply();
   current.fit();
   reselect();
   if (view.loose.length) {
-    lbtn.hidden = !card.hidden; lbtn.textContent = `${view.loose.length} senza legami in questa vista`;
     lbtn.onclick = () => {
       lp.hidden = !lp.hidden;
       lp.innerHTML = `<div class="lph"><b>Senza legami in questa vista</b><button class="cx" aria-label="Chiudi">×</button></div><div class="list compact">${view.loose.map((g) => gnode(g)).sort(byTitle).map((n) => noteRow(n, '', false)).join('')}</div>`;
@@ -286,7 +289,7 @@ ${n.tipo === 'famiglia' ? '' : `<a class="cgo" href="${href(n.id)}">Apri la sche
   card.addEventListener('click', (e) => {
     if (e.target.closest('.cx')) { current.select(-1); return; }
     const nb = e.target.closest('.nb');
-    if (!nb) return;
+    if (!nb || nb.classList.contains('ext')) return;
     if (nb.classList.contains('more')) { expanded.add(`${nodes[cur].g}|${nb.dataset.k}`); showCard(cur); return; }
     current.select(Number(nb.dataset.i)); // the selection moves
   });

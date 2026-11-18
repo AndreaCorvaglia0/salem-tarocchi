@@ -6,14 +6,14 @@
 import { layout, spread } from '../../lore-site/layout.js';
 
 const W = 360;
-const SPINE = { insegna: ['legge', 'leggi'], impara: ['famiglia', 'riguarda', 'sta_in'], storia: ['luoghi', 'chi_ci_vive', 'persona'] };
+const SPINE = { insegna: ['legge', 'leggi'], impara: ['famiglia', 'riguarda', 'sta_in', 'arriva_da', 'la_da', 'si_impara_da'], storia: ['luoghi', 'chi_ci_vive', 'persona', 'arco'] };
 const METODO = ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'];
 const CORSO = ['obiettivo', 'famiglia', 'concetto'];
 const STORIA = ['persona', 'luogo', 'fatto', 'retroscena', 'decisione'];
 
 export const VIEWS = [
   { id: 'insegna', short: 'Metodo', label: 'Perché insegna', types: METODO },
-  { id: 'impara', short: 'Corso', label: 'Che cosa si impara', types: ['obiettivo', 'famiglia', 'concetto', 'luogo'] },
+  { id: 'impara', short: 'Corso', label: 'Che cosa si impara', types: ['obiettivo', 'famiglia', 'concetto', 'luogo', 'persona'] },
   { id: 'storia', short: 'Storia', label: 'La storia', types: STORIA },
   { id: 'tutto', short: 'Tutto', label: 'Tutto', types: [...METODO, ...CORSO, 'luogo', 'persona', 'fatto', 'retroscena', 'decisione'] },
 ];
@@ -83,6 +83,11 @@ export function buildViews(ctx) {
 
   function oneView(def) {
     const set = new Set(members(def));
+    if (def.id === 'impara') { // people appear only as teachers or givers of a concept
+      const teach = new Set(edges.filter((e) => ['si_impara_da', 'la_da'].includes(fname(e))).map((e) => e[1]));
+      const staIn = new Set(edges.filter((e) => fname(e) === 'sta_in').map((e) => e[1]));
+      for (const i of [...set]) if ((tipoOf(i) === 'persona' && !teach.has(i)) || (tipoOf(i) === 'luogo' && !staIn.has(i))) set.delete(i);
+    }
     const pairs = viewPairs(set), deg = degOf(pairs);
     const linked = new Set([...set].filter((i) => deg.get(i)));
     const ctxv = { set, linked, deg };
@@ -143,7 +148,7 @@ export function buildViews(ctx) {
       g.R = Math.max(g.pack.R, g.hubR);
     }
     const top = 16;
-    const f = flow(groups.map((g) => ({ w: 2 * g.R, h: 2 * g.R + 26 })), W, { gapX: 6, gapY: 6, per: 4 });
+    const f = flow(groups.map((g) => ({ w: Math.max(2 * g.R, 86), h: 2 * g.R + 26 })), W, { gapX: 6, gapY: 6, per: 4 });
     caps.push([W / 2, 0, laws.length ? `${(WORDS[laws.length] || `${laws.length} leggi`).toUpperCase()}, E CIÒ CHE NE DISCENDE` : 'PRINCIPI, TECNICHE, RICETTE', 'title']);
     groups.forEach((g, k) => {
       const c = f.at[k], cx = c.x, cy = top + c.rowTop + c.rowH / 2 - 13;
@@ -177,7 +182,7 @@ export function buildViews(ctx) {
       caps.push([c.x, y0 + d.rows * d.s + 6, human(d.k), 'group']);
     });
     const nl = laws.length;
-    return { placed, caps, caption: `${WORDS[nl] || `${nl} leggi`}${nl ? '; intorno a ognuna, i principi, le tecniche e le ricette che ne discendono. Sotto, quello che lei fa.' : ': i principi, le tecniche e le ricette. Sotto, quello che lei fa.'}` };
+    return { placed, caps, caption: `${WORDS[nl] || `${nl} leggi`}${nl ? '; intorno a ognuna, i principi, le tecniche e le ricette che ne discendono. In basso, quello che lei fa.' : ': i principi, le tecniche e le ricette. Sotto, quello che lei fa.'}` };
   }
 
   // ----- «Che cosa si impara»: obiettivi (top) -> families with their concepts (middle) -> luoghi (bottom)
@@ -202,13 +207,13 @@ export function buildViews(ctx) {
     const spot = new Map(); // cluster -> centre
     const label = (c, cx, cy) => ({ label: c.hub == null ? 'Senza famiglia' : nodeAt(c.hub).title, ldy: c.R + 2, lw: 92 });
     // centre column: the nucleo families, two to a row when they fit
-    const colC = { x: 180, w: 160 };
-    const fc = flow(big.map((c) => ({ w: c.d + 22, h: c.d + 22 })), colC.w, { gapX: 4, gapY: 2 });
+    const colC = { x: 180, w: 196 };
+    const fc = flow(big.map((c) => ({ w: c.d + 6, h: c.d + 30 })), colC.w, { gapX: 2, gapY: 2 });
     big.forEach((c, k) => spot.set(c, { x: colC.x - colC.w / 2 + fc.at[k].x, y: FAM_TOP + fc.at[k].y }));
     // side columns: the others, each to the shorter column
-    const cols = [{ x: 56, h: 0, items: [] }, { x: 304, h: 0, items: [] }];
-    for (const c of side) { const col = cols[0].h <= cols[1].h ? cols[0] : cols[1]; col.items.push(c); col.h += c.d + 22; }
-    for (const col of cols) { let y = FAM_TOP; for (const c of col.items) { spot.set(c, { x: col.x, y: y + c.d / 2 + 4 }); y += c.d + 22; } }
+    const cols = [{ x: 46, h: 0, items: [] }, { x: 314, h: 0, items: [] }];
+    for (const c of side) { const col = cols[0].h <= cols[1].h ? cols[0] : cols[1]; col.items.push(c); col.h += c.d + 30; }
+    for (const col of cols) { let y = FAM_TOP; for (const c of col.items) { spot.set(c, { x: col.x, y: y + c.d / 2 + 4 }); y += c.d + 30; } }
     const bandBottom = Math.max(FAM_TOP + fc.height, ...cols.map((c) => FAM_TOP + c.h));
     const hubX = new Map();
     for (const c of clusters) {
@@ -235,7 +240,7 @@ export function buildViews(ctx) {
     if (luoghi.length) {
       const bx = (l) => { const xs = edges.filter((e) => e[1] === l && placed.has(e[0]) && tipoOf(e[0]) === 'concetto').map((e) => placed.get(e[0]).x); return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : W / 2; };
       luoghi.sort((a, b) => bx(a) - bx(b) || (nodeAt(a).id < nodeAt(b).id ? -1 : 1));
-      const lr = 5.5, per = Math.floor((W - 30) / (2 * lr + 7)), n = luoghi.length, rowsL = Math.ceil(n / per), y0 = bandBottom + 36;
+      const lr = 5.5, per = Math.floor((W - 30) / (2 * lr + 7)), n = luoghi.length, rowsL = Math.ceil(n / per), y0 = bandBottom + 44;
       caps.push([W / 2, y0 - 20, 'LUOGHI: DOVE SI IMPARA', 'title']);
       luoghi.forEach((l, k) => {
         const row = Math.floor(k / per), inRow = Math.min(per, n - row * per), j = k % per, step = Math.min(2 * lr + 7, (W - 40) / Math.max(1, inRow - 1 || 1));
@@ -243,7 +248,16 @@ export function buildViews(ctx) {
       });
       bottomY = y0 + rowsL * (2 * lr + 6);
     }
-    return { placed, caps, caption: 'In alto, che cosa lei sa fare; in mezzo, le famiglie di concetti (le più grandi sono il nucleo); in basso, i luoghi dove li si trova.' };
+    // persone: only those who teach a concept or give it (si_impara_da, la_da), in a short row under the luoghi
+    const pers = [...linked].filter((i) => tipoOf(i) === 'persona');
+    if (pers.length) {
+      const px = (l) => { const xs = edges.filter((e) => e[1] === l && placed.has(e[0])).map((e) => placed.get(e[0]).x); return xs.length ? xs.reduce((s, v) => s + v, 0) / xs.length : W / 2; };
+      pers.sort((a, b) => px(a) - px(b) || (nodeAt(a).id < nodeAt(b).id ? -1 : 1));
+      const y0 = bottomY + 34, step = Math.min(44, (W - 60) / Math.max(1, pers.length - 1));
+      caps.push([W / 2, y0 - 18, 'CHI INSEGNA O DÀ', 'title']);
+      pers.forEach((pe, k) => placed.set(pe, { x: W / 2 - ((pers.length - 1) * step) / 2 + k * step, y: y0, r: 7, label: nodeAt(pe).title, ldy: 10, lw: 56, always: true }));
+    }
+    return { placed, caps, caption: 'In alto, che cosa lei sa fare; in mezzo, le famiglie di concetti (le più grandi sono il nucleo); in basso, i luoghi dove li si trova e le persone da cui si imparano.' };
   }
 
   // ----- «La storia»: discs by type, laid out by forces (persone in the middle)
@@ -283,7 +297,7 @@ export function buildViews(ctx) {
     }
     const placed = new Map();
     ids.forEach((g, k) => placed.set(g, { x: p[2 * k], y: p[2 * k + 1], r: rUsed[k], ...(tipoOf(g) === 'persona' && rUsed[k] >= 9 ? { always: false } : {}) }));
-    return { placed, caps: [], caption: 'Fatti in alto, persone al centro, luoghi e retroscena ai lati. Le linee dicono chi vive dove e di chi è ogni retroscena.' };
+    return { placed, caps: [], caption: 'Fatti in alto, persone al centro, luoghi e retroscena ai lati. Le linee dicono chi vive dove, di chi è ogni retroscena e in quali fatti c’è ogni persona.' };
   }
 
   // ----- «Tutto»: the three zones one under the other; at rest only the links that cross zones
@@ -297,7 +311,7 @@ export function buildViews(ctx) {
     const bbox = (pl) => { let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity; for (const p of pl.values()) { x0 = Math.min(x0, p.x - p.r); x1 = Math.max(x1, p.x + p.r); y0 = Math.min(y0, p.y - p.r); y1 = Math.max(y1, p.y + p.r); } return { x0, x1, y0, y1 }; };
     const zones = [
       { id: 'metodo', title: 'METODO: COME SI INSEGNA', R: A, keep: (g) => tipoOf(g) !== 'x', k: 0.8 },
-      { id: 'corso', title: 'CORSO: CHE COSA SI IMPARA', R: B, keep: (g) => tipoOf(g) !== 'luogo', k: 0.8 },
+      { id: 'corso', title: 'CORSO: CHE COSA SI IMPARA', R: B, keep: (g) => tipoOf(g) !== 'luogo' && tipoOf(g) !== 'persona', k: 0.8 },
       { id: 'storia', title: 'STORIA: DOVE E CON CHI', R: C, keep: () => true, k: 0.75 },
     ];
     let y = 0;
@@ -308,7 +322,7 @@ export function buildViews(ctx) {
       const top = y + 26;
       for (const [g, p] of pl) {
         if (!linkedAll.has(g)) continue;
-        placed.set(g, { x: p.x * z.k + ox, y: (p.y - b.y0) * z.k + top, r: Math.max(2.2, p.r * z.k * 0.85) });
+        placed.set(g, { x: (p.x - (b.x0 + b.x1) / 2) * z.k * 1.25 + W / 2, y: (p.y - b.y0) * z.k + top, r: Math.max(2.2, p.r * z.k * 0.85), ...(tipoOf(g) === 'legge' ? { label: `Legge ${nodeAt(g).fm?.numero ?? ''}` } : {}) });
       }
       y = top + (b.y1 - b.y0) * z.k + 26;
       z.w = w;

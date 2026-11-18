@@ -7,6 +7,8 @@ import { buildSite, siteFiles, graphColors, SPLIT_AT, VIEWS, ZONES, resetLayoutC
 import { md } from '../lore-site/md.js';
 import { layout, spread } from '../lore-site/layout.js';
 import { phrase, LINKS } from '../lore-site/linknames.js';
+import { trail } from '../lore-site/trail.js';
+import { ringPack } from '../scripts/lore/siteviews.mjs';
 import { lorePlugin } from '../vite.config.js';
 
 const vault = loadVault();
@@ -114,7 +116,7 @@ const nodeOf = (i) => (i < data.notes.length ? data.notes[i] : data.hubs[i - dat
 test('four views, with the right types, and no generated type or index page in any of them', () => {
   assert.deepEqual(data.views.map((v) => v.id), ['insegna', 'impara', 'storia', 'tutto']);
   assert.deepEqual(data.views.map((v) => v.label), ['Perché insegna', 'Che cosa si impara', 'La storia', 'Tutto']);
-  const allowed = { insegna: ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'], impara: ['obiettivo', 'famiglia', 'concetto', 'luogo', 'meccanica'], storia: ['persona', 'luogo', 'fatto', 'retroscena', 'decisione'] };
+  const allowed = { insegna: ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'], impara: ['obiettivo', 'famiglia', 'concetto', 'luogo', 'persona'], storia: ['persona', 'luogo', 'fatto', 'retroscena', 'decisione'] };
   allowed.tutto = [...new Set(Object.values(allowed).flat())];
   for (const v of data.views) {
     for (const i of [...v.ids, ...v.loose]) {
@@ -253,4 +255,101 @@ test('the graph size stays reasonable', () => {
   console.log(`# data.json ${size} bytes (SPLIT_AT ${SPLIT_AT}, bodies ${data.bodies ? 'split' : 'inline'})`);
   assert.ok(size < 3e6);
   assert.ok(data.views.every((v) => JSON.stringify(v).length < 20000));
+});
+
+// ---------- second pass: structure ----------
+const view = (id, d = data) => d.views.find((v) => v.id === id);
+const at = (v, i) => { const k = v.ids.indexOf(i); return [v.pos[2 * k], v.pos[2 * k + 1], v.r[k]]; };
+const adjOf = (d) => { const a = Array.from({ length: d.notes.length + d.hubs.length }, () => []); for (const [x, y, f] of d.edges) { a[x].push({ o: y, f, out: true }); a[y].push({ o: x, f, out: false }); } return a; };
+const restFields = (v, d = data) => { const s = new Set(); for (const [a, b] of v.rest) { const A = v.ids[a], B = v.ids[b]; s.add(d.edges.filter(([x, y]) => (x === A && y === B) || (x === B && y === A)).map(([, , f]) => d.fields[f])); } return s; }; // per rest pair: the fields that join it
+const allowedRest = (v, ok) => { for (const fs of restFields(v)) assert.ok(fs.some((f) => ok.includes(f)), `a rest link of ${v.id} comes from ${fs}`); };
+
+test('«Perché insegna»: one cluster per law, every method card sits in its law cluster, mechanics in a band by dinamica', () => {
+  const v = view('insegna'), laws = data.notes.map((n, i) => (n.tipo === 'legge' ? i : -1)).filter((i) => i >= 0);
+  assert.equal(laws.length, 11);
+  for (const l of laws) assert.ok(v.ids.includes(l), `${data.notes[l].id} is drawn`);
+  // the law label is «N · name», cut at 22 characters
+  for (const l of laws) { const lab = v.lbl[v.ids.indexOf(l)]; assert.ok(lab && /^\d+ · /.test(lab.t) && lab.t.split(' · ')[1].length <= 22, `${l} label`); assert.ok(v.always.includes(v.ids.indexOf(l))); }
+  // each principio / tecnica / ricetta is nearest to its main law (the field `legge`)
+  let checked = 0;
+  for (const [a, b, f] of data.edges) {
+    if (data.fields[f] !== 'legge' || !v.ids.includes(a) || !laws.includes(b)) continue;
+    const [x, y] = at(v, a), d = (l) => Math.hypot(at(v, l)[0] - x, at(v, l)[1] - y);
+    assert.equal(laws.slice().sort((p, q) => d(p) - d(q))[0], b, `${data.notes[a].id} is not in the cluster of its law`); checked++;
+  }
+  assert.ok(checked >= 50, `${checked} cards checked`);
+  // the mechanics: below every law cluster, and each dinamica group is a compact block of its own
+  const mech = v.ids.filter((i) => data.notes[i]?.tipo === 'meccanica');
+  assert.ok(mech.length >= 30);
+  const lawBottom = Math.max(...v.ids.filter((i) => data.notes[i]?.tipo !== 'meccanica').map((i) => at(v, i)[1]));
+  for (const m of mech) assert.ok(at(v, m)[1] > lawBottom, `${data.notes[m].id} is in the band`);
+  const by = {};
+  for (const m of mech) (by[data.notes[m].fm.dinamica] ||= []).push(m);
+  const box = (g) => { const p = g.map((m) => at(v, m)); return [Math.min(...p.map((q) => q[0])), Math.min(...p.map((q) => q[1])), Math.max(...p.map((q) => q[0])), Math.max(...p.map((q) => q[1]))]; };
+  for (const [k, g] of Object.entries(by)) { const [x0, y0, x1, y1] = box(g); for (const m of mech) if (!g.includes(m)) { const [x, y] = at(v, m); assert.ok(x < x0 || x > x1 || y < y0 || y > y1, `${k}: ${data.notes[m].id} is inside the group`); } }
+  assert.ok(v.caps.some((c) => c[3] === 'group'), 'group labels exist');
+});
+
+test('every view shows at rest only its structural links; Tutto only the links that cross zones', () => {
+  allowedRest(view('insegna'), ['leggi', 'legge']);
+  allowedRest(view('impara'), ['famiglia', 'riguarda', 'sta_in', 'arriva_da', 'la_da', 'si_impara_da']);
+  allowedRest(view('storia'), ['luoghi', 'chi_ci_vive', 'persona', 'arco']);
+  const flat = new Set([...restFields(view('impara'))].flat());
+  assert.ok(flat.has('famiglia') && flat.has('riguarda') && flat.has('sta_in'));
+  assert.ok(new Set([...restFields(view('insegna'))].flat()).has('leggi'));
+  const zone = (i) => { const t = nodeOf(i).tipo; return ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'].includes(t) ? 0 : ['obiettivo', 'famiglia', 'concetto'].includes(t) ? 1 : 2; };
+  const t = view('tutto');
+  assert.ok(t.rest.length > 50);
+  for (const [a, b] of t.rest) assert.notEqual(zone(t.ids[a]), zone(t.ids[b]), 'a rest link of Tutto stays inside a zone');
+  assert.ok(t.rest.length < t.ids.length, 'a few bridges, not the whole tangle');
+  for (const v of data.views) for (const [a, b] of v.rest) assert.ok(a !== b && a < v.ids.length && b < v.ids.length);
+});
+
+test('«Che cosa si impara»: obiettivi on top, families in the middle, luoghi (reached by sta_in) at the bottom', () => {
+  const v = view('impara'), N = data.notes.length;
+  const ys = (tipo) => v.ids.filter((i) => nodeOf(i).tipo === tipo).map((i) => at(v, i)[1]);
+  const ob = ys('obiettivo'), fam = ys('famiglia'), lu = ys('luogo');
+  assert.ok(ob.length && fam.length && lu.length);
+  assert.ok(Math.max(...ob) < Math.min(...fam), 'obiettivi above the families');
+  assert.ok(Math.min(...lu) > Math.max(...fam), 'luoghi below the families');
+  // a luogo is drawn only if some concept sta_in it; each concept is close to its family hub
+  for (const i of v.ids.filter((i) => nodeOf(i).tipo === 'luogo')) assert.ok(data.edges.some(([a, b, f]) => b === i && data.fields[f] === 'sta_in'), `${nodeOf(i).id} has no sta_in`);
+  for (const h of data.hubs) { const hi = h.index; if (!v.ids.includes(hi)) continue; const [hx, hy] = at(v, hi); for (const m of h.members.slice(0, 4)) if (v.ids.includes(m)) assert.ok(Math.hypot(at(v, m)[0] - hx, at(v, m)[1] - hy) < 70, `${nodeOf(m).id} is far from its hub`); }
+  assert.ok(v.ids.some((i) => i >= N));
+  // people appear only as teachers or givers
+  for (const i of v.ids.filter((i) => nodeOf(i).tipo === 'persona')) assert.ok(data.edges.some(([a, b, f]) => b === i && ['si_impara_da', 'la_da'].includes(data.fields[f])));
+  assert.ok(v.caption.length > 20 && data.views.every((x) => x.caption && x.short));
+});
+
+test('«perché c’è»: a breadcrumb for a meccanica and a concetto, nothing for a note with no path', () => {
+  const adj = adjOf(data), ctx = { nodeAt: (i) => nodeOf(i), adj, fields: data.fields };
+  const ix = (id) => data.notes.findIndex((n) => n.id === id);
+  const m = trail(ix('leggere-ai-clienti'), ctx);
+  assert.match(m[0], /^Legge \d+ · .+ → Leggere ai clienti$/);
+  assert.match(m[1], /^Leggere ai clienti → insegna: /);
+  const c = data.notes.findIndex((n) => n.tipo === 'concetto' && n.fm?.sta_in && n.fm?.famiglia === 'arcano');
+  const tc = trail(c, ctx);
+  assert.ok(tc.some((l) => /^Obiettivo: /.test(l)), tc.join('|'));
+  assert.ok(tc.some((l) => /sta in: /.test(l) && /famiglia: /.test(l)));
+  const lg = trail(data.notes.findIndex((n) => n.tipo === 'legge'), ctx);
+  assert.match(lg[0], /si traduce in/);
+  const lu = trail(data.notes.findIndex((n) => n.tipo === 'luogo' && adj[data.notes.indexOf(n)].some((e) => !e.out && data.fields[e.f] === 'sta_in')), ctx);
+  assert.match(lu[0], /^Qui si trovano: /);
+  assert.deepEqual(trail(ix('ortica'), ctx), [], 'a person has no path to a law');
+  assert.deepEqual(trail(0, { nodeAt: () => ({ tipo: 'meccanica', title: 'X', fm: {} }), adj: [[]], fields: [] }), []);
+});
+
+test('rings pack circles without touching', () => {
+  const { pts, R } = ringPack(12, 4, 20);
+  assert.equal(pts.length, 20);
+  for (const [x, y] of pts) assert.ok(Math.hypot(x, y) >= 12 + 4 && Math.hypot(x, y) + 4 <= R + 0.01);
+  for (let a = 0; a < pts.length; a++) for (let b = a + 1; b < pts.length; b++) assert.ok(Math.hypot(pts[a][0] - pts[b][0], pts[a][1] - pts[b][1]) >= 8, 'two circles touch');
+});
+
+test('the new phrases and the size guard', () => {
+  assert.equal(phrase('arriva_da', 'in', 'fatto'), 'da qui arriva');
+  assert.equal(phrase('la_da', 'out'), 'la dà');
+  assert.equal(phrase('si_impara_da', 'in'), 'insegna');
+  assert.equal(data.hubs.find((h) => h.id === 'famiglia:storia')?.title ?? 'Storia · 1', 'Storia · 1');
+  assert.ok(JSON.stringify(data.views).length < 60000);
 });

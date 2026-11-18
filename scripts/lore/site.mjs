@@ -7,7 +7,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { loadVault, linksIn, LORE } from './vault.mjs';
 import { ROOT } from './story.mjs';
-import { layout, spread } from '../../lore-site/layout.js';
+import { buildViews, VIEWS, ZONES } from './siteviews.mjs';
 
 export const SITE_DIR = join(ROOT, 'lore-site');
 export const SPLIT_AT = 1.5e6; // bytes: above this the bodies go to their own file
@@ -22,7 +22,7 @@ export const TYPES = [
 ];
 const INDEX_COLOR = '#8a8173';
 const FAMIGLIA_COLOR = '#14532d';
-const FAMIGLIE = { arcano: 'Arcani maggiori', seme: 'Semi', erba: 'Erbe', fumo: 'Fumi', pietra: 'Pietre', pianeta: 'Pianeti', elemento: 'Elementi', segno: 'Segni', intenzione: 'Intenzioni', numero: 'Numeri', figura: 'Figure', stesa: 'Stese', regola: 'Regole', storia: 'Storie' };
+const FAMIGLIE = { arcano: 'Arcani maggiori', seme: 'Semi', erba: 'Erbe', fumo: 'Fumi', pietra: 'Pietre', pianeta: 'Pianeti', elemento: 'Elementi', segno: 'Segni', intenzione: 'Intenzioni', numero: 'Numeri', figura: 'Figure', stesa: 'Stese', regola: 'Regole', storia: 'Storia' };
 
 // path:<folder>/ -> #rrggbb, from the Obsidian graph settings
 export function graphColors(text) {
@@ -57,118 +57,9 @@ function subOf(fm) {
   return '';
 }
 
-// The views of the graph page (#/grafo/<id>): which types each one shows and where the clusters start
-// (anchors in unit coordinates, scaled by the size of the view). Generated types and index pages are in none.
-export const VIEWS = [
-  { id: 'insegna', label: 'Perché insegna', pad: 8, types: ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'],
-    anchors: { legge: [0, -1.2], principio: [-0.9, -0.3], tecnica: [0.9, -0.3], ricetta: [0, 0.6], meccanica: [0, 1.2] } },
-  { id: 'impara', label: 'Che cosa si impara', types: ['obiettivo', 'famiglia', 'concetto', 'luogo', 'meccanica'],
-    pad: 5, anchors: { meccanica: [-0.9, -0.8], obiettivo: [0.9, -0.8], famiglia: [0, 0.5], concetto: [0, 0.5], luogo: [0, 2] } },
-  { id: 'storia', label: 'La storia', pad: 5, types: ['persona', 'luogo', 'fatto', 'retroscena', 'decisione'],
-    anchors: { persona: [0, 0], fatto: [0, -1.3], retroscena: [1.1, 0.9], luogo: [-1.1, 0.9], decisione: [1.2, -1.3] } },
-  { id: 'tutto', label: 'Tutto', pad: 3, types: ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica', 'obiettivo', 'famiglia', 'concetto', 'luogo', 'persona', 'fatto', 'retroscena', 'decisione'],
-    anchors: { legge: [0, -2.4], principio: [-0.9, -1.9], tecnica: [0.9, -1.9], ricetta: [0, -1.5], meccanica: [0, -0.9], obiettivo: [0, -0.3], famiglia: [0, 0.3], concetto: [0, 0.9], luogo: [-0.5, 1.6], persona: [0.2, 1.9], fatto: [0.7, 2.4], retroscena: [-0.5, 2.4], decisione: [1.2, 1.6] } },
-];
-// the three doors of the home page: the zone, its question, the types it lists and the view it opens
-export const ZONES = [
-  { id: 'metodo', label: 'Metodo: come si insegna', view: 'insegna', types: ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'] },
-  { id: 'corso', label: 'Corso: che cosa si impara', view: 'impara', types: ['obiettivo', 'concetto'] },
-  { id: 'storia', label: 'Storia: dove e con chi', view: 'storia', types: ['persona', 'luogo', 'fatto', 'retroscena', 'decisione'] },
-];
-const R_MAX = 10, R_LEGGE = 13;
-
-// one view: its nodes, the links among them, sizes, and a deterministic layout. Notes with no link in the view
-// are not drawn: they are listed in `loose` (the page says «N senza legami in questa vista»).
-export const resetLayoutCache = () => VIEW_CACHE.clear();
-const VIEW_CACHE = new Map(); // layouts by their inputs: the dev server rebuilds the data on every request
-function buildView(def, { notes, hubs, edges, nodeAt }) {
-  const all = [...notes, ...hubs].map((n, i) => i).filter((i) => def.types.includes(nodeAt(i).tipo) && !String(nodeAt(i).id).startsWith('_'));
-  const inV = new Set(all), seen = new Set(), pairs = [];
-  for (const [a, b] of edges) {
-    if (!inV.has(a) || !inV.has(b) || a === b) continue;
-    const k = a < b ? `${a},${b}` : `${b},${a}`;
-    if (!seen.has(k)) { seen.add(k); pairs.push([a, b]); }
-  }
-  const deg = new Map();
-  for (const [a, b] of pairs) { deg.set(a, (deg.get(a) || 0) + 1); deg.set(b, (deg.get(b) || 0) + 1); }
-  const ids = all.filter((i) => deg.get(i)), loose = all.filter((i) => !deg.get(i));
-  const loc = new Map(ids.map((g, k) => [g, k]));
-  const local = pairs.map(([a, b]) => [loc.get(a), loc.get(b)]);
-  const r = ids.map((g) => {
-    const n = nodeAt(g), d = deg.get(g);
-    if (n.tipo === 'legge') return R_LEGGE;
-    if (n.tipo === 'famiglia') return Math.min(15, 8 + 0.8 * Math.sqrt(n.members.length));
-    let v = Math.min(R_MAX, 3 + 1.3 * Math.sqrt(d));
-    const peso = n.fm?.peso;
-    if (n.tipo === 'concetto' && peso === 'nucleo') v = Math.max(v * 1.5, 9);
-    else if (n.tipo === 'concetto' && peso === 'contorno') v = Math.max(3, v * 0.8);
-    return Math.round(v * 10) / 10;
-  });
-  const ckey = JSON.stringify([def, ids, local, r, ids.map((g) => `${nodeAt(g).tipo}${nodeAt(g).fm?.famiglia ?? ''}`)]);
-  const hit = VIEW_CACHE.get(ckey);
-  const types = [...new Set(def.types)];
-  // groups: a type, except that concepts form one group per family, so each family is a hub with its members
-  const hasHubs = hubs.length && def.types.includes('famiglia');
-  const gkey = ids.map((g) => { const n = nodeAt(g); const f = n.tipo === 'famiglia' ? n.fam : n.fm?.famiglia; return hasHubs && f && (n.tipo === 'concetto' || n.tipo === 'famiglia') ? `concetto:${String(f).trim().toLowerCase()}` : n.tipo; });
-  const keys = [...new Set(gkey)];
-  const group = gkey.map((k) => keys.indexOf(k));
-  // the circles are drawn at their size r (screen px) when the whole picture fits the phone (scale s0); so the
-  // layout keeps them apart at r / s0, found in a few passes (a big view needs a scale below 1)
-  const arrange = (rw) => {
-    // each group is a disc whose area fits its circles; discs go to their anchors, spaced so they just touch;
-    // the force layout then arranges the circles inside (hubs to the middle) and the links between discs
-    const area = keys.map(() => 0), num = keys.map(() => 0);
-    ids.forEach((g, k) => { area[group[k]] += (rw[k] + 2.5) ** 2; num[group[k]]++; });
-    const R = area.map((a) => Math.sqrt(a) * 1.3);
-    // the family discs form a block (a grid, the biggest first) that stands in for the concept group
-    const fam = keys.map((k, i) => i).filter((i) => keys[i].startsWith('concetto:')).sort((a, b) => R[b] - R[a] || (keys[a] < keys[b] ? -1 : 1));
-    const cols = 3, cell = fam.length ? 2 * Math.max(...fam.map((i) => R[i])) + 8 : 0, rows = Math.ceil(fam.length / cols);
-    const block = fam.length ? Math.hypot(cols * cell, rows * cell) / 2 * 0.62 : 0;
-    const unit = keys.map((k) => { const t = k.split(':')[0], a = def.anchors[t] || [0, 0]; return [a[0], a[1] * 1.3]; });
-    const radius = keys.map((k, i) => (k.startsWith('concetto:') ? 0 : R[i]));
-    const blockAt = fam.length ? def.anchors.concetto : null;
-    let A = 40;
-    const nodesFit = keys.map((k, i) => (k.startsWith('concetto:') ? null : [unit[i], radius[i]])).filter(Boolean);
-    if (blockAt) nodesFit.push([[blockAt[0], blockAt[1] * 1.3], block]);
-    for (let i = 0; i < nodesFit.length; i++) for (let j = i + 1; j < nodesFit.length; j++) {
-      const [pa, ra] = nodesFit[i], [pb, rb] = nodesFit[j], dd = Math.hypot(pa[0] - pb[0], pa[1] - pb[1]) || 1;
-      A = Math.max(A, ((ra + rb) * 0.9) / dd);
-    }
-    const at = keys.map((k, i) => [unit[i][0] * A, unit[i][1] * A]);
-    fam.forEach((i, n) => { const c = n % cols, rw = Math.floor(n / cols); at[i] = [at[i][0] + (c - (Math.min(cols, fam.length) - 1) / 2) * cell, at[i][1] + (rw - (rows - 1) / 2) * cell]; });
-    const init = new Float64Array(2 * ids.length), seenG = {};
-    ids.forEach((g, k) => {
-      const gi = group[k], c = (seenG[gi] = (seenG[gi] || 0) + 1), rr = 9 * Math.sqrt(c), ang = c * 2.39996323;
-      init[2 * k] = at[gi][0] + rr * Math.cos(ang); init[2 * k + 1] = at[gi][1] + rr * Math.sin(ang);
-    });
-    const pull = keys.map((k, i) => (def.free?.includes(k) ? 0 : Math.min(14, Math.max(0.3, (1200 * num[i]) / (R[i] * R[i])))));
-    const p = layout(ids.length, local, { iterations: 360, dist: 20, init, gravity: 0.01, hubGravity: 1.2, group, groupPull: pull, groupAt: at, rad: rw, pad: def.pad ?? 4 });
-    // a family hub sits in the middle of its members, which then make room around it
-    ids.forEach((g, k) => {
-      if (nodeAt(g).tipo !== 'famiglia') return;
-      let sx = 0, sy = 0, c = 0;
-      for (const [a, b] of local) { const o = a === k ? b : b === k ? a : -1; if (o >= 0 && group[o] === group[k]) { sx += p[2 * o]; sy += p[2 * o + 1]; c++; } }
-      if (c) { p[2 * k] = sx / c; p[2 * k + 1] = sy / c; }
-    });
-    spread(p, rw, { iterations: 400, pad: (def.pad ?? 4) - 1 });
-    return p;
-  };
-  let s0 = 1, p = null, rOut, rUsed;
-  if (hit) { p = hit.p; rOut = hit.rOut; } else {
-  for (let pass = 0; pass < 3; pass++) {
-    rUsed = r.map((v) => v / s0);
-    p = arrange(rUsed);
-    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
-    for (let k = 0; k < ids.length; k++) { x0 = Math.min(x0, p[2 * k]); x1 = Math.max(x1, p[2 * k]); y0 = Math.min(y0, p[2 * k + 1]); y1 = Math.max(y1, p[2 * k + 1]); }
-    s0 = Math.min(1, 350 / Math.max(1, x1 - x0), 520 / Math.max(1, y1 - y0));
-  }
-  rOut = rUsed.map((v) => Math.round(v * 10) / 10);
-  VIEW_CACHE.set(ckey, { p, rOut });
-  }
-  const count = {};
-  for (const g of ids) count[nodeAt(g).tipo] = (count[nodeAt(g).tipo] || 0) + 1;
-  return { id: def.id, label: def.label, ids, pos: Array.from(p, Math.round), r: rOut, loose, legend: types.map((tipo) => ({ tipo, count: count[tipo] || 0, loose: loose.filter((g) => nodeAt(g).tipo === tipo).length })).filter((t) => t.count || t.loose) };
-}
+export { VIEWS, ZONES };
+const VIEWS_CACHE = new Map();
+export const resetLayoutCache = () => VIEWS_CACHE.clear();
 
 export function buildSite(vault = loadVault(), { colors = null } = {}) {
   colors ??= graphColors(existsSync(join(LORE, '.obsidian/graph.json')) ? readFileSync(join(LORE, '.obsidian/graph.json'), 'utf8') : '{}');
@@ -234,7 +125,9 @@ export function buildSite(vault = loadVault(), { colors = null } = {}) {
 
   // ---- the views: a layout each, with that view's nodes and the links among them only
   const nodeAt = (i) => (i < notes.length ? notes[i] : hubs[i - notes.length]);
-  const views = VIEWS.map((def) => buildView(def, { notes, hubs, edges, nodeAt }));
+  const vkey = JSON.stringify([edges, fields, notes.map((n) => [n.id, n.tipo, n.title, n.fm?.numero, n.fm?.dinamica, n.fm?.peso, n.fm?.famiglia, n.fm?.nome]), hubs.map((h) => [h.id, h.members])]);
+  let views = VIEWS_CACHE.get(vkey);
+  if (!views) { views = buildViews({ notes, hubs, edges, fields, nodeAt }); VIEWS_CACHE.clear(); VIEWS_CACHE.set(vkey, views); } // the dev server rebuilds on every request
 
   const counts = {};
   for (const n of notes) counts[n.tipo] = (counts[n.tipo] || 0) + 1;
