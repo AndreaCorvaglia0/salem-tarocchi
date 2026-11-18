@@ -2,11 +2,11 @@
 
 _generato da scripts/lore.mjs, non modificare a mano_
 
-162 scelte nei copioni, nelle sedute e nelle visite. Classe: `stabilisce` (lascia qualcosa che la storia rilegge), `mette_alla_prova` (le risposte o il seguito dipendono dallo stato), `entrambe`, `colore` (niente delle due).
+164 scelte nei copioni, nelle sedute e nelle visite. Classe: `stabilisce` (lascia qualcosa che la storia rilegge), `mette_alla_prova` (le risposte o il seguito dipendono dallo stato), `entrambe`, `colore` (niente delle due).
 
 | Classe | Scelte |
 |---|---:|
-| stabilisce | 95 |
+| stabilisce | 97 |
 | mette_alla_prova | 0 |
 | entrambe | 47 |
 | colore | 20 |
@@ -122,6 +122,8 @@ Né da una condizione, né per nome dal codice (src fuori da src/data).
 | [[garden-lessons-garden-lesson-vaso-1]] | colore |  |
 | [[garden-lessons-garden-lesson-semina-1]] | colore |  |
 | [[hat-trial-hat-door-1]] | entrambe | [[cappello-in-soffitta]] |
+| [[interests-ortica-int-ortica-start-1]] | stabilisce | [[il-trave-di-ortica]] |
+| [[interests-ortica-int-ortica-miller-1]] | stabilisce | [[unguento-del-mortaio]] |
 | [[lessons-fly-lesson-1]] | stabilisce | [[lezione-di-volo]] |
 | [[lessons-fly-lesson-2]] | stabilisce | [[lezione-di-volo]] |
 | [[lessons-minors-1-lesson-1]] | colore | [[lezione-dei-semi]] |

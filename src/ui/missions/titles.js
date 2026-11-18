@@ -56,6 +56,12 @@ export const TITLES = {
   'garden.lesson.terra': T('La terra', 'orto', 'Ortica', 'Ortica ha preparato un sacco di terriccio e un secchio di ghiaino. Mi aspetta dietro la sua capanna, nel bosco.'),
   'garden.lesson.vaso': T('Il vaso', 'orto', 'Ortica', 'Ortica deve cambiare vaso alla menta, e vuole che ci sia anch\'io. Mi aspetta dietro la sua capanna, nel bosco.'),
   'garden.lesson.semina': T('Semina e talea', 'orto', 'Ortica', 'Ortica semina la calendula, e vuole insegnarmi a fare una pianta da un rametto. Mi aspetta dietro la sua capanna, nel bosco.'),
+  // Ortica's interest, herbs and garden (notes/interessi/PROGETTO.md §10): the first is the garden, she knows;
+  // the others are favours Ortica told her about at the end of the mission before, so no kind
+  'int.ortica.1': T('A testa in giù', 'orto', 'Ortica', 'Ortica ha la schiena a pezzi e il trave della capanna vuoto. Vuole che le porti i miei mazzetti, e li appendiamo insieme.'),
+  'int.ortica.2': T('Le scale del mulino', null, 'Ortica', 'Il merlo dice che il mugnaio non scende più le scale. Ortica gli portava l\'unguento, ma con questa schiena non ce la fa.'),
+  'int.ortica.3': T('Il fumo di Malva', null, 'Ortica', 'Ortica giura che il bottegaio mette la segatura nell\'incenso di Malva, e che con la salvia secca si farebbe di meglio.',
+    { hunch: 'Malva non me l\'ha mai detto, ma lei non dice molte cose.' }),
   // the trials: each starts as a favour asked at a door, so no kind; `later` is her diary after the door
   'trial.night': T('Il cesto di Malva', null, 'Malva', 'Malva deve far uscire un cesto dal villaggio prima che faccia giorno, e vuole che l\'accompagni. Mi aspetta nel vicolo di sotto.',
     { later: [offered('night'), 'Malva ha un cesto da far uscire dal villaggio stanotte, e vuole me. Prima ripasso in biblioteca, e poi torno da lei nel vicolo di sotto.'] }),

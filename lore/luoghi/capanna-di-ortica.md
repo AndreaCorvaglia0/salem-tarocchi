@@ -10,6 +10,7 @@ atmosfera:
   - { t: "Una voce che parla da sola da prima che tu arrivi.", fonte: copione, scena: "c2.js#c2.ortica" }
 si_apre_con: "step c2.ortica"
 aperto:
+  - "Proposto (18 novembre): dentro c'è un trave con i ganci per seccare le erbe, vuoto finché la ragazza non ci appende i suoi mazzetti ([[il-trave-di-ortica]])."
 ---
 
 La casa di Ortica nel bosco, con la finestra sempre illuminata e le erbe che pendono dal tetto.

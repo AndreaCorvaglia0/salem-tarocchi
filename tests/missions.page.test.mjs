@@ -13,12 +13,13 @@ import { SIDE, LESSON_MISSIONS } from '../src/data/story/index.js';
 import { TRIALS } from '../src/data/trials/index.js';
 import { WORLD_LIST } from '../src/data/elsewhere/index.js';
 import { lessonEntries } from '../src/glue/garden.rules.js';
+import { orticaEntries } from '../src/glue/interests.rules.js';
 
 const SYMS = ['carta', 'lezione', 'prova', 'orto', 'altrove', 'storia', 'nota', 'storiaMain', 'fatta'];
 
 // Every place that registers entries (core/extras.js EXTRAS). The glue files cannot be imported in node
 // (they pull in fonts and screens), so the entries (id and place) are rebuilt from the same data they read.
-const SITES = 6; // EXTRAS.push / EXTRAS.unshift outside core/extras.js
+const SITES = 7; // EXTRAS.push / EXTRAS.unshift outside core/extras.js
 function registry() {
   const asList = (x) => (Array.isArray(x) ? x : Object.values(x || {}));
   return [
@@ -27,6 +28,7 @@ function registry() {
     ['garden.ortica', 'forest.ortica_hut'], ...lessonEntries().map((e) => [e.extra.id, e.extra.at]), // glue/garden.js
     ...Object.values(TRIALS).filter((d) => !d.debug).map((d) => [`trial.${d.id}`, d.start?.at]), ['library.first', 'library.desk'], // glue/trials.js
     ...WORLD_LIST.map((w) => [`elsewhere.${w.id}`, w.trigger.at]), // glue/elsewhere.rules.js
+    ...orticaEntries().map((e) => [e.extra.id, e.extra.at]), // glue/interests.js
   ];
 }
 const registryIds = () => registry().map(([id]) => id);

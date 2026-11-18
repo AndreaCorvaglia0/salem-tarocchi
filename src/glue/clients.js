@@ -4,7 +4,7 @@
 // an old face comes back, a generated client (src/reading/clients.js) knocks, or someone she must send away.
 // With popularity 2 or more a second visitor may wait outside.
 // opts (debug and screenshots): { force: 'gen' | 'refuse' | 'back', tier: 0..2, second: true }
-import { provide, call } from '../core/services.js';
+import { provide, call, has } from '../core/services.js';
 import { state, save } from '../core/state.js';
 import { setFlag, addXp, levelOf } from '../core/progress.js';
 import { popLevel } from '../core/bonds.js';
@@ -52,11 +52,13 @@ async function serveRefusal(tier) {
   const v = makeRefusal({ tier, avoid: g.recent });
   g.recent = pushRecent(g.recent, v.keys); save();
   const say = (t) => ({ say: v.name, t });
+  // one more answer from what she can do besides the cards (glue/interests.js: a herb, for an illness), or null
+  const extra = has('interests.refusal') ? await call('interests.refusal', v) : null;
   return call('story.run', [
     { say: 'narra', t: 'Qualcuno bussa forte, come chi ha fretta.' },
     say(v.hello), say(v.ask),
-    { choice: v.options.map((o) => ({ t: o.me, trait: o.trait,
-      then: o.id === 'turn' && v.turn ? [{ do: 'reading', spread: 'single', client: v.turn }, { do: 'xp', n: 3 }] : [say(o.re)] })) },
+    { choice: [...v.options.map((o) => ({ t: o.me, trait: o.trait,
+      then: o.id === 'turn' && v.turn ? [{ do: 'reading', spread: 'single', client: v.turn }, { do: 'xp', n: 3 }] : [say(o.re)] })), ...(extra ? [extra] : [])] },
   ]);
 }
 

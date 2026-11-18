@@ -83,6 +83,8 @@ export const AMBITO_PHRASE = { amore: "le domande d'amore", lavoro: 'le domande 
 
 // Every line she reads in the rite. The guides are interface lines (docs/WRITING.md, rule 7), shown the
 // first three times only; from the fourth the rite has no words at all except the air's name.
+// «la salvia» -> «la tua salvia», «il cipresso» -> «il tuo cipresso», «l'alloro» -> «il tuo alloro»
+const yours = (name) => name.replace(/^la /, 'la tua ').replace(/^il /, 'il tuo ').replace(/^l'alloro/, 'il tuo alloro');
 export const TEXT = {
   guide: {
     knock: 'Tieni il dito sulla brace.',
@@ -90,7 +92,7 @@ export const TEXT = {
     search: "Fai scorrere il dito di lato e cerca l'aria che ha questa domanda.",
   },
   still: 'La brace è ancora accesa.', // a second rite within twenty minutes
-  named: (air) => `Quest'aria è ${air.name}.`,
+  named: (air, mine = false) => `Quest'aria è ${mine ? yours(air.name) : air.name}.`, // «la tua salvia»: an air she made
   skip: 'Leggo senza fumo',
   // the line after the reading: a fact, never an interpretation of her
   fact: (air) => `Per questa domanda hai acceso ${air.name}.`,

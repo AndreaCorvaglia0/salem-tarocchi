@@ -73,6 +73,7 @@ export function createSmoke(canvas, { reduced = false } = {}) {
   function drawScene() {
     if (!scene) return;
     const { hearthY, coal, slots, owned, arcY, hover, lit, show } = scene;
+    const made = scene.made || [];
     // the hearth: a long bed of coals, the coal to knock on in the middle
     const bed = g.createLinearGradient(0, hearthY - 30, 0, hearthY + 40);
     bed.addColorStop(0, 'rgba(0,0,0,0)'); bed.addColorStop(0.5, `rgba(120,40,10,${0.25 + coal * 0.25})`); bed.addColorStop(1, 'rgba(0,0,0,0)');
@@ -96,6 +97,8 @@ export function createSmoke(canvas, { reduced = false } = {}) {
       eg.addColorStop(0, `rgba(255,${on ? 230 : 190},${on ? 170 : 110},${(on ? 1 : 0.8) * show})`); eg.addColorStop(0.4, `rgba(230,90,30,${(on ? 0.6 : 0.4) * show})`); eg.addColorStop(1, 'rgba(120,30,10,0)');
       g.fillStyle = eg; g.beginPath(); g.arc(x, y, R * 1.8, 0, 7); g.fill();
       g.fillStyle = `rgba(${on ? 255 : 200},${on ? 150 : 90},40,${show})`; g.beginPath(); g.ellipse(x, y, on ? 15 : 11, on ? 9 : 7, 0, 0, 7); g.fill();
+      // an air she made herself: a small pale dot above its ember («tua»)
+      if (made.includes(s.id)) { g.fillStyle = `rgba(250,238,200,${0.85 * show})`; g.beginPath(); g.arc(x, y - (on ? 20 : 15), 3, 0, 7); g.fill(); }
     }
   }
 

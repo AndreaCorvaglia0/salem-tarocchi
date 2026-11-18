@@ -23,6 +23,9 @@
 //   { attitude: { edera: 'brontola' } } ('pari' | 'prova' | 'brontola' | 'fredda')
 //   the trials (src/trials): { trial: 'demo' } (done: passed, or a main one played)  { trial: ['demo', 'fail'] }
 //   (that outcome)  { trialPending: true } (a real trial is open now)  { studied: 'm13' } (studied in the library)
+//   the interests (added 18 Nov, notes/interessi/PROGETTO.md): { interest: ['ortica', 1] } (the step of that witch's
+//   interest at least: 1 after two missions, 2 after four, 3 after six)  { interestRested: 'ortica' } (no mission of her
+//   interest done today: one step a day)
 //   birth:  { hasBirth: true } { hasYear: true } { element: 'Fuoco' } { modality: 'fisso' }
 //           { moon: 'piena' } { bornOn: 'giovedì' }   (moon and weekday need the year: false without it)
 //
@@ -36,6 +39,7 @@ import { popLevel, tartufoLevel } from './bonds.js';
 import { affinityOf, bondOf, attitudeOf } from './witches.js';
 import { TRIALS } from '../data/trials/index.js';
 import { trialDone } from '../trials/run.js';
+import { todayKey } from './progress.js';
 import { levelOf, titleOf, yourCard, hasCard, majorsFound, seasonOfBirth, traitWord, traitWords, lastSnapshot, lastVerdict } from './progress.js';
 
 const signOfState = (s) => SIGNS.find((x) => x.id === s.player?.sign) || null;
@@ -48,6 +52,9 @@ const sameBool = (v, x) => (v === false ? !x : !!x);
 export const joinIt = (ws) => (ws.length < 2 ? ws[0] || '' : `${ws.slice(0, -1).join(', ')} e ${ws[ws.length - 1]}`);
 
 const cmp = (a, op, b) => (op === '>=' ? a >= b : op === '>' ? a > b : op === '<=' ? a <= b : op === '<' ? a < b : op === '!=' ? a !== b : a === b);
+
+// the interests: a mission done is the flag `int.<witch>.<n>` (n 1..6); its steps come at the 2nd, 4th and 6th
+const interestSteps = (w, s) => Math.floor([1, 2, 3, 4, 5, 6].filter((n) => s.flags?.[`int.${w}.${n}`]).length / 2);
 
 const TITLE_LEVEL = { novizia: 1, fattucchiera: 4, strega: 7 };
 
@@ -97,6 +104,8 @@ const TESTS = {
   trial: (v, s) => { const [id, res] = Array.isArray(v) ? v : [v]; const d = TRIALS[id]; if (!d) return false; return res ? s.trials?.[id]?.result === res : trialDone(d, s); },
   trialPending: (v, s) => sameBool(v, Object.values(TRIALS).some((d) => !d.debug && !trialDone(d, s) && test(d.when, s))),
   studied: (v, s) => !!s.studied?.[v],
+  interest: ([w, n], s) => interestSteps(w, s) >= n,
+  interestRested: (w, s) => s.interests?.day?.[w] !== todayKey(),
   not: (v, s) => !test(v, s),
   any: (v, s) => v.some((c) => test(c, s)),
 };

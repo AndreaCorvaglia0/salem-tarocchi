@@ -76,6 +76,7 @@ carte:
   - { carta: "m03 L'Imperatrice", perche: "La gira prima di regalare le carte.", fonte: copione, scena: "c2.js#c2.ortica" }
   - { carta: "m18 La Luna", perche: "Esce prima della nebbia, e va lo stesso.", fonte: copione, scena: "trials/main.js#fog" }
 aperto:
+  - "Proposto (18 novembre): l'interesse per le erbe, [[il-trave-di-ortica]], [[unguento-del-mortaio]] e [[la-salvia-di-malva]] (ha la schiena a pezzi e non sale più sul trave); da aggiungere ad `arco` quando Andrea lo conferma."
   - "Perché Ortica ha lasciato la capanna al limite del bosco per vivere nel bosco? Malva lo accenna (c1.js#c1.back), nessuno lo spiega."
   - "Che cosa vuole Ortica oltre a essere ascoltata?"
   - "Quanti anni ha? Dice «trent'anni» di bosco e «me a vent'anni» (c2.js#ortica.chat)."

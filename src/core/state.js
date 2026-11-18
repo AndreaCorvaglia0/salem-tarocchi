@@ -33,6 +33,8 @@ export const fresh = () => ({
   garden: { unlocked: false, beds: [null, null, null, null] }, // the beds at the cottage (glue/garden.rules.js)
   seeds: {}, // herb id -> seeds she owns
   pantry: {}, // herb id -> bunches harvested (for the potions, later)
+  pantryDry: {}, // herb id -> dried bunches (the interests, glue/interests.rules.js: fresh bunches hung on Ortica's beam dry by the next day)
+  interests: { day: {}, hung: [], back: [] }, // witch -> the day of her last mission; bunches on the beam [{ herb, n, day }]; visitors given a herb who come back [{ id, name, gender, herb, day }]
   daily: { looks: {}, notes: 0, noteDay: null }, // looks read per card; notes shown so far
   settings: { music: true, sfx: true },
   // the portrait (docs/DESIGN.md "Il ritratto"): five axes -6..6, positive pole first
@@ -123,6 +125,11 @@ export const migrate = (s) => {
   // learning better (docs/BACKLOG.md 2): the Reader's recall questions, the day the card of the day last counted for the review
   if (typeof s.recalled !== 'object' || !s.recalled || Array.isArray(s.recalled)) s.recalled = {};
   if (typeof s.dayAsked !== 'string') s.dayAsked = null;
+  // the interests (notes/interessi/PROGETTO.md): the dried pantry, the last mission day per witch, the beam, the returns
+  if (typeof s.pantryDry !== 'object' || !s.pantryDry || Array.isArray(s.pantryDry)) s.pantryDry = {};
+  if (typeof s.interests !== 'object' || !s.interests || Array.isArray(s.interests)) s.interests = { day: {}, hung: [], back: [] };
+  if (typeof s.interests.day !== 'object' || !s.interests.day || Array.isArray(s.interests.day)) s.interests.day = {};
+  for (const k of ['hung', 'back']) if (!Array.isArray(s.interests[k])) s.interests[k] = [];
   return s;
 };
 

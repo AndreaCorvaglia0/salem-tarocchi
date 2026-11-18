@@ -81,6 +81,7 @@ carte:
   - { carta: "m00 Il Matto", perche: "La gira prima di aprire il cancello del bosco.", fonte: copione, scena: "c1b.js#c1.gate" }
   - { carta: "m08 La Forza / m12 L'Appeso", perche: "Sul coperchio della botola: La Forza apre, L'Appeso tiene chiuso.", fonte: copione, scena: "c3.js#c3.trapdoor" }
 aperto:
+  - "Proposto (18 novembre): [[la-salvia-di-malva]], il mazzo di salvia al posto dell'incenso del bottegaio; non ringrazia, ma lo tiene accanto al focolare."
   - "Quanti anni ha Malva? DESIGN.md dice «sui quaranta», ma nei copioni ha fatto nascere un conestabile con vent'anni di ronde e conosce Ortica da trent'anni (vedi notes/lore-story.md, Contraddizioni)."
   - "Che cosa teme Malva per sé? Nei copioni teme per le ragazze, mai per sé."
   - "Chi riceve il cesto oltre il cancello («una che conosco», trials/main.js#night)?"

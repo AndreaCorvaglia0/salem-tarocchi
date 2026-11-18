@@ -50,6 +50,7 @@ stabilisce:
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-1]]" }
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-1]]" }
   - { dove: "end.js#f.last", n: 1, scelta: "[[end-f-last-2]]" }
+  - { dove: "interests.ortica.js#int.ortica.miller", n: 1, scelta: "[[interests-ortica-int-ortica-miller-1]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.child", n: -1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.washer", n: -1, scelta: "[[post-enc-washer-1]]" }
@@ -158,6 +159,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): gentile (+) o pungente (-), da -6 a 6.
 
-Lo muovono 91 punti dei copioni e lo leggono 58 condizioni.
+Lo muovono 92 punti dei copioni e lo leggono 58 condizioni.
 
-Verso gentile: 51 punti; verso pungente: 40 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso gentile: 52 punti; verso pungente: 40 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

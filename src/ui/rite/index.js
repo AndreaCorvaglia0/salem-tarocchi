@@ -78,7 +78,7 @@ export function riteOverlay({ plan, scene = null, gift = null, real = false } = 
     smoke.resize(); ({ W, H } = smoke.size);
     hearthY = Math.round(H * 0.8); arcY = Math.round(H * 0.665);
     slots = arcSlots(W);
-    smoke.scene({ hearthY, arcY, slots, owned: plan.owned });
+    smoke.scene({ hearthY, arcY, slots, owned: plan.owned, made: plan.made || [] });
   };
   layout();
   const onResize = () => layout();
@@ -244,7 +244,7 @@ export function riteOverlay({ plan, scene = null, gift = null, real = false } = 
     path.getBoundingClientRect();
     path.style.transition = `stroke-dashoffset ${Math.min(0.9, plan.dur.name * 0.6)}s ease-out`;
     path.style.strokeDashoffset = '0';
-    name.textContent = TEXT.named(a); name.classList.add('on');
+    name.textContent = TEXT.named(a, (plan.made || []).includes(a.id)); name.classList.add('on');
     call('sound.mood', `air.${id}`);
     await sleep(plan.dur.name * 1000);
     phases.name = (now() - t0) / 1000;

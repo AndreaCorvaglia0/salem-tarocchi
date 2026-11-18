@@ -21,6 +21,8 @@ export const freshRite = () => ({
   malva: false, // the scene at Malva's hearth has been seen
   gifts: {}, // air -> true once given
   deck: 0, // passes of smoke over the deck
+  // made: { air: true } only once she has made an air with her own hands (the interests: Ortica's sage), shown
+  // as «tua»; absent until then, so fresh() of core/state.js and old saves stay as they are
 });
 
 // Any saved value, old or damaged, becomes a valid rite (old saves have none: they start from the first rite).
@@ -44,6 +46,8 @@ export function normRite(r) {
   out.malva = !!r.malva;
   out.gifts = {};
   for (const [k, v] of Object.entries(obj(r.gifts))) if (AIRS[k] && v) out.gifts[k] = true;
+  const made = Object.entries(obj(r.made)).filter(([k, v]) => AIRS[k] && v && out.owned.includes(k));
+  if (made.length) out.made = Object.fromEntries(made.map(([k]) => [k, true]));
   return out;
 }
 
@@ -78,6 +82,7 @@ export function planRite(r, now) {
     skip: rr.n >= 3, // «Leggo senza fumo», quietly, from the fourth
     veil: rr.last ? rr.last.air : null, // the tint left by the last smoke, cleaned by the breaths
     owned: rr.owned,
+    made: rr.owned.filter((a) => rr.made?.[a]), // her own airs: the name says «la tua salvia»
     dur: DUR[stage],
     fixed: fixedTime(stage, breaths),
     limit: LIMIT[stage],
@@ -164,6 +169,10 @@ export function giftDue(r, s) {
   return null;
 }
 export function afterGift(r, air) { const rr = normRite(r); if (!rr.owned.includes(air)) rr.owned = ARC.filter((a) => a === air || rr.owned.includes(a)); rr.gifts[air] = true; return rr; }
+// An air she made herself (the interests, notes/interessi/PROGETTO.md §2, mission 3: the sage tied at Ortica's).
+// She owns it from now on (no second gift later: giftDue skips an owned air), and it is «tua». A player who had
+// already received it after four rites keeps it, and from now on it is hers too.
+export function afterMade(r, air) { if (!AIRS[air]) return normRite(r); const rr = afterGift(r, air); rr.made = { ...(rr.made || {}), [air]: true }; return rr; }
 
 // The scene at Malva's hearth before the very first rite: once, and only if she has met Malva.
 export const malvaSceneDue = (r, s) => !normRite(r).malva && normRite(r).n === 0 && ((Number(s?.bonds?.malva) || 0) > 0 || (Number(s?.trust?.malva) || 0) > 0 || (s?.chapter || 0) >= 1);

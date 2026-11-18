@@ -55,6 +55,7 @@ stabilisce:
   - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
+  - { dove: "interests.ortica.js#int.ortica.miller", n: 1, scelta: "[[interests-ortica-int-ortica-miller-1]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
   - { dove: "post.js#enc.gravedigger", n: 1, scelta: "[[post-enc-gravedigger-1]]" }
@@ -150,6 +151,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): curiosa (+) o dritta (-), da -6 a 6.
 
-Lo muovono 86 punti dei copioni e lo leggono 55 condizioni.
+Lo muovono 87 punti dei copioni e lo leggono 55 condizioni.
 
-Verso curiosa: 51 punti; verso dritta: 35 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso curiosa: 52 punti; verso dritta: 35 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

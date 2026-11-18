@@ -9,6 +9,7 @@
 import { snd } from './sfx.js';
 import { h, css, openOverlay, reducedMotion } from '../core/dom.js';
 import { todayKey } from '../core/progress.js';
+import { state } from '../core/state.js';
 import { HERB, HERB_LIST } from '../data/herbs/base.js';
 import { HERB_TEXTS } from '../data/herbs/texts.js';
 import { GARDEN, SOILS, SOIL, LIGHT, BEDS } from '../data/garden.js';
@@ -180,7 +181,14 @@ export function openGarden({ from = 'world' } = {}) {
     };
     const pantryLine = () => {
       const P = pantry(), ids = ORDER.filter((id) => P[id]), S = seeds(), ns = Object.values(S).reduce((a, b) => a + b, 0);
-      const parts = [ids.length ? h('span', {}, 'In dispensa: ', ...ids.flatMap((id, i) => [i ? ' · ' : '', h('b', {}, `${lower(id)} ${P[id]}`)])) : h('span', {}, 'La dispensa è ancora vuota.')];
+      const list = (O, ks) => ks.flatMap((id, i) => [i ? ' · ' : '', h('b', {}, `${lower(id)} ${O[id]}`)]);
+      // once she has dried bunches with Ortica (glue/interests.js), the pantry has two columns: fresh and dried
+      const D = state.pantryDry || {}, dry = ORDER.filter((id) => D[id] > 0);
+      const hung = (state.interests?.hung || []).reduce((a, b) => a + (Number(b?.n) || 0), 0);
+      const parts = state.flags?.['int.ortica.1'] || dry.length || hung
+        ? [h('span', {}, 'Fresche: ', ...(ids.length ? list(P, ids) : ['nessuna'])), h('br'), h('span', {}, 'Secche: ', ...(dry.length ? list(D, dry) : ['nessuna'])),
+          ...(hung ? [h('br'), h('span', {}, `Sul trave di Ortica: ${hung === 1 ? 'un mazzetto' : `${hung} mazzetti`}.`)] : [])]
+        : [ids.length ? h('span', {}, 'In dispensa: ', ...list(P, ids)) : h('span', {}, 'La dispensa è ancora vuota.')];
       if (ns) parts.push(h('br'), h('span', {}, `Da piantare: ${ns} tra piantine e semi.`));
       pan.replaceChildren(...parts);
     };

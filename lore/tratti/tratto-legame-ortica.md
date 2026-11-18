@@ -17,6 +17,9 @@ stabilisce:
   - { dove: "garden-lessons.js#garden.lesson.vaso", n: 1 }
   - { dove: "garden-lessons.js#garden.lesson.semina", n: 1 }
   - { dove: "garden.js#garden.ortica", n: 1 }
+  - { dove: "interests.ortica.js#int.ortica.1", n: 1 }
+  - { dove: "interests.ortica.js#int.ortica.2", n: 1 }
+  - { dove: "interests.ortica.js#int.ortica.3", n: 1 }
 mette_alla_prova:
   - { dove: "c3.js#c3.coven", condizione: "trust ortica >= 2" }
   - { dove: "c3.js#c3.jail", condizione: "flag coven.ortica.talk e trust ortica >= 2" }
@@ -30,6 +33,6 @@ mette_alla_prova:
 
 Quello che lei e ortica hanno costruito insieme: la fiducia dei copioni (state.trust) nutre il legame (state.bonds, glue/witches.js).
 
-Lo muovono 13 punti dei copioni e lo leggono 8 condizioni.
+Lo muovono 16 punti dei copioni e lo leggono 8 condizioni.
 
 Il legame cresce anche dal codice: le prove (glue/trials.js) e le opinioni (glue/opinions.js).

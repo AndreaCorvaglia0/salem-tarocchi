@@ -51,6 +51,8 @@ stabilisce:
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "interests.ortica.js#int.ortica.start", n: 1, scelta: "[[interests-ortica-int-ortica-start-1]]" }
+  - { dove: "interests.ortica.js#int.ortica.start", n: -1, scelta: "[[interests-ortica-int-ortica-start-1]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
   - { dove: "lessons.js#fly.lesson", n: -1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
@@ -165,6 +167,6 @@ mette_alla_prova:
 
 Un asse del ritratto (core/progress.js AXES): audace (+) o prudente (-), da -6 a 6.
 
-Lo muovono 95 punti dei copioni e lo leggono 61 condizioni.
+Lo muovono 97 punti dei copioni e lo leggono 61 condizioni.
 
-Verso audace: 53 punti; verso prudente: 42 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).
+Verso audace: 54 punti; verso prudente: 43 punti. Lo muove anche il codice mentre gioca (glue/traits.js, glue/opinions.js, glue/trials.js), e lo leggono sempre, senza condizioni scritte, la carta che la rappresenta (yourCard), il seme e il ritratto finale (story/portrait.js).

@@ -26,6 +26,7 @@ luoghi:
   - "[[stagno]]"
 carte:
 aperto:
+  - "Proposto (18 novembre): [[unguento-del-mortaio]], l'unguento pestato dalla ragazza; il giorno dopo scende in piazza col bastone nuovo. Da aggiungere ad `arco` quando Andrea lo conferma."
   - "Che cosa fa girare la ruota al contrario?"
   - "Proposto (17 novembre): [[cappello-in-soffitta]] è un fatto del suo arco, dopo il finale; da aggiungere ad `arco` quando Andrea lo conferma."
 ---

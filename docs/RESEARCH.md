@@ -530,3 +530,34 @@ plausibile per gli speziali del tempo, non cercato.
   La 12, 24 e 36 hanno tre pianeti diversi (Saturno, Sole, Marte): così sono stampate.
 - **Non verificato:** le traduzioni italiane dei versi sono nostre (Andrea o un madrelingua tedesco possono
   rileggerle); nessuna fonte consultata in questa sessione dà il significato dei segni stampati su questo mazzo.
+
+## Gli interessi: erbe e orto (18 novembre 2026)
+
+I tre fatti veri che servono alla prima fetta (notes/interessi/PROGETTO.md §11), controllati sul web una richiesta
+alla volta. Nel gioco le erbe guariscono e il fumo pulisce, detti come li dice la tradizione; qui c'è che cosa è vero.
+
+- **Seccare a testa in giù, all'ombra e all'aria.** University of Wisconsin, Master Gardener, «Drying Herbs»
+  (mastergardener.extension.wisc.edu/files/2016/01/Drying-Herbs.pdf): mazzetti piccoli di 5-6 steli legati e appesi a
+  testa in giù «in a warm (70-80°F), dry, well-ventilated area out of direct sunlight», finché l'umidità se ne va,
+  «generally 2-4 weeks». **Nel gioco** i mazzetti sono secchi il giorno dopo (il passo di un giorno della pagina di
+  progetto): è una compressione del tempo, e nessuna battuta dice quanto ci vuole. Il perché del sole (colore e
+  profumo che si perdono) e del fuoco (fumo e fuliggine) sono dette da Ortica a memoria, non dalla pagina letta
+  (MEMORIA, consenso comune nei manuali di erbe). La linea «il secco va nei fumi e nei sacchetti» è nostra.
+- **La calendula negli unguenti.** European Medicines Agency, «Calendulae flos» (ema.europa.eu/en/medicines/herbal/
+  calendulae-flos): uso tradizionale per «minor inflammation of the skin (such as sunburn)» e come «an aid in healing of
+  minor wounds», in forme liquide e «semi-solid forms to be applied to the skin»; le prove cliniche sono
+  insufficienti, l'uso è tradizionale e sicuro da almeno trent'anni. **Nel gioco** l'unguento è per ginocchia gonfie,
+  cioè un uso più largo di quello del monografo: la tradizione popolare lo fa, l'EMA no. La melissa in un unguento è
+  scelta del cerchio (intenzione «guarigione e conforto», src/data/sapere.js), non un uso tradizionale verificato.
+- **La salvia legata in mazzo da bruciare.** Wikipedia, «Smudging» (en.wikipedia.org/wiki/Smudging): bruciare erbe
+  sacre è una cerimonia di alcuni popoli nativi delle Americhe, con protocolli che variano; i «smudge stick» commerciali
+  di salvia bianca (Salvia apiana, californiana) sono un uso moderno, New Age, contestato come appropriazione culturale
+  e per la raccolta eccessiva. Wikipedia, «Saining» (en.wikipedia.org/wiki/Saining): in Scozia si fumigava casa e
+  stalla a Capodanno con rami di ginepro accesi (fonti: F. Marian McNeill, The Silver Bough, 1961); la salvia non è
+  nominata. **Consenso basso** sul mazzo stretto di salvia da bruciare in un villaggio inglese del 1692. **Nel gioco**
+  la salvia è quella comune dell'orto (Salvia officinalis); il mazzo si lega per portarla intera, e Malva le foglie
+  le sbriciola sulla brace come l'incenso (come già fa il rito). Fumigare con erbe secche in Europa è attestato (il
+  ginepro); la salvia del rito resta una scelta del cerchio (`consenso` del fumo di salvia in src/data/sapere.js).
+- **Non verificato qui:** un uso storico della melissa o della calendula a Salem nel 1692; l'infuso di melissa per
+  un bambino con la febbre e un'erba che guarisce mescolata al fieno di una mucca sono detti come li direbbe la tradizione,
+  senza fonte letta.
