@@ -1,9 +1,9 @@
 // The lore viewer: reads data.json once (built from lore/ by scripts/lore/site.mjs) and shows the vault
 // with hash routes, so the back button works and a link can be shared:
 //   #/  home · #/n/<id> a note · #/t/<tipo> a list · #/grafo[/<id>] the whole graph · #/cerca/<q> search
-import { md, inline, esc } from './md.js?v=1794995485388';
-import { graphView } from './graph.js?v=1794995485388';
-import { layout } from './layout.js?v=1794995485388';
+import { md, inline, esc } from './md.js?v=1795006864226';
+import { graphView } from './graph.js?v=1795006864226';
+import { layout } from './layout.js?v=1795006864226';
 
 const app = document.getElementById('app');
 const FONTI = ['copione', 'deciso', 'proposto'];
@@ -18,7 +18,7 @@ const fold = (s) => String(s ?? '').toLowerCase().replace(/[^\x00-\x7f]/g, (c) =
 const href = (id) => `#/n/${encodeURIComponent(id)}`;
 const colorOf = (tipo) => T.get(tipo)?.color || '#8a8173';
 const labelOf = (tipo) => T.get(tipo)?.label || tipo;
-const one = (tipo) => ({ persona: 'persona', retroscena: 'retroscena', luogo: 'luogo', fatto: 'fatto', meccanica: 'meccanica', obiettivo: 'obiettivo', tecnica: 'tecnica', principio: 'principio', metodo: 'metodo', tratto: 'tratto', scelta: 'scelta', finale: 'finale', decisione: 'decisione', indice: 'indice' }[tipo] || tipo);
+const one = (tipo) => ({ persona: 'persona', retroscena: 'retroscena', luogo: 'luogo', fatto: 'fatto', meccanica: 'meccanica', obiettivo: 'obiettivo', tecnica: 'tecnica', principio: 'principio', legge: 'legge', ricetta: 'ricetta', concetto: 'concetto', tratto: 'tratto', scelta: 'scelta', finale: 'finale', decisione: 'decisione', indice: 'indice' }[tipo] || tipo);
 const chip = (tipo, big = false) => `<a class="chip${big ? ' big' : ''}" href="#/t/${tipo}" style="--c:${colorOf(tipo)}"><span class="dot"></span>${esc(big ? labelOf(tipo) : one(tipo))}</a>`;
 const badge = (f) => (FONTI.includes(f) ? `<span class="fonte f-${f}" title="fonte">${f}</span>` : '');
 const link = (id, alias) => {
@@ -259,9 +259,9 @@ function route() {
 
 async function start() {
   try {
-    const res = await fetch('./data.json?v=1794995485388');
+    const res = await fetch('./data.json?v=1795006864226');
     D = await res.json();
-    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1794995485388')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
+    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1795006864226')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
   } catch (e) {
     app.innerHTML = `<div class="page"><p class="warn">Non riesco a leggere il vault (${esc(e.message)}).</p></div>`;
     return;
