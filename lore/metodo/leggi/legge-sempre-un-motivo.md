@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "C'è sempre un motivo"
+ambito: generale
 numero: 2
 gruppo: "come"
 in_breve: "Nessuno fa niente «per imparare»: si va, si cerca, si risponde perché c'è un motivo nel mondo, e il mistero è il motore."

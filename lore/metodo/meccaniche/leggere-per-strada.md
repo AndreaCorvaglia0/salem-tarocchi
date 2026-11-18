@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Leggere per strada"
+ambito: salem
 dinamica: "letture"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -14,6 +15,9 @@ cosa_fa_la_giocatrice: "Qualcuno a cui ha già letto le carte la riconosce per s
 serve:
   - "[[leggere-e-l-attivita-vera]]"
   - "[[mai-assillare]]"
+concetti:
+  - "arcano"
+  - "stesa"
 insegna:
   - "[[dire-l-idea-della-carta]]"
   - "[[rispondere-a-chi-chiede]]"

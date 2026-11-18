@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Accendere il fumo"
+ambito: salem
 dinamica: "rito"
 leggi:
   - "[[legge-si-vede-e-si-tocca]]"
@@ -20,6 +21,11 @@ serve:
   - "[[mai-assillare]]"
   - "[[interfaccia-che-premia]]"
   - "[[niente-tocchi-per-sbaglio]]"
+concetti:
+  - "fumo"
+  - "intenzione"
+  - "pianeta"
+  - "elemento"
 insegna: []
 tecniche:
   - "[[effetto-dell-azione]]"

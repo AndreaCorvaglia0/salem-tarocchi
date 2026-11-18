@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Spendere in bottega"
+ambito: salem
 dinamica: "gradi-e-zone"
 leggi:
   - "[[legge-si-entra-piano]]"
@@ -17,6 +18,7 @@ cosa_fa_la_giocatrice: "Alla bottega del vicolo compra con le monete: la bottigl
 serve:
   - "[[le-carte-servono-a-muoversi]]"
   - "[[pochi-concetti-legati]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[elementi-di-gioco]]"

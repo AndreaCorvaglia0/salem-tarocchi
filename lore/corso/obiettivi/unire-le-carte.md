@@ -9,10 +9,6 @@ concetti:
   - "seme"
   - "numero"
   - "stesa"
-meccaniche:
-  - "[[giocare-a-coppie-con-la-sibilla]]"
-  - "[[leggere-ai-clienti]]"
-  - "[[raccogliere-pietre-e-figurine]]"
 aperto: "Il colpo d'occhio (seme dominante, numeri ripetuti, molte figure) si mostra sotto la lettura ma non si chiede mai."
 ---
 

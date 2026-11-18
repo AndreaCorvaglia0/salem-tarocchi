@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Legarsi alle streghe"
+ambito: salem
 dinamica: "personaggi"
 leggi:
   - "[[legge-e-lei-a-decidere]]"
@@ -16,6 +17,7 @@ cosa_fa_la_giocatrice: "Ogni strega la guarda in due modi: l'affinità (quanto s
 serve:
   - "[[la-lettrice-legge-lei]]"
   - "[[nelle-prove-si-perde]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[storia-ed-emozione]]"

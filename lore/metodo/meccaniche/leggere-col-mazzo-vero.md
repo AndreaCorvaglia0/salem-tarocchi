@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Leggere col mazzo vero dal grimorio"
+ambito: salem
 dinamica: "letture"
 leggi:
   - "[[legge-poche-cose-verificate]]"
@@ -14,6 +15,13 @@ dove:
 cosa_fa_la_giocatrice: "Dal grimorio, «Leggere con il mio mazzo vero»: sceglie una stesa, indica le carte uscite sul tavolo di casa e il gioco l'accompagna posizione per posizione. Con «Prova tu prima» il testo resta nascosto finché lei non tocca."
 serve:
   - "[[alla-fine-il-suo-mazzo]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "regola"
 insegna:
   - "[[leggere-il-proprio-mazzo]]"
   - "[[leggere-in-posizione]]"

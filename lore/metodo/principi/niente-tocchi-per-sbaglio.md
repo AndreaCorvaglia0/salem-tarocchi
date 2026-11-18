@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Niente tocchi per sbaglio"
+ambito: generale
 legge: "[[legge-chiaro-vero-curato]]"
 in_breve: "I tasti nuovi ignorano i tocchi per un attimo, e i momenti da leggere non si saltano per sbaglio."
 perche: "Sul telefono un tocco di troppo fa perdere una battuta o sceglie una risposta che lei non voleva."

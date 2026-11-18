@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Concetti, storia e materiali non dipendono l'uno dall'altro"
+ambito: generale
 numero: 10
 gruppo: "com-e-costruito"
 in_breve: "Concetti, storia e materiali sono strati che non si tengono in ostaggio, così il gioco può crescere e correggersi."

@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Salire di rango"
+ambito: salem
 dinamica: "gradi-e-zone"
 leggi:
   - "[[legge-si-entra-piano]]"
@@ -15,6 +16,7 @@ serve:
   - "[[le-carte-servono-a-muoversi]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[pochi-concetti-legati]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[autonomia-competenza-legami]]"

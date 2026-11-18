@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Far crescere la luna"
+ambito: salem
 dinamica: "gesti-del-giorno"
 leggi:
   - "[[legge-poco-ogni-giorno]]"
@@ -15,6 +16,7 @@ cosa_fa_la_giocatrice: "Ogni giorno in cui fa almeno una cosa della soglia o gio
 serve:
   - "[[mai-assillare]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[ripetizione-distanziata]]"

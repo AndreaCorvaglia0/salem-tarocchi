@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Studiare in biblioteca"
+ambito: salem
 dinamica: "ripasso"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -18,6 +19,12 @@ serve:
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[le-carte-servono-a-muoversi]]"
   - "[[nelle-prove-si-perde]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "regola"
 insegna:
   - "[[capire-i-minori]]"
   - "[[dire-l-idea-della-carta]]"

@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Leggere è l'attività vera"
+ambito: salem
 legge: "[[legge-il-concetto-e-una-chiave]]"
 in_breve: "Tutto serve a leggere meglio: ricordare l'idea della carta, applicarla al posto e alla domanda, rispondere a chi ha chiesto."
 perche: "È quello che lei vuole saper fare; gli esercizi sono allenamento per questo, come il combattimento in un gioco di ruolo."

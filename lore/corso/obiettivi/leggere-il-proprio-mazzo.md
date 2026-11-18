@@ -11,9 +11,6 @@ concetti:
   - "figura"
   - "stesa"
   - "regola"
-meccaniche:
-  - "[[leggere-per-se]]"
-  - "[[leggere-col-mazzo-vero]]"
 aperto: "Si verifica l'idea di ogni carta, non la lettura intera (che cosa vuol dire in quel posto, come si legano le carte) e non con parole sue. Nessuna schermata mostra ancora come va nel tempo."
 ---
 

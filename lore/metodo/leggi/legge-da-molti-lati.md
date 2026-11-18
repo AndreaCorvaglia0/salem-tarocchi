@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Da molti lati, con parole sue"
+ambito: generale
 numero: 4
 gruppo: "come"
 in_breve: "Lo stesso materiale torna ogni volta da un lato nuovo, con parole sue; i personaggi non spiegano, lo fa il fare."

@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Rispondere a memoria sul disegno"
+ambito: salem
 dinamica: "gesti-del-giorno"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -18,6 +19,8 @@ serve:
   - "[[la-domanda-non-mostra-la-risposta]]"
   - "[[interfaccia-che-premia]]"
   - "[[mai-assillare]]"
+concetti:
+  - "arcano"
 insegna:
   - "[[ricordare-i-dettagli]]"
   - "[[riconoscere-una-carta]]"

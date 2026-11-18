@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Annotare i luoghi"
+ambito: salem
 dinamica: "misteri"
 leggi:
   - "[[legge-sempre-un-motivo]]"
@@ -17,6 +18,7 @@ cosa_fa_la_giocatrice: "Toccando sulla mappa un posto già visto, legge le sue n
 serve:
   - "[[vede-solo-quello-che-sa]]"
   - "[[il-testo-e-la-chiave]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[curiosita]]"

@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Ripassare"
+ambito: salem
 dinamica: "ripasso"
 leggi:
   - "[[legge-poche-cose-verificate]]"
@@ -18,6 +19,15 @@ cosa_fa_la_giocatrice: "Un giro calmo di cinque domande miste: prima le carte sc
 serve:
   - "[[mai-assillare]]"
   - "[[la-domanda-non-mostra-la-risposta]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "pianeta"
+  - "segno"
+  - "elemento"
 insegna:
   - "[[riconoscere-una-carta]]"
   - "[[dire-l-idea-della-carta]]"

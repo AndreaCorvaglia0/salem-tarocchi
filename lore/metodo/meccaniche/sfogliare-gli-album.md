@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Sfogliare gli album"
+ambito: salem
 dinamica: "grimorio-e-album"
 leggi:
   - "[[legge-poche-cose-verificate]]"
@@ -16,6 +17,13 @@ cosa_fa_la_giocatrice: "Nel grimorio ha gli album delle cose trovate: l'erbario,
 serve:
   - "[[vede-solo-quello-che-sa]]"
   - "[[erbe-come-storia]]"
+concetti:
+  - "erba"
+  - "pietra"
+  - "pianeta"
+  - "segno"
+  - "elemento"
+  - "intenzione"
 insegna:
   - "[[riconoscere-e-curare-le-piante]]"
   - "[[conoscere-pianeti-e-segni]]"

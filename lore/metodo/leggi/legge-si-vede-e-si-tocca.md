@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Il concetto si vede e si tocca"
+ambito: generale
 numero: 3
 gruppo: "come"
 in_breve: "Ogni concetto ha un corpo: un'immagine vera, grande, in cui si entra, e un gesto fatto con le mani."

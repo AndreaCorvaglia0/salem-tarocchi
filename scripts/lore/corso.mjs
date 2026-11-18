@@ -1,7 +1,8 @@
 // The course in the vault (lore/corso/, docs/MANIFESTO.md: law 1 «Poche cose da sapere» and «L'unità di
 // crescita: sei cose per ogni concetto»; spec notes/vault/V3-spec.md):
 //   checkCorso(V, E, W)      the rules of `lore check` about peso, concetti, the places (sta_in...) and the families
-//   corsoModel(V, hasFile)   the six voices of every family, computed from the vault
+//   corsoModel(V, hasFile)   the six voices of every family, computed from the vault (corpo, motivo, uso and ritorno:
+//                            the meccaniche that declare the family in `concetti` and have law 3 / 2 / 5 / 8; spec notes/vault/V4-spec.md)
 //   seiVociPage(V, header)   the generated page lore/corso/_sei-voci.md
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -46,6 +47,11 @@ export function checkCorso(V, E, W) {
     const pesi = new Set(docs.filter((d) => d.data.famiglia === f).map((d) => d.data.peso));
     if (pesi.size > 1) W('peso', `corso/concetti (${f})`, `the family ${f} mixes peso: ${[...pesi].join(', ')}`);
   }
+  // a meccanica says which families of the course it touches (`concetti`: obligatory, may be empty)
+  for (const d of V.ofTipo('meccanica')) {
+    if (!('concetti' in d.data)) continue;
+    for (const c of asList(d.data.concetti).filter((x) => x != null && x !== '')) if (!families.has(c)) E('meccanica.concetti', d.rel, `\`concetti\` names "${c}", which is not a family of lore/corso/concetti/ (${[...families].sort().join(', ')})`);
+  }
   for (const d of V.ofTipo('obiettivo')) {
     const x = d.data;
     if ('peso' in x && !PESI.includes(x.peso)) E('peso', d.rel, `\`peso\` must be nucleo or contorno, not "${x.peso}"`);
@@ -79,7 +85,7 @@ export function corsoModel(V, hasFile = defaultHasFile) {
     const cs = docs.filter((d) => d.data.famiglia === f).sort((a, b) => a.name.localeCompare(b.name));
     const peso = cs.map((d) => d.data.peso).sort((a, b) => cs.filter((d) => d.data.peso === b).length - cs.filter((d) => d.data.peso === a).length)[0] || null;
     const obj = objs.filter((o) => asList(o.data.concetti).includes(f)).map((o) => o.name);
-    const teaching = mecc.filter((m) => asList(m.data.insegna).some((o) => obj.includes(linkTarget(o))));
+    const teaching = mecc.filter((m) => asList(m.data.concetti).includes(f));
     const byLaw = (n) => teaching.filter((m) => asList(m.data.leggi).some((l) => laws.get(linkTarget(l)) === n)).map((m) => m.name).sort();
     return {
       famiglia: f, peso, concetti: cs.map((d) => d.name), obiettivi: obj,
@@ -90,7 +96,8 @@ export function corsoModel(V, hasFile = defaultHasFile) {
     };
   });
   const senzaConcetti = objs.filter((o) => !asList(o.data.concetti).filter(Boolean).length).map((o) => o.name);
-  return { fams, senzaConcetti, senzaObiettivi: fams.filter((f) => !f.obiettivi.length).map((f) => f.famiglia) };
+  const meccSenzaConcetti = mecc.filter((m) => !asList(m.data.concetti).filter(Boolean).length).map((m) => m.name).sort();
+  return { fams, senzaConcetti, meccSenzaConcetti, senzaObiettivi: fams.filter((f) => !f.obiettivi.length).map((f) => f.famiglia) };
 }
 
 const L = (n) => `[[${n}]]`;
@@ -109,7 +116,7 @@ const IMAGE_FAMILIES = ['arcano', 'erba', 'pietra'];
 export function seiVociPage(V, header, hasFile) {
   const M = corsoModel(V, hasFile);
   const out = ['# Le sei voci di ogni concetto', '', header, '',
-    "L'unità di crescita di `docs/MANIFESTO.md`: un concetto è «dentro» quando ha un **nucleo** (una riga: `in_breve`), un **corpo** (un'immagine vera, o una meccanica della legge 3 che insegna un obiettivo che riguarda la famiglia), un **posto** (`sta_in`, `arriva_da`, `la_da` o `si_impara_da`), un **motivo** (una meccanica della legge 2 che insegna un obiettivo della famiglia), un **uso** (legge 5) e un **ritorno** (legge 8). Una riga per famiglia; le famiglie sono quelle di `corso/concetti/`, gli obiettivi di una famiglia sono quelli che la nominano in `concetti`. Dove c'è un numero, la voce si conta concetto per concetto (n/N).", ''];
+    "L'unità di crescita di `docs/MANIFESTO.md`: un concetto è «dentro» quando ha un **nucleo** (una riga: `in_breve`), un **corpo** (un'immagine vera, o una meccanica della legge 3 che dichiara la famiglia), un **posto** (`sta_in`, `arriva_da`, `la_da` o `si_impara_da`), un **motivo** (una meccanica della legge 2 che dichiara la famiglia), un **uso** (legge 5) e un **ritorno** (legge 8). Una meccanica dichiara una famiglia col suo campo `concetti`: è quella che tocca davvero, secondo la scheda e il codice (non quella degli obiettivi che insegna). Una riga per famiglia; le famiglie sono quelle di `corso/concetti/`, gli obiettivi di una famiglia sono quelli che la nominano in `concetti`. Dove c'è un numero, la voce si conta concetto per concetto (n/N).", ''];
   for (const peso of PESI) {
     const fs = M.fams.filter((f) => f.peso === peso);
     out.push(`## ${peso === 'nucleo' ? 'Il nucleo' : 'Il contorno'}`, '', '| Famiglia | Obiettivi | Nucleo | Corpo | Posto | Motivo | Uso | Ritorno |', '|---|---|---|---|---|---|---|---|');
@@ -133,6 +140,8 @@ export function seiVociPage(V, header, hasFile) {
     if (no.length) { any = true; out.push(`- **${f.famiglia}**: ${no.join(', ')}`); }
   }
   if (!any) out.push('Nessuna.');
+  out.push('', '### Meccaniche che non toccano nessun concetto', '', 'Tengono dentro, non insegnano il corso: è onesto vederle (il campo `concetti` è vuoto).', '');
+  out.push(...(M.meccSenzaConcetti.length ? M.meccSenzaConcetti.map((n) => `- ${L(n)}`) : ['Nessuna.']));
   out.push('', '### In fondo', '', `- Obiettivi senza concetti: ${M.senzaConcetti.map(L).join(', ') || 'nessuno'}.`, `- Famiglie senza obiettivi: ${M.senzaObiettivi.join(', ') || 'nessuna'}.`);
   return `${out.join('\n').trimEnd()}\n`;
 }

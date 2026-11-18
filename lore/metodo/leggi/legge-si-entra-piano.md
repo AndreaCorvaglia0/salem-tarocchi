@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Si entra piano, e il mondo cresce con quello che sa"
+ambito: generale
 numero: 9
 gruppo: "come"
 in_breve: "All'inizio un posto, una carta, una persona; il resto compare quando serve, e ogni concetto nuovo allarga il mondo."

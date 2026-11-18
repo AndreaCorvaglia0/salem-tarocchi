@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Poche cose da sapere, chiare, e verificate"
+ambito: generale
 numero: 1
 gruppo: "che-cosa"
 in_breve: "Al centro pochi concetti, detti chiari, con intorno il contorno che li aiuta; ogni obiettivo ha una verifica, e la verifica è gioco."

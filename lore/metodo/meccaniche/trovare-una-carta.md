@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Trovare una carta"
+ambito: salem
 dinamica: "laboratorio"
 leggi:
   - "[[legge-si-vede-e-si-tocca]]"
@@ -22,6 +23,11 @@ serve:
   - "[[la-lettrice-legge-lei]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[niente-tocchi-per-sbaglio]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
 insegna:
   - "[[riconoscere-una-carta]]"
   - "[[ricordare-i-dettagli]]"

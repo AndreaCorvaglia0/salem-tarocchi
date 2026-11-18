@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Un'interfaccia che premia"
+ambito: generale
 legge: "[[legge-si-vede-e-si-tocca]]"
 anche: "[[legge-chiaro-vero-curato]]"
 in_breve: "L'interfaccia è fluida e moderna, e ogni gesto riuscito si vede: la carta si gira, il sigillo cede, la stella si accende."

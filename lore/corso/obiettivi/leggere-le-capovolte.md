@@ -7,12 +7,6 @@ si_vede_da: "Dopo la lezione di Edera (flag lesson.reversed) le letture ai clien
 concetti:
   - "regola"
   - "arcano"
-meccaniche:
-  - "[[seguire-le-lezioni]]"
-  - "[[leggere-ai-clienti]]"
-  - "[[girare-la-carta-di-oggi]]"
-  - "[[affrontare-le-prove]]"
-  - "[[studiare-in-biblioteca]]"
 aperto: "Negli Esami e nel ripasso non c'è una domanda sulle capovolte."
 ---
 

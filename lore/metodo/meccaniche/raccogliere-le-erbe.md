@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Raccogliere le erbe nell'erbario"
+ambito: salem
 dinamica: "trovare"
 leggi:
   - "[[legge-sempre-un-motivo]]"
@@ -19,6 +20,8 @@ serve:
   - "[[erbe-come-storia]]"
   - "[[prima-di-tutto-corretto]]"
   - "[[mai-assillare]]"
+concetti:
+  - "erba"
 insegna:
   - "[[riconoscere-e-curare-le-piante]]"
 tecniche:

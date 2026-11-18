@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Girare la carta di oggi"
+ambito: salem
 dinamica: "gesti-del-giorno"
 leggi:
   - "[[legge-poco-ogni-giorno]]"
@@ -22,6 +23,13 @@ serve:
   - "[[prima-di-tutto-corretto]]"
   - "[[arriva-a-chi-e-avanti]]"
   - "[[il-testo-e-la-chiave]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "regola"
+  - "storia"
 insegna:
   - "[[riconoscere-una-carta]]"
   - "[[dire-l-idea-della-carta]]"

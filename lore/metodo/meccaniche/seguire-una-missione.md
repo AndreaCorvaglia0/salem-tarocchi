@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Seguire una missione"
+ambito: salem
 dinamica: "missioni"
 leggi:
   - "[[legge-sempre-un-motivo]]"
@@ -17,6 +18,7 @@ serve:
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[vede-solo-quello-che-sa]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[curiosita]]"

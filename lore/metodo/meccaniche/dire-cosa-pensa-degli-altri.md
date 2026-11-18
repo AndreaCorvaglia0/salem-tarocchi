@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Dire che cosa pensa degli altri"
+ambito: salem
 dinamica: "personaggi"
 leggi:
   - "[[legge-e-lei-a-decidere]]"
@@ -17,6 +18,7 @@ serve:
   - "[[la-lettrice-legge-lei]]"
   - "[[mai-assillare]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[storia-ed-emozione]]"

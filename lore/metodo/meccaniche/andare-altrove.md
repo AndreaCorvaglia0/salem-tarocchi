@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Andare altrove"
+ambito: salem
 dinamica: "missioni"
 leggi:
   - "[[legge-sempre-un-motivo]]"
@@ -19,6 +20,12 @@ serve:
   - "[[arriva-a-chi-e-avanti]]"
   - "[[nelle-prove-si-perde]]"
   - "[[le-carte-servono-a-muoversi]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "regola"
 insegna:
   - "[[decidere-con-una-carta]]"
 tecniche:

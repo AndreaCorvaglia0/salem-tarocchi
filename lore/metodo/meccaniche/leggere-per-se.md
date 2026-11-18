@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Leggere per sé"
+ambito: salem
 dinamica: "letture"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -18,6 +19,13 @@ cosa_fa_la_giocatrice: "Dalla soglia, «Leggi le tue carte»: sceglie il tema co
 serve:
   - "[[alla-fine-il-suo-mazzo]]"
   - "[[mai-assillare]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "regola"
 insegna:
   - "[[leggere-il-proprio-mazzo]]"
   - "[[leggere-in-posizione]]"

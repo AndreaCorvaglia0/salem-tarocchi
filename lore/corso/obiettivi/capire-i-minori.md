@@ -8,12 +8,6 @@ concetti:
   - "seme"
   - "numero"
   - "figura"
-meccaniche:
-  - "[[seguire-le-lezioni]]"
-  - "[[leggere-ai-clienti]]"
-  - "[[affrontare-le-prove]]"
-  - "[[studiare-in-biblioteca]]"
-  - "[[chiedere-alle-carte]]"
 aperto: ""
 ---
 

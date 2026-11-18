@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Seguire le lezioni"
+ambito: salem
 dinamica: "missioni"
 leggi:
   - "[[legge-si-entra-piano]]"
@@ -21,6 +22,16 @@ serve:
   - "[[arriva-a-chi-e-avanti]]"
   - "[[prima-di-tutto-corretto]]"
   - "[[il-testo-e-la-chiave]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "regola"
+  - "pianeta"
+  - "segno"
+  - "elemento"
 insegna:
   - "[[capire-i-minori]]"
   - "[[conoscere-le-stese]]"

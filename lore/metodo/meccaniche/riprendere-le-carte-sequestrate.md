@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Riprendere le carte sequestrate"
+ambito: salem
 dinamica: "esami-e-prove"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -13,6 +14,15 @@ cosa_fa_la_giocatrice: "Al deposito del tribunale il custode le ridà una carta 
 serve:
   - "[[nelle-prove-si-perde]]"
   - "[[le-carte-servono-a-muoversi]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "pianeta"
+  - "segno"
+  - "elemento"
 insegna:
   - "[[riconoscere-una-carta]]"
   - "[[dire-l-idea-della-carta]]"

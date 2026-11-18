@@ -153,7 +153,9 @@ test('lore/corso/_sei-voci.md is generated, has every family, and shows the hole
   assert.deepEqual(M.senzaObiettivi.sort(), ['fumo', 'intenzione', 'pietra']);
   const by = Object.fromEntries(M.fams.map((f) => [f.famiglia, f]));
   assert.equal(by.arcano.nucleo.length, 22); assert.equal(by.arcano.immagini.length, 22);
-  assert.equal(by.regola.motivo.length, 0, 'a hole the page must show');
+  assert.equal(by.stesa.corpo.length, 0, 'a hole the page must show: no mechanic of law 3 touches the spreads');
+  assert.equal(by.segno.motivo.length, 0, 'a hole the page must show');
+  assert.ok(text.includes('### Meccaniche che non toccano nessun concetto'));
   assert.ok(text.includes('## I buchi') && text.includes('Famiglie senza obiettivi: intenzione, fumo, pietra'));
   // the circle says in `aperto` why fumo, pietra and intenzione have no goal
   assert.ok(/fumi.*pietre.*intenzioni/.test(String(V.get('_il-cerchio').data.aperto)));

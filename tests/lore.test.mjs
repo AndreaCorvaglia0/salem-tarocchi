@@ -103,13 +103,13 @@ test('rules: flags, steps and sessions named by a fatto must exist; persona ids 
   assert.deepEqual(r.errors.filter((e) => e.file.includes('cattivo')).map((e) => e.rule).sort(), ['fatto.cast', 'fatto.flag', 'fatto.session', 'fatto.step']);
   assert.deepEqual(r.errors.filter((e) => e.file.includes('inventata')).map((e) => e.rule), ['persona.id']);
 });
-test('rules: meccaniche serve principi, obiettivi have meccaniche or say what is open', async () => {
-  const mecc = (serve) => fm({ tipo: '"meccanica"', nome: '"m"', dinamica: '"trovare"', leggi: ['"[[legge-x]]"'], motivo: '"perché sì"', effetto: '"effetto"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve, insegna: '[]', tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '' });
-  const ob = (m, a) => fm({ tipo: '"obiettivo"', nome: '"o"', peso: '"nucleo"', concetti: ['"storia"'], sa_fare: '""', si_vede_da: '""', meccaniche: m, aperto: a });
-  const pr = fm({ tipo: '"principio"', nome: '"p"', legge: '"[[legge-x]]"', in_breve: '""', perche: '""', fonte: '""', si_rompe_se: '""' });
-  const legge = fm({ tipo: '"legge"', nome: '"x"', numero: 1, gruppo: '"come"', in_breve: '""', perche: '""', si_rompe_se: '""', lezioni: '""', fonte: '"deciso"' });
-  const V = mini({ 'metodo/leggi/legge-x.md': legge, 'metodo/principi/p-uno.md': pr, 'metodo/principi/p-due.md': pr, 'metodo/meccaniche/m-ok.md': mecc(['"[[p-uno]]"']), 'metodo/meccaniche/m-vuota.md': mecc('[]'),
-    'corso/concetti/arcano-x.md': fm({ tipo: '"concetto"', nome: '"x"', famiglia: 'storia', peso: '"contorno"', in_breve: '"x"', fonte: '"ricerca"' }), 'corso/obiettivi/o-ok.md': ob('[]', ['"manca tutto"']), 'corso/obiettivi/o-vuoto.md': ob('[]', '') });
+test('rules: meccaniche serve principi, an obiettivo is taught by a meccanica (`insegna`) or says what is open', async () => {
+  const mecc = (serve, insegna = '[]') => fm({ tipo: '"meccanica"', nome: '"m"', ambito: '"salem"', dinamica: '"trovare"', leggi: ['"[[legge-x]]"'], motivo: '"perché sì"', effetto: '"effetto"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve, concetti: '[]', insegna, tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '' });
+  const ob = (a) => fm({ tipo: '"obiettivo"', nome: '"o"', peso: '"nucleo"', concetti: ['"storia"'], sa_fare: '""', si_vede_da: '""', aperto: a });
+  const pr = fm({ tipo: '"principio"', nome: '"p"', ambito: '"generale"', legge: '"[[legge-x]]"', in_breve: '""', perche: '""', fonte: '""', si_rompe_se: '""' });
+  const legge = fm({ tipo: '"legge"', nome: '"x"', ambito: '"generale"', numero: 1, gruppo: '"come"', in_breve: '""', perche: '""', si_rompe_se: '""', lezioni: '""', fonte: '"deciso"' });
+  const V = mini({ 'metodo/leggi/legge-x.md': legge, 'metodo/principi/p-uno.md': pr, 'metodo/principi/p-due.md': pr, 'metodo/meccaniche/m-ok.md': mecc(['"[[p-uno]]"'], ['"[[o-insegnato]]"']), 'metodo/meccaniche/m-vuota.md': mecc('[]'),
+    'corso/concetti/arcano-x.md': fm({ tipo: '"concetto"', nome: '"x"', famiglia: 'storia', peso: '"contorno"', in_breve: '"x"', fonte: '"ricerca"' }), 'corso/obiettivi/o-ok.md': ob(['"manca tutto"']), 'corso/obiettivi/o-insegnato.md': ob(''), 'corso/obiettivi/o-vuoto.md': ob('') });
   const r = check(V, await story());
   assert.deepEqual(rules(r).sort(), ['meccanica.serve', 'obiettivo']);
   assert.ok(r.warnings.some((w) => w.rule === 'principio' && w.file.includes('p-due')));

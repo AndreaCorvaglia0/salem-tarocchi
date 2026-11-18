@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Poco, ogni giorno, volentieri"
+ambito: generale
 numero: 8
 gruppo: "come"
 in_breve: "Si impara con la continuità: gesti di un minuto che valgono da soli, una cosa al giorno, mai un senso di colpa."

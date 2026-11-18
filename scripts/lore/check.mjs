@@ -6,6 +6,7 @@ import { linkTarget, linksIn } from './vault.mjs';
 import { atoms, readsOf } from './story.mjs';
 import { DINAMICA_IDS } from './dinamiche.mjs';
 import { checkCorso } from './corso.mjs';
+import { checkAmbito } from './ambito.mjs';
 
 const NAME_RE = /^_?[a-z0-9]+(-[a-z0-9]+)*$/;
 const empty = (v) => v == null || v === '' || (Array.isArray(v) && v.filter((x) => x != null && x !== '').length === 0);
@@ -136,8 +137,10 @@ export function check(V, S) {
     serve.forEach((s) => served.add(s));
     for (const s of serve) { const t = V.get(s); if (t && t.data?.tipo !== 'principio') E('meccanica.serve', d.rel, `[[${s}]] in serve is a ${t.data?.tipo}, not a principio`); }
   }
+  // the link between a meccanica and an obiettivo is written once, in `insegna` of the meccanica; the reverse is computed
+  const taught = new Set(V.ofTipo('meccanica').flatMap((m) => (Array.isArray(m.data.insegna) ? m.data.insegna : []).map(linkTarget).filter(Boolean)));
   for (const d of V.ofTipo('obiettivo')) {
-    if (empty(d.data.meccaniche) && empty(d.data.aperto)) E('obiettivo', d.rel, 'an obiettivo needs at least one meccanica, or says what is missing in `aperto`');
+    if (!taught.has(d.name) && empty(d.data.aperto)) E('obiettivo', d.rel, 'an obiettivo needs at least one meccanica that teaches it (`insegna` of a meccanica), or says what is missing in `aperto`');
   }
   for (const d of V.ofTipo('principio')) if (!served.has(d.name)) W('principio', d.rel, 'no meccanica serves this principio');
 
@@ -185,6 +188,9 @@ export function check(V, S) {
 
   // ---- the course: peso, concetti, places, families (scripts/lore/corso.mjs)
   checkCorso(V, E, W);
+
+  // ---- the scope of the cards of the method: general or Salem (scripts/lore/ambito.mjs); warnings only
+  stats.ambito = checkAmbito(V, E, W);
 
   return { errors, warnings, stats };
 }

@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Chiaro, vero, fatto con cura"
+ambito: generale
 numero: 11
 gruppo: "com-e-costruito"
 in_breve: "Il testo si capisce alla prima, quello che si insegna è vero, un tocco sbagliato non costa una battuta; chi costruisce dice che cosa ha verificato."

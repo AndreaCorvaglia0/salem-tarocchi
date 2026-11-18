@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Il concetto è una chiave"
+ambito: generale
 numero: 5
 gruppo: "come"
 in_breve: "Un concetto diventa importante quando serve per andare avanti: la storia chiede una decisione e solo il concetto la sa prendere."

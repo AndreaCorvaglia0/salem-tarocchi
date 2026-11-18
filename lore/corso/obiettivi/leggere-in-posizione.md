@@ -7,10 +7,6 @@ si_vede_da: "La seconda domanda per carta nelle letture: «E qui, per questa dom
 concetti:
   - "stesa"
   - "arcano"
-meccaniche:
-  - "[[leggere-ai-clienti]]"
-  - "[[leggere-per-se]]"
-  - "[[leggere-col-mazzo-vero]]"
 aperto: ""
 ---
 

@@ -9,20 +9,6 @@ concetti:
   - "seme"
   - "numero"
   - "figura"
-meccaniche:
-  - "[[giocare-a-coppie-con-la-sibilla]]"
-  - "[[trovare-una-carta]]"
-  - "[[superare-l-esame]]"
-  - "[[riprendere-le-carte-sequestrate]]"
-  - "[[leggere-ai-clienti]]"
-  - "[[leggere-per-strada]]"
-  - "[[girare-la-carta-di-oggi]]"
-  - "[[ripassare]]"
-  - "[[studiare-in-biblioteca]]"
-  - "[[chiedere-alle-carte]]"
-  - "[[aprire-i-sigilli]]"
-  - "[[farsi-leggere-dalla-lettrice]]"
-  - "[[leggere-per-se]]"
 aperto: "Lei non scrive mai l'idea con parole sue dopo averla imparata: le tre parole si scrivono una volta, prima della spiegazione, e tornano solo come indizio. Il gioco non sa se le sue parole erano giuste, sa solo se la riportano alla carta."
 ---
 

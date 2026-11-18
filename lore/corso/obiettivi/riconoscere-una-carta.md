@@ -7,15 +7,6 @@ si_vede_da: "Domande «Che carta è?» con il titolo coperto, «Da quale carta v
 concetti:
   - "arcano"
   - "seme"
-meccaniche:
-  - "[[trovare-una-carta]]"
-  - "[[superare-l-esame]]"
-  - "[[riprendere-le-carte-sequestrate]]"
-  - "[[girare-la-carta-di-oggi]]"
-  - "[[rispondere-a-memoria]]"
-  - "[[ripassare]]"
-  - "[[aprire-i-sigilli]]"
-  - "[[farsi-leggere-dalla-lettrice]]"
 aperto: ""
 ---
 

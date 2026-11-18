@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Leggere i libri dello scaffale"
+ambito: salem
 dinamica: "libri"
 leggi:
   - "[[legge-poche-cose-verificate]]"
@@ -22,6 +23,12 @@ serve:
   - "[[mai-assillare]]"
   - "[[arriva-a-chi-e-avanti]]"
   - "[[leggere-e-l-attivita-vera]]"
+concetti:
+  - "erba"
+  - "pietra"
+  - "pianeta"
+  - "elemento"
+  - "fumo"
 insegna:
   - "[[conoscere-pianeti-e-segni]]"
 tecniche:

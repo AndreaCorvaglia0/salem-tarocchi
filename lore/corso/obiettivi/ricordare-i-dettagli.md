@@ -6,10 +6,6 @@ sa_fare: "Ricorda che cosa c'è nel disegno di una carta (la rosa bianca del Mat
 si_vede_da: "La domanda «Senza guardare» della carta di oggi (src/data/daily/visual.js, due domande per carta; se la carta è sua conta per il ripasso, una volta al giorno, e un giorno su tre la carta di oggi è una delle sue da ripassare: src/glue/threshold.rules.js) e la domanda col ritaglio della carta (kind detail in src/data/questions.js)."
 concetti:
   - "arcano"
-meccaniche:
-  - "[[trovare-una-carta]]"
-  - "[[girare-la-carta-di-oggi]]"
-  - "[[rispondere-a-memoria]]"
 aperto: ""
 ---
 

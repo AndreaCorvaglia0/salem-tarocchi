@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Coltivare le erbe con Ortica (l'interesse da strega)"
+ambito: salem
 dinamica: "interessi"
 leggi:
   - "[[legge-si-vede-e-si-tocca]]"
@@ -23,6 +24,12 @@ serve:
   - "[[mai-assillare]]"
   - "[[erbe-come-storia]]"
   - "[[i-personaggi-non-spiegano]]"
+concetti:
+  - "erba"
+  - "intenzione"
+  - "pianeta"
+  - "elemento"
+  - "fumo"
 insegna:
   - "[[riconoscere-e-curare-le-piante]]"
   - "[[rispondere-a-chi-chiede]]"

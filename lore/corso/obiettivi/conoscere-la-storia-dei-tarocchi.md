@@ -6,8 +6,6 @@ sa_fare: "Racconta qualcosa della storia del mazzo: il gioco di carte del Quattr
 si_vede_da: "Non si verifica: gli sguardi «storia» della carta di oggi e le note del quaderno (src/data/daily/) si leggono e basta."
 concetti:
   - "storia"
-meccaniche:
-  - "[[girare-la-carta-di-oggi]]"
 aperto: "Nessuna domanda sulla storia."
 ---
 

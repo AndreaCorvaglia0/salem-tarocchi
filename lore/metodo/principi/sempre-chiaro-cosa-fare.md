@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Sempre chiaro cosa fare"
+ambito: generale
 legge: "[[legge-chiaro-vero-curato]]"
 anche: "[[legge-si-entra-piano]]"
 in_breve: "Si capisce sempre che cosa fare e che cosa viene dopo; si impara una cosa alla volta, usandola."

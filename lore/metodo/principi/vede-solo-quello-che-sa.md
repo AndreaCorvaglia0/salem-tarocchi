@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Lei vede solo quello che sa"
+ambito: generale
 legge: "[[legge-sempre-un-motivo]]"
 anche: "[[legge-si-entra-piano]]"
 in_breve: "Ogni schermata mostra quello che lei ha visto o le hanno detto: mai il premio, il contenuto o i retroscena. Quello che non sa è un «?» o una riga misteriosa, mai un vuoto e mai una spiegazione."

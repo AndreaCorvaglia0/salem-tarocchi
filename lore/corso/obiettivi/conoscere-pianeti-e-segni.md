@@ -8,11 +8,6 @@ concetti:
   - "pianeta"
   - "segno"
   - "elemento"
-meccaniche:
-  - "[[seguire-le-lezioni]]"
-  - "[[superare-l-esame]]"
-  - "[[ripassare]]"
-  - "[[raccogliere-pietre-e-figurine]]"
 aperto: "Gli elementi dei semi si incontrano nelle lezioni e nella magia, ma nessuna domanda li chiede direttamente."
 ---
 

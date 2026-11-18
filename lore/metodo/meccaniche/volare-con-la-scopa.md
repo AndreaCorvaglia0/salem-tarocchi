@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Volare con la scopa"
+ambito: salem
 dinamica: "gradi-e-zone"
 leggi:
   - "[[legge-si-entra-piano]]"
@@ -18,6 +19,7 @@ serve:
   - "[[vede-solo-quello-che-sa]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[interfaccia-che-premia]]"
+concetti: []
 insegna: []
 tecniche: []
 ragione_nel_gioco: "Una strega vola, ma solo dove i suoi piedi sono già stati, all'aperto, e quando nessuno la guarda."

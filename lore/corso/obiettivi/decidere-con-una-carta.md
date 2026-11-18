@@ -6,11 +6,6 @@ sa_fare: "Usa una carta pescata per scegliere che cosa fare: favorevole o contra
 si_vede_da: "I bivi delle prove e di Altrove (src/trials/ask.js): una scelta sbagliata è un errore, con una perdita."
 concetti:
   - "arcano"
-meccaniche:
-  - "[[affrontare-le-prove]]"
-  - "[[studiare-in-biblioteca]]"
-  - "[[chiedere-alle-carte]]"
-  - "[[andare-altrove]]"
 aperto: "Fuori dalle prove il gesto non c'è: il servizio trial.ask esiste ma nessuna scena del mondo lo chiama."
 ---
 

@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Curare l'orto"
+ambito: salem
 dinamica: "gesti-del-giorno"
 leggi:
   - "[[legge-poco-ogni-giorno]]"
@@ -19,6 +20,8 @@ serve:
   - "[[mai-assillare]]"
   - "[[prima-di-tutto-corretto]]"
   - "[[erbe-come-storia]]"
+concetti:
+  - "erba"
 insegna:
   - "[[riconoscere-e-curare-le-piante]]"
 tecniche:

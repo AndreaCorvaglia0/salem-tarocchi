@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Stare con Tartufo"
+ambito: salem
 dinamica: "personaggi"
 leggi:
   - "[[legge-e-lei-a-decidere]]"
@@ -17,6 +18,7 @@ cosa_fa_la_giocatrice: "Il gatto nero arriva al livello 2. Lei lo tocca per darg
 serve:
   - "[[mai-assillare]]"
   - "[[interfaccia-che-premia]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[storia-ed-emozione]]"

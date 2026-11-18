@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Giocare a coppie con la sibilla"
+ambito: salem
 dinamica: "parole-sue"
 leggi:
   - "[[legge-da-molti-lati]]"
@@ -20,6 +21,7 @@ serve:
   - "[[interfaccia-che-premia]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti: []
 insegna:
   - "[[unire-le-carte]]"
   - "[[dire-l-idea-della-carta]]"

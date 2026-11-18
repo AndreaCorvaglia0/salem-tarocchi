@@ -89,10 +89,10 @@ test('the README table lists the new fields', () => {
 // ---- the new rules on small made-up vaults -------------------------------------------------------------
 const fm = (o) => `---\n${Object.entries(o).map(([k, v]) => `${k}: ${Array.isArray(v) ? `\n${v.map((x) => `  - ${x}`).join('\n')}` : v}`).join('\n').replace(/: \n/g, ':\n')}\n---\nTesto.\n`;
 const mini = (files) => vaultOf(Object.entries(files).map(([rel, text]) => docOf(rel, text)), README);
-const legge = (n, extra = {}) => fm({ tipo: '"legge"', nome: '"x"', numero: n, gruppo: '"come"', in_breve: '"x"', perche: '"x"', si_rompe_se: '"x"', lezioni: '"1"', fonte: '"deciso"', ...extra });
-const principio = (extra = {}) => fm({ tipo: '"principio"', nome: '"p"', legge: '"[[legge-uno]]"', in_breve: '"x"', perche: '"x"', fonte: '"x"', si_rompe_se: '"x"', ...extra });
-const tecnica = (extra = {}) => fm({ tipo: '"tecnica"', nome: '"t"', legge: '"[[legge-uno]]"', in_breve: '"x"', come_funziona: '"x"', fonte: '"x"', dove_la_usiamo: '[]', dove_manca: '"x"', ...extra });
-const mecc = (extra = {}) => fm({ tipo: '"meccanica"', nome: '"m"', dinamica: '"trovare"', leggi: ['"[[legge-uno]]"'], motivo: '"un motivo"', effetto: '"un effetto"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve: ['"[[p-uno]]"'], insegna: '[]', tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '', ...extra });
+const legge = (n, extra = {}) => fm({ tipo: '"legge"', nome: '"x"', ambito: '"generale"', numero: n, gruppo: '"come"', in_breve: '"x"', perche: '"x"', si_rompe_se: '"x"', lezioni: '"1"', fonte: '"deciso"', ...extra });
+const principio = (extra = {}) => fm({ tipo: '"principio"', nome: '"p"', ambito: '"generale"', legge: '"[[legge-uno]]"', in_breve: '"x"', perche: '"x"', fonte: '"x"', si_rompe_se: '"x"', ...extra });
+const tecnica = (extra = {}) => fm({ tipo: '"tecnica"', nome: '"t"', ambito: '"generale"', legge: '"[[legge-uno]]"', in_breve: '"x"', come_funziona: '"x"', fonte: '"x"', dove_manca: '"x"', ...extra });
+const mecc = (extra = {}) => fm({ tipo: '"meccanica"', nome: '"m"', ambito: '"salem"', dinamica: '"trovare"', leggi: ['"[[legge-uno]]"'], motivo: '"un motivo"', effetto: '"un effetto"', fonte: '""', dove: '""', cosa_fa_la_giocatrice: '""', serve: ['"[[p-uno]]"'], concetti: '[]', insegna: '[]', tecniche: '[]', ragione_nel_gioco: '""', premio: '""', rischio: '""', tratti: '[]', aperto: '', ...extra });
 const base = { 'metodo/leggi/legge-uno.md': legge(1), 'metodo/leggi/legge-strati-indipendenti.md': legge(10), 'metodo/leggi/legge-chiaro-vero-curato.md': legge(11), 'metodo/principi/p-uno.md': principio(), 'metodo/tecniche/t-uno.md': tecnica() };
 const run = async (files) => check(mini({ ...base, ...files }), await story());
 const by = (r, rule) => r.errors.filter((e) => e.rule === rule).map((e) => e.file);

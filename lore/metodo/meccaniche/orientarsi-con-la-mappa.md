@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Orientarsi con la mappa"
+ambito: salem
 dinamica: "grimorio-e-album"
 leggi:
   - "[[legge-il-mondo-e-la-memoria]]"
@@ -18,6 +19,7 @@ serve:
   - "[[un-mondo-da-ricordare]]"
   - "[[sempre-chiaro-cosa-fare]]"
   - "[[vede-solo-quello-che-sa]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[loci-e-immagini-vivide]]"

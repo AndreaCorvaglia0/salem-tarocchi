@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Scegliere le pietre con Edera (l'interesse da strega)"
+ambito: salem
 dinamica: "interessi"
 leggi:
   - "[[legge-si-vede-e-si-tocca]]"
@@ -25,6 +26,10 @@ serve:
   - "[[erbe-come-storia]]"
   - "[[i-personaggi-non-spiegano]]"
   - "[[nelle-prove-si-perde]]"
+concetti:
+  - "pietra"
+  - "intenzione"
+  - "pianeta"
 insegna:
   - "[[conoscere-pianeti-e-segni]]"
   - "[[rispondere-a-chi-chiede]]"

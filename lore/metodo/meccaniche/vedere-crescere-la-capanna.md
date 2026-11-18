@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Vedere crescere la capanna"
+ambito: salem
 dinamica: "casa"
 leggi:
   - "[[legge-e-lei-a-decidere]]"
@@ -17,6 +18,7 @@ cosa_fa_la_giocatrice: "La sua capanna nel villaggio cambia sagoma in tre stadi:
 serve:
   - "[[arriva-a-chi-e-avanti]]"
   - "[[interfaccia-che-premia]]"
+concetti: []
 insegna: []
 tecniche:
   - "[[riferimento-a-se]]"

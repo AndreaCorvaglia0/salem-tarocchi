@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Leggere ai clienti"
+ambito: salem
 dinamica: "letture"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -22,6 +23,13 @@ serve:
   - "[[alla-fine-il-suo-mazzo]]"
   - "[[le-carte-servono-a-muoversi]]"
   - "[[il-testo-e-la-chiave]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "regola"
 insegna:
   - "[[dire-l-idea-della-carta]]"
   - "[[leggere-in-posizione]]"

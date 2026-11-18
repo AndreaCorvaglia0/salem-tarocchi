@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Chiedere alle carte"
+ambito: salem
 dinamica: "decisioni"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -19,6 +20,12 @@ serve:
   - "[[la-domanda-non-mostra-la-risposta]]"
   - "[[leggere-e-l-attivita-vera]]"
   - "[[pochi-concetti-legati]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "regola"
 insegna:
   - "[[decidere-con-una-carta]]"
   - "[[dire-l-idea-della-carta]]"

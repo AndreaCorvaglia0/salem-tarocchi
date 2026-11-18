@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Prima di tutto corretto"
+ambito: generale
 legge: "[[legge-chiaro-vero-curato]]"
 in_breve: "Quello che il gioco insegna è vero: nel dubbio si cerca, e la fonte si scrive in RESEARCH.md."
 perche: "Lei impara davvero i tarocchi e le piante: un errore le resterebbe in testa."

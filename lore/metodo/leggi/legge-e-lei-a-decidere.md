@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "È lei a decidere"
+ambito: generale
 numero: 7
 gruppo: "come"
 in_breve: "Il gioco è suo: sceglie, e il mondo se ne ricorda; quello che riguarda lei, lo ricorda."

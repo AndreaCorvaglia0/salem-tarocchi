@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Raccogliere pietre e figurine della sibilla"
+ambito: salem
 dinamica: "trovare"
 leggi:
   - "[[legge-sempre-un-motivo]]"
@@ -23,6 +24,11 @@ serve:
   - "[[vede-solo-quello-che-sa]]"
   - "[[erbe-come-storia]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti:
+  - "pietra"
+  - "pianeta"
+  - "elemento"
+  - "intenzione"
 insegna:
   - "[[unire-le-carte]]"
   - "[[conoscere-pianeti-e-segni]]"

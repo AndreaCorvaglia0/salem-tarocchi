@@ -1,6 +1,7 @@
 ---
 tipo: "meccanica"
 nome: "Scegliere nella storia"
+ambito: salem
 dinamica: "decisioni"
 leggi:
   - "[[legge-e-lei-a-decidere]]"
@@ -17,6 +18,8 @@ cosa_fa_la_giocatrice: "Nei copioni, nelle sedute e nelle visite il gioco le chi
 serve:
   - "[[la-lettrice-legge-lei]]"
   - "[[le-carte-servono-a-muoversi]]"
+concetti:
+  - "arcano"
 insegna: []
 tecniche:
   - "[[autonomia-competenza-legami]]"

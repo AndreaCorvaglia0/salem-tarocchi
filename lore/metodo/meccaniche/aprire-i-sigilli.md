@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Aprire i sigilli"
+ambito: salem
 dinamica: "esami-e-prove"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -15,6 +16,15 @@ serve:
   - "[[le-carte-servono-a-muoversi]]"
   - "[[la-domanda-non-mostra-la-risposta]]"
   - "[[interfaccia-che-premia]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "pianeta"
+  - "segno"
+  - "elemento"
 insegna:
   - "[[riconoscere-una-carta]]"
   - "[[dire-l-idea-della-carta]]"

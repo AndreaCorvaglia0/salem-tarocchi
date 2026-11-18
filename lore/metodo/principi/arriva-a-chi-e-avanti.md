@@ -1,6 +1,7 @@
 ---
 tipo: principio
 nome: "Arriva anche a chi è avanti"
+ambito: generale
 legge: "[[legge-strati-indipendenti]]"
 in_breve: "Ogni cosa aggiunta dipende da quello che lei ha, non dal punto della storia."
 perche: "Lei sta già giocando: un pezzo legato a un passo superato non lo vedrebbe mai."

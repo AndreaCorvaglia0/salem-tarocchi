@@ -1,6 +1,7 @@
 ---
 tipo: "principio"
 nome: "Un mondo fatto per essere ricordato"
+ambito: generale
 legge: "[[legge-il-mondo-e-la-memoria]]"
 in_breve: "L'ambientazione è fatta per essere ricordata: zone riconoscibili, punti di riferimento, una mappa che coincide col mondo, e ogni concetto ha un posto."
 perche: "Legare le cose a luoghi aiuta a ricordarle in ordine, ma le prove sul metodo dei loci sono di qualità bassa e poco sul lungo periodo: il mondo sostiene, il lavoro duraturo lo fanno le leggi 5 e 8. Chi giocava non si orientava, perché gli edifici erano tutti la stessa casetta (lezione 11), e la mappa disegnata a mano mostrava luoghi che non esistevano (lezione 12)."

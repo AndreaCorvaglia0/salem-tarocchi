@@ -1,6 +1,7 @@
 ---
 tipo: "legge"
 nome: "Il mondo è la memoria"
+ambito: generale
 numero: 6
 gruppo: "come"
 in_breve: "La forma del mondo è la forma di quello che si impara: ogni concetto ha un posto, e la mappa lo mostra."

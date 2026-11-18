@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Imparare l'orto da Ortica"
+ambito: salem
 dinamica: "interessi"
 leggi:
   - "[[legge-si-vede-e-si-tocca]]"
@@ -17,6 +18,8 @@ serve:
   - "[[prima-di-tutto-corretto]]"
   - "[[erbe-come-storia]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti:
+  - "erba"
 insegna:
   - "[[riconoscere-e-curare-le-piante]]"
 tecniche:

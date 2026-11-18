@@ -7,9 +7,6 @@ si_vede_da: "«Quindi, che cosa rispondi?» con tre risposte; paga e popolarità
 concetti:
   - "arcano"
   - "stesa"
-meccaniche:
-  - "[[leggere-ai-clienti]]"
-  - "[[leggere-per-strada]]"
 aperto: "La scelta del tono, con garbo o senza giri di parole, è stata tolta: consult.js mette tone = null. Mandare via qualcuno non ha una risposta giusta."
 ---
 

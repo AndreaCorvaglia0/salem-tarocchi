@@ -60,6 +60,7 @@ export function notesText(r) {
   const L = ['# Tools: what the lore linter says', '', '_Written by `node scripts/lore.mjs check`: do not edit by hand. What the rules mean: docs/TOOLS.md._', '',
     `Errors: ${r.errors.length}. Warnings: ${r.warnings.length}.`, '',
     `Links checked: ${r.stats.links}. Fact clauses checked: ${r.stats.factTokensChecked} names; ${r.stats.factClausesUnchecked} clauses not understood (not checked).`,
+    `${r.stats.ambito.conSalem} schede generali parlano ancora di Salem (su ${r.stats.ambito.generali} generali; ${r.stats.ambito.salem} sono di Salem).`, '',
     `Continuity: ${r.stats.continuity.claims} claims (who knows what), ${r.stats.continuity.checked} placed on the main path and checked, ${r.stats.continuity.guarded} guarded by a test of the fact's flags, ${r.stats.continuity.skipped} not placeable (skipped), ${r.stats.continuity.violations} violations.`, ''];
   for (const [title, list] of [['Errors', r.errors], ['Warnings', r.warnings]]) {
     L.push(`## ${title}`, '');
@@ -82,6 +83,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     mkdirSync(dirname(NOTES), { recursive: true });
     writeFileSync(NOTES, notesText(r));
     console.log(`\n${r.errors.length} errors, ${r.warnings.length} warnings (notes/tools.md). Continuity: ${JSON.stringify(r.stats.continuity)}`);
+    console.log(`${r.stats.ambito.conSalem} schede generali parlano ancora di Salem (su ${r.stats.ambito.generali}); le cinque peggiori: ${r.stats.ambito.peggiori.map((x) => `${x.file} (${x.score})`).join(', ')}`);
     process.exit(r.errors.length ? 1 : 0);
   } else if (cmd === 'gen') {
     const pages = await runGen();

@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Farsi leggere dalla Lettrice"
+ambito: salem
 dinamica: "personaggi"
 leggi:
   - "[[legge-e-lei-a-decidere]]"
@@ -22,6 +23,9 @@ serve:
   - "[[i-personaggi-non-spiegano]]"
   - "[[alla-fine-il-suo-mazzo]]"
   - "[[niente-tocchi-per-sbaglio]]"
+concetti:
+  - "arcano"
+  - "stesa"
 insegna:
   - "[[dire-l-idea-della-carta]]"
   - "[[riconoscere-una-carta]]"

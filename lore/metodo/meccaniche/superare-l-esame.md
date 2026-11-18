@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Superare l'Esame"
+ambito: salem
 dinamica: "esami-e-prove"
 leggi:
   - "[[legge-poche-cose-verificate]]"
@@ -19,6 +20,15 @@ serve:
   - "[[le-carte-servono-a-muoversi]]"
   - "[[la-domanda-non-mostra-la-risposta]]"
   - "[[niente-tocchi-per-sbaglio]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "pianeta"
+  - "segno"
+  - "elemento"
 insegna:
   - "[[riconoscere-una-carta]]"
   - "[[dire-l-idea-della-carta]]"

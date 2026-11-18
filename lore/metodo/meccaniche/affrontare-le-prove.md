@@ -1,6 +1,7 @@
 ---
 tipo: meccanica
 nome: "Affrontare le prove"
+ambito: salem
 dinamica: "esami-e-prove"
 leggi:
   - "[[legge-il-concetto-e-una-chiave]]"
@@ -19,6 +20,12 @@ serve:
   - "[[nelle-prove-si-perde]]"
   - "[[le-carte-servono-a-muoversi]]"
   - "[[arriva-a-chi-e-avanti]]"
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "regola"
 insegna:
   - "[[decidere-con-una-carta]]"
   - "[[capire-i-minori]]"
