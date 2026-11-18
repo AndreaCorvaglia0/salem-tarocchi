@@ -31,6 +31,7 @@ export default {
     desk: [2, 4, 'Il tavolo dei libri'],
     shelf: [2, 2, 'Lo scaffale'], // the bookshelf (glue/books.js, ui/books.js): the shelf left of the window
     book: [4, 3, 'Un libro aperto'], // Altrove: the story read in the library (glue/elsewhere.js)
+    stones: [7, 2, 'Le pietre di Edera'], // the shelf right of the window: Edera's stones and their labels (glue/interests.edera.js)
   },
   doors: [{ at: 'door', to: 'village.library_door', look: 'mat' }],
 };

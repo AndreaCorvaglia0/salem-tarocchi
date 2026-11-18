@@ -12,6 +12,8 @@ const P = {
   prova: 'M9 21 L9 11 L15 11 L15 21 Z M7 21 L17 21 M12 11 L12 9.5 M12 9.5 C9.6 7.6 10.8 5 12 2.8 C13.2 5 14.4 7.6 12 9.5 Z',
   // a sprout: two leaves on a stem
   orto: 'M12 21 L12 10 M12 14 C8 14 5.5 11.5 5 7.5 C9 7.5 11.5 10 12 14 M12 11.5 C12.5 7.5 15 5 19 4.5 C18.6 8.6 16 11.2 12 11.5 M8 21 L16 21',
+  // a cut stone, seen from the side, with its facets: Edera's stones
+  pietra: 'M5 9.5 L9 5 L15 5 L19 9.5 L12 20 Z M5 9.5 L19 9.5 M9 5 L10.5 9.5 L12 20 M15 5 L13.5 9.5 L12 20',
   // a spiral: a door to somewhere else
   altrove: 'M12 12 C12 10.6 13.8 10.6 13.8 12 C13.8 14 10.4 14 10.4 12 C10.4 8.8 15.6 8.8 15.6 12 C15.6 16.4 8.4 16.4 8.4 12 C8.4 6.6 17.6 6.6 17.6 12 C17.6 18.6 6.4 18.6 6.4 12 C6.4 7 9 4.4 12 4',
   // a speech bubble with three dots: somebody's small story

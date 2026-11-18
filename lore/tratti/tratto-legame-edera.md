@@ -11,6 +11,9 @@ stabilisce:
   - { dove: "c3.js#edera.chat", n: 1 }
   - { dove: "c3.js#edera.chat", n: 1, scelta: "[[c3-edera-chat-1]]" }
   - { dove: "c3.js#edera.chat", n: 1, scelta: "[[c3-edera-chat-1]]" }
+  - { dove: "interests.edera.js#int.edera.1", n: 1 }
+  - { dove: "interests.edera.js#int.edera.2", n: 1 }
+  - { dove: "interests.edera.js#int.edera.3", n: 1 }
 mette_alla_prova:
   - { dove: "c3.js#c3.coven", condizione: "trust edera >= 2" }
   - { dove: "end.js#c3.trial", condizione: "trust edera >= 2" }
@@ -23,6 +26,6 @@ mette_alla_prova:
 
 Quello che lei e edera hanno costruito insieme: la fiducia dei copioni (state.trust) nutre il legame (state.bonds, glue/witches.js).
 
-Lo muovono 7 punti dei copioni e lo leggono 7 condizioni.
+Lo muovono 10 punti dei copioni e lo leggono 7 condizioni.
 
 Il legame cresce anche dal codice: le prove (glue/trials.js) e le opinioni (glue/opinions.js).

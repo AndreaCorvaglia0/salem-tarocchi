@@ -9,6 +9,7 @@ chi_ci_vive:
 atmosfera:
 si_apre_con: "capitolo 3"
 aperto:
+  - "Proposto, da confermare: nella crepa dietro l'edera, accanto al pozzo, c'era il lapislazzuli della nonna di Edera; il raggio di luna lo faceva luccicare (interests.edera.js#int.edera.1)."
 ---
 
 Il pozzo dove dorme una guardia.

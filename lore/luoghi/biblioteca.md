@@ -12,6 +12,7 @@ atmosfera:
 si_apre_con: "capitolo 1 in poi"
 aperto:
   - "Di chi era il cuscino sul tavolo?"
+  - "Proposto, da confermare: sullo scaffale a destra della finestra ci sono le pietre di Edera, con i cartellini scritti dalla ragazza (interests.edera.js#int.edera.3, [[i-cartellini]])."
 ---
 
 La biblioteca di Edera, rimasta di sopra quando lei è andata a vivere sotto. Malva la spolvera una volta al mese.

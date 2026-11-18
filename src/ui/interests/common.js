@@ -16,6 +16,7 @@ const CSS = `
 .it-say{flex:none;width:min(400px,calc(100% - 24px));box-sizing:border-box;margin-top:12px;padding:10px 14px 11px;border-radius:4px 14px 14px 14px;background:#f0e6cf;color:#2a2030;font:italic 18px/1.35 ${SERIF};box-shadow:0 6px 18px #000a;animation:gx-fade .3s}
 .it-say b{display:block;font:400 14px ${SERIF};font-style:normal;color:#6b5a48;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1px}
 .it-say.bad{background:#f3dcc8}
+.it-say.mine{border-radius:14px;font:19px/23px ${HAND};font-style:normal;background:#e9dfc6}
 .it-say:empty{display:none}
 .it-body{flex:none;width:min(400px,calc(100% - 24px));margin-top:12px;display:flex;flex-direction:column;gap:9px}
 .it-note{margin:0;text-align:center;font:17px/21px ${HAND};color:#cdb98e}
@@ -57,20 +58,20 @@ export function herbCanvas(id, k = 3, { flip = false } = {}) {
   return c;
 }
 
-// Ortica's bubble: say(text, bad?) changes it, say('') hides it
+// A witch's bubble: say(text, bad?) changes it, say('') hides it. `who` null: her own thought (no name, no «»).
 export function bubble(who = 'Ortica') {
-  const el = h('div.it-say', { role: 'status', 'aria-live': 'polite' });
-  el.say = (t, bad = false) => { el.classList.toggle('bad', !!bad); el.replaceChildren(...(t ? [h('b', {}, who), `«${t}»`] : [])); if (t) { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; } };
+  const el = h(`div.it-say${who ? '' : '.mine'}`, { role: 'status', 'aria-live': 'polite' });
+  el.say = (t, bad = false) => { el.classList.toggle('bad', !!bad); el.replaceChildren(...(t ? (who ? [h('b', {}, who), `«${t}»`] : [t]) : [])); if (t) { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; } };
   return el;
 }
 
 // The frame: a title, a subtitle, the stage, the bubble, the body (buttons), and a quiet «leave it» at the bottom.
 // -> { el, sub, stage, say, body, done(result) } and a promise in `result`
-export function frame({ title, label, closeText }) {
+export function frame({ title, label, closeText, who = 'Ortica' }) {
   baseCss(); css('ui-interests', CSS);
   let close = () => {}, pop = () => {}, finish;
   const result = new Promise((r) => { finish = r; });
-  const sub = h('p'), stage = h('div.it-stage'), say = bubble(), body = h('div.it-body');
+  const sub = h('p'), stage = h('div.it-stage'), say = bubble(who), body = h('div.it-body');
   const done = (v) => { pop(); close(); finish(v); };
   const x = h('button.it-x', { type: 'button', onclick: () => done({ ok: false }) }, closeText);
   const el = h('div.it', { role: 'dialog', 'aria-label': label || title }, h('div.it-head', h('h1', {}, title), sub), stage, say, body, h('div.it-foot', x));

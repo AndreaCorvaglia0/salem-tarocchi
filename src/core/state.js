@@ -35,6 +35,7 @@ export const fresh = () => ({
   pantry: {}, // herb id -> bunches harvested (for the potions, later)
   pantryDry: {}, // herb id -> dried bunches (the interests, glue/interests.rules.js: fresh bunches hung on Ortica's beam dry by the next day)
   interests: { day: {}, hung: [], back: [] }, // witch -> the day of her last mission; bunches on the beam [{ herb, n, day }]; visitors given a herb who come back [{ id, name, gender, herb, day }]
+  pocket: { stone: null, used: '', lent: null }, // Edera's stones (glue/interests.edera.rules.js): the stone in her pocket, the day it last gave an Exam a second try, her stone lent to the constable for a night { stone, day }
   daily: { looks: {}, notes: 0, noteDay: null }, // looks read per card; notes shown so far
   settings: { music: true, sfx: true },
   // the portrait (docs/DESIGN.md "Il ritratto"): five axes -6..6, positive pole first
@@ -137,6 +138,10 @@ export const migrate = (s) => {
   if (typeof s.interests !== 'object' || !s.interests || Array.isArray(s.interests)) s.interests = { day: {}, hung: [], back: [] };
   if (typeof s.interests.day !== 'object' || !s.interests.day || Array.isArray(s.interests.day)) s.interests.day = {};
   for (const k of ['hung', 'back']) if (!Array.isArray(s.interests[k])) s.interests[k] = [];
+  if (typeof s.pocket !== 'object' || !s.pocket || Array.isArray(s.pocket)) s.pocket = { stone: null, used: '', lent: null }; // Edera's stones
+  if (typeof s.pocket.stone !== 'string') s.pocket.stone = null;
+  if (typeof s.pocket.used !== 'string') s.pocket.used = '';
+  if (!s.pocket.lent || typeof s.pocket.lent !== 'object' || typeof s.pocket.lent.stone !== 'string') s.pocket.lent = null;
   return s;
 };
 

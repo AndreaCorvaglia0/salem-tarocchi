@@ -24,6 +24,7 @@ luoghi:
 carte:
 aperto:
   - "Che cosa racconta ai colleghi? I conestabili ne parlano se lei ha fatto il fantasma (barks.js, guard.ghost)."
+  - "Proposto, da confermare: di notte parla da solo per paura dei cani che abbaiano alla luna; con una pietra di coraggio in tasca dorme tranquillo (interests.edera.js#int.edera.2, int.edera.guard, [[occhi-chiusi]])."
 ---
 
 Un conestabile che «pensa con gli occhi chiusi» accanto al pozzo vecchio. In cambio del silenzio racconta della palude, dei due cani che abbaiano alla luna e di una carta in fondo al sentiero.

@@ -44,30 +44,30 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1166 |
-| `src/data` | 13 | 1470 |
+| `src/core` | 11 | 1171 |
+| `src/data` | 13 | 1471 |
 | `src/data/books` | 6 | 279 |
 | `src/data/cards` | 4 | 748 |
 | `src/data/daily` | 3 | 1571 |
 | `src/data/elsewhere` | 3 | 179 |
 | `src/data/herbs` | 2 | 351 |
-| `src/data/interests` | 1 | 90 |
+| `src/data/interests` | 2 | 213 |
 | `src/data/reading` | 5 | 758 |
 | `src/data/reading/voices` | 81 | 6645 |
 | `src/data/story` | 12 | 2034 |
-| `src/data/story/scripts` | 14 | 2999 |
+| `src/data/story/scripts` | 15 | 3113 |
 | `src/data/trials` | 7 | 920 |
-| `src/data/world` | 17 | 1219 |
-| `src/glue` | 49 | 3709 |
+| `src/data/world` | 17 | 1223 |
+| `src/glue` | 51 | 3945 |
 | `src/reading` | 9 | 702 |
 | `src/sound` | 11 | 1014 |
 | `src/story` | 12 | 1138 |
 | `src/story/stage` | 14 | 1925 |
-| `src/systems` | 20 | 1605 |
+| `src/systems` | 20 | 1624 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 38 | 4384 |
-| `src/ui/interests` | 3 | 336 |
-| `src/ui/missions` | 5 | 548 |
+| `src/ui` | 38 | 4386 |
+| `src/ui/interests` | 5 | 592 |
+| `src/ui/missions` | 5 | 555 |
 | `src/ui/rite` | 2 | 512 |
 | `src/world` | 19 | 1428 |
 | `src/world/art` | 20 | 3485 |
@@ -93,6 +93,7 @@ Provided by one file, sometimes wrapped by glue, called by name from anywhere.
 | `elsewhere.leave` | glue/elsewhere |  | — |
 | `elsewhere.status` | glue/elsewhere |  | — |
 | `exam.recover` | systems/index |  | — |
+| `exam.second` | glue/interests.edera |  | systems/exam |
 | `exam.start` | systems/index | glue/diary, glue/hints | glue/trials, story/runner, world/scene/World |
 | `find.take` | glue/collect |  | world/scene/finds |
 | `fly.check` | glue/fly |  | ui/mappa |
@@ -106,13 +107,17 @@ Provided by one file, sometimes wrapped by glue, called by name from anywhere.
 | `guide.ask` | glue/hints |  | ui/hud |
 | `herb.look` | glue/herbs |  | world/scene/herbs |
 | `hud.mount` | ui/index |  | main |
-| `hud.toast` | ui/index |  | glue/bonds, glue/collect, glue/day, glue/diary, glue/elsewhere, glue/garden … (+9) |
+| `hud.toast` | ui/index |  | glue/bonds, glue/collect, glue/day, glue/diary, glue/elsewhere, glue/garden … (+10) |
 | `interests.beam` | glue/interests |  | — |
 | `interests.bundle` | glue/interests |  | — |
+| `interests.cellar` | glue/interests.edera |  | — |
+| `interests.courage` | glue/interests.edera |  | — |
 | `interests.give` | glue/interests |  | — |
+| `interests.giveBack` | glue/interests.edera |  | — |
+| `interests.labels` | glue/interests.edera |  | — |
 | `interests.mortar` | glue/interests |  | — |
 | `interests.refusal` | glue/interests |  | glue/clients |
-| `interests.step` | glue/interests |  | — |
+| `interests.step` | glue/interests | glue/interests.edera | — |
 | `library.open` | glue/trials |  | — |
 | `lock.ask` | systems/index | glue/diary | world/scene/things |
 | `opinions.answer` | glue/opinions |  | glue/opinions |
@@ -139,12 +144,13 @@ Provided by one file, sometimes wrapped by glue, called by name from anywhere.
 | `sound.hold` | glue/mood |  | story/session, story/visit |
 | `sound.mood` | sound/index |  | glue/mood, glue/rite, story/session, story/visit, systems/theme, ui/rite/index … (+4) |
 | `sound.music` | sound/index |  | — |
-| `sound.play` | sound/index |  | glue/bonds, glue/books, glue/collect, glue/fly, glue/herbs, glue/rite … (+13) |
+| `sound.play` | sound/index |  | glue/bonds, glue/books, glue/collect, glue/fly, glue/herbs, glue/rite … (+15) |
 | `sound.preload` | sound/index |  | ui/rite/index |
 | `sound.sample` | sound/index |  | ui/rite/index |
 | `sound.sfx` | sound/index |  | — |
 | `sound.stop` | sound/index |  | story/chapter |
 | `sound.want` | sound/index |  | glue/rite |
+| `stones.pocket` | glue/interests.edera |  | ui/collect |
 | `story.busy` | story/index |  | glue/bonds, glue/books, glue/collect, glue/fly, glue/home, glue/lessons … (+2) |
 | `story.chapterCard` | story/chapter |  | main |
 | `story.choose` | story/index |  | glue/clients, glue/elsewhere, glue/trials |
@@ -173,7 +179,7 @@ Provided by one file, sometimes wrapped by glue, called by name from anywhere.
 | `world.mission` | world/index |  | glue/bonds |
 | `world.refresh` | world/index |  | — |
 | `world.sensed` | world/index |  | — |
-| `world.start` | world/index | glue/bonds, glue/garden, glue/hints, glue/interests, glue/lessons | main |
+| `world.start` | world/index | glue/bonds, glue/garden, glue/hints, glue/interests, glue/interests.edera, glue/lessons | main |
 | `world.stranger` | world/index |  | glue/street |
 | `world.travel` | world/index | glue/diary | glue/debug, glue/elsewhere, glue/fly, glue/trials, story/runner, world/scene/World |
 | `world.where` | world/index |  | glue/debug, glue/elsewhere, glue/fly, glue/home, glue/lessons, glue/mood … (+2) |
@@ -237,18 +243,18 @@ Every service that is called is provided.
 
 Touch these with care: many files depend on them.
 
-- `src/core/state.js` (82)
-- `src/core/dom.js` (72)
-- `src/core/services.js` (65)
-- `src/core/progress.js` (59)
+- `src/core/state.js` (83)
+- `src/core/dom.js` (74)
+- `src/core/services.js` (69)
+- `src/core/progress.js` (60)
 - `src/data/cards.base.js` (54)
-- `src/core/bus.js` (44)
+- `src/core/bus.js` (45)
 - `src/core/cond.js` (33)
-- `src/ui/paper.js` (31)
-- `src/data/story/index.js` (27)
-- `src/data/story/h.js` (22)
+- `src/ui/paper.js` (33)
+- `src/data/story/index.js` (28)
+- `src/data/story/h.js` (23)
 - `src/world/art/px.js` (22)
 - `src/core/fonts.js` (16)
 - `src/world/art/palette.js` (15)
 - `src/data/cards.js` (14)
-- `src/world/maps.js` (12)
+- `src/core/extras.js` (12)

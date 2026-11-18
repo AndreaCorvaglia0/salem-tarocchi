@@ -51,6 +51,8 @@ stabilisce:
   - { dove: "end.js#c3.trial", n: 1, scelta: "[[end-c3-trial-3]]" }
   - { dove: "end.js#f.dawn", n: 1, scelta: "[[end-f-dawn-2]]" }
   - { dove: "end.js#f.dawn", n: -1, scelta: "[[end-f-dawn-2]]" }
+  - { dove: "interests.edera.js#int.edera.start", n: 1, scelta: "[[interests-edera-int-edera-start-1]]" }
+  - { dove: "interests.edera.js#int.edera.start", n: -1, scelta: "[[interests-edera-int-edera-start-1]]" }
   - { dove: "interests.ortica.js#int.ortica.start", n: 1, scelta: "[[interests-ortica-int-ortica-start-1]]" }
   - { dove: "interests.ortica.js#int.ortica.start", n: -1, scelta: "[[interests-ortica-int-ortica-start-1]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-1]]" }
@@ -305,6 +307,6 @@ mette_alla_prova:
 
 Quanto ortica si riconosce in lei (core/witches.js AFFINITY): audace, schietta, testa, più la sua carta. Calcolata dai tratti, mai salvata.
 
-Lo muovono 293 punti dei copioni e lo leggono 3 condizioni.
+Lo muovono 295 punti dei copioni e lo leggono 3 condizioni.
 
 Qui `n` è il verso rispetto all'affinità: +1 avvicina, -1 allontana. La mostra il codice: ui/witches.js.

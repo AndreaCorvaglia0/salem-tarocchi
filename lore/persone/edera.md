@@ -67,6 +67,9 @@ aperto:
   - "Chi è l'altra delle tre che le fa notare ad alta voce quando dimentica (c3.js#c3.edera)?"
   - "Quanti anni ha? «Settant'anni» di carte, la prima a sei anni: almeno settantasei."
   - "Ha avuto un marito? Dice solo che nelle figure cercava un marito (lessons.js#minors.5.lesson)."
+  - "Proposto, da confermare: aveva un lapislazzuli di sua nonna, perso nelle cantine e ritrovato dalla ragazza; ora lo porta al collo sotto lo scialle (interests.edera.js#int.edera.1, [[la-pietra-della-nonna]])."
+  - "Proposto, da confermare: delle sue pietre, sullo scaffale della biblioteca, ricorda il colore e non il nome (interests.edera.js#int.edera.2, [[i-cartellini]])."
+  - "Deciso il 18 novembre (decisioni-2026-11-18, interessi 2): alla fine del ramo delle pietre la chiama una volta col suo nome vero invece che Rosalba; la scena (missione 6) non è ancora scritta."
 ---
 
 Nonna Edera è la più anziana delle maestre: capelli d'argento raccolti in alto, dritta come una regina, una candela sola nella nicchia in fondo alle cantine. Sbaglia i nomi di tutti (chiama la protagonista Rosalba) ma ricorda ogni carta girata in settant'anni. Conosce il Giudice da quando era un bambino che mangiava le candele della chiesa, e questo ricordo, al processo, diventa un'arma gentile.

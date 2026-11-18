@@ -19,6 +19,7 @@ import './bonds.js'; // popularity, Tartufo's points and treats, the tracked sid
 import './selfread.js'; // the diary of readings: client readings kept, readings for herself saved
 import './rite.js'; // the smoke rite before a reading (ui/rite), the line after it
 import './interests.js'; // the witches' interests: Ortica's herbs (the beam, the mortar, the sage), a herb for an illness
+import './interests.edera.js'; // Edera's stones: the cellars, a stone for the constable, the labels; a stone in her pocket
 import './wire.js'; // fog, small cards, obstacles, trading, the last hints
 import './lessons.js'; // the lessons as missions (flying, Minors, reversed) and the chapter card
 import './trials.js'; // asking the cards, the trials, the library (src/trials)

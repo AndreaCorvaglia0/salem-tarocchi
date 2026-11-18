@@ -144,6 +144,7 @@ stabilisce:
   - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "hat.js#trial.hat.door", n: -1, scelta: "[[hat-trial-hat-door-1]]" }
   - { dove: "hat.js#trial.hat.door", n: 1, scelta: "[[hat-trial-hat-door-1]]" }
+  - { dove: "interests.edera.js#int.edera.guard", n: 1, scelta: "[[interests-edera-int-edera-guard-1]]" }
   - { dove: "interests.ortica.js#int.ortica.miller", n: 1, scelta: "[[interests-ortica-int-ortica-miller-1]]" }
   - { dove: "lessons.js#fly.lesson", n: 1, scelta: "[[lessons-fly-lesson-2]]" }
   - { dove: "post.js#enc.child", n: 1, scelta: "[[post-enc-child-1]]" }
@@ -295,6 +296,6 @@ mette_alla_prova:
 
 Quanto edera si riconosce in lei (core/witches.js AFFINITY): accorta, curiosa, testa, più la sua carta. Calcolata dai tratti, mai salvata.
 
-Lo muovono 283 punti dei copioni e lo leggono 3 condizioni.
+Lo muovono 284 punti dei copioni e lo leggono 3 condizioni.
 
 Qui `n` è il verso rispetto all'affinità: +1 avvicina, -1 allontana. La mostra il codice: ui/witches.js.

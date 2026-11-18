@@ -4,8 +4,8 @@ _Written by `node scripts/lore.mjs check`: do not edit by hand. What the rules m
 
 Errors: 0. Warnings: 16.
 
-Links checked: 3984. Fact clauses checked: 211 names; 52 clauses not understood (not checked).
-Continuity: 164 claims (who knows what), 49 placed on the main path and checked, 7 guarded by a test of the fact's flags, 116 not placeable (skipped), 0 violations.
+Links checked: 4023. Fact clauses checked: 221 names; 53 clauses not understood (not checked).
+Continuity: 168 claims (who knows what), 49 placed on the main path and checked, 7 guarded by a test of the fact's flags, 120 not placeable (skipped), 0 violations.
 
 ## Errors
 

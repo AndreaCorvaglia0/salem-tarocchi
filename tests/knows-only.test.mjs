@@ -150,7 +150,10 @@ test('the albums: valid conditions, no backstory name, and the mission cards nev
     ...SIBYL_LIST.flatMap((c) => [c.it.title, ...c.it.verse].map((t) => [c.id, t]))].filter(([, t]) => t);
   for (const [id, text] of texts) for (const w of BACKSTORY_ONLY) assert.doesNotMatch(text, new RegExp(`\\b${w}\\b`), `${id}: «${w}» exists only in lore/retroscena`);
   // the cards of the optional things say nothing of stones or figures to be given
-  for (const [id, text] of cardTexts) assert.doesNotMatch(text.replace(/pietra di confine/gi, ''), /\b(pietr\w*|figurin\w*|sibill\w*|ametist\w*|ossidian\w*)\b/i, `${id}: a mission card announces a gift («${text}»)`);
+  // (Edera's interest is about stones she works with for others, and none of its missions gives her one: its cards
+  // may say «pietra», never the name of a stone, nor figures)
+  const free = (id, text) => (id.startsWith('int.edera.') ? text.replace(/\bpietr[ae]\b/gi, '') : text);
+  for (const [id, text] of cardTexts) assert.doesNotMatch(free(id, text).replace(/pietra di confine/gi, ''), /\b(pietr\w*|figurin\w*|sibill\w*|ametist\w*|ossidian\w*)\b/i, `${id}: a mission card announces a gift («${text}»)`);
 });
 
 test('the albums show only what she has: a missing slot is a number, never a name', async () => {

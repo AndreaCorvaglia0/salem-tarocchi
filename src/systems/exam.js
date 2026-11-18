@@ -1,6 +1,7 @@
 // The Exam: a constable, an Afflicted or the Judge stops her. The questions are in the witch's head:
 // knowing the cards keeps up the spell that hides her. Rules: exam.rules.js. Screen pieces: exam.ui.js.
 import { h } from '../core/dom.js';
+import { has, call } from '../core/services.js';
 import { state, save } from '../core/state.js';
 import { test, fill } from '../core/cond.js';
 import { answer, ownedIds, confiscate, stat, addXp, trusts } from '../core/progress.js';
@@ -80,6 +81,24 @@ export async function startExam({ kind = 'constable', place = 'village', rng = M
     const forgive = !ok && judge && trusts('malva') && !used.malva && !s.mercy;
     if (forgive) used.malva = true;
     const r = R.answerStep(s, ok, { forgive });
+    // a stone in her pocket (glue/interests.edera.js, service exam.second): once a day, the mistake that would lose
+    // the Exam is taken back and the next question is on another card (never with the judge)
+    if (!ok && !judge && R.failed(r.state) && has('exam.second')) {
+      const nq = makeQuestion({ pool, kinds: R.RECOGNIZE, level: chapter, rng, exclude: qs.map((x) => x.cardId).filter(Boolean) });
+      const words = nq?.cardId && nq.cardId !== q.cardId ? await call('exam.second', { kind }) : null;
+      if (words) {
+        answer(q.cardId, false, q.star);
+        view.reveal(picked);
+        snd('wrong');
+        helps.remove();
+        qs.splice(qi + 1, 0, nq);
+        const second = h('div.sx-fb.mercy.sx-in', h('h3', words[0]), h('p', words[1]), h('p', q.explain));
+        scr.col.append(second);
+        scr.show(second);
+        await new Promise((res) => scr.setFoot(btn('Avanti', res, 'go')));
+        continue;
+      }
+    }
     s = r.state;
     answer(q.cardId, ok, q.star);
     view.reveal(picked);

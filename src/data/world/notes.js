@@ -81,6 +81,7 @@ export const PLACE_NOTES = {
     N(F('library.first'), 'Ci ripasso le carte prima di una notte difficile.'),
     N(F('elsewhere.book.done'), 'Da un libro su quel tavolo sono finita dentro una storia.'),
     N(F('book.agrippa.read'), 'Nel libro di Edera il gatto è di Saturno e anche della Luna.'), // a book read (data/books)
+    N(F('int.edera.3'), 'Sullo scaffale ci sono le pietre di Edera, coi miei cartellini.'), // the stones, mission 3
   ] },
   'village.cottage_door': { unknown: 'Una capanna storta, al limite del bosco.', notes: [
     N(past('c1.cottage'), 'È la mia capanna: storta, piena di spifferi, ma mia.'),
@@ -161,6 +162,7 @@ export const PLACE_NOTES = {
     N(past('c3.edera'), 'Mi ha insegnato la croce celtica.'),
     N(F('lesson.minors.5'), 'Mi ha parlato delle figure: re, regine, cavalli e fanti.'),
     N(F('lesson.reversed'), 'Qui ho imparato a leggere le carte capovolte.'),
+    N(F('int.edera.1'), 'Edera porta al collo il lapislazzuli di sua nonna.'), // the stones, mission 1
   ] },
   'depths.coven': { unknown: 'Una sala tonda con un calderone in mezzo.', notes: [
     N(past('c3.coven'), 'Qui le tre maestre si riuniscono intorno al calderone.'),
@@ -176,6 +178,7 @@ export const PLACE_NOTES = {
   ] },
   'depths.well': { named: true, unknown: 'Un pozzo aperto in alto: ci cade dentro un raggio di luna.', notes: [
     N({ has: 'm17' }, 'Sul fondo del pozzo vecchio luccicava una carta.'),
+    N(F('int.edera.guard'), 'Il conestabile qui dorme con una pietra in tasca.'), // the stones, the day after mission 2
   ] },
   'depths.swamp': { named: true, unknown: 'Canne e fuochi fatui, in una nebbia fitta.', notes: [
     N(F('side.m18'), 'Di notte ci abbaiano due cani. La guardia non ci va.'),

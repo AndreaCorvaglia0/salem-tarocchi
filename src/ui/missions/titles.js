@@ -21,6 +21,7 @@ export const KIND = {
   lezione: { word: 'una lezione', sym: 'lezione' },
   prova: { word: 'una prova', sym: 'prova' },
   orto: { word: "l'orto", sym: 'orto' },
+  pietra: { word: 'le pietre', sym: 'pietra' },
   altrove: { word: 'Altrove', sym: 'altrove' },
   storia: { word: 'una storia', sym: 'storia' },
 };
@@ -62,6 +63,10 @@ export const TITLES = {
   'int.ortica.2': T('Le scale del mulino', null, 'Ortica', 'Il merlo dice che il mugnaio non scende più le scale. Ortica gli portava l\'unguento, ma con questa schiena non ce la fa.'),
   'int.ortica.3': T('Il fumo di Malva', null, 'Ortica', 'Ortica giura che il bottegaio mette la segatura nell\'incenso di Malva, e che con la salvia secca si farebbe di meglio.',
     { hunch: 'Malva non me l\'ha mai detto, ma lei non dice molte cose.' }),
+  // Edera's stones: the first is a favour (a thing lost), so no kind; from the second she knows it is about stones
+  'int.edera.1': T('La pietra della nonna', null, 'Nonna Edera', 'Edera ha perso nelle cantine una pietra di sua nonna, blu con dei puntini d\'oro. Non ricorda dove l\'ha posata, un anno fa o ieri.'),
+  'int.edera.2': T('Occhi chiusi', 'pietra', 'Nonna Edera', 'Il conestabile del pozzo vecchio, di notte, ha paura dei cani che abbaiano alla luna. Edera vuole che gli scelga una pietra tra le mie.'),
+  'int.edera.3': T('I cartellini', 'pietra', 'Nonna Edera', 'Delle sue pietre Edera ricorda il colore e non il nome. Stanno sullo scaffale a destra della finestra, in biblioteca, e vuole che scriva i cartellini.'),
   // the trials: each starts as a favour asked at a door, so no kind; `later` is her diary after the door
   'trial.night': T('Il cesto di Malva', null, 'Malva', 'Malva deve far uscire un cesto dal villaggio prima che faccia giorno, e vuole che l\'accompagni. Mi aspetta nel vicolo di sotto.',
     { later: [offered('night'), 'Malva ha un cesto da far uscire dal villaggio stanotte, e vuole me. Prima ripasso in biblioteca, e poi torno da lei nel vicolo di sotto.'] }),
