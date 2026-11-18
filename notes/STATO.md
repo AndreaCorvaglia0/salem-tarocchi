@@ -27,9 +27,9 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 
 | Passo | Che cosa | Stato |
 |---|---|---|
-| V1a | Spostare le cartelle nelle tre zone (`metodo/`, `corso/`, `storia/`), tipi `ricetta` e `concetto`, strumenti e riferimenti aggiornati | agente in corso |
-| V1b | Visore: tre viste con disposizione propria, colori per zona, generati nascosti | da fare (dopo V1a) |
-| V2 | Dieci schede `legge`; `legge` su principi/tecniche/ricette; `leggi`, `motivo`, `effetto`, `dinamica` sulle meccaniche; `_dinamiche` | da fare (dopo V1a) |
+| V1a | Spostare le cartelle nelle tre zone, tipi `ricetta` e `concetto`, strumenti e riferimenti | **fatto, pubblicato** (main dd63c35): 744 file spostati, 654 test, check 0 errori |
+| V1b | Visore: tre viste con disposizione propria, generati nascosti | agente in corso |
+| V2 | Dieci schede `legge`; `legge` su principi/tecniche/ricette; `leggi`, `motivo`, `effetto`, `dinamica` sulle meccaniche; `_dinamiche` (specifica: `notes/vault/V2-spec.md`) | agente in corso |
 | V3 | `peso` sui concetti; `concetti` sugli obiettivi; `sta_in` generato; `_sei-voci` | da fare |
 | V4 | Togliere i campi doppi; `ambito` e controllo «il metodo generale non nomina Salem» | da fare |
 | V5 | Legami con il nome e «la catena» nel visore; pagina d'ingresso | da fare |

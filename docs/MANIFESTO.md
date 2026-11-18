@@ -1,6 +1,6 @@
 # Imparare giocando: il manifesto
 
-Seconda stesura, 18 novembre 2026, da discutere con Andrea. Vale per «Le carte di Salem», per Mnemopolis e per
+Terza stesura, 18 novembre 2026 (approvata da Andrea alla seconda; la legge 11 è aggiunta dopo, da confermare). Vale per «Le carte di Salem», per Mnemopolis e per
 qualunque gioco fatto con questo metodo. È la radice del metodo: principi, tecniche e meccaniche discendono da
 qui. Le fonti sono in `docs/RESEARCH.md`; dove le prove sono deboli, è scritto.
 
@@ -34,10 +34,10 @@ Tutto il gioco è un giro solo, che si ripete e ogni volta si allarga.
 4. **Ritorno.** Si torna poco e spesso, perché c'è qualcosa di bello e perché la prossima cosa lo richiede.
 5. **Crescita.** Si aprono posti, concetti e poteri nuovi. E con loro, nuove curiosità.
 
-## Le dieci leggi
+## Le undici leggi
 
-Una dice **che cosa** si impara, otto dicono **come**, una dice **com'è costruito** il gioco perché possa
-crescere. Ogni legge: che cosa, perché funziona (e quanto sono solide le prove), come lo facciamo, quando si
+Una dice **che cosa** si impara, otto dicono **come**, due dicono **com'è costruito** il gioco perché possa
+crescere e perché ci si possa fidare. Ogni legge: che cosa, perché funziona (e quanto sono solide le prove), come lo facciamo, quando si
 rompe, come l'abbiamo imparato.
 
 ---
@@ -215,6 +215,25 @@ raggiunge anche chi è già avanti, perché dipende da quello che ha e non dal p
 - **Si rompe se** una scena contiene il testo di un concetto, se per aggiungere un concetto bisogna toccare la
   storia, se un'immagine è cablata in una scena, se una novità arriva solo a chi ricomincia.
 - **Imparato così.** Lezioni 12, 17, 31, 32.
+
+### 11. Chiaro, vero, fatto con cura
+
+*Aggiunta il 18 novembre durante il riordino del vault, da confermare con Andrea: una ventina di principi e
+ricette (il testo, la correttezza, l'interfaccia, il modo di lavorare) non pendevano da nessuna delle dieci.*
+
+Niente di quello che precede funziona se il testo non si capisce alla prima, se quello che si insegna non è
+vero, o se un tocco sbagliato fa perdere una battuta. E chi costruisce dice sempre che cosa ha verificato e che
+cosa no.
+
+- **Perché funziona.** Quello che distrae dal concetto fa imparare peggio (Sundararajan e Adesope 2020); un
+  errore imparato giocando resta. Il resto è mestiere, imparato dai riscontri di chi gioca.
+- **Come.** Il testo pensato per primo: naturale, concreto, scene e non massime. Fatti cercati e scritti con
+  la fonte; ogni riga di canone dice da dove viene. Tasti che ignorano i tocchi per un attimo, momenti da
+  leggere che non si saltano, sempre chiaro che cosa fare. Lettori ingenui per la chiarezza; «verificato» vuol
+  dire visto o eseguito.
+- **Si rompe se** una frase va riletta per capirla, se un fatto è plausibile ma non controllato, se si scrive
+  «funziona» senza aver guardato, se chi gioca non sa che cosa fare adesso.
+- **Imparato così.** Lezioni 22, 23, 26, 27, 29, 30, 33.
 
 ## Ogni dinamica, con le sue due facce
 

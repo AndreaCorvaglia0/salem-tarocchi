@@ -1,6 +1,6 @@
 # Il kit: come si aggiunge un pezzo a Salem
 
-> **Da leggere per primo: `docs/MANIFESTO.md`**, il perché di tutto il metodo (le due facce, il giro, le dieci leggi).
+> **Da leggere per primo: `docs/MANIFESTO.md`**, il perché di tutto il metodo (le due facce, il giro, le undici leggi).
 
 Questa pagina è l'ingresso per chi deve aggiungere qualcosa al gioco: una storia secondaria, una persona,
 un mondo. È anche la base per tornare a Mnemopolis e farne un generatore di storie (`docs/MNEMOPOLIS.md`).

@@ -183,7 +183,7 @@ tutorial è qualcosa che abbiamo imparato».* Regola: all'inizio un posto, una c
 concetti compaiono quando servono. *Da completare con Andrea: che cosa è successo di preciso col tutorial.*
 
 **36. Ogni cosa ha due facce: un motivo nel gioco e un effetto sull'imparare.**
-È il disegno più largo dietro tutte le altre lezioni, scritto in `docs/MANIFESTO.md` (dieci leggi, la tabella
+È il disegno più largo dietro tutte le altre lezioni, scritto in `docs/MANIFESTO.md` (undici leggi, la tabella
 delle dinamiche, l'unità di crescita in sei verbi: sapere, toccare, andare, volere, usare, tornare).
 
 ## Da aggiungere
