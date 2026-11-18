@@ -28,7 +28,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | Passo | Che cosa | Stato |
 |---|---|---|
 | V1a | Spostare le cartelle nelle tre zone, tipi `ricetta` e `concetto`, strumenti e riferimenti | **fatto, pubblicato** (main dd63c35): 744 file spostati, 654 test, check 0 errori |
-| V1b | Visore: tre viste con disposizione propria, generati nascosti | agente in corso |
+| V1b | Visore: quattro viste con disposizione propria, legami con il nome, nodi famiglia, porte delle zone | **fatto, pubblicato** (main 950dee6, gh-pages f3c8bab). Secondo giro in corso: «Perché insegna» ordinato per legge, solo i legami di struttura a riposo, tre fasce in «Che cosa si impara», «Perché c'è» nella scheda (assorbe V5) |
 | V2 | Undici schede `legge`; `legge` su principi/tecniche/ricette; due facce e `dinamica` sulle meccaniche; 8 tecniche, 1 principio, 7 meccaniche nuove; `_dinamiche` | **fatto** (main 96e59c6; 665 test in copia pulita; da pubblicare insieme al visore) |
 | V3 | `peso`; concetti mancanti del nucleo (numeri, figure, stese, capovolte); `concetti` sugli obiettivi; `sta_in` con test; `_sei-voci` (specifica: `notes/vault/V3-spec.md`) | agente in corso |
 | V4 | Togliere i campi doppi; `ambito` e controllo «il metodo generale non nomina Salem» | da fare |
