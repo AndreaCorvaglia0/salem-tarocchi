@@ -1,9 +1,9 @@
 // The lore viewer: reads data.json once (built from lore/ by scripts/lore/site.mjs) and shows the vault
 // with hash routes, so the back button works and a link can be shared:
 //   #/  home · #/n/<id> a note · #/t/<tipo> a list · #/grafo[/<id>] the whole graph · #/cerca/<q> search
-import { md, inline, esc } from './md.js?v=1794992382840';
-import { graphView } from './graph.js?v=1794992382840';
-import { layout } from './layout.js?v=1794992382840';
+import { md, inline, esc } from './md.js?v=1794993126339';
+import { graphView } from './graph.js?v=1794993126339';
+import { layout } from './layout.js?v=1794993126339';
 
 const app = document.getElementById('app');
 const FONTI = ['copione', 'deciso', 'proposto'];
@@ -259,9 +259,9 @@ function route() {
 
 async function start() {
   try {
-    const res = await fetch('./data.json?v=1794992382840');
+    const res = await fetch('./data.json?v=1794993126339');
     D = await res.json();
-    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1794992382840')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
+    if (D.bodies) { const b = await (await fetch('./bodies.json?v=1794993126339')).json(); for (const n of D.notes) n.body = b[n.id] || ''; }
   } catch (e) {
     app.innerHTML = `<div class="page"><p class="warn">Non riesco a leggere il vault (${esc(e.message)}).</p></div>`;
     return;
