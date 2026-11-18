@@ -177,6 +177,15 @@ che crescono. Ogni testo ha una condizione, e un test impedisce che i retroscena
 E la richiesta a un agente lo dice per prima cosa: chiedere «che cosa ci guadagna» è stato un errore di chi
 ha scritto la consegna, non di chi l'ha eseguita.
 
+**35. Si entra piano: l'inizio è già gioco.**
+*Andrea, 18 novembre: i livelli e l'apertura progressiva di mappa e concetti servono a facilitare l'ingresso; «il
+tutorial è qualcosa che abbiamo imparato».* Regola: all'inizio un posto, una carta, una persona; menu, zone e
+concetti compaiono quando servono. *Da completare con Andrea: che cosa è successo di preciso col tutorial.*
+
+**36. Ogni cosa ha due facce: un motivo nel gioco e un effetto sull'imparare.**
+È il disegno più largo dietro tutte le altre lezioni, scritto in `docs/MANIFESTO.md` (sette leggi, la tabella
+delle dinamiche, l'unità di crescita «un posto, un motivo, un uso, un ritorno»).
+
 ## Da aggiungere
 
 Questo elenco non è finito. Candidati: come si sceglie che cosa lasciare fuori; quanto testo regge una

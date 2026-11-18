@@ -568,3 +568,23 @@ Nel mazzo di Pamela Colman Smith (1909) la Sacerdotessa ha un manto azzurro che 
 diventa acqua; Waite, *The Pictorial Key to the Tarot* (1911), la lega alla Luna (la falce ai suoi piedi).
 Usato nella missione di Edera «La pietra della nonna» (il blu del lapislazzuli). Da ricontrollare sulla scansione
 della carta in `public/` quando si rilegge.
+
+## Per il manifesto: curiosità, sé, motivazione, gamification (18 novembre)
+
+Cercate il 18 novembre per `docs/MANIFESTO.md`. Lette le schede o i riassunti indicati, non gli articoli interi.
+
+- **Curiosità e memoria.** Gruber, Gelman e Ranganath 2014, *Neuron* 84(2): si ricorda meglio ciò di cui si era
+  curiosi e anche il materiale estraneo visto in quello stato; l'effetto c'è subito e dopo un giorno. Studio di
+  laboratorio con domande di cultura generale e volti. https://orca.cardiff.ac.uk/96033
+- **Riferimento a sé.** Symons e Johnson 1997, *Psychological Bulletin* 121(3), meta-analisi: codificare una
+  cosa in rapporto a sé la fa ricordare meglio che in rapporto al significato o ad altri; effetto presente ma
+  non uguale in tutti gli studi. https://digitalcommons.lib.uconn.edu/chip_docs/9
+- **Perché si resta in un gioco.** Ryan, Rigby e Przybylski 2006, *Motivation and Emotion* 30: autonomia,
+  competenza e relazione predicono, ognuna per conto suo, il piacere di giocare e la voglia di rigiocare.
+  Giochi d'intrattenimento, non didattici.
+  https://www.rochester.edu/warner/lida/wp-content/uploads/2022/11/02bfe513dd59366750000000.pdf
+- **Gamification.** Sailer e Homner 2020, *Educational Psychology Review* 32, meta-analisi: effetti positivi ma
+  piccoli su apprendimento (g 0,49), motivazione (0,36) e comportamento (0,25); stabile solo il primo negli
+  studi più rigorosi. Le cifre sono lette in un riassunto di terzi, l'abstract dell'articolo conferma il
+  quadro. https://opus.bibliothek.uni-augsburg.de/opus4/frontdoor/index/index/docId/109056
+- Non verificato e quindi non citato nel manifesto: il carico cognitivo (Sweller) per la legge 7.

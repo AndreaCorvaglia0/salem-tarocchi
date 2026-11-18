@@ -29,6 +29,19 @@ immagini vivide (tecnica) → trovare una carta, la mappa (meccaniche) → ricon
 Carro (concetto) → il posto dove sta (luogo) → chi ci abita e che cosa ci è successo (storia). In Mnemopolis
 l'ultimo tratto è «la casa è il concetto»: è lo stesso legame.
 
+## Aggiunta dopo il manifesto (18 novembre, 11:30)
+
+L'esempio di Andrea vale per tutto: ogni dinamica ha un motivo nel gioco e un effetto sull'imparare. Il
+disegno largo è ora in `docs/MANIFESTO.md` e diventa la **radice della zona `metodo/`**:
+
+    manifesto → 7 leggi → principi e tecniche → meccaniche → obiettivi → concetti → luoghi → storia
+
+Conseguenze per il piano: (a) sette schede `legge` in cima a `metodo/` (unico tipo nuovo, giustificato: sono
+la spina del grafo); ogni principio e ogni tecnica dichiara la sua legge; (b) ogni meccanica ha due campi
+espliciti, `motivo` e `effetto` (le due facce), e il controllo avvisa se ne manca uno; (c) ogni concetto del
+corso ha i quattro legami dell'unità di crescita: posto, motivo, uso, ritorno; il controllo elenca i concetti
+a cui ne manca uno. Passo 0 del piano: approvare il manifesto.
+
 ## Che cosa manca oggi (misurato)
 
 - **L'anello concetto → luogo non esiste**: nessuna delle 22 schede degli Arcani dice dove sta la carta. È
