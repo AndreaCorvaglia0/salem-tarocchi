@@ -15,8 +15,8 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 3 | Collezioni: pietre e sibilla | **fatto, pubblicato** (main 7a28077, gh-pages c3bf1a1) | `notes/collezioni.md`; **le 36 carte della sibilla già ritagliate e controllate** in `/home/claude/ext/sibilla/cards/01..36.jpg` (ordine giusto, foglio di prova `contact.jpg`) |
 | 4 | Test dei lettori ingenui sul villaggio | **fatto** per Malva, biblioteca, bottega (correzione pubblicata: main 41ba213, gh-pages 1429248); quartieri da rifare con inquadratura migliore | `notes/village-test.md` |
 | 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | **scritto**, in attesa delle risposte di Andrea (6 domande in fondo a `notes/libri/CONCETTO.md`) | BACKLOG sezione 7 |
-| 6 | Imparare meglio (BACKLOG 2) | agente in corso (piano in `notes/imparare.md`) | |
-| 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | da fare, dopo 3 | |
+| 6 | Imparare meglio (BACKLOG 2) | **fatto, pubblicato** (main 95eec8b, gh-pages 500d95e) | |
+| 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | agente in corso (`notes/sibilla-coppie.md`) | |
 | 8 | Interessi da strega: pagina di progetto | **scritta**, in attesa delle 5 risposte di Andrea; prima fetta = erbe di Ortica, 3 missioni | BACKLOG sezione 6 |
 
 ## Regole del giro

@@ -119,6 +119,25 @@ sessione, non nella repo).
   - Due libri «di fuori» datati dopo il 1692 (Waite, la storia dei tarocchi del 1913) arrivano dalla Lettrice: da
     decidere con Andrea.
 
+## 6b. Imparare meglio (BACKLOG 2)
+
+- **Commit:** `95eec8b` (gh-pages 500d95e). Piano: `notes/imparare.md`.
+- **Cosa:** (2.1) nel ripasso una domanda con le sue tre parole e «Che carta è?»; (2.2) «Senza guardare» della
+  carta di oggi conta come ripasso, e un giorno su tre la carta di oggi è una da ripassare; (2.3) «Prima di
+  leggere: che idea porta questa carta?» nella lettura per sé, con «Leggo e basta»; (2.4) la Lettrice chiede di
+  una carta già raccontata prima di girare le nuove.
+- **Verificato dal capofila:** test verdi (610), una schermata (2.3) guardata; costruito da copia pulita.
+- **Non verificato:** visita raggiunta nella storia (forzata dall'agente); la via «Pesco qui» del 2.3; il piè di
+  pagina «Sì, è questa.»; partita intera.
+- **Dubbi (dall'agente, condivisi):**
+  - Sono tutte scelte fra tre: nessuna verifica «l'idea con parole sue».
+  - Le risposte di 2.3 e 2.4 contano come «significato» e possono alzare la seconda stella di una carta che la
+    Lettrice non ha ancora raccontato.
+  - 2.4 propone la riga breve della scheda, non le parole esatte dette dalla Lettrice quella notte.
+  - «Leggo e basta» non viene ricordato: la prova torna ogni lettura. Può dare fastidio: da sentire da lei.
+  - Possibile difetto già esistente: nelle letture ai clienti le opzioni sbagliate possono essere idee di altre
+    carte della stessa stesa (il 2.3 lo ha corretto solo per la lettura per sé).
+
 ## 7. Interessi da strega (scritto, da approvare; niente codice)
 
 - **Cosa:** `notes/interessi/PROGETTO.md`: quattro catene da sei missioni (Ortica erbe, Malva fumi e sacchetti,
