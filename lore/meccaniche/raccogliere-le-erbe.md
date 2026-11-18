@@ -7,7 +7,7 @@ dove:
   - "src/ui/herbs.js"
   - "src/data/herbs/"
   - "src/data/world/herbs.js"
-cosa_fa_la_giocatrice: "Vicino alle case e lungo i sentieri ci sono erbe vere. Avvicinandosi, «Guarda»: la prima volta la pianta entra nell'erbario, con la sua tavola botanica dell'Ottocento e la sua pagina (come riconoscerla, credenze, storia, che cosa c'è di vero, coltivarla)."
+cosa_fa_la_giocatrice: "Vicino alle case e lungo i sentieri ci sono erbe vere. Avvicinandosi, «Guarda»: la prima volta la pianta entra nell'erbario, con la sua tavola botanica dell'Ottocento e la sua pagina (come riconoscerla, credenze, storia, che cosa c'è di vero, coltivarla). Solo la primissima pianta apre la pagina da sola; le altre volano nel grimorio con una riga e aspettano lì come «nuova» (18 novembre, come pietre e figurine)."
 serve:
   - "[[erbe-come-storia]]"
   - "[[prima-di-tutto-corretto]]"

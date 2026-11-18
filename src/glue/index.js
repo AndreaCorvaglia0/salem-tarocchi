@@ -5,6 +5,7 @@ import './diary.js'; // diary lines, Tartufo's remarks, the wake-up in the cell
 import './mood.js'; // sound.back: the music of the current map
 import './tools.js'; // tool.use: the bottle
 import './herbs.js'; // herb.look: a plant noticed in the world goes into the herbarium
+import './collect.js'; // find.take, gifts and first words: the albums of stones and of the sibyl's figures
 import './garden.js'; // the garden at the cottage: Ortica's gift, garden.open, the beds in the world
 import './home.js'; // her cottage grows with her: one line the first time she sees a new stage
 import './day.js'; // day.draw: the card of the day at the cottage bed

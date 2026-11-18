@@ -16,3 +16,4 @@ Meccaniche che lo servono:
 - [[raccogliere-le-erbe]] — Raccogliere le erbe nell'erbario
 - [[curare-l-orto]] — Curare l'orto
 - [[imparare-da-ortica]] — Imparare l'orto da Ortica
+- [[raccogliere-pietre-e-figurine]] — Raccogliere pietre e figurine della sibilla

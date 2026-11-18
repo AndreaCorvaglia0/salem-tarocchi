@@ -20,3 +20,4 @@ Meccaniche che lo servono:
 - [[dire-cosa-pensa-degli-altri]] — Dire che cosa pensa degli altri
 - [[imparare-da-ortica]] — Imparare l'orto da Ortica
 - [[andare-altrove]] — Andare altrove
+- [[raccogliere-pietre-e-figurine]] — Raccogliere pietre e figurine della sibilla

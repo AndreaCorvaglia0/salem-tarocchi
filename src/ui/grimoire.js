@@ -12,9 +12,14 @@ import { ioPages } from './io.js';
 import { cartePages } from './carte.js';
 import { mappaPages } from './mappa.js';
 import { herbPages } from './herbs.js';
+import { stonePages, sibylPages, sibylTitle, cssOn as collectCss } from './collect.js';
+import { countOf, albumHasNew } from '../glue/collect.rules.js';
 
-const TABS = [['io', 'Io'], ['carte', 'Carte'], ['mappa', 'Mappa'], ['erbe', 'Erbe']];
-const BUILD = { io: ioPages, carte: cartePages, mappa: mappaPages, erbe: herbPages };
+// the albums of stones and figures get their ribbon with the first one she has (glue/collect.js)
+const tabs = () => [['io', 'Io'], ['carte', 'Carte'], ['mappa', 'Mappa'], ['erbe', 'Erbe'],
+  ...(countOf(state, 'stone') ? [['pietre', 'Pietre']] : []), ...(countOf(state, 'sibyl') ? [['sibilla', sibylTitle()]] : [])];
+const ALBUM = { erbe: 'herb', pietre: 'stone', sibilla: 'sibyl' }; // a dot on the ribbon while a page is «nuova»
+const BUILD = { io: ioPages, carte: cartePages, mappa: mappaPages, erbe: herbPages, pietre: stonePages, sibilla: sibylPages };
 
 function settingsPanel(panel, done) {
   const s = state.settings || (state.settings = { music: true, sfx: true });
@@ -36,9 +41,13 @@ function settingsPanel(panel, done) {
 }
 
 export function openGrimoire({ tab = 'io', study = false } = {}) {
-  let cur = BUILD[tab] ? tab : 'io', closeOverlay = () => {}, popEsc = () => {}, resolveP;
+  collectCss();
+  const TABS = tabs();
+  let cur = BUILD[tab] && TABS.some(([id]) => id === tab) ? tab : 'io', closeOverlay = () => {}, popEsc = () => {}, resolveP;
   const ribs = h('div.bk-ribs', { role: 'tablist', 'aria-label': 'Segnalibri' });
+  if (TABS.length > 4) ribs.classList.add('many');
   const btns = TABS.map(([id, name]) => h('button.bk-rib', { type: 'button', role: 'tab', style: `--rib:${RIB[id]}`, onclick: () => show(id) }, name));
+  const dots = () => btns.forEach((x, i) => { const k = ALBUM[TABS[i][0]]; x.classList.toggle('dot', !!k && albumHasNew(state, k)); });
   ribs.append(...btns);
   const finish = () => { popEsc(); globalThis.removeEventListener('keydown', key, true); closeOverlay(); resolveP?.(); };
   const b = bookFrame({ ribbons: ribs, onClose: finish, label: 'Il grimorio', mid: '', settings: (panel) => settingsPanel(panel, finish) });
@@ -50,6 +59,7 @@ export function openGrimoire({ tab = 'io', study = false } = {}) {
     const { L, R, single, folio } = BUILD[t](ctx);
     b.fill(L, R, { single, folio });
     b.el.dataset.tab = t;
+    dots();
   }
   const key = (e) => {
     if (e.target?.tagName === 'INPUT' || e.target?.tagName === 'TEXTAREA') return;

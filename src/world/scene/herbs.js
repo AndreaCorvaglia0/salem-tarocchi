@@ -49,7 +49,8 @@ export class Herbs {
   async use(u) {
     if (!has('herb.look')) return;
     this.scene.tweens.add({ targets: u.h.img, scaleY: 0.94, duration: 140, yoyo: true });
-    await call('herb.look', u.h.id);
+    const cam = this.scene.cameras.main, wv = cam.worldView, z = cam.zoom; // where it is on the screen (the flight to the grimoire)
+    await call('herb.look', u.h.id, { from: { x: (u.h.img.x - wv.x) * z, y: (u.h.top - wv.y) * z } });
   }
 
   update(time) {

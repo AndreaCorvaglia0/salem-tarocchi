@@ -64,3 +64,13 @@ legge. Stato: `stones: {}`, `oracle: {}`, `albumSeen: {}` con valori di partenza
 
 Ogni pietra e figurina ha pagina, posto o donatore raggiungibile da chi è già avanti; nessun testo oltre una
 riga quando si trova; il test «vede solo quello che sa» copre anche gli album; schermate a 390 px.
+
+## Fatto (18 novembre, sera)
+
+- Dati: `src/data/stones.js`, `src/data/sibyl.js`, `src/data/world/finds.js` (7 pietre e 8 mazzetti per terra),
+  `src/data/gifts.js` (13 regali e le prime parole di Edera e Ginepra). Regole: `src/glue/collect.rules.js`;
+  gioco: `src/glue/collect.js`; album: `src/ui/collect.js`; mondo: `src/world/scene/finds.js`, `art/finds.js`.
+- Le prime parole aspettano la prima chiacchierata libera con Edera (pietre) o Ginepra (figurine): prima di
+  conoscerle lei non può sentirle. Se il primo pezzo è proprio il loro regalo, dicono la forma `given`.
+- Prima delle parole di Ginepra il nastro si chiama «Figurine», dopo «Sibilla».
+- Non verificato: telefono vero, suono `pick`, traduzioni dei versi (da far rileggere a chi sa il tedesco).

@@ -19,6 +19,7 @@ export const SFX = {
     k.tone({ f: 190, to: 120, t: t + 0.05, dur: 0.12, a: 0.004, gain: 0.22, dest: d });
   },
   found(k, t, d) { [69, 72, 76, 81].forEach((m, i) => k.voice('bell', m, t + i * 0.1, 0.075, d, 0.35)); },
+  pick(k, t, d) { k.voice('bell', 93, t, 0.05, d, 0.28); k.voice('bell', 98, t + 0.06, 0.03, d, 0.22); }, // something small picked up for the grimoire (glue/collect.js): two tiny high notes
   star(k, t, d) { k.voice('bell', 88, t, 0.08, d, 0.5); k.voice('bell', 100, t + 0.07, 0.035, d, 0.3); },
   level(k, t, d) { // warm three notes, then the chord holds
     [[69, 0], [76, 0.2], [81, 0.4]].forEach(([m, dt]) => k.tone({ f: hz(m), t: t + dt, dur: 1.6, a: 0.02, gain: 0.14, type: 'triangle', lp: 2400, dest: d, tc: 0.5 }));

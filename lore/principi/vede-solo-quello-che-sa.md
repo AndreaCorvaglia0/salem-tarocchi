@@ -19,3 +19,7 @@ In pratica:
 - Arricchire è il caso normale: dove lei tocca qualcosa, il solo nome non basta.
 
 ## Note
+
+Meccaniche che lo servono:
+
+- [[raccogliere-pietre-e-figurine]] — Raccogliere pietre e figurine della sibilla

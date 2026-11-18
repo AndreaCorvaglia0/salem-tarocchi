@@ -100,3 +100,25 @@ Rider-Waite-Smith deck, scans from the open dataset `metabismuth/tarot-json`. Se
 Da Wikimedia Commons, opere di pubblico dominio:
 - *Köhler's Medizinal-Pflanzen in naturgetreuen Abbildungen*, Gera, 1887 (file `Koeh-NNN.jpg`): tutte le piante tranne ortica e verbena.
 - Otto Wilhelm Thomé, *Flora von Deutschland, Österreich und der Schweiz*, Gera, 1885 (file `Illustration Urtica dioica0.jpg`, `Illustration Verbena officinalis0.jpg`): ortica e verbena.
+
+## Le pietre (`public/stones/`, 18 novembre)
+
+- Henry Sowerby, *Popular Mineralogy*, London, Reeve, 1850, tavole litografate e colorate a mano. Copia della
+  Wellcome Collection (https://wellcomecollection.org/works/z6yvxatb, IIIF `b33028126`), segnata **Public Domain
+  Mark**. Ritagliate e ridotte (450x600, webp): tav. I (cristallo di rocca, ametista, agata), tav. II
+  (lapislazzuli), tav. VI (tormalina).
+- Le altre sette (quarzo giallo, pietra di luna, eliotropio, pietra forata, occhio di tigre, ossidiana, quarzo
+  rosa) non hanno una tavola: sono disegnate in codice (`src/world/art/finds.js`, `paintStone`).
+- Cercate e non usate: James Sowerby, *British Mineralogy* (1802-17). La Biodiversity Heritage Library ha risposto
+  403 (una pagina di controllo Cloudflare) e c82.net non ha avuto il permesso in tempo: non si è insistito. Su
+  pdimagearchive.org / Public Domain Review ci sono 68 tavole ritagliate, ma nessuna delle nostre pietre tranne
+  agata e quarzo (cristallo druso, non il cristallo di rocca): si è preferita la serie omogenea di H. Sowerby.
+
+## La sibilla dell'ambulante (`public/sibyl/`, 18 novembre)
+
+- «Wahrsagekarten der berühmten Kartenlegerin Lenormand», Paris, Ch. Didot, [1890?], 36 carte in cromolitografia.
+  Yale University, Beinecke Rare Book and Manuscript Library, Cary Collection of Playing Cards,
+  https://collections.library.yale.edu/catalog/10994633. Stampa anonima di circa il 1890, quindi di pubblico
+  dominio; la scheda porta solo la formula generica di Yale («may be subject to copyright law»), non una licenza.
+  Ritagliate dai quattro fogli della digitalizzazione; 600 px di larghezza (`NN.webp`) e 200 px (`t/NN.webp`).
+  Nel gioco il nome storico del mazzo non compare mai.

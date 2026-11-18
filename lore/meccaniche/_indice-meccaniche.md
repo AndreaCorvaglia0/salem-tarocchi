@@ -22,6 +22,7 @@ Le 27 cose che lei fa davvero nel gioco. Il campo più importante è `ragione_ne
 - [[dire-cosa-pensa-degli-altri]] — Dopo una chiacchierata qualcuno dice una cosa di un altro personaggio, oppure chiede «E tu, che ne pensi di lei?» con tre risposte.
 - [[legarsi-alle-streghe]] — Ogni strega la guarda in due modi: l'affinità (quanto si rivede in lei, dai tratti) e il legame (quello che hanno fatto insieme).
 - [[raccogliere-le-erbe]] — Vicino alle case e lungo i sentieri ci sono erbe vere.
+- [[raccogliere-pietre-e-figurine]] — Per terra, solo da vicino, qualcosa luccica appena: una pietra o una figurina della sibilla; altre le regalano le persone.
 - [[curare-l-orto]] — Quattro aiuole alla capanna, ognuna con la sua luce.
 - [[imparare-da-ortica]] — Cinque lezioni brevi dietro la capanna di Ortica: l'acqua, la luce, la terra e il drenaggio, il vaso e la potatura, semina e talea.
 - [[spendere-in-bottega]] — Alla bottega del vicolo compra con le monete: la bottiglia della strega (12), l'incenso (10), il pendolo (10), un manicaretto per Tartufo (3), semi (5, i velenosi 9) e, sotto il banco, due Maggiori del capitolo che le mancano (30, 45 o 60).

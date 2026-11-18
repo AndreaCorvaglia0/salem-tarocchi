@@ -498,3 +498,35 @@ per le intenzioni nessuna fonte letta).
 Le voci dei due libri di Cunningham, una per una. Book T della Golden Dawn nel testo originale. La storia dei singoli
 fumi nelle botteghe del New England del 1692 (se olibano, benzoino, canfora o sangue di drago si trovassero a Salem):
 plausibile per gli speziali del tempo, non cercato.
+
+## La sibilla dell'ambulante: le figure e le parole chiave (18 novembre 2026)
+
+- **Il mazzo.** Le 36 figure vengono dal «Spiel der Hoffnung» di Johann Kaspar Hechtel (Norimberga, Bieling,
+  circa 1799), un gioco d'azzardo con le figure numerate da 1 a 36 e l'ancora come casella vincente; dopo la morte
+  di Marie Anne Lenormand (1843) il suo nome finì su mazzi da cartomanzia con le stesse figure, numeri e carte da
+  gioco abbinate (Wikipedia, «Johann Kaspar Hechtel»; Mary K. Greer, «the petit lenormand tradition», 2013: il
+  mazzo esce nel 1846 con un foglio d'istruzioni, che diventa la base della tradizione).
+- **Le regole del 1799** (traduzione inglese di Steph Myriel Es-Tragon, Tarot Professionals 2012,
+  tarotassociation.net/lenormand/GameofHope.pdf): la nave porta alle Canarie, la volpe svia nel bosco, la stella
+  dà sei marchi, l'ancora è la «Speranza» che vince, la croce è la sfortuna. Confermano il senso di nave, volpe,
+  stelle, ancora e croce.
+- **Le parole chiave** sono quelle comuni della tradizione moderna (lista di Helen Riding per Le Petit Lenormand
+  Éclectique, 2012, riportata da lenormanddictionary.blogspot.com: cavaliere notizie, trifoglio fortuna, nave
+  viaggio, casa casa e famiglia, albero salute e crescita, nuvole confusione, serpente guai e rivali, bara fine,
+  mazzo di fiori gioia e doni, falce taglio improvviso, frusta conflitto, uccelli conversazione, bambino inizio,
+  volpe astuzia, orso forza, stelle guida, cicogna cambiamento, cane amicizia fedele, torre autorità, giardino
+  gente, montagna ostacolo, bivio scelta, topi perdita, cuore amore, anello impegno, libro informazione, lettera
+  corrispondenza, uomo e donna i consultanti, gigli pace e maturità, sole successo, luna emozioni, chiave
+  soluzione, pesci affari, ancora stabilità, croce peso e fede), confrontate con i titoli stampati sulle carte
+  del mazzo Didot (es. 1 «Fortuna und gute Nachricht», 17 «Wohnungs-Wechsel», 23 «Diebstahl», 25 «Glückl.
+  Vermählung», 34 «Viel Geld»), che dicono la stessa cosa. La terza parola chiave a volte viene dal titolo della
+  carta (luna: «Ehre», onore).
+- **Titoli, versi e segni** letti sulle scansioni della Beinecke, carta per carta, ingrandendo il cartiglio e il
+  riquadro in basso. Titolo della 33 non sicuro nell'ultima parola («Glückl. Gelingen. …»): la pagina lo dice. I
+  segni: ogni carta ha un segno zodiacale, un piccolo disegno e un pianeta o un aspetto; la serie di dodici si
+  ripete identica (1, 13, 25 Gemelli e Saturno; 2, 14, 26 Bilancia e opposizione…), e questo fa da controllo. Si
+  mostrano il segno sempre e il pianeta solo dove è uno dei sette e si legge bene; esclusi l'opposizione (2),
+  la congiunzione (7), il nodo (10) e il glifo poco chiaro della 11, e i disegnini (non coincidono con il segno).
+  La 12, 24 e 36 hanno tre pianeti diversi (Saturno, Sole, Marte): così sono stampate.
+- **Non verificato:** le traduzioni italiane dei versi sono nostre (Andrea o un madrelingua tedesco possono
+  rileggerle); nessuna fonte consultata in questa sessione dà il significato dei segni stampati su questo mazzo.

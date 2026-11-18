@@ -136,3 +136,30 @@ test('her notes: the last three that hold; an old save shows nothing new; a new 
   // a broken stored value counts as an old save
   assert.ok(adoptNotes({ notesAck: [] }, t));
 });
+
+// ---- the albums of stones and figures (notes/collezioni.md) ----------------------------------------------
+test('the albums: valid conditions, no backstory name, and the mission cards never announce a gift', async () => {
+  const { FIND_SPOTS } = await import('../src/data/world/finds.js');
+  const { GIFTS, FIRST } = await import('../src/data/gifts.js');
+  const { STONE_LIST } = await import('../src/data/stones.js');
+  const { SIBYL_LIST } = await import('../src/data/sibyl.js');
+  for (const s of [...FIND_SPOTS, ...GIFTS]) checkCond(s.when, s.id);
+  const texts = [...FIND_SPOTS.map((s) => [s.id, s.where]), ...GIFTS.flatMap((g) => [[g.id, g.line], [g.id, g.phrase]]),
+    ...Object.entries(FIRST).flatMap(([k, f]) => [...f.lines, ...(f.given || [])].map((t) => [k, t])),
+    ...STONE_LIST.flatMap((s) => [s.com, s.dice, s.storia].map((t) => [s.id, t])),
+    ...SIBYL_LIST.flatMap((c) => [c.it.title, ...c.it.verse].map((t) => [c.id, t]))].filter(([, t]) => t);
+  for (const [id, text] of texts) for (const w of BACKSTORY_ONLY) assert.doesNotMatch(text, new RegExp(`\\b${w}\\b`), `${id}: «${w}» exists only in lore/retroscena`);
+  // the cards of the optional things say nothing of stones or figures to be given
+  for (const [id, text] of cardTexts) assert.doesNotMatch(text.replace(/pietra di confine/gi, ''), /\b(pietr\w*|figurin\w*|sibill\w*|ametist\w*|ossidian\w*)\b/i, `${id}: a mission card announces a gift («${text}»)`);
+});
+
+test('the albums show only what she has: a missing slot is a number, never a name', async () => {
+  const R = await import('../src/glue/collect.rules.js');
+  const { STONE_LIST } = await import('../src/data/stones.js');
+  const { SIBYL_LIST } = await import('../src/data/sibyl.js');
+  const s = { stones: { agata: { at: 1, from: 'st.board' } }, oracle: { 1: { at: 1, from: 'sb.cottage' } }, albumSeen: {}, world: { once: {} } };
+  for (const [kind, list] of [['stone', STONE_LIST], ['sibyl', SIBYL_LIST]]) {
+    for (const sl of R.albumSlots(s, kind, list)) if (!sl.have) assert.deepEqual(Object.keys(sl).sort(), ['have', 'n'], `${kind} ${sl.n}: only a number`);
+  }
+  assert.equal(R.albumSlots(s, 'stone', STONE_LIST).filter((x) => x.have).length, 1);
+});

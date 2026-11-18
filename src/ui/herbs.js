@@ -3,7 +3,8 @@
 // ribbon; showHerb(id) opens one plant: how to recognise it, what tradition says, what it was used for, what
 // is true of it, how to grow it. History and tradition, never a medical guide.
 import { h, css, openOverlay } from '../core/dom.js';
-import { state } from '../core/state.js';
+import { state, save } from '../core/state.js';
+import { isNew, markSeen } from '../glue/collect.rules.js';
 import { HERB, HERB_LIST, herbUrl } from '../data/herbs/base.js';
 import { HERB_TEXTS } from '../data/herbs/texts.js';
 import { openSheet } from './sheet.js';
@@ -12,7 +13,7 @@ import { HAND, INK, PENCIL, RED } from './paper.js';
 
 const CSS = `
 .hb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 8px;margin-top:8px}
-.hb-it{display:flex;flex-direction:column;align-items:center;gap:3px;padding:0;border:0;background:none;color:${INK};font:19px/21px ${HAND};cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hb-it{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0;border:0;background:none;color:${INK};font:19px/21px ${HAND};cursor:pointer;-webkit-tap-highlight-color:transparent}
 .hb-it img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 30%;border:3px solid #fbf5e6;box-shadow:0 2px 6px #5a452c66;background:#f4ecd6}
 .hb-it:nth-child(odd) img{transform:rotate(-1.2deg)}.hb-it:nth-child(even) img{transform:rotate(1deg)}
 .hb-it.no{cursor:default;color:${PENCIL}}
@@ -53,13 +54,17 @@ export function herbBody(id) {
     sky ? h('p.pencil', { style: { marginTop: '12px' } }, sky) : null, sec('Una curiosità', T.curiosita)];
   return { L: L.filter(Boolean), R: R.filter(Boolean) };
 }
-export const showHerb = (id) => (HERB[id] ? openSheet({ label: HERB[id].name, build: () => ({ ...herbBody(id), single: true }) }) : Promise.resolve());
+export const showHerb = (id) => {
+  if (!HERB[id]) return Promise.resolve();
+  if (markSeen(state, 'herb', id)) save(); // its «nuova» goes (glue/collect.rules.js)
+  return openSheet({ label: HERB[id].name, build: () => ({ ...herbBody(id), single: true }) });
+};
 
 export function herbPages(ctx) {
   css('ui-herbs', CSS);
   const S = seen(), n = herbsSeen();
   const item = (p) => (S[p.id]
-    ? h('button.hb-it', { type: 'button', onclick: async () => { await showHerb(p.id); ctx.rerender?.(); } }, h('img', { src: herbUrl(p.id), alt: '', loading: 'lazy' }), h('span', {}, p.name))
+    ? h('button.hb-it', { type: 'button', onclick: async () => { await showHerb(p.id); ctx.rerender?.(); } }, h('img', { src: herbUrl(p.id), alt: '', loading: 'lazy' }), h('span', {}, p.name), isNew(state, 'herb', p.id) ? h('span.cl-new', {}, 'nuova') : null)
     : h('div.hb-it.no', {}, h('i'), h('span', {}, '?')));
   const half = Math.ceil(HERB_LIST.length / 2);
   const L = [h('h2', {}, 'L\'erbario'),

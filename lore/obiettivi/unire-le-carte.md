@@ -5,6 +5,7 @@ sa_fare: "Tiene insieme più carte: nota se dominano i Maggiori, un seme, le rov
 si_vede_da: "In parte: dopo aver visto tutta la stesa sceglie la risposta finale, bene, dipende o male (verdictChoices in src/systems/consult.js)."
 meccaniche:
   - "[[leggere-ai-clienti]]"
+  - "[[raccogliere-pietre-e-figurine]]"
 aperto: "Il colpo d'occhio (seme dominante, numeri ripetuti, molte figure) si mostra sotto la lettura ma non si chiede mai."
 ---
 

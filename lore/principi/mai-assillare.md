@@ -23,3 +23,4 @@ Meccaniche che lo servono:
 - [[raccogliere-le-erbe]] — Raccogliere le erbe nell'erbario
 - [[curare-l-orto]] — Curare l'orto
 - [[stare-con-tartufo]] — Stare con Tartufo
+- [[raccogliere-pietre-e-figurine]] — Raccogliere pietre e figurine della sibilla

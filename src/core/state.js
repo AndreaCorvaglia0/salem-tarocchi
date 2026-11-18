@@ -68,6 +68,13 @@ export const fresh = () => ({
   notesAck: null, // place notes she has read (ui/placenotes.js); null on an old save: what is true now counts as read
   // the smoke rite before a reading (glue/rite.rules.js freshRite: the same shape; normRite mends old values)
   rite: { n: 0, last: null, owned: ['rosa', 'alloro', 'cipresso'], picks: {}, mine: {}, skipped: 0, shown: 0, times: {}, lineDay: null, malva: false, gifts: {}, deck: 0 },
+  // the grimoire's albums (glue/collect.js, notes/collezioni.md): the stones and the sibyl's figures she has
+  // (id or card number -> { at, from }), the phrase a group of figures came with (from -> { who, phrase, cards }),
+  // and the album pages not opened yet (key -> false means «nuova»: 'herb:<id>', 'stone:<id>', 'sibyl:<n>')
+  stones: {},
+  oracle: {},
+  oracleFrom: {},
+  albumSeen: {},
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
@@ -106,6 +113,7 @@ export const migrate = (s) => {
   if (s.powers) for (const k of ['seals', 'sense2', 'light2']) delete s.powers[k];
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job
   if (s.flags) delete s.flags['sight.far'];
+  for (const k of ['stones', 'oracle', 'oracleFrom', 'albumSeen']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {}; // the albums (glue/collect.js)
   return s;
 };
 

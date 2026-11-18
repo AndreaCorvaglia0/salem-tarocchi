@@ -6,7 +6,7 @@ import { FONT } from '../core/fonts.js';
 
 export const INK = '#2a2134', PENCIL = '#6a6256', RED = '#a3372a', PAPER = '#efe4c8', GOLD = '#d8b25a';
 export const HAND = FONT.hand, SERIF = FONT.serif;
-export const RIB = { io: '#7d2a2a', carte: '#2c5444', mappa: '#2b3866', erbe: '#5d6a2c' };
+export const RIB = { io: '#7d2a2a', carte: '#2c5444', mappa: '#2b3866', erbe: '#5d6a2c', pietre: '#4e4466', sibilla: '#8a4e2a' };
 
 // a deterministic random for drawings that must look the same every time
 export const rnd = (seed) => { let a = seed >>> 0 || 1; return () => { a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
