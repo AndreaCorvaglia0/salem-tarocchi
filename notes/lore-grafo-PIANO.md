@@ -42,6 +42,20 @@ espliciti, `motivo` e `effetto` (le due facce), e il controllo avvisa se ne manc
 corso ha i quattro legami dell'unità di crescita: posto, motivo, uso, ritorno; il controllo elenca i concetti
 a cui ne manca uno. Passo 0 del piano: approvare il manifesto.
 
+## Aggiunta dopo il secondo giro del manifesto (18 novembre, 12:00)
+
+Le leggi sono dieci, in tre gruppi (che cosa, come, com'è costruito). Tre conseguenze per il vault:
+
+- **Le tre zone sono la legge 10**: `corso/` (concetti), `storia/`, e i materiali (che stanno nel codice e in
+  `public/`, con i crediti); `metodo/` è la parte che non sa niente di Salem. Il test «il metodo non nomina
+  Salem» e «la storia non contiene il testo dei concetti» sono i controlli della legge 10.
+- **Nucleo e contorno (legge 1)** diventano due campi di ogni concetto: `nucleo` (una riga: che cosa sapere) e
+  `segnini` (applicazioni, metafore, paralleli, ognuno legato al nucleo). Gli obiettivi dicono quali concetti
+  del nucleo coprono; il controllo elenca i concetti del nucleo che nessuna verifica tocca.
+- **L'unità di crescita ha sei voci** (nucleo, corpo, posto, motivo, uso, ritorno): il controllo fa una tabella
+  concetto × sei voci e mostra i buchi. È la stessa tabella che servirà a Mnemopolis per dire se una casa è
+  finita.
+
 ## Che cosa manca oggi (misurato)
 
 - **L'anello concetto → luogo non esiste**: nessuna delle 22 schede degli Arcani dice dove sta la carta. È

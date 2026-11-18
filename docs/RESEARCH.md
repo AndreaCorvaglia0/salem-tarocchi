@@ -588,3 +588,24 @@ Cercate il 18 novembre per `docs/MANIFESTO.md`. Lette le schede o i riassunti in
   studi più rigorosi. Le cifre sono lette in un riassunto di terzi, l'abstract dell'articolo conferma il
   quadro. https://opus.bibliothek.uni-augsburg.de/opus4/frontdoor/index/index/docId/109056
 - Non verificato e quindi non citato nel manifesto: il carico cognitivo (Sweller) per la legge 7.
+
+## Per il manifesto, secondo giro: nucleo, mappe, azione, dettagli estranei (18 novembre)
+
+Lette le schede, gli abstract o i comunicati indicati, non gli articoli interi.
+
+- **Mappe concettuali.** Schroeder, Nesbit, Anguiano e Adesope 2018, *Educational Psychology Review* 30(2),
+  meta-analisi (142 effetti, 11.814 persone): g 0,58; costruire la mappa 0,72, studiarla 0,43.
+  https://summit.sfu.ca/item/17789
+- **Mastery learning.** Kulik, Kulik e Bangert-Drowns 1990, *Review of Educational Research* 60(2), 108 studi:
+  effetto positivo sugli esami (in media 0,52 secondo un riassunto di terzi), più forte per chi è più debole;
+  può abbassare il numero di chi finisce il corso. Una rassegna di più meta-analisi dà stime da 0,04 a 0,60:
+  non c'è una cifra sola. https://doi.org/10.3102/00346543060002265
+- **Dettagli seducenti.** Sundararajan e Adesope 2020, *Educational Psychology Review*, meta-analisi di 58 studi
+  (più di 7.500 studenti): informazioni interessanti ma estranee all'obiettivo fanno imparare peggio; gli
+  studi usano quasi tutti sessioni di 6-12 minuti. I dettagli che c'entrano con l'argomento restano utili.
+  https://news.wsu.edu/2020/03/19/seductive-details-inhibit-learning/
+- **Effetto dell'azione (enactment).** Roberts, MacLeod e Fernandes 2022, *Psychological Bulletin* 148, 145 studi
+  comportamentali: g 1,23 rispetto a leggere; due componenti, progettare l'azione e farla. Riguarda azioni
+  fisiche vere su frasi d'azione; in alcuni disegni sperimentali il vantaggio sul guardare sparisce
+  (Steffens e altri 2015). Un gesto su uno schermo è una nostra estensione, non verificata.
+  https://uwaterloo.ca/memory-attention-cognition-lab/sites/default/files/uploads/files/enact22.pdf
