@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Terra"
 famiglia: elemento
+peso: contorno
 seme: "[[seme-denari]]"
 elemento: null
 pianeta: null

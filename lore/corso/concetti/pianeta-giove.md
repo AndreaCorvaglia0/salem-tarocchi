@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Giove"
 famiglia: pianeta
+peso: contorno
 giorno: "giovedì"
 metallo: "stagno"
 carta: "[[arcano-la-ruota]]"

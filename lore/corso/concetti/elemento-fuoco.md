@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Fuoco"
 famiglia: elemento
+peso: contorno
 seme: "[[seme-bastoni]]"
 elemento: null
 pianeta: null

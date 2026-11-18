@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Luna"
 famiglia: pianeta
+peso: contorno
 giorno: "lunedì"
 metallo: "argento"
 carta: "[[arcano-la-sacerdotessa]]"

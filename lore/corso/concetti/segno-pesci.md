@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Pesci"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-la-luna]]"
 seme: "[[seme-coppe]]"
 elemento: "[[elemento-acqua]]"

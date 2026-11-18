@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Mercurio"
 famiglia: pianeta
+peso: contorno
 giorno: "mercoledì"
 metallo: "mercurio"
 carta: "[[arcano-il-mago]]"

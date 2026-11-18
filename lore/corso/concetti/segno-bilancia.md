@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Bilancia"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-la-giustizia]]"
 seme: "[[seme-spade]]"
 elemento: "[[elemento-aria]]"

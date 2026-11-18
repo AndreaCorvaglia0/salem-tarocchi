@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Belladonna"
 id: "belladonna"
 famiglia: erba
+peso: contorno
 rischio: "velenosa"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-saturno]]"
@@ -14,6 +15,7 @@ si_dice: "Le streghe, si diceva, la mettevano negli unguenti per volare e vedere
 da_dove_viene: "Il nome Atropa viene da Atropo, la Parca che taglia il filo della vita."
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti: []
+sta_in: "[[cimitero]]"
 nel_gioco:
   - "src/data/herbs/base.js#belladonna"
   - "[[raccogliere-le-erbe]]"

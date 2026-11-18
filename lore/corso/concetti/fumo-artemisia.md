@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Artemisia secca"
 famiglia: fumo
+peso: contorno
 erba: "[[erba-artemisia]]"
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-venere]]"

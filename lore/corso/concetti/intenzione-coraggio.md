@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Coraggio"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-marte]]"
 intenzioni: []

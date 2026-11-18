@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Matto"
 id: "m00"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-aria]]"
 pianeta: null
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Aleph, data all'elemento aria."
 consenso: { segno: null, pianeta: null, elemento: alto, intenzioni: nostro }
 varianti:
   - "Molti moderni gli danno Urano (ANG)."
+arriva_da: "[[prima-seduta]]"
 nel_gioco:
   - "src/data/cards.base.js#m00"
   - "[[trovare-una-carta]]"

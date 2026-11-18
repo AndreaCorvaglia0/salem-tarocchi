@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Tormalina nera"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-saturno]]"
 intenzioni:
@@ -13,6 +14,7 @@ si_dice: "Messa sulla soglia o in tasca prende su di sé quello che di brutto ar
 da_dove_viene: "Gli Olandesi la chiamavano tira cenere, perché scaldata attira la polvere."
 consenso: { pianeta: alto, elemento: alto, intenzioni: alto }
 varianti: []
+sta_in: "[[cimitero]]"
 nel_gioco: []
 fonte:
   - "SNAV"

@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Foglie d'alloro"
 famiglia: fumo
+peso: contorno
 erba: "[[erba-alloro]]"
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"

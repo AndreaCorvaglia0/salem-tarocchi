@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Sangue di drago"
 famiglia: fumo
+peso: contorno
 erba: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-marte]]"

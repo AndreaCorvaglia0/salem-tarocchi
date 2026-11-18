@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Marte"
 famiglia: pianeta
+peso: contorno
 giorno: "martedì"
 metallo: "ferro"
 carta: "[[arcano-la-torre]]"

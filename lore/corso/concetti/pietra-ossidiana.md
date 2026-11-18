@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Ossidiana"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-saturno]]"
 intenzioni:
@@ -14,6 +15,7 @@ da_dove_viene: "È vetro nato dai vulcani; lo specchio nero di John Dee, l'astro
 consenso: { pianeta: basso, elemento: basso, intenzioni: medio }
 varianti:
   - "Molti moderni la danno a Plutone (SNAV, KERY); Roth la mette con Saturno e la terra."
+la_da: "[[becchino]]"
 nel_gioco: []
 fonte:
   - "ROTH"

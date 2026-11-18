@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Amore"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"
 intenzioni: []

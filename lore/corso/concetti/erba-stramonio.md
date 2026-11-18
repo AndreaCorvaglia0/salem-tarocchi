@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Stramonio"
 id: "stramonio"
 famiglia: erba
+peso: contorno
 rischio: "velenosa"
 elemento: null
 pianeta: null
@@ -16,6 +17,7 @@ da_dove_viene: "Viene dalle Americhe; a Jamestown, nel 1676, alcuni soldati ne m
 consenso: { pianeta: null, elemento: null, intenzioni: basso }
 varianti:
   - "Cunningham e Roth lo mettono sotto Saturno e l'acqua; il gioco lascia pianeta ed elemento vuoti, perché i libri antichi non ne parlano."
+sta_in: "[[botola]]"
 nel_gioco:
   - "src/data/herbs/base.js#stramonio"
   - "[[raccogliere-le-erbe]]"

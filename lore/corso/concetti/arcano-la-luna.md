@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Luna"
 id: "m18"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-pesci]]"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-giove]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Qoph, data ai Pesci."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti:
   - "Non è la carta del pianeta Luna, che va alla Sacerdotessa; i moderni danno i Pesci a Nettuno."
+sta_in: "[[palude]]"
 nel_gioco:
   - "src/data/cards.base.js#m18"
   - "[[trovare-una-carta]]"

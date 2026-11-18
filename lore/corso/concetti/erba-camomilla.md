@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Camomilla"
 id: "camomilla"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-sole]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Gli Egizi, racconta Culpeper, la dedicavano al Sole; il nome gre
 consenso: { pianeta: medio, elemento: alto, intenzioni: alto }
 varianti:
   - "Roth la mette sotto la Luna."
+sta_in: "[[casa-di-malva]]"
 nel_gioco:
   - "src/data/herbs/base.js#camomilla"
   - "[[raccogliere-le-erbe]]"

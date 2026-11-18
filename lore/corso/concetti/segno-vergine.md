@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Vergine"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-l-eremita]]"
 seme: "[[seme-denari]]"
 elemento: "[[elemento-terra]]"

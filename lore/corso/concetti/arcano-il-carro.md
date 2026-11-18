@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Carro"
 id: "m07"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-cancro]]"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-luna]]"
@@ -13,6 +14,7 @@ si_dice: "Il Cancro porta la casa addosso come il carrista la sua armatura; sull
 da_dove_viene: "Golden Dawn: lettera Cheth, data al Cancro."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[mercato]]"
 nel_gioco:
   - "src/data/cards.base.js#m07"
   - "[[trovare-una-carta]]"

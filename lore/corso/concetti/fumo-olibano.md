@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Olibano (incenso)"
 famiglia: fumo
+peso: contorno
 erba: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"

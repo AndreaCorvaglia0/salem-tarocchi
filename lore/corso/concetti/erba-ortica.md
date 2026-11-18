@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Ortica"
 id: "ortica"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-marte]]"
@@ -15,6 +16,7 @@ si_dice: "Un sacchetto d'ortica rimanda il malocchio a chi l'ha fatto, e chi ne 
 da_dove_viene: "Punge come un'arma, e già Agrippa la mette tra le piante di Marte."
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti: []
+sta_in: "[[bottega]]"
 nel_gioco:
   - "src/data/herbs/base.js#ortica"
   - "[[raccogliere-le-erbe]]"

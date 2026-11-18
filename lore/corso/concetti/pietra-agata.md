@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Agata"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-mercurio]]"
 intenzioni:
@@ -13,6 +14,7 @@ si_dice: "Dà le parole giuste a chi deve convincere, aiuta la memoria e porta f
 da_dove_viene: "Prende il nome dal fiume Acate, in Sicilia; Agrippa la mette sotto Mercurio."
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti: []
+sta_in: "[[casa-delle-riunioni]]"
 nel_gioco: []
 fonte:
   - "AGR"

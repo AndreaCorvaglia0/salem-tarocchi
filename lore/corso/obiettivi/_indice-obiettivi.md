@@ -1,6 +1,6 @@
 # Obiettivi didattici
 
-Che cosa lei sa fare alla fine, in modo che si veda. 14 obiettivi; `aperto` dice dove il gioco non lo verifica.
+Che cosa lei sa fare alla fine, in modo che si veda. 14 obiettivi, 9 del nucleo e 5 di contorno (`peso`); `concetti` dice quali famiglie di concetti riguardano (la tabella per famiglia è in [[_sei-voci]]); `aperto` dice dove il gioco non lo verifica. Contorno: ricordare i dettagli, decidere con una carta, conoscere pianeti e segni, conoscere la storia dei tarocchi, riconoscere e curare le piante.
 
 - [[riconoscere-una-carta]] — Vede una carta Rider-Waite-Smith e ne dice il nome, anche con il titolo coperto o da un solo dettaglio.
 - [[dire-l-idea-della-carta]] — Dice con parole sue l'idea centrale di una carta dritta, in una frase.

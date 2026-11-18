@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Ariete"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-l-imperatore]]"
 seme: "[[seme-bastoni]]"
 elemento: "[[elemento-fuoco]]"

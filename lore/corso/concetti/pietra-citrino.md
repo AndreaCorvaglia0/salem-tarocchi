@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Citrino (quarzo giallo)"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
 intenzioni:
@@ -13,6 +14,7 @@ si_dice: "È la pietra dei mercanti: tenuta nella cassa porta denaro. Messa vici
 da_dove_viene: "Il nome viene dal cedro, citrus; gran parte del citrino che si vende è ametista scaldata."
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti: []
+la_da: "[[bottegaio]]"
 nel_gioco: []
 fonte:
   - "KERY"

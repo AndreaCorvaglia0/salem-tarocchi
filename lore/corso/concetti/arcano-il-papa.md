@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Papa"
 id: "m05"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-toro]]"
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-venere]]"
@@ -13,6 +14,7 @@ si_dice: "Il Toro è lento e fedele a quello che conosce, e il Papa insegna le r
 da_dove_viene: "Golden Dawn: lettera Vav, data al Toro."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[casa-delle-riunioni]]"
 nel_gioco:
   - "src/data/cards.base.js#m05"
   - "[[trovare-una-carta]]"

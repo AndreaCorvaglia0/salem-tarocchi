@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Mago"
 id: "m01"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-mercurio]]"
@@ -13,6 +14,7 @@ si_dice: "Mercurio è il pianeta delle parole e delle mani abili, e sul tavolo d
 da_dove_viene: "Golden Dawn: lettera Beth, data a Mercurio."
 consenso: { segno: null, pianeta: alto, elemento: medio, intenzioni: nostro }
 varianti: []
+sta_in: "[[mercato]]"
 nel_gioco:
   - "src/data/cards.base.js#m01"
   - "[[trovare-una-carta]]"

@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Scorpione"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-la-morte]]"
 seme: "[[seme-coppe]]"
 elemento: "[[elemento-acqua]]"

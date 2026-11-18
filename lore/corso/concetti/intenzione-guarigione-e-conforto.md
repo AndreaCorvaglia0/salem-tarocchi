@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Guarigione e conforto"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-sole]]"
 intenzioni: []

@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Occhio di tigre"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
 intenzioni:
@@ -13,6 +14,7 @@ si_dice: "Dà sicurezza a chi deve parlare o decidere, e il suo riflesso che si 
 da_dove_viene: "È quarzo cresciuto al posto di fibre minerali, e per questo brilla a strisce; la sua fama magica è recente."
 consenso: { pianeta: medio, elemento: alto, intenzioni: medio }
 varianti: []
+sta_in: "[[bivacco]]"
 nel_gioco: []
 fonte:
   - "SNAV"

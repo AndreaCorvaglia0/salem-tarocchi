@@ -137,3 +137,38 @@ Il cerchio delle corrispondenze in 104 pagine: 19 chiodi, 12 segni e 73 foglie. 
 - [[pietra-quarzo-ialino]] — Il cristallo di rocca schiarisce: la mente, la vista e il male.
 - [[pietra-quarzo-rosa]] — Il quarzo rosa è la pietra dell'amore tenero.
 - [[pietra-tormalina-nera]] — La tormalina nera assorbe il male e tiene i piedi per terra.
+
+## Il nucleo fuori dal cerchio
+
+Schede sottili, scritte solo dai dati del gioco: non sono nel cerchio e non entrano in `src/data/sapere.js`. Le sei voci di ogni famiglia sono in [[_sei-voci]].
+
+### Numeri (nucleo)
+
+- [[numero-asso]] — Asso, inizio: comincia qualcosa.
+- [[numero-due]] — Due, coppia: due cose si incontrano.
+- [[numero-tre]] — Tre, crescita: qualcosa cresce e dà il primo frutto.
+- [[numero-quattro]] — Quattro, sosta: ci si ferma.
+- [[numero-cinque]] — Cinque, scossa: qualcosa si rompe.
+- [[numero-sei]] — Sei, armonia: torna l'equilibrio.
+- [[numero-sette]] — Sette, verifica: ci si ferma a valutare.
+- [[numero-otto]] — Otto, movimento: le cose si muovono.
+- [[numero-nove]] — Nove, quasi: si è quasi in fondo.
+- [[numero-dieci]] — Dieci, compimento: il ciclo si chiude.
+
+### Figure (nucleo)
+
+- [[figura-fante]] — Fante: chi impara.
+- [[figura-cavaliere]] — Cavaliere: chi va.
+- [[figura-regina]] — Regina: chi custodisce.
+- [[figura-re]] — Re: chi governa.
+
+### Stese e regola (nucleo)
+
+- [[stesa-carta-singola]] — Una carta sola, al centro.
+- [[stesa-passato-presente-futuro]] — Tre carte in fila: passato, presente, futuro.
+- [[stesa-croce-celtica]] — Dieci carte: sei in croce, quattro in colonna.
+- [[regola-le-capovolte]] — Una carta capovolta dice la stessa cosa, che però fatica a uscire.
+
+### Storia (contorno)
+
+- [[storia-dei-tarocchi]] — Gioco di carte del Quattrocento, divinazione dal 1781, Rider-Waite-Smith del 1909.

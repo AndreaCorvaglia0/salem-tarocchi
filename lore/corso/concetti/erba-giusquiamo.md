@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Giusquiamo"
 id: "giusquiamo"
 famiglia: erba
+peso: contorno
 rischio: "velenosa"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-saturno]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Prima del luppolo lo si metteva anche nella birra."
 consenso: { pianeta: medio, elemento: alto, intenzioni: basso }
 varianti:
   - "Agrippa lo mette sotto Giove, e i suoi semi nel fumo di Saturno."
+sta_in: "[[botola]]"
 nel_gioco:
   - "src/data/herbs/base.js#giusquiamo"
   - "[[raccogliere-le-erbe]]"

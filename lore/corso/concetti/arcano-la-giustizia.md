@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Giustizia"
 id: "m11"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-bilancia]]"
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-venere]]"
@@ -13,6 +14,7 @@ si_dice: "Tiene in mano la bilancia del suo segno, e Venere, che governa la Bila
 da_dove_viene: "Golden Dawn: lettera Lamed, data alla Bilancia."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[pietra-di-confine]]"
 nel_gioco:
   - "src/data/cards.base.js#m11"
   - "[[trovare-una-carta]]"

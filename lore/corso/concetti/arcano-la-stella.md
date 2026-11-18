@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Stella"
 id: "m17"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-acquario]]"
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-saturno]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Tzaddi, data all'Acquario."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti:
   - "Crowley le dà la lettera Heh; i moderni danno l'Acquario a Urano."
+sta_in: "[[pozzo-vecchio]]"
 nel_gioco:
   - "src/data/cards.base.js#m17"
   - "[[trovare-una-carta]]"

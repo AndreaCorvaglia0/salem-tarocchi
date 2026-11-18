@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Lavanda"
 id: "lavanda"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-mercurio]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Il nome viene dal latino lavare: i Romani la mettevano nell'acqu
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti:
   - "Qualcuno la mette anche sotto Venere (MYST)."
+sta_in: "[[vicolo-di-sotto]]"
 nel_gioco:
   - "src/data/herbs/base.js#lavanda"
   - "[[raccogliere-le-erbe]]"

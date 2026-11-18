@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Salvia"
 id: "salvia"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-giove]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Il nome viene da salvus, sano; la Scuola di Salerno si chiedeva 
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti:
   - "Il fumo «che pulisce» della pratica moderna è spesso la salvia bianca americana, un'altra pianta (GRIM)."
+sta_in: "[[orto-di-malva]]"
 nel_gioco:
   - "src/data/herbs/base.js#salvia"
   - "[[raccogliere-le-erbe]]"

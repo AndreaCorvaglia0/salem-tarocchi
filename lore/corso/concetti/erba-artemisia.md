@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Artemisia"
 id: "artemisia"
 famiglia: erba
+peso: contorno
 rischio: "attenzione"
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-venere]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Prende il nome da Artemide; nel Medioevo era il «cingolo di San
 consenso: { pianeta: medio, elemento: medio, intenzioni: alto }
 varianti:
   - "Molti autori moderni la mettono sotto la Luna (MYST, ROTH); Culpeper e Cunningham sotto Venere."
+sta_in: "[[pietra-di-confine]]"
 nel_gioco:
   - "src/data/herbs/base.js#artemisia"
   - "[[raccogliere-le-erbe]]"

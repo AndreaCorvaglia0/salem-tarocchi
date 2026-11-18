@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Quarzo rosa"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"
 intenzioni:
@@ -13,6 +14,7 @@ si_dice: "Apre il cuore all'amore, a quello degli altri e al proprio, e consola 
 da_dove_viene: "Nei libri antichi non ha un capitolo suo: la sua fama di pietra dell'amore è moderna."
 consenso: { pianeta: alto, elemento: alto, intenzioni: alto }
 varianti: []
+la_da: "[[edera]]"
 nel_gioco: []
 fonte:
   - "KERY"

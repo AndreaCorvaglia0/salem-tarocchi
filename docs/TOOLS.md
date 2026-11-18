@@ -7,7 +7,7 @@ data (`src/data/story/`) is the truth of what the game does. These tools compare
 | Command | Writes | Run by `npm test` |
 |---|---|---|
 | `npm run lore check` | `notes/tools.md` | yes (`tests/lore.test.mjs`: no errors) |
-| `npm run lore gen` | `lore/storia/generati/tratti/`, `lore/storia/generati/scelte/`, `lore/storia/generati/finali/`, `lore/metodo/meccaniche/_dinamiche.md` | yes (`gen --check`: up to date) |
+| `npm run lore gen` | `lore/storia/generati/tratti/`, `lore/storia/generati/scelte/`, `lore/storia/generati/finali/`, `lore/metodo/meccaniche/_dinamiche.md`, `lore/corso/_sei-voci.md` | yes (`gen --check`: up to date) |
 | `npm run lore sapere` | `src/data/sapere.js`, the tables of `lore/corso/concetti/_il-cerchio.md` (from `lore/corso/concetti/`) | yes (`tests/sapere.test.mjs`: in step, the circle closes) |
 | `npm run coverage -- --runs 1000` | `docs/COVERAGE.md` | a small run (`tests/coverage.test.mjs`) |
 | `npm run map` | `docs/MAP.md` | yes (`tests/map.test.mjs`) |
@@ -30,6 +30,7 @@ and the README table: those are the contract.
 - in `lore/storia/persone`, an `id` that is not a speaker, a CAST id, a client or a script id.
 - a `meccanica` with no `serve`; an `obiettivo` with no `meccaniche` and an empty `aperto`.
 - **the laws and the two faces** (`lore/metodo/leggi/`, `tests/lore.leggi.test.mjs`): a `meccanica` without `motivo`, `effetto`, a valid `dinamica` (one of the seventeen in `scripts/lore/dinamiche.mjs`) or `leggi`; a `principio`, `tecnica` or `ricetta` without a `legge` that exists (or an `anche` that does not). Warnings: a `motivo` or `effetto` over 20 words or repeated; a law that no `tecnica` rests on (laws 10 and 11 are exempt).
+- **the course** (`scripts/lore/corso.mjs`, `tests/lore.corso.test.mjs`): a `concetto` or `obiettivo` without a `peso` of `nucleo` or `contorno`; an `obiettivo` without `concetti` or naming a family that does not exist; a `concetto` whose family is neither of the circle nor listed as outside it (`scripts/lore/sapere.mjs`); a concept of the circle without its circle fields; `sta_in` not pointing to a `luogo`, `arriva_da` to a `fatto`, `la_da` or `si_impara_da` to a `persona`; a nucleus concept outside the circle without `in_breve`. `lore gen` writes `corso/_sei-voci.md`: the six voices (nucleo, corpo, posto, motivo, uso, ritorno) per family, and the holes.
 - **continuity**: a claim "P knows fact F from scene S" (`sa: { fatto, da }` in persone, where `da` is a
   fatto whose `scena` names the scenes; or `chi_lo_sa: { chi, come }` in fatti, where `come` names a
   `file.js#scene`) is an error when F happens at a main-path step (its scene is the CAST entry of one step)

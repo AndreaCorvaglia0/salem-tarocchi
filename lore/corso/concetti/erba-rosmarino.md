@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Rosmarino"
 id: "rosmarino"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Ofelia, nell'Amleto, lo porge «per il ricordo»; il nome latino
 consenso: { pianeta: medio, elemento: alto, intenzioni: alto }
 varianti:
   - "Agrippa lo mette sotto la Luna, e molti moderni sotto Marte (MYST)."
+sta_in: "[[orto-della-capanna]]"
 nel_gioco:
   - "src/data/herbs/base.js#rosmarino"
   - "[[raccogliere-le-erbe]]"

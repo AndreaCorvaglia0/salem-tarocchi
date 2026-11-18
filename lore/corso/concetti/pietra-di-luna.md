@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Pietra di luna"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-luna]]"
 intenzioni:
@@ -13,6 +14,7 @@ si_dice: "Sotto il cuscino fa sognare il futuro, e scambiata tra innamorati li r
 da_dove_viene: "Il suo riflesso azzurro che si muove ricorda la luce della luna sull'acqua."
 consenso: { pianeta: alto, elemento: alto, intenzioni: alto }
 varianti: []
+la_da: "[[edera]]"
 nel_gioco: []
 fonte:
   - "SNAV"

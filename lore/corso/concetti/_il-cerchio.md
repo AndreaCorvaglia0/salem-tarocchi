@@ -1,6 +1,7 @@
 ---
 tipo: indice
 nome: "Il cerchio: erbe, fumi, pietre, tarocchi"
+aperto: "Nessun obiettivo riguarda ancora i fumi, le pietre e le intenzioni: sono contorno arrivato dopo, e le sei voci (corso/_sei-voci) lo mostrano."
 ---
 
 # Il cerchio

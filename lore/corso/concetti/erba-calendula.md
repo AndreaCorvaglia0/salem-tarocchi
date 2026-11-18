@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Calendula"
 id: "calendula"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
@@ -15,6 +16,7 @@ si_dice: "I suoi petali chiudono le ferite, e un mazzetto sotto il letto, si dic
 da_dove_viene: "Il nome viene dalle calende, il primo giorno del mese, perché fiorisce quasi tutto l'anno."
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti: []
+sta_in: "[[orto-di-malva]]"
 nel_gioco:
   - "src/data/herbs/base.js#calendula"
   - "[[raccogliere-le-erbe]]"

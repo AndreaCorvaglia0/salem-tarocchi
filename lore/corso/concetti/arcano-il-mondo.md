@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Mondo"
 id: "m21"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-saturno]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Tav, data a Saturno."
 consenso: { segno: null, pianeta: alto, elemento: alto, intenzioni: nostro }
 varianti:
   - "La Golden Dawn gli dà anche la terra (ANG)."
+arriva_da: "[[seduta-finale]]"
 nel_gioco:
   - "src/data/cards.base.js#m21"
   - "[[trovare-una-carta]]"

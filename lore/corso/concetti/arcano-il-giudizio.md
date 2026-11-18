@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Giudizio"
 id: "m20"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-fuoco]]"
 pianeta: null
@@ -15,6 +16,7 @@ da_dove_viene: "Golden Dawn: lettera Shin, data all'elemento fuoco."
 consenso: { segno: null, pianeta: null, elemento: alto, intenzioni: nostro }
 varianti:
   - "Molti moderni gli danno Plutone (ANG)."
+arriva_da: "[[processo-davanti-al-giudice]]"
 nel_gioco:
   - "src/data/cards.base.js#m20"
   - "[[trovare-una-carta]]"

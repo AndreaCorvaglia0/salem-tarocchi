@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Rosa"
 id: null
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"

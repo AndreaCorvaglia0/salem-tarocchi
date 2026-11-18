@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Torre"
 id: "m16"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-marte]]"
@@ -13,6 +14,7 @@ si_dice: "Il fulmine colpisce la cima e la corona cade; dopo il crollo, l'aria Ã
 da_dove_viene: "Golden Dawn: lettera Peh, data a Marte."
 consenso: { segno: null, pianeta: alto, elemento: medio, intenzioni: nostro }
 varianti: []
+sta_in: "[[torre]]"
 nel_gioco:
   - "src/data/cards.base.js#m16"
   - "[[trovare-una-carta]]"

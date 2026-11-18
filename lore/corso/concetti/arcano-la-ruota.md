@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Ruota della Fortuna"
 id: "m10"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-giove]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Kaph, data a Giove."
 consenso: { segno: null, pianeta: alto, elemento: medio, intenzioni: nostro }
 varianti:
   - "Per l'elemento, chi pensa al Sagittario le dà il fuoco."
+sta_in: "[[mulino]]"
 nel_gioco:
   - "src/data/cards.base.js#m10"
   - "[[trovare-una-carta]]"

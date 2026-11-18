@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Chiarezza"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-mercurio]]"
 intenzioni: []

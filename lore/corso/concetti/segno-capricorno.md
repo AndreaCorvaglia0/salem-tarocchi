@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Capricorno"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-il-diavolo]]"
 seme: "[[seme-denari]]"
 elemento: "[[elemento-terra]]"

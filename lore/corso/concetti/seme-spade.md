@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Spade"
 id: "s"
 famiglia: seme
+peso: nucleo
 segni:
   - "[[segno-gemelli]]"
   - "[[segno-bilancia]]"
@@ -17,6 +18,7 @@ da_dove_viene: "L'abbinamento dei semi agli elementi lo rende comune la Golden D
 consenso: { pianeta: null, elemento: alto, intenzioni: medio }
 varianti:
   - "Chi scambia aria e fuoco dà il fuoco alle Spade (CRAFT)."
+si_impara_da: "[[malva]]"
 nel_gioco:
   - "src/data/cards.base.js#SUITS.s"
   - "[[seguire-le-lezioni]]"

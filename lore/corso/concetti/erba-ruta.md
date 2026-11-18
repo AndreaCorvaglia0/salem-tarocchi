@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Ruta"
 id: "ruta"
 famiglia: erba
+peso: contorno
 rischio: "attenzione"
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Mitridate, si racconta, la metteva nel suo antidoto contro i vel
 consenso: { pianeta: basso, elemento: alto, intenzioni: alto }
 varianti:
   - "Cunningham e MYST la mettono sotto Marte, Agrippa e Roth sotto Saturno; il gioco segue Culpeper (Sole)."
+sta_in: "[[villaggio]]"
 nel_gioco:
   - "src/data/herbs/base.js#ruta"
   - "[[raccogliere-le-erbe]]"

@@ -3,6 +3,7 @@ tipo: concetto
 nome: "L'Imperatore"
 id: "m04"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-ariete]]"
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-marte]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Heh, data all'Ariete."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti:
   - "Crowley scambia le lettere dell'Imperatore e della Stella."
+sta_in: "[[tribunale]]"
 nel_gioco:
   - "src/data/cards.base.js#m04"
   - "[[trovare-una-carta]]"

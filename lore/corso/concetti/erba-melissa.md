@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Melissa"
 id: "melissa"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-giove]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Melissa in greco vuol dire ape; i Carmelitani di Parigi ne fecer
 consenso: { pianeta: basso, elemento: alto, intenzioni: medio }
 varianti:
   - "Cunningham la mette sotto la Luna, Agrippa sotto il Sole; il gioco segue Culpeper (Giove), come MYST."
+sta_in: "[[casa-di-malva]]"
 nel_gioco:
   - "src/data/herbs/base.js#melissa"
   - "[[raccogliere-le-erbe]]"

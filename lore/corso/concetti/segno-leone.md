@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Leone"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-la-forza]]"
 seme: "[[seme-bastoni]]"
 elemento: "[[elemento-fuoco]]"

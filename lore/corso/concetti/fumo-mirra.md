@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Mirra"
 famiglia: fumo
+peso: contorno
 erba: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-luna]]"

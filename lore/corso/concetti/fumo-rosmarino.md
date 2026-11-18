@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Rosmarino secco"
 famiglia: fumo
+peso: contorno
 erba: "[[erba-rosmarino]]"
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"

@@ -14,6 +14,10 @@ export const HUB_FAMILIES = ['elemento', 'pianeta', 'intenzione'];
 export const LEAF_FAMILIES = ['seme', 'arcano', 'erba', 'fumo', 'pietra'];
 // the four groups of the circle: "the circle closes" when every hub has a leaf in each of them
 export const GROUPS = { tarocchi: ['seme', 'arcano'], erbe: ['erba'], fumi: ['fumo'], pietre: ['pietra'] };
+// The circle is these nine families (plus the signs, which are hubs for the Majors). The families of the course that
+// are not part of the circle are listed here on purpose: they never enter src/data/sapere.js or its tables.
+export const CIRCLE_FAMILIES = [...HUB_FAMILIES, 'segno', ...LEAF_FAMILIES];
+export const OUTSIDE_FAMILIES = ['numero', 'figura', 'stesa', 'regola', 'storia'];
 export const CONSENSO = ['alto', 'medio', 'basso', 'nostro'];
 export const START = '<!-- dal vault: inizio (scritto da `node scripts/lore.mjs sapere`, non modificare a mano) -->';
 export const END = '<!-- dal vault: fine -->';
@@ -50,7 +54,7 @@ function entry(d) {
 }
 
 export function readSapere(vault = loadVault()) {
-  const docs = vault.ofTipo('concetto').filter((d) => d.folder === 'corso/concetti').sort((a, b) => a.name.localeCompare(b.name));
+  const docs = vault.ofTipo('concetto').filter((d) => d.folder === 'corso/concetti' && CIRCLE_FAMILIES.includes(d.data.famiglia)).sort((a, b) => a.name.localeCompare(b.name));
   const all = docs.map(entry).sort(byRank);
   return {
     hubs: all.filter((e) => HUB_FAMILIES.includes(e.famiglia)),

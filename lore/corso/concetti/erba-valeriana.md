@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Valeriana"
 id: "valeriana"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-mercurio]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Nel Medioevo la chiamavano «cura tutto»; il nome viene forse d
 consenso: { pianeta: basso, elemento: alto, intenzioni: alto }
 varianti:
   - "Agrippa e Cunningham la mettono sotto Venere, MYST sotto Saturno; il gioco segue Culpeper (Mercurio)."
+sta_in: "[[stagno]]"
 nel_gioco:
   - "src/data/herbs/base.js#valeriana"
   - "[[raccogliere-le-erbe]]"

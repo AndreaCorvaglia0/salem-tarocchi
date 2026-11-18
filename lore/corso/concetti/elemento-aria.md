@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Aria"
 famiglia: elemento
+peso: contorno
 seme: "[[seme-spade]]"
 elemento: null
 pianeta: null

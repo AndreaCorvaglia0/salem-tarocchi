@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Sole"
 id: "m19"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
@@ -14,6 +15,7 @@ si_dice: "Un bambino su un cavallo bianco, i girasoli dietro: è la carta della 
 da_dove_viene: "Golden Dawn: lettera Resh, data al Sole."
 consenso: { segno: null, pianeta: alto, elemento: medio, intenzioni: nostro }
 varianti: []
+arriva_da: "[[volo-all-alba]]"
 nel_gioco:
   - "src/data/cards.base.js#m19"
   - "[[trovare-una-carta]]"

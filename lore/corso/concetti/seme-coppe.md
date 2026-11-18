@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Coppe"
 id: "c"
 famiglia: seme
+peso: nucleo
 segni:
   - "[[segno-cancro]]"
   - "[[segno-scorpione]]"
@@ -16,6 +17,7 @@ si_dice: "Nelle letture le Coppe parlano di quello che si prova e delle persone 
 da_dove_viene: "L'abbinamento dei semi agli elementi lo rende comune la Golden Dawn a fine Ottocento; oggi è il più diffuso."
 consenso: { pianeta: null, elemento: alto, intenzioni: alto }
 varianti: []
+si_impara_da: "[[malva]]"
 nel_gioco:
   - "src/data/cards.base.js#SUITS.c"
   - "[[seguire-le-lezioni]]"

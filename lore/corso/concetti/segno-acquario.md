@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Acquario"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-la-stella]]"
 seme: "[[seme-spade]]"
 elemento: "[[elemento-aria]]"

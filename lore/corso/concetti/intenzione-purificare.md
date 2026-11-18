@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Purificare e lasciar andare"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-saturno]]"
 intenzioni: []

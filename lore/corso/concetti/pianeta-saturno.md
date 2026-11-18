@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Saturno"
 famiglia: pianeta
+peso: contorno
 giorno: "sabato"
 metallo: "piombo"
 carta: "[[arcano-il-mondo]]"

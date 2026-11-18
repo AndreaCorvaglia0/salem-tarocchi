@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Benzoino"
 famiglia: fumo
+peso: contorno
 erba: null
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-sole]]"

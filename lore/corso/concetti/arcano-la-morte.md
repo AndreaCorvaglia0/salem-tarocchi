@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Morte"
 id: "m13"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-scorpione]]"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-marte]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Nun, data al Scorpione."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti:
   - "I moderni danno lo Scorpione a Plutone; qui vale il governatore antico, Marte."
+sta_in: "[[cimitero]]"
 nel_gioco:
   - "src/data/cards.base.js#m13"
   - "[[trovare-una-carta]]"

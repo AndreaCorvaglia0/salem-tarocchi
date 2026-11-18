@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Cancro"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-il-carro]]"
 seme: "[[seme-coppe]]"
 elemento: "[[elemento-acqua]]"

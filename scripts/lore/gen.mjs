@@ -3,6 +3,7 @@
 import { AXES, WITCHES, atoms, readsOf, condText, slug, short } from './story.mjs';
 import { parseSceneRefs } from './check.mjs';
 import { dinamichePage } from './dinamiche.mjs';
+import { seiVociPage } from './corso.mjs';
 
 export const HEADER = '# generato da scripts/lore.mjs, non modificare a mano';
 export const GEN_DIRS = ['storia/generati/tratti', 'storia/generati/scelte', 'storia/generati/finali'];
@@ -244,6 +245,7 @@ export function generate(S, V) {
   out.set('storia/generati/scelte/_indice-scelte.md', `${I.join('\n')}\n`);
   // the dynamics page: the mechanics grouped by the rows of the manifesto's table, with their two faces
   out.set('metodo/meccaniche/_dinamiche.md', dinamichePage(V, `${HEADER.replace(/^# /, '_')}_`));
+  out.set('corso/_sei-voci.md', seiVociPage(V, `${HEADER.replace(/^# /, '_')}_`));
   out.summary = { choices: choiceRows.length, counts, neverRead, neverSet, setNotTested: setNotTested.map((t) => t.id), testedThin: testedThin.map((t) => `${t.id} (${t.setPlaces})`), finals: finalRows.length, traits: traitInfo.length };
   return out;
 }

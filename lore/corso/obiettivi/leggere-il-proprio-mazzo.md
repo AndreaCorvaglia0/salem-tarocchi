@@ -1,8 +1,16 @@
 ---
 tipo: obiettivo
 nome: "Leggere il proprio mazzo"
+peso: nucleo
 sa_fare: "Pesca dal suo mazzo vero a casa, sceglie una stesa e legge le carte per sé, da sola."
 si_vede_da: "In parte: nella lettura per sé (src/ui/selfread.js), anche con le carte vere pescate a casa, prima del testo lei sceglie l'idea di ogni carta; il diario tiene che cosa ha indovinato da sola (state.readings[].tried, src/glue/selfread.rules.js tryScore). Nessun punteggio che dia o tolga qualcosa, per scelta. La lettura dal grimorio (src/systems/free.js) ha solo il suo «Prova tu prima» senza conteggio."
+concetti:
+  - "arcano"
+  - "seme"
+  - "numero"
+  - "figura"
+  - "stesa"
+  - "regola"
 meccaniche:
   - "[[leggere-per-se]]"
   - "[[leggere-col-mazzo-vero]]"

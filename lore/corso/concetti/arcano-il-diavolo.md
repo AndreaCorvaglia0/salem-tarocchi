@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Il Diavolo"
 id: "m15"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-capricorno]]"
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-saturno]]"
@@ -13,6 +14,7 @@ si_dice: "Ha le corna del capro, e Saturno, che governa il Capricorno, è il pia
 da_dove_viene: "Golden Dawn: lettera Ayin, data al Capricorno."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[catene]]"
 nel_gioco:
   - "src/data/cards.base.js#m15"
   - "[[trovare-una-carta]]"

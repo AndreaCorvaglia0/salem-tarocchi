@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Sagittario"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-la-temperanza]]"
 seme: "[[seme-bastoni]]"
 elemento: "[[elemento-fuoco]]"

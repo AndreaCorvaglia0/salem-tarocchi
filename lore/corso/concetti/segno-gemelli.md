@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Gemelli"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-gli-amanti]]"
 seme: "[[seme-spade]]"
 elemento: "[[elemento-aria]]"

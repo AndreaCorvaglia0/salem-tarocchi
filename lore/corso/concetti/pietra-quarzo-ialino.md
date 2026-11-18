@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Quarzo ialino (cristallo di rocca)"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-luna]]"
 intenzioni:
@@ -14,6 +15,7 @@ da_dove_viene: "Gli antichi lo credevano ghiaccio diventato duro per sempre: kry
 consenso: { pianeta: basso, elemento: medio, intenzioni: medio }
 varianti:
   - "Cunningham lo dà al Sole e alla Luna insieme, KERY a Mercurio."
+sta_in: "[[fonte]]"
 nel_gioco: []
 fonte:
   - "AGR"

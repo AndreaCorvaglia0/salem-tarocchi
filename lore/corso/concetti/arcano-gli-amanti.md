@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Gli Amanti"
 id: "m06"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-gemelli]]"
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-mercurio]]"
@@ -13,6 +14,7 @@ si_dice: "I Gemelli sono due che si guardano, e sopra gli Amanti c'è un angelo:
 da_dove_viene: "Golden Dawn: lettera Zayin, data ai Gemelli."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[davanzale-della-canonica]]"
 nel_gioco:
   - "src/data/cards.base.js#m06"
   - "[[trovare-una-carta]]"

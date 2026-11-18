@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Bastoni"
 id: "w"
 famiglia: seme
+peso: nucleo
 segni:
   - "[[segno-ariete]]"
   - "[[segno-leone]]"
@@ -17,6 +18,7 @@ da_dove_viene: "L'abbinamento dei semi agli elementi lo rende comune la Golden D
 consenso: { pianeta: null, elemento: alto, intenzioni: medio }
 varianti:
   - "Alcune scuole danno l'aria ai Bastoni e il fuoco alle Spade (CRAFT)."
+si_impara_da: "[[malva]]"
 nel_gioco:
   - "src/data/cards.base.js#SUITS.w"
   - "[[seguire-le-lezioni]]"

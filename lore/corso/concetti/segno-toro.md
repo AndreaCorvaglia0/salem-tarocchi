@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Toro"
 famiglia: segno
+peso: contorno
 arcano: "[[arcano-il-papa]]"
 seme: "[[seme-denari]]"
 elemento: "[[elemento-terra]]"

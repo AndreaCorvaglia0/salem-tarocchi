@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Alloro"
 id: "alloro"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Era sacro ad Apollo: la Pizia di Delfi ne masticava le foglie, e
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti:
   - "Agrippa mette il lauro anche sotto Marte."
+sta_in: "[[casa-di-malva]]"
 nel_gioco:
   - "src/data/herbs/base.js#alloro"
   - "[[raccogliere-le-erbe]]"

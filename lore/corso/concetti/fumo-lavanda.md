@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Lavanda secca"
 famiglia: fumo
+peso: contorno
 erba: "[[erba-lavanda]]"
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-mercurio]]"

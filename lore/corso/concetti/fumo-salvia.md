@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Salvia secca"
 famiglia: fumo
+peso: contorno
 erba: "[[erba-salvia]]"
 elemento: "[[elemento-aria]]"
 pianeta: "[[pianeta-giove]]"

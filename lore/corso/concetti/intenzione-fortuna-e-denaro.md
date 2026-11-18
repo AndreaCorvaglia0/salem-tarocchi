@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Fortuna e denaro"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-giove]]"
 intenzioni: []

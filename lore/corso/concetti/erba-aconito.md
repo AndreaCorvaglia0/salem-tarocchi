@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Aconito"
 id: "aconito"
 famiglia: erba
+peso: contorno
 rischio: "velenosa"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-saturno]]"
@@ -15,6 +16,7 @@ da_dove_viene: "Il nome inglese wolfsbane viene dalle esche avvelenate per i lup
 consenso: { pianeta: medio, elemento: alto, intenzioni: basso }
 varianti:
   - "Agrippa mette il «wolfsbane» sotto Marte."
+sta_in: "[[limite-del-bosco]]"
 nel_gioco:
   - "src/data/herbs/base.js#aconito"
   - "[[raccogliere-le-erbe]]"

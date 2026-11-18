@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Sonno e sogni"
 famiglia: intenzione
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-luna]]"
 intenzioni: []

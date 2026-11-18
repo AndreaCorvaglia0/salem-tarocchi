@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Lapislazzuli"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"
 intenzioni:
@@ -14,6 +15,7 @@ da_dove_viene: "Dalle miniere dell'Afghanistan arrivava fino in Egitto, e macina
 consenso: { pianeta: basso, elemento: medio, intenzioni: medio }
 varianti:
   - "KERY lo mette sotto Giove, SNAV sotto il Sole e il fuoco; Agrippa sotto Venere."
+sta_in: "[[davanzale-della-canonica]]"
 nel_gioco: []
 fonte:
   - "AGR"

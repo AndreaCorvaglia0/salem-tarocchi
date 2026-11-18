@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Sacerdotessa"
 id: "m02"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-luna]]"
@@ -14,6 +15,7 @@ si_dice: "Ha la luna ai piedi e l'acqua dietro il velo: è la carta dell'intuito
 da_dove_viene: "Golden Dawn: lettera Gimel, data alla Luna."
 consenso: { segno: null, pianeta: alto, elemento: medio, intenzioni: nostro }
 varianti: []
+sta_in: "[[vicolo-di-sotto]]"
 nel_gioco:
   - "src/data/cards.base.js#m02"
   - "[[trovare-una-carta]]"

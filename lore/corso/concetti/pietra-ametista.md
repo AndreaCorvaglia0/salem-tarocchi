@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Ametista"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-giove]]"
 intenzioni:
@@ -14,6 +15,7 @@ da_dove_viene: "Il nome greco amethystos vuol dire «non ubriaco», e i lapidari
 consenso: { pianeta: medio, elemento: medio, intenzioni: alto }
 varianti:
   - "Agrippa la mette sotto Marte; SNAV sotto Urano e l'aria."
+sta_in: "[[stagno]]"
 nel_gioco: []
 fonte:
   - "KERY"

@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Temperanza"
 id: "m14"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-sagittario]]"
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-giove]]"
@@ -13,6 +14,7 @@ si_dice: "Versa l'acqua da una coppa all'altra con un piede nell'acqua e uno sul
 da_dove_viene: "Golden Dawn: lettera Samekh, data al Sagittario."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[fonte]]"
 nel_gioco:
   - "src/data/cards.base.js#m14"
   - "[[trovare-una-carta]]"

@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Menta"
 id: "menta"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-venere]]"
@@ -16,6 +17,7 @@ da_dove_viene: "Per i Greci era la ninfa Minte, amata da Ade e trasformata in er
 consenso: { pianeta: basso, elemento: basso, intenzioni: medio }
 varianti:
   - "La piperita è di Mercurio e del fuoco, la menta romana di Venere e dell'acqua (CUN); Agrippa mette le mente sotto il Sole e Giove. Il gioco ha Venere (Culpeper) e fuoco."
+sta_in: "[[stagno]]"
 nel_gioco:
   - "src/data/herbs/base.js#menta"
   - "[[raccogliere-le-erbe]]"

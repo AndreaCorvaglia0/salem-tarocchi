@@ -1,8 +1,13 @@
 ---
 tipo: obiettivo
 nome: "Conoscere pianeti e segni"
+peso: contorno
 sa_fare: "Associa a ogni Maggiore il suo pianeta o segno della tradizione Golden Dawn, e a ogni seme il suo elemento."
 si_vede_da: "Le domande «astro»: una risposta giusta dà la terza stella, «Conosciuta» (src/core/progress.js answer)."
+concetti:
+  - "pianeta"
+  - "segno"
+  - "elemento"
 meccaniche:
   - "[[seguire-le-lezioni]]"
   - "[[superare-l-esame]]"

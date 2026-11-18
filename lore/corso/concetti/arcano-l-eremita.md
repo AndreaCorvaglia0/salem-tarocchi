@@ -3,6 +3,7 @@ tipo: concetto
 nome: "L'Eremita"
 id: "m09"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-vergine]]"
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-mercurio]]"
@@ -13,6 +14,7 @@ si_dice: "La Vergine è attenta e raccolta, e Mercurio le dà il pensiero: l'Ere
 da_dove_viene: "Golden Dawn: lettera Yod, data alla Vergine."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti: []
+sta_in: "[[bosco-fitto]]"
 nel_gioco:
   - "src/data/cards.base.js#m09"
   - "[[trovare-una-carta]]"

@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Acqua"
 famiglia: elemento
+peso: contorno
 seme: "[[seme-coppe]]"
 elemento: null
 pianeta: null

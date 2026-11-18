@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Sole"
 famiglia: pianeta
+peso: contorno
 giorno: "domenica"
 metallo: "oro"
 carta: "[[arcano-il-sole]]"

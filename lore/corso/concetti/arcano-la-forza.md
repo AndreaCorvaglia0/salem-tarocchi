@@ -3,6 +3,7 @@ tipo: concetto
 nome: "La Forza"
 id: "m08"
 famiglia: arcano
+peso: nucleo
 segno: "[[segno-leone]]"
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-sole]]"
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Teth, data al Leone."
 consenso: { segno: alto, pianeta: medio, elemento: alto, intenzioni: nostro }
 varianti:
   - "Per questa lettera Waite la mette all'ottavo posto e la Giustizia all'undicesimo; nei mazzi antichi era il contrario."
+sta_in: "[[tana]]"
 nel_gioco:
   - "src/data/cards.base.js#m08"
   - "[[trovare-una-carta]]"

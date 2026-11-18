@@ -5,6 +5,7 @@
 import { linkTarget, linksIn } from './vault.mjs';
 import { atoms, readsOf } from './story.mjs';
 import { DINAMICA_IDS } from './dinamiche.mjs';
+import { checkCorso } from './corso.mjs';
 
 const NAME_RE = /^_?[a-z0-9]+(-[a-z0-9]+)*$/;
 const empty = (v) => v == null || v === '' || (Array.isArray(v) && v.filter((x) => x != null && x !== '').length === 0);
@@ -181,6 +182,9 @@ export function check(V, S) {
   const NO_TECNICA_OK = new Set(['legge-strati-indipendenti', 'legge-chiaro-vero-curato']);
   for (const [l, ds] of byLaw) if (!NO_TECNICA_OK.has(l) && !ds.some((d) => d.data.tipo === 'tecnica')) W('legge', `metodo/leggi/${l}.md`, 'no tecnica rests on this legge');
   stats.leggi = Object.fromEntries([...byLaw].map(([l, ds]) => [l, ds.length]));
+
+  // ---- the course: peso, concetti, places, families (scripts/lore/corso.mjs)
+  checkCorso(V, E, W);
 
   return { errors, warnings, stats };
 }

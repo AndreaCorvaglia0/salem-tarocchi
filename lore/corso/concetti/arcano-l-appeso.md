@@ -3,6 +3,7 @@ tipo: concetto
 nome: "L'Appeso"
 id: "m12"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-acqua]]"
 pianeta: null
@@ -14,6 +15,7 @@ da_dove_viene: "Golden Dawn: lettera Mem, data all'elemento acqua."
 consenso: { segno: null, pianeta: null, elemento: alto, intenzioni: nostro }
 varianti:
   - "Molti moderni gli danno Nettuno (ANG)."
+sta_in: "[[stagno]]"
 nel_gioco:
   - "src/data/cards.base.js#m12"
   - "[[trovare-una-carta]]"

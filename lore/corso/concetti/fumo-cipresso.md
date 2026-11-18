@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Cipresso"
 famiglia: fumo
+peso: contorno
 erba: null
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-saturno]]"

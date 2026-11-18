@@ -3,6 +3,7 @@ tipo: concetto
 nome: "L'Imperatrice"
 id: "m03"
 famiglia: arcano
+peso: nucleo
 segno: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"
@@ -15,6 +16,7 @@ da_dove_viene: "Golden Dawn: lettera Daleth, data a Venere."
 consenso: { segno: null, pianeta: alto, elemento: medio, intenzioni: nostro }
 varianti:
   - "Per l'elemento molti lettori pensano alla terra, per il grano e la natura."
+sta_in: "[[orto-di-malva]]"
 nel_gioco:
   - "src/data/cards.base.js#m03"
   - "[[trovare-una-carta]]"

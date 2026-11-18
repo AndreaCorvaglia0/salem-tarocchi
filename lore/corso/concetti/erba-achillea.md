@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Achillea"
 id: "achillea"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"
@@ -15,6 +16,7 @@ si_dice: "Chi la porta addosso non ha paura, e un mazzetto appeso sopra il letto
 da_dove_viene: "Prende il nome da Achille, che secondo il mito la usava per curare le ferite dei suoi soldati."
 consenso: { pianeta: alto, elemento: alto, intenzioni: alto }
 varianti: []
+sta_in: "[[strada-d-arrivo]]"
 nel_gioco:
   - "src/data/herbs/base.js#achillea"
   - "[[raccogliere-le-erbe]]"

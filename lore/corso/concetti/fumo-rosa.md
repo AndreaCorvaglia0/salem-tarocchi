@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Petali di rosa"
 famiglia: fumo
+peso: contorno
 erba: "[[erba-rosa]]"
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"

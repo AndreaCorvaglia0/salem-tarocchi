@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Pietra forata"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-acqua]]"
 pianeta: null
 intenzioni:
@@ -14,6 +15,7 @@ da_dove_viene: "In Inghilterra si appendeva alle porte di case e stalle fino all
 consenso: { pianeta: null, elemento: basso, intenzioni: alto }
 varianti:
   - "Nessuna fonte le dà un pianeta; l'acqua è scelta nostra, perché è l'acqua a forarla."
+sta_in: "[[mulino]]"
 nel_gioco: []
 fonte:
   - "PRM"

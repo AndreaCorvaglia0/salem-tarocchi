@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Timo"
 id: "timo"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-acqua]]"
 pianeta: "[[pianeta-venere]]"
@@ -16,6 +17,7 @@ da_dove_viene: "I Greci lo bruciavano nei templi e gli Egizi lo usavano per imba
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti:
   - "Roth lo mette anche tra le piante di Saturno."
+sta_in: "[[orto-di-malva]]"
 nel_gioco:
   - "src/data/herbs/base.js#timo"
   - "[[raccogliere-le-erbe]]"

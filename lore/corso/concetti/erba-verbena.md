@@ -3,6 +3,7 @@ tipo: concetto
 nome: "Verbena"
 id: "verbena"
 famiglia: erba
+peso: contorno
 rischio: null
 elemento: "[[elemento-terra]]"
 pianeta: "[[pianeta-venere]]"
@@ -16,6 +17,7 @@ da_dove_viene: "I Romani la chiamavano herba sacra e ne facevano mazzi per gli a
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti:
   - "Agrippa la mette sotto Venere e anche sotto il Sole."
+sta_in: "[[fonte]]"
 nel_gioco:
   - "src/data/herbs/base.js#verbena"
   - "[[raccogliere-le-erbe]]"

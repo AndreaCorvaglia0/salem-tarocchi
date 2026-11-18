@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Eliotropio (pietra del sangue)"
 famiglia: pietra
+peso: contorno
 elemento: "[[elemento-fuoco]]"
 pianeta: "[[pianeta-marte]]"
 intenzioni:
@@ -14,6 +15,7 @@ da_dove_viene: "Il nome greco vuol dire «che volge il sole»; Agrippa la mette 
 consenso: { pianeta: alto, elemento: alto, intenzioni: medio }
 varianti:
   - "Agrippa la mette anche sotto il Sole."
+la_da: "[[ortica]]"
 nel_gioco: []
 fonte:
   - "AGR"

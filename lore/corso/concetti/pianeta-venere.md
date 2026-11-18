@@ -2,6 +2,7 @@
 tipo: concetto
 nome: "Venere"
 famiglia: pianeta
+peso: contorno
 giorno: "venerdì"
 metallo: "rame"
 carta: "[[arcano-l-imperatrice]]"
