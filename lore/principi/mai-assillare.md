@@ -24,3 +24,4 @@ Meccaniche che lo servono:
 - [[curare-l-orto]] — Curare l'orto
 - [[stare-con-tartufo]] — Stare con Tartufo
 - [[raccogliere-pietre-e-figurine]] — Raccogliere pietre e figurine della sibilla
+- [[giocare-a-coppie-con-la-sibilla]] — Giocare a coppie con la sibilla

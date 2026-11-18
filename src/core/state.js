@@ -75,6 +75,8 @@ export const fresh = () => ({
   oracle: {},
   oracleFrom: {},
   albumSeen: {},
+  // the sibyl pairs game (glue/sibylpairs.rules.js freshPlay: the same shape; normPlay mends old values)
+  sibylPlay: { day: null, today: 0, plays: 0, rounds: 0, seen: {}, mine: [] },
   // the Reader asks about a card she told before, once a visit (story/visit.plan.js pickRecall): card id -> times asked
   recalled: {},
   dayAsked: null, // the day «Senza guardare» of the card of the day last counted as a review answer (glue/threshold.js)
@@ -117,6 +119,7 @@ export const migrate = (s) => {
   if (s.tools) delete s.tools.sieve; // the sieve is gone: the sixth sense and Tartufo do its job
   if (s.flags) delete s.flags['sight.far'];
   for (const k of ['stones', 'oracle', 'oracleFrom', 'albumSeen']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {}; // the albums (glue/collect.js)
+  if (typeof s.sibylPlay !== 'object' || !s.sibylPlay || Array.isArray(s.sibylPlay)) s.sibylPlay = { day: null, today: 0, plays: 0, rounds: 0, seen: {}, mine: [] }; // the sibyl pairs (glue/sibylpairs.js)
   // learning better (docs/BACKLOG.md 2): the Reader's recall questions, the day the card of the day last counted for the review
   if (typeof s.recalled !== 'object' || !s.recalled || Array.isArray(s.recalled)) s.recalled = {};
   if (typeof s.dayAsked !== 'string') s.dayAsked = null;

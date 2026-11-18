@@ -19,3 +19,4 @@ Meccaniche che lo servono:
 - [[aprire-i-sigilli]] — Aprire i sigilli
 - [[volare-con-la-scopa]] — Volare con la scopa
 - [[stare-con-tartufo]] — Stare con Tartufo
+- [[giocare-a-coppie-con-la-sibilla]] — Giocare a coppie con la sibilla

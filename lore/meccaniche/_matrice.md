@@ -34,7 +34,8 @@ Generate dai campi `insegna` e `tecniche` delle meccaniche. Una colonna con tota
 | [[volare-con-la-scopa]] |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[stare-con-tartufo]] |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[raccogliere-pietre-e-figurine]] |  |  |  |  | x |  |  |  |  |  | x |  |  |  |
-| **totale** | 8 | 12 | 5 | 3 | 2 | 2 | 4 | 2 | 5 | 3 | 4 | 3 | 1 | 3 |
+| [[giocare-a-coppie-con-la-sibilla]] |  | x |  |  | x |  |  |  |  |  |  |  |  |  |
+| **totale** | 8 | 13 | 5 | 3 | 3 | 2 | 4 | 2 | 5 | 3 | 4 | 3 | 1 | 3 |
 
 Legenda:
 
@@ -86,7 +87,8 @@ Legenda:
 | [[volare-con-la-scopa]] |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 | [[stare-con-tartufo]] |  |  |  |  |  |  |  |  |  |  |  |  | x |  |
 | [[raccogliere-pietre-e-figurine]] |  |  |  |  | x |  | x |  |  |  |  |  |  |  |
-| **totale** | 15 | 5 | 2 | 5 | 6 | 4 | 3 | 3 | 4 | 3 | 14 | 9 | 11 | 4 |
+| [[giocare-a-coppie-con-la-sibilla]] |  |  |  | x |  |  |  |  | x |  | x |  |  |  |
+| **totale** | 15 | 5 | 2 | 6 | 6 | 4 | 3 | 3 | 5 | 3 | 15 | 9 | 11 | 4 |
 
 Legenda:
 

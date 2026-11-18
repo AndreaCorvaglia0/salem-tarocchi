@@ -13,6 +13,8 @@ import { SAPERE } from '../data/sapere.js';
 import { FIND_SPOTS } from '../data/world/finds.js';
 import { GIFT } from '../data/gifts.js';
 import { albumSlots, markSeen, countOf, cameWith, firstTold } from '../glue/collect.rules.js';
+import { canPlay, marksOf, lastOf, MARKS_SHOWN } from '../glue/sibylpairs.rules.js';
+import { call, has } from '../core/services.js';
 import { paintStone } from '../world/art/finds.js';
 import { openSheet } from './sheet.js';
 import { onEscape } from './book.js';
@@ -44,6 +46,9 @@ const CSS = `
 .cl-zoom img.px{image-rendering:pixelated;width:min(90vw,90vh)}
 .cl-fly{position:fixed;z-index:95;left:0;top:0;width:34px;height:auto;pointer-events:none;filter:drop-shadow(0 3px 6px #000a);transition:transform .7s cubic-bezier(.45,.05,.7,.4),opacity .7s;will-change:transform}
 .cl-fly.px{image-rendering:pixelated}
+.cl-marks{display:block;height:8px;line-height:0;letter-spacing:0}.cl-marks i{display:inline-block;width:5px;height:5px;margin:0 1px;border-radius:50%;background:${PENCIL}}
+.cl-play{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin:10px 0 2px}
+.cl-play .cl-new{top:-9px;right:6px}
 .bk-rib.dot::after{content:'';position:absolute;top:7px;right:9px;width:9px;height:9px;border-radius:50%;background:#f0d27a;box-shadow:0 0 0 2px #2a2134aa}
 @media (max-width:719px){.bk-ribs.many .bk-rib{font-size:17px}.bk-ribs.many{gap:4px;padding:0 6px}.bk-rib.dot::after{top:5px;right:4px;width:8px;height:8px}}
 `;
@@ -138,7 +143,8 @@ export function sibylBody(n) {
     h('div.cl-sec', h('h3', {}, 'Che cosa c\'è scritto'), h('p', {}, `«${c.it.title}»`), h('p.cl-verse', {}, c.it.verse[0]), h('p.cl-verse', {}, c.it.verse[1]),
       h('p.pencil', { style: { marginTop: '4px' } }, c.unsure ? 'È in tedesco, in caratteri gotici; l\'ultima parola del titolo non si legge bene.' : 'È in tedesco, in caratteri gotici: questo è quello che ci leggo io.')),
     corner ? sec('Nell\'angolo', corner) : null,
-    sec('Come l\'ho avuta', sibylHow(n))];
+    sec('Come l\'ho avuta', sibylHow(n)),
+    sec('Al banco', pairsHow(n))];
   return { L, R: R.filter(Boolean) };
 }
 export const showSibyl = (n) => {
@@ -146,6 +152,24 @@ export const showSibyl = (n) => {
   if (markSeen(state, 'sibyl', n)) save();
   return openSheet({ label: SIBYL[n].name, build: () => ({ ...sibylBody(n), single: true }) });
 };
+// the pairs game (glue/sibylpairs.js): the dots under a figure are the rounds it was turned in (the first few of a day)
+function marks(n) {
+  const c = Math.min(MARKS_SHOWN, marksOf(state, n));
+  return c ? h('span.cl-marks', { 'aria-label': `girata in coppia ${marksOf(state, n)} volte` }, Array.from({ length: c }, () => h('i'))) : null;
+}
+function playButton(ctx) {
+  if (!canPlay(state) || !has('sibyl.pairs')) return null;
+  const never = !(state.sibylPlay?.rounds > 0);
+  return h('button.gx-btn.cl-play', { type: 'button', onclick: async () => { await call('sibyl.pairs'); ctx.rerender?.(); } },
+    'Gioca a coppie', never ? h('span.cl-new', {}, 'nuovo') : null);
+}
+function pairsHow(n) {
+  const m = lastOf(state, n);
+  if (!m?.c) return null;
+  const times = m.c === 1 ? 'L\'ho girata in coppia una volta' : `L'ho girata in coppia ${m.c} volte`;
+  const w = withNames(m.with || []);
+  return m.t && w ? `${times}. L'ultima volta era insieme ${w}, e ci ho visto: «${m.t}»` : `${times}.`;
+}
 // before Ginepra has told her what they are, they are only «figurine»
 export const sibylTitle = () => (firstTold(state, 'sibyl') ? 'Sibilla' : 'Figurine');
 export function sibylPages(ctx) {
@@ -153,12 +177,13 @@ export function sibylPages(ctx) {
   const slots = albumSlots(state, 'sibyl', SIBYL_LIST), n = countOf(state, 'sibyl'), told = firstTold(state, 'sibyl');
   const item = (sl) => (sl.have
     ? h('button.cl-it', { type: 'button', onclick: async () => { await showSibyl(sl.id); ctx.rerender?.(); } },
-      h('img', { src: sibylThumb(sl.id), alt: '', loading: 'lazy' }), h('span', {}, String(sl.n)), sl.nuova ? h('span.cl-new', {}, 'nuova') : null)
+      h('img', { src: sibylThumb(sl.id), alt: '', loading: 'lazy' }), h('span', {}, String(sl.n)), marks(sl.id), sl.nuova ? h('span.cl-new', {}, 'nuova') : null)
     : h('div.cl-it.no', {}, h('i', {}, String(sl.n))));
   const L = [h('h2', {}, told ? 'La sibilla' : 'Le figurine'),
     h('p.pencil', {}, told
       ? `Le figurine della sibilla dell'ambulante: ne ho ${n} su 36. Ginepra dice di tenerle insieme, perché da sole dicono poco.`
       : `Figurine colorate, ognuna con un numero, due righe in tedesco e dei segni nell'angolo. Ne ho ${n}, e non so di chi fossero.`),
+    playButton(ctx),
     h('div.cl-grid.sb', slots.slice(0, 20).map(item))];
   const R = [h('div.cl-grid.sb', slots.slice(20).map(item))];
   return { L, R, single: true };

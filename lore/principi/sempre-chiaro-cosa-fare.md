@@ -18,3 +18,4 @@ Meccaniche che lo servono:
 - [[studiare-in-biblioteca]] — Studiare in biblioteca
 - [[salire-di-rango]] — Salire di rango
 - [[volare-con-la-scopa]] — Volare con la scopa
+- [[giocare-a-coppie-con-la-sibilla]] — Giocare a coppie con la sibilla

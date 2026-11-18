@@ -21,3 +21,4 @@ Meccaniche che lo servono:
 - [[imparare-da-ortica]] — Imparare l'orto da Ortica
 - [[andare-altrove]] — Andare altrove
 - [[raccogliere-pietre-e-figurine]] — Raccogliere pietre e figurine della sibilla
+- [[giocare-a-coppie-con-la-sibilla]] — Giocare a coppie con la sibilla

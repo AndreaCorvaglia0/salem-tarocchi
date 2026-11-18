@@ -57,6 +57,8 @@ let release = null; // what a tap / Space / Enter does right now
 
 const onKey = (e) => {
   if (!release) return;
+  const t = e.target; // typing in a box (a note, the sibyl pairs) is not a tap on the dialogue
+  if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
   if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); if (isTapKey(e)) release('key'); }
   else if (/^[1-6]$/.test(e.key) && !e.repeat) release(`n${e.key}`);
 };
