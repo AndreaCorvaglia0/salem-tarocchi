@@ -138,6 +138,25 @@ sessione, non nella repo).
   - Possibile difetto già esistente: nelle letture ai clienti le opzioni sbagliate possono essere idee di altre
     carte della stessa stesa (il 2.3 lo ha corretto solo per la lettura per sé).
 
+## 6c. Le coppie della sibilla
+
+- **Commit:** `610b172` (gh-pages 334528b). Piano: `notes/sibilla-coppie.md`.
+- **Cosa:** dal album «Sibilla», «Gioca a coppie» (dopo 4 figurine e le prime parole di Ginepra): due figurine,
+  una domanda, tre frasi o le sue parole; poi «Come si legge di solito» e Ginepra; tre giri al giorno contano
+  (tacche sulle figurine). Più: `story/dialogue.js` non prende più lo spazio scritto in una casella (correzione
+  del capofila, difetto trovato dall'agente).
+- **Verificato dal capofila:** test verdi (619); tre schermate (tavolo, scelta, dopo).
+- **Non verificato:** tastiera del telefono sopra la casella; tempo di un giro su una persona; lettori ingenui
+  sulle frasi.
+- **Dubbi:**
+  - Per le coppie non scritte a mano una delle tre frasi coincide con «come si legge di solito»: si capisce qual è
+    la «tradizionale». Non è un voto, ma si può ammorbidire.
+  - Le letture tradizionali composte dal motore a volte stonano («Un inganno di cui ci si può fidare»); scritte a
+    mano solo ~27 coppie.
+  - Il gioco compare solo dopo le prime parole di Ginepra (scelta dell'agente, coerente con «vede solo quello che
+    sa»): chi ha figurine ma non ha ancora parlato con Ginepra non lo vede.
+  - Battute di Ginepra da leggere ad alta voce (fonte: proposto).
+
 ## 7. Interessi da strega (scritto, da approvare; niente codice)
 
 - **Cosa:** `notes/interessi/PROGETTO.md`: quattro catene da sei missioni (Ortica erbe, Malva fumi e sacchetti,
