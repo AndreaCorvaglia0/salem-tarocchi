@@ -6,7 +6,7 @@
 // selection and its neighbours first, then the biggest nodes, more of them the closer one zooms, and a label
 // that would cover another is skipped (labels: 'auto' | 'all'). With onSelect the caller draws the card for
 // the selection (and gets -1 when the background is tapped); without it a one-line bar with «Apri» is shown.
-import { esc } from './md.js?v=1795008400588';
+import { esc } from './md.js?v=1795008888257';
 
 const INK = '#2a2134';
 
