@@ -14,12 +14,14 @@ import { mappaPages } from './mappa.js';
 import { herbPages } from './herbs.js';
 import { stonePages, sibylPages, sibylTitle, cssOn as collectCss } from './collect.js';
 import { countOf, albumHasNew } from '../glue/collect.rules.js';
+import { shelfPages } from './books.js';
+import { anyNewBook } from '../glue/books.rules.js';
 
 // the albums of stones and figures get their ribbon with the first one she has (glue/collect.js)
 const tabs = () => [['io', 'Io'], ['carte', 'Carte'], ['mappa', 'Mappa'], ['erbe', 'Erbe'],
-  ...(countOf(state, 'stone') ? [['pietre', 'Pietre']] : []), ...(countOf(state, 'sibyl') ? [['sibilla', sibylTitle()]] : [])];
+  ...(countOf(state, 'stone') ? [['pietre', 'Pietre']] : []), ...(countOf(state, 'sibyl') ? [['sibilla', sibylTitle()]] : []), ...(state.flags?.['library.first'] || Object.keys(state.books || {}).length ? [['libri', 'Libri']] : [])]; // the bookshelf (ui/books.js): once she has seen the library, or has a book
 const ALBUM = { erbe: 'herb', pietre: 'stone', sibilla: 'sibyl' }; // a dot on the ribbon while a page is «nuova»
-const BUILD = { io: ioPages, carte: cartePages, mappa: mappaPages, erbe: herbPages, pietre: stonePages, sibilla: sibylPages };
+const BUILD = { io: ioPages, carte: cartePages, mappa: mappaPages, erbe: herbPages, pietre: stonePages, sibilla: sibylPages, libri: shelfPages };
 
 function settingsPanel(panel, done) {
   const s = state.settings || (state.settings = { music: true, sfx: true });
@@ -47,7 +49,7 @@ export function openGrimoire({ tab = 'io', study = false } = {}) {
   const ribs = h('div.bk-ribs', { role: 'tablist', 'aria-label': 'Segnalibri' });
   if (TABS.length > 4) ribs.classList.add('many');
   const btns = TABS.map(([id, name]) => h('button.bk-rib', { type: 'button', role: 'tab', style: `--rib:${RIB[id]}`, onclick: () => show(id) }, name));
-  const dots = () => btns.forEach((x, i) => { const k = ALBUM[TABS[i][0]]; x.classList.toggle('dot', !!k && albumHasNew(state, k)); });
+  const dots = () => btns.forEach((x, i) => { const t = TABS[i][0], k = ALBUM[t]; x.classList.toggle('dot', t === 'libri' ? anyNewBook(state) : !!k && albumHasNew(state, k)); });
   ribs.append(...btns);
   const finish = () => { popEsc(); globalThis.removeEventListener('keydown', key, true); closeOverlay(); resolveP?.(); };
   const b = bookFrame({ ribbons: ribs, onClose: finish, label: 'Il grimorio', mid: '', settings: (panel) => settingsPanel(panel, finish) });

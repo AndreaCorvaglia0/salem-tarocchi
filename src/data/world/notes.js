@@ -80,11 +80,13 @@ export const PLACE_NOTES = {
     N(F('library.first'), 'Di sopra ci sono i libri di Edera. Malva li spolvera.'),
     N(F('library.first'), 'Ci ripasso le carte prima di una notte difficile.'),
     N(F('elsewhere.book.done'), 'Da un libro su quel tavolo sono finita dentro una storia.'),
+    N(F('book.agrippa.read'), 'Nel libro di Edera il gatto è di Saturno e anche della Luna.'), // a book read (data/books)
   ] },
   'village.cottage_door': { unknown: 'Una capanna storta, al limite del bosco.', notes: [
     N(past('c1.cottage'), 'È la mia capanna: storta, piena di spifferi, ma mia.'),
     N(past('c1.client'), 'Al tavolo leggo le carte a chi bussa.'),
     N(past('c2.ortica'), 'Prima di me ci ha abitato Ortica, da giovane.'),
+    N(F('book.artemidoro.read'), 'Nel libro dei sogni la bocca è la casa, e i denti chi ci abita.'), // a book read (data/books)
   ] },
   'village.orto': { unknown: 'Quattro aiuole contro il muro della capanna.', notes: [
     N(F('garden.given'), 'Le aiuole di Ortica: due al sole, una al mattino, una all\'ombra.'),

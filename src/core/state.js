@@ -82,6 +82,11 @@ export const fresh = () => ({
   // the Reader asks about a card she told before, once a visit (story/visit.plan.js pickRecall): card id -> times asked
   recalled: {},
   dayAsked: null, // the day «Senza guardare» of the card of the day last counted as a review answer (glue/threshold.js)
+  // the bookshelf in Edera's library (glue/books.rules.js): books she has (id -> { at, from }), books read to the
+  // end (id -> { at, n }), the day the last new book arrived (one a day at most)
+  books: {},
+  booksRead: {},
+  bookDay: null,
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
@@ -125,6 +130,8 @@ export const migrate = (s) => {
   // learning better (docs/BACKLOG.md 2): the Reader's recall questions, the day the card of the day last counted for the review
   if (typeof s.recalled !== 'object' || !s.recalled || Array.isArray(s.recalled)) s.recalled = {};
   if (typeof s.dayAsked !== 'string') s.dayAsked = null;
+  for (const k of ['books', 'booksRead']) if (typeof s[k] !== 'object' || !s[k] || Array.isArray(s[k])) s[k] = {}; // the bookshelf (glue/books.js)
+  if (typeof s.bookDay !== 'string') s.bookDay = null;
   // the interests (notes/interessi/PROGETTO.md): the dried pantry, the last mission day per witch, the beam, the returns
   if (typeof s.pantryDry !== 'object' || !s.pantryDry || Array.isArray(s.pantryDry)) s.pantryDry = {};
   if (typeof s.interests !== 'object' || !s.interests || Array.isArray(s.interests)) s.interests = { day: {}, hung: [], back: [] };

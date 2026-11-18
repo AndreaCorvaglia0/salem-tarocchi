@@ -1,0 +1,40 @@
+// The Voynich manuscript (Yale, Beinecke MS 408). Nobody can read it, so the lines under the pictures are HERS
+// (`voice: 'hers'`), and the pages open in a different order every time (CONCETTO n. 13). Brought by Tartufo.
+// Images: Yale University Library, IIIF of object 2002046 (folios 1r, 2r, 9v, 33v, 67r, 70v, 75r, 88r, 116v).
+export default {
+  id: 'voynich',
+  spine: '?',
+  title: 'Un libro senza titolo',
+  author: 'nessuno sa chi',
+  place: '',
+  year: null,
+  leather: '#6b5a3a',
+  from: 'da Tartufo',
+  voice: 'hers',
+  shuffle: true,
+  pages: [
+    { img: 'books/voynich/1.webp', alt: 'Una pagina fitta di una scrittura sconosciuta, con qualche lettera rossa', tall: true,
+      text: 'La prima pagina è tutta scritta, con qualche lettera rossa. Riconosco la forma delle lettere ma non una parola: sembra una lingua vista in sogno.',
+      note: { by: 'ignota', t: 'Ci ho provato per sei inverni.' } },
+    { img: 'books/voynich/2.webp', alt: 'Una pianta dipinta con due fiori a spazzola e radici rosse', tall: true,
+      text: 'Una pianta con due fiori a spazzola e le foglie a lancia. Le radici sono dipinte di rosso scuro, come se sanguinassero.' },
+    { img: 'books/voynich/3.webp', alt: 'Una pianta con fiori blu a cinque petali', tall: true,
+      text: 'Fiori blu a cinque petali, quasi viole del pensiero, ma le foglie sono di un\'altra pianta. È come se l\'avesse disegnata qualcuno che se la ricordava male.' },
+    { img: 'books/voynich/4.webp', alt: 'Due grandi fiori a disco pieni di semi, su steli con foglie verdi', tall: true,
+      text: 'Due fiori enormi, a forma di disco, pieni di semi. Nessuna pianta dell\'orto è così, e nemmeno del bosco.' },
+    { img: 'books/voynich/5.webp', alt: 'Una stella rossa e blu dentro un cerchio, con parole scritte in tondo', tall: true,
+      text: 'Una stella rossa e blu dentro un cerchio, come una rosa dei venti. Intorno, le parole sono scritte in tondo, e per leggerle bisogna girare il libro.' },
+    { img: 'books/voynich/6.webp', alt: 'Un grande cerchio con piccole figure in fila tutto intorno e un animale nel mezzo',
+      text: 'Un grande cerchio con delle figurine in fila tutto intorno, e in mezzo un animale. Sembra un calendario, ma di un anno che non conosco.' },
+    { img: 'books/voynich/7.webp', alt: 'Donne nude che fanno il bagno in vasche verdi collegate da tubi', tall: true,
+      text: 'Donne che fanno il bagno in vasche verdi, collegate da tubi come budella. Non ho idea di che cosa sia, e forse è meglio così.' },
+    { img: 'books/voynich/8.webp', alt: 'Vasi dipinti alti e stretti, e accanto radici e foglie', tall: true,
+      text: 'Vasi alti e stretti, come quelli di una spezieria, e accanto radici e foglie staccate. Questa pagina mi sembra quasi una ricetta.' },
+    { img: 'books/voynich/9.webp', alt: 'L\'ultima pagina, quasi bianca, con poche righe in alto', tall: true,
+      text: 'L\'ultima pagina è quasi bianca. In alto ci sono poche righe con lettere diverse dalle altre, come se qualcuno avesse provato a firmarla.' },
+  ],
+  truth: {
+    text: 'Il libro è vero, ed è ancora illeggibile: è il manoscritto 408 della Beinecke Library di Yale, di pergamena datata tra il 1404 e il 1438. Nel 1666 fu mandato a Roma al gesuita Athanasius Kircher, e Wilfrid Voynich lo comprò vicino a Roma nel 1912: come sia arrivato a Salem nel 1692 lo sa soltanto Tartufo. Le figure sono di Yale; le righe sotto le figure sono tue.',
+    links: [{ t: 'Il manoscritto a Yale', url: 'https://collections.library.yale.edu/catalog/2002046' }],
+  },
+};

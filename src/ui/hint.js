@@ -98,7 +98,7 @@ export function showHint(id) {
 
 // a hint waits while a scene, a session or a dialogue covers the world (the world may emit it just
 // before a scene starts); the Exam and reading hints are meant to show over their own screens
-const COVER = '.sgm,.cn,.ss,.sy-layer.on,.fd';
+const COVER = '.sgm,.cn,.ss,.sy-layer.on,.fd,.bkr'; // .bkr: a book open (ui/books.js)
 const free = () => !document.querySelector(COVER) && !blocked();
 function whenFree(id, tries = 0) {
   const own = OVER.includes(id);

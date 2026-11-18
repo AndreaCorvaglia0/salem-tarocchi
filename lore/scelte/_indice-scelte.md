@@ -35,6 +35,8 @@ Né da una condizione, né per nome dal codice (src fuori da src/data).
 
 ## Flag letti e mai impostati
 
+- `book.agrippa.read`
+- `book.artemidoro.read`
 - `garden.lesson.acqua`
 - `library.first`
 

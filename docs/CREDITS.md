@@ -122,3 +122,22 @@ Da Wikimedia Commons, opere di pubblico dominio:
   dominio; la scheda porta solo la formula generica di Yale («may be subject to copyright law»), non una licenza.
   Ritagliate dai quattro fogli della digitalizzazione; 600 px di larghezza (`NN.webp`) e 200 px (`t/NN.webp`).
   Nel gioco il nome storico del mazzo non compare mai.
+
+## I libri dello scaffale (`public/books/`, 18 novembre)
+
+Figure ritagliate dalle scansioni, ridotte a 720 px sul lato lungo, webp. Ogni libro ha anche una piccola
+copertina (`t.webp`, 160 px) per il volo nel grimorio. Le pagine dei libri dicono le stesse cose nell'ultima
+pagina, «Che cosa è vero». Prese una richiesta alla volta, con pause; la Wellcome ha risposto 403 a una richiesta
+di ritaglio ad alta risoluzione (IIIF `pct:`) e da lì non le si è chiesto più niente.
+
+| Cartella | Libro | Da dove | Licenza |
+|---|---|---|---|
+| `durante/` | Castore Durante, *Herbario nuovo*, Roma, Bonfadino e Diani, 1585: frontespizio, p. 47, 230, 231, 396, 402, 408, ultima pagina dell'indice | Wellcome Collection, https://wellcomecollection.org/works?query=b33552642 (IIIF `b33552642`, immagini 9, 79, 252, 253, 416, 422, 428, 519) | Public Domain Mark |
+| `agrippa/` | H. C. Agrippa, *Three Books of Occult Philosophy*, Londra, R.W. per Gregory Moule, 1651 (la copia non ha il frontespizio): «To the Reader», lettera a Tritemio, p. 53, 54, 55, 58, 88, 279 | Wellcome Collection, https://wellcomecollection.org/works/ftahuupv (IIIF `b30335231`, immagini 9, 12, 15, 73, 74, 75, 78, 108, 287) | Public Domain Mark |
+| `artemidoro/1` | Artemidoro, *Dell'interpretatione de' sogni*, trad. Pietro Lauro, Venezia, Giolito, 1547: frontespizio | Internet Archive, https://archive.org/details/artemidoro-interpretatione-de-sogni (scansione Google, caricata da un utente; nessuna licenza dichiarata) | opera di pubblico dominio; la scansione non dichiara licenza |
+| `artemidoro/2-8` | *Hypnerotomachia Poliphili*, Venezia, Aldo, 1499: xilografie n. 1, 2, 3, 4, 16, 36, 38, dal facsimile *The dream of Poliphilus* (Londra, 1888) | Wellcome Collection, IIIF `b21781059`, immagini 21, 23, 35, 57 | Public Domain Mark |
+| `scot/` | Reginald Scot, *The Discovery of Witchcraft*, terza edizione, Londra, A. Clark, 1665: frontespizio, tavole di p. 200-201 | Internet Archive, https://archive.org/details/discoveryofwitch00scot (copia del Boston College, foglio 6, 221, 222) | opera di pubblico dominio; la scansione non dichiara licenza |
+| `voynich/` | Manoscritto «Voynich», Beinecke MS 408, ca. 1404-1438: ff. 1r, 2r, 9v, 33v, 67r, 70v, 75r, 88r, 116v | Yale University Library, https://collections.library.yale.edu/catalog/2002046 (IIIF) | manoscritto medievale, pubblico dominio; la scheda porta solo la formula generica di Yale, come per la sibilla |
+
+Da controllare: l'anno del facsimile della *Hypnerotomachia* (1888) è scritto a memoria; la scheda Wellcome dice solo
+«fac-similes of one hundred and sixty-eight woodcuts... with an introductory notice by J.W. Appell».
