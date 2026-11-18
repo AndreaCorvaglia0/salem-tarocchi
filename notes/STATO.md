@@ -19,7 +19,7 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | **fatto, pubblicato** (main 610b172, gh-pages 334528b) | |
 | 8 | Interessi da strega: pagina di progetto | **approvata** (`lore/decisioni/decisioni-2026-11-18.md`) |
 | 9 | Interessi: prima fetta (Ortica, erbe, tre missioni) | **fatto, pubblicato** (main 6c4861e) |
-| 10 | Libri: scaffale in biblioteca, primi libri | agente in corso | BACKLOG sezione 6 |
+| 10 | Libri: scaffale in biblioteca, primi cinque libri | **fatto, pubblicato** (main 0ee9952, gh-pages 0ef7d33). Mancano: i due libri della Lettrice (Court de Gébelin 1781, Waite 1911: scansione di Waite non trovata), gli altri del catalogo | BACKLOG sezione 6 |
 
 ## Dopo la coda (in attesa di Andrea)
 

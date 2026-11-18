@@ -192,6 +192,26 @@ sessione, non nella repo).
   - L'opzione col rimedio compare solo se ha un'erba che guarisce già secca; senza, niente prestito (diverso dalla
     regola «la strega presta sempre», che vale per le missioni).
 
+## 9. Lo scaffale dei libri
+
+- **Commit:** `0ee9952` (gh-pages 0ef7d33). Costruzione: `notes/libri/costruzione.md`.
+- **Cosa:** linguetta «Libri» nel grimorio e «Sfoglia» in biblioteca; lettore a pagine con figura, note a margine
+  e ultima pagina «Che cosa è vero». Libri veri raccontati con parole nostre: Agrippa 1651 (sullo scaffale),
+  Durante 1585 (da Ortica), Artemidoro trad. Lauro 1547 (alla porta della capanna, dalla vedova Bray), Scot 1665
+  (deposito del tribunale), manoscritto Voynich (da Tartufo). Ogni libro letto lascia una nota o uno scambio.
+- **Verificato dal capofila:** test verdi (641); tre schermate (scaffale, pagina con nota, pagina della verità).
+- **Non verificato:** i regali di Ortica ed Edera nel browser (solo test); il volo del libro; telefono vero.
+- **Dubbi:**
+  - Wellcome ha risposto 403 a una richiesta di ritaglio: l'agente si è fermato (bene). Tutte le figure Wellcome
+    vengono da richieste fatte prima.
+  - Artemidoro e Scot: l'opera è di pubblico dominio, ma le scansioni (Google su Internet Archive, Boston College)
+    non dichiarano una licenza; la pagina della verità dice «pubblico dominio».
+  - Tre pagine di Scot sono parafrasi della tesi non controllate parola per parola sul testo.
+  - Nota a margine nello Scot: «Comare Hale non è vecchia, e non è povera» (nomina un personaggio): da approvare.
+  - Agrippa: la copia non ha il frontespizio; la prima pagina è «Al lettore».
+  - L'anno 1888 del facsimile dell'Hypnerotomachia nei crediti è scritto a memoria.
+  - Il Voynich arrivato a Salem nel 1692 è invenzione dichiarata nella pagina della verità.
+
 ## Altro fatto in questa sessione (senza codice di gioco)
 
 - Backlog: sezioni 6 (interessi da strega) e 7 (libri); `docs/ARRIVO.md`; `docs/LEZIONI.md`; il sapere
