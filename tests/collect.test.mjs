@@ -4,7 +4,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, statSync } from 'node:fs';
-import { STONE_LIST, STONE } from '../src/data/stones.js';
+import { STONE_LIST, STONE, stoneUrl } from '../src/data/stones.js';
 import { SIBYL_LIST, SIBYL, sibylUrl, sibylThumb, SIGN_GLYPH, PLANET_GLYPH, sibylFindLine } from '../src/data/sibyl.js';
 import { FIND_SPOTS } from '../src/data/world/finds.js';
 import { GIFTS, GIFT, FIRST } from '../src/data/gifts.js';
@@ -28,14 +28,13 @@ test('twelve stones, one page each, tied to the vault and with a picture', () =>
     assert.ok(words(s.com) <= 35 && words(s.storia) <= 40, `${s.id}: short pages`);
     assert.ok(words(s.find) <= 4 && s.find.endsWith('.'), `${s.id}: the find line is a few words («${s.find}»)`);
     assert.doesNotMatch(`${s.com} ${s.dice} ${s.storia}`, /consiglio medico|non sostituisce|attenzione:/i, `${s.id}: no disclaimers (lore/principi/erbe-come-storia.md)`);
-    if (s.plate) {
-      const f = `public/stones/${s.id}.webp`;
-      assert.ok(existsSync(f), `${f} missing`);
-      assert.ok(statSync(f).size < 80000, `${f} too heavy`);
-      assert.ok(s.plate.work, `${s.id}: the plate names its work`);
-    } else {
-      assert.ok(s.look?.pal?.length === 4 && s.look.shape, `${s.id}: drawn in code needs a look`);
-    }
+    assert.ok(s.plate ? !s.drawn : s.drawn === true, `${s.id}: either an old plate or drawn: true`);
+    const f = `public/stones/${s.id}.webp`;
+    assert.ok(existsSync(f), `${f} missing`);
+    assert.ok(statSync(f).size < 80000, `${f} too heavy`);
+    assert.equal(stoneUrl(s.id), `stones/${s.id}.webp`, `${s.id}: stoneUrl`);
+    if (s.plate) assert.ok(s.plate.work, `${s.id}: the plate names its work`);
+    assert.ok(s.look?.pal?.length === 4 && s.look.shape, `${s.id}: the small world stone needs a look`);
   }
 });
 

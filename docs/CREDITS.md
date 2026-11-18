@@ -107,12 +107,30 @@ Da Wikimedia Commons, opere di pubblico dominio:
   Wellcome Collection (https://wellcomecollection.org/works/z6yvxatb, IIIF `b33028126`), segnata **Public Domain
   Mark**. Ritagliate e ridotte (450x600, webp): tav. I (cristallo di rocca, ametista, agata), tav. II
   (lapislazzuli), tav. VI (tormalina).
-- Le altre sette (quarzo giallo, pietra di luna, eliotropio, pietra forata, occhio di tigre, ossidiana, quarzo
-  rosa) non hanno una tavola: sono disegnate in codice (`src/world/art/finds.js`, `paintStone`).
-- Cercate e non usate: James Sowerby, *British Mineralogy* (1802-17). La Biodiversity Heritage Library ha risposto
-  403 (una pagina di controllo Cloudflare) e c82.net non ha avuto il permesso in tempo: non si è insistito. Su
-  pdimagearchive.org / Public Domain Review ci sono 68 tavole ritagliate, ma nessuna delle nostre pietre tranne
-  agata e quarzo (cristallo druso, non il cristallo di rocca): si è preferita la serie omogenea di H. Sowerby.
+- J. G. Kurr, *The Mineral Kingdom* (trad. di *Das Mineralreich in Bildern*), Edimburgo, Edmonston and Douglas, 1859,
+  incisioni colorate a mano. Copia della Smithsonian Libraries (Biodiversity Heritage Library), su Internet Archive:
+  https://archive.org/details/mineralkingdom00kurr (leaf 95 = tav. III; BHL: «Public domain. The BHL considers that this
+  work is no longer under copyright protection»). Ritagliato e ridotto (450x600, webp, carta riportata al tono delle
+  tavole Sowerby): fig. 13 della tav. III, eliotropio (*Heliotrope... from the Southern Tyrol*) -> `eliotropio.webp`.
+  La didascalia di Kurr dice proprio «Heliotrope, polished, from the Southern Tyrol».
+- Sei pietre non hanno una tavola antica e hanno un disegno nostro (`drawn: true`, didascalia «Disegnata da me, sul
+  modello delle tavole antiche»): quarzo giallo, pietra di luna, pietra forata, occhio di tigre, ossidiana, quarzo rosa.
+  Sono generate al computer (carta, luce da sinistra in alto, ombre morbide, contorno a penna, colori del minerale)
+  con `scripts/stones-paint.py` e `scripts/stones-holed.py` (numpy + PIL): `python3 -I scripts/stones-paint.py
+  public/stones`, `python3 -I scripts/stones-holed.py public/stones/pietra-forata.webp`. Nessuna fonte esterna.
+  Una vera tavola antica per queste non c'è (cercata, vedi sotto).
+- Cercate e non usate: Mawe, *Treatise on Diamonds* (1813/1815 e 1823, coloured plates): solo diamanti grezzi, tagli
+  e un foglio di colori di gemme, nessuna delle nostre pietre. Blum, *Taschenbuch der Edelsteinkunde* (1834): nessuna
+  tavola. *Popular Mineralogy* ha solo sei tavole (24 minerali): I-II-VI usate, III (asbesto, actinolite,
+  corindone, topazio), IV (serpentino, berillo, zircone, smeraldo) e V (mica, apofillite, feldspato rosso, talco) non
+  hanno nessuna delle nostre pietre. James Sowerby, *Exotic Mineralogy* (1811-17): solo il «Cat's-eye Quartz» (tab. LXIII,
+  quarzo sericeo grigioverde di Ceylon: non è l'occhio di tigre, quindi no) e il «Blue Feldspar»; *British Mineralogy*
+  (1802-17): «Pitchstone» (non è ossidiana) e ciottoli di selce senza buco. Kurr, tav. VI: l'adularia (pietra di luna)
+  è solo un disegno al tratto, senza colore, e la fig. 3 di tav. III (quarzo rosa) è un cristallino di 70 px: troppo
+  piccolo. Il citrino in Kurr non ha figura.
+- Siti che hanno rifiutato: Biodiversity Heritage Library e Wellcome (403, prima), Wikimedia Commons (429 oggi: non si è
+  più chiesto niente), c82.net (nessun permesso in tempo). Su pdimagearchive.org / Public Domain Review ci sono 68
+  tavole ritagliate, ma nessuna delle nostre pietre tranne agata e quarzo (cristallo druso).
 
 ## La sibilla dell'ambulante (`public/sibyl/`, 18 novembre)
 

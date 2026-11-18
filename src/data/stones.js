@@ -2,8 +2,9 @@
 // planet, element and intentions come from (src/data/sapere.js, generated from the vault). The page text is
 // written from each card's «si dice» and «da dove viene», in the convinced voice of the game: here stones do
 // heal and protect, said as tradition says it (lore/principi/erbe-come-storia.md).
-// `plate`: an old engraving in public/stones/<id>.webp (docs/CREDITS.md), or null: then the stone is drawn
-// in code (src/world/art/finds.js stoneArt). `find`: the one short line at the bottom when she picks it up.
+// `plate`: an old engraving in public/stones/<id>.webp (docs/CREDITS.md), or null. `drawn: true`: no plate, our own
+// painted picture in the plates' style, also public/stones/<id>.webp (made with a script, see CREDITS). The small
+// pixel stone of the world (src/world/art/finds.js paintStone) stays, from `look`. `find`: the one short line at the bottom when she picks it up.
 // `look`: the colours of the small drawn stone [dark, mid, light, glint], its shape, and bands, stripes,
 // spots or a sheen.
 export const STONE_LIST = [
@@ -17,22 +18,22 @@ export const STONE_LIST = [
     com: 'Un cristallo viola, più scuro sulla punta e quasi trasparente alla base. Contro la candela prende il colore del vino annacquato.',
     dice: "Chi la porta addosso non si ubriaca e non si lascia prendere dai vizi. Messa sotto il cuscino scaccia gli incubi e lascia un sonno pulito.",
     storia: 'Il nome greco amethystos vuol dire «non ubriaco», e i lapidari del Medioevo la consigliavano proprio contro l\'ebbrezza.' },
-  { id: 'citrino', sapere: 'pietra-citrino', name: 'Quarzo giallo', find: 'Un quarzo giallo.', plate: null,
+  { id: 'citrino', sapere: 'pietra-citrino', name: 'Quarzo giallo', find: 'Un quarzo giallo.', plate: null, drawn: true,
     look: { pal: ['#8a5a14', '#d9a23a', '#f6d77a', '#fff6d0'], shape: 'point' },
     com: 'Un quarzo giallo come il miele chiaro, trasparente, che alla luce sembra scaldarsi. Lo chiamano anche citrino.',
     dice: 'È la pietra dei mercanti: tenuta nella cassa fa entrare il denaro e non lo lascia scappare. Messa vicino a chi è triste scaccia la malinconia e i brutti sogni.',
     storia: 'Il nome viene da citrus, il cedro, per il colore. Gran parte del quarzo giallo che si vende è ametista scaldata, che nel fuoco diventa gialla e così resta.' },
-  { id: 'pietra-di-luna', sapere: 'pietra-di-luna', name: 'Pietra di luna', find: 'Una pietra di luna.', plate: null,
+  { id: 'pietra-di-luna', sapere: 'pietra-di-luna', name: 'Pietra di luna', find: 'Una pietra di luna.', plate: null, drawn: true,
     look: { pal: ['#7c8494', '#c6ccd8', '#eef0f6', '#bfe0ff'], shape: 'round', sheen: '#9cc8ff' },
     com: 'Una pietra bianco latte, liscia, che quando la giri manda un riflesso azzurro: sembra che dentro ci scivoli una luce.',
     dice: 'Sotto il cuscino fa sognare il futuro, e due innamorati che se la scambiano tornano vicini anche dopo una lite. È più forte quando la luna cresce.',
     storia: 'Il riflesso che si muove ricorda la luce della luna sull\'acqua, ed è da lì che viene il nome.' },
-  { id: 'eliotropio', sapere: 'pietra-eliotropio', name: 'Eliotropio', find: 'Un eliotropio.', plate: null,
+  { id: 'eliotropio', sapere: 'pietra-eliotropio', name: 'Eliotropio', find: 'Un eliotropio.', plate: { work: 'J. G. Kurr, The Mineral Kingdom, Edimburgo, 1859, tav. III' },
     look: { pal: ['#173a2a', '#2f6a4a', '#4f8f68', '#c8e8d0'], shape: 'flat', spots: '#b8282a' },
     com: 'Una pietra verde scuro con macchioline rosse, come gocce di sangue cadute sul muschio. La chiamano anche pietra del sangue.',
     dice: 'La portano i soldati, perché dà forza e fa vincere. Posata su una ferita ferma il sangue.',
     storia: 'Il nome greco vuol dire «che volge il sole». Agrippa la mette sotto il Sole e sotto Marte insieme.' },
-  { id: 'pietra-forata', sapere: 'pietra-forata', name: 'Pietra forata', find: 'Una pietra forata.', plate: null,
+  { id: 'pietra-forata', sapere: 'pietra-forata', name: 'Pietra forata', find: 'Una pietra forata.', plate: null, drawn: true,
     look: { pal: ['#4e5258', '#8a9098', '#c4c8cc', '#eef0f2'], shape: 'holed' },
     com: 'Un sasso grigio di fiume con un buco che lo passa da parte a parte, scavato dall\'acqua in tanti anni: ci si può guardare attraverso.',
     dice: 'Appesa alla porta della stalla impedisce alle streghe di cavalcare i cavalli di notte, e appesa al letto tiene lontano l\'incubo che schiaccia il petto. Guardando nel buco, dicono, si vede il popolo nascosto.',
@@ -42,12 +43,12 @@ export const STONE_LIST = [
     com: 'Un blu profondo, come il cielo un\'ora dopo il tramonto, con puntini dorati che sembrano stelle.',
     dice: 'Aiuta a dire il vero e a sentirlo dagli altri, rende fedeli gli amanti e apre la vista di dentro.',
     storia: 'Arrivava dalle miniere dell\'Afghanistan fino in Egitto, e macinato diventava l\'oltremare, il blu più caro dei pittori.' },
-  { id: 'occhio-di-tigre', sapere: 'pietra-occhio-di-tigre', name: 'Occhio di tigre', find: 'Un occhio di tigre.', plate: null,
+  { id: 'occhio-di-tigre', sapere: 'pietra-occhio-di-tigre', name: 'Occhio di tigre', find: 'Un occhio di tigre.', plate: null, drawn: true,
     look: { pal: ['#4a2a0c', '#8a5a1c', '#c89a3a', '#ffe4a0'], shape: 'round', stripes: '#f0c860' },
     com: 'Una pietra bruna e dorata, a strisce, con un riflesso che scorre quando la muovi, proprio come l\'occhio di un gatto.',
     dice: 'Dà sicurezza a chi deve parlare o decidere, e il suo riflesso guarda indietro chi ti guarda male: così il malocchio torna da dove è venuto.',
     storia: 'È quarzo cresciuto al posto di fibre minerali, e per questo brilla a strisce. Nei libri antichi non c\'è: la sua fama è recente.' },
-  { id: 'ossidiana', sapere: 'pietra-ossidiana', name: 'Ossidiana', find: "Un'ossidiana.", plate: null,
+  { id: 'ossidiana', sapere: 'pietra-ossidiana', name: 'Ossidiana', find: "Un'ossidiana.", plate: null, drawn: true,
     look: { pal: ['#08080e', '#1c1c28', '#3a3a50', '#c8c8e8'], shape: 'shard' },
     com: 'Vetro nero e lucido, con i bordi taglienti. Dove è più sottile, contro la luce, diventa appena fumo.',
     dice: 'Fa da scudo contro chi ti vuole male, e lucidata come uno specchio mostra le cose nascoste a chi sa guardare.',
@@ -57,7 +58,7 @@ export const STONE_LIST = [
     com: 'Un cristallo trasparente come l\'acqua, a sei facce, con la punta come quella di un campanile. Lo chiamano anche quarzo ialino.',
     dice: 'Tenuto in mano aiuta a vedere chiaro, nella sfera mostra le cose lontane, e posato su chi sta male lo aiuta a guarire. Rafforza ogni altra pietra che gli sta vicino.',
     storia: 'Gli antichi lo credevano ghiaccio diventato duro per sempre: krystallos, in greco, vuol dire proprio ghiaccio. Agrippa lo mette sotto la Luna.' },
-  { id: 'quarzo-rosa', sapere: 'pietra-quarzo-rosa', name: 'Quarzo rosa', find: 'Un quarzo rosa.', plate: null,
+  { id: 'quarzo-rosa', sapere: 'pietra-quarzo-rosa', name: 'Quarzo rosa', find: 'Un quarzo rosa.', plate: null, drawn: true,
     look: { pal: ['#9a5a6a', '#d898a8', '#f4ccd6', '#fff0f4'], shape: 'round' },
     com: 'Un quarzo rosa pallido, opaco come lo zucchero, che sembra più caldo quando lo tieni in mano.',
     dice: 'Apre il cuore all\'amore, a quello degli altri e al proprio, e consola chi è stato ferito.',
@@ -69,4 +70,4 @@ export const STONE_LIST = [
     storia: 'Gli Olandesi la chiamavano tira-cenere, perché scaldata attira la polvere.' },
 ];
 export const STONE = Object.fromEntries(STONE_LIST.map((s) => [s.id, s]));
-export const stoneUrl = (id) => (STONE[id]?.plate ? `stones/${id}.webp` : null);
+export const stoneUrl = (id) => (STONE[id]?.plate || STONE[id]?.drawn ? `stones/${id}.webp` : null);

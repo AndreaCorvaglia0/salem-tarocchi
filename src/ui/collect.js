@@ -56,7 +56,7 @@ export const cssOn = () => css('ui-collect', CSS);
 
 // ---- pictures ----
 const drawn = {};
-// a stone with no old plate is painted in code, big pixels on paper
+// a stone with no old plate has its own painted picture; the pixel one is only a fallback
 export function stoneSrc(id) {
   const url = stoneUrl(id);
   if (url) return { src: url, px: false };
@@ -94,7 +94,8 @@ function sibylHow(n) {
 }
 
 // ---- the stones ----
-export function stoneBody(id) {
+// `sheet`: the open page (its refill rebuilds it), for the pocket section of Edera's stones (service stones.pocket)
+export function stoneBody(id, sheet = null) {
   cssOn();
   const s = STONE[id], sap = SAPERE[s.sapere] || {}, pic = stoneSrc(id);
   const nm = (k) => SAPERE[k]?.nome || null;
@@ -102,17 +103,18 @@ export function stoneBody(id) {
   const uses = (sap.intenzioni || []).map((k) => String(nm(k)).toLowerCase()).filter(Boolean).join(' · ');
   const L = [h('h2', {}, s.name),
     h('button.cl-pic', { type: 'button', 'aria-label': 'Ingrandisci', onclick: () => zoom(pic.src, pic.px, s.name) }, h(pic.px ? 'img.px' : 'img', { src: pic.src, alt: s.name })),
-    h('p.cl-cred', {}, s.plate ? s.plate.work : 'Nessuna tavola antica: l\'ho disegnata io.'),
+    h('p.cl-cred', {}, s.plate ? s.plate.work : 'Disegnata da me, sul modello delle tavole antiche.'),
     sec('Com\'è', s.com)];
   const R = [sec('Che cosa se ne dice', s.dice), sec('Da dove viene', s.storia),
     circle || uses ? h('div.cl-sec', h('h3', {}, 'Nel cerchio'), circle ? h('p', {}, circle) : null, uses ? h('p', {}, `Serve per: ${uses}`) : null) : null,
-    sec('Come l\'ho avuta', stoneHow(id))];
+    sec('Come l\'ho avuta', stoneHow(id)),
+    has('stones.pocket') ? call('stones.pocket', id, () => sheet?.refill?.(true)) : null];
   return { L: L.filter(Boolean), R: R.filter(Boolean) };
 }
 export const showStone = (id) => {
   if (!STONE[id]) return Promise.resolve();
   if (markSeen(state, 'stone', id)) save();
-  return openSheet({ label: STONE[id].name, build: () => ({ ...stoneBody(id), single: true }) });
+  return openSheet({ label: STONE[id].name, build: (sheet) => ({ ...stoneBody(id, sheet), single: true }) });
 };
 export function stonePages(ctx) {
   cssOn();
