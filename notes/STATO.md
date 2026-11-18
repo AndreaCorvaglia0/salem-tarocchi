@@ -23,6 +23,18 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 11 | Pietre: immagini | **fatto, pubblicato** (main 809e9a6, gh-pages 5b8154a): eliotropio da Kurr 1859, sei pietre dipinte al computer |
 | 12 | Interessi: pietre di Edera, missioni 1–3 + grado 1 | **fatto, pubblicato** (main 8ac1bb4, gh-pages 235f646). Da fare: missioni 4–6 (nella 6 il nome vero) |
 
+## Riordino del vault (via libera di Andrea, 18/11 13:49) — piano in `notes/lore-grafo-PIANO.md`, radice `docs/MANIFESTO.md`
+
+| Passo | Che cosa | Stato |
+|---|---|---|
+| V1a | Spostare le cartelle nelle tre zone (`metodo/`, `corso/`, `storia/`), tipi `ricetta` e `concetto`, strumenti e riferimenti aggiornati | agente in corso |
+| V1b | Visore: tre viste con disposizione propria, colori per zona, generati nascosti | da fare (dopo V1a) |
+| V2 | Dieci schede `legge`; `legge` su principi/tecniche/ricette; `leggi`, `motivo`, `effetto`, `dinamica` sulle meccaniche; `_dinamiche` | da fare (dopo V1a) |
+| V3 | `peso` sui concetti; `concetti` sugli obiettivi; `sta_in` generato; `_sei-voci` | da fare |
+| V4 | Togliere i campi doppi; `ambito` e controllo «il metodo generale non nomina Salem» | da fare |
+| V5 | Legami con il nome e «la catena» nel visore; pagina d'ingresso | da fare |
+| V6 | Prova: copiare il metodo generale in Mnemopolis | da fare (chiedere ad Andrea prima di toccare la repo di Mnemopolis) |
+
 ## Da dove ripartire (scritto il 18/11 alle 10:55, token quasi finiti)
 
 Tutto è committato e pubblicato fino a main 8ac1bb4 / gh-pages 235f646; nessun agente in corso.
