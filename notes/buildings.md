@@ -166,3 +166,14 @@ I disegnini a inchiostro proposti per la mappa sono in `harness/buildings.ink.js
   (26,38) accanto alla tettoia nuova. Prima del cambio bisogna ricontrollare `data/world/herbs.js` e le carte.
 - **Luci che si spengono**: oggi le finestre `house` possono spegnersi, le altre no (`keep`); i tipi nuovi le
   tengono accese apposta (la finestra di Malva e quella di Ortica sono «sempre accese»).
+
+## 18 novembre: correzione dopo i lettori ingenui
+
+Casa di Malva (`witchhomes.js` `malvaHouse`): tetto storto e cadente color prugna con muschio, falce di latta in
+cima, camino a gradini con fumo verde tenue, muri ocra tra travi storte, finestra tonda viola, bottiglie colorate
+in vetrina, porta viola ad arco con una falce dipinta, treccia d'aglio, mazzi d'erbe sotto la gronda, calderone
+con brodo verde, insegna del mortaio su tavola viola. Casa Proctor (`facades.js` `richHouse`): due piani
+simmetrici, assi bianche su zoccolo di pietra, tetto a padiglione d'ardesia, due camini, persiane nere, porta nera
+con lunetta, frontone e batacchio, staccionata bianca. Biblioteca (`libraryHouse`): finestra a punta con tre
+scaffali di dorsi colorati e una lampada, grande tavola dipinta col libro aperto e i tre nastri di Edera, finestre
+basse piene di libri. Fumo colorato e bagliore verde: `scene/build.js` (`art.smokeTint`, glow `green`).

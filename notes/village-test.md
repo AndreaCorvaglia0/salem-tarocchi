@@ -1,6 +1,6 @@
 # Prova dei lettori ingenui: orientarsi guardando (17 novembre)
 
-**Stato: primo giro fatto il 18 novembre (domande 1 e 3), fallito su due punti; correzione in corso, poi si rifà.** L'agente che ha portato gli edifici nel gioco non aveva lo strumento per lanciare altri agenti
+**Stato: 18 novembre, due giri. Malva e biblioteca corrette e ora riconosciute; bottega riconosciuta; quartieri ambigui.** L'agente che ha portato gli edifici nel gioco non aveva lo strumento per lanciare altri agenti
 (nessun «Agent» fra i suoi strumenti), e non ha voluto aggirarlo lanciando a mano un altro Claude dalla riga di
 comando. Le schermate e le domande sono pronte qui sotto: la prova la lancia il capofila (modello «haiku», uno o
 due alla volta, ognuno vede UNA sola schermata e niente altro), e scrive le risposte in questo file.
@@ -55,3 +55,16 @@ Proctor), si cambia quello che li confonde e si rifà la prova solo su quelli.
   di una strega (per il gatto e la figura davanti, che sono la giocatrice).
 - Correzione affidata a un agente (casa di Malva eccentrica e diversa dai Proctor; biblioteca con libri e
   insegna leggibile); poi si rifanno le domande 1 e 3 con lettori nuovi, e le altre nove.
+
+## Secondo giro (18 novembre, lettori nuovi, scatti `after2/` dopo la correzione)
+
+- **Domanda 3, Malva: passata.** «la casetta con tetto viola, falce di luna, calderone, bottiglie colorate, porta
+  viola ad arco». Resta: di notte le finestre calde di tutte e due le case si somigliano un poco; l'insegna viola
+  «può sembrare un negozio» (va bene: è anche una bottega di erbe).
+- **Domanda 1, biblioteca: passata.** «finestra ad arco piena di libri colorati, libro aperto sopra la porta».
+  Tribunale riconosciuto dalla bilancia.
+- **Domanda 5, bottega (`after/door-shop.png`): passata.** Riconosce l'insegna con l'ampolla; pensa a pozioni.
+- **Domanda 6, quartiere basso (`after2/district-lower.png`): incerta.** Vede la casa ricca dei Proctor e quella di
+  Malva come «parte ricca» e le case buie a sinistra come povere: l'inquadratura mescola i due quartieri. Non si
+  corregge ora: da rifare con un'inquadratura solo del quartiere basso.
+- Non rifatte: 2, 4, 7–11.

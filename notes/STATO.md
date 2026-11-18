@@ -13,8 +13,8 @@ Ordine deciso da Andrea il 18 novembre, 00:29: «fai tutto uno dietro l'altro se
 | 1 | Rito dell'incenso (`notes/rito/PROGETTO.md`) | **fatto, pubblicato** (main 3b8bc48, gh-pages 2704fe8); musiche provvisorie fino all'ascolto alla cieca: https://andreacorvaglia0.github.io/salem-tarocchi/ascolto/ ; codice → `node scripts/audio/ascolto-decode.mjs <codice>` | `notes/rito/costruzione.md`, `notes/rito/musica.md` |
 | 2 | Promesse (BACKLOG 1.1–1.4) | **fatto, pubblicato** (main 7213183, gh-pages bdf2829). Debito: `progress.addTrust` dovrebbe chiamare `addBond` e `cond.js` leggere `bonds`, poi togliere la copia `trust` | schermate in `/home/claude/shots/promesse/` |
 | 3 | Collezioni: pietre e sibilla come l'erbario | agente in corso | `notes/collezioni.md`; **le 36 carte della sibilla già ritagliate e controllate** in `/home/claude/ext/sibilla/cards/01..36.jpg` (ordine giusto, foglio di prova `contact.jpg`) |
-| 4 | Test dei lettori ingenui sul villaggio | primo giro fatto: Malva/Proctor confuse, biblioteca non trovata → agente arte in corso; poi rifare il test (scatti in `/home/claude/shots/village-new/after2/`) | `notes/village-test.md` |
-| 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | da fare | BACKLOG sezione 7 |
+| 4 | Test dei lettori ingenui sul villaggio | **fatto** per Malva, biblioteca, bottega (correzione pubblicata: main 41ba213, gh-pages 1429248); quartieri da rifare con inquadratura migliore | `notes/village-test.md` |
+| 5 | Libri in biblioteca: pagina di concetto + tre libri di prova | agente in corso (solo scrittura, niente codice) | BACKLOG sezione 7 |
 | 6 | Imparare meglio (BACKLOG 2.1–2.4) | da fare | |
 | 7 | Sibilla: il gioco delle coppie (BACKLOG 3.0) | da fare, dopo 3 | |
 | 8 | Interessi da strega: pagina di progetto | da fare | BACKLOG sezione 6 |
