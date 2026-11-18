@@ -58,3 +58,21 @@ tecniche, principi, metodo), **il sapere** (il cerchio). Scelte, finali e tratti
 sono tabelle per i test. La misura di qualità cambia per vista: nella storia conta che ogni persona abbia una
 scheda piena e legami con altre persone e fatti; nel gioco che ogni obiettivo sia servito da una meccanica;
 nel sapere che il cerchio si chiuda.
+
+## Decisione proposta dopo la risposta di Andrea (10:58)
+
+Andrea non usa il grafo per lavorare: gli piace guardarlo. Mnemopolis è importante. Proposta: **due grafi**, e un
+terzo strato che li lega.
+
+1. **Il metodo** (riusabile, va in Mnemopolis così com'è): tecniche, principi, meccaniche, obiettivi, schede di
+   metodo. Nessun nome di Salem dentro: le meccaniche dicono «una carta», non «la Stella nel pozzo».
+2. **La storia di Salem**: persone, luoghi, fatti, retroscena, decisioni; scelte, finali e tratti come
+   sottocartella generata, nascosta nel disegno.
+3. **Il contenuto del corso** (`sapere/`): in Salem le carte, le erbe, le pietre; in Mnemopolis le materie dei
+   corsi. È il terzo pezzo che Mnemopolis ha già (le case-concetto).
+
+Legami tra i grafi: pochi e di due tipi soltanto, controllati dal linter: «questa meccanica compare in questa
+scena/missione» (metodo → storia) e «questo obiettivo insegna questo concetto» (metodo → contenuto).
+Da fare: separare le cartelle (`metodo/` fuori da `lore/`, o due vault Obsidian), ripulire le meccaniche dai
+riferimenti a Salem, nascondere i generati nel disegno, riempire persone e luoghi perché il grafo della storia
+sia bello da guardare.
