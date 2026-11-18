@@ -3,9 +3,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadVault, vaultOf, docOf, linksIn } from '../scripts/lore/vault.mjs';
-import { buildSite, siteFiles, graphColors, SPLIT_AT } from '../scripts/lore/site.mjs';
+import { buildSite, siteFiles, graphColors, SPLIT_AT, VIEWS, ZONES, resetLayoutCache } from '../scripts/lore/site.mjs';
 import { md } from '../lore-site/md.js';
-import { layout } from '../lore-site/layout.js';
+import { layout, spread } from '../lore-site/layout.js';
+import { phrase, LINKS } from '../lore-site/linknames.js';
 import { lorePlugin } from '../vite.config.js';
 
 const vault = loadVault();
@@ -13,12 +14,11 @@ const site = buildSite(vault);
 const { data } = site;
 const byId = new Map(data.notes.map((n) => [n.id, n]));
 
-test('every file of the vault is a note, with a type, a title and a place in the graph', () => {
+test('every file of the vault is a note, with a type and a title', () => {
   assert.equal(data.notes.length, new Set(vault.docs.map((d) => d.name)).size);
   for (const n of data.notes) {
     assert.ok(n.id && n.tipo && n.title, n.id);
     assert.ok(data.types.some((t) => t.tipo === n.tipo), `${n.id}: type ${n.tipo} has no chip`);
-    assert.ok(Number.isFinite(n.x) && Number.isFinite(n.y), `${n.id} has no position`);
   }
   assert.equal(data.home, 'inizio');
   assert.equal(data.types.reduce((s, t) => s + t.count, 0), data.notes.length);
@@ -53,10 +53,11 @@ test('backlinks are exactly the links seen from the other side, and the edges ar
     for (const l of n.links) assert.ok(byId.get(l).back.includes(n.id), `${n.id} -> ${l} has no backlink`);
     for (const b of n.back) assert.ok(byId.get(b).links.includes(n.id), `${b} is listed as linking ${n.id} but does not`);
   }
-  const pairs = new Set();
+  const pairs = new Set(), N = data.notes.length;
   for (const n of data.notes) for (const l of n.links) pairs.add([n.id, l].sort().join(' '));
-  assert.equal(data.edges.length, pairs.size);
-  for (const [a, b] of data.edges) assert.ok(pairs.has([data.notes[a].id, data.notes[b].id].sort().join(' ')));
+  const seen = new Set();
+  for (const [a, b] of data.edges) if (a < N && b < N) seen.add([data.notes[a].id, data.notes[b].id].sort().join(' '));
+  assert.deepEqual([...seen].sort(), [...pairs].sort()); // the edges between notes are the same pairs (hub edges aside)
 });
 
 test('the data stays one file while it is small, and splits the bodies when it is not', () => {
@@ -74,7 +75,7 @@ test('the build emits the page, its modules and the data under lore/', () => {
   const emitted = [];
   lorePlugin().generateBundle.call({ emitFile: (f) => emitted.push(f) });
   const files = new Map(emitted.map((f) => [f.fileName, f.source]));
-  for (const f of ['lore/index.html', 'lore/data.json', 'lore/app.js', 'lore/graph.js', 'lore/md.js', 'lore/layout.js', 'lore/style.css']) assert.ok(files.has(f), f);
+  for (const f of ['lore/index.html', 'lore/data.json', 'lore/app.js', 'lore/graph.js', 'lore/md.js', 'lore/layout.js', 'lore/linknames.js', 'lore/style.css']) assert.ok(files.has(f), f);
   const html = files.get('lore/index.html');
   assert.match(html, /<meta name="robots" content="noindex/);
   assert.doesNotMatch(html, /https?:\/\//, 'no CDN');
@@ -104,4 +105,152 @@ test('the layout is deterministic and stops', () => {
   const a = layout(5, edges, { iterations: 50 }), b = layout(5, edges, { iterations: 50 });
   assert.deepEqual([...a], [...b]);
   assert.ok([...a].every(Number.isFinite));
+});
+
+// ---------- the views of the graph ----------
+const GENERATED = ['scelta', 'finale', 'tratto', 'indice'];
+const nodeOf = (i) => (i < data.notes.length ? data.notes[i] : data.hubs[i - data.notes.length]);
+
+test('four views, with the right types, and no generated type or index page in any of them', () => {
+  assert.deepEqual(data.views.map((v) => v.id), ['insegna', 'impara', 'storia', 'tutto']);
+  assert.deepEqual(data.views.map((v) => v.label), ['Perché insegna', 'Che cosa si impara', 'La storia', 'Tutto']);
+  const allowed = { insegna: ['legge', 'principio', 'tecnica', 'ricetta', 'meccanica'], impara: ['obiettivo', 'famiglia', 'concetto', 'luogo', 'meccanica'], storia: ['persona', 'luogo', 'fatto', 'retroscena', 'decisione'] };
+  allowed.tutto = [...new Set(Object.values(allowed).flat())];
+  for (const v of data.views) {
+    for (const i of [...v.ids, ...v.loose]) {
+      const n = nodeOf(i);
+      assert.ok(allowed[v.id].includes(n.tipo), `${v.id}: ${n.id} is a ${n.tipo}`);
+      assert.ok(!GENERATED.includes(n.tipo) && !String(n.id).startsWith('_'), `${v.id}: ${n.id} must not appear`);
+    }
+    for (const l of v.legend) assert.ok(!GENERATED.includes(l.tipo), l.tipo);
+  }
+  assert.ok(data.views[3].ids.length >= data.views[0].ids.length + data.views[2].ids.length - data.views[0].ids.length);
+  assert.deepEqual(ZONES.map((z) => z.view), ['insegna', 'impara', 'storia']);
+  assert.deepEqual(VIEWS.map((v) => v.id), data.views.map((v) => v.id));
+});
+
+test('every node drawn in a view has a position and a size; the others are listed as loose', () => {
+  for (const v of data.views) {
+    assert.equal(v.pos.length, 2 * v.ids.length);
+    assert.equal(v.r.length, v.ids.length);
+    assert.ok(v.pos.every(Number.isFinite) && v.r.every((r) => r > 0), v.id);
+    assert.equal(new Set([...v.ids, ...v.loose]).size, v.ids.length + v.loose.length, 'a node is drawn or loose, once');
+    // a drawn node has a link inside the view; a loose one has none
+    const inV = new Set(v.ids), linked = new Set();
+    for (const [a, b] of data.edges) if (inV.has(a) && inV.has(b)) { linked.add(a); linked.add(b); }
+    for (const i of v.ids) assert.ok(linked.has(i), `${v.id}: ${nodeOf(i).id} is drawn with no link`);
+    for (const i of v.loose) assert.ok(!linked.has(i), `${v.id}: ${nodeOf(i).id} is loose but linked`);
+    // legend counts add up
+    assert.equal(v.legend.reduce((s, l) => s + l.count, 0), v.ids.length);
+    // circles do not overlap (the layout keeps them apart; 1px of rounding)
+    for (let a = 0; a < v.ids.length; a++) for (let b = a + 1; b < v.ids.length; b++) {
+      const d = Math.hypot(v.pos[2 * a] - v.pos[2 * b], v.pos[2 * a + 1] - v.pos[2 * b + 1]);
+      assert.ok(d >= v.r[a] + v.r[b] - 3, `${v.id}: ${nodeOf(v.ids[a]).id} and ${nodeOf(v.ids[b]).id} overlap`);
+    }
+  }
+});
+
+test('the layout of every view is deterministic', () => {
+  resetLayoutCache();
+  const a = buildSite(vault).data.views;
+  resetLayoutCache();
+  const b = buildSite(vault).data.views;
+  assert.deepEqual(a, b);
+});
+
+test('every link carries the name of the field it comes from, or testo', () => {
+  assert.equal(data.fields[0], 'testo');
+  for (const [a, b, f] of data.edges) {
+    assert.ok(typeof data.fields[f] === 'string' && data.fields[f], `edge ${a}-${b} has no field name`);
+    assert.ok(a !== b && nodeOf(a) && nodeOf(b));
+  }
+  const names = new Set(data.edges.map((e) => data.fields[e[2]]));
+  for (const f of ['serve', 'insegna', 'tecniche', 'in_salem', 'chi_ci_vive', 'conseguenze', 'testo']) assert.ok(names.has(f), f);
+  // the edge says where it comes from: a meccanica serves a principio
+  const m = data.notes.findIndex((n) => n.tipo === 'meccanica' && n.fm?.serve?.length);
+  const target = data.notes.findIndex((n) => n.id === linksIn(data.notes[m].fm.serve[0])[0]);
+  assert.ok(data.edges.some(([a, b, f]) => a === m && b === target && data.fields[f] === 'serve'));
+});
+
+test('the names of links read as Italian for both ends, with a fallback', () => {
+  for (const f of Object.keys(LINKS)) { assert.ok(phrase(f, 'out', 'meccanica') && phrase(f, 'in', 'meccanica'), f); assert.ok(!/[{}]/.test(phrase(f, 'in', 'meccanica')), f); }
+  assert.equal(phrase('serve', 'out'), 'serve');
+  assert.equal(phrase('tecniche', 'out'), 'usa la tecnica');
+  assert.equal(phrase('insegna', 'in', 'obiettivo'), 'lo insegna');
+  assert.equal(phrase('tecniche', 'in', 'tecnica'), 'la usa');
+  assert.equal(phrase('campo_nuovo', 'out'), 'campo nuovo');
+  assert.ok(phrase('campo_nuovo', 'in'));
+  for (const f of data.fields) assert.ok(phrase(f, 'out') && phrase(f, 'in'), f);
+});
+
+const small = (docs) => buildSite(vaultOf(docs.map(([rel, fm, body = 'x']) => docOf(rel, `---\n${fm}\n---\n${body}`)), ''), { colors: {} }).data;
+const SMALL = [
+  ['metodo/leggi/l1.md', 'tipo: legge\nnome: "L1"'],
+  ['metodo/principi/p1.md', 'tipo: principio\nnome: "P1"\nlegge: "[[l1]]"'],
+  ['metodo/meccaniche/m1.md', 'tipo: meccanica\nnome: "M1"\nserve:\n  - "[[p1]]"\ninsegna:\n  - "[[o1]]"'],
+  ['corso/obiettivi/o1.md', 'tipo: obiettivo\nnome: "O1"\nconcetti:\n  - arcano\n  - pietra'],
+  ['corso/concetti/c1.md', 'tipo: concetto\nnome: "C1"\nfamiglia: arcano\npeso: nucleo\nsta_in: "[[lu1]]"'],
+  ['corso/concetti/c2.md', 'tipo: concetto\nnome: "C2"\nfamiglia: arcano\npeso: contorno'],
+  ['corso/concetti/c3.md', 'tipo: concetto\nnome: "C3"\nfamiglia: pietra'],
+  ['corso/concetti/c4.md', 'tipo: concetto\nnome: "C4"'],
+  ['storia/luoghi/lu1.md', 'tipo: luogo\nnome: "Lu1"'],
+  ['storia/persone/pe1.md', 'tipo: persona\nnome: "Pe1"\nluoghi:\n  - "[[lu1]]"'],
+  ['storia/generati/scelte/s1.md', 'tipo: scelta\nnome: "S1"', 'vedi [[pe1]]'],
+  ['storia/_indice.md', 'tipo: indice', '[[pe1]] [[lu1]]'],
+];
+
+test('family hubs: one per family present, linked to every member, in the views with concepts only', () => {
+  const d = small(SMALL);
+  assert.deepEqual(d.hubs.map((h) => h.id), ['famiglia:arcano', 'famiglia:pietra']);
+  assert.deepEqual(d.hubs.map((h) => h.title), ['Arcani maggiori · 2', 'Pietre · 1']);
+  assert.ok(d.hubs.every((h) => h.tipo === 'famiglia'));
+  assert.ok(!d.notes.some((n) => n.id.startsWith('famiglia:') || n.tipo === 'famiglia'), 'a hub is not a note');
+  const N = d.notes.length, ix = (id) => d.notes.findIndex((n) => n.id === id);
+  const link = (a, b, f) => d.edges.some(([x, y, g]) => x === a && y === b && d.fields[g] === f);
+  assert.ok(link(ix('c1'), N, 'famiglia') && link(ix('c2'), N, 'famiglia') && link(ix('c3'), N + 1, 'famiglia'));
+  assert.ok(!d.edges.some(([x, y]) => x === ix('c4') && y >= N), 'a concept without a family has no hub');
+  // an objective names families as plain strings
+  assert.ok(link(ix('o1'), N, 'riguarda') && link(ix('o1'), N + 1, 'riguarda'));
+  // hubs only in the views that have concepts
+  for (const v of d.views) assert.equal(v.ids.some((i) => i >= N), ['impara', 'tutto'].includes(v.id), v.id);
+  // a plain wikilink field
+  assert.ok(link(ix('c1'), ix('lu1'), 'sta_in'));
+  assert.equal(phrase('sta_in', 'out'), 'sta in');
+  assert.equal(phrase('sta_in', 'in'), 'qui si trova');
+  // no concept at all: no hubs, no hub in any view
+  const none = small(SMALL.filter(([rel]) => !rel.includes('concetti')));
+  assert.equal(none.hubs.length, 0);
+  assert.ok(none.views.every((v) => v.ids.every((i) => i < none.notes.length)));
+});
+
+test('sizes: laws are the largest, a nucleo concept is bigger than a contorno one, with or without those fields', () => {
+  const d = small(SMALL), v = d.views.find((x) => x.id === 'tutto'), N = d.notes.length;
+  const r = (id) => v.r[v.ids.indexOf(d.notes.findIndex((n) => n.id === id))];
+  assert.ok(r('c1') > r('c2'), 'nucleo > contorno');
+  assert.ok(r('l1') >= Math.max(...v.r.filter((_, k) => v.ids[k] < N)), 'a law is never smaller than another note');
+  // no laws at all, or eleven of them
+  const none = small(SMALL.filter(([rel]) => !rel.includes('leggi')));
+  assert.ok(none.views.every((x) => x.r.length === x.ids.length));
+  const eleven = small([...SMALL, ...Array.from({ length: 10 }, (_, k) => [`metodo/leggi/x${k}.md`, `tipo: legge\nnome: "X${k}"`, '[[p1]]'])]);
+  const ve = eleven.views.find((x) => x.id === 'insegna');
+  assert.equal(ve.legend.length >= 1, true);
+  assert.equal(eleven.notes.filter((n) => n.tipo === 'legge').length, 11);
+  // without peso at all the concepts still get a size
+  const plain = small(SMALL.map(([rel, fm, b]) => [rel, fm.replace(/\npeso: \w+/, ''), b]));
+  assert.ok(plain.views.find((x) => x.id === 'impara').r.every((x) => x > 0));
+});
+
+test('spread pushes overlapping circles apart and stops', () => {
+  const p = Float64Array.from([0, 0, 1, 0, 2, 0]), rad = [5, 5, 5];
+  spread(p, rad, { iterations: 100, pad: 1 });
+  for (let a = 0; a < 3; a++) for (let b = a + 1; b < 3; b++) assert.ok(Math.hypot(p[2 * a] - p[2 * b], p[2 * a + 1] - p[2 * b + 1]) >= 10.5);
+  const q = layout(6, [[0, 1], [1, 2], [3, 4]], { group: [0, 0, 0, 1, 1, 1], groupPull: [1, 1], groupAt: [[-50, 0], [50, 0]], rad: [4, 4, 4, 4, 4, 4] });
+  assert.ok([...q].every(Number.isFinite));
+});
+
+test('the graph size stays reasonable', () => {
+  const size = JSON.stringify(data).length;
+  console.log(`# data.json ${size} bytes (SPLIT_AT ${SPLIT_AT}, bodies ${data.bodies ? 'split' : 'inline'})`);
+  assert.ok(size < 3e6);
+  assert.ok(data.views.every((v) => JSON.stringify(v).length < 20000));
 });

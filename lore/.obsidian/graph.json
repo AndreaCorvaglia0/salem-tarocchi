@@ -11,7 +11,7 @@
    "query": "path:metodo/leggi/",
    "color": {
     "a": 1,
-    "rgb": 5972406
+    "rgb": 4988309
    }
   },
   {
@@ -25,21 +25,21 @@
    "query": "path:metodo/tecniche/",
    "color": {
     "a": 1,
-    "rgb": 6514417
+    "rgb": 5195493
    }
   },
   {
    "query": "path:metodo/ricette/",
    "color": {
     "a": 1,
-    "rgb": 3900150
+    "rgb": 2450411
    }
   },
   {
    "query": "path:metodo/meccaniche/",
    "color": {
     "a": 1,
-    "rgb": 8246268
+    "rgb": 959977
    }
   },
   {
@@ -109,7 +109,7 @@
    "query": "path:storia/generati/tratti/",
    "color": {
     "a": 1,
-    "rgb": 12730636
+    "rgb": 11569824
    }
   }
  ],
