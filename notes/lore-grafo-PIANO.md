@@ -1,108 +1,119 @@
-# Il vault: piano di riordino (proposta, 18 novembre)
+# Il vault: piano di riordino
 
-Da approvare. Sostituisce le proposte in `lore-grafo-valutazione.md`. Niente è ancora cambiato nel vault.
+Terza stesura, 18 novembre 2026, dopo l'approvazione del manifesto (`docs/MANIFESTO.md`). Sostituisce le
+precedenti. Da approvare; nel vault non è ancora cambiato niente. La misura di partenza è in
+`lore-grafo-valutazione.md`.
 
-## A che cosa serve
+## Scopo
 
-1. **Mnemopolis e il generatore** (lo scopo principale): portarsi via il metodo, pulito.
-2. **Chi scrive scene** (agenti): non contraddire la storia, sapere che cosa lei sa.
-3. **Il gioco**: il contenuto del corso diventa dati (`sapere.js`).
-4. **Andrea**: guardarlo ogni tanto, e che abbia senso a colpo d'occhio.
+Un vault che **spiega** il gioco a chi lo guarda e a chi ci lavora:
 
-## L'idea: un vault, tre zone, una catena
+1. **Mnemopolis e il generatore**: portarsi via il metodo, pulito.
+2. **Chi scrive scene e missioni** (agenti): non contraddire la storia, sapere che cosa lei sa.
+3. **Il gioco**: il corso diventa dati.
+4. **Andrea**: guardarlo ogni tanto e capire a colpo d'occhio perché ogni cosa c'è.
 
-Un solo vault (due vault spezzerebbero proprio i legami che contano), con tre cartelle madri:
+## Tre zone (è la legge 10 del manifesto)
 
-| Zona | Dentro | In Mnemopolis |
-|---|---|---|
-| `metodo/` **come si insegna** | principi, tecniche, meccaniche, obiettivi, ricette (le attuali schede `metodo`) | si copia com'è |
-| `corso/` **che cosa si impara** | i concetti (l'attuale `sapere/`: carte, erbe, pietre, fumi, pianeti…) | i concetti del corso (le case) |
-| `storia/` **dove e con chi** | persone, luoghi, fatti, retroscena, decisioni; `generati/` (scelte, finali, tratti) | la città e la sua storia |
+Un vault solo, tre cartelle madri. I nomi dei file non cambiano, quindi nessun collegamento si rompe.
 
-Tra le zone passa **una catena sola**, sempre nello stesso verso:
+| Zona | Dentro (tipi di scheda) | Risponde a | In Mnemopolis |
+|---|---|---|---|
+| `metodo/` | **leggi** (10, nuove), **principi** (17), **tecniche** (14), **ricette** (le 36 schede oggi in `metodo/`), **meccaniche** (33) | perché e come si insegna | si copiano le schede generali |
+| `corso/` | **obiettivi** (14), **concetti** (le 104 schede oggi in `sapere/`) | che cosa si impara | i concetti del corso |
+| `storia/` | **persone**, **luoghi**, **fatti**, **retroscena**, **decisioni**; `generati/` (scelte, finali, tratti) | dove, con chi, che cosa succede | la città |
 
-    principio → tecnica → meccanica → obiettivo → concetto → luogo → (persone, fatti)
-    perché       come      con che cosa  per saper fare  che cosa   dove
+Scelte fatte, con il perché:
 
-L'esempio di Andrea, letto sulla catena: «l'ambientazione è fatta per essere ricordata» (principio) → luoghi e
-immagini vivide (tecnica) → trovare una carta, la mappa (meccaniche) → riconoscere una carta (obiettivo) → il
-Carro (concetto) → il posto dove sta (luogo) → chi ci abita e che cosa ci è successo (storia). In Mnemopolis
-l'ultimo tratto è «la casa è il concetto»: è lo stesso legame.
+- **Le meccaniche stanno nel metodo**, come le pensa Andrea, anche se descrivono Salem: sono il punto in cui
+  una legge diventa una cosa che lei fa. Ogni scheda del metodo dichiara l'`ambito`: `generale` o `salem`. Le
+  generali non nominano Salem (un test lo controlla) e sono quelle che vanno in Mnemopolis; le meccaniche sono
+  `salem`, e la loro forma generale esiste già: sono le ricette che le citano.
+- **Gli obiettivi stanno nel corso**, non nel metodo: «riconoscere una carta» è del corso di tarocchi.
+- **Un solo tipo nuovo: la legge.** Dieci schede, la spina del grafo. Niente tipo «dinamica»: è un campo delle
+  meccaniche, e la tabella del manifesto diventa una pagina generata.
+- **Niente riscritture.** Principi, tecniche, ricette, meccaniche e obiettivi restano come sono; si aggiungono
+  pochi campi.
 
-## Aggiunta dopo il manifesto (18 novembre, 11:30)
+## I legami: pochi, con un nome, scritti una volta
 
-L'esempio di Andrea vale per tutto: ogni dinamica ha un motivo nel gioco e un effetto sull'imparare. Il
-disegno largo è ora in `docs/MANIFESTO.md` e diventa la **radice della zona `metodo/`**:
+Ogni legame sta in un campo, dal lato che lo conosce. Il verso opposto lo calcolano gli strumenti.
 
-    manifesto → 7 leggi → principi e tecniche → meccaniche → obiettivi → concetti → luoghi → storia
+| Da | Campo | A | Stato |
+|---|---|---|---|
+| principio, tecnica, ricetta | `legge` | legge | **nuovo** (67 schede, una riga ciascuna) |
+| meccanica | `leggi`, `motivo`, `effetto`, `dinamica` | legge; le due facce a parole | **nuovo** (33 schede; base: la tabella del manifesto) |
+| meccanica | `serve`, `tecniche`, `insegna` | principi, tecniche, obiettivi | c'è |
+| ricetta | `in_salem` | meccaniche | c'è |
+| obiettivo | `concetti` | concetti (per famiglia: «gli Arcani maggiori») | **nuovo** (14 schede) |
+| concetto | `peso` | `nucleo` o `contorno` (legge 1) | **nuovo** (una parola per scheda; il nucleo è già scritto: `nome` + `in_breve`) |
+| concetto | elemento, pianeta, intenzioni… | concetti (il cerchio) | c'è |
+| concetto | `sta_in` | luogo | **nuovo, generato** dai dati del mondo |
+| fatto, persona, retroscena | chi, dove, conseguenze | persone, luoghi, fatti | c'è |
 
-Conseguenze per il piano: (a) sette schede `legge` in cima a `metodo/` (unico tipo nuovo, giustificato: sono
-la spina del grafo); ogni principio e ogni tecnica dichiara la sua legge; (b) ogni meccanica ha due campi
-espliciti, `motivo` e `effetto` (le due facce), e il controllo avvisa se ne manca uno; (c) ogni concetto del
-corso ha i quattro legami dell'unità di crescita: posto, motivo, uso, ritorno; il controllo elenca i concetti
-a cui ne manca uno. Passo 0 del piano: approvare il manifesto.
+Si tolgono i campi doppi (`dove_la_usiamo` nelle tecniche, `meccaniche` negli obiettivi): sono il verso opposto
+di campi che esistono già, e sono già andati fuori sincrono due volte.
 
-## Aggiunta dopo il secondo giro del manifesto (18 novembre, 12:00)
+La catena che ne esce, sempre nello stesso verso:
 
-Le leggi sono dieci, in tre gruppi (che cosa, come, com'è costruito). Tre conseguenze per il vault:
+    legge → principio / tecnica / ricetta → meccanica → obiettivo → concetto → luogo → persone e fatti
 
-- **Le tre zone sono la legge 10**: `corso/` (concetti), `storia/`, e i materiali (che stanno nel codice e in
-  `public/`, con i crediti); `metodo/` è la parte che non sa niente di Salem. Il test «il metodo non nomina
-  Salem» e «la storia non contiene il testo dei concetti» sono i controlli della legge 10.
-- **Nucleo e contorno (legge 1)** diventano due campi di ogni concetto: `nucleo` (una riga: che cosa sapere) e
-  `segnini` (applicazioni, metafore, paralleli, ognuno legato al nucleo). Gli obiettivi dicono quali concetti
-  del nucleo coprono; il controllo elenca i concetti del nucleo che nessuna verifica tocca.
-- **L'unità di crescita ha sei voci** (nucleo, corpo, posto, motivo, uso, ritorno): il controllo fa una tabella
-  concetto × sei voci e mostra i buchi. È la stessa tabella che servirà a Mnemopolis per dire se una casa è
+## Tre viste (i «grafi»)
+
+Le cartelle dicono di chi è una scheda; le viste dicono che cosa si guarda. Sono filtri per tipo, come
+pulsanti nel visore del browser (e come colori in Obsidian).
+
+1. **Perché il gioco insegna**: leggi al centro, intorno principi, tecniche e ricette, sul bordo le
+   meccaniche. Si legge: «questa legge → si fa così in Salem».
+2. **Che cosa si impara, e dove**: obiettivi → concetti (nucleo grande, contorno piccolo) → luoghi; le
+   meccaniche compaiono come ciò che verifica un obiettivo.
+3. **La storia**: persone, luoghi, fatti, retroscena.
+4. Tutto insieme, con le zone a colori.
+
+Scelte, finali e tratti non compaiono in nessuna vista (restano file per i test).
+
+Per renderle esplicative, nel visore:
+- **i legami hanno un nome** (passando sopra: «insegna», «sta in», «serve»), perché vengono da campi con un nome;
+- **la catena di una scheda**: aprendo una scheda qualsiasi si vede il filo dalla legge al luogo («perché c'è»);
+- le leggi sono i nodi più grandi; il nucleo del corso più grande del contorno.
+
+## Due pagine generate che mostrano i buchi
+
+- `corso/_sei-voci.md`: per ogni concetto del nucleo le sei voci dell'unità di crescita (nucleo, corpo, posto,
+  motivo, uso, ritorno), con una casella vuota dove manca. È la tabella che in Mnemopolis dirà se una casa è
   finita.
+- `metodo/_dinamiche.md`: la tabella del manifesto con, per ogni dinamica, le meccaniche di Salem, il loro
+  motivo e il loro effetto.
 
-## Che cosa manca oggi (misurato)
+## Controlli (pochi)
 
-- **L'anello concetto → luogo non esiste**: nessuna delle 22 schede degli Arcani dice dove sta la carta. È
-  proprio il legame «casa», e si può **ricavare dai dati del mondo** (carte, erbe, pietre, figurine hanno già
-  un posto nel codice): generato, non scritto a mano.
-- **L'anello obiettivo → concetti non esiste**: un obiettivo non dice quali concetti copre.
-- **Il principio dell'esempio non c'è** tra i 17 principi (è solo la lezione 11 in LEZIONI.md): va scritto.
-- **Legami scritti due volte** (tecnica ↔ meccanica, obiettivo ↔ meccanica) che vanno fuori sincrono: ne sono
-  già stati trovati due sbagliati.
-- **Meccaniche con Salem dentro**: descrivono «gira per Salem»; per Mnemopolis serve la forma generale.
-- I generati (275 file) coprono il disegno; 34 retroscena e 35 ricette non hanno nessuno che punti a loro.
-- Correzione: avevo scritto che persone e luoghi sono vuoti. Il contenuto c'è, ma sta nei campi in testa
-  (circa 70 parole); è il testo sotto che è di una riga.
+1. Ogni meccanica ha `motivo`, `effetto` e almeno una legge.
+2. Ogni obiettivo ha una meccanica che lo insegna e dichiara i suoi concetti; ogni concetto del nucleo è
+   coperto da un obiettivo e ha un posto.
+3. Una scheda `generale` del metodo non punta fuori dal metodo, tranne che in `in_salem`.
+4. Quelli che ci sono già (collegamenti rotti, campi mancanti, pagine generate vecchie, il cerchio).
 
-## Le regole (poche)
+## Passi
 
-1. **Ogni legame si scrive in un posto solo**, dal lato che lo conosce; il verso opposto lo calcolano gli
-   strumenti (Obsidian lo fa già con i «collegamenti in entrata»). Si tolgono i campi doppi.
-2. **Quello che si può ricavare dal codice si genera** (concetto → luogo; meccanica → file).
-3. **Il metodo non nomina Salem.** Ogni meccanica ha la forma generale; l'esempio di Salem sta in un campo
-   solo (`in_salem`), l'unico ponte ammesso dal metodo alla storia. Un test lo controlla.
-4. **I generati restano file** (servono ai test) ma fuori dal disegno.
-5. Tre controlli al posto di molti: ogni obiettivo ha una meccanica e almeno un concetto; ogni concetto ha un
-   posto e un obiettivo; ogni persona ha il suo retroscena e il suo luogo.
+Ognuno finisce con i test verdi e con qualcosa che si vede nel visore.
 
-## Che cosa NON si fa
+| # | Passo | Si vede |
+|---|---|---|
+| 1 | Spostare le cartelle nelle tre zone; aggiornare strumenti e visore; pulsanti delle tre viste, colori per zona, generati nascosti | tre grafi nel browser |
+| 2 | Dieci schede `legge`; `legge` su principi, tecniche, ricette; `leggi`, `motivo`, `effetto`, `dinamica` sulle meccaniche; pagina `_dinamiche` | la vista 1 ha una spina |
+| 3 | `peso` sui concetti; `concetti` sugli obiettivi; `sta_in` generato; pagina `_sei-voci` | la vista 2 lega concetti e luoghi; elenco dei buchi |
+| 4 | Togliere i campi doppi; `ambito` e controllo 3 | il metodo è pulito |
+| 5 | Legami con il nome e «la catena» nel visore; pagina d'ingresso con le tre porte | il grafo si spiega da solo |
+| 6 | Prova: copiare le schede generali in Mnemopolis | se serve ritoccarle, non erano pulite |
 
-- Niente tipi nuovi di scheda: si usano quelli che ci sono (le «ricette» restano, legate al principio o alla
-  tecnica che applicano).
-- Niente secondo vault, niente database, niente riscrittura delle schede buone (meccaniche, obiettivi,
-  tecniche, principi funzionano già).
-- Niente arricchimento a mano di 100 schede: prima i legami; il testo sotto le schede di persone e luoghi si
-  scrive solo per i principali.
+Il passo 1 va da solo (sposta tutto). I passi 2 e 3 possono andare insieme (zone diverse). Non si riempiono
+a mano le schede di persone e luoghi: il loro contenuto c'è già, nei campi.
 
-## Passi (ognuno piccolo e verificabile)
+## Rischi
 
-1. Spostare le cartelle nelle tre zone e aggiornare gli strumenti (i nomi dei file non cambiano, quindi nessun
-   link si rompe). Disegno: tre colori, generati nascosti.
-2. Un verso solo: togliere i campi doppi, il controllo usa il verso calcolato.
-3. Generare concetto → luogo dai dati del mondo; aggiungere `concetti` agli obiettivi (per famiglia: «gli
-   Arcani maggiori», non 22 righe).
-4. Scrivere il principio mancante; legare ogni ricetta al suo principio o tecnica; ogni persona al retroscena.
-5. Meccaniche in forma generale + `in_salem`; test «il metodo non nomina Salem».
-6. Pagina d'ingresso con le tre porte e la catena dell'esempio, da seguire con i clic.
-7. Copiare `metodo/` in Mnemopolis come prova: se serve ritoccarlo, il metodo non era pulito.
-
-## Da decidere con Andrea
-
-- I nomi delle tre zone (`metodo`, `corso`, `storia`).
-- Se il passo 7 (prova su Mnemopolis) si fa subito o dopo.
+- Spostare 600 file: i link sono per nome, non per cartella, e gli strumenti leggono quasi tutto per tipo; i
+  percorsi fissi sono pochi (`GEN_DIRS`, il cerchio, i colori di Obsidian). Si fa in un commit solo, con i test.
+- I campi nuovi delle meccaniche sono scrittura: li propone un agente dalla tabella del manifesto, li rilegge
+  il capofila.
+- `sta_in` generato funziona per carte, erbe, pietre, figurine (hanno un posto nei dati); per pianeti ed
+  elementi non c'è un posto: restano contorno senza luogo, ed è giusto così.
