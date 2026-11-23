@@ -19,6 +19,8 @@ import { garden, gardenNote } from '../glue/garden.js';
 import { CODE_CSS } from './savecode.js';
 import { SERIF, HAND, GOLD, baseCss, rnd } from './paper.js';
 import { cardBack } from './art.js';
+import { openAdvent, HOLLY } from './avvento.js';
+import { adventVisible, winterFeast, toAsk, adventOpened } from '../glue/avvento.js';
 
 const CSS = `
 .tt{position:fixed;inset:0;z-index:50;overflow:hidden auto;display:flex;flex-direction:column;align-items:center;background:radial-gradient(ellipse 90% 340px at 50% 330px,#3a2414 0%,#1a1018 55%,#07070d 100%) #07070d;color:#efe4c8;font:16px ${SERIF};animation:gx-fade .6s;-webkit-overflow-scrolling:touch}
@@ -70,6 +72,12 @@ const CSS = `
 .tt-l{border:0;background:none;color:#cdbf9f;font:17px ${SERIF};text-decoration:underline;text-underline-offset:4px;min-height:40px;cursor:pointer}
 .tt-area{display:block;width:100%;height:96px;box-sizing:border-box;padding:8px;border-radius:6px;border:1px solid #d8b25a66;background:#0b0a10;color:#e9dcc0;font:13px/1.3 ui-monospace,monospace;resize:none;user-select:text;-webkit-user-select:text}
 .tt-q{margin:0 0 4px;text-align:center;font:22px/28px ${HAND};color:#e9dcc0}
+.tt-flake{position:absolute;top:-10px;border-radius:50%;background:#fff;pointer-events:none;animation:tt-fall linear infinite}
+@keyframes tt-fall{to{transform:translate3d(var(--dx),360px,0);opacity:0}}
+.tt-holly{position:absolute;left:calc(50% + 22px);bottom:24px;transform:rotate(-8deg);pointer-events:none;filter:drop-shadow(0 4px 6px #000a)}
+.tt-holly svg{display:block}
+.tt-b.xmas{border-color:#b8323a;background:linear-gradient(#5a1a22d8,#3a1016d8)}
+.tt-b.xmas.call{box-shadow:0 0 14px 2px #ffd77a55}
 @media (min-height:880px){.tt-head{margin-top:calc(44px + env(safe-area-inset-top))}.tt-scene{height:232px}}
 @media (prefers-reduced-motion:reduce){.tt-card,.tt-card.back svg,.tt-glow,.tt-candle .fl,.tt-sky i{animation:none;transition:none}}
 `;
@@ -85,9 +93,10 @@ export function openTitle() {
   return new Promise((resolve) => {
     const sky = h('div.tt-sky');
     const r = rnd(7);
+    if (winterFeast()) for (let i = 0; i < 26; i++) { const z = 2 + r() * 3; sky.append(h('b.tt-flake', { style: { left: `${r() * 100}%`, width: `${z}px`, height: `${z}px`, opacity: String(0.4 + r() * 0.5), animationDuration: `${(7 + r() * 8).toFixed(1)}s`, animationDelay: `${(-r() * 14).toFixed(1)}s`, '--dx': `${Math.round((r() - 0.5) * 60)}px` } })); }
     for (let i = 0; i < 40; i++) sky.append(h('i', { style: { left: `${r() * 100}%`, top: `${r() * 100}%`, opacity: String(0.3 + r() * 0.6), animationDelay: `${(r() * 4).toFixed(2)}s`, transform: `scale(${(0.6 + r() * 0.9).toFixed(2)})` } }));
     const moonEl = h('div.tt-moon'), cardEl = h('button.tt-card', { type: 'button' }), tapEl = h('span.tt-tap'), slip = h('div.tt-slip'), acts = h('div.tt-acts'), foot = h('div.tt-foot');
-    const scene = h('div.tt-scene', h('div.tt-glow'), h('div.tt-table'), cardEl, tapEl, h('div.tt-candle', h('span.wick'), h('span.fl'), h('span.wax')));
+    const scene = h('div.tt-scene', h('div.tt-glow'), h('div.tt-table'), cardEl, tapEl, h('div.tt-candle', h('span.wick'), h('span.fl'), h('span.wax')), winterFeast() ? h('div.tt-holly', { html: HOLLY(64) }) : null);
     const el = h('div.tt', { role: 'dialog', 'aria-label': 'Le carte di Salem' }, sky, h('div.tt-head', h('h1', {}, 'Le carte di Salem')), moonEl, scene, slip, acts, foot);
     const close = openOverlay(el);
     const b = (t, fn, main, sub) => h(`button.tt-b${main ? '.main' : ''}`, { type: 'button', onclick: () => { snd('tap'); fn(); } }, t, sub ? h('small', {}, sub) : null);
@@ -136,7 +145,9 @@ export function openTitle() {
       const row = [saved && canSelfRead(state) ? b('Leggi le tue carte', () => aside(() => openSelfRead()), false, 'con il mazzo vero') : null,
         pair.length ? b(pair.length > 1 ? 'Ripassa due carte' : 'Ripassa una carta', () => aside(() => call('review.open', { ids: pair, n: pair.length })), false, 'le più indietro, un minuto') : null,
         saved && garden().unlocked ? b('L\'orto', () => aside(() => call('garden.open', { from: 'table' })), false, gardenNote()) : null].filter(Boolean);
+      const xmas = adventVisible() ? (() => { const n = toAsk(), k = adventOpened(); const x = b('Il calendario', () => aside(() => openAdvent()), false, n ? `il sacchetto del ${n} ti aspetta` : k ? `${k} ${k === 1 ? 'sacchetto aperto' : 'sacchetti aperti'}` : 'venticinque sacchetti'); x.classList.add('xmas'); if (n) x.classList.add('call'); return x; })() : null;
       acts.replaceChildren(...[
+        xmas,
         saved ? b('Continua', () => done('continue'), true, `${state.player?.name ? `${state.player.name} · ` : ''}${chapterName()} · ${titleOf()}`) : b('Nuova partita', () => done('new'), true),
         !saved && older ? b('Riprendi la partita di prima', async () => { if (await takeOlder()) done('continue'); }) : null,
         row.length ? h(`div.tt-row${row.length > 2 ? '.three' : ''}`, row) : null].filter(Boolean));

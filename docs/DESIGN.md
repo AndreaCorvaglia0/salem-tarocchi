@@ -582,3 +582,21 @@ personaggi, e anche per conoscerti per confronto con gli altri».
   tratti) e la lettura finale della Lettrice.
 - **Misura.** Al massimo una domanda per giorno di gioco, mai durante una scena della storia, mai due volte la
   stessa. Dipende da chi ha incontrato e non dal punto della storia, così arriva anche a chi è avanti.
+
+## Il calendario dell'Avvento (23 novembre)
+
+A dicembre 2026 Andrea le regala un calendario vero: 25 sacchetti di carta appesi a uno spago, ognuno con un
+oggetto e un bigliettino. Il gioco ne è l'altra metà. Dal 1° dicembre sulla soglia compare il bottone «Il
+calendario» (`ui/avvento.js`): 25 sacchetti, quelli del futuro chiusi con un «?», quelli arrivati che brillano.
+Ogni bigliettino porta una parola; scritta nel gioco (senza badare a maiuscole e accenti) apre la pagina del
+sacchetto: la foto dell'oggetto, che cos'è e da dove viene, cosa farci, perché proprio quel giorno. Le pagine
+sono nella voce di Andrea (`data/avvento.js`, regole in `glue/avvento.rules.js`). Un giorno saltato non si perde:
+il sacchetto si apre con la sua parola anche dopo. Le pagine aperte restano sue anche con una nuova partita, come
+la luna. Il bottone sparisce dopo gennaio se non ha aperto niente.
+
+Intorno, gli accenni al Natale: dal 1° dicembre all'Epifania nevica sulla soglia e in tutto il mondo all'aperto
+(su ogni stagione), sul tavolo c'è un rametto di agrifoglio, e nei giorni di festa il quaderno ha la sua nota
+(`data/daily/feasts.js`: Santa Barbara, Santa Lucia, il solstizio, la vigilia, Natale, le dodici notti…).
+
+Le parole sono ancora segnaposto (`WORDS` in `data/avvento.js`): vanno scelte prima di stampare i bigliettini.
+Per provarlo prima di dicembre: `?debug&oggi=2026-12-09` (o `#oggi-2026-12-09` sulla pagina pubblicata).

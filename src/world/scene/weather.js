@@ -12,12 +12,14 @@ const KINDS = {
   cave: { tex: ['fx-flake1'], n: 26, vy: [-1, 2], vx: [-1, 1], depth: 8995, alpha: [0.1, 0.3] },
 };
 const r = (a, b) => a + Math.random() * (b - a);
+// the real calendar: from the first of December to Epiphany the sky outside snows (the threshold does too)
+const winterFeast = (d = new Date()) => d.getMonth() === 11 || (d.getMonth() === 0 && d.getDate() <= 6);
 
 export class Weather {
   constructor(scene, map, season = map.season, light = 'night') {
     this.scene = scene;
     this.box = map.inside ? { x: 16, y: 32, r: map.W * 16 - 16, b: map.H * 16 - 16 } : null; // dust stays in the room
-    const kind = map.inside ? 'inside' : map.id === 'depths' ? 'cave' : light === 'dawn' ? 'dawn' : season;
+    const kind = map.inside ? 'inside' : map.id === 'depths' ? 'cave' : winterFeast() ? 'winter' : light === 'dawn' ? 'dawn' : season; // in December it snows on every season
     this.k = KINDS[kind] || KINDS.winter;
     this.p = [];
     const v = scene.cameras.main.worldView;

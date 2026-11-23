@@ -5,6 +5,7 @@ import { todayKey, addCoins, addTreats, dueIds, hasCard, answer } from '../core/
 import { CARD } from '../data/cards.base.js';
 import { DAILY } from '../data/daily/cards.js';
 import { NOTES } from '../data/daily/notes.js';
+import { FEASTS } from '../data/daily/feasts.js';
 import { moonSeedGift } from './garden.js';
 import { HERB } from '../data/herbs/base.js';
 import { growMoon, moonShown, dayOf, noteOf, reviewPair, giftOf, giftText, readerLine, dayAnswer } from './threshold.rules.js';
@@ -62,6 +63,6 @@ export function answerToday(ok) {
 export function noteToday() {
   const D = daily(), day = todayKey();
   if (D.noteDay !== day) { D.noteDay = day; D.notes = (Number(D.notes) || 0) + 1; save(); }
-  return noteOf(NOTES, day, Math.max(0, D.notes - 1));
+  return FEASTS[day.slice(5)] ? { t: FEASTS[day.slice(5)] } : noteOf(NOTES, day, Math.max(0, D.notes - 1)); // a winter feast has its own note
 }
 export const pairToday = () => reviewPair(state.cards);

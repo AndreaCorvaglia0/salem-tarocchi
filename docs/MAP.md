@@ -44,11 +44,11 @@ by the lead before each commit (a test fails when a service is called but never 
 | Folder | Files | Lines |
 |---|---:|---:|
 | `src/.` | 1 | 50 |
-| `src/core` | 11 | 1171 |
-| `src/data` | 13 | 1471 |
+| `src/core` | 11 | 1174 |
+| `src/data` | 14 | 1614 |
 | `src/data/books` | 6 | 279 |
 | `src/data/cards` | 4 | 748 |
-| `src/data/daily` | 3 | 1571 |
+| `src/data/daily` | 4 | 1590 |
 | `src/data/elsewhere` | 3 | 179 |
 | `src/data/herbs` | 2 | 351 |
 | `src/data/interests` | 2 | 213 |
@@ -58,20 +58,20 @@ by the lead before each commit (a test fails when a service is called but never 
 | `src/data/story/scripts` | 15 | 3113 |
 | `src/data/trials` | 7 | 920 |
 | `src/data/world` | 17 | 1223 |
-| `src/glue` | 51 | 3945 |
+| `src/glue` | 53 | 4020 |
 | `src/reading` | 9 | 702 |
 | `src/sound` | 11 | 1014 |
 | `src/story` | 12 | 1138 |
 | `src/story/stage` | 14 | 1925 |
 | `src/systems` | 20 | 1624 |
 | `src/trials` | 3 | 471 |
-| `src/ui` | 38 | 4386 |
+| `src/ui` | 39 | 4580 |
 | `src/ui/interests` | 5 | 592 |
 | `src/ui/missions` | 5 | 555 |
 | `src/ui/rite` | 2 | 512 |
 | `src/world` | 19 | 1428 |
 | `src/world/art` | 20 | 3485 |
-| `src/world/scene` | 21 | 2193 |
+| `src/world/scene` | 21 | 2195 |
 
 ## Services
 
@@ -243,14 +243,14 @@ Every service that is called is provided.
 
 Touch these with care: many files depend on them.
 
-- `src/core/state.js` (83)
-- `src/core/dom.js` (74)
+- `src/core/state.js` (84)
+- `src/core/dom.js` (75)
 - `src/core/services.js` (69)
-- `src/core/progress.js` (60)
+- `src/core/progress.js` (61)
 - `src/data/cards.base.js` (54)
 - `src/core/bus.js` (45)
+- `src/ui/paper.js` (34)
 - `src/core/cond.js` (33)
-- `src/ui/paper.js` (33)
 - `src/data/story/index.js` (28)
 - `src/data/story/h.js` (23)
 - `src/world/art/px.js` (22)

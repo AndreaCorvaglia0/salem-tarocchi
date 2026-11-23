@@ -88,6 +88,7 @@ export const fresh = () => ({
   books: {},
   booksRead: {},
   bookDay: null,
+  avvento: { opened: {} }, // the Advent calendar at the threshold (glue/avvento.rules.js): day -> date opened
   savedAt: 0, // when it was last written (ms): the newest copy wins when the game is restored
 });
 
@@ -142,6 +143,8 @@ export const migrate = (s) => {
   if (typeof s.pocket.stone !== 'string') s.pocket.stone = null;
   if (typeof s.pocket.used !== 'string') s.pocket.used = '';
   if (!s.pocket.lent || typeof s.pocket.lent !== 'object' || typeof s.pocket.lent.stone !== 'string') s.pocket.lent = null;
+  if (typeof s.avvento !== 'object' || !s.avvento || Array.isArray(s.avvento)) s.avvento = { opened: {} }; // the Advent calendar
+  if (typeof s.avvento.opened !== 'object' || !s.avvento.opened || Array.isArray(s.avvento.opened)) s.avvento.opened = {};
   return s;
 };
 
@@ -196,7 +199,7 @@ export const reset = () => {
   try { ls()?.removeItem(BAK); } catch { /* */ }
   lastBak = 0;
   // the threshold belongs to her, not to one game: the moon and the card of the day stay
-  const keep = { moon: state.moon, day: state.day, daily: state.daily };
+  const keep = { moon: state.moon, day: state.day, daily: state.daily, avvento: state.avvento }; // and the Advent pages she opened
   replace({ ...fresh(), ...JSON.parse(JSON.stringify(keep)) }); saveNow();
 };
 // Replace the running game with a saved one (a mirror, the set-aside game, a code): -> true if it was taken
